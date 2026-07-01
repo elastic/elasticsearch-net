@@ -27,18 +27,31 @@ public partial class HistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Interval); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Interval");
-			writer.WriteValue(Interval);
-			writer.Write("L");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping", false);
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Interval");
+				writer.WriteValue(Interval);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

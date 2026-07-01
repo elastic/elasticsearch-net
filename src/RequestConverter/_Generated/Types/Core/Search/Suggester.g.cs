@@ -27,26 +27,41 @@ public partial class Suggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Suggester", false);
-		if (Suggesters is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Suggesters");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester");
-			writer.Write(">()");
-			writer.WriteBlockList(Suggesters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (Suggesters is not null)
+			{
+				writer.WriteFluentDescriptorCall("Suggesters", (w) => { w.WriteFluentDictionaryAdds("Add", Suggesters, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
 
-		if (Text is not null)
+			if (Text is not null)
+			{
+				writer.WriteFluentCall("Text", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Text); });
+			}
+		}
+		else
 		{
-			initializer.Property("Text");
-			writer.WriteString(Text);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Suggester", false);
+			if (Suggesters is not null)
+			{
+				initializer.Property("Suggesters");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester");
+				writer.Write(">()");
+				writer.WriteBlockList(Suggesters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (Text is not null)
+			{
+				initializer.Property("Text");
+				writer.WriteString(Text);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

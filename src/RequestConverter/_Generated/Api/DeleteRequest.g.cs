@@ -27,68 +27,151 @@ public partial class DeleteRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DeleteRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
 
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Id.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DeleteRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
+
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Id.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (IfPrimaryTerm is not null)
+			{
+				writer.WriteFluentCall("IfPrimaryTerm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+			}
+
+			if (IfSeqNo is not null)
+			{
+				writer.WriteFluentCall("IfSeqNo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+			}
+
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+			}
+
+			if (VersionType is not null)
+			{
+				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+			}
+
+			if (WaitForActiveShards is not null)
+			{
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DeleteRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (IfPrimaryTerm is not null)
-		{
-			initializer.Property("IfPrimaryTerm");
-			writer.WriteValue(IfPrimaryTerm.Value);
-			writer.Write("L");
-		}
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (IfSeqNo is not null)
-		{
-			initializer.Property("IfSeqNo");
-			writer.WriteValue(IfSeqNo.Value);
-			writer.Write("L");
-		}
+			if (IfPrimaryTerm is not null)
+			{
+				initializer.Property("IfPrimaryTerm");
+				writer.WriteValue(IfPrimaryTerm.Value);
+				writer.Write("L");
+			}
 
-		if (Refresh is not null)
-		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			if (IfSeqNo is not null)
+			{
+				initializer.Property("IfSeqNo");
+				writer.WriteValue(IfSeqNo.Value);
+				writer.Write("L");
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteValue(Version.Value);
-			writer.Write("L");
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (VersionType is not null)
-		{
-			initializer.Property("VersionType");
-			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
-		}
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteValue(Version.Value);
+				writer.Write("L");
+			}
 
-		if (WaitForActiveShards is not null)
-		{
-			initializer.Property("WaitForActiveShards");
-			WaitForActiveShards.FormatCode(writer);
-		}
+			if (VersionType is not null)
+			{
+				initializer.Property("VersionType");
+				Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (WaitForActiveShards is not null)
+			{
+				initializer.Property("WaitForActiveShards");
+				WaitForActiveShards.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

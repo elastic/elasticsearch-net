@@ -27,25 +27,45 @@ public partial class TTestAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation", false);
-		if (A is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("A");
-			A.FormatCode(writer);
-		}
+			if (A is not null)
+			{
+				writer.WriteFluentDescriptorCall("A", (w) => { A.FormatCode(w); });
+			}
 
-		if (B is not null)
+			if (B is not null)
+			{
+				writer.WriteFluentDescriptorCall("B", (w) => { B.FormatCode(w); });
+			}
+
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(Type.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("B");
-			B.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation", false);
+			if (A is not null)
+			{
+				initializer.Property("A");
+				A.FormatCode(writer);
+			}
 
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(Type.Value, writer);
-		}
+			if (B is not null)
+			{
+				initializer.Property("B");
+				B.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(Type.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

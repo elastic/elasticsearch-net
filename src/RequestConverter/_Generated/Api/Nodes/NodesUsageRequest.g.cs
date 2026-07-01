@@ -27,25 +27,49 @@ public partial class NodesUsageRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest", false);
-		if (Metric is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Metric");
-			writer.WriteInlineList(Metric, (w, item) => { Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetricCodeFormatter.FormatCode(item, w); });
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Metric is not null)
+			{
+				writer.WriteFluentParams("Metric", Metric, (w, item) => { Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetricCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (NodeId is not null)
+			if (NodeId is not null)
+			{
+				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("NodeId");
-			NodeId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest", false);
+			if (Metric is not null)
+			{
+				initializer.Property("Metric");
+				writer.WriteInlineList(Metric, (w, item) => { Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetricCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (NodeId is not null)
+			{
+				initializer.Property("NodeId");
+				NodeId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

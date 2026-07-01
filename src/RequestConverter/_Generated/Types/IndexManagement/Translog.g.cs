@@ -27,31 +27,56 @@ public partial class Translog : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Translog", false);
-		if (Durability is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Durability");
-			Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(Durability.Value, writer);
-		}
+			if (Durability is not null)
+			{
+				writer.WriteFluentCall("Durability", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(Durability.Value, w); });
+			}
 
-		if (FlushThresholdSize is not null)
+			if (FlushThresholdSize is not null)
+			{
+				writer.WriteFluentCall("FlushThresholdSize", (w) => { using var _oi = w.ForceObjectInitializer(); FlushThresholdSize.FormatCode(w); });
+			}
+
+			if (Retention is not null)
+			{
+				writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); });
+			}
+
+			if (SyncInterval is not null)
+			{
+				writer.WriteFluentCall("SyncInterval", (w) => { using var _oi = w.ForceObjectInitializer(); SyncInterval.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("FlushThresholdSize");
-			FlushThresholdSize.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Translog", false);
+			if (Durability is not null)
+			{
+				initializer.Property("Durability");
+				Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(Durability.Value, writer);
+			}
 
-		if (Retention is not null)
-		{
-			initializer.Property("Retention");
-			Retention.FormatCode(writer);
-		}
+			if (FlushThresholdSize is not null)
+			{
+				initializer.Property("FlushThresholdSize");
+				FlushThresholdSize.FormatCode(writer);
+			}
 
-		if (SyncInterval is not null)
-		{
-			initializer.Property("SyncInterval");
-			SyncInterval.FormatCode(writer);
-		}
+			if (Retention is not null)
+			{
+				initializer.Property("Retention");
+				Retention.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (SyncInterval is not null)
+			{
+				initializer.Property("SyncInterval");
+				SyncInterval.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

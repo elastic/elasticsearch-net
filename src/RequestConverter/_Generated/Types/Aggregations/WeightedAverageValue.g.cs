@@ -27,26 +27,46 @@ public partial class WeightedAverageValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (Missing is not null)
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); w.Write("d"); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing.Value);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteValue(Missing.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

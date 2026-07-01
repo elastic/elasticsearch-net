@@ -27,7 +27,17 @@ public partial class GetBuiltinPrivilegesRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest", false);
-		initializer.Dispose();
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest", false);
+			initializer.Dispose();
+		}
 	}
 }

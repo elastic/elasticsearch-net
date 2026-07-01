@@ -27,99 +27,178 @@ public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (Collate is not null)
+			if (Collate is not null)
+			{
+				writer.WriteFluentDescriptorCall("Collate", (w) => { Collate.FormatCode(w); });
+			}
+
+			if (Confidence is not null)
+			{
+				writer.WriteFluentCall("Confidence", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Confidence.Value); w.Write("d"); });
+			}
+
+			if (DirectGenerator is not null)
+			{
+				writer.WriteFluentDescriptorParams("DirectGenerator", DirectGenerator, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>"); w.Write("()"); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (ForceUnigrams is not null)
+			{
+				writer.WriteFluentCall("ForceUnigrams", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ForceUnigrams.Value); });
+			}
+
+			if (GramSize is not null)
+			{
+				writer.WriteFluentCall("GramSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(GramSize.Value); });
+			}
+
+			if (Highlight is not null)
+			{
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); });
+			}
+
+			if (MaxErrors is not null)
+			{
+				writer.WriteFluentCall("MaxErrors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxErrors.Value); w.Write("d"); });
+			}
+
+			if (RealWordErrorLikelihood is not null)
+			{
+				writer.WriteFluentCall("RealWordErrorLikelihood", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RealWordErrorLikelihood.Value); w.Write("d"); });
+			}
+
+			if (Separator is not null)
+			{
+				writer.WriteFluentCall("Separator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Separator); });
+			}
+
+			if (ShardSize is not null)
+			{
+				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Smoothing is not null)
+			{
+				writer.WriteFluentDescriptorCall("Smoothing", (w) => { Smoothing.FormatCode(w); });
+			}
+
+			if (TokenLimit is not null)
+			{
+				writer.WriteFluentCall("TokenLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TokenLimit.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Collate");
-			Collate.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (Confidence is not null)
-		{
-			initializer.Property("Confidence");
-			writer.WriteValue(Confidence.Value);
-			writer.Write("d");
-		}
+			if (Collate is not null)
+			{
+				initializer.Property("Collate");
+				Collate.FormatCode(writer);
+			}
 
-		if (DirectGenerator is not null)
-		{
-			initializer.Property("DirectGenerator");
-			writer.WriteInlineList(DirectGenerator, (w, item) => { item.FormatCode(w); });
-		}
+			if (Confidence is not null)
+			{
+				initializer.Property("Confidence");
+				writer.WriteValue(Confidence.Value);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (DirectGenerator is not null)
+			{
+				initializer.Property("DirectGenerator");
+				writer.WriteInlineList(DirectGenerator, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (ForceUnigrams is not null)
-		{
-			initializer.Property("ForceUnigrams");
-			writer.WriteValue(ForceUnigrams.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (GramSize is not null)
-		{
-			initializer.Property("GramSize");
-			writer.WriteValue(GramSize.Value);
-		}
+			if (ForceUnigrams is not null)
+			{
+				initializer.Property("ForceUnigrams");
+				writer.WriteValue(ForceUnigrams.Value);
+			}
 
-		if (Highlight is not null)
-		{
-			initializer.Property("Highlight");
-			Highlight.FormatCode(writer);
-		}
+			if (GramSize is not null)
+			{
+				initializer.Property("GramSize");
+				writer.WriteValue(GramSize.Value);
+			}
 
-		if (MaxErrors is not null)
-		{
-			initializer.Property("MaxErrors");
-			writer.WriteValue(MaxErrors.Value);
-			writer.Write("d");
-		}
+			if (Highlight is not null)
+			{
+				initializer.Property("Highlight");
+				Highlight.FormatCode(writer);
+			}
 
-		if (RealWordErrorLikelihood is not null)
-		{
-			initializer.Property("RealWordErrorLikelihood");
-			writer.WriteValue(RealWordErrorLikelihood.Value);
-			writer.Write("d");
-		}
+			if (MaxErrors is not null)
+			{
+				initializer.Property("MaxErrors");
+				writer.WriteValue(MaxErrors.Value);
+				writer.Write("d");
+			}
 
-		if (Separator is not null)
-		{
-			initializer.Property("Separator");
-			writer.WriteString(Separator);
-		}
+			if (RealWordErrorLikelihood is not null)
+			{
+				initializer.Property("RealWordErrorLikelihood");
+				writer.WriteValue(RealWordErrorLikelihood.Value);
+				writer.Write("d");
+			}
 
-		if (ShardSize is not null)
-		{
-			initializer.Property("ShardSize");
-			writer.WriteValue(ShardSize.Value);
-		}
+			if (Separator is not null)
+			{
+				initializer.Property("Separator");
+				writer.WriteString(Separator);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (ShardSize is not null)
+			{
+				initializer.Property("ShardSize");
+				writer.WriteValue(ShardSize.Value);
+			}
 
-		if (Smoothing is not null)
-		{
-			initializer.Property("Smoothing");
-			Smoothing.FormatCode(writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (TokenLimit is not null)
-		{
-			initializer.Property("TokenLimit");
-			writer.WriteValue(TokenLimit.Value);
-		}
+			if (Smoothing is not null)
+			{
+				initializer.Property("Smoothing");
+				Smoothing.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TokenLimit is not null)
+			{
+				initializer.Property("TokenLimit");
+				writer.WriteValue(TokenLimit.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

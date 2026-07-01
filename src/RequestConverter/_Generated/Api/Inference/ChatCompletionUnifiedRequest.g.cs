@@ -27,23 +27,47 @@ public partial class ChatCompletionUnifiedRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InferenceId");
-			InferenceId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				InferenceId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("ChatCompletionRequest", (w) => { ChatCompletionRequest.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest", false);
+			{
+				initializer.Property("InferenceId");
+				InferenceId.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("ChatCompletionRequest");
-			ChatCompletionRequest.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("ChatCompletionRequest");
+				ChatCompletionRequest.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

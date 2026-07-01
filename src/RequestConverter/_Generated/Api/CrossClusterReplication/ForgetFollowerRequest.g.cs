@@ -27,42 +27,98 @@ public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
 
-		if (Timeout is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (FollowerCluster is not null)
+			{
+				writer.WriteFluentCall("FollowerCluster", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FollowerCluster); });
+			}
+
+			if (FollowerIndex is not null)
+			{
+				writer.WriteFluentCall("FollowerIndex", (w) => { using var _oi = w.ForceObjectInitializer(); FollowerIndex.FormatCode(w); });
+			}
+
+			if (FollowerIndexUuid is not null)
+			{
+				writer.WriteFluentCall("FollowerIndexUuid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FollowerIndexUuid); });
+			}
+
+			if (LeaderRemoteCluster is not null)
+			{
+				writer.WriteFluentCall("LeaderRemoteCluster", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LeaderRemoteCluster); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (FollowerCluster is not null)
-		{
-			initializer.Property("FollowerCluster");
-			writer.WriteString(FollowerCluster);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (FollowerIndex is not null)
-		{
-			initializer.Property("FollowerIndex");
-			FollowerIndex.FormatCode(writer);
-		}
+			if (FollowerCluster is not null)
+			{
+				initializer.Property("FollowerCluster");
+				writer.WriteString(FollowerCluster);
+			}
 
-		if (FollowerIndexUuid is not null)
-		{
-			initializer.Property("FollowerIndexUuid");
-			writer.WriteString(FollowerIndexUuid);
-		}
+			if (FollowerIndex is not null)
+			{
+				initializer.Property("FollowerIndex");
+				FollowerIndex.FormatCode(writer);
+			}
 
-		if (LeaderRemoteCluster is not null)
-		{
-			initializer.Property("LeaderRemoteCluster");
-			writer.WriteString(LeaderRemoteCluster);
-		}
+			if (FollowerIndexUuid is not null)
+			{
+				initializer.Property("FollowerIndexUuid");
+				writer.WriteString(FollowerIndexUuid);
+			}
 
-		initializer.Dispose();
+			if (LeaderRemoteCluster is not null)
+			{
+				initializer.Property("LeaderRemoteCluster");
+				writer.WriteString(LeaderRemoteCluster);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,37 +27,67 @@ public partial class GeohashGridAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation", false);
-		if (Bounds is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Bounds");
-			Bounds.FormatCode(writer);
-		}
+			if (Bounds is not null)
+			{
+				writer.WriteFluentCall("Bounds", (w) => { using var _oi = w.ForceObjectInitializer(); Bounds.FormatCode(w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Precision is not null)
+			{
+				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); Precision.FormatCode(w); });
+			}
+
+			if (ShardSize is not null)
+			{
+				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation", false);
+			if (Bounds is not null)
+			{
+				initializer.Property("Bounds");
+				Bounds.FormatCode(writer);
+			}
 
-		if (Precision is not null)
-		{
-			initializer.Property("Precision");
-			Precision.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (ShardSize is not null)
-		{
-			initializer.Property("ShardSize");
-			writer.WriteValue(ShardSize.Value);
-		}
+			if (Precision is not null)
+			{
+				initializer.Property("Precision");
+				Precision.FormatCode(writer);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (ShardSize is not null)
+			{
+				initializer.Property("ShardSize");
+				writer.WriteValue(ShardSize.Value);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

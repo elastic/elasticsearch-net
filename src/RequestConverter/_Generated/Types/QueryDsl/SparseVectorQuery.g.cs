@@ -27,62 +27,106 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Prune is not null)
+			{
+				writer.WriteFluentCall("Prune", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Prune.Value); });
+			}
+
+			if (PruningConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("PruningConfig", (w) => { PruningConfig.FormatCode(w); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (InferenceId is not null)
+			{
+				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); InferenceId.FormatCode(w); });
+			}
+
+			if (QueryVector is not null)
+			{
+				writer.WriteFluentCall("QueryVector", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (Prune is not null)
-		{
-			initializer.Property("Prune");
-			writer.WriteValue(Prune.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (PruningConfig is not null)
-		{
-			initializer.Property("PruningConfig");
-			PruningConfig.FormatCode(writer);
-		}
+			if (Prune is not null)
+			{
+				initializer.Property("Prune");
+				writer.WriteValue(Prune.Value);
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			if (PruningConfig is not null)
+			{
+				initializer.Property("PruningConfig");
+				PruningConfig.FormatCode(writer);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
 
-		if (InferenceId is not null)
-		{
-			initializer.Property("InferenceId");
-			InferenceId.FormatCode(writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		if (QueryVector is not null)
-		{
-			initializer.Property("QueryVector");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("float");
-			writer.Write(">()");
-			writer.WriteBlockList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); });
-		}
+			if (InferenceId is not null)
+			{
+				initializer.Property("InferenceId");
+				InferenceId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (QueryVector is not null)
+			{
+				initializer.Property("QueryVector");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("float");
+				writer.Write(">()");
+				writer.WriteBlockList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

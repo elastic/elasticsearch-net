@@ -27,29 +27,44 @@ public partial class JaStopTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter", true);
-		if (Stopwords is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Stopwords");
-			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Stopwords is not null)
 			{
-				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				writer.WriteFluentCall("Stopwords", (w) => { using var _oi = w.ForceObjectInitializer(); if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
 			}
-			else
+
+			if (Version is not null)
 			{
-				writer.Write("new ");
-				writer.WriteTypeRef("string");
-				writer.Write("[] ");
-				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
 			}
 		}
-
-		if (Version is not null)
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter", true);
+			if (Stopwords is not null)
+			{
+				initializer.Property("Stopwords");
+				if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("string");
+					writer.Write("[] ");
+					writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				}
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

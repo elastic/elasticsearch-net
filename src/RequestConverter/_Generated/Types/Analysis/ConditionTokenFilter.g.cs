@@ -27,23 +27,41 @@ public partial class ConditionTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
-		}
+			{
+				writer.WriteFluentParams("Filter", Filter, (w, item) => { w.WriteString(item); });
+			}
 
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter", true);
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,43 +27,78 @@ public partial class CardinalityAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation", false);
-		if (ExecutionHint is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ExecutionHint");
-			Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionModeCodeFormatter.FormatCode(ExecutionHint.Value, writer);
-		}
+			if (ExecutionHint is not null)
+			{
+				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionModeCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (PrecisionThreshold is not null)
+			{
+				writer.WriteFluentCall("PrecisionThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrecisionThreshold.Value); });
+			}
+
+			if (Rehash is not null)
+			{
+				writer.WriteFluentCall("Rehash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Rehash.Value); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation", false);
+			if (ExecutionHint is not null)
+			{
+				initializer.Property("ExecutionHint");
+				Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionModeCodeFormatter.FormatCode(ExecutionHint.Value, writer);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (PrecisionThreshold is not null)
-		{
-			initializer.Property("PrecisionThreshold");
-			writer.WriteValue(PrecisionThreshold.Value);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		if (Rehash is not null)
-		{
-			initializer.Property("Rehash");
-			writer.WriteValue(Rehash.Value);
-		}
+			if (PrecisionThreshold is not null)
+			{
+				initializer.Property("PrecisionThreshold");
+				writer.WriteValue(PrecisionThreshold.Value);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Rehash is not null)
+			{
+				initializer.Property("Rehash");
+				writer.WriteValue(Rehash.Value);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

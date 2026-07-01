@@ -27,62 +27,128 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.PutJobRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Id.FormatCode(writer);
+				}
 
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Id.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentCall("Cron", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Cron); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Groups", (w) => { Groups.FormatCode(w); });
+			}
+
+			if (Headers is not null)
+			{
+				writer.WriteFluentCall("Headers", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<string>"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentCall("IndexPattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexPattern); });
+			}
+
+			if (Metrics is not null)
+			{
+				writer.WriteFluentDescriptorParams("Metrics", Metrics, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>"); w.Write("()"); });
+			}
+
+			{
+				writer.WriteFluentCall("PageSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PageSize); });
+			}
+
+			{
+				writer.WriteFluentCall("RollupIndex", (w) => { using var _oi = w.ForceObjectInitializer(); RollupIndex.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Cron");
-			writer.WriteString(Cron);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.PutJobRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Groups");
-			Groups.FormatCode(writer);
-		}
+			{
+				initializer.Property("Cron");
+				writer.WriteString(Cron);
+			}
 
-		if (Headers is not null)
-		{
-			initializer.Property("Headers");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("System.Collections.Generic.ICollection<string>");
-			writer.Write(">()");
-			writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
-		}
+			{
+				initializer.Property("Groups");
+				Groups.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("IndexPattern");
-			writer.WriteString(IndexPattern);
-		}
+			if (Headers is not null)
+			{
+				initializer.Property("Headers");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("System.Collections.Generic.ICollection<string>");
+				writer.Write(">()");
+				writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
+			}
 
-		if (Metrics is not null)
-		{
-			initializer.Property("Metrics");
-			writer.WriteInlineList(Metrics, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("IndexPattern");
+				writer.WriteString(IndexPattern);
+			}
 
-		{
-			initializer.Property("PageSize");
-			writer.WriteValue(PageSize);
-		}
+			if (Metrics is not null)
+			{
+				initializer.Property("Metrics");
+				writer.WriteInlineList(Metrics, (w, item) => { item.FormatCode(w); });
+			}
 
-		{
-			initializer.Property("RollupIndex");
-			RollupIndex.FormatCode(writer);
-		}
+			{
+				initializer.Property("PageSize");
+				writer.WriteValue(PageSize);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			{
+				initializer.Property("RollupIndex");
+				RollupIndex.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

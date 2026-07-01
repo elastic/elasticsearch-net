@@ -27,7 +27,13 @@ public partial class GlobalAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation", false);
-		initializer.Dispose();
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation", false);
+			initializer.Dispose();
+		}
 	}
 }

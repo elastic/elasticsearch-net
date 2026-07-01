@@ -27,7 +27,311 @@ public partial class Analyzers : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
-		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			foreach (var kvp in this)
+			{
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer c1)
+				{
+					writer.WriteFluentVariantAdd("Arabic", (w) => { w.WriteString(kvp.Key); }, (w) => { c1.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.ArmenianAnalyzer c2)
+				{
+					writer.WriteFluentVariantAdd("Armenian", (w) => { w.WriteString(kvp.Key); }, (w) => { c2.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.BasqueAnalyzer c3)
+				{
+					writer.WriteFluentVariantAdd("Basque", (w) => { w.WriteString(kvp.Key); }, (w) => { c3.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.BengaliAnalyzer c4)
+				{
+					writer.WriteFluentVariantAdd("Bengali", (w) => { w.WriteString(kvp.Key); }, (w) => { c4.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.BrazilianAnalyzer c5)
+				{
+					writer.WriteFluentVariantAdd("Brazilian", (w) => { w.WriteString(kvp.Key); }, (w) => { c5.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.BulgarianAnalyzer c6)
+				{
+					writer.WriteFluentVariantAdd("Bulgarian", (w) => { w.WriteString(kvp.Key); }, (w) => { c6.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer c7)
+				{
+					writer.WriteFluentVariantAdd("Catalan", (w) => { w.WriteString(kvp.Key); }, (w) => { c7.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer c8)
+				{
+					writer.WriteFluentVariantAdd("Chinese", (w) => { w.WriteString(kvp.Key); }, (w) => { c8.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.CjkAnalyzer c9)
+				{
+					writer.WriteFluentVariantAdd("Cjk", (w) => { w.WriteString(kvp.Key); }, (w) => { c9.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer c10)
+				{
+					writer.WriteFluentVariantAdd("Custom", (w) => { w.WriteString(kvp.Key); }, (w) => { c10.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.CzechAnalyzer c11)
+				{
+					writer.WriteFluentVariantAdd("Czech", (w) => { w.WriteString(kvp.Key); }, (w) => { c11.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.DanishAnalyzer c12)
+				{
+					writer.WriteFluentVariantAdd("Danish", (w) => { w.WriteString(kvp.Key); }, (w) => { c12.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer c13)
+				{
+					writer.WriteFluentVariantAdd("Dutch", (w) => { w.WriteString(kvp.Key); }, (w) => { c13.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.EnglishAnalyzer c14)
+				{
+					writer.WriteFluentVariantAdd("English", (w) => { w.WriteString(kvp.Key); }, (w) => { c14.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.EstonianAnalyzer c15)
+				{
+					writer.WriteFluentVariantAdd("Estonian", (w) => { w.WriteString(kvp.Key); }, (w) => { c15.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer c16)
+				{
+					writer.WriteFluentVariantAdd("Fingerprint", (w) => { w.WriteString(kvp.Key); }, (w) => { c16.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.FinnishAnalyzer c17)
+				{
+					writer.WriteFluentVariantAdd("Finnish", (w) => { w.WriteString(kvp.Key); }, (w) => { c17.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.FrenchAnalyzer c18)
+				{
+					writer.WriteFluentVariantAdd("French", (w) => { w.WriteString(kvp.Key); }, (w) => { c18.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.GalicianAnalyzer c19)
+				{
+					writer.WriteFluentVariantAdd("Galician", (w) => { w.WriteString(kvp.Key); }, (w) => { c19.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.GermanAnalyzer c20)
+				{
+					writer.WriteFluentVariantAdd("German", (w) => { w.WriteString(kvp.Key); }, (w) => { c20.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer c21)
+				{
+					writer.WriteFluentVariantAdd("Greek", (w) => { w.WriteString(kvp.Key); }, (w) => { c21.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.HindiAnalyzer c22)
+				{
+					writer.WriteFluentVariantAdd("Hindi", (w) => { w.WriteString(kvp.Key); }, (w) => { c22.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.HungarianAnalyzer c23)
+				{
+					writer.WriteFluentVariantAdd("Hungarian", (w) => { w.WriteString(kvp.Key); }, (w) => { c23.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer c24)
+				{
+					writer.WriteFluentVariantAdd("Icu", (w) => { w.WriteString(kvp.Key); }, (w) => { c24.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.IndonesianAnalyzer c25)
+				{
+					writer.WriteFluentVariantAdd("Indonesian", (w) => { w.WriteString(kvp.Key); }, (w) => { c25.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.IrishAnalyzer c26)
+				{
+					writer.WriteFluentVariantAdd("Irish", (w) => { w.WriteString(kvp.Key); }, (w) => { c26.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer c27)
+				{
+					writer.WriteFluentVariantAdd("Italian", (w) => { w.WriteString(kvp.Key); }, (w) => { c27.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer c28)
+				{
+					writer.WriteFluentVariantAdd("Keyword", (w) => { w.WriteString(kvp.Key); }, (w) => { c28.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer c29)
+				{
+					writer.WriteFluentVariantAdd("Kuromoji", (w) => { w.WriteString(kvp.Key); }, (w) => { c29.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer c30)
+				{
+					writer.WriteFluentVariantAdd("Latvian", (w) => { w.WriteString(kvp.Key); }, (w) => { c30.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.LithuanianAnalyzer c31)
+				{
+					writer.WriteFluentVariantAdd("Lithuanian", (w) => { w.WriteString(kvp.Key); }, (w) => { c31.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer c32)
+				{
+					writer.WriteFluentVariantAdd("Nori", (w) => { w.WriteString(kvp.Key); }, (w) => { c32.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.NorwegianAnalyzer c33)
+				{
+					writer.WriteFluentVariantAdd("Norwegian", (w) => { w.WriteString(kvp.Key); }, (w) => { c33.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer c34)
+				{
+					writer.WriteFluentVariantAdd("Pattern", (w) => { w.WriteString(kvp.Key); }, (w) => { c34.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.PersianAnalyzer c35)
+				{
+					writer.WriteFluentVariantAdd("Persian", (w) => { w.WriteString(kvp.Key); }, (w) => { c35.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.PortugueseAnalyzer c36)
+				{
+					writer.WriteFluentVariantAdd("Portuguese", (w) => { w.WriteString(kvp.Key); }, (w) => { c36.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.RomanianAnalyzer c37)
+				{
+					writer.WriteFluentVariantAdd("Romanian", (w) => { w.WriteString(kvp.Key); }, (w) => { c37.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.RussianAnalyzer c38)
+				{
+					writer.WriteFluentVariantAdd("Russian", (w) => { w.WriteString(kvp.Key); }, (w) => { c38.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SerbianAnalyzer c39)
+				{
+					writer.WriteFluentVariantAdd("Serbian", (w) => { w.WriteString(kvp.Key); }, (w) => { c39.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer c40)
+				{
+					writer.WriteFluentVariantAdd("Simple", (w) => { w.WriteString(kvp.Key); }, (w) => { c40.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer c41)
+				{
+					writer.WriteFluentVariantAdd("Snowball", (w) => { w.WriteString(kvp.Key); }, (w) => { c41.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer c42)
+				{
+					writer.WriteFluentVariantAdd("Sorani", (w) => { w.WriteString(kvp.Key); }, (w) => { c42.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SpanishAnalyzer c43)
+				{
+					writer.WriteFluentVariantAdd("Spanish", (w) => { w.WriteString(kvp.Key); }, (w) => { c43.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer c44)
+				{
+					writer.WriteFluentVariantAdd("Standard", (w) => { w.WriteString(kvp.Key); }, (w) => { c44.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer c45)
+				{
+					writer.WriteFluentVariantAdd("Stop", (w) => { w.WriteString(kvp.Key); }, (w) => { c45.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SwedishAnalyzer c46)
+				{
+					writer.WriteFluentVariantAdd("Swedish", (w) => { w.WriteString(kvp.Key); }, (w) => { c46.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.ThaiAnalyzer c47)
+				{
+					writer.WriteFluentVariantAdd("Thai", (w) => { w.WriteString(kvp.Key); }, (w) => { c47.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer c48)
+				{
+					writer.WriteFluentVariantAdd("Turkish", (w) => { w.WriteString(kvp.Key); }, (w) => { c48.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.WhitespaceAnalyzer c49)
+				{
+					writer.WriteFluentVariantAdd("Whitespace", (w) => { w.WriteString(kvp.Key); }, (w) => { c49.FormatCode(w); });
+					continue;
+				}
+
+				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+			}
+		}
+		else
+		{
+			writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.Analysis.Analyzers");
+			writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
 	}
 }

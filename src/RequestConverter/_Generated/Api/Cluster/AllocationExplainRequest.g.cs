@@ -27,49 +27,93 @@ public partial class AllocationExplainRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest", false);
-		if (IncludeDiskInfo is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IncludeDiskInfo");
-			writer.WriteValue(IncludeDiskInfo.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (IncludeDiskInfo is not null)
+			{
+				writer.WriteFluentCall("IncludeDiskInfo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDiskInfo.Value); });
+			}
 
-		if (IncludeYesDecisions is not null)
+			if (IncludeYesDecisions is not null)
+			{
+				writer.WriteFluentCall("IncludeYesDecisions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeYesDecisions.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (CurrentNode is not null)
+			{
+				writer.WriteFluentCall("CurrentNode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CurrentNode); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (Primary is not null)
+			{
+				writer.WriteFluentCall("Primary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Primary.Value); });
+			}
+
+			if (Shard is not null)
+			{
+				writer.WriteFluentCall("Shard", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Shard.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("IncludeYesDecisions");
-			writer.WriteValue(IncludeYesDecisions.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest", false);
+			if (IncludeDiskInfo is not null)
+			{
+				initializer.Property("IncludeDiskInfo");
+				writer.WriteValue(IncludeDiskInfo.Value);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (IncludeYesDecisions is not null)
+			{
+				initializer.Property("IncludeYesDecisions");
+				writer.WriteValue(IncludeYesDecisions.Value);
+			}
 
-		if (CurrentNode is not null)
-		{
-			initializer.Property("CurrentNode");
-			writer.WriteString(CurrentNode);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (CurrentNode is not null)
+			{
+				initializer.Property("CurrentNode");
+				writer.WriteString(CurrentNode);
+			}
 
-		if (Primary is not null)
-		{
-			initializer.Property("Primary");
-			writer.WriteValue(Primary.Value);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (Shard is not null)
-		{
-			initializer.Property("Shard");
-			writer.WriteValue(Shard.Value);
-		}
+			if (Primary is not null)
+			{
+				initializer.Property("Primary");
+				writer.WriteValue(Primary.Value);
+			}
 
-		initializer.Dispose();
+			if (Shard is not null)
+			{
+				initializer.Property("Shard");
+				writer.WriteValue(Shard.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

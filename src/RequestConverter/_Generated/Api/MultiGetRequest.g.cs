@@ -27,79 +27,158 @@ public partial class MultiGetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MultiGetRequest", false);
-		if (Index is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (ForceSyntheticSource is not null)
+			using var _chainIndent = writer.Indent();
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (ForceSyntheticSource is not null)
+			{
+				writer.WriteFluentCall("ForceSyntheticSource", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ForceSyntheticSource.Value); });
+			}
+
+			if (Preference is not null)
+			{
+				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+			}
+
+			if (Realtime is not null)
+			{
+				writer.WriteFluentCall("Realtime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Realtime.Value); });
+			}
+
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); Source.FormatCode(w); });
+			}
+
+			if (SourceExcludes is not null)
+			{
+				writer.WriteFluentCall("SourceExcludes", (w) => { using var _oi = w.ForceObjectInitializer(); SourceExcludes.FormatCode(w); });
+			}
+
+			if (SourceIncludes is not null)
+			{
+				writer.WriteFluentCall("SourceIncludes", (w) => { using var _oi = w.ForceObjectInitializer(); SourceIncludes.FormatCode(w); });
+			}
+
+			if (StoredFields is not null)
+			{
+				writer.WriteFluentCall("StoredFields", (w) => { using var _oi = w.ForceObjectInitializer(); StoredFields.FormatCode(w); });
+			}
+
+			if (Docs is not null)
+			{
+				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>"); w.Write("()"); });
+			}
+
+			if (Ids is not null)
+			{
+				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); Ids.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ForceSyntheticSource");
-			writer.WriteValue(ForceSyntheticSource.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MultiGetRequest", false);
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (Preference is not null)
-		{
-			initializer.Property("Preference");
-			writer.WriteString(Preference);
-		}
+			if (ForceSyntheticSource is not null)
+			{
+				initializer.Property("ForceSyntheticSource");
+				writer.WriteValue(ForceSyntheticSource.Value);
+			}
 
-		if (Realtime is not null)
-		{
-			initializer.Property("Realtime");
-			writer.WriteValue(Realtime.Value);
-		}
+			if (Preference is not null)
+			{
+				initializer.Property("Preference");
+				writer.WriteString(Preference);
+			}
 
-		if (Refresh is not null)
-		{
-			initializer.Property("Refresh");
-			writer.WriteValue(Refresh.Value);
-		}
+			if (Realtime is not null)
+			{
+				initializer.Property("Realtime");
+				writer.WriteValue(Realtime.Value);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				writer.WriteValue(Refresh.Value);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
 
-		if (SourceExcludes is not null)
-		{
-			initializer.Property("SourceExcludes");
-			SourceExcludes.FormatCode(writer);
-		}
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
 
-		if (SourceIncludes is not null)
-		{
-			initializer.Property("SourceIncludes");
-			SourceIncludes.FormatCode(writer);
-		}
+			if (SourceExcludes is not null)
+			{
+				initializer.Property("SourceExcludes");
+				SourceExcludes.FormatCode(writer);
+			}
 
-		if (StoredFields is not null)
-		{
-			initializer.Property("StoredFields");
-			StoredFields.FormatCode(writer);
-		}
+			if (SourceIncludes is not null)
+			{
+				initializer.Property("SourceIncludes");
+				SourceIncludes.FormatCode(writer);
+			}
 
-		if (Docs is not null)
-		{
-			initializer.Property("Docs");
-			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
-		}
+			if (StoredFields is not null)
+			{
+				initializer.Property("StoredFields");
+				StoredFields.FormatCode(writer);
+			}
 
-		if (Ids is not null)
-		{
-			initializer.Property("Ids");
-			Ids.FormatCode(writer);
-		}
+			if (Docs is not null)
+			{
+				initializer.Property("Docs");
+				writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Ids is not null)
+			{
+				initializer.Property("Ids");
+				Ids.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

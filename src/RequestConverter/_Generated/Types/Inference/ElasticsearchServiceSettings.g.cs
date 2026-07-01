@@ -27,47 +27,85 @@ public partial class ElasticsearchServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings", false);
-		if (AdaptiveAllocations is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AdaptiveAllocations");
-			AdaptiveAllocations.FormatCode(writer);
-		}
+			if (AdaptiveAllocations is not null)
+			{
+				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); });
+			}
 
-		if (DeploymentId is not null)
+			if (DeploymentId is not null)
+			{
+				writer.WriteFluentCall("DeploymentId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DeploymentId); });
+			}
+
+			if (LongDocumentStrategy is not null)
+			{
+				writer.WriteFluentCall("LongDocumentStrategy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LongDocumentStrategy); });
+			}
+
+			if (MaxChunksPerDoc is not null)
+			{
+				writer.WriteFluentCall("MaxChunksPerDoc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChunksPerDoc.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (NumAllocations is not null)
+			{
+				writer.WriteFluentCall("NumAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumAllocations.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("NumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumThreads); });
+			}
+		}
+		else
 		{
-			initializer.Property("DeploymentId");
-			writer.WriteString(DeploymentId);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings", false);
+			if (AdaptiveAllocations is not null)
+			{
+				initializer.Property("AdaptiveAllocations");
+				AdaptiveAllocations.FormatCode(writer);
+			}
 
-		if (LongDocumentStrategy is not null)
-		{
-			initializer.Property("LongDocumentStrategy");
-			writer.WriteString(LongDocumentStrategy);
-		}
+			if (DeploymentId is not null)
+			{
+				initializer.Property("DeploymentId");
+				writer.WriteString(DeploymentId);
+			}
 
-		if (MaxChunksPerDoc is not null)
-		{
-			initializer.Property("MaxChunksPerDoc");
-			writer.WriteValue(MaxChunksPerDoc.Value);
-		}
+			if (LongDocumentStrategy is not null)
+			{
+				initializer.Property("LongDocumentStrategy");
+				writer.WriteString(LongDocumentStrategy);
+			}
 
-		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			if (MaxChunksPerDoc is not null)
+			{
+				initializer.Property("MaxChunksPerDoc");
+				writer.WriteValue(MaxChunksPerDoc.Value);
+			}
 
-		if (NumAllocations is not null)
-		{
-			initializer.Property("NumAllocations");
-			writer.WriteValue(NumAllocations.Value);
-		}
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		{
-			initializer.Property("NumThreads");
-			writer.WriteValue(NumThreads);
-		}
+			if (NumAllocations is not null)
+			{
+				initializer.Property("NumAllocations");
+				writer.WriteValue(NumAllocations.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("NumThreads");
+				writer.WriteValue(NumThreads);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

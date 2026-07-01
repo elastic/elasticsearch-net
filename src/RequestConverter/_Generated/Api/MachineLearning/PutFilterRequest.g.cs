@@ -27,24 +27,49 @@ public partial class PutFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FilterId");
-			FilterId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				FilterId.FormatCode(writer);
+			}
 
-		if (Description is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (Items is not null)
+			{
+				writer.WriteFluentParams("Items", Items, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest", false);
+			{
+				initializer.Property("FilterId");
+				FilterId.FormatCode(writer);
+			}
 
-		if (Items is not null)
-		{
-			initializer.Property("Items");
-			writer.WriteInlineList(Items, (w, item) => { w.WriteString(item); });
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		initializer.Dispose();
+			if (Items is not null)
+			{
+				initializer.Property("Items");
+				writer.WriteInlineList(Items, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

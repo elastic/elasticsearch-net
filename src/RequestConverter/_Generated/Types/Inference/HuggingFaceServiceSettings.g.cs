@@ -27,29 +27,52 @@ public partial class HuggingFaceServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
-		if (ModelId is not null)
+			if (ModelId is not null)
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			if (ModelId is not null)
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

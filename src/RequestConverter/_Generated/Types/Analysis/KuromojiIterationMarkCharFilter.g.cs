@@ -27,23 +27,41 @@ public partial class KuromojiIterationMarkCharFilter : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("NormalizeKana");
-			writer.WriteValue(NormalizeKana);
-		}
+			{
+				writer.WriteFluentCall("NormalizeKana", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NormalizeKana); });
+			}
 
+			{
+				writer.WriteFluentCall("NormalizeKanji", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NormalizeKanji); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("NormalizeKanji");
-			writer.WriteValue(NormalizeKanji);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter", true);
+			{
+				initializer.Property("NormalizeKana");
+				writer.WriteValue(NormalizeKana);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			{
+				initializer.Property("NormalizeKanji");
+				writer.WriteValue(NormalizeKanji);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

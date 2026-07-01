@@ -27,25 +27,49 @@ public partial class GetRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest", false);
-		if (Name is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
 
-		if (Local is not null)
+			if (Local is not null)
+			{
+				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Local");
-			writer.WriteValue(Local.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest", false);
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (Local is not null)
+			{
+				initializer.Property("Local");
+				writer.WriteValue(Local.Value);
+			}
 
-		initializer.Dispose();
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

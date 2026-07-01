@@ -27,12 +27,21 @@ public partial class Restriction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Restriction", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Workflows");
-			writer.WriteInlineList(Workflows, (w, item) => { item.FormatCode(w); });
+			{
+				writer.WriteFluentParams("Workflows", Workflows, (w, item) => { item.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Restriction", false);
+			{
+				initializer.Property("Workflows");
+				writer.WriteInlineList(Workflows, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

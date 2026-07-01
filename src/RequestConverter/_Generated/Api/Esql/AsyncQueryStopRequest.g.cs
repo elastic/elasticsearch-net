@@ -27,18 +27,38 @@ public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
 
-		if (DropNullColumns is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (DropNullColumns is not null)
+			{
+				writer.WriteFluentCall("DropNullColumns", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DropNullColumns.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("DropNullColumns");
-			writer.WriteValue(DropNullColumns.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (DropNullColumns is not null)
+			{
+				initializer.Property("DropNullColumns");
+				writer.WriteValue(DropNullColumns.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

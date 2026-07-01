@@ -27,55 +27,94 @@ public partial class RemoteSource : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource", false);
-		if (ApiKey is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			if (ApiKey is not null)
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
-		if (ConnectTimeout is not null)
+			if (ConnectTimeout is not null)
+			{
+				writer.WriteFluentCall("ConnectTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); ConnectTimeout.FormatCode(w); });
+			}
+
+			if (Headers is not null)
+			{
+				writer.WriteFluentCall("Headers", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentCall("Host", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Host); });
+			}
+
+			if (Password is not null)
+			{
+				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+			}
+
+			if (SocketTimeout is not null)
+			{
+				writer.WriteFluentCall("SocketTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); SocketTimeout.FormatCode(w); });
+			}
+
+			if (Username is not null)
+			{
+				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ConnectTimeout");
-			ConnectTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource", false);
+			if (ApiKey is not null)
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		if (Headers is not null)
-		{
-			initializer.Property("Headers");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			if (ConnectTimeout is not null)
+			{
+				initializer.Property("ConnectTimeout");
+				ConnectTimeout.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Host");
-			writer.WriteString(Host);
-		}
+			if (Headers is not null)
+			{
+				initializer.Property("Headers");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Password is not null)
-		{
-			initializer.Property("Password");
-			writer.WriteString(Password);
-		}
+			{
+				initializer.Property("Host");
+				writer.WriteString(Host);
+			}
 
-		if (SocketTimeout is not null)
-		{
-			initializer.Property("SocketTimeout");
-			SocketTimeout.FormatCode(writer);
-		}
+			if (Password is not null)
+			{
+				initializer.Property("Password");
+				writer.WriteString(Password);
+			}
 
-		if (Username is not null)
-		{
-			initializer.Property("Username");
-			Username.FormatCode(writer);
-		}
+			if (SocketTimeout is not null)
+			{
+				initializer.Property("SocketTimeout");
+				SocketTimeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Username is not null)
+			{
+				initializer.Property("Username");
+				Username.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

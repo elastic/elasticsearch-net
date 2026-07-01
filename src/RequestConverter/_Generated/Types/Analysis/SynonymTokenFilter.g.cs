@@ -27,61 +27,111 @@ public partial class SynonymTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter", true);
-		if (Expand is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Expand");
-			writer.WriteValue(Expand.Value);
-		}
+			if (Expand is not null)
+			{
+				writer.WriteFluentCall("Expand", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Expand.Value); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(Format.Value, w); });
+			}
+
+			if (Lenient is not null)
+			{
+				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+			}
+
+			if (Synonyms is not null)
+			{
+				writer.WriteFluentParams("Synonyms", Synonyms, (w, item) => { w.WriteString(item); });
+			}
+
+			if (SynonymsPath is not null)
+			{
+				writer.WriteFluentCall("SynonymsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SynonymsPath); });
+			}
+
+			if (SynonymsSet is not null)
+			{
+				writer.WriteFluentParams("SynonymsSet", SynonymsSet, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Tokenizer is not null)
+			{
+				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tokenizer); });
+			}
+
+			if (Updateable is not null)
+			{
+				writer.WriteFluentCall("Updateable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Updateable.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(Format.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SynonymTokenFilter", true);
+			if (Expand is not null)
+			{
+				initializer.Property("Expand");
+				writer.WriteValue(Expand.Value);
+			}
 
-		if (Lenient is not null)
-		{
-			initializer.Property("Lenient");
-			writer.WriteValue(Lenient.Value);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(Format.Value, writer);
+			}
 
-		if (Synonyms is not null)
-		{
-			initializer.Property("Synonyms");
-			writer.WriteInlineList(Synonyms, (w, item) => { w.WriteString(item); });
-		}
+			if (Lenient is not null)
+			{
+				initializer.Property("Lenient");
+				writer.WriteValue(Lenient.Value);
+			}
 
-		if (SynonymsPath is not null)
-		{
-			initializer.Property("SynonymsPath");
-			writer.WriteString(SynonymsPath);
-		}
+			if (Synonyms is not null)
+			{
+				initializer.Property("Synonyms");
+				writer.WriteInlineList(Synonyms, (w, item) => { w.WriteString(item); });
+			}
 
-		if (SynonymsSet is not null)
-		{
-			initializer.Property("SynonymsSet");
-			writer.WriteInlineList(SynonymsSet, (w, item) => { w.WriteString(item); });
-		}
+			if (SynonymsPath is not null)
+			{
+				initializer.Property("SynonymsPath");
+				writer.WriteString(SynonymsPath);
+			}
 
-		if (Tokenizer is not null)
-		{
-			initializer.Property("Tokenizer");
-			writer.WriteString(Tokenizer);
-		}
+			if (SynonymsSet is not null)
+			{
+				initializer.Property("SynonymsSet");
+				writer.WriteInlineList(SynonymsSet, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Updateable is not null)
-		{
-			initializer.Property("Updateable");
-			writer.WriteValue(Updateable.Value);
-		}
+			if (Tokenizer is not null)
+			{
+				initializer.Property("Tokenizer");
+				writer.WriteString(Tokenizer);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Updateable is not null)
+			{
+				initializer.Property("Updateable");
+				writer.WriteValue(Updateable.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

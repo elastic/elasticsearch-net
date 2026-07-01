@@ -27,26 +27,46 @@ public partial class TokenPruningConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TokenPruningConfig", false);
-		if (OnlyScorePrunedTokens is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("OnlyScorePrunedTokens");
-			writer.WriteValue(OnlyScorePrunedTokens.Value);
-		}
+			if (OnlyScorePrunedTokens is not null)
+			{
+				writer.WriteFluentCall("OnlyScorePrunedTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnlyScorePrunedTokens.Value); });
+			}
 
-		if (TokensFreqRatioThreshold is not null)
+			if (TokensFreqRatioThreshold is not null)
+			{
+				writer.WriteFluentCall("TokensFreqRatioThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TokensFreqRatioThreshold.Value); });
+			}
+
+			if (TokensWeightThreshold is not null)
+			{
+				writer.WriteFluentCall("TokensWeightThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TokensWeightThreshold.Value); w.Write("f"); });
+			}
+		}
+		else
 		{
-			initializer.Property("TokensFreqRatioThreshold");
-			writer.WriteValue(TokensFreqRatioThreshold.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TokenPruningConfig", false);
+			if (OnlyScorePrunedTokens is not null)
+			{
+				initializer.Property("OnlyScorePrunedTokens");
+				writer.WriteValue(OnlyScorePrunedTokens.Value);
+			}
 
-		if (TokensWeightThreshold is not null)
-		{
-			initializer.Property("TokensWeightThreshold");
-			writer.WriteValue(TokensWeightThreshold.Value);
-			writer.Write("f");
-		}
+			if (TokensFreqRatioThreshold is not null)
+			{
+				initializer.Property("TokensFreqRatioThreshold");
+				writer.WriteValue(TokensFreqRatioThreshold.Value);
+			}
 
-		initializer.Dispose();
+			if (TokensWeightThreshold is not null)
+			{
+				initializer.Property("TokensWeightThreshold");
+				writer.WriteValue(TokensWeightThreshold.Value);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

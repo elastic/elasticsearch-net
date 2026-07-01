@@ -27,13 +27,23 @@ public partial class SettingsHighlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight", false);
-		if (MaxAnalyzedOffset is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxAnalyzedOffset");
-			writer.WriteValue(MaxAnalyzedOffset.Value);
+			if (MaxAnalyzedOffset is not null)
+			{
+				writer.WriteFluentCall("MaxAnalyzedOffset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxAnalyzedOffset.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight", false);
+			if (MaxAnalyzedOffset is not null)
+			{
+				initializer.Property("MaxAnalyzedOffset");
+				writer.WriteValue(MaxAnalyzedOffset.Value);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,31 +27,56 @@ public partial class IndicesOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndicesOptions", false);
-		if (AllowNoIndices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowNoIndices");
-			writer.WriteValue(AllowNoIndices.Value);
-		}
+			if (AllowNoIndices is not null)
+			{
+				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+			}
 
-		if (ExpandWildcards is not null)
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (IgnoreThrottled is not null)
+			{
+				writer.WriteFluentCall("IgnoreThrottled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreThrottled.Value); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndicesOptions", false);
+			if (AllowNoIndices is not null)
+			{
+				initializer.Property("AllowNoIndices");
+				writer.WriteValue(AllowNoIndices.Value);
+			}
 
-		if (IgnoreThrottled is not null)
-		{
-			initializer.Property("IgnoreThrottled");
-			writer.WriteValue(IgnoreThrottled.Value);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (IgnoreThrottled is not null)
+			{
+				initializer.Property("IgnoreThrottled");
+				writer.WriteValue(IgnoreThrottled.Value);
+			}
 
-		initializer.Dispose();
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

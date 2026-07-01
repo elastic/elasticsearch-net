@@ -27,19 +27,48 @@ public partial class DataStreamsStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest", false);
-		if (Name is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (ExpandWildcards is not null)
+			using var _chainIndent = writer.Indent();
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest", false);
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

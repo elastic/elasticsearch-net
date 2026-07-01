@@ -27,48 +27,86 @@ public partial class GeoBoundingBoxQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
-		{
-			initializer.Property("BoundingBox");
-			BoundingBox.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("BoundingBox", (w) => { using var _oi = w.ForceObjectInitializer(); BoundingBox.FormatCode(w); });
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (IgnoreUnmapped is not null)
-		{
-			initializer.Property("IgnoreUnmapped");
-			writer.WriteValue(IgnoreUnmapped.Value);
-		}
+			if (IgnoreUnmapped is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
 #pragma warning disable CS0618
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionCodeFormatter.FormatCode(Type.Value, writer);
-		}
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionCodeFormatter.FormatCode(Type.Value, w); });
+			}
 #pragma warning restore CS0618
-		if (ValidationMethod is not null)
-		{
-			initializer.Property("ValidationMethod");
-			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
+			if (ValidationMethod is not null)
+			{
+				writer.WriteFluentCall("ValidationMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("BoundingBox");
+				BoundingBox.FormatCode(writer);
+			}
+
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
+
+			if (IgnoreUnmapped is not null)
+			{
+				initializer.Property("IgnoreUnmapped");
+				writer.WriteValue(IgnoreUnmapped.Value);
+			}
+
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
+#pragma warning disable CS0618
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionCodeFormatter.FormatCode(Type.Value, writer);
+			}
+#pragma warning restore CS0618
+			if (ValidationMethod is not null)
+			{
+				initializer.Property("ValidationMethod");
+				Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

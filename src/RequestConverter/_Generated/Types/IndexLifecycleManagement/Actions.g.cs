@@ -27,85 +27,155 @@ public partial class Actions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions", false);
-		if (Allocate is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Allocate");
-			Allocate.FormatCode(writer);
-		}
+			if (Allocate is not null)
+			{
+				writer.WriteFluentDescriptorCall("Allocate", (w) => { Allocate.FormatCode(w); });
+			}
 
-		if (Delete is not null)
-		{
-			initializer.Property("Delete");
-			Delete.FormatCode(writer);
-		}
+			if (Delete is not null)
+			{
+				writer.WriteFluentDescriptorCall("Delete", (w) => { Delete.FormatCode(w); });
+			}
 
-		if (Downsample is not null)
-		{
-			initializer.Property("Downsample");
-			Downsample.FormatCode(writer);
-		}
+			if (Downsample is not null)
+			{
+				writer.WriteFluentDescriptorCall("Downsample", (w) => { Downsample.FormatCode(w); });
+			}
 
-		if (Forcemerge is not null)
-		{
-			initializer.Property("Forcemerge");
-			Forcemerge.FormatCode(writer);
-		}
+			if (Forcemerge is not null)
+			{
+				writer.WriteFluentDescriptorCall("Forcemerge", (w) => { Forcemerge.FormatCode(w); });
+			}
 #pragma warning disable CS0618
-		if (Freeze is not null)
-		{
-			initializer.Property("Freeze");
-			Freeze.FormatCode(writer);
-		}
+			if (Freeze is not null)
+			{
+				writer.WriteFluentDescriptorCall("Freeze", (w) => { Freeze.FormatCode(w); });
+			}
 #pragma warning restore CS0618
-		if (Migrate is not null)
-		{
-			initializer.Property("Migrate");
-			Migrate.FormatCode(writer);
-		}
+			if (Migrate is not null)
+			{
+				writer.WriteFluentDescriptorCall("Migrate", (w) => { Migrate.FormatCode(w); });
+			}
 
-		if (Readonly is not null)
-		{
-			initializer.Property("Readonly");
-			Readonly.FormatCode(writer);
-		}
+			if (Readonly is not null)
+			{
+				writer.WriteFluentDescriptorCall("Readonly", (w) => { Readonly.FormatCode(w); });
+			}
 
-		if (Rollover is not null)
-		{
-			initializer.Property("Rollover");
-			Rollover.FormatCode(writer);
-		}
+			if (Rollover is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rollover", (w) => { Rollover.FormatCode(w); });
+			}
 
-		if (SearchableSnapshot is not null)
-		{
-			initializer.Property("SearchableSnapshot");
-			SearchableSnapshot.FormatCode(writer);
-		}
+			if (SearchableSnapshot is not null)
+			{
+				writer.WriteFluentDescriptorCall("SearchableSnapshot", (w) => { SearchableSnapshot.FormatCode(w); });
+			}
 
-		if (SetPriority is not null)
-		{
-			initializer.Property("SetPriority");
-			SetPriority.FormatCode(writer);
-		}
+			if (SetPriority is not null)
+			{
+				writer.WriteFluentDescriptorCall("SetPriority", (w) => { SetPriority.FormatCode(w); });
+			}
 
-		if (Shrink is not null)
-		{
-			initializer.Property("Shrink");
-			Shrink.FormatCode(writer);
-		}
+			if (Shrink is not null)
+			{
+				writer.WriteFluentDescriptorCall("Shrink", (w) => { Shrink.FormatCode(w); });
+			}
 
-		if (Unfollow is not null)
-		{
-			initializer.Property("Unfollow");
-			Unfollow.FormatCode(writer);
-		}
+			if (Unfollow is not null)
+			{
+				writer.WriteFluentDescriptorCall("Unfollow", (w) => { Unfollow.FormatCode(w); });
+			}
 
-		if (WaitForSnapshot is not null)
-		{
-			initializer.Property("WaitForSnapshot");
-			WaitForSnapshot.FormatCode(writer);
+			if (WaitForSnapshot is not null)
+			{
+				writer.WriteFluentDescriptorCall("WaitForSnapshot", (w) => { WaitForSnapshot.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions", false);
+			if (Allocate is not null)
+			{
+				initializer.Property("Allocate");
+				Allocate.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Delete is not null)
+			{
+				initializer.Property("Delete");
+				Delete.FormatCode(writer);
+			}
+
+			if (Downsample is not null)
+			{
+				initializer.Property("Downsample");
+				Downsample.FormatCode(writer);
+			}
+
+			if (Forcemerge is not null)
+			{
+				initializer.Property("Forcemerge");
+				Forcemerge.FormatCode(writer);
+			}
+#pragma warning disable CS0618
+			if (Freeze is not null)
+			{
+				initializer.Property("Freeze");
+				Freeze.FormatCode(writer);
+			}
+#pragma warning restore CS0618
+			if (Migrate is not null)
+			{
+				initializer.Property("Migrate");
+				Migrate.FormatCode(writer);
+			}
+
+			if (Readonly is not null)
+			{
+				initializer.Property("Readonly");
+				Readonly.FormatCode(writer);
+			}
+
+			if (Rollover is not null)
+			{
+				initializer.Property("Rollover");
+				Rollover.FormatCode(writer);
+			}
+
+			if (SearchableSnapshot is not null)
+			{
+				initializer.Property("SearchableSnapshot");
+				SearchableSnapshot.FormatCode(writer);
+			}
+
+			if (SetPriority is not null)
+			{
+				initializer.Property("SetPriority");
+				SetPriority.FormatCode(writer);
+			}
+
+			if (Shrink is not null)
+			{
+				initializer.Property("Shrink");
+				Shrink.FormatCode(writer);
+			}
+
+			if (Unfollow is not null)
+			{
+				initializer.Property("Unfollow");
+				Unfollow.FormatCode(writer);
+			}
+
+			if (WaitForSnapshot is not null)
+			{
+				initializer.Property("WaitForSnapshot");
+				WaitForSnapshot.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

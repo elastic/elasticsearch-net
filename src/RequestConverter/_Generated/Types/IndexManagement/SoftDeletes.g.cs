@@ -27,19 +27,34 @@ public partial class SoftDeletes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes", false);
-		if (Enabled is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
 
-		if (RetentionLease is not null)
+			if (RetentionLease is not null)
+			{
+				writer.WriteFluentDescriptorCall("RetentionLease", (w) => { RetentionLease.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("RetentionLease");
-			RetentionLease.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes", false);
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		initializer.Dispose();
+			if (RetentionLease is not null)
+			{
+				initializer.Property("RetentionLease");
+				RetentionLease.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

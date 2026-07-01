@@ -27,47 +27,99 @@ public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest", false);
-		if (Refresh is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (AccessToken is not null)
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+
+			if (AccessToken is not null)
+			{
+				writer.WriteFluentCall("AccessToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AccessToken); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("GrantType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, w); });
+			}
+
+			if (Password is not null)
+			{
+				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+			}
+
+			if (RunAs is not null)
+			{
+				writer.WriteFluentCall("RunAs", (w) => { using var _oi = w.ForceObjectInitializer(); RunAs.FormatCode(w); });
+			}
+
+			if (Username is not null)
+			{
+				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("AccessToken");
-			writer.WriteString(AccessToken);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest", false);
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
 
-		{
-			initializer.Property("ApiKey");
-			ApiKey.FormatCode(writer);
-		}
+			if (AccessToken is not null)
+			{
+				initializer.Property("AccessToken");
+				writer.WriteString(AccessToken);
+			}
 
-		{
-			initializer.Property("GrantType");
-			Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, writer);
-		}
+			{
+				initializer.Property("ApiKey");
+				ApiKey.FormatCode(writer);
+			}
 
-		if (Password is not null)
-		{
-			initializer.Property("Password");
-			writer.WriteString(Password);
-		}
+			{
+				initializer.Property("GrantType");
+				Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, writer);
+			}
 
-		if (RunAs is not null)
-		{
-			initializer.Property("RunAs");
-			RunAs.FormatCode(writer);
-		}
+			if (Password is not null)
+			{
+				initializer.Property("Password");
+				writer.WriteString(Password);
+			}
 
-		if (Username is not null)
-		{
-			initializer.Property("Username");
-			Username.FormatCode(writer);
-		}
+			if (RunAs is not null)
+			{
+				initializer.Property("RunAs");
+				RunAs.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Username is not null)
+			{
+				initializer.Property("Username");
+				Username.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

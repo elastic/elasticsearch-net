@@ -27,24 +27,41 @@ public partial class FielddataFrequencyFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Max");
-			writer.WriteValue(Max);
-			writer.Write("d");
-		}
+			{
+				writer.WriteFluentCall("Max", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Max); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("Min", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Min); w.Write("d"); });
+			}
+
+			{
+				writer.WriteFluentCall("MinSegmentSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinSegmentSize); });
+			}
+		}
+		else
 		{
-			initializer.Property("Min");
-			writer.WriteValue(Min);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter", false);
+			{
+				initializer.Property("Max");
+				writer.WriteValue(Max);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("MinSegmentSize");
-			writer.WriteValue(MinSegmentSize);
-		}
+			{
+				initializer.Property("Min");
+				writer.WriteValue(Min);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("MinSegmentSize");
+				writer.WriteValue(MinSegmentSize);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

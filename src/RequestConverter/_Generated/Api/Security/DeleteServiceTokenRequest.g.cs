@@ -27,28 +27,60 @@ public partial class DeleteServiceTokenRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteString(Namespace);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteString(Service);
+			}
+
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Namespace");
-			writer.WriteString(Namespace);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Service");
-			writer.WriteString(Service);
-		}
+			{
+				initializer.Property("Namespace");
+				writer.WriteString(Namespace);
+			}
 
-		if (Refresh is not null)
-		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			{
+				initializer.Property("Service");
+				writer.WriteString(Service);
+			}
 
-		initializer.Dispose();
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

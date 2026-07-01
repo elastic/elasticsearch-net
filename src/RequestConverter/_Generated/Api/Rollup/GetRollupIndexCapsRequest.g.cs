@@ -27,12 +27,28 @@ public partial class GetRollupIndexCapsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Index.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

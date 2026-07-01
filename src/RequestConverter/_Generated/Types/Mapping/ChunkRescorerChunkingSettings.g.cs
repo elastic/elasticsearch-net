@@ -27,42 +27,76 @@ public partial class ChunkRescorerChunkingSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxChunkSize");
-			writer.WriteValue(MaxChunkSize);
-		}
+			{
+				writer.WriteFluentCall("MaxChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChunkSize); });
+			}
 
-		if (Overlap is not null)
+			if (Overlap is not null)
+			{
+				writer.WriteFluentCall("Overlap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Overlap.Value); });
+			}
+
+			if (SentenceOverlap is not null)
+			{
+				writer.WriteFluentCall("SentenceOverlap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SentenceOverlap.Value); });
+			}
+
+			if (SeparatorGroup is not null)
+			{
+				writer.WriteFluentCall("SeparatorGroup", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SeparatorGroup); });
+			}
+
+			if (Separators is not null)
+			{
+				writer.WriteFluentParams("Separators", Separators, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Strategy is not null)
+			{
+				writer.WriteFluentCall("Strategy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Strategy); });
+			}
+		}
+		else
 		{
-			initializer.Property("Overlap");
-			writer.WriteValue(Overlap.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettings", false);
+			{
+				initializer.Property("MaxChunkSize");
+				writer.WriteValue(MaxChunkSize);
+			}
 
-		if (SentenceOverlap is not null)
-		{
-			initializer.Property("SentenceOverlap");
-			writer.WriteValue(SentenceOverlap.Value);
-		}
+			if (Overlap is not null)
+			{
+				initializer.Property("Overlap");
+				writer.WriteValue(Overlap.Value);
+			}
 
-		if (SeparatorGroup is not null)
-		{
-			initializer.Property("SeparatorGroup");
-			writer.WriteString(SeparatorGroup);
-		}
+			if (SentenceOverlap is not null)
+			{
+				initializer.Property("SentenceOverlap");
+				writer.WriteValue(SentenceOverlap.Value);
+			}
 
-		if (Separators is not null)
-		{
-			initializer.Property("Separators");
-			writer.WriteInlineList(Separators, (w, item) => { w.WriteString(item); });
-		}
+			if (SeparatorGroup is not null)
+			{
+				initializer.Property("SeparatorGroup");
+				writer.WriteString(SeparatorGroup);
+			}
 
-		if (Strategy is not null)
-		{
-			initializer.Property("Strategy");
-			writer.WriteString(Strategy);
-		}
+			if (Separators is not null)
+			{
+				initializer.Property("Separators");
+				writer.WriteInlineList(Separators, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Strategy is not null)
+			{
+				initializer.Property("Strategy");
+				writer.WriteString(Strategy);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

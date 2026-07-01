@@ -27,35 +27,85 @@ public partial class PutDataStreamMappingsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
 
-		if (DryRun is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (DryRun is not null)
+			{
+				writer.WriteFluentCall("DryRun", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DryRun.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Mappings", (w) => { Mappings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("DryRun");
-			writer.WriteValue(DryRun.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (DryRun is not null)
+			{
+				initializer.Property("DryRun");
+				writer.WriteValue(DryRun.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Mappings");
-			Mappings.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Mappings");
+				Mappings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,37 +27,67 @@ public partial class IndexSettingsAnalysis : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis", false);
-		if (Analyzers is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzers");
-			Analyzers.FormatCode(writer);
-		}
+			if (Analyzers is not null)
+			{
+				writer.WriteFluentDescriptorCall("Analyzers", (w) => { Analyzers.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Analyzers.FormatCode(w); });
+			}
 
-		if (CharFilters is not null)
+			if (CharFilters is not null)
+			{
+				writer.WriteFluentDescriptorCall("CharFilters", (w) => { CharFilters.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); CharFilters.FormatCode(w); });
+			}
+
+			if (Normalizers is not null)
+			{
+				writer.WriteFluentDescriptorCall("Normalizers", (w) => { Normalizers.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Normalizers.FormatCode(w); });
+			}
+
+			if (TokenFilters is not null)
+			{
+				writer.WriteFluentDescriptorCall("TokenFilters", (w) => { TokenFilters.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TokenFilters.FormatCode(w); });
+			}
+
+			if (Tokenizers is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenizers", (w) => { Tokenizers.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tokenizers.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("CharFilters");
-			CharFilters.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis", false);
+			if (Analyzers is not null)
+			{
+				initializer.Property("Analyzers");
+				Analyzers.FormatCode(writer);
+			}
 
-		if (Normalizers is not null)
-		{
-			initializer.Property("Normalizers");
-			Normalizers.FormatCode(writer);
-		}
+			if (CharFilters is not null)
+			{
+				initializer.Property("CharFilters");
+				CharFilters.FormatCode(writer);
+			}
 
-		if (TokenFilters is not null)
-		{
-			initializer.Property("TokenFilters");
-			TokenFilters.FormatCode(writer);
-		}
+			if (Normalizers is not null)
+			{
+				initializer.Property("Normalizers");
+				Normalizers.FormatCode(writer);
+			}
 
-		if (Tokenizers is not null)
-		{
-			initializer.Property("Tokenizers");
-			Tokenizers.FormatCode(writer);
-		}
+			if (TokenFilters is not null)
+			{
+				initializer.Property("TokenFilters");
+				TokenFilters.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Tokenizers is not null)
+			{
+				initializer.Property("Tokenizers");
+				Tokenizers.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

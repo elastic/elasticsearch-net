@@ -27,12 +27,35 @@ public partial class ValidateDetectorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Detector");
-			Detector.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor");
+				writer.Write("()");
+			}
 
-		initializer.Dispose();
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("Detector", (w) => { Detector.FormatCode(w); });
+			}
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest", false);
+			{
+				initializer.Property("Detector");
+				Detector.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

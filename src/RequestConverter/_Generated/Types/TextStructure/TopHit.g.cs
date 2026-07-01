@@ -36,7 +36,7 @@ public partial class TopHit : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Value");
-			writer.WriteValue(Value);
+			writer.WriteObjectValue(Value);
 		}
 
 		initializer.Dispose();

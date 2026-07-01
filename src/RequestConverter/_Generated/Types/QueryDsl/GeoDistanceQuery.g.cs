@@ -27,53 +27,95 @@ public partial class GeoDistanceQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Distance", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Distance); });
+			}
+
+			if (DistanceType is not null)
+			{
+				writer.WriteFluentCall("DistanceType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (IgnoreUnmapped is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); Location.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (ValidationMethod is not null)
+			{
+				writer.WriteFluentCall("ValidationMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Distance");
-			writer.WriteString(Distance);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (DistanceType is not null)
-		{
-			initializer.Property("DistanceType");
-			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
-		}
+			{
+				initializer.Property("Distance");
+				writer.WriteString(Distance);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (DistanceType is not null)
+			{
+				initializer.Property("DistanceType");
+				Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
+			}
 
-		if (IgnoreUnmapped is not null)
-		{
-			initializer.Property("IgnoreUnmapped");
-			writer.WriteValue(IgnoreUnmapped.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Location");
-			Location.FormatCode(writer);
-		}
+			if (IgnoreUnmapped is not null)
+			{
+				initializer.Property("IgnoreUnmapped");
+				writer.WriteValue(IgnoreUnmapped.Value);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Location");
+				Location.FormatCode(writer);
+			}
 
-		if (ValidationMethod is not null)
-		{
-			initializer.Property("ValidationMethod");
-			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (ValidationMethod is not null)
+			{
+				initializer.Property("ValidationMethod");
+				Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,29 +27,52 @@ public partial class MistralServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
-		if (MaxInputTokens is not null)
+			if (MaxInputTokens is not null)
+			{
+				writer.WriteFluentCall("MaxInputTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInputTokens.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Model", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Model); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxInputTokens");
-			writer.WriteValue(MaxInputTokens.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		{
-			initializer.Property("Model");
-			writer.WriteString(Model);
-		}
+			if (MaxInputTokens is not null)
+			{
+				initializer.Property("MaxInputTokens");
+				writer.WriteValue(MaxInputTokens.Value);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			{
+				initializer.Property("Model");
+				writer.WriteString(Model);
+			}
 
-		initializer.Dispose();
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

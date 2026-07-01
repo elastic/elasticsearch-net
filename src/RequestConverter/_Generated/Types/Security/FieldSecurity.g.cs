@@ -27,19 +27,34 @@ public partial class FieldSecurity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.FieldSecurity", false);
-		if (Except is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Except");
-			Except.FormatCode(writer);
-		}
+			if (Except is not null)
+			{
+				writer.WriteFluentCall("Except", (w) => { using var _oi = w.ForceObjectInitializer(); Except.FormatCode(w); });
+			}
 
-		if (Grant is not null)
+			if (Grant is not null)
+			{
+				writer.WriteFluentCall("Grant", (w) => { using var _oi = w.ForceObjectInitializer(); Grant.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Grant");
-			Grant.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.FieldSecurity", false);
+			if (Except is not null)
+			{
+				initializer.Property("Except");
+				Except.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Grant is not null)
+			{
+				initializer.Property("Grant");
+				Grant.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

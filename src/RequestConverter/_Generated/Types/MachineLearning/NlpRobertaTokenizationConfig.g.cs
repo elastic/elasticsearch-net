@@ -27,43 +27,78 @@ public partial class NlpRobertaTokenizationConfig : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig", false);
-		if (AddPrefixSpace is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AddPrefixSpace");
-			writer.WriteValue(AddPrefixSpace.Value);
-		}
+			if (AddPrefixSpace is not null)
+			{
+				writer.WriteFluentCall("AddPrefixSpace", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AddPrefixSpace.Value); });
+			}
 
-		if (DoLowerCase is not null)
+			if (DoLowerCase is not null)
+			{
+				writer.WriteFluentCall("DoLowerCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DoLowerCase.Value); });
+			}
+
+			if (MaxSequenceLength is not null)
+			{
+				writer.WriteFluentCall("MaxSequenceLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxSequenceLength.Value); });
+			}
+
+			if (Span is not null)
+			{
+				writer.WriteFluentCall("Span", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Span.Value); });
+			}
+
+			if (Truncate is not null)
+			{
+				writer.WriteFluentCall("Truncate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, w); });
+			}
+
+			if (WithSpecialTokens is not null)
+			{
+				writer.WriteFluentCall("WithSpecialTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithSpecialTokens.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("DoLowerCase");
-			writer.WriteValue(DoLowerCase.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig", false);
+			if (AddPrefixSpace is not null)
+			{
+				initializer.Property("AddPrefixSpace");
+				writer.WriteValue(AddPrefixSpace.Value);
+			}
 
-		if (MaxSequenceLength is not null)
-		{
-			initializer.Property("MaxSequenceLength");
-			writer.WriteValue(MaxSequenceLength.Value);
-		}
+			if (DoLowerCase is not null)
+			{
+				initializer.Property("DoLowerCase");
+				writer.WriteValue(DoLowerCase.Value);
+			}
 
-		if (Span is not null)
-		{
-			initializer.Property("Span");
-			writer.WriteValue(Span.Value);
-		}
+			if (MaxSequenceLength is not null)
+			{
+				initializer.Property("MaxSequenceLength");
+				writer.WriteValue(MaxSequenceLength.Value);
+			}
 
-		if (Truncate is not null)
-		{
-			initializer.Property("Truncate");
-			Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, writer);
-		}
+			if (Span is not null)
+			{
+				initializer.Property("Span");
+				writer.WriteValue(Span.Value);
+			}
 
-		if (WithSpecialTokens is not null)
-		{
-			initializer.Property("WithSpecialTokens");
-			writer.WriteValue(WithSpecialTokens.Value);
-		}
+			if (Truncate is not null)
+			{
+				initializer.Property("Truncate");
+				Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (WithSpecialTokens is not null)
+			{
+				initializer.Property("WithSpecialTokens");
+				writer.WriteValue(WithSpecialTokens.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

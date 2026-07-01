@@ -27,31 +27,57 @@ public partial class NoriAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer", true);
-		if (DecompoundMode is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DecompoundMode");
-			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
-		}
+			if (DecompoundMode is not null)
+			{
+				writer.WriteFluentCall("DecompoundMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, w); });
+			}
 
-		if (Stoptags is not null)
-		{
-			initializer.Property("Stoptags");
-			writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
-		}
+			if (Stoptags is not null)
+			{
+				writer.WriteFluentParams("Stoptags", Stoptags, (w, item) => { w.WriteString(item); });
+			}
 
-		if (UserDictionary is not null)
-		{
-			initializer.Property("UserDictionary");
-			writer.WriteString(UserDictionary);
-		}
+			if (UserDictionary is not null)
+			{
+				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+			}
 #pragma warning disable CS0618
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
 #pragma warning restore CS0618
-		initializer.Dispose();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzer", true);
+			if (DecompoundMode is not null)
+			{
+				initializer.Property("DecompoundMode");
+				Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
+			}
+
+			if (Stoptags is not null)
+			{
+				initializer.Property("Stoptags");
+				writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
+			}
+
+			if (UserDictionary is not null)
+			{
+				initializer.Property("UserDictionary");
+				writer.WriteString(UserDictionary);
+			}
+#pragma warning disable CS0618
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+#pragma warning restore CS0618
+			initializer.Dispose();
+		}
 	}
 }

@@ -38,7 +38,7 @@ public partial class InlineGet<TDocument> : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		{
@@ -56,7 +56,7 @@ public partial class InlineGet<TDocument> : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		if (PrimaryTerm is not null)

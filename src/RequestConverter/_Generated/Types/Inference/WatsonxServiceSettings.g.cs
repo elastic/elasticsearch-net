@@ -27,38 +27,68 @@ public partial class WatsonxServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
+			{
+				writer.WriteFluentCall("ApiVersion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiVersion); });
+			}
+
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			{
+				writer.WriteFluentCall("ProjectId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectId); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("ApiVersion");
-			writer.WriteString(ApiVersion);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			{
+				initializer.Property("ApiVersion");
+				writer.WriteString(ApiVersion);
+			}
 
-		{
-			initializer.Property("ProjectId");
-			writer.WriteString(ProjectId);
-		}
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			{
+				initializer.Property("ProjectId");
+				writer.WriteString(ProjectId);
+			}
 
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

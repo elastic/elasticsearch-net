@@ -27,42 +27,82 @@ public partial class ResolveIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (AllowNoIndices is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AllowNoIndices is not null)
+			{
+				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (Mode is not null)
+			{
+				writer.WriteFluentParams("Mode", Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoIndices");
-			writer.WriteValue(AllowNoIndices.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			if (AllowNoIndices is not null)
+			{
+				initializer.Property("AllowNoIndices");
+				writer.WriteValue(AllowNoIndices.Value);
+			}
 
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Mode is not null)
-		{
-			initializer.Property("Mode");
-			writer.WriteInlineList(Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(item, w); });
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
 
-		if (ProjectRouting is not null)
-		{
-			initializer.Property("ProjectRouting");
-			writer.WriteString(ProjectRouting);
-		}
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				writer.WriteInlineList(Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.IndexModeCodeFormatter.FormatCode(item, w); });
+			}
 
-		initializer.Dispose();
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

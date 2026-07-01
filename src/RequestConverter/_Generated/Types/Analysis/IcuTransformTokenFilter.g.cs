@@ -27,24 +27,43 @@ public partial class IcuTransformTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter", true);
-		if (Dir is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Dir");
-			Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionCodeFormatter.FormatCode(Dir.Value, writer);
-		}
+			if (Dir is not null)
+			{
+				writer.WriteFluentCall("Dir", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionCodeFormatter.FormatCode(Dir.Value, w); });
+			}
 
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Id");
-			writer.WriteString(Id);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter", true);
+			if (Dir is not null)
+			{
+				initializer.Property("Dir");
+				Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionCodeFormatter.FormatCode(Dir.Value, writer);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			{
+				initializer.Property("Id");
+				writer.WriteString(Id);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

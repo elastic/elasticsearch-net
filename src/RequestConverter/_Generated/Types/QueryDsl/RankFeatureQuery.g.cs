@@ -27,49 +27,88 @@ public partial class RankFeatureQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Linear is not null)
+			{
+				writer.WriteFluentDescriptorCall("Linear", (w) => { Linear.FormatCode(w); });
+			}
+
+			if (Log is not null)
+			{
+				writer.WriteFluentDescriptorCall("Log", (w) => { Log.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (Saturation is not null)
+			{
+				writer.WriteFluentDescriptorCall("Saturation", (w) => { Saturation.FormatCode(w); });
+			}
+
+			if (Sigmoid is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sigmoid", (w) => { Sigmoid.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (Linear is not null)
-		{
-			initializer.Property("Linear");
-			Linear.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Log is not null)
-		{
-			initializer.Property("Log");
-			Log.FormatCode(writer);
-		}
+			if (Linear is not null)
+			{
+				initializer.Property("Linear");
+				Linear.FormatCode(writer);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (Log is not null)
+			{
+				initializer.Property("Log");
+				Log.FormatCode(writer);
+			}
 
-		if (Saturation is not null)
-		{
-			initializer.Property("Saturation");
-			Saturation.FormatCode(writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		if (Sigmoid is not null)
-		{
-			initializer.Property("Sigmoid");
-			Sigmoid.FormatCode(writer);
-		}
+			if (Saturation is not null)
+			{
+				initializer.Property("Saturation");
+				Saturation.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Sigmoid is not null)
+			{
+				initializer.Property("Sigmoid");
+				Sigmoid.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

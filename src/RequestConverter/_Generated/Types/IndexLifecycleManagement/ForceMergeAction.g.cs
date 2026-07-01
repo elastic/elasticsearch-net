@@ -27,18 +27,32 @@ public partial class ForceMergeAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction", false);
-		if (IndexCodec is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IndexCodec");
-			writer.WriteString(IndexCodec);
-		}
+			if (IndexCodec is not null)
+			{
+				writer.WriteFluentCall("IndexCodec", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexCodec); });
+			}
 
+			{
+				writer.WriteFluentCall("MaxNumSegments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumSegments); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxNumSegments");
-			writer.WriteValue(MaxNumSegments);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction", false);
+			if (IndexCodec is not null)
+			{
+				initializer.Property("IndexCodec");
+				writer.WriteString(IndexCodec);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("MaxNumSegments");
+				writer.WriteValue(MaxNumSegments);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

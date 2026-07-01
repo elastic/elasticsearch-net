@@ -27,43 +27,82 @@ public partial class GetComponentTemplateRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest", false);
-		if (Name is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
 
-		if (FlatSettings is not null)
-		{
-			initializer.Property("FlatSettings");
-			writer.WriteValue(FlatSettings.Value);
-		}
+			if (FlatSettings is not null)
+			{
+				writer.WriteFluentCall("FlatSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatSettings.Value); });
+			}
 
-		if (IncludeDefaults is not null)
-		{
-			initializer.Property("IncludeDefaults");
-			writer.WriteValue(IncludeDefaults.Value);
-		}
+			if (IncludeDefaults is not null)
+			{
+				writer.WriteFluentCall("IncludeDefaults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDefaults.Value); });
+			}
 #pragma warning disable CS0618
-		if (Local is not null)
-		{
-			initializer.Property("Local");
-			writer.WriteValue(Local.Value);
-		}
+			if (Local is not null)
+			{
+				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+			}
 #pragma warning restore CS0618
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
 
-		if (SettingsFilter is not null)
-		{
-			initializer.Property("SettingsFilter");
-			writer.WriteInlineList(SettingsFilter, (w, item) => { w.WriteString(item); });
+			if (SettingsFilter is not null)
+			{
+				writer.WriteFluentParams("SettingsFilter", SettingsFilter, (w, item) => { w.WriteString(item); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest", false);
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (FlatSettings is not null)
+			{
+				initializer.Property("FlatSettings");
+				writer.WriteValue(FlatSettings.Value);
+			}
+
+			if (IncludeDefaults is not null)
+			{
+				initializer.Property("IncludeDefaults");
+				writer.WriteValue(IncludeDefaults.Value);
+			}
+#pragma warning disable CS0618
+			if (Local is not null)
+			{
+				initializer.Property("Local");
+				writer.WriteValue(Local.Value);
+			}
+#pragma warning restore CS0618
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
+
+			if (SettingsFilter is not null)
+			{
+				initializer.Property("SettingsFilter");
+				writer.WriteInlineList(SettingsFilter, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

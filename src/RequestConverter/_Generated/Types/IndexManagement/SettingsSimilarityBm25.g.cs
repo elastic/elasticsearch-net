@@ -27,27 +27,47 @@ public partial class SettingsSimilarityBm25 : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25", true);
-		if (B is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("B");
-			writer.WriteValue(B.Value);
-			writer.Write("d");
-		}
+			if (B is not null)
+			{
+				writer.WriteFluentCall("B", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(B.Value); w.Write("d"); });
+			}
 
-		if (DiscountOverlaps is not null)
+			if (DiscountOverlaps is not null)
+			{
+				writer.WriteFluentCall("DiscountOverlaps", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscountOverlaps.Value); });
+			}
+
+			if (K1 is not null)
+			{
+				writer.WriteFluentCall("K1", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K1.Value); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("DiscountOverlaps");
-			writer.WriteValue(DiscountOverlaps.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25", true);
+			if (B is not null)
+			{
+				initializer.Property("B");
+				writer.WriteValue(B.Value);
+				writer.Write("d");
+			}
 
-		if (K1 is not null)
-		{
-			initializer.Property("K1");
-			writer.WriteValue(K1.Value);
-			writer.Write("d");
-		}
+			if (DiscountOverlaps is not null)
+			{
+				initializer.Property("DiscountOverlaps");
+				writer.WriteValue(DiscountOverlaps.Value);
+			}
 
-		initializer.Dispose();
+			if (K1 is not null)
+			{
+				initializer.Property("K1");
+				writer.WriteValue(K1.Value);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

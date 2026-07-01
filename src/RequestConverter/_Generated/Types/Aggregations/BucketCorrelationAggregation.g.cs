@@ -27,18 +27,32 @@ public partial class BucketCorrelationAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation", false);
-		if (BucketsPath is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BucketsPath");
-			BucketsPath.FormatCode(writer);
-		}
+			if (BucketsPath is not null)
+			{
+				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentDescriptorCall("Function", (w) => { Function.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Function");
-			Function.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation", false);
+			if (BucketsPath is not null)
+			{
+				initializer.Property("BucketsPath");
+				BucketsPath.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Function");
+				Function.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,24 +27,43 @@ public partial class DatabaseConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
 
-		if (Ipinfo is not null)
+			if (Ipinfo is not null)
+			{
+				writer.WriteFluentDescriptorCall("Ipinfo", (w) => { Ipinfo.FormatCode(w); });
+			}
+
+			if (Maxmind is not null)
+			{
+				writer.WriteFluentDescriptorCall("Maxmind", (w) => { Maxmind.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Ipinfo");
-			Ipinfo.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (Maxmind is not null)
-		{
-			initializer.Property("Maxmind");
-			Maxmind.FormatCode(writer);
-		}
+			if (Ipinfo is not null)
+			{
+				initializer.Property("Ipinfo");
+				Ipinfo.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Maxmind is not null)
+			{
+				initializer.Property("Maxmind");
+				Maxmind.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

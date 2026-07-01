@@ -27,99 +27,195 @@ public partial class PutIndexTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
 
-		if (Cause is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (Cause is not null)
+			{
+				writer.WriteFluentCall("Cause", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Cause); });
+			}
+
+			if (Create is not null)
+			{
+				writer.WriteFluentCall("Create", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Create.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (AllowAutoCreate is not null)
+			{
+				writer.WriteFluentCall("AllowAutoCreate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowAutoCreate.Value); });
+			}
+
+			if (ComposedOf is not null)
+			{
+				writer.WriteFluentCall("ComposedOf", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			if (DataStream is not null)
+			{
+				writer.WriteFluentDescriptorCall("DataStream", (w) => { DataStream.FormatCode(w); });
+			}
+
+			if (Deprecated is not null)
+			{
+				writer.WriteFluentCall("Deprecated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Deprecated.Value); });
+			}
+
+			if (IgnoreMissingComponentTemplates is not null)
+			{
+				writer.WriteFluentParams("IgnoreMissingComponentTemplates", IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
+			}
+
+			if (IndexPatterns is not null)
+			{
+				writer.WriteFluentCall("IndexPatterns", (w) => { using var _oi = w.ForceObjectInitializer(); IndexPatterns.FormatCode(w); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Priority is not null)
+			{
+				writer.WriteFluentCall("Priority", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Priority.Value); w.Write("L"); });
+			}
+
+			if (Template is not null)
+			{
+				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Cause");
-			writer.WriteString(Cause);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (Create is not null)
-		{
-			initializer.Property("Create");
-			writer.WriteValue(Create.Value);
-		}
+			if (Cause is not null)
+			{
+				initializer.Property("Cause");
+				writer.WriteString(Cause);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (Create is not null)
+			{
+				initializer.Property("Create");
+				writer.WriteValue(Create.Value);
+			}
 
-		if (AllowAutoCreate is not null)
-		{
-			initializer.Property("AllowAutoCreate");
-			writer.WriteValue(AllowAutoCreate.Value);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (ComposedOf is not null)
-		{
-			initializer.Property("ComposedOf");
-			writer.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); });
-		}
+			if (AllowAutoCreate is not null)
+			{
+				initializer.Property("AllowAutoCreate");
+				writer.WriteValue(AllowAutoCreate.Value);
+			}
 
-		if (DataStream is not null)
-		{
-			initializer.Property("DataStream");
-			DataStream.FormatCode(writer);
-		}
+			if (ComposedOf is not null)
+			{
+				initializer.Property("ComposedOf");
+				writer.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Deprecated is not null)
-		{
-			initializer.Property("Deprecated");
-			writer.WriteValue(Deprecated.Value);
-		}
+			if (DataStream is not null)
+			{
+				initializer.Property("DataStream");
+				DataStream.FormatCode(writer);
+			}
 
-		if (IgnoreMissingComponentTemplates is not null)
-		{
-			initializer.Property("IgnoreMissingComponentTemplates");
-			writer.WriteInlineList(IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
-		}
+			if (Deprecated is not null)
+			{
+				initializer.Property("Deprecated");
+				writer.WriteValue(Deprecated.Value);
+			}
 
-		if (IndexPatterns is not null)
-		{
-			initializer.Property("IndexPatterns");
-			IndexPatterns.FormatCode(writer);
-		}
+			if (IgnoreMissingComponentTemplates is not null)
+			{
+				initializer.Property("IgnoreMissingComponentTemplates");
+				writer.WriteInlineList(IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (IndexPatterns is not null)
+			{
+				initializer.Property("IndexPatterns");
+				IndexPatterns.FormatCode(writer);
+			}
 
-		if (Priority is not null)
-		{
-			initializer.Property("Priority");
-			writer.WriteValue(Priority.Value);
-			writer.Write("L");
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Template is not null)
-		{
-			initializer.Property("Template");
-			Template.FormatCode(writer);
-		}
+			if (Priority is not null)
+			{
+				initializer.Property("Priority");
+				writer.WriteValue(Priority.Value);
+				writer.Write("L");
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteValue(Version.Value);
-			writer.Write("L");
-		}
+			if (Template is not null)
+			{
+				initializer.Property("Template");
+				Template.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteValue(Version.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,19 +27,34 @@ public partial class NlpTokenizationUpdateOptions : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions", false);
-		if (Span is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Span");
-			writer.WriteValue(Span.Value);
-		}
+			if (Span is not null)
+			{
+				writer.WriteFluentCall("Span", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Span.Value); });
+			}
 
-		if (Truncate is not null)
+			if (Truncate is not null)
+			{
+				writer.WriteFluentCall("Truncate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Truncate");
-			Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions", false);
+			if (Span is not null)
+			{
+				initializer.Property("Span");
+				writer.WriteValue(Span.Value);
+			}
 
-		initializer.Dispose();
+			if (Truncate is not null)
+			{
+				initializer.Property("Truncate");
+				Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

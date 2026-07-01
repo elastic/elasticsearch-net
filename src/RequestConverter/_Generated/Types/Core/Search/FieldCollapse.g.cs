@@ -27,30 +27,54 @@ public partial class FieldCollapse : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse", false);
-		if (Collapse is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Collapse");
-			Collapse.FormatCode(writer);
-		}
+			if (Collapse is not null)
+			{
+				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (InnerHits is not null)
+			{
+				writer.WriteFluentDescriptorParams("InnerHits", InnerHits, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>"); w.Write("()"); });
+			}
+
+			if (MaxConcurrentGroupSearches is not null)
+			{
+				writer.WriteFluentCall("MaxConcurrentGroupSearches", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentGroupSearches.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse", false);
+			if (Collapse is not null)
+			{
+				initializer.Property("Collapse");
+				Collapse.FormatCode(writer);
+			}
 
-		if (InnerHits is not null)
-		{
-			initializer.Property("InnerHits");
-			writer.WriteInlineList(InnerHits, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MaxConcurrentGroupSearches is not null)
-		{
-			initializer.Property("MaxConcurrentGroupSearches");
-			writer.WriteValue(MaxConcurrentGroupSearches.Value);
-		}
+			if (InnerHits is not null)
+			{
+				initializer.Property("InnerHits");
+				writer.WriteInlineList(InnerHits, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (MaxConcurrentGroupSearches is not null)
+			{
+				initializer.Property("MaxConcurrentGroupSearches");
+				writer.WriteValue(MaxConcurrentGroupSearches.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

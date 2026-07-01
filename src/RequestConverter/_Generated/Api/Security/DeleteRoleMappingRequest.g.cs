@@ -27,18 +27,38 @@ public partial class DeleteRoleMappingRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (Refresh is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

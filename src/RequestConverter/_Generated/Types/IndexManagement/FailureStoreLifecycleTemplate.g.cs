@@ -27,19 +27,34 @@ public partial class FailureStoreLifecycleTemplate : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplate", false);
-		if (DataRetention is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DataRetention");
-			DataRetention.FormatCode(writer);
-		}
+			if (DataRetention is not null)
+			{
+				writer.WriteFluentCall("DataRetention", (w) => { using var _oi = w.ForceObjectInitializer(); DataRetention.FormatCode(w); });
+			}
 
-		if (Enabled is not null)
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplate", false);
+			if (DataRetention is not null)
+			{
+				initializer.Property("DataRetention");
+				DataRetention.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

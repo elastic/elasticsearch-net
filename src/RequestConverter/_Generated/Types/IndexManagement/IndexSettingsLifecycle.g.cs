@@ -27,57 +27,97 @@ public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle", false);
-		if (IndexingComplete is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IndexingComplete");
-			writer.WriteValue(IndexingComplete.Value);
-		}
-
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
-
-		if (OriginationDate is not null)
-		{
-			initializer.Property("OriginationDate");
-			writer.WriteValue(OriginationDate.Value);
-			writer.Write("L");
-		}
-
-		if (ParseOriginationDate is not null)
-		{
-			initializer.Property("ParseOriginationDate");
-			writer.WriteValue(ParseOriginationDate.Value);
-		}
-
-		if (PreferIlm is not null)
-		{
-			initializer.Property("PreferIlm");
-			if (PreferIlm.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (IndexingComplete is not null)
 			{
-				writer.WriteValue(PreferIlm.Value1);
+				writer.WriteFluentCall("IndexingComplete", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexingComplete.Value); });
 			}
-			else
+
+			if (Name is not null)
 			{
-				writer.WriteString(PreferIlm.Value2);
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+
+			if (OriginationDate is not null)
+			{
+				writer.WriteFluentCall("OriginationDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OriginationDate.Value); w.Write("L"); });
+			}
+
+			if (ParseOriginationDate is not null)
+			{
+				writer.WriteFluentCall("ParseOriginationDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ParseOriginationDate.Value); });
+			}
+
+			if (PreferIlm is not null)
+			{
+				writer.WriteFluentCall("PreferIlm", (w) => { using var _oi = w.ForceObjectInitializer(); if (PreferIlm.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(PreferIlm.Value1); } else { w.WriteString(PreferIlm.Value2); } });
+			}
+
+			if (RolloverAlias is not null)
+			{
+				writer.WriteFluentCall("RolloverAlias", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RolloverAlias); });
+			}
+
+			if (Step is not null)
+			{
+				writer.WriteFluentDescriptorCall("Step", (w) => { Step.FormatCode(w); });
 			}
 		}
-
-		if (RolloverAlias is not null)
+		else
 		{
-			initializer.Property("RolloverAlias");
-			writer.WriteString(RolloverAlias);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle", false);
+			if (IndexingComplete is not null)
+			{
+				initializer.Property("IndexingComplete");
+				writer.WriteValue(IndexingComplete.Value);
+			}
 
-		if (Step is not null)
-		{
-			initializer.Property("Step");
-			Step.FormatCode(writer);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (OriginationDate is not null)
+			{
+				initializer.Property("OriginationDate");
+				writer.WriteValue(OriginationDate.Value);
+				writer.Write("L");
+			}
+
+			if (ParseOriginationDate is not null)
+			{
+				initializer.Property("ParseOriginationDate");
+				writer.WriteValue(ParseOriginationDate.Value);
+			}
+
+			if (PreferIlm is not null)
+			{
+				initializer.Property("PreferIlm");
+				if (PreferIlm.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(PreferIlm.Value1);
+				}
+				else
+				{
+					writer.WriteString(PreferIlm.Value2);
+				}
+			}
+
+			if (RolloverAlias is not null)
+			{
+				initializer.Property("RolloverAlias");
+				writer.WriteString(RolloverAlias);
+			}
+
+			if (Step is not null)
+			{
+				initializer.Property("Step");
+				Step.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,113 +27,219 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
 
-		if (AllowLazyOpen is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (AllowLazyOpen is not null)
+			{
+				writer.WriteFluentCall("AllowLazyOpen", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLazyOpen.Value); });
+			}
+
+			if (AnalysisLimits is not null)
+			{
+				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); });
+			}
+
+			if (BackgroundPersistInterval is not null)
+			{
+				writer.WriteFluentCall("BackgroundPersistInterval", (w) => { using var _oi = w.ForceObjectInitializer(); BackgroundPersistInterval.FormatCode(w); });
+			}
+
+			if (CategorizationFilters is not null)
+			{
+				writer.WriteFluentParams("CategorizationFilters", CategorizationFilters, (w, item) => { w.WriteString(item); });
+			}
+
+			if (CustomSettings is not null)
+			{
+				writer.WriteFluentCall("CustomSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (DailyModelSnapshotRetentionAfterDays is not null)
+			{
+				writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (Detectors is not null)
+			{
+				writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>"); w.Write("()"); });
+			}
+
+			if (Groups is not null)
+			{
+				writer.WriteFluentParams("Groups", Groups, (w, item) => { w.WriteString(item); });
+			}
+
+			if (ModelPlotConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("ModelPlotConfig", (w) => { ModelPlotConfig.FormatCode(w); });
+			}
+
+			if (ModelPruneWindow is not null)
+			{
+				writer.WriteFluentCall("ModelPruneWindow", (w) => { using var _oi = w.ForceObjectInitializer(); ModelPruneWindow.FormatCode(w); });
+			}
+
+			if (ModelSnapshotRetentionDays is not null)
+			{
+				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
+			}
+
+			if (PerPartitionCategorization is not null)
+			{
+				writer.WriteFluentDescriptorCall("PerPartitionCategorization", (w) => { PerPartitionCategorization.FormatCode(w); });
+			}
+
+			if (RenormalizationWindowDays is not null)
+			{
+				writer.WriteFluentCall("RenormalizationWindowDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
+			}
+
+			if (ResultsRetentionDays is not null)
+			{
+				writer.WriteFluentCall("ResultsRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowLazyOpen");
-			writer.WriteValue(AllowLazyOpen.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (AnalysisLimits is not null)
-		{
-			initializer.Property("AnalysisLimits");
-			AnalysisLimits.FormatCode(writer);
-		}
+			if (AllowLazyOpen is not null)
+			{
+				initializer.Property("AllowLazyOpen");
+				writer.WriteValue(AllowLazyOpen.Value);
+			}
 
-		if (BackgroundPersistInterval is not null)
-		{
-			initializer.Property("BackgroundPersistInterval");
-			BackgroundPersistInterval.FormatCode(writer);
-		}
+			if (AnalysisLimits is not null)
+			{
+				initializer.Property("AnalysisLimits");
+				AnalysisLimits.FormatCode(writer);
+			}
 
-		if (CategorizationFilters is not null)
-		{
-			initializer.Property("CategorizationFilters");
-			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
-		}
+			if (BackgroundPersistInterval is not null)
+			{
+				initializer.Property("BackgroundPersistInterval");
+				BackgroundPersistInterval.FormatCode(writer);
+			}
 
-		if (CustomSettings is not null)
-		{
-			initializer.Property("CustomSettings");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (CategorizationFilters is not null)
+			{
+				initializer.Property("CategorizationFilters");
+				writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
+			}
 
-		if (DailyModelSnapshotRetentionAfterDays is not null)
-		{
-			initializer.Property("DailyModelSnapshotRetentionAfterDays");
-			writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
-			writer.Write("L");
-		}
+			if (CustomSettings is not null)
+			{
+				initializer.Property("CustomSettings");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (DailyModelSnapshotRetentionAfterDays is not null)
+			{
+				initializer.Property("DailyModelSnapshotRetentionAfterDays");
+				writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
+				writer.Write("L");
+			}
 
-		if (Detectors is not null)
-		{
-			initializer.Property("Detectors");
-			writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (Groups is not null)
-		{
-			initializer.Property("Groups");
-			writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
-		}
+			if (Detectors is not null)
+			{
+				initializer.Property("Detectors");
+				writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (ModelPlotConfig is not null)
-		{
-			initializer.Property("ModelPlotConfig");
-			ModelPlotConfig.FormatCode(writer);
-		}
+			if (Groups is not null)
+			{
+				initializer.Property("Groups");
+				writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ModelPruneWindow is not null)
-		{
-			initializer.Property("ModelPruneWindow");
-			ModelPruneWindow.FormatCode(writer);
-		}
+			if (ModelPlotConfig is not null)
+			{
+				initializer.Property("ModelPlotConfig");
+				ModelPlotConfig.FormatCode(writer);
+			}
 
-		if (ModelSnapshotRetentionDays is not null)
-		{
-			initializer.Property("ModelSnapshotRetentionDays");
-			writer.WriteValue(ModelSnapshotRetentionDays.Value);
-			writer.Write("L");
-		}
+			if (ModelPruneWindow is not null)
+			{
+				initializer.Property("ModelPruneWindow");
+				ModelPruneWindow.FormatCode(writer);
+			}
 
-		if (PerPartitionCategorization is not null)
-		{
-			initializer.Property("PerPartitionCategorization");
-			PerPartitionCategorization.FormatCode(writer);
-		}
+			if (ModelSnapshotRetentionDays is not null)
+			{
+				initializer.Property("ModelSnapshotRetentionDays");
+				writer.WriteValue(ModelSnapshotRetentionDays.Value);
+				writer.Write("L");
+			}
 
-		if (RenormalizationWindowDays is not null)
-		{
-			initializer.Property("RenormalizationWindowDays");
-			writer.WriteValue(RenormalizationWindowDays.Value);
-			writer.Write("L");
-		}
+			if (PerPartitionCategorization is not null)
+			{
+				initializer.Property("PerPartitionCategorization");
+				PerPartitionCategorization.FormatCode(writer);
+			}
 
-		if (ResultsRetentionDays is not null)
-		{
-			initializer.Property("ResultsRetentionDays");
-			writer.WriteValue(ResultsRetentionDays.Value);
-			writer.Write("L");
-		}
+			if (RenormalizationWindowDays is not null)
+			{
+				initializer.Property("RenormalizationWindowDays");
+				writer.WriteValue(RenormalizationWindowDays.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			if (ResultsRetentionDays is not null)
+			{
+				initializer.Property("ResultsRetentionDays");
+				writer.WriteValue(ResultsRetentionDays.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

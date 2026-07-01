@@ -27,48 +27,87 @@ public partial class DateHistogramGrouping : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping", false);
-		if (CalendarInterval is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CalendarInterval");
-			CalendarInterval.FormatCode(writer);
-		}
+			if (CalendarInterval is not null)
+			{
+				writer.WriteFluentCall("CalendarInterval", (w) => { using var _oi = w.ForceObjectInitializer(); CalendarInterval.FormatCode(w); });
+			}
 
-		if (Delay is not null)
+			if (Delay is not null)
+			{
+				writer.WriteFluentCall("Delay", (w) => { using var _oi = w.ForceObjectInitializer(); Delay.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (FixedInterval is not null)
+			{
+				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); FixedInterval.FormatCode(w); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (Interval is not null)
+			{
+				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); Interval.FormatCode(w); });
+			}
+
+			if (TimeZone is not null)
+			{
+				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+			}
+		}
+		else
 		{
-			initializer.Property("Delay");
-			Delay.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping", false);
+			if (CalendarInterval is not null)
+			{
+				initializer.Property("CalendarInterval");
+				CalendarInterval.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Delay is not null)
+			{
+				initializer.Property("Delay");
+				Delay.FormatCode(writer);
+			}
 
-		if (FixedInterval is not null)
-		{
-			initializer.Property("FixedInterval");
-			FixedInterval.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (FixedInterval is not null)
+			{
+				initializer.Property("FixedInterval");
+				FixedInterval.FormatCode(writer);
+			}
 
-		if (Interval is not null)
-		{
-			initializer.Property("Interval");
-			Interval.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (TimeZone is not null)
-		{
-			initializer.Property("TimeZone");
-			writer.WriteString(TimeZone);
-		}
+			if (Interval is not null)
+			{
+				initializer.Property("Interval");
+				Interval.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TimeZone is not null)
+			{
+				initializer.Property("TimeZone");
+				writer.WriteString(TimeZone);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

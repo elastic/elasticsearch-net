@@ -27,19 +27,32 @@ public partial class RankFeatureFunctionSigmoid : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Exponent");
-			writer.WriteValue(Exponent);
-			writer.Write("f");
-		}
+			{
+				writer.WriteFluentCall("Exponent", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Exponent); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Pivot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Pivot); w.Write("f"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Pivot");
-			writer.WriteValue(Pivot);
-			writer.Write("f");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid", false);
+			{
+				initializer.Property("Exponent");
+				writer.WriteValue(Exponent);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Pivot");
+				writer.WriteValue(Pivot);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

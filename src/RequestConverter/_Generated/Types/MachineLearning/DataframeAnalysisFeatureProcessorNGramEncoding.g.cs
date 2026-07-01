@@ -27,41 +27,74 @@ public partial class DataframeAnalysisFeatureProcessorNGramEncoding : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding", false);
-		if (Custom is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Custom");
-			writer.WriteValue(Custom.Value);
-		}
+			if (Custom is not null)
+			{
+				writer.WriteFluentCall("Custom", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Custom.Value); });
+			}
 
-		if (FeaturePrefix is not null)
+			if (FeaturePrefix is not null)
+			{
+				writer.WriteFluentCall("FeaturePrefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FeaturePrefix); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Length is not null)
+			{
+				writer.WriteFluentCall("Length", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Length.Value); });
+			}
+
+			{
+				writer.WriteFluentParams("NGrams", NGrams, (w, item) => { w.WriteValue(item); });
+			}
+
+			if (Start is not null)
+			{
+				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("FeaturePrefix");
-			writer.WriteString(FeaturePrefix);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding", false);
+			if (Custom is not null)
+			{
+				initializer.Property("Custom");
+				writer.WriteValue(Custom.Value);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (FeaturePrefix is not null)
+			{
+				initializer.Property("FeaturePrefix");
+				writer.WriteString(FeaturePrefix);
+			}
 
-		if (Length is not null)
-		{
-			initializer.Property("Length");
-			writer.WriteValue(Length.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("NGrams");
-			writer.WriteInlineList(NGrams, (w, item) => { w.WriteValue(item); });
-		}
+			if (Length is not null)
+			{
+				initializer.Property("Length");
+				writer.WriteValue(Length.Value);
+			}
 
-		if (Start is not null)
-		{
-			initializer.Property("Start");
-			writer.WriteValue(Start.Value);
-		}
+			{
+				initializer.Property("NGrams");
+				writer.WriteInlineList(NGrams, (w, item) => { w.WriteValue(item); });
+			}
 
-		initializer.Dispose();
+			if (Start is not null)
+			{
+				initializer.Property("Start");
+				writer.WriteValue(Start.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

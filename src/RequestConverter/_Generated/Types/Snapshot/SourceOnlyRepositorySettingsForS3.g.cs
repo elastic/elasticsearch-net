@@ -27,96 +27,175 @@ public partial class SourceOnlyRepositorySettingsForS3 : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3", true);
-		if (BasePath is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BasePath");
-			writer.WriteString(BasePath);
-		}
+			if (BasePath is not null)
+			{
+				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+			}
 
+			{
+				writer.WriteFluentCall("Bucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Bucket); });
+			}
+
+			if (BufferSize is not null)
+			{
+				writer.WriteFluentCall("BufferSize", (w) => { using var _oi = w.ForceObjectInitializer(); BufferSize.FormatCode(w); });
+			}
+
+			if (CannedAcl is not null)
+			{
+				writer.WriteFluentCall("CannedAcl", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CannedAcl); });
+			}
+
+			if (Client is not null)
+			{
+				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+			}
+
+			if (DeleteObjectsMaxSize is not null)
+			{
+				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteObjectsMaxSize.Value); });
+			}
+
+			if (GetRegisterRetryDelay is not null)
+			{
+				writer.WriteFluentCall("GetRegisterRetryDelay", (w) => { using var _oi = w.ForceObjectInitializer(); GetRegisterRetryDelay.FormatCode(w); });
+			}
+
+			if (MaxMultipartParts is not null)
+			{
+				writer.WriteFluentCall("MaxMultipartParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMultipartParts.Value); });
+			}
+
+			if (MaxMultipartUploadCleanupSize is not null)
+			{
+				writer.WriteFluentCall("MaxMultipartUploadCleanupSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMultipartUploadCleanupSize.Value); });
+			}
+
+			if (Readonly is not null)
+			{
+				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+			}
+
+			if (ServerSideEncryption is not null)
+			{
+				writer.WriteFluentCall("ServerSideEncryption", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ServerSideEncryption.Value); });
+			}
+
+			if (StorageClass is not null)
+			{
+				writer.WriteFluentCall("StorageClass", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StorageClass); });
+			}
+
+			if (ThrottledDeleteRetryDelayIncrement is not null)
+			{
+				writer.WriteFluentCall("ThrottledDeleteRetryDelayIncrement", (w) => { using var _oi = w.ForceObjectInitializer(); ThrottledDeleteRetryDelayIncrement.FormatCode(w); });
+			}
+
+			if (ThrottledDeleteRetryMaximumDelay is not null)
+			{
+				writer.WriteFluentCall("ThrottledDeleteRetryMaximumDelay", (w) => { using var _oi = w.ForceObjectInitializer(); ThrottledDeleteRetryMaximumDelay.FormatCode(w); });
+			}
+
+			if (ThrottledDeleteRetryMaximumNumberOfRetries is not null)
+			{
+				writer.WriteFluentCall("ThrottledDeleteRetryMaximumNumberOfRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ThrottledDeleteRetryMaximumNumberOfRetries.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Bucket");
-			writer.WriteString(Bucket);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3", true);
+			if (BasePath is not null)
+			{
+				initializer.Property("BasePath");
+				writer.WriteString(BasePath);
+			}
 
-		if (BufferSize is not null)
-		{
-			initializer.Property("BufferSize");
-			BufferSize.FormatCode(writer);
-		}
+			{
+				initializer.Property("Bucket");
+				writer.WriteString(Bucket);
+			}
 
-		if (CannedAcl is not null)
-		{
-			initializer.Property("CannedAcl");
-			writer.WriteString(CannedAcl);
-		}
+			if (BufferSize is not null)
+			{
+				initializer.Property("BufferSize");
+				BufferSize.FormatCode(writer);
+			}
 
-		if (Client is not null)
-		{
-			initializer.Property("Client");
-			writer.WriteString(Client);
-		}
+			if (CannedAcl is not null)
+			{
+				initializer.Property("CannedAcl");
+				writer.WriteString(CannedAcl);
+			}
 
-		if (DeleteObjectsMaxSize is not null)
-		{
-			initializer.Property("DeleteObjectsMaxSize");
-			writer.WriteValue(DeleteObjectsMaxSize.Value);
-		}
+			if (Client is not null)
+			{
+				initializer.Property("Client");
+				writer.WriteString(Client);
+			}
 
-		if (GetRegisterRetryDelay is not null)
-		{
-			initializer.Property("GetRegisterRetryDelay");
-			GetRegisterRetryDelay.FormatCode(writer);
-		}
+			if (DeleteObjectsMaxSize is not null)
+			{
+				initializer.Property("DeleteObjectsMaxSize");
+				writer.WriteValue(DeleteObjectsMaxSize.Value);
+			}
 
-		if (MaxMultipartParts is not null)
-		{
-			initializer.Property("MaxMultipartParts");
-			writer.WriteValue(MaxMultipartParts.Value);
-		}
+			if (GetRegisterRetryDelay is not null)
+			{
+				initializer.Property("GetRegisterRetryDelay");
+				GetRegisterRetryDelay.FormatCode(writer);
+			}
 
-		if (MaxMultipartUploadCleanupSize is not null)
-		{
-			initializer.Property("MaxMultipartUploadCleanupSize");
-			writer.WriteValue(MaxMultipartUploadCleanupSize.Value);
-		}
+			if (MaxMultipartParts is not null)
+			{
+				initializer.Property("MaxMultipartParts");
+				writer.WriteValue(MaxMultipartParts.Value);
+			}
 
-		if (Readonly is not null)
-		{
-			initializer.Property("Readonly");
-			writer.WriteValue(Readonly.Value);
-		}
+			if (MaxMultipartUploadCleanupSize is not null)
+			{
+				initializer.Property("MaxMultipartUploadCleanupSize");
+				writer.WriteValue(MaxMultipartUploadCleanupSize.Value);
+			}
 
-		if (ServerSideEncryption is not null)
-		{
-			initializer.Property("ServerSideEncryption");
-			writer.WriteValue(ServerSideEncryption.Value);
-		}
+			if (Readonly is not null)
+			{
+				initializer.Property("Readonly");
+				writer.WriteValue(Readonly.Value);
+			}
 
-		if (StorageClass is not null)
-		{
-			initializer.Property("StorageClass");
-			writer.WriteString(StorageClass);
-		}
+			if (ServerSideEncryption is not null)
+			{
+				initializer.Property("ServerSideEncryption");
+				writer.WriteValue(ServerSideEncryption.Value);
+			}
 
-		if (ThrottledDeleteRetryDelayIncrement is not null)
-		{
-			initializer.Property("ThrottledDeleteRetryDelayIncrement");
-			ThrottledDeleteRetryDelayIncrement.FormatCode(writer);
-		}
+			if (StorageClass is not null)
+			{
+				initializer.Property("StorageClass");
+				writer.WriteString(StorageClass);
+			}
 
-		if (ThrottledDeleteRetryMaximumDelay is not null)
-		{
-			initializer.Property("ThrottledDeleteRetryMaximumDelay");
-			ThrottledDeleteRetryMaximumDelay.FormatCode(writer);
-		}
+			if (ThrottledDeleteRetryDelayIncrement is not null)
+			{
+				initializer.Property("ThrottledDeleteRetryDelayIncrement");
+				ThrottledDeleteRetryDelayIncrement.FormatCode(writer);
+			}
 
-		if (ThrottledDeleteRetryMaximumNumberOfRetries is not null)
-		{
-			initializer.Property("ThrottledDeleteRetryMaximumNumberOfRetries");
-			writer.WriteValue(ThrottledDeleteRetryMaximumNumberOfRetries.Value);
-		}
+			if (ThrottledDeleteRetryMaximumDelay is not null)
+			{
+				initializer.Property("ThrottledDeleteRetryMaximumDelay");
+				ThrottledDeleteRetryMaximumDelay.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ThrottledDeleteRetryMaximumNumberOfRetries is not null)
+			{
+				initializer.Property("ThrottledDeleteRetryMaximumNumberOfRetries");
+				writer.WriteValue(ThrottledDeleteRetryMaximumNumberOfRetries.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

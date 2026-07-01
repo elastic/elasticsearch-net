@@ -27,28 +27,58 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CollectionName");
-			CollectionName.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				CollectionName.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Debug is not null)
+			{
+				writer.WriteFluentCall("Debug", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Debug.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Payload", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Payload); });
+			}
+		}
+		else
 		{
-			initializer.Property("EventType");
-			Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest", false);
+			{
+				initializer.Property("CollectionName");
+				CollectionName.FormatCode(writer);
+			}
 
-		if (Debug is not null)
-		{
-			initializer.Property("Debug");
-			writer.WriteValue(Debug.Value);
-		}
+			{
+				initializer.Property("EventType");
+				Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);
+			}
 
-		{
-			initializer.Property("Payload");
-			writer.WriteValue(Payload);
-		}
+			if (Debug is not null)
+			{
+				initializer.Property("Debug");
+				writer.WriteValue(Debug.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Payload");
+				writer.WriteObjectValue(Payload);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

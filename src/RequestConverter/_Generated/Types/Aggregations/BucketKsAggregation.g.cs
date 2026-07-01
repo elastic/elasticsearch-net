@@ -27,31 +27,56 @@ public partial class BucketKsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation", false);
-		if (Alternative is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Alternative");
-			writer.WriteInlineList(Alternative, (w, item) => { w.WriteString(item); });
-		}
+			if (Alternative is not null)
+			{
+				writer.WriteFluentParams("Alternative", Alternative, (w, item) => { w.WriteString(item); });
+			}
 
-		if (BucketsPath is not null)
+			if (BucketsPath is not null)
+			{
+				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+			}
+
+			if (Fractions is not null)
+			{
+				writer.WriteFluentParams("Fractions", Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+
+			if (SamplingMethod is not null)
+			{
+				writer.WriteFluentCall("SamplingMethod", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SamplingMethod); });
+			}
+		}
+		else
 		{
-			initializer.Property("BucketsPath");
-			BucketsPath.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation", false);
+			if (Alternative is not null)
+			{
+				initializer.Property("Alternative");
+				writer.WriteInlineList(Alternative, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Fractions is not null)
-		{
-			initializer.Property("Fractions");
-			writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
-		}
+			if (BucketsPath is not null)
+			{
+				initializer.Property("BucketsPath");
+				BucketsPath.FormatCode(writer);
+			}
 
-		if (SamplingMethod is not null)
-		{
-			initializer.Property("SamplingMethod");
-			writer.WriteString(SamplingMethod);
-		}
+			if (Fractions is not null)
+			{
+				initializer.Property("Fractions");
+				writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
 
-		initializer.Dispose();
+			if (SamplingMethod is not null)
+			{
+				initializer.Property("SamplingMethod");
+				writer.WriteString(SamplingMethod);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

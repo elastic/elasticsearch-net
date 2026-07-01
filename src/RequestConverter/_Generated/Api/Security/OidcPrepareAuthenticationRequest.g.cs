@@ -27,37 +27,71 @@ public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest", false);
-		if (Iss is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Iss");
-			writer.WriteString(Iss);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Iss is not null)
+			{
+				writer.WriteFluentCall("Iss", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Iss); });
+			}
 
-		if (LoginHint is not null)
+			if (LoginHint is not null)
+			{
+				writer.WriteFluentCall("LoginHint", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LoginHint); });
+			}
+
+			if (Nonce is not null)
+			{
+				writer.WriteFluentCall("Nonce", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Nonce); });
+			}
+
+			if (Realm is not null)
+			{
+				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+			}
+
+			if (State is not null)
+			{
+				writer.WriteFluentCall("State", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(State); });
+			}
+		}
+		else
 		{
-			initializer.Property("LoginHint");
-			writer.WriteString(LoginHint);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest", false);
+			if (Iss is not null)
+			{
+				initializer.Property("Iss");
+				writer.WriteString(Iss);
+			}
 
-		if (Nonce is not null)
-		{
-			initializer.Property("Nonce");
-			writer.WriteString(Nonce);
-		}
+			if (LoginHint is not null)
+			{
+				initializer.Property("LoginHint");
+				writer.WriteString(LoginHint);
+			}
 
-		if (Realm is not null)
-		{
-			initializer.Property("Realm");
-			writer.WriteString(Realm);
-		}
+			if (Nonce is not null)
+			{
+				initializer.Property("Nonce");
+				writer.WriteString(Nonce);
+			}
 
-		if (State is not null)
-		{
-			initializer.Property("State");
-			writer.WriteString(State);
-		}
+			if (Realm is not null)
+			{
+				initializer.Property("Realm");
+				writer.WriteString(Realm);
+			}
 
-		initializer.Dispose();
+			if (State is not null)
+			{
+				initializer.Property("State");
+				writer.WriteString(State);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

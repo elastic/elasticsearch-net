@@ -27,30 +27,60 @@ public partial class DeleteTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TransformId.FormatCode(writer);
+			}
 
-		if (DeleteDestIndex is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (DeleteDestIndex is not null)
+			{
+				writer.WriteFluentCall("DeleteDestIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteDestIndex.Value); });
+			}
+
+			if (Force is not null)
+			{
+				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("DeleteDestIndex");
-			writer.WriteValue(DeleteDestIndex.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest", false);
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (Force is not null)
-		{
-			initializer.Property("Force");
-			writer.WriteValue(Force.Value);
-		}
+			if (DeleteDestIndex is not null)
+			{
+				initializer.Property("DeleteDestIndex");
+				writer.WriteValue(DeleteDestIndex.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Force is not null)
+			{
+				initializer.Property("Force");
+				writer.WriteValue(Force.Value);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

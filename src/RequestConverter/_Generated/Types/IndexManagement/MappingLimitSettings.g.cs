@@ -27,68 +27,118 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings", false);
-		if (Coerce is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Coerce");
-			writer.WriteValue(Coerce.Value);
-		}
-
-		if (Depth is not null)
-		{
-			initializer.Property("Depth");
-			Depth.FormatCode(writer);
-		}
-
-		if (DimensionFields is not null)
-		{
-			initializer.Property("DimensionFields");
-			DimensionFields.FormatCode(writer);
-		}
-
-		if (FieldNameLength is not null)
-		{
-			initializer.Property("FieldNameLength");
-			FieldNameLength.FormatCode(writer);
-		}
-
-		if (IgnoreMalformed is not null)
-		{
-			initializer.Property("IgnoreMalformed");
-			if (IgnoreMalformed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Coerce is not null)
 			{
-				writer.WriteValue(IgnoreMalformed.Value1);
+				writer.WriteFluentCall("Coerce", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Coerce.Value); });
 			}
-			else
+
+			if (Depth is not null)
 			{
-				writer.WriteString(IgnoreMalformed.Value2);
+				writer.WriteFluentDescriptorCall("Depth", (w) => { Depth.FormatCode(w); });
+			}
+
+			if (DimensionFields is not null)
+			{
+				writer.WriteFluentDescriptorCall("DimensionFields", (w) => { DimensionFields.FormatCode(w); });
+			}
+
+			if (FieldNameLength is not null)
+			{
+				writer.WriteFluentDescriptorCall("FieldNameLength", (w) => { FieldNameLength.FormatCode(w); });
+			}
+
+			if (IgnoreMalformed is not null)
+			{
+				writer.WriteFluentCall("IgnoreMalformed", (w) => { using var _oi = w.ForceObjectInitializer(); if (IgnoreMalformed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(IgnoreMalformed.Value1); } else { w.WriteString(IgnoreMalformed.Value2); } });
+			}
+
+			if (NestedFields is not null)
+			{
+				writer.WriteFluentDescriptorCall("NestedFields", (w) => { NestedFields.FormatCode(w); });
+			}
+
+			if (NestedObjects is not null)
+			{
+				writer.WriteFluentDescriptorCall("NestedObjects", (w) => { NestedObjects.FormatCode(w); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+			}
+
+			if (TotalFields is not null)
+			{
+				writer.WriteFluentDescriptorCall("TotalFields", (w) => { TotalFields.FormatCode(w); });
 			}
 		}
-
-		if (NestedFields is not null)
+		else
 		{
-			initializer.Property("NestedFields");
-			NestedFields.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings", false);
+			if (Coerce is not null)
+			{
+				initializer.Property("Coerce");
+				writer.WriteValue(Coerce.Value);
+			}
 
-		if (NestedObjects is not null)
-		{
-			initializer.Property("NestedObjects");
-			NestedObjects.FormatCode(writer);
-		}
+			if (Depth is not null)
+			{
+				initializer.Property("Depth");
+				Depth.FormatCode(writer);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (DimensionFields is not null)
+			{
+				initializer.Property("DimensionFields");
+				DimensionFields.FormatCode(writer);
+			}
 
-		if (TotalFields is not null)
-		{
-			initializer.Property("TotalFields");
-			TotalFields.FormatCode(writer);
-		}
+			if (FieldNameLength is not null)
+			{
+				initializer.Property("FieldNameLength");
+				FieldNameLength.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (IgnoreMalformed is not null)
+			{
+				initializer.Property("IgnoreMalformed");
+				if (IgnoreMalformed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(IgnoreMalformed.Value1);
+				}
+				else
+				{
+					writer.WriteString(IgnoreMalformed.Value2);
+				}
+			}
+
+			if (NestedFields is not null)
+			{
+				initializer.Property("NestedFields");
+				NestedFields.FormatCode(writer);
+			}
+
+			if (NestedObjects is not null)
+			{
+				initializer.Property("NestedObjects");
+				NestedObjects.FormatCode(writer);
+			}
+
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
+
+			if (TotalFields is not null)
+			{
+				initializer.Property("TotalFields");
+				TotalFields.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,77 +27,140 @@ public partial class DateIndexNameProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor", false);
-		if (DateFormats is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DateFormats");
-			writer.WriteInlineList(DateFormats, (w, item) => { w.WriteString(item); });
-		}
+			if (DateFormats is not null)
+			{
+				writer.WriteFluentParams("DateFormats", DateFormats, (w, item) => { w.WriteString(item); });
+			}
 
+			{
+				writer.WriteFluentCall("DateRounding", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DateRounding); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (IndexNameFormat is not null)
+			{
+				writer.WriteFluentCall("IndexNameFormat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexNameFormat); });
+			}
+
+			if (IndexNamePrefix is not null)
+			{
+				writer.WriteFluentCall("IndexNamePrefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexNamePrefix); });
+			}
+
+			if (Locale is not null)
+			{
+				writer.WriteFluentCall("Locale", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Locale); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (Timezone is not null)
+			{
+				writer.WriteFluentCall("Timezone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Timezone); });
+			}
+		}
+		else
 		{
-			initializer.Property("DateRounding");
-			writer.WriteString(DateRounding);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor", false);
+			if (DateFormats is not null)
+			{
+				initializer.Property("DateFormats");
+				writer.WriteInlineList(DateFormats, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			{
+				initializer.Property("DateRounding");
+				writer.WriteString(DateRounding);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IndexNameFormat is not null)
-		{
-			initializer.Property("IndexNameFormat");
-			writer.WriteString(IndexNameFormat);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (IndexNamePrefix is not null)
-		{
-			initializer.Property("IndexNamePrefix");
-			writer.WriteString(IndexNamePrefix);
-		}
+			if (IndexNameFormat is not null)
+			{
+				initializer.Property("IndexNameFormat");
+				writer.WriteString(IndexNameFormat);
+			}
 
-		if (Locale is not null)
-		{
-			initializer.Property("Locale");
-			writer.WriteString(Locale);
-		}
+			if (IndexNamePrefix is not null)
+			{
+				initializer.Property("IndexNamePrefix");
+				writer.WriteString(IndexNamePrefix);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (Locale is not null)
+			{
+				initializer.Property("Locale");
+				writer.WriteString(Locale);
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Timezone is not null)
-		{
-			initializer.Property("Timezone");
-			writer.WriteString(Timezone);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		initializer.Dispose();
+			if (Timezone is not null)
+			{
+				initializer.Property("Timezone");
+				writer.WriteString(Timezone);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

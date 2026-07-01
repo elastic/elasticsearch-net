@@ -27,36 +27,65 @@ public partial class HunspellTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter", true);
-		if (Dedup is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Dedup");
-			writer.WriteValue(Dedup.Value);
-		}
+			if (Dedup is not null)
+			{
+				writer.WriteFluentCall("Dedup", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dedup.Value); });
+			}
 
-		if (Dictionary is not null)
+			if (Dictionary is not null)
+			{
+				writer.WriteFluentCall("Dictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Dictionary); });
+			}
+
+			{
+				writer.WriteFluentCall("Locale", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Locale); });
+			}
+
+			if (LongestOnly is not null)
+			{
+				writer.WriteFluentCall("LongestOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LongestOnly.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Dictionary");
-			writer.WriteString(Dictionary);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter", true);
+			if (Dedup is not null)
+			{
+				initializer.Property("Dedup");
+				writer.WriteValue(Dedup.Value);
+			}
 
-		{
-			initializer.Property("Locale");
-			writer.WriteString(Locale);
-		}
+			if (Dictionary is not null)
+			{
+				initializer.Property("Dictionary");
+				writer.WriteString(Dictionary);
+			}
 
-		if (LongestOnly is not null)
-		{
-			initializer.Property("LongestOnly");
-			writer.WriteValue(LongestOnly.Value);
-		}
+			{
+				initializer.Property("Locale");
+				writer.WriteString(Locale);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (LongestOnly is not null)
+			{
+				initializer.Property("LongestOnly");
+				writer.WriteValue(LongestOnly.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

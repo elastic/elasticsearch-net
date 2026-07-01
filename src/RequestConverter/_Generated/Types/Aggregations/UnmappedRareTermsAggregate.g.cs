@@ -30,7 +30,7 @@ public partial class UnmappedRareTermsAggregate : RequestConverter.ICodeFormatta
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate", true);
 		{
 			initializer.Property("Buckets");
-			writer.WriteInlineList(Buckets, (w, item) => { w.WriteValue(item); });
+			writer.WriteInlineList(Buckets, (w, item) => { w.WriteObjectValue(item); });
 		}
 
 		if (Meta is not null)
@@ -43,7 +43,7 @@ public partial class UnmappedRareTermsAggregate : RequestConverter.ICodeFormatta
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

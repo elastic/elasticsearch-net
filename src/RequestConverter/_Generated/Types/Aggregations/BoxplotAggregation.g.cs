@@ -27,38 +27,68 @@ public partial class BoxplotAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation", false);
-		if (Compression is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Compression");
-			writer.WriteValue(Compression.Value);
-			writer.Write("d");
-		}
+			if (Compression is not null)
+			{
+				writer.WriteFluentCall("Compression", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compression.Value); w.Write("d"); });
+			}
 
-		if (ExecutionHint is not null)
+			if (ExecutionHint is not null)
+			{
+				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+			}
+
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExecutionHint");
-			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation", false);
+			if (Compression is not null)
+			{
+				initializer.Property("Compression");
+				writer.WriteValue(Compression.Value);
+				writer.Write("d");
+			}
 
-		if (Field is not null)
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (ExecutionHint is not null)
+			{
+				initializer.Property("ExecutionHint");
+				Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

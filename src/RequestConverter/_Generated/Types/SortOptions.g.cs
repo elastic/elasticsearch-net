@@ -27,37 +27,67 @@ public partial class SortOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SortOptions", false);
-		if (Doc is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Doc");
-			Doc.FormatCode(writer);
-		}
+			if (Doc is not null)
+			{
+				writer.WriteFluentDescriptorCall("Doc", (w) => { Doc.FormatCode(w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentDescriptorCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (GeoDistance is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoDistance", (w) => { GeoDistance.FormatCode(w); });
+			}
+
+			if (Score is not null)
+			{
+				writer.WriteFluentDescriptorCall("Score", (w) => { Score.FormatCode(w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SortOptions", false);
+			if (Doc is not null)
+			{
+				initializer.Property("Doc");
+				Doc.FormatCode(writer);
+			}
 
-		if (GeoDistance is not null)
-		{
-			initializer.Property("GeoDistance");
-			GeoDistance.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Score is not null)
-		{
-			initializer.Property("Score");
-			Score.FormatCode(writer);
-		}
+			if (GeoDistance is not null)
+			{
+				initializer.Property("GeoDistance");
+				GeoDistance.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Score is not null)
+			{
+				initializer.Property("Score");
+				Score.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

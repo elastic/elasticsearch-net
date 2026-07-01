@@ -27,31 +27,56 @@ public partial class NerInferenceOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions", false);
-		if (ClassificationLabels is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ClassificationLabels");
-			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
-		}
+			if (ClassificationLabels is not null)
+			{
+				writer.WriteFluentParams("ClassificationLabels", ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ResultsField is not null)
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+			}
+
+			if (Tokenization is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+			}
+
+			if (Vocabulary is not null)
+			{
+				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ResultsField");
-			writer.WriteString(ResultsField);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions", false);
+			if (ClassificationLabels is not null)
+			{
+				initializer.Property("ClassificationLabels");
+				writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Tokenization is not null)
-		{
-			initializer.Property("Tokenization");
-			Tokenization.FormatCode(writer);
-		}
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				writer.WriteString(ResultsField);
+			}
 
-		if (Vocabulary is not null)
-		{
-			initializer.Property("Vocabulary");
-			Vocabulary.FormatCode(writer);
-		}
+			if (Tokenization is not null)
+			{
+				initializer.Property("Tokenization");
+				Tokenization.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Vocabulary is not null)
+			{
+				initializer.Property("Vocabulary");
+				Vocabulary.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,18 +27,32 @@ public partial class SynonymRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.SynonymRule", false);
-		if (Id is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Synonyms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Synonyms); });
+			}
+		}
+		else
 		{
-			initializer.Property("Synonyms");
-			writer.WriteString(Synonyms);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.SynonymRule", false);
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Synonyms");
+				writer.WriteString(Synonyms);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

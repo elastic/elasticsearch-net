@@ -27,13 +27,23 @@ public partial class ScoreSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScoreSort", false);
-		if (Order is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Order");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
+			if (Order is not null)
+			{
+				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScoreSort", false);
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

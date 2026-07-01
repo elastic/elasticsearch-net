@@ -27,36 +27,64 @@ public partial class IpPrefixAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation", false);
-		if (AppendPrefixLength is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AppendPrefixLength");
-			writer.WriteValue(AppendPrefixLength.Value);
-		}
+			if (AppendPrefixLength is not null)
+			{
+				writer.WriteFluentCall("AppendPrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AppendPrefixLength.Value); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (IsIpv6 is not null)
+			{
+				writer.WriteFluentCall("IsIpv6", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsIpv6.Value); });
+			}
+
+			if (MinDocCount is not null)
+			{
+				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); w.Write("L"); });
+			}
+
+			{
+				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation", false);
+			if (AppendPrefixLength is not null)
+			{
+				initializer.Property("AppendPrefixLength");
+				writer.WriteValue(AppendPrefixLength.Value);
+			}
 
-		if (IsIpv6 is not null)
-		{
-			initializer.Property("IsIpv6");
-			writer.WriteValue(IsIpv6.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MinDocCount is not null)
-		{
-			initializer.Property("MinDocCount");
-			writer.WriteValue(MinDocCount.Value);
-			writer.Write("L");
-		}
+			if (IsIpv6 is not null)
+			{
+				initializer.Property("IsIpv6");
+				writer.WriteValue(IsIpv6.Value);
+			}
 
-		{
-			initializer.Property("PrefixLength");
-			writer.WriteValue(PrefixLength);
-		}
+			if (MinDocCount is not null)
+			{
+				initializer.Property("MinDocCount");
+				writer.WriteValue(MinDocCount.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("PrefixLength");
+				writer.WriteValue(PrefixLength);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

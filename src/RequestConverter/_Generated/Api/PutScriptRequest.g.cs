@@ -27,6 +27,7 @@ public partial class PutScriptRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.PutScriptRequest", false);
 		if (Context is not null)
 		{

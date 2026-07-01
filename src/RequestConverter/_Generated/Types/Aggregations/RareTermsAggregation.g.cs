@@ -27,51 +27,91 @@ public partial class RareTermsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation", false);
-		if (Exclude is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Exclude");
-			Exclude.FormatCode(writer);
-		}
+			if (Exclude is not null)
+			{
+				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); Exclude.FormatCode(w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Include is not null)
+			{
+				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); Include.FormatCode(w); });
+			}
+
+			if (MaxDocCount is not null)
+			{
+				writer.WriteFluentCall("MaxDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocCount.Value); w.Write("L"); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (Precision is not null)
+			{
+				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Precision.Value); w.Write("d"); });
+			}
+
+			if (ValueType is not null)
+			{
+				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ValueType); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation", false);
+			if (Exclude is not null)
+			{
+				initializer.Property("Exclude");
+				Exclude.FormatCode(writer);
+			}
 
-		if (Include is not null)
-		{
-			initializer.Property("Include");
-			Include.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MaxDocCount is not null)
-		{
-			initializer.Property("MaxDocCount");
-			writer.WriteValue(MaxDocCount.Value);
-			writer.Write("L");
-		}
+			if (Include is not null)
+			{
+				initializer.Property("Include");
+				Include.FormatCode(writer);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			if (MaxDocCount is not null)
+			{
+				initializer.Property("MaxDocCount");
+				writer.WriteValue(MaxDocCount.Value);
+				writer.Write("L");
+			}
 
-		if (Precision is not null)
-		{
-			initializer.Property("Precision");
-			writer.WriteValue(Precision.Value);
-			writer.Write("d");
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		if (ValueType is not null)
-		{
-			initializer.Property("ValueType");
-			writer.WriteString(ValueType);
-		}
+			if (Precision is not null)
+			{
+				initializer.Property("Precision");
+				writer.WriteValue(Precision.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			if (ValueType is not null)
+			{
+				initializer.Property("ValueType");
+				writer.WriteString(ValueType);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

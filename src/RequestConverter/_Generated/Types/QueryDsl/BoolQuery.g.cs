@@ -27,50 +27,90 @@ public partial class BoolQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (MinimumShouldMatch is not null)
+			{
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+			}
+
+			if (Must is not null)
+			{
+				writer.WriteFluentDescriptorParams("Must", Must, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (MustNot is not null)
+			{
+				writer.WriteFluentDescriptorParams("MustNot", MustNot, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (Should is not null)
+			{
+				writer.WriteFluentDescriptorParams("Should", Should, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (MinimumShouldMatch is not null)
-		{
-			initializer.Property("MinimumShouldMatch");
-			MinimumShouldMatch.FormatCode(writer);
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Must is not null)
-		{
-			initializer.Property("Must");
-			writer.WriteInlineList(Must, (w, item) => { item.FormatCode(w); });
-		}
+			if (MinimumShouldMatch is not null)
+			{
+				initializer.Property("MinimumShouldMatch");
+				MinimumShouldMatch.FormatCode(writer);
+			}
 
-		if (MustNot is not null)
-		{
-			initializer.Property("MustNot");
-			writer.WriteInlineList(MustNot, (w, item) => { item.FormatCode(w); });
-		}
+			if (Must is not null)
+			{
+				initializer.Property("Must");
+				writer.WriteInlineList(Must, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (MustNot is not null)
+			{
+				initializer.Property("MustNot");
+				writer.WriteInlineList(MustNot, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Should is not null)
-		{
-			initializer.Property("Should");
-			writer.WriteInlineList(Should, (w, item) => { item.FormatCode(w); });
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (Should is not null)
+			{
+				initializer.Property("Should");
+				writer.WriteInlineList(Should, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

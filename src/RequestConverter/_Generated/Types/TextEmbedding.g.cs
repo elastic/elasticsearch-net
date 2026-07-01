@@ -27,18 +27,32 @@ public partial class TextEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextEmbedding", false);
-		if (ModelId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			if (ModelId is not null)
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
 
+			{
+				writer.WriteFluentCall("ModelText", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelText); });
+			}
+		}
+		else
 		{
-			initializer.Property("ModelText");
-			writer.WriteString(ModelText);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextEmbedding", false);
+			if (ModelId is not null)
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("ModelText");
+				writer.WriteString(ModelText);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

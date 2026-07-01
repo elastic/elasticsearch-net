@@ -27,19 +27,34 @@ public partial class KuromojiAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer", true);
-		if (Mode is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode.Value, writer);
-		}
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode.Value, w); });
+			}
 
-		if (UserDictionary is not null)
+			if (UserDictionary is not null)
+			{
+				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+			}
+		}
+		else
 		{
-			initializer.Property("UserDictionary");
-			writer.WriteString(UserDictionary);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer", true);
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (UserDictionary is not null)
+			{
+				initializer.Property("UserDictionary");
+				writer.WriteString(UserDictionary);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,19 +27,32 @@ public partial class LatLonGeoLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LatLonGeoLocation", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Lat");
-			writer.WriteValue(Lat);
-			writer.Write("d");
-		}
+			{
+				writer.WriteFluentCall("Lat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lat); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("Lon", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lon); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Lon");
-			writer.WriteValue(Lon);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LatLonGeoLocation", true);
+			{
+				initializer.Property("Lat");
+				writer.WriteValue(Lat);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Lon");
+				writer.WriteValue(Lon);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

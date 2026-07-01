@@ -27,79 +27,138 @@ public partial class InferenceProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor", false);
-		if (Description is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
 
-		if (FieldMap is not null)
+			if (FieldMap is not null)
+			{
+				writer.WriteFluentCall("FieldMap", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(FieldMap, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (IgnoreMissing is not null)
+			{
+				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+			}
+
+			if (InferenceConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); });
+			}
+
+			if (InputOutput is not null)
+			{
+				writer.WriteFluentDescriptorParams("InputOutput", InputOutput, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.InputConfig>"); w.Write("()"); });
+			}
+
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); ModelId.FormatCode(w); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (TargetField is not null)
+			{
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("FieldMap");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(FieldMap, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor", false);
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			if (FieldMap is not null)
+			{
+				initializer.Property("FieldMap");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(FieldMap, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IgnoreMissing is not null)
-		{
-			initializer.Property("IgnoreMissing");
-			writer.WriteValue(IgnoreMissing.Value);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (InferenceConfig is not null)
-		{
-			initializer.Property("InferenceConfig");
-			InferenceConfig.FormatCode(writer);
-		}
+			if (IgnoreMissing is not null)
+			{
+				initializer.Property("IgnoreMissing");
+				writer.WriteValue(IgnoreMissing.Value);
+			}
 
-		if (InputOutput is not null)
-		{
-			initializer.Property("InputOutput");
-			writer.WriteInlineList(InputOutput, (w, item) => { item.FormatCode(w); });
-		}
+			if (InferenceConfig is not null)
+			{
+				initializer.Property("InferenceConfig");
+				InferenceConfig.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			if (InputOutput is not null)
+			{
+				initializer.Property("InputOutput");
+				writer.WriteInlineList(InputOutput, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (TargetField is not null)
-		{
-			initializer.Property("TargetField");
-			TargetField.FormatCode(writer);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		initializer.Dispose();
+			if (TargetField is not null)
+			{
+				initializer.Property("TargetField");
+				TargetField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

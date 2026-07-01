@@ -27,37 +27,67 @@ public partial class EdgeNGramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter", true);
-		if (MaxGram is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxGram");
-			writer.WriteValue(MaxGram.Value);
-		}
+			if (MaxGram is not null)
+			{
+				writer.WriteFluentCall("MaxGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGram.Value); });
+			}
 
-		if (MinGram is not null)
+			if (MinGram is not null)
+			{
+				writer.WriteFluentCall("MinGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinGram.Value); });
+			}
+
+			if (PreserveOriginal is not null)
+			{
+				writer.WriteFluentCall("PreserveOriginal", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveOriginal.Value); });
+			}
+
+			if (Side is not null)
+			{
+				writer.WriteFluentCall("Side", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSideCodeFormatter.FormatCode(Side.Value, w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("MinGram");
-			writer.WriteValue(MinGram.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter", true);
+			if (MaxGram is not null)
+			{
+				initializer.Property("MaxGram");
+				writer.WriteValue(MaxGram.Value);
+			}
 
-		if (PreserveOriginal is not null)
-		{
-			initializer.Property("PreserveOriginal");
-			writer.WriteValue(PreserveOriginal.Value);
-		}
+			if (MinGram is not null)
+			{
+				initializer.Property("MinGram");
+				writer.WriteValue(MinGram.Value);
+			}
 
-		if (Side is not null)
-		{
-			initializer.Property("Side");
-			Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSideCodeFormatter.FormatCode(Side.Value, writer);
-		}
+			if (PreserveOriginal is not null)
+			{
+				initializer.Property("PreserveOriginal");
+				writer.WriteValue(PreserveOriginal.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Side is not null)
+			{
+				initializer.Property("Side");
+				Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSideCodeFormatter.FormatCode(Side.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

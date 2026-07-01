@@ -27,64 +27,116 @@ public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings", false);
-		if (ApiKey is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			if (ApiKey is not null)
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
+			{
+				writer.WriteFluentCall("ApiVersion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiVersion); });
+			}
+
+			if (ClientId is not null)
+			{
+				writer.WriteFluentCall("ClientId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ClientId); });
+			}
+
+			if (ClientSecret is not null)
+			{
+				writer.WriteFluentCall("ClientSecret", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ClientSecret); });
+			}
+
+			{
+				writer.WriteFluentCall("DeploymentId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DeploymentId); });
+			}
+
+			if (EntraId is not null)
+			{
+				writer.WriteFluentCall("EntraId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EntraId); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("ResourceName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResourceName); });
+			}
+
+			if (Scopes is not null)
+			{
+				writer.WriteFluentParams("Scopes", Scopes, (w, item) => { w.WriteString(item); });
+			}
+
+			if (TenantId is not null)
+			{
+				writer.WriteFluentCall("TenantId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TenantId); });
+			}
+		}
+		else
 		{
-			initializer.Property("ApiVersion");
-			writer.WriteString(ApiVersion);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings", false);
+			if (ApiKey is not null)
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		if (ClientId is not null)
-		{
-			initializer.Property("ClientId");
-			writer.WriteString(ClientId);
-		}
+			{
+				initializer.Property("ApiVersion");
+				writer.WriteString(ApiVersion);
+			}
 
-		if (ClientSecret is not null)
-		{
-			initializer.Property("ClientSecret");
-			writer.WriteString(ClientSecret);
-		}
+			if (ClientId is not null)
+			{
+				initializer.Property("ClientId");
+				writer.WriteString(ClientId);
+			}
 
-		{
-			initializer.Property("DeploymentId");
-			writer.WriteString(DeploymentId);
-		}
+			if (ClientSecret is not null)
+			{
+				initializer.Property("ClientSecret");
+				writer.WriteString(ClientSecret);
+			}
 
-		if (EntraId is not null)
-		{
-			initializer.Property("EntraId");
-			writer.WriteString(EntraId);
-		}
+			{
+				initializer.Property("DeploymentId");
+				writer.WriteString(DeploymentId);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			if (EntraId is not null)
+			{
+				initializer.Property("EntraId");
+				writer.WriteString(EntraId);
+			}
 
-		{
-			initializer.Property("ResourceName");
-			writer.WriteString(ResourceName);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		if (Scopes is not null)
-		{
-			initializer.Property("Scopes");
-			writer.WriteInlineList(Scopes, (w, item) => { w.WriteString(item); });
-		}
+			{
+				initializer.Property("ResourceName");
+				writer.WriteString(ResourceName);
+			}
 
-		if (TenantId is not null)
-		{
-			initializer.Property("TenantId");
-			writer.WriteString(TenantId);
-		}
+			if (Scopes is not null)
+			{
+				initializer.Property("Scopes");
+				writer.WriteInlineList(Scopes, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (TenantId is not null)
+			{
+				initializer.Property("TenantId");
+				writer.WriteString(TenantId);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

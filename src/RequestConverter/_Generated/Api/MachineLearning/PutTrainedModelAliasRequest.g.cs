@@ -27,23 +27,49 @@ public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelAlias");
-			ModelAlias.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelAlias.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Reassign is not null)
+			{
+				writer.WriteFluentCall("Reassign", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Reassign.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest", false);
+			{
+				initializer.Property("ModelAlias");
+				ModelAlias.FormatCode(writer);
+			}
 
-		if (Reassign is not null)
-		{
-			initializer.Property("Reassign");
-			writer.WriteValue(Reassign.Value);
-		}
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Reassign is not null)
+			{
+				initializer.Property("Reassign");
+				writer.WriteValue(Reassign.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

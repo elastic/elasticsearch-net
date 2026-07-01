@@ -27,7 +27,35 @@ public partial class ReasoningDetails : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
-		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			foreach (var kvp in this)
+			{
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Inference.EncryptedReasoningDetail c1)
+				{
+					writer.WriteFluentVariantAdd("Encrypted", (w) => { w.WriteString(kvp.Key); }, (w) => { c1.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Inference.SummaryReasoningDetail c2)
+				{
+					writer.WriteFluentVariantAdd("Summary", (w) => { w.WriteString(kvp.Key); }, (w) => { c2.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Inference.TextReasoningDetail c3)
+				{
+					writer.WriteFluentVariantAdd("Text", (w) => { w.WriteString(kvp.Key); }, (w) => { c3.FormatCode(w); });
+					continue;
+				}
+
+				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+			}
+		}
+		else
+		{
+			writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.Inference.ReasoningDetails");
+			writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
 	}
 }

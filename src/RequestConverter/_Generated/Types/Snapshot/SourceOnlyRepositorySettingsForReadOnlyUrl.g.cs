@@ -27,30 +27,54 @@ public partial class SourceOnlyRepositorySettingsForReadOnlyUrl : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl", true);
-		if (HttpMaxRetries is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("HttpMaxRetries");
-			writer.WriteValue(HttpMaxRetries.Value);
-		}
+			if (HttpMaxRetries is not null)
+			{
+				writer.WriteFluentCall("HttpMaxRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HttpMaxRetries.Value); });
+			}
 
-		if (HttpSocketTimeout is not null)
+			if (HttpSocketTimeout is not null)
+			{
+				writer.WriteFluentCall("HttpSocketTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); HttpSocketTimeout.FormatCode(w); });
+			}
+
+			if (MaxNumberOfSnapshots is not null)
+			{
+				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfSnapshots.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("HttpSocketTimeout");
-			HttpSocketTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl", true);
+			if (HttpMaxRetries is not null)
+			{
+				initializer.Property("HttpMaxRetries");
+				writer.WriteValue(HttpMaxRetries.Value);
+			}
 
-		if (MaxNumberOfSnapshots is not null)
-		{
-			initializer.Property("MaxNumberOfSnapshots");
-			writer.WriteValue(MaxNumberOfSnapshots.Value);
-		}
+			if (HttpSocketTimeout is not null)
+			{
+				initializer.Property("HttpSocketTimeout");
+				HttpSocketTimeout.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (MaxNumberOfSnapshots is not null)
+			{
+				initializer.Property("MaxNumberOfSnapshots");
+				writer.WriteValue(MaxNumberOfSnapshots.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

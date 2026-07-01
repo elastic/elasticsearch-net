@@ -27,513 +27,928 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.Aggregation", false);
-		if (Aggregations is not null)
-		{
-			initializer.Property("Aggregations");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
-			writer.Write(">()");
-			writer.WriteBlockList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
-
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
-
-		if (AdjacencyMatrix is not null)
-		{
-			initializer.Property("AdjacencyMatrix");
-			AdjacencyMatrix.FormatCode(writer);
-		}
-
-		if (AutoDateHistogram is not null)
-		{
-			initializer.Property("AutoDateHistogram");
-			AutoDateHistogram.FormatCode(writer);
-		}
-
-		if (Avg is not null)
-		{
-			initializer.Property("Avg");
-			Avg.FormatCode(writer);
-		}
-
-		if (AvgBucket is not null)
-		{
-			initializer.Property("AvgBucket");
-			AvgBucket.FormatCode(writer);
-		}
-
-		if (Boxplot is not null)
-		{
-			initializer.Property("Boxplot");
-			Boxplot.FormatCode(writer);
-		}
-
-		if (BucketCorrelation is not null)
-		{
-			initializer.Property("BucketCorrelation");
-			BucketCorrelation.FormatCode(writer);
-		}
-
-		if (BucketCountKsTest is not null)
-		{
-			initializer.Property("BucketCountKsTest");
-			BucketCountKsTest.FormatCode(writer);
-		}
-
-		if (BucketScript is not null)
-		{
-			initializer.Property("BucketScript");
-			BucketScript.FormatCode(writer);
-		}
-
-		if (BucketSelector is not null)
-		{
-			initializer.Property("BucketSelector");
-			BucketSelector.FormatCode(writer);
-		}
-
-		if (BucketSort is not null)
-		{
-			initializer.Property("BucketSort");
-			BucketSort.FormatCode(writer);
-		}
-
-		if (Cardinality is not null)
-		{
-			initializer.Property("Cardinality");
-			Cardinality.FormatCode(writer);
-		}
-
-		if (CartesianBounds is not null)
-		{
-			initializer.Property("CartesianBounds");
-			CartesianBounds.FormatCode(writer);
-		}
-
-		if (CartesianCentroid is not null)
-		{
-			initializer.Property("CartesianCentroid");
-			CartesianCentroid.FormatCode(writer);
-		}
-
-		if (CategorizeText is not null)
-		{
-			initializer.Property("CategorizeText");
-			CategorizeText.FormatCode(writer);
-		}
-
-		if (ChangePoint is not null)
-		{
-			initializer.Property("ChangePoint");
-			ChangePoint.FormatCode(writer);
-		}
-
-		if (Children is not null)
-		{
-			initializer.Property("Children");
-			Children.FormatCode(writer);
-		}
-
-		if (Composite is not null)
-		{
-			initializer.Property("Composite");
-			Composite.FormatCode(writer);
-		}
-
-		if (CumulativeCardinality is not null)
-		{
-			initializer.Property("CumulativeCardinality");
-			CumulativeCardinality.FormatCode(writer);
-		}
-
-		if (CumulativeSum is not null)
-		{
-			initializer.Property("CumulativeSum");
-			CumulativeSum.FormatCode(writer);
-		}
-
-		if (DateHistogram is not null)
-		{
-			initializer.Property("DateHistogram");
-			DateHistogram.FormatCode(writer);
-		}
-
-		if (DateRange is not null)
-		{
-			initializer.Property("DateRange");
-			DateRange.FormatCode(writer);
-		}
-
-		if (Derivative is not null)
-		{
-			initializer.Property("Derivative");
-			Derivative.FormatCode(writer);
-		}
-
-		if (DiversifiedSampler is not null)
-		{
-			initializer.Property("DiversifiedSampler");
-			DiversifiedSampler.FormatCode(writer);
-		}
-
-		if (ExtendedStats is not null)
-		{
-			initializer.Property("ExtendedStats");
-			ExtendedStats.FormatCode(writer);
-		}
-
-		if (ExtendedStatsBucket is not null)
-		{
-			initializer.Property("ExtendedStatsBucket");
-			ExtendedStatsBucket.FormatCode(writer);
-		}
-
-		if (Filter is not null)
-		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
-
-		if (Filters is not null)
-		{
-			initializer.Property("Filters");
-			Filters.FormatCode(writer);
-		}
-
-		if (FrequentItemSets is not null)
-		{
-			initializer.Property("FrequentItemSets");
-			FrequentItemSets.FormatCode(writer);
-		}
-
-		if (GeoBounds is not null)
-		{
-			initializer.Property("GeoBounds");
-			GeoBounds.FormatCode(writer);
-		}
-
-		if (GeoCentroid is not null)
-		{
-			initializer.Property("GeoCentroid");
-			GeoCentroid.FormatCode(writer);
-		}
-
-		if (GeoDistance is not null)
-		{
-			initializer.Property("GeoDistance");
-			GeoDistance.FormatCode(writer);
-		}
-
-		if (GeohashGrid is not null)
-		{
-			initializer.Property("GeohashGrid");
-			GeohashGrid.FormatCode(writer);
-		}
-
-		if (GeohexGrid is not null)
-		{
-			initializer.Property("GeohexGrid");
-			GeohexGrid.FormatCode(writer);
-		}
-
-		if (GeoLine is not null)
-		{
-			initializer.Property("GeoLine");
-			GeoLine.FormatCode(writer);
-		}
-
-		if (GeotileGrid is not null)
-		{
-			initializer.Property("GeotileGrid");
-			GeotileGrid.FormatCode(writer);
-		}
-
-		if (Global is not null)
-		{
-			initializer.Property("Global");
-			Global.FormatCode(writer);
-		}
-
-		if (Histogram is not null)
-		{
-			initializer.Property("Histogram");
-			Histogram.FormatCode(writer);
-		}
-
-		if (Inference is not null)
-		{
-			initializer.Property("Inference");
-			Inference.FormatCode(writer);
-		}
-
-		if (IpPrefix is not null)
-		{
-			initializer.Property("IpPrefix");
-			IpPrefix.FormatCode(writer);
-		}
-
-		if (IpRange is not null)
-		{
-			initializer.Property("IpRange");
-			IpRange.FormatCode(writer);
-		}
-
-		if (Line is not null)
-		{
-			initializer.Property("Line");
-			Line.FormatCode(writer);
-		}
-
-		if (MatrixStats is not null)
-		{
-			initializer.Property("MatrixStats");
-			MatrixStats.FormatCode(writer);
-		}
-
-		if (Max is not null)
-		{
-			initializer.Property("Max");
-			Max.FormatCode(writer);
-		}
-
-		if (MaxBucket is not null)
-		{
-			initializer.Property("MaxBucket");
-			MaxBucket.FormatCode(writer);
-		}
-
-		if (MedianAbsoluteDeviation is not null)
-		{
-			initializer.Property("MedianAbsoluteDeviation");
-			MedianAbsoluteDeviation.FormatCode(writer);
-		}
-
-		if (Min is not null)
-		{
-			initializer.Property("Min");
-			Min.FormatCode(writer);
-		}
-
-		if (MinBucket is not null)
-		{
-			initializer.Property("MinBucket");
-			MinBucket.FormatCode(writer);
-		}
-
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			Missing.FormatCode(writer);
-		}
-
-		if (MovingFn is not null)
-		{
-			initializer.Property("MovingFn");
-			MovingFn.FormatCode(writer);
-		}
-
-		if (MovingPercentiles is not null)
-		{
-			initializer.Property("MovingPercentiles");
-			MovingPercentiles.FormatCode(writer);
-		}
-
-		if (MultiTerms is not null)
-		{
-			initializer.Property("MultiTerms");
-			MultiTerms.FormatCode(writer);
-		}
-
-		if (Nested is not null)
-		{
-			initializer.Property("Nested");
-			Nested.FormatCode(writer);
-		}
-
-		if (Normalize is not null)
-		{
-			initializer.Property("Normalize");
-			Normalize.FormatCode(writer);
-		}
-
-		if (Parent is not null)
-		{
-			initializer.Property("Parent");
-			Parent.FormatCode(writer);
-		}
-
-		if (PercentileRanks is not null)
-		{
-			initializer.Property("PercentileRanks");
-			PercentileRanks.FormatCode(writer);
-		}
-
-		if (Percentiles is not null)
-		{
-			initializer.Property("Percentiles");
-			Percentiles.FormatCode(writer);
-		}
-
-		if (PercentilesBucket is not null)
-		{
-			initializer.Property("PercentilesBucket");
-			PercentilesBucket.FormatCode(writer);
-		}
-
-		if (RandomSampler is not null)
-		{
-			initializer.Property("RandomSampler");
-			RandomSampler.FormatCode(writer);
-		}
-
-		if (Range is not null)
-		{
-			initializer.Property("Range");
-			Range.FormatCode(writer);
-		}
-
-		if (RareTerms is not null)
-		{
-			initializer.Property("RareTerms");
-			RareTerms.FormatCode(writer);
-		}
-
-		if (Rate is not null)
-		{
-			initializer.Property("Rate");
-			Rate.FormatCode(writer);
-		}
-
-		if (ReverseNested is not null)
-		{
-			initializer.Property("ReverseNested");
-			ReverseNested.FormatCode(writer);
-		}
-
-		if (Sampler is not null)
-		{
-			initializer.Property("Sampler");
-			Sampler.FormatCode(writer);
-		}
-
-		if (ScriptedMetric is not null)
-		{
-			initializer.Property("ScriptedMetric");
-			ScriptedMetric.FormatCode(writer);
-		}
-
-		if (SerialDiff is not null)
-		{
-			initializer.Property("SerialDiff");
-			SerialDiff.FormatCode(writer);
-		}
-
-		if (SignificantTerms is not null)
-		{
-			initializer.Property("SignificantTerms");
-			SignificantTerms.FormatCode(writer);
-		}
-
-		if (SignificantText is not null)
-		{
-			initializer.Property("SignificantText");
-			SignificantText.FormatCode(writer);
-		}
-
-		if (Stats is not null)
-		{
-			initializer.Property("Stats");
-			Stats.FormatCode(writer);
-		}
-
-		if (StatsBucket is not null)
-		{
-			initializer.Property("StatsBucket");
-			StatsBucket.FormatCode(writer);
-		}
-
-		if (StringStats is not null)
-		{
-			initializer.Property("StringStats");
-			StringStats.FormatCode(writer);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			if (Aggregations is not null)
+			{
+				writer.WriteFluentDescriptorCall("Aggregations", (w) => { w.WriteFluentDictionaryAdds("Add", Aggregations, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (AdjacencyMatrix is not null)
+			{
+				writer.WriteFluentDescriptorCall("AdjacencyMatrix", (w) => { AdjacencyMatrix.FormatCode(w); });
+			}
+
+			if (AutoDateHistogram is not null)
+			{
+				writer.WriteFluentDescriptorCall("AutoDateHistogram", (w) => { AutoDateHistogram.FormatCode(w); });
+			}
+
+			if (Avg is not null)
+			{
+				writer.WriteFluentDescriptorCall("Avg", (w) => { Avg.FormatCode(w); });
+			}
+
+			if (AvgBucket is not null)
+			{
+				writer.WriteFluentDescriptorCall("AvgBucket", (w) => { AvgBucket.FormatCode(w); });
+			}
+
+			if (Boxplot is not null)
+			{
+				writer.WriteFluentDescriptorCall("Boxplot", (w) => { Boxplot.FormatCode(w); });
+			}
+
+			if (BucketCorrelation is not null)
+			{
+				writer.WriteFluentDescriptorCall("BucketCorrelation", (w) => { BucketCorrelation.FormatCode(w); });
+			}
+
+			if (BucketCountKsTest is not null)
+			{
+				writer.WriteFluentDescriptorCall("BucketCountKsTest", (w) => { BucketCountKsTest.FormatCode(w); });
+			}
+
+			if (BucketScript is not null)
+			{
+				writer.WriteFluentDescriptorCall("BucketScript", (w) => { BucketScript.FormatCode(w); });
+			}
+
+			if (BucketSelector is not null)
+			{
+				writer.WriteFluentDescriptorCall("BucketSelector", (w) => { BucketSelector.FormatCode(w); });
+			}
+
+			if (BucketSort is not null)
+			{
+				writer.WriteFluentDescriptorCall("BucketSort", (w) => { BucketSort.FormatCode(w); });
+			}
+
+			if (Cardinality is not null)
+			{
+				writer.WriteFluentDescriptorCall("Cardinality", (w) => { Cardinality.FormatCode(w); });
+			}
+
+			if (CartesianBounds is not null)
+			{
+				writer.WriteFluentDescriptorCall("CartesianBounds", (w) => { CartesianBounds.FormatCode(w); });
+			}
+
+			if (CartesianCentroid is not null)
+			{
+				writer.WriteFluentDescriptorCall("CartesianCentroid", (w) => { CartesianCentroid.FormatCode(w); });
+			}
+
+			if (CategorizeText is not null)
+			{
+				writer.WriteFluentDescriptorCall("CategorizeText", (w) => { CategorizeText.FormatCode(w); });
+			}
+
+			if (ChangePoint is not null)
+			{
+				writer.WriteFluentDescriptorCall("ChangePoint", (w) => { ChangePoint.FormatCode(w); });
+			}
+
+			if (Children is not null)
+			{
+				writer.WriteFluentDescriptorCall("Children", (w) => { Children.FormatCode(w); });
+			}
+
+			if (Composite is not null)
+			{
+				writer.WriteFluentDescriptorCall("Composite", (w) => { Composite.FormatCode(w); });
+			}
+
+			if (CumulativeCardinality is not null)
+			{
+				writer.WriteFluentDescriptorCall("CumulativeCardinality", (w) => { CumulativeCardinality.FormatCode(w); });
+			}
+
+			if (CumulativeSum is not null)
+			{
+				writer.WriteFluentDescriptorCall("CumulativeSum", (w) => { CumulativeSum.FormatCode(w); });
+			}
+
+			if (DateHistogram is not null)
+			{
+				writer.WriteFluentDescriptorCall("DateHistogram", (w) => { DateHistogram.FormatCode(w); });
+			}
+
+			if (DateRange is not null)
+			{
+				writer.WriteFluentDescriptorCall("DateRange", (w) => { DateRange.FormatCode(w); });
+			}
+
+			if (Derivative is not null)
+			{
+				writer.WriteFluentDescriptorCall("Derivative", (w) => { Derivative.FormatCode(w); });
+			}
+
+			if (DiversifiedSampler is not null)
+			{
+				writer.WriteFluentDescriptorCall("DiversifiedSampler", (w) => { DiversifiedSampler.FormatCode(w); });
+			}
+
+			if (ExtendedStats is not null)
+			{
+				writer.WriteFluentDescriptorCall("ExtendedStats", (w) => { ExtendedStats.FormatCode(w); });
+			}
+
+			if (ExtendedStatsBucket is not null)
+			{
+				writer.WriteFluentDescriptorCall("ExtendedStatsBucket", (w) => { ExtendedStatsBucket.FormatCode(w); });
+			}
+
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
+
+			if (Filters is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filters", (w) => { Filters.FormatCode(w); });
+			}
+
+			if (FrequentItemSets is not null)
+			{
+				writer.WriteFluentDescriptorCall("FrequentItemSets", (w) => { FrequentItemSets.FormatCode(w); });
+			}
+
+			if (GeoBounds is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoBounds", (w) => { GeoBounds.FormatCode(w); });
+			}
+
+			if (GeoCentroid is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoCentroid", (w) => { GeoCentroid.FormatCode(w); });
+			}
+
+			if (GeoDistance is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoDistance", (w) => { GeoDistance.FormatCode(w); });
+			}
+
+			if (GeohashGrid is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeohashGrid", (w) => { GeohashGrid.FormatCode(w); });
+			}
+
+			if (GeohexGrid is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeohexGrid", (w) => { GeohexGrid.FormatCode(w); });
+			}
+
+			if (GeoLine is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoLine", (w) => { GeoLine.FormatCode(w); });
+			}
+
+			if (GeotileGrid is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeotileGrid", (w) => { GeotileGrid.FormatCode(w); });
+			}
+
+			if (Global is not null)
+			{
+				writer.WriteFluentDescriptorCall("Global", (w) => { Global.FormatCode(w); });
+			}
+
+			if (Histogram is not null)
+			{
+				writer.WriteFluentDescriptorCall("Histogram", (w) => { Histogram.FormatCode(w); });
+			}
+
+			if (Inference is not null)
+			{
+				writer.WriteFluentDescriptorCall("Inference", (w) => { Inference.FormatCode(w); });
+			}
+
+			if (IpPrefix is not null)
+			{
+				writer.WriteFluentDescriptorCall("IpPrefix", (w) => { IpPrefix.FormatCode(w); });
+			}
+
+			if (IpRange is not null)
+			{
+				writer.WriteFluentDescriptorCall("IpRange", (w) => { IpRange.FormatCode(w); });
+			}
+
+			if (Line is not null)
+			{
+				writer.WriteFluentDescriptorCall("Line", (w) => { Line.FormatCode(w); });
+			}
+
+			if (MatrixStats is not null)
+			{
+				writer.WriteFluentDescriptorCall("MatrixStats", (w) => { MatrixStats.FormatCode(w); });
+			}
+
+			if (Max is not null)
+			{
+				writer.WriteFluentDescriptorCall("Max", (w) => { Max.FormatCode(w); });
+			}
+
+			if (MaxBucket is not null)
+			{
+				writer.WriteFluentDescriptorCall("MaxBucket", (w) => { MaxBucket.FormatCode(w); });
+			}
+
+			if (MedianAbsoluteDeviation is not null)
+			{
+				writer.WriteFluentDescriptorCall("MedianAbsoluteDeviation", (w) => { MedianAbsoluteDeviation.FormatCode(w); });
+			}
+
+			if (Min is not null)
+			{
+				writer.WriteFluentDescriptorCall("Min", (w) => { Min.FormatCode(w); });
+			}
+
+			if (MinBucket is not null)
+			{
+				writer.WriteFluentDescriptorCall("MinBucket", (w) => { MinBucket.FormatCode(w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentDescriptorCall("Missing", (w) => { Missing.FormatCode(w); });
+			}
+
+			if (MovingFn is not null)
+			{
+				writer.WriteFluentDescriptorCall("MovingFn", (w) => { MovingFn.FormatCode(w); });
+			}
+
+			if (MovingPercentiles is not null)
+			{
+				writer.WriteFluentDescriptorCall("MovingPercentiles", (w) => { MovingPercentiles.FormatCode(w); });
+			}
+
+			if (MultiTerms is not null)
+			{
+				writer.WriteFluentDescriptorCall("MultiTerms", (w) => { MultiTerms.FormatCode(w); });
+			}
+
+			if (Nested is not null)
+			{
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); });
+			}
+
+			if (Normalize is not null)
+			{
+				writer.WriteFluentDescriptorCall("Normalize", (w) => { Normalize.FormatCode(w); });
+			}
+
+			if (Parent is not null)
+			{
+				writer.WriteFluentDescriptorCall("Parent", (w) => { Parent.FormatCode(w); });
+			}
+
+			if (PercentileRanks is not null)
+			{
+				writer.WriteFluentDescriptorCall("PercentileRanks", (w) => { PercentileRanks.FormatCode(w); });
+			}
+
+			if (Percentiles is not null)
+			{
+				writer.WriteFluentDescriptorCall("Percentiles", (w) => { Percentiles.FormatCode(w); });
+			}
+
+			if (PercentilesBucket is not null)
+			{
+				writer.WriteFluentDescriptorCall("PercentilesBucket", (w) => { PercentilesBucket.FormatCode(w); });
+			}
+
+			if (RandomSampler is not null)
+			{
+				writer.WriteFluentDescriptorCall("RandomSampler", (w) => { RandomSampler.FormatCode(w); });
+			}
+
+			if (Range is not null)
+			{
+				writer.WriteFluentDescriptorCall("Range", (w) => { Range.FormatCode(w); });
+			}
+
+			if (RareTerms is not null)
+			{
+				writer.WriteFluentDescriptorCall("RareTerms", (w) => { RareTerms.FormatCode(w); });
+			}
+
+			if (Rate is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rate", (w) => { Rate.FormatCode(w); });
+			}
+
+			if (ReverseNested is not null)
+			{
+				writer.WriteFluentDescriptorCall("ReverseNested", (w) => { ReverseNested.FormatCode(w); });
+			}
+
+			if (Sampler is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sampler", (w) => { Sampler.FormatCode(w); });
+			}
+
+			if (ScriptedMetric is not null)
+			{
+				writer.WriteFluentDescriptorCall("ScriptedMetric", (w) => { ScriptedMetric.FormatCode(w); });
+			}
+
+			if (SerialDiff is not null)
+			{
+				writer.WriteFluentDescriptorCall("SerialDiff", (w) => { SerialDiff.FormatCode(w); });
+			}
+
+			if (SignificantTerms is not null)
+			{
+				writer.WriteFluentDescriptorCall("SignificantTerms", (w) => { SignificantTerms.FormatCode(w); });
+			}
+
+			if (SignificantText is not null)
+			{
+				writer.WriteFluentDescriptorCall("SignificantText", (w) => { SignificantText.FormatCode(w); });
+			}
+
+			if (Stats is not null)
+			{
+				writer.WriteFluentDescriptorCall("Stats", (w) => { Stats.FormatCode(w); });
+			}
+
+			if (StatsBucket is not null)
+			{
+				writer.WriteFluentDescriptorCall("StatsBucket", (w) => { StatsBucket.FormatCode(w); });
+			}
+
+			if (StringStats is not null)
+			{
+				writer.WriteFluentDescriptorCall("StringStats", (w) => { StringStats.FormatCode(w); });
+			}
+
+			if (Sum is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sum", (w) => { Sum.FormatCode(w); });
+			}
+
+			if (SumBucket is not null)
+			{
+				writer.WriteFluentDescriptorCall("SumBucket", (w) => { SumBucket.FormatCode(w); });
+			}
+
+			if (Terms is not null)
+			{
+				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); });
+			}
+
+			if (TimeSeries is not null)
+			{
+				writer.WriteFluentDescriptorCall("TimeSeries", (w) => { TimeSeries.FormatCode(w); });
+			}
+
+			if (TopHits is not null)
+			{
+				writer.WriteFluentDescriptorCall("TopHits", (w) => { TopHits.FormatCode(w); });
+			}
+
+			if (TopMetrics is not null)
+			{
+				writer.WriteFluentDescriptorCall("TopMetrics", (w) => { TopMetrics.FormatCode(w); });
+			}
+
+			if (TTest is not null)
+			{
+				writer.WriteFluentDescriptorCall("TTest", (w) => { TTest.FormatCode(w); });
+			}
+
+			if (ValueCount is not null)
+			{
+				writer.WriteFluentDescriptorCall("ValueCount", (w) => { ValueCount.FormatCode(w); });
+			}
+
+			if (VariableWidthHistogram is not null)
+			{
+				writer.WriteFluentDescriptorCall("VariableWidthHistogram", (w) => { VariableWidthHistogram.FormatCode(w); });
+			}
+
+			if (WeightedAvg is not null)
+			{
+				writer.WriteFluentDescriptorCall("WeightedAvg", (w) => { WeightedAvg.FormatCode(w); });
+			}
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.Aggregation", false);
+			if (Aggregations is not null)
+			{
+				initializer.Property("Aggregations");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Aggregations.Aggregation");
+				writer.Write(">()");
+				writer.WriteBlockList(Aggregations, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
+
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
+
+			if (AdjacencyMatrix is not null)
+			{
+				initializer.Property("AdjacencyMatrix");
+				AdjacencyMatrix.FormatCode(writer);
+			}
+
+			if (AutoDateHistogram is not null)
+			{
+				initializer.Property("AutoDateHistogram");
+				AutoDateHistogram.FormatCode(writer);
+			}
+
+			if (Avg is not null)
+			{
+				initializer.Property("Avg");
+				Avg.FormatCode(writer);
+			}
+
+			if (AvgBucket is not null)
+			{
+				initializer.Property("AvgBucket");
+				AvgBucket.FormatCode(writer);
+			}
+
+			if (Boxplot is not null)
+			{
+				initializer.Property("Boxplot");
+				Boxplot.FormatCode(writer);
+			}
+
+			if (BucketCorrelation is not null)
+			{
+				initializer.Property("BucketCorrelation");
+				BucketCorrelation.FormatCode(writer);
+			}
+
+			if (BucketCountKsTest is not null)
+			{
+				initializer.Property("BucketCountKsTest");
+				BucketCountKsTest.FormatCode(writer);
+			}
+
+			if (BucketScript is not null)
+			{
+				initializer.Property("BucketScript");
+				BucketScript.FormatCode(writer);
+			}
+
+			if (BucketSelector is not null)
+			{
+				initializer.Property("BucketSelector");
+				BucketSelector.FormatCode(writer);
+			}
+
+			if (BucketSort is not null)
+			{
+				initializer.Property("BucketSort");
+				BucketSort.FormatCode(writer);
+			}
+
+			if (Cardinality is not null)
+			{
+				initializer.Property("Cardinality");
+				Cardinality.FormatCode(writer);
+			}
+
+			if (CartesianBounds is not null)
+			{
+				initializer.Property("CartesianBounds");
+				CartesianBounds.FormatCode(writer);
+			}
+
+			if (CartesianCentroid is not null)
+			{
+				initializer.Property("CartesianCentroid");
+				CartesianCentroid.FormatCode(writer);
+			}
+
+			if (CategorizeText is not null)
+			{
+				initializer.Property("CategorizeText");
+				CategorizeText.FormatCode(writer);
+			}
+
+			if (ChangePoint is not null)
+			{
+				initializer.Property("ChangePoint");
+				ChangePoint.FormatCode(writer);
+			}
+
+			if (Children is not null)
+			{
+				initializer.Property("Children");
+				Children.FormatCode(writer);
+			}
+
+			if (Composite is not null)
+			{
+				initializer.Property("Composite");
+				Composite.FormatCode(writer);
+			}
+
+			if (CumulativeCardinality is not null)
+			{
+				initializer.Property("CumulativeCardinality");
+				CumulativeCardinality.FormatCode(writer);
+			}
+
+			if (CumulativeSum is not null)
+			{
+				initializer.Property("CumulativeSum");
+				CumulativeSum.FormatCode(writer);
+			}
+
+			if (DateHistogram is not null)
+			{
+				initializer.Property("DateHistogram");
+				DateHistogram.FormatCode(writer);
+			}
+
+			if (DateRange is not null)
+			{
+				initializer.Property("DateRange");
+				DateRange.FormatCode(writer);
+			}
+
+			if (Derivative is not null)
+			{
+				initializer.Property("Derivative");
+				Derivative.FormatCode(writer);
+			}
+
+			if (DiversifiedSampler is not null)
+			{
+				initializer.Property("DiversifiedSampler");
+				DiversifiedSampler.FormatCode(writer);
+			}
+
+			if (ExtendedStats is not null)
+			{
+				initializer.Property("ExtendedStats");
+				ExtendedStats.FormatCode(writer);
+			}
+
+			if (ExtendedStatsBucket is not null)
+			{
+				initializer.Property("ExtendedStatsBucket");
+				ExtendedStatsBucket.FormatCode(writer);
+			}
+
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
+
+			if (Filters is not null)
+			{
+				initializer.Property("Filters");
+				Filters.FormatCode(writer);
+			}
+
+			if (FrequentItemSets is not null)
+			{
+				initializer.Property("FrequentItemSets");
+				FrequentItemSets.FormatCode(writer);
+			}
+
+			if (GeoBounds is not null)
+			{
+				initializer.Property("GeoBounds");
+				GeoBounds.FormatCode(writer);
+			}
+
+			if (GeoCentroid is not null)
+			{
+				initializer.Property("GeoCentroid");
+				GeoCentroid.FormatCode(writer);
+			}
+
+			if (GeoDistance is not null)
+			{
+				initializer.Property("GeoDistance");
+				GeoDistance.FormatCode(writer);
+			}
+
+			if (GeohashGrid is not null)
+			{
+				initializer.Property("GeohashGrid");
+				GeohashGrid.FormatCode(writer);
+			}
+
+			if (GeohexGrid is not null)
+			{
+				initializer.Property("GeohexGrid");
+				GeohexGrid.FormatCode(writer);
+			}
+
+			if (GeoLine is not null)
+			{
+				initializer.Property("GeoLine");
+				GeoLine.FormatCode(writer);
+			}
+
+			if (GeotileGrid is not null)
+			{
+				initializer.Property("GeotileGrid");
+				GeotileGrid.FormatCode(writer);
+			}
+
+			if (Global is not null)
+			{
+				initializer.Property("Global");
+				Global.FormatCode(writer);
+			}
+
+			if (Histogram is not null)
+			{
+				initializer.Property("Histogram");
+				Histogram.FormatCode(writer);
+			}
+
+			if (Inference is not null)
+			{
+				initializer.Property("Inference");
+				Inference.FormatCode(writer);
+			}
+
+			if (IpPrefix is not null)
+			{
+				initializer.Property("IpPrefix");
+				IpPrefix.FormatCode(writer);
+			}
+
+			if (IpRange is not null)
+			{
+				initializer.Property("IpRange");
+				IpRange.FormatCode(writer);
+			}
+
+			if (Line is not null)
+			{
+				initializer.Property("Line");
+				Line.FormatCode(writer);
+			}
+
+			if (MatrixStats is not null)
+			{
+				initializer.Property("MatrixStats");
+				MatrixStats.FormatCode(writer);
+			}
+
+			if (Max is not null)
+			{
+				initializer.Property("Max");
+				Max.FormatCode(writer);
+			}
+
+			if (MaxBucket is not null)
+			{
+				initializer.Property("MaxBucket");
+				MaxBucket.FormatCode(writer);
+			}
+
+			if (MedianAbsoluteDeviation is not null)
+			{
+				initializer.Property("MedianAbsoluteDeviation");
+				MedianAbsoluteDeviation.FormatCode(writer);
+			}
+
+			if (Min is not null)
+			{
+				initializer.Property("Min");
+				Min.FormatCode(writer);
+			}
+
+			if (MinBucket is not null)
+			{
+				initializer.Property("MinBucket");
+				MinBucket.FormatCode(writer);
+			}
+
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				Missing.FormatCode(writer);
+			}
+
+			if (MovingFn is not null)
+			{
+				initializer.Property("MovingFn");
+				MovingFn.FormatCode(writer);
+			}
+
+			if (MovingPercentiles is not null)
+			{
+				initializer.Property("MovingPercentiles");
+				MovingPercentiles.FormatCode(writer);
+			}
+
+			if (MultiTerms is not null)
+			{
+				initializer.Property("MultiTerms");
+				MultiTerms.FormatCode(writer);
+			}
+
+			if (Nested is not null)
+			{
+				initializer.Property("Nested");
+				Nested.FormatCode(writer);
+			}
+
+			if (Normalize is not null)
+			{
+				initializer.Property("Normalize");
+				Normalize.FormatCode(writer);
+			}
+
+			if (Parent is not null)
+			{
+				initializer.Property("Parent");
+				Parent.FormatCode(writer);
+			}
+
+			if (PercentileRanks is not null)
+			{
+				initializer.Property("PercentileRanks");
+				PercentileRanks.FormatCode(writer);
+			}
+
+			if (Percentiles is not null)
+			{
+				initializer.Property("Percentiles");
+				Percentiles.FormatCode(writer);
+			}
+
+			if (PercentilesBucket is not null)
+			{
+				initializer.Property("PercentilesBucket");
+				PercentilesBucket.FormatCode(writer);
+			}
+
+			if (RandomSampler is not null)
+			{
+				initializer.Property("RandomSampler");
+				RandomSampler.FormatCode(writer);
+			}
+
+			if (Range is not null)
+			{
+				initializer.Property("Range");
+				Range.FormatCode(writer);
+			}
+
+			if (RareTerms is not null)
+			{
+				initializer.Property("RareTerms");
+				RareTerms.FormatCode(writer);
+			}
+
+			if (Rate is not null)
+			{
+				initializer.Property("Rate");
+				Rate.FormatCode(writer);
+			}
+
+			if (ReverseNested is not null)
+			{
+				initializer.Property("ReverseNested");
+				ReverseNested.FormatCode(writer);
+			}
+
+			if (Sampler is not null)
+			{
+				initializer.Property("Sampler");
+				Sampler.FormatCode(writer);
+			}
+
+			if (ScriptedMetric is not null)
+			{
+				initializer.Property("ScriptedMetric");
+				ScriptedMetric.FormatCode(writer);
+			}
+
+			if (SerialDiff is not null)
+			{
+				initializer.Property("SerialDiff");
+				SerialDiff.FormatCode(writer);
+			}
+
+			if (SignificantTerms is not null)
+			{
+				initializer.Property("SignificantTerms");
+				SignificantTerms.FormatCode(writer);
+			}
+
+			if (SignificantText is not null)
+			{
+				initializer.Property("SignificantText");
+				SignificantText.FormatCode(writer);
+			}
+
+			if (Stats is not null)
+			{
+				initializer.Property("Stats");
+				Stats.FormatCode(writer);
+			}
+
+			if (StatsBucket is not null)
+			{
+				initializer.Property("StatsBucket");
+				StatsBucket.FormatCode(writer);
+			}
+
+			if (StringStats is not null)
+			{
+				initializer.Property("StringStats");
+				StringStats.FormatCode(writer);
+			}
+
+			if (Sum is not null)
+			{
+				initializer.Property("Sum");
+				Sum.FormatCode(writer);
+			}
+
+			if (SumBucket is not null)
+			{
+				initializer.Property("SumBucket");
+				SumBucket.FormatCode(writer);
+			}
+
+			if (Terms is not null)
+			{
+				initializer.Property("Terms");
+				Terms.FormatCode(writer);
+			}
+
+			if (TimeSeries is not null)
+			{
+				initializer.Property("TimeSeries");
+				TimeSeries.FormatCode(writer);
+			}
+
+			if (TopHits is not null)
+			{
+				initializer.Property("TopHits");
+				TopHits.FormatCode(writer);
+			}
+
+			if (TopMetrics is not null)
+			{
+				initializer.Property("TopMetrics");
+				TopMetrics.FormatCode(writer);
+			}
+
+			if (TTest is not null)
+			{
+				initializer.Property("TTest");
+				TTest.FormatCode(writer);
+			}
+
+			if (ValueCount is not null)
+			{
+				initializer.Property("ValueCount");
+				ValueCount.FormatCode(writer);
+			}
+
+			if (VariableWidthHistogram is not null)
+			{
+				initializer.Property("VariableWidthHistogram");
+				VariableWidthHistogram.FormatCode(writer);
+			}
+
+			if (WeightedAvg is not null)
+			{
+				initializer.Property("WeightedAvg");
+				WeightedAvg.FormatCode(writer);
+			}
+
+			initializer.Dispose();
 		}
-
-		if (Sum is not null)
-		{
-			initializer.Property("Sum");
-			Sum.FormatCode(writer);
-		}
-
-		if (SumBucket is not null)
-		{
-			initializer.Property("SumBucket");
-			SumBucket.FormatCode(writer);
-		}
-
-		if (Terms is not null)
-		{
-			initializer.Property("Terms");
-			Terms.FormatCode(writer);
-		}
-
-		if (TimeSeries is not null)
-		{
-			initializer.Property("TimeSeries");
-			TimeSeries.FormatCode(writer);
-		}
-
-		if (TopHits is not null)
-		{
-			initializer.Property("TopHits");
-			TopHits.FormatCode(writer);
-		}
-
-		if (TopMetrics is not null)
-		{
-			initializer.Property("TopMetrics");
-			TopMetrics.FormatCode(writer);
-		}
-
-		if (TTest is not null)
-		{
-			initializer.Property("TTest");
-			TTest.FormatCode(writer);
-		}
-
-		if (ValueCount is not null)
-		{
-			initializer.Property("ValueCount");
-			ValueCount.FormatCode(writer);
-		}
-
-		if (VariableWidthHistogram is not null)
-		{
-			initializer.Property("VariableWidthHistogram");
-			VariableWidthHistogram.FormatCode(writer);
-		}
-
-		if (WeightedAvg is not null)
-		{
-			initializer.Property("WeightedAvg");
-			WeightedAvg.FormatCode(writer);
-		}
-
-		initializer.Dispose();
 	}
 }

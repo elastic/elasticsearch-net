@@ -27,52 +27,94 @@ public partial class CalendarEvent : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent", false);
-		if (CalendarId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CalendarId");
-			CalendarId.FormatCode(writer);
-		}
+			if (CalendarId is not null)
+			{
+				writer.WriteFluentCall("CalendarId", (w) => { using var _oi = w.ForceObjectInitializer(); CalendarId.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			{
+				writer.WriteFluentCall("EndTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EndTime); });
+			}
+
+			if (EventId is not null)
+			{
+				writer.WriteFluentCall("EventId", (w) => { using var _oi = w.ForceObjectInitializer(); EventId.FormatCode(w); });
+			}
+
+			if (ForceTimeShift is not null)
+			{
+				writer.WriteFluentCall("ForceTimeShift", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ForceTimeShift.Value); });
+			}
+
+			if (SkipModelUpdate is not null)
+			{
+				writer.WriteFluentCall("SkipModelUpdate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipModelUpdate.Value); });
+			}
+
+			if (SkipResult is not null)
+			{
+				writer.WriteFluentCall("SkipResult", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipResult.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("StartTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StartTime); });
+			}
+		}
+		else
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent", false);
+			if (CalendarId is not null)
+			{
+				initializer.Property("CalendarId");
+				CalendarId.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("EndTime");
-			writer.WriteValue(EndTime);
-		}
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (EventId is not null)
-		{
-			initializer.Property("EventId");
-			EventId.FormatCode(writer);
-		}
+			{
+				initializer.Property("EndTime");
+				writer.WriteValue(EndTime);
+			}
 
-		if (ForceTimeShift is not null)
-		{
-			initializer.Property("ForceTimeShift");
-			writer.WriteValue(ForceTimeShift.Value);
-		}
+			if (EventId is not null)
+			{
+				initializer.Property("EventId");
+				EventId.FormatCode(writer);
+			}
 
-		if (SkipModelUpdate is not null)
-		{
-			initializer.Property("SkipModelUpdate");
-			writer.WriteValue(SkipModelUpdate.Value);
-		}
+			if (ForceTimeShift is not null)
+			{
+				initializer.Property("ForceTimeShift");
+				writer.WriteValue(ForceTimeShift.Value);
+			}
 
-		if (SkipResult is not null)
-		{
-			initializer.Property("SkipResult");
-			writer.WriteValue(SkipResult.Value);
-		}
+			if (SkipModelUpdate is not null)
+			{
+				initializer.Property("SkipModelUpdate");
+				writer.WriteValue(SkipModelUpdate.Value);
+			}
 
-		{
-			initializer.Property("StartTime");
-			writer.WriteValue(StartTime);
-		}
+			if (SkipResult is not null)
+			{
+				initializer.Property("SkipResult");
+				writer.WriteValue(SkipResult.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("StartTime");
+				writer.WriteValue(StartTime);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,36 +27,64 @@ public partial class WeightedTokensQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (PruningConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("PruningConfig", (w) => { PruningConfig.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			{
+				writer.WriteFluentCall("Tokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Tokens, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (PruningConfig is not null)
-		{
-			initializer.Property("PruningConfig");
-			PruningConfig.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (PruningConfig is not null)
+			{
+				initializer.Property("PruningConfig");
+				PruningConfig.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Tokens");
-			writer.WriteInlineList(Tokens, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); });
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Tokens");
+				writer.WriteInlineList(Tokens, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

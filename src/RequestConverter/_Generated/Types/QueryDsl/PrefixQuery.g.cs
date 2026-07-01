@@ -27,42 +27,75 @@ public partial class PrefixQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
-		if (CaseInsensitive is not null)
+			if (CaseInsensitive is not null)
+			{
+				writer.WriteFluentCall("CaseInsensitive", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CaseInsensitive.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (Rewrite is not null)
+			{
+				writer.WriteFluentCall("Rewrite", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Rewrite); });
+			}
+
+			{
+				writer.WriteFluentCall("Value", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("CaseInsensitive");
-			writer.WriteValue(CaseInsensitive.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (CaseInsensitive is not null)
+			{
+				initializer.Property("CaseInsensitive");
+				writer.WriteValue(CaseInsensitive.Value);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Rewrite is not null)
-		{
-			initializer.Property("Rewrite");
-			writer.WriteString(Rewrite);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		{
-			initializer.Property("Value");
-			writer.WriteString(Value);
-		}
+			if (Rewrite is not null)
+			{
+				initializer.Property("Rewrite");
+				writer.WriteString(Rewrite);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Value");
+				writer.WriteString(Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

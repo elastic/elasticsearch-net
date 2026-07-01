@@ -27,12 +27,21 @@ public partial class WaitForSnapshotAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Policy");
-			writer.WriteString(Policy);
+			{
+				writer.WriteFluentCall("Policy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Policy); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction", false);
+			{
+				initializer.Property("Policy");
+				writer.WriteString(Policy);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

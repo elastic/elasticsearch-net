@@ -27,17 +27,30 @@ public partial class PhraseSuggestHighlight : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("PostTag");
-			writer.WriteString(PostTag);
-		}
+			{
+				writer.WriteFluentCall("PostTag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PostTag); });
+			}
 
+			{
+				writer.WriteFluentCall("PreTag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PreTag); });
+			}
+		}
+		else
 		{
-			initializer.Property("PreTag");
-			writer.WriteString(PreTag);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight", false);
+			{
+				initializer.Property("PostTag");
+				writer.WriteString(PostTag);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("PreTag");
+				writer.WriteString(PreTag);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

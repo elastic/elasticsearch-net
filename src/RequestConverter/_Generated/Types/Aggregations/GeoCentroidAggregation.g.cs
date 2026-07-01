@@ -27,38 +27,68 @@ public partial class GeoCentroidAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation", false);
-		if (Count is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Count");
-			writer.WriteValue(Count.Value);
-			writer.Write("L");
-		}
+			if (Count is not null)
+			{
+				writer.WriteFluentCall("Count", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Count.Value); w.Write("L"); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Location is not null)
+			{
+				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); Location.FormatCode(w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation", false);
+			if (Count is not null)
+			{
+				initializer.Property("Count");
+				writer.WriteValue(Count.Value);
+				writer.Write("L");
+			}
 
-		if (Location is not null)
-		{
-			initializer.Property("Location");
-			Location.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			if (Location is not null)
+			{
+				initializer.Property("Location");
+				Location.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,12 +27,21 @@ public partial class SettingsQueryString : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Lenient");
-			writer.WriteValue(Lenient);
+			{
+				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString", false);
+			{
+				initializer.Property("Lenient");
+				writer.WriteValue(Lenient);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,14 +27,24 @@ public partial class RankFeatureFunctionSaturation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation", false);
-		if (Pivot is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Pivot");
-			writer.WriteValue(Pivot.Value);
-			writer.Write("f");
+			if (Pivot is not null)
+			{
+				writer.WriteFluentCall("Pivot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Pivot.Value); w.Write("f"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation", false);
+			if (Pivot is not null)
+			{
+				initializer.Property("Pivot");
+				writer.WriteValue(Pivot.Value);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

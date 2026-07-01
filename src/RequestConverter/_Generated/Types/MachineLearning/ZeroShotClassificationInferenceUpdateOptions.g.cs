@@ -27,30 +27,54 @@ public partial class ZeroShotClassificationInferenceUpdateOptions : RequestConve
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptions", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Labels");
-			writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });
-		}
+			{
+				writer.WriteFluentParams("Labels", Labels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (MultiLabel is not null)
+			if (MultiLabel is not null)
+			{
+				writer.WriteFluentCall("MultiLabel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultiLabel.Value); });
+			}
+
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+			}
+
+			if (Tokenization is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MultiLabel");
-			writer.WriteValue(MultiLabel.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceUpdateOptions", false);
+			{
+				initializer.Property("Labels");
+				writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ResultsField is not null)
-		{
-			initializer.Property("ResultsField");
-			writer.WriteString(ResultsField);
-		}
+			if (MultiLabel is not null)
+			{
+				initializer.Property("MultiLabel");
+				writer.WriteValue(MultiLabel.Value);
+			}
 
-		if (Tokenization is not null)
-		{
-			initializer.Property("Tokenization");
-			Tokenization.FormatCode(writer);
-		}
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				writer.WriteString(ResultsField);
+			}
 
-		initializer.Dispose();
+			if (Tokenization is not null)
+			{
+				initializer.Property("Tokenization");
+				Tokenization.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

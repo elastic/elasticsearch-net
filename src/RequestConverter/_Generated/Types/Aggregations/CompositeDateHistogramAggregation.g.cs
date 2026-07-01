@@ -27,73 +27,133 @@ public partial class CompositeDateHistogramAggregation : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation", false);
-		if (CalendarInterval is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CalendarInterval");
-			writer.WriteString(CalendarInterval);
-		}
+			if (CalendarInterval is not null)
+			{
+				writer.WriteFluentCall("CalendarInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CalendarInterval); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (FixedInterval is not null)
+			{
+				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (MissingBucket is not null)
+			{
+				writer.WriteFluentCall("MissingBucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MissingBucket.Value); });
+			}
+
+			if (MissingOrder is not null)
+			{
+				writer.WriteFluentCall("MissingOrder", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, w); });
+			}
+
+			if (Offset is not null)
+			{
+				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); Offset.FormatCode(w); });
+			}
+
+			if (Order is not null)
+			{
+				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (TimeZone is not null)
+			{
+				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+			}
+
+			if (ValueType is not null)
+			{
+				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation", false);
+			if (CalendarInterval is not null)
+			{
+				initializer.Property("CalendarInterval");
+				writer.WriteString(CalendarInterval);
+			}
 
-		if (FixedInterval is not null)
-		{
-			initializer.Property("FixedInterval");
-			writer.WriteString(FixedInterval);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (FixedInterval is not null)
+			{
+				initializer.Property("FixedInterval");
+				writer.WriteString(FixedInterval);
+			}
 
-		if (MissingBucket is not null)
-		{
-			initializer.Property("MissingBucket");
-			writer.WriteValue(MissingBucket.Value);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (MissingOrder is not null)
-		{
-			initializer.Property("MissingOrder");
-			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
-		}
+			if (MissingBucket is not null)
+			{
+				initializer.Property("MissingBucket");
+				writer.WriteValue(MissingBucket.Value);
+			}
 
-		if (Offset is not null)
-		{
-			initializer.Property("Offset");
-			Offset.FormatCode(writer);
-		}
+			if (MissingOrder is not null)
+			{
+				initializer.Property("MissingOrder");
+				Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
+			}
 
-		if (Order is not null)
-		{
-			initializer.Property("Order");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
-		}
+			if (Offset is not null)
+			{
+				initializer.Property("Offset");
+				Offset.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
+			}
 
-		if (TimeZone is not null)
-		{
-			initializer.Property("TimeZone");
-			writer.WriteString(TimeZone);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		if (ValueType is not null)
-		{
-			initializer.Property("ValueType");
-			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
-		}
+			if (TimeZone is not null)
+			{
+				initializer.Property("TimeZone");
+				writer.WriteString(TimeZone);
+			}
 
-		initializer.Dispose();
+			if (ValueType is not null)
+			{
+				initializer.Property("ValueType");
+				Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

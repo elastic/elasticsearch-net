@@ -27,25 +27,53 @@ public partial class BulkPutRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest", false);
-		if (Refresh is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor");
+				writer.Write("()");
+			}
 
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Roles", (w) => { w.WriteFluentDictionaryAdds("Add", Roles, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Roles");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RoleDescriptor");
-			writer.Write(">()");
-			writer.WriteBlockList(Roles, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest", false);
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Roles");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RoleDescriptor");
+				writer.Write(">()");
+				writer.WriteBlockList(Roles, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

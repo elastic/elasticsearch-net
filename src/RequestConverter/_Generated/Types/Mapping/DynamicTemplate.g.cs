@@ -27,61 +27,111 @@ public partial class DynamicTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate", false);
-		if (Match is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Match");
-			writer.WriteInlineList(Match, (w, item) => { w.WriteString(item); });
-		}
+			if (Match is not null)
+			{
+				writer.WriteFluentParams("Match", Match, (w, item) => { w.WriteString(item); });
+			}
 
-		if (MatchMappingType is not null)
+			if (MatchMappingType is not null)
+			{
+				writer.WriteFluentParams("MatchMappingType", MatchMappingType, (w, item) => { w.WriteString(item); });
+			}
+
+			if (MatchPattern is not null)
+			{
+				writer.WriteFluentCall("MatchPattern", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(MatchPattern.Value, w); });
+			}
+
+			if (PathMatch is not null)
+			{
+				writer.WriteFluentParams("PathMatch", PathMatch, (w, item) => { w.WriteString(item); });
+			}
+
+			if (PathUnmatch is not null)
+			{
+				writer.WriteFluentParams("PathUnmatch", PathUnmatch, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Unmatch is not null)
+			{
+				writer.WriteFluentParams("Unmatch", Unmatch, (w, item) => { w.WriteString(item); });
+			}
+
+			if (UnmatchMappingType is not null)
+			{
+				writer.WriteFluentParams("UnmatchMappingType", UnmatchMappingType, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Mapping is not null)
+			{
+				writer.WriteFluentCall("Mapping", (w) => { using var _oi = w.ForceObjectInitializer(); Mapping.FormatCode(w); });
+			}
+
+			if (Runtime is not null)
+			{
+				writer.WriteFluentDescriptorCall("Runtime", (w) => { Runtime.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MatchMappingType");
-			writer.WriteInlineList(MatchMappingType, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate", false);
+			if (Match is not null)
+			{
+				initializer.Property("Match");
+				writer.WriteInlineList(Match, (w, item) => { w.WriteString(item); });
+			}
 
-		if (MatchPattern is not null)
-		{
-			initializer.Property("MatchPattern");
-			Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(MatchPattern.Value, writer);
-		}
+			if (MatchMappingType is not null)
+			{
+				initializer.Property("MatchMappingType");
+				writer.WriteInlineList(MatchMappingType, (w, item) => { w.WriteString(item); });
+			}
 
-		if (PathMatch is not null)
-		{
-			initializer.Property("PathMatch");
-			writer.WriteInlineList(PathMatch, (w, item) => { w.WriteString(item); });
-		}
+			if (MatchPattern is not null)
+			{
+				initializer.Property("MatchPattern");
+				Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(MatchPattern.Value, writer);
+			}
 
-		if (PathUnmatch is not null)
-		{
-			initializer.Property("PathUnmatch");
-			writer.WriteInlineList(PathUnmatch, (w, item) => { w.WriteString(item); });
-		}
+			if (PathMatch is not null)
+			{
+				initializer.Property("PathMatch");
+				writer.WriteInlineList(PathMatch, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Unmatch is not null)
-		{
-			initializer.Property("Unmatch");
-			writer.WriteInlineList(Unmatch, (w, item) => { w.WriteString(item); });
-		}
+			if (PathUnmatch is not null)
+			{
+				initializer.Property("PathUnmatch");
+				writer.WriteInlineList(PathUnmatch, (w, item) => { w.WriteString(item); });
+			}
 
-		if (UnmatchMappingType is not null)
-		{
-			initializer.Property("UnmatchMappingType");
-			writer.WriteInlineList(UnmatchMappingType, (w, item) => { w.WriteString(item); });
-		}
+			if (Unmatch is not null)
+			{
+				initializer.Property("Unmatch");
+				writer.WriteInlineList(Unmatch, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Mapping is not null)
-		{
-			initializer.Property("Mapping");
-			Mapping.FormatCode(writer);
-		}
+			if (UnmatchMappingType is not null)
+			{
+				initializer.Property("UnmatchMappingType");
+				writer.WriteInlineList(UnmatchMappingType, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Runtime is not null)
-		{
-			initializer.Property("Runtime");
-			Runtime.FormatCode(writer);
-		}
+			if (Mapping is not null)
+			{
+				initializer.Property("Mapping");
+				Mapping.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Runtime is not null)
+			{
+				initializer.Property("Runtime");
+				Runtime.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

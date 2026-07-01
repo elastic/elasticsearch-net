@@ -27,34 +27,59 @@ public partial class AmazonBedrockTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings", false);
-		if (MaxNewTokens is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxNewTokens");
-			writer.WriteValue(MaxNewTokens.Value);
-		}
+			if (MaxNewTokens is not null)
+			{
+				writer.WriteFluentCall("MaxNewTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNewTokens.Value); });
+			}
 
-		if (Temperature is not null)
+			if (Temperature is not null)
+			{
+				writer.WriteFluentCall("Temperature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Temperature.Value); w.Write("f"); });
+			}
+
+			if (TopK is not null)
+			{
+				writer.WriteFluentCall("TopK", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopK.Value); w.Write("f"); });
+			}
+
+			if (TopP is not null)
+			{
+				writer.WriteFluentCall("TopP", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopP.Value); w.Write("f"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Temperature");
-			writer.WriteValue(Temperature.Value);
-			writer.Write("f");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings", false);
+			if (MaxNewTokens is not null)
+			{
+				initializer.Property("MaxNewTokens");
+				writer.WriteValue(MaxNewTokens.Value);
+			}
 
-		if (TopK is not null)
-		{
-			initializer.Property("TopK");
-			writer.WriteValue(TopK.Value);
-			writer.Write("f");
-		}
+			if (Temperature is not null)
+			{
+				initializer.Property("Temperature");
+				writer.WriteValue(Temperature.Value);
+				writer.Write("f");
+			}
 
-		if (TopP is not null)
-		{
-			initializer.Property("TopP");
-			writer.WriteValue(TopP.Value);
-			writer.Write("f");
-		}
+			if (TopK is not null)
+			{
+				initializer.Property("TopK");
+				writer.WriteValue(TopK.Value);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			if (TopP is not null)
+			{
+				initializer.Property("TopP");
+				writer.WriteValue(TopP.Value);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

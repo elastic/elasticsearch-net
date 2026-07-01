@@ -27,23 +27,45 @@ public partial class SamlAuthenticateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Content");
-			writer.WriteString(Content);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Content); });
+			}
 
+			{
+				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); Ids.FormatCode(w); });
+			}
+
+			if (Realm is not null)
+			{
+				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+			}
+		}
+		else
 		{
-			initializer.Property("Ids");
-			Ids.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest", false);
+			{
+				initializer.Property("Content");
+				writer.WriteString(Content);
+			}
 
-		if (Realm is not null)
-		{
-			initializer.Property("Realm");
-			writer.WriteString(Realm);
-		}
+			{
+				initializer.Property("Ids");
+				Ids.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Realm is not null)
+			{
+				initializer.Property("Realm");
+				writer.WriteString(Realm);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,42 +27,82 @@ public partial class FlushJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				JobId.FormatCode(writer);
+			}
 
-		if (AdvanceTime is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AdvanceTime is not null)
+			{
+				writer.WriteFluentCall("AdvanceTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AdvanceTime.Value); });
+			}
+
+			if (CalcInterim is not null)
+			{
+				writer.WriteFluentCall("CalcInterim", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CalcInterim.Value); });
+			}
+
+			if (End is not null)
+			{
+				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+			}
+
+			if (SkipTime is not null)
+			{
+				writer.WriteFluentCall("SkipTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipTime.Value); });
+			}
+
+			if (Start is not null)
+			{
+				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AdvanceTime");
-			writer.WriteValue(AdvanceTime.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (CalcInterim is not null)
-		{
-			initializer.Property("CalcInterim");
-			writer.WriteValue(CalcInterim.Value);
-		}
+			if (AdvanceTime is not null)
+			{
+				initializer.Property("AdvanceTime");
+				writer.WriteValue(AdvanceTime.Value);
+			}
 
-		if (End is not null)
-		{
-			initializer.Property("End");
-			writer.WriteValue(End.Value);
-		}
+			if (CalcInterim is not null)
+			{
+				initializer.Property("CalcInterim");
+				writer.WriteValue(CalcInterim.Value);
+			}
 
-		if (SkipTime is not null)
-		{
-			initializer.Property("SkipTime");
-			writer.WriteValue(SkipTime.Value);
-		}
+			if (End is not null)
+			{
+				initializer.Property("End");
+				writer.WriteValue(End.Value);
+			}
 
-		if (Start is not null)
-		{
-			initializer.Property("Start");
-			writer.WriteValue(Start.Value);
-		}
+			if (SkipTime is not null)
+			{
+				initializer.Property("SkipTime");
+				writer.WriteValue(SkipTime.Value);
+			}
 
-		initializer.Dispose();
+			if (Start is not null)
+			{
+				initializer.Property("Start");
+				writer.WriteValue(Start.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

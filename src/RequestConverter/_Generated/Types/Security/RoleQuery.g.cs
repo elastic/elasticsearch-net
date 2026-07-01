@@ -27,73 +27,133 @@ public partial class RoleQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleQuery", false);
-		if (Bool is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Bool");
-			Bool.FormatCode(writer);
-		}
+			if (Bool is not null)
+			{
+				writer.WriteFluentDescriptorCall("Bool", (w) => { Bool.FormatCode(w); });
+			}
 
-		if (Exists is not null)
+			if (Exists is not null)
+			{
+				writer.WriteFluentDescriptorCall("Exists", (w) => { Exists.FormatCode(w); });
+			}
+
+			if (Ids is not null)
+			{
+				writer.WriteFluentDescriptorCall("Ids", (w) => { Ids.FormatCode(w); });
+			}
+
+			if (Match is not null)
+			{
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); });
+			}
+
+			if (MatchAll is not null)
+			{
+				writer.WriteFluentDescriptorCall("MatchAll", (w) => { MatchAll.FormatCode(w); });
+			}
+
+			if (Prefix is not null)
+			{
+				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); });
+			}
+
+			if (Range is not null)
+			{
+				writer.WriteFluentCall("Range", (w) => { using var _oi = w.ForceObjectInitializer(); Range.FormatCode(w); });
+			}
+
+			if (SimpleQueryString is not null)
+			{
+				writer.WriteFluentDescriptorCall("SimpleQueryString", (w) => { SimpleQueryString.FormatCode(w); });
+			}
+
+			if (Term is not null)
+			{
+				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); });
+			}
+
+			if (Terms is not null)
+			{
+				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); });
+			}
+
+			if (Wildcard is not null)
+			{
+				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Exists");
-			Exists.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleQuery", false);
+			if (Bool is not null)
+			{
+				initializer.Property("Bool");
+				Bool.FormatCode(writer);
+			}
 
-		if (Ids is not null)
-		{
-			initializer.Property("Ids");
-			Ids.FormatCode(writer);
-		}
+			if (Exists is not null)
+			{
+				initializer.Property("Exists");
+				Exists.FormatCode(writer);
+			}
 
-		if (Match is not null)
-		{
-			initializer.Property("Match");
-			Match.FormatCode(writer);
-		}
+			if (Ids is not null)
+			{
+				initializer.Property("Ids");
+				Ids.FormatCode(writer);
+			}
 
-		if (MatchAll is not null)
-		{
-			initializer.Property("MatchAll");
-			MatchAll.FormatCode(writer);
-		}
+			if (Match is not null)
+			{
+				initializer.Property("Match");
+				Match.FormatCode(writer);
+			}
 
-		if (Prefix is not null)
-		{
-			initializer.Property("Prefix");
-			Prefix.FormatCode(writer);
-		}
+			if (MatchAll is not null)
+			{
+				initializer.Property("MatchAll");
+				MatchAll.FormatCode(writer);
+			}
 
-		if (Range is not null)
-		{
-			initializer.Property("Range");
-			Range.FormatCode(writer);
-		}
+			if (Prefix is not null)
+			{
+				initializer.Property("Prefix");
+				Prefix.FormatCode(writer);
+			}
 
-		if (SimpleQueryString is not null)
-		{
-			initializer.Property("SimpleQueryString");
-			SimpleQueryString.FormatCode(writer);
-		}
+			if (Range is not null)
+			{
+				initializer.Property("Range");
+				Range.FormatCode(writer);
+			}
 
-		if (Term is not null)
-		{
-			initializer.Property("Term");
-			Term.FormatCode(writer);
-		}
+			if (SimpleQueryString is not null)
+			{
+				initializer.Property("SimpleQueryString");
+				SimpleQueryString.FormatCode(writer);
+			}
 
-		if (Terms is not null)
-		{
-			initializer.Property("Terms");
-			Terms.FormatCode(writer);
-		}
+			if (Term is not null)
+			{
+				initializer.Property("Term");
+				Term.FormatCode(writer);
+			}
 
-		if (Wildcard is not null)
-		{
-			initializer.Property("Wildcard");
-			Wildcard.FormatCode(writer);
-		}
+			if (Terms is not null)
+			{
+				initializer.Property("Terms");
+				Terms.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Wildcard is not null)
+			{
+				initializer.Property("Wildcard");
+				Wildcard.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

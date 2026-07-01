@@ -59,7 +59,7 @@ public partial class IndicesPrivilegesRead : RequestConverter.ICodeFormattable
 		if (Query is not null)
 		{
 			initializer.Property("Query");
-			writer.WriteValue(Query);
+			writer.WriteObjectValue(Query);
 		}
 
 		initializer.Dispose();

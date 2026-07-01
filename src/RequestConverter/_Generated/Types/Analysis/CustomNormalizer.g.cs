@@ -27,19 +27,34 @@ public partial class CustomNormalizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer", true);
-		if (CharFilter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CharFilter");
-			writer.WriteInlineList(CharFilter, (w, item) => { w.WriteString(item); });
-		}
+			if (CharFilter is not null)
+			{
+				writer.WriteFluentParams("CharFilter", CharFilter, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentParams("Filter", Filter, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer", true);
+			if (CharFilter is not null)
+			{
+				initializer.Property("CharFilter");
+				writer.WriteInlineList(CharFilter, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

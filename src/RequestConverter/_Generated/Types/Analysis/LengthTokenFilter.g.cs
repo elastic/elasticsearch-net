@@ -27,25 +27,45 @@ public partial class LengthTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter", true);
-		if (Max is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Max");
-			writer.WriteValue(Max.Value);
-		}
+			if (Max is not null)
+			{
+				writer.WriteFluentCall("Max", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Max.Value); });
+			}
 
-		if (Min is not null)
+			if (Min is not null)
+			{
+				writer.WriteFluentCall("Min", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Min.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Min");
-			writer.WriteValue(Min.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter", true);
+			if (Max is not null)
+			{
+				initializer.Property("Max");
+				writer.WriteValue(Max.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Min is not null)
+			{
+				initializer.Property("Min");
+				writer.WriteValue(Min.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

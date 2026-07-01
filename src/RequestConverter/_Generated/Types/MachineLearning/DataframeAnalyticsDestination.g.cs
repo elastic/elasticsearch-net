@@ -27,18 +27,32 @@ public partial class DataframeAnalyticsDestination : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
 
-		if (ResultsField is not null)
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ResultsField");
-			ResultsField.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				ResultsField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

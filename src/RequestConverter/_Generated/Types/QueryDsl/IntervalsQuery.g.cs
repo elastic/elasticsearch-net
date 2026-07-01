@@ -27,73 +27,132 @@ public partial class IntervalsQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (AllOf is not null)
+			{
+				writer.WriteFluentDescriptorCall("AllOf", (w) => { AllOf.FormatCode(w); });
+			}
+
+			if (AnyOf is not null)
+			{
+				writer.WriteFluentDescriptorCall("AnyOf", (w) => { AnyOf.FormatCode(w); });
+			}
+
+			if (Fuzzy is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); });
+			}
+
+			if (Match is not null)
+			{
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); });
+			}
+
+			if (Prefix is not null)
+			{
+				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); });
+			}
+
+			if (Range is not null)
+			{
+				writer.WriteFluentDescriptorCall("Range", (w) => { Range.FormatCode(w); });
+			}
+
+			if (Regexp is not null)
+			{
+				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); });
+			}
+
+			if (Wildcard is not null)
+			{
+				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (AllOf is not null)
-		{
-			initializer.Property("AllOf");
-			AllOf.FormatCode(writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		if (AnyOf is not null)
-		{
-			initializer.Property("AnyOf");
-			AnyOf.FormatCode(writer);
-		}
+			if (AllOf is not null)
+			{
+				initializer.Property("AllOf");
+				AllOf.FormatCode(writer);
+			}
 
-		if (Fuzzy is not null)
-		{
-			initializer.Property("Fuzzy");
-			Fuzzy.FormatCode(writer);
-		}
+			if (AnyOf is not null)
+			{
+				initializer.Property("AnyOf");
+				AnyOf.FormatCode(writer);
+			}
 
-		if (Match is not null)
-		{
-			initializer.Property("Match");
-			Match.FormatCode(writer);
-		}
+			if (Fuzzy is not null)
+			{
+				initializer.Property("Fuzzy");
+				Fuzzy.FormatCode(writer);
+			}
 
-		if (Prefix is not null)
-		{
-			initializer.Property("Prefix");
-			Prefix.FormatCode(writer);
-		}
+			if (Match is not null)
+			{
+				initializer.Property("Match");
+				Match.FormatCode(writer);
+			}
 
-		if (Range is not null)
-		{
-			initializer.Property("Range");
-			Range.FormatCode(writer);
-		}
+			if (Prefix is not null)
+			{
+				initializer.Property("Prefix");
+				Prefix.FormatCode(writer);
+			}
 
-		if (Regexp is not null)
-		{
-			initializer.Property("Regexp");
-			Regexp.FormatCode(writer);
-		}
+			if (Range is not null)
+			{
+				initializer.Property("Range");
+				Range.FormatCode(writer);
+			}
 
-		if (Wildcard is not null)
-		{
-			initializer.Property("Wildcard");
-			Wildcard.FormatCode(writer);
-		}
+			if (Regexp is not null)
+			{
+				initializer.Property("Regexp");
+				Regexp.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Wildcard is not null)
+			{
+				initializer.Property("Wildcard");
+				Wildcard.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

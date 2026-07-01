@@ -27,37 +27,67 @@ public partial class RangeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); });
+			}
+
+			if (Ranges is not null)
+			{
+				writer.WriteFluentDescriptorParams("Ranges", Ranges, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>"); w.Write("()"); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing.Value);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Ranges is not null)
-		{
-			initializer.Property("Ranges");
-			writer.WriteInlineList(Ranges, (w, item) => { item.FormatCode(w); });
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteValue(Missing.Value);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Ranges is not null)
+			{
+				initializer.Property("Ranges");
+				writer.WriteInlineList(Ranges, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

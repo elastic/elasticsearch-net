@@ -27,19 +27,34 @@ public partial class RankEvalMetricDiscountedCumulativeGain : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain", false);
-		if (K is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("K");
-			writer.WriteValue(K.Value);
-		}
+			if (K is not null)
+			{
+				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K.Value); });
+			}
 
-		if (Normalize is not null)
+			if (Normalize is not null)
+			{
+				writer.WriteFluentCall("Normalize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Normalize.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Normalize");
-			writer.WriteValue(Normalize.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain", false);
+			if (K is not null)
+			{
+				initializer.Property("K");
+				writer.WriteValue(K.Value);
+			}
 
-		initializer.Dispose();
+			if (Normalize is not null)
+			{
+				initializer.Property("Normalize");
+				writer.WriteValue(Normalize.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

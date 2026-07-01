@@ -27,6 +27,7 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexRequest<TDocument>", false);
 		if (Id is not null)
 		{
@@ -122,7 +123,7 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Document");
-			writer.WriteValue(Document);
+			writer.WriteDocument(Document);
 		}
 
 		initializer.Dispose();

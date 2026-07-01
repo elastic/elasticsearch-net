@@ -27,18 +27,32 @@ public partial class SettingsSimilarityScripted : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
 
-		if (WeightScript is not null)
+			if (WeightScript is not null)
+			{
+				writer.WriteFluentDescriptorCall("WeightScript", (w) => { WeightScript.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("WeightScript");
-			WeightScript.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted", true);
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (WeightScript is not null)
+			{
+				initializer.Property("WeightScript");
+				WeightScript.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

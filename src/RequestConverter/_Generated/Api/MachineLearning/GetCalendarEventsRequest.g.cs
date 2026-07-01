@@ -27,42 +27,82 @@ public partial class GetCalendarEventsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CalendarId");
-			CalendarId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				CalendarId.FormatCode(writer);
+			}
 
-		if (End is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (End is not null)
+			{
+				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+			}
+
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
+
+			if (JobId is not null)
+			{
+				writer.WriteFluentCall("JobId", (w) => { using var _oi = w.ForceObjectInitializer(); JobId.FormatCode(w); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Start is not null)
+			{
+				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("End");
-			writer.WriteValue(End.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest", false);
+			{
+				initializer.Property("CalendarId");
+				CalendarId.FormatCode(writer);
+			}
 
-		if (From is not null)
-		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			if (End is not null)
+			{
+				initializer.Property("End");
+				writer.WriteValue(End.Value);
+			}
 
-		if (JobId is not null)
-		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (JobId is not null)
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (Start is not null)
-		{
-			initializer.Property("Start");
-			writer.WriteValue(Start.Value);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		initializer.Dispose();
+			if (Start is not null)
+			{
+				initializer.Property("Start");
+				writer.WriteValue(Start.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

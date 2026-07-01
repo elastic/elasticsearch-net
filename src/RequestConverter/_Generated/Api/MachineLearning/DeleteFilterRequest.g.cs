@@ -27,12 +27,28 @@ public partial class DeleteFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FilterId");
-			FilterId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				FilterId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest", false);
+			{
+				initializer.Property("FilterId");
+				FilterId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

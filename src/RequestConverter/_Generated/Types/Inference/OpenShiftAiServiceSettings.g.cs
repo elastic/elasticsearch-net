@@ -27,41 +27,74 @@ public partial class OpenShiftAiServiceSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
-		if (MaxInputTokens is not null)
+			if (MaxInputTokens is not null)
+			{
+				writer.WriteFluentCall("MaxInputTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInputTokens.Value); });
+			}
+
+			if (ModelId is not null)
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			if (Similarity is not null)
+			{
+				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxInputTokens");
-			writer.WriteValue(MaxInputTokens.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		if (ModelId is not null)
-		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			if (MaxInputTokens is not null)
+			{
+				initializer.Property("MaxInputTokens");
+				writer.WriteValue(MaxInputTokens.Value);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			if (ModelId is not null)
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		if (Similarity is not null)
-		{
-			initializer.Property("Similarity");
-			Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

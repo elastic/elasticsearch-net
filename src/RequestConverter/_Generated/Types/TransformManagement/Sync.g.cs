@@ -27,13 +27,23 @@ public partial class Sync : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Sync", false);
-		if (Time is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Time");
-			Time.FormatCode(writer);
+			if (Time is not null)
+			{
+				writer.WriteFluentDescriptorCall("Time", (w) => { Time.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Sync", false);
+			if (Time is not null)
+			{
+				initializer.Property("Time");
+				Time.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -41,7 +41,7 @@ public partial class ModelSnapshotUpgrade : RequestConverter.ICodeFormattable
 		if (Node is not null)
 		{
 			initializer.Property("Node");
-			writer.Write("new(");
+			writer.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<string,Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>");
 			writer.WriteString(Node.Value.Key);
 			writer.Write(", ");
 			Node.Value.Value.FormatCode(writer);

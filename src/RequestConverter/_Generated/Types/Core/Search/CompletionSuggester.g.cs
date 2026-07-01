@@ -27,55 +27,94 @@ public partial class CompletionSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (Contexts is not null)
+			if (Contexts is not null)
+			{
+				writer.WriteFluentCall("Contexts", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>"); w.Write(">()"); w.WriteBlockList(Contexts, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Fuzzy is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); });
+			}
+
+			if (Regex is not null)
+			{
+				writer.WriteFluentDescriptorCall("Regex", (w) => { Regex.FormatCode(w); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (SkipDuplicates is not null)
+			{
+				writer.WriteFluentCall("SkipDuplicates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipDuplicates.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Contexts");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>");
-			writer.Write(">()");
-			writer.WriteBlockList(Contexts, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Contexts is not null)
+			{
+				initializer.Property("Contexts");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>");
+				writer.Write(">()");
+				writer.WriteBlockList(Contexts, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); });
+			}
 
-		if (Fuzzy is not null)
-		{
-			initializer.Property("Fuzzy");
-			Fuzzy.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Regex is not null)
-		{
-			initializer.Property("Regex");
-			Regex.FormatCode(writer);
-		}
+			if (Fuzzy is not null)
+			{
+				initializer.Property("Fuzzy");
+				Fuzzy.FormatCode(writer);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (Regex is not null)
+			{
+				initializer.Property("Regex");
+				Regex.FormatCode(writer);
+			}
 
-		if (SkipDuplicates is not null)
-		{
-			initializer.Property("SkipDuplicates");
-			writer.WriteValue(SkipDuplicates.Value);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		initializer.Dispose();
+			if (SkipDuplicates is not null)
+			{
+				initializer.Property("SkipDuplicates");
+				writer.WriteValue(SkipDuplicates.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

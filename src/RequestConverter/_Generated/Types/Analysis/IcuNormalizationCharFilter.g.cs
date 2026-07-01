@@ -27,31 +27,56 @@ public partial class IcuNormalizationCharFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter", true);
-		if (Mode is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode.Value, writer);
-		}
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode.Value, w); });
+			}
 
-		if (Name is not null)
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name.Value, w); });
+			}
+
+			if (UnicodeSetFilter is not null)
+			{
+				writer.WriteFluentCall("UnicodeSetFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UnicodeSetFilter); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Name");
-			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter", true);
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode.Value, writer);
+			}
 
-		if (UnicodeSetFilter is not null)
-		{
-			initializer.Property("UnicodeSetFilter");
-			writer.WriteString(UnicodeSetFilter);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name.Value, writer);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (UnicodeSetFilter is not null)
+			{
+				initializer.Property("UnicodeSetFilter");
+				writer.WriteString(UnicodeSetFilter);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

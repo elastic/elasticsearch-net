@@ -27,57 +27,102 @@ public partial class AllField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.AllField", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+			}
+
+			{
+				writer.WriteFluentCall("OmitNorms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OmitNorms); });
+			}
+
+			{
+				writer.WriteFluentCall("SearchAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchAnalyzer); });
+			}
+
+			{
+				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Similarity); });
+			}
+
+			{
+				writer.WriteFluentCall("Store", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Store); });
+			}
+
+			{
+				writer.WriteFluentCall("StoreTermVectorOffsets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectorOffsets); });
+			}
+
+			{
+				writer.WriteFluentCall("StoreTermVectorPayloads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectorPayloads); });
+			}
+
+			{
+				writer.WriteFluentCall("StoreTermVectorPositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectorPositions); });
+			}
+
+			{
+				writer.WriteFluentCall("StoreTermVectors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectors); });
+			}
+		}
+		else
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.AllField", false);
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		{
-			initializer.Property("OmitNorms");
-			writer.WriteValue(OmitNorms);
-		}
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled);
+			}
 
-		{
-			initializer.Property("SearchAnalyzer");
-			writer.WriteString(SearchAnalyzer);
-		}
+			{
+				initializer.Property("OmitNorms");
+				writer.WriteValue(OmitNorms);
+			}
 
-		{
-			initializer.Property("Similarity");
-			writer.WriteString(Similarity);
-		}
+			{
+				initializer.Property("SearchAnalyzer");
+				writer.WriteString(SearchAnalyzer);
+			}
 
-		{
-			initializer.Property("Store");
-			writer.WriteValue(Store);
-		}
+			{
+				initializer.Property("Similarity");
+				writer.WriteString(Similarity);
+			}
 
-		{
-			initializer.Property("StoreTermVectorOffsets");
-			writer.WriteValue(StoreTermVectorOffsets);
-		}
+			{
+				initializer.Property("Store");
+				writer.WriteValue(Store);
+			}
 
-		{
-			initializer.Property("StoreTermVectorPayloads");
-			writer.WriteValue(StoreTermVectorPayloads);
-		}
+			{
+				initializer.Property("StoreTermVectorOffsets");
+				writer.WriteValue(StoreTermVectorOffsets);
+			}
 
-		{
-			initializer.Property("StoreTermVectorPositions");
-			writer.WriteValue(StoreTermVectorPositions);
-		}
+			{
+				initializer.Property("StoreTermVectorPayloads");
+				writer.WriteValue(StoreTermVectorPayloads);
+			}
 
-		{
-			initializer.Property("StoreTermVectors");
-			writer.WriteValue(StoreTermVectors);
-		}
+			{
+				initializer.Property("StoreTermVectorPositions");
+				writer.WriteValue(StoreTermVectorPositions);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("StoreTermVectors");
+				writer.WriteValue(StoreTermVectors);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

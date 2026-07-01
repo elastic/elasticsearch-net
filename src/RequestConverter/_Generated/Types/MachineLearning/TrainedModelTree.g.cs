@@ -27,29 +27,52 @@ public partial class TrainedModelTree : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree", false);
-		if (ClassificationLabels is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ClassificationLabels");
-			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
-		}
+			if (ClassificationLabels is not null)
+			{
+				writer.WriteFluentParams("ClassificationLabels", ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
 
+			{
+				writer.WriteFluentParams("FeatureNames", FeatureNames, (w, item) => { w.WriteString(item); });
+			}
+
+			if (TargetType is not null)
+			{
+				writer.WriteFluentCall("TargetType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetType); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("TreeStructure", TreeStructure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("FeatureNames");
-			writer.WriteInlineList(FeatureNames, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree", false);
+			if (ClassificationLabels is not null)
+			{
+				initializer.Property("ClassificationLabels");
+				writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (TargetType is not null)
-		{
-			initializer.Property("TargetType");
-			writer.WriteString(TargetType);
-		}
+			{
+				initializer.Property("FeatureNames");
+				writer.WriteInlineList(FeatureNames, (w, item) => { w.WriteString(item); });
+			}
 
-		{
-			initializer.Property("TreeStructure");
-			writer.WriteInlineList(TreeStructure, (w, item) => { item.FormatCode(w); });
-		}
+			if (TargetType is not null)
+			{
+				initializer.Property("TargetType");
+				writer.WriteString(TargetType);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("TreeStructure");
+				writer.WriteInlineList(TreeStructure, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

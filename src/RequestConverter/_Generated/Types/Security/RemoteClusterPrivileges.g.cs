@@ -27,17 +27,30 @@ public partial class RemoteClusterPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Clusters");
-			Clusters.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Clusters", (w) => { using var _oi = w.ForceObjectInitializer(); Clusters.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentParams("Privileges", Privileges, (w, item) => { Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegeCodeFormatter.FormatCode(item, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Privileges");
-			writer.WriteInlineList(Privileges, (w, item) => { Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegeCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges", false);
+			{
+				initializer.Property("Clusters");
+				Clusters.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Privileges");
+				writer.WriteInlineList(Privileges, (w, item) => { Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegeCodeFormatter.FormatCode(item, w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,24 +27,50 @@ public partial class ExistsComponentTemplateRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
-#pragma warning disable CS0618
-		if (Local is not null)
-		{
-			initializer.Property("Local");
-			writer.WriteValue(Local.Value);
-		}
-#pragma warning restore CS0618
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+#pragma warning disable CS0618
+			if (Local is not null)
+			{
+				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+			}
+#pragma warning restore CS0618
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
+#pragma warning disable CS0618
+			if (Local is not null)
+			{
+				initializer.Property("Local");
+				writer.WriteValue(Local.Value);
+			}
+#pragma warning restore CS0618
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

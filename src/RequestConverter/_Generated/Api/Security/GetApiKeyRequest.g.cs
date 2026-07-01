@@ -27,55 +27,104 @@ public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest", false);
-		if (ActiveOnly is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ActiveOnly");
-			writer.WriteValue(ActiveOnly.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (ActiveOnly is not null)
+			{
+				writer.WriteFluentCall("ActiveOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ActiveOnly.Value); });
+			}
 
-		if (Id is not null)
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+
+			if (Owner is not null)
+			{
+				writer.WriteFluentCall("Owner", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Owner.Value); });
+			}
+
+			if (RealmName is not null)
+			{
+				writer.WriteFluentCall("RealmName", (w) => { using var _oi = w.ForceObjectInitializer(); RealmName.FormatCode(w); });
+			}
+
+			if (Username is not null)
+			{
+				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+			}
+
+			if (WithLimitedBy is not null)
+			{
+				writer.WriteFluentCall("WithLimitedBy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithLimitedBy.Value); });
+			}
+
+			if (WithProfileUid is not null)
+			{
+				writer.WriteFluentCall("WithProfileUid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithProfileUid.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest", false);
+			if (ActiveOnly is not null)
+			{
+				initializer.Property("ActiveOnly");
+				writer.WriteValue(ActiveOnly.Value);
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (Owner is not null)
-		{
-			initializer.Property("Owner");
-			writer.WriteValue(Owner.Value);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (RealmName is not null)
-		{
-			initializer.Property("RealmName");
-			RealmName.FormatCode(writer);
-		}
+			if (Owner is not null)
+			{
+				initializer.Property("Owner");
+				writer.WriteValue(Owner.Value);
+			}
 
-		if (Username is not null)
-		{
-			initializer.Property("Username");
-			Username.FormatCode(writer);
-		}
+			if (RealmName is not null)
+			{
+				initializer.Property("RealmName");
+				RealmName.FormatCode(writer);
+			}
 
-		if (WithLimitedBy is not null)
-		{
-			initializer.Property("WithLimitedBy");
-			writer.WriteValue(WithLimitedBy.Value);
-		}
+			if (Username is not null)
+			{
+				initializer.Property("Username");
+				Username.FormatCode(writer);
+			}
 
-		if (WithProfileUid is not null)
-		{
-			initializer.Property("WithProfileUid");
-			writer.WriteValue(WithProfileUid.Value);
-		}
+			if (WithLimitedBy is not null)
+			{
+				initializer.Property("WithLimitedBy");
+				writer.WriteValue(WithLimitedBy.Value);
+			}
 
-		initializer.Dispose();
+			if (WithProfileUid is not null)
+			{
+				initializer.Property("WithProfileUid");
+				writer.WriteValue(WithProfileUid.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

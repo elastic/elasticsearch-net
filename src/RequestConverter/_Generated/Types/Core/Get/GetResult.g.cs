@@ -38,7 +38,7 @@ public partial class GetResult<TDocument> : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		{
@@ -85,7 +85,7 @@ public partial class GetResult<TDocument> : RequestConverter.ICodeFormattable
 		if (Source is not null)
 		{
 			initializer.Property("Source");
-			writer.WriteValue(Source);
+			writer.WriteDocument(Source);
 		}
 
 		if (Version is not null)

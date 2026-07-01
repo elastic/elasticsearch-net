@@ -27,81 +27,141 @@ public partial class Pipeline : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Pipeline", false);
-		if (CreatedDate is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CreatedDate");
-			writer.WriteValue(CreatedDate.Value);
-		}
+			if (CreatedDate is not null)
+			{
+				writer.WriteFluentCall("CreatedDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreatedDate.Value); });
+			}
 
-		if (CreatedDateMillis is not null)
+			if (CreatedDateMillis is not null)
+			{
+				writer.WriteFluentCall("CreatedDateMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreatedDateMillis.Value); });
+			}
+
+			if (Deprecated is not null)
+			{
+				writer.WriteFluentCall("Deprecated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Deprecated.Value); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (FieldAccessPattern is not null)
+			{
+				writer.WriteFluentCall("FieldAccessPattern", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Ingest.FieldAccessPatternCodeFormatter.FormatCode(FieldAccessPattern.Value, w); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (ModifiedDate is not null)
+			{
+				writer.WriteFluentCall("ModifiedDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModifiedDate.Value); });
+			}
+
+			if (ModifiedDateMillis is not null)
+			{
+				writer.WriteFluentCall("ModifiedDateMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModifiedDateMillis.Value); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Processors is not null)
+			{
+				writer.WriteFluentDescriptorParams("Processors", Processors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("CreatedDateMillis");
-			writer.WriteValue(CreatedDateMillis.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Pipeline", false);
+			if (CreatedDate is not null)
+			{
+				initializer.Property("CreatedDate");
+				writer.WriteValue(CreatedDate.Value);
+			}
 
-		if (Deprecated is not null)
-		{
-			initializer.Property("Deprecated");
-			writer.WriteValue(Deprecated.Value);
-		}
+			if (CreatedDateMillis is not null)
+			{
+				initializer.Property("CreatedDateMillis");
+				writer.WriteValue(CreatedDateMillis.Value);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Deprecated is not null)
+			{
+				initializer.Property("Deprecated");
+				writer.WriteValue(Deprecated.Value);
+			}
 
-		if (FieldAccessPattern is not null)
-		{
-			initializer.Property("FieldAccessPattern");
-			Elastic.Clients.Elasticsearch.Ingest.FieldAccessPatternCodeFormatter.FormatCode(FieldAccessPattern.Value, writer);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (FieldAccessPattern is not null)
+			{
+				initializer.Property("FieldAccessPattern");
+				Elastic.Clients.Elasticsearch.Ingest.FieldAccessPatternCodeFormatter.FormatCode(FieldAccessPattern.Value, writer);
+			}
 
-		if (ModifiedDate is not null)
-		{
-			initializer.Property("ModifiedDate");
-			writer.WriteValue(ModifiedDate.Value);
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (ModifiedDateMillis is not null)
-		{
-			initializer.Property("ModifiedDateMillis");
-			writer.WriteValue(ModifiedDateMillis.Value);
-		}
+			if (ModifiedDate is not null)
+			{
+				initializer.Property("ModifiedDate");
+				writer.WriteValue(ModifiedDate.Value);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (ModifiedDateMillis is not null)
+			{
+				initializer.Property("ModifiedDateMillis");
+				writer.WriteValue(ModifiedDateMillis.Value);
+			}
 
-		if (Processors is not null)
-		{
-			initializer.Property("Processors");
-			writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteValue(Version.Value);
-			writer.Write("L");
-		}
+			if (Processors is not null)
+			{
+				initializer.Property("Processors");
+				writer.WriteInlineList(Processors, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteValue(Version.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

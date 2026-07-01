@@ -27,31 +27,56 @@ public partial class SlowlogTresholdLevels : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels", false);
-		if (Debug is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Debug");
-			Debug.FormatCode(writer);
-		}
+			if (Debug is not null)
+			{
+				writer.WriteFluentCall("Debug", (w) => { using var _oi = w.ForceObjectInitializer(); Debug.FormatCode(w); });
+			}
 
-		if (Info is not null)
+			if (Info is not null)
+			{
+				writer.WriteFluentCall("Info", (w) => { using var _oi = w.ForceObjectInitializer(); Info.FormatCode(w); });
+			}
+
+			if (Trace is not null)
+			{
+				writer.WriteFluentCall("Trace", (w) => { using var _oi = w.ForceObjectInitializer(); Trace.FormatCode(w); });
+			}
+
+			if (Warn is not null)
+			{
+				writer.WriteFluentCall("Warn", (w) => { using var _oi = w.ForceObjectInitializer(); Warn.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Info");
-			Info.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels", false);
+			if (Debug is not null)
+			{
+				initializer.Property("Debug");
+				Debug.FormatCode(writer);
+			}
 
-		if (Trace is not null)
-		{
-			initializer.Property("Trace");
-			Trace.FormatCode(writer);
-		}
+			if (Info is not null)
+			{
+				initializer.Property("Info");
+				Info.FormatCode(writer);
+			}
 
-		if (Warn is not null)
-		{
-			initializer.Property("Warn");
-			Warn.FormatCode(writer);
-		}
+			if (Trace is not null)
+			{
+				initializer.Property("Trace");
+				Trace.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Warn is not null)
+			{
+				initializer.Property("Warn");
+				Warn.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

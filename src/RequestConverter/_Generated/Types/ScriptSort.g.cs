@@ -27,36 +27,65 @@ public partial class ScriptSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScriptSort", false);
-		if (Mode is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
-		}
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
+			}
 
-		if (Nested is not null)
+			if (Nested is not null)
+			{
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); });
+			}
+
+			if (Order is not null)
+			{
+				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(Type.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Nested");
-			Nested.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScriptSort", false);
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
+			}
 
-		if (Order is not null)
-		{
-			initializer.Property("Order");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
-		}
+			if (Nested is not null)
+			{
+				initializer.Property("Nested");
+				Nested.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
+			}
 
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(Type.Value, writer);
-		}
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(Type.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

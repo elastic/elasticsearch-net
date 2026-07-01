@@ -27,30 +27,68 @@ public partial class TranslateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.TranslateRequest", false);
-		if (FetchSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FetchSize");
-			writer.WriteValue(FetchSize.Value);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (Filter is not null)
+			using var _chainIndent = writer.Indent();
+			if (FetchSize is not null)
+			{
+				writer.WriteFluentCall("FetchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FetchSize.Value); });
+			}
+
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
+
+			if (TimeZone is not null)
+			{
+				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.TranslateRequest", false);
+			if (FetchSize is not null)
+			{
+				initializer.Property("FetchSize");
+				writer.WriteValue(FetchSize.Value);
+			}
 
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
 
-		if (TimeZone is not null)
-		{
-			initializer.Property("TimeZone");
-			writer.WriteString(TimeZone);
-		}
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
 
-		initializer.Dispose();
+			if (TimeZone is not null)
+			{
+				initializer.Property("TimeZone");
+				writer.WriteString(TimeZone);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

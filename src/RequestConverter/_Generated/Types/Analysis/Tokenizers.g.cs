@@ -27,7 +27,125 @@ public partial class Tokenizers : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
-		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			foreach (var kvp in this)
+			{
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer c1)
+				{
+					writer.WriteFluentVariantAdd("CharGroup", (w) => { w.WriteString(kvp.Key); }, (w) => { c1.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.ClassicTokenizer c2)
+				{
+					writer.WriteFluentVariantAdd("Classic", (w) => { w.WriteString(kvp.Key); }, (w) => { c2.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer c3)
+				{
+					writer.WriteFluentVariantAdd("EdgeNGram", (w) => { w.WriteString(kvp.Key); }, (w) => { c3.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer c4)
+				{
+					writer.WriteFluentVariantAdd("Icu", (w) => { w.WriteString(kvp.Key); }, (w) => { c4.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer c5)
+				{
+					writer.WriteFluentVariantAdd("Keyword", (w) => { w.WriteString(kvp.Key); }, (w) => { c5.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer c6)
+				{
+					writer.WriteFluentVariantAdd("Kuromoji", (w) => { w.WriteString(kvp.Key); }, (w) => { c6.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer c7)
+				{
+					writer.WriteFluentVariantAdd("Letter", (w) => { w.WriteString(kvp.Key); }, (w) => { c7.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer c8)
+				{
+					writer.WriteFluentVariantAdd("Lowercase", (w) => { w.WriteString(kvp.Key); }, (w) => { c8.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer c9)
+				{
+					writer.WriteFluentVariantAdd("NGram", (w) => { w.WriteString(kvp.Key); }, (w) => { c9.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer c10)
+				{
+					writer.WriteFluentVariantAdd("Nori", (w) => { w.WriteString(kvp.Key); }, (w) => { c10.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer c11)
+				{
+					writer.WriteFluentVariantAdd("PathHierarchy", (w) => { w.WriteString(kvp.Key); }, (w) => { c11.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer c12)
+				{
+					writer.WriteFluentVariantAdd("Pattern", (w) => { w.WriteString(kvp.Key); }, (w) => { c12.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SimplePatternTokenizer c13)
+				{
+					writer.WriteFluentVariantAdd("SimplePattern", (w) => { w.WriteString(kvp.Key); }, (w) => { c13.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer c14)
+				{
+					writer.WriteFluentVariantAdd("SimplePatternSplit", (w) => { w.WriteString(kvp.Key); }, (w) => { c14.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer c15)
+				{
+					writer.WriteFluentVariantAdd("Standard", (w) => { w.WriteString(kvp.Key); }, (w) => { c15.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer c16)
+				{
+					writer.WriteFluentVariantAdd("Thai", (w) => { w.WriteString(kvp.Key); }, (w) => { c16.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer c17)
+				{
+					writer.WriteFluentVariantAdd("UaxEmailUrl", (w) => { w.WriteString(kvp.Key); }, (w) => { c17.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer c18)
+				{
+					writer.WriteFluentVariantAdd("Whitespace", (w) => { w.WriteString(kvp.Key); }, (w) => { c18.FormatCode(w); });
+					continue;
+				}
+
+				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+			}
+		}
+		else
+		{
+			writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.Analysis.Tokenizers");
+			writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
 	}
 }

@@ -27,17 +27,39 @@ public partial class DeleteTrainedModelAliasRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelAlias");
-			ModelAlias.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelAlias.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest", false);
+			{
+				initializer.Property("ModelAlias");
+				ModelAlias.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

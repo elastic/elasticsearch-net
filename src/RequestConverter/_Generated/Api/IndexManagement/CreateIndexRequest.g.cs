@@ -27,55 +27,116 @@ public partial class CreateIndexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
 
-		if (MasterTimeout is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (WaitForActiveShards is not null)
+			{
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+			}
+
+			if (Aliases is not null)
+			{
+				writer.WriteFluentDescriptorCall("Aliases", (w) => { w.WriteFluentDictionaryAdds("Add", Aliases, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+
+			if (Mappings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Mappings", (w) => { Mappings.FormatCode(w); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (WaitForActiveShards is not null)
-		{
-			initializer.Property("WaitForActiveShards");
-			WaitForActiveShards.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (Aliases is not null)
-		{
-			initializer.Property("Aliases");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Name");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
-			writer.Write(">()");
-			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (WaitForActiveShards is not null)
+			{
+				initializer.Property("WaitForActiveShards");
+				WaitForActiveShards.FormatCode(writer);
+			}
 
-		if (Mappings is not null)
-		{
-			initializer.Property("Mappings");
-			Mappings.FormatCode(writer);
-		}
+			if (Aliases is not null)
+			{
+				initializer.Property("Aliases");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Name");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
+				writer.Write(">()");
+				writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (Settings is not null)
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			if (Mappings is not null)
+			{
+				initializer.Property("Mappings");
+				Mappings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

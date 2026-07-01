@@ -27,22 +27,39 @@ public partial class SettingsSimilarityIb : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Distribution");
-			Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, writer);
-		}
+			{
+				writer.WriteFluentCall("Distribution", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, w); });
+			}
 
+			{
+				writer.WriteFluentCall("Lambda", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(Lambda, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Normalization", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Lambda");
-			Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(Lambda, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb", true);
+			{
+				initializer.Property("Distribution");
+				Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, writer);
+			}
 
-		{
-			initializer.Property("Normalization");
-			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
-		}
+			{
+				initializer.Property("Lambda");
+				Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(Lambda, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Normalization");
+				Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

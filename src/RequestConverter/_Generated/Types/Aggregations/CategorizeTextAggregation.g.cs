@@ -27,66 +27,120 @@ public partial class CategorizeTextAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation", false);
-		if (CategorizationAnalyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CategorizationAnalyzer");
-			CategorizationAnalyzer.FormatCode(writer);
-		}
+			if (CategorizationAnalyzer is not null)
+			{
+				writer.WriteFluentCall("CategorizationAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); CategorizationAnalyzer.FormatCode(w); });
+			}
 
-		if (CategorizationFilters is not null)
+			if (CategorizationFilters is not null)
+			{
+				writer.WriteFluentParams("CategorizationFilters", CategorizationFilters, (w, item) => { w.WriteString(item); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (MaxMatchedTokens is not null)
+			{
+				writer.WriteFluentCall("MaxMatchedTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMatchedTokens.Value); });
+			}
+
+			if (MaxUniqueTokens is not null)
+			{
+				writer.WriteFluentCall("MaxUniqueTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxUniqueTokens.Value); });
+			}
+
+			if (MinDocCount is not null)
+			{
+				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); });
+			}
+
+			if (ShardMinDocCount is not null)
+			{
+				writer.WriteFluentCall("ShardMinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardMinDocCount.Value); });
+			}
+
+			if (ShardSize is not null)
+			{
+				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+			}
+
+			if (SimilarityThreshold is not null)
+			{
+				writer.WriteFluentCall("SimilarityThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SimilarityThreshold.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("CategorizationFilters");
-			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation", false);
+			if (CategorizationAnalyzer is not null)
+			{
+				initializer.Property("CategorizationAnalyzer");
+				CategorizationAnalyzer.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (CategorizationFilters is not null)
+			{
+				initializer.Property("CategorizationFilters");
+				writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
+			}
 
-		if (MaxMatchedTokens is not null)
-		{
-			initializer.Property("MaxMatchedTokens");
-			writer.WriteValue(MaxMatchedTokens.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MaxUniqueTokens is not null)
-		{
-			initializer.Property("MaxUniqueTokens");
-			writer.WriteValue(MaxUniqueTokens.Value);
-		}
+			if (MaxMatchedTokens is not null)
+			{
+				initializer.Property("MaxMatchedTokens");
+				writer.WriteValue(MaxMatchedTokens.Value);
+			}
 
-		if (MinDocCount is not null)
-		{
-			initializer.Property("MinDocCount");
-			writer.WriteValue(MinDocCount.Value);
-		}
+			if (MaxUniqueTokens is not null)
+			{
+				initializer.Property("MaxUniqueTokens");
+				writer.WriteValue(MaxUniqueTokens.Value);
+			}
 
-		if (ShardMinDocCount is not null)
-		{
-			initializer.Property("ShardMinDocCount");
-			writer.WriteValue(ShardMinDocCount.Value);
-		}
+			if (MinDocCount is not null)
+			{
+				initializer.Property("MinDocCount");
+				writer.WriteValue(MinDocCount.Value);
+			}
 
-		if (ShardSize is not null)
-		{
-			initializer.Property("ShardSize");
-			writer.WriteValue(ShardSize.Value);
-		}
+			if (ShardMinDocCount is not null)
+			{
+				initializer.Property("ShardMinDocCount");
+				writer.WriteValue(ShardMinDocCount.Value);
+			}
 
-		if (SimilarityThreshold is not null)
-		{
-			initializer.Property("SimilarityThreshold");
-			writer.WriteValue(SimilarityThreshold.Value);
-		}
+			if (ShardSize is not null)
+			{
+				initializer.Property("ShardSize");
+				writer.WriteValue(ShardSize.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (SimilarityThreshold is not null)
+			{
+				initializer.Property("SimilarityThreshold");
+				writer.WriteValue(SimilarityThreshold.Value);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

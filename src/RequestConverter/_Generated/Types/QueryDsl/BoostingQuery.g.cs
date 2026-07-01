@@ -27,36 +27,63 @@ public partial class BoostingQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentDescriptorCall("Negative", (w) => { Negative.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("NegativeBoost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NegativeBoost); w.Write("d"); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Positive", (w) => { Positive.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+		}
+		else
 		{
-			initializer.Property("Negative");
-			Negative.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		{
-			initializer.Property("NegativeBoost");
-			writer.WriteValue(NegativeBoost);
-			writer.Write("d");
-		}
+			{
+				initializer.Property("Negative");
+				Negative.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Positive");
-			Positive.FormatCode(writer);
-		}
+			{
+				initializer.Property("NegativeBoost");
+				writer.WriteValue(NegativeBoost);
+				writer.Write("d");
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Positive");
+				Positive.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

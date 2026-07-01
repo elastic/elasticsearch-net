@@ -27,24 +27,47 @@ public partial class ScrollRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScrollRequest", false);
-		if (RestTotalHitsAsInt is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RestTotalHitsAsInt");
-			writer.WriteValue(RestTotalHitsAsInt.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScrollRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (RestTotalHitsAsInt is not null)
+			{
+				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RestTotalHitsAsInt.Value); });
+			}
 
-		if (Scroll is not null)
+			if (Scroll is not null)
+			{
+				writer.WriteFluentCall("Scroll", (w) => { using var _oi = w.ForceObjectInitializer(); Scroll.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("ScrollId", (w) => { using var _oi = w.ForceObjectInitializer(); ScrollId.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Scroll");
-			Scroll.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScrollRequest", false);
+			if (RestTotalHitsAsInt is not null)
+			{
+				initializer.Property("RestTotalHitsAsInt");
+				writer.WriteValue(RestTotalHitsAsInt.Value);
+			}
 
-		{
-			initializer.Property("ScrollId");
-			ScrollId.FormatCode(writer);
-		}
+			if (Scroll is not null)
+			{
+				initializer.Property("Scroll");
+				Scroll.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("ScrollId");
+				ScrollId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

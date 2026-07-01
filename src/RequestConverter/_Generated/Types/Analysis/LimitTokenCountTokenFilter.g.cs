@@ -27,25 +27,45 @@ public partial class LimitTokenCountTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter", true);
-		if (ConsumeAllTokens is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ConsumeAllTokens");
-			writer.WriteValue(ConsumeAllTokens.Value);
-		}
+			if (ConsumeAllTokens is not null)
+			{
+				writer.WriteFluentCall("ConsumeAllTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ConsumeAllTokens.Value); });
+			}
 
-		if (MaxTokenCount is not null)
+			if (MaxTokenCount is not null)
+			{
+				writer.WriteFluentCall("MaxTokenCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokenCount.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxTokenCount");
-			writer.WriteValue(MaxTokenCount.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter", true);
+			if (ConsumeAllTokens is not null)
+			{
+				initializer.Property("ConsumeAllTokens");
+				writer.WriteValue(ConsumeAllTokens.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (MaxTokenCount is not null)
+			{
+				initializer.Property("MaxTokenCount");
+				writer.WriteValue(MaxTokenCount.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,17 +27,39 @@ public partial class PutCalendarJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CalendarId");
-			CalendarId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				CalendarId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				JobId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest", false);
+			{
+				initializer.Property("CalendarId");
+				CalendarId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

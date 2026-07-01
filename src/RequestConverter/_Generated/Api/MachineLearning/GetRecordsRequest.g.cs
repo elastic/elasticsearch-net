@@ -27,67 +27,143 @@ public partial class GetRecordsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
 
-		if (From is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Desc is not null)
+			{
+				writer.WriteFluentCall("Desc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Desc.Value); });
+			}
+
+			if (End is not null)
+			{
+				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+			}
+
+			if (ExcludeInterim is not null)
+			{
+				writer.WriteFluentCall("ExcludeInterim", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeInterim.Value); });
+			}
+
+			if (Page is not null)
+			{
+				writer.WriteFluentDescriptorCall("Page", (w) => { Page.FormatCode(w); });
+			}
+
+			if (RecordScore is not null)
+			{
+				writer.WriteFluentCall("RecordScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RecordScore.Value); w.Write("d"); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); });
+			}
+
+			if (Start is not null)
+			{
+				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (Desc is not null)
-		{
-			initializer.Property("Desc");
-			writer.WriteValue(Desc.Value);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (End is not null)
-		{
-			initializer.Property("End");
-			writer.WriteValue(End.Value);
-		}
+			if (Desc is not null)
+			{
+				initializer.Property("Desc");
+				writer.WriteValue(Desc.Value);
+			}
 
-		if (ExcludeInterim is not null)
-		{
-			initializer.Property("ExcludeInterim");
-			writer.WriteValue(ExcludeInterim.Value);
-		}
+			if (End is not null)
+			{
+				initializer.Property("End");
+				writer.WriteValue(End.Value);
+			}
 
-		if (Page is not null)
-		{
-			initializer.Property("Page");
-			Page.FormatCode(writer);
-		}
+			if (ExcludeInterim is not null)
+			{
+				initializer.Property("ExcludeInterim");
+				writer.WriteValue(ExcludeInterim.Value);
+			}
 
-		if (RecordScore is not null)
-		{
-			initializer.Property("RecordScore");
-			writer.WriteValue(RecordScore.Value);
-			writer.Write("d");
-		}
+			if (Page is not null)
+			{
+				initializer.Property("Page");
+				Page.FormatCode(writer);
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			Sort.FormatCode(writer);
-		}
+			if (RecordScore is not null)
+			{
+				initializer.Property("RecordScore");
+				writer.WriteValue(RecordScore.Value);
+				writer.Write("d");
+			}
 
-		if (Start is not null)
-		{
-			initializer.Property("Start");
-			writer.WriteValue(Start.Value);
-		}
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				Sort.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Start is not null)
+			{
+				initializer.Property("Start");
+				writer.WriteValue(Start.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

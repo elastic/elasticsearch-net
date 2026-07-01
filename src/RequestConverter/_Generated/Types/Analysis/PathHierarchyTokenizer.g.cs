@@ -27,43 +27,78 @@ public partial class PathHierarchyTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer", true);
-		if (BufferSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BufferSize");
-			writer.WriteValue(BufferSize.Value);
-		}
+			if (BufferSize is not null)
+			{
+				writer.WriteFluentCall("BufferSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BufferSize.Value); });
+			}
 
-		if (Delimiter is not null)
+			if (Delimiter is not null)
+			{
+				writer.WriteFluentCall("Delimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Delimiter); });
+			}
+
+			if (Replacement is not null)
+			{
+				writer.WriteFluentCall("Replacement", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Replacement); });
+			}
+
+			if (Reverse is not null)
+			{
+				writer.WriteFluentCall("Reverse", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Reverse.Value); });
+			}
+
+			if (Skip is not null)
+			{
+				writer.WriteFluentCall("Skip", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Skip.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Delimiter");
-			writer.WriteString(Delimiter);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer", true);
+			if (BufferSize is not null)
+			{
+				initializer.Property("BufferSize");
+				writer.WriteValue(BufferSize.Value);
+			}
 
-		if (Replacement is not null)
-		{
-			initializer.Property("Replacement");
-			writer.WriteString(Replacement);
-		}
+			if (Delimiter is not null)
+			{
+				initializer.Property("Delimiter");
+				writer.WriteString(Delimiter);
+			}
 
-		if (Reverse is not null)
-		{
-			initializer.Property("Reverse");
-			writer.WriteValue(Reverse.Value);
-		}
+			if (Replacement is not null)
+			{
+				initializer.Property("Replacement");
+				writer.WriteString(Replacement);
+			}
 
-		if (Skip is not null)
-		{
-			initializer.Property("Skip");
-			writer.WriteValue(Skip.Value);
-		}
+			if (Reverse is not null)
+			{
+				initializer.Property("Reverse");
+				writer.WriteValue(Reverse.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Skip is not null)
+			{
+				initializer.Property("Skip");
+				writer.WriteValue(Skip.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

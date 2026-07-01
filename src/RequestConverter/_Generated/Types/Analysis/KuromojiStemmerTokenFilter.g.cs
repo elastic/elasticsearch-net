@@ -27,18 +27,32 @@ public partial class KuromojiStemmerTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MinimumLength");
-			writer.WriteValue(MinimumLength);
-		}
+			{
+				writer.WriteFluentCall("MinimumLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinimumLength); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiStemmerTokenFilter", true);
+			{
+				initializer.Property("MinimumLength");
+				writer.WriteValue(MinimumLength);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

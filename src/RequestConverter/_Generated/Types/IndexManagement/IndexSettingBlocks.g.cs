@@ -27,37 +27,67 @@ public partial class IndexSettingBlocks : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks", false);
-		if (Metadata is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Metadata");
-			writer.WriteValue(Metadata.Value);
-		}
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Metadata.Value); });
+			}
 
-		if (Read is not null)
+			if (Read is not null)
+			{
+				writer.WriteFluentCall("Read", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Read.Value); });
+			}
+
+			if (ReadOnly is not null)
+			{
+				writer.WriteFluentCall("ReadOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReadOnly.Value); });
+			}
+
+			if (ReadOnlyAllowDelete is not null)
+			{
+				writer.WriteFluentCall("ReadOnlyAllowDelete", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReadOnlyAllowDelete.Value); });
+			}
+
+			if (Write is not null)
+			{
+				writer.WriteFluentCall("Write", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Write.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Read");
-			writer.WriteValue(Read.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks", false);
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.WriteValue(Metadata.Value);
+			}
 
-		if (ReadOnly is not null)
-		{
-			initializer.Property("ReadOnly");
-			writer.WriteValue(ReadOnly.Value);
-		}
+			if (Read is not null)
+			{
+				initializer.Property("Read");
+				writer.WriteValue(Read.Value);
+			}
 
-		if (ReadOnlyAllowDelete is not null)
-		{
-			initializer.Property("ReadOnlyAllowDelete");
-			writer.WriteValue(ReadOnlyAllowDelete.Value);
-		}
+			if (ReadOnly is not null)
+			{
+				initializer.Property("ReadOnly");
+				writer.WriteValue(ReadOnly.Value);
+			}
 
-		if (Write is not null)
-		{
-			initializer.Property("Write");
-			writer.WriteValue(Write.Value);
-		}
+			if (ReadOnlyAllowDelete is not null)
+			{
+				initializer.Property("ReadOnlyAllowDelete");
+				writer.WriteValue(ReadOnlyAllowDelete.Value);
+			}
 
-		initializer.Dispose();
+			if (Write is not null)
+			{
+				initializer.Property("Write");
+				writer.WriteValue(Write.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

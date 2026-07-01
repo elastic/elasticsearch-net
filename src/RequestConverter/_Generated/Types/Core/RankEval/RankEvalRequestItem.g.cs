@@ -27,42 +27,70 @@ public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
 
-		if (Params is not null)
+			if (Params is not null)
+			{
+				writer.WriteFluentCall("Params", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("Ratings", Ratings, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>"); w.Write("()"); });
+			}
+
+			if (Request is not null)
+			{
+				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); });
+			}
+
+			if (TemplateId is not null)
+			{
+				writer.WriteFluentCall("TemplateId", (w) => { using var _oi = w.ForceObjectInitializer(); TemplateId.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Params");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Ratings");
-			writer.WriteInlineList(Ratings, (w, item) => { item.FormatCode(w); });
-		}
+			if (Params is not null)
+			{
+				initializer.Property("Params");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Request is not null)
-		{
-			initializer.Property("Request");
-			Request.FormatCode(writer);
-		}
+			{
+				initializer.Property("Ratings");
+				writer.WriteInlineList(Ratings, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (TemplateId is not null)
-		{
-			initializer.Property("TemplateId");
-			TemplateId.FormatCode(writer);
-		}
+			if (Request is not null)
+			{
+				initializer.Property("Request");
+				Request.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TemplateId is not null)
+			{
+				initializer.Property("TemplateId");
+				TemplateId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

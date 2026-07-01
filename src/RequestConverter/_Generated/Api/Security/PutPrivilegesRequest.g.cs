@@ -27,25 +27,43 @@ public partial class PutPrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest", false);
-		if (Refresh is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
-
-		{
-			initializer.Property("Privileges");
 			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("System.Collections.Generic.IDictionary<string,Elastic.Clients.Elasticsearch.Security.PrivilegeActions>");
-			writer.Write(">()");
-			writer.WriteBlockList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); w.Write(" }"); });
-		}
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
 
-		initializer.Dispose();
+			{
+				writer.WriteFluentCall("Privileges", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.IDictionary<string,Elastic.Clients.Elasticsearch.Security.PrivilegeActions>"); w.Write(">()"); w.WriteBlockList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); w.Write(" }"); }); });
+			}
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest", false);
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
+
+			{
+				initializer.Property("Privileges");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("System.Collections.Generic.IDictionary<string,Elastic.Clients.Elasticsearch.Security.PrivilegeActions>");
+				writer.Write(">()");
+				writer.WriteBlockList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

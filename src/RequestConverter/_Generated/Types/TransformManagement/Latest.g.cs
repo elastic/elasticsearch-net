@@ -27,17 +27,30 @@ public partial class Latest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Latest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Sort");
-			Sort.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("UniqueKey", (w) => { using var _oi = w.ForceObjectInitializer(); UniqueKey.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("UniqueKey");
-			UniqueKey.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Latest", false);
+			{
+				initializer.Property("Sort");
+				Sort.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("UniqueKey");
+				UniqueKey.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

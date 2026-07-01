@@ -27,32 +27,56 @@ public partial class RescoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
 
-		if (QueryWeight is not null)
+			if (QueryWeight is not null)
+			{
+				writer.WriteFluentCall("QueryWeight", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(QueryWeight.Value); w.Write("d"); });
+			}
+
+			if (RescoreQueryWeight is not null)
+			{
+				writer.WriteFluentCall("RescoreQueryWeight", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RescoreQueryWeight.Value); w.Write("d"); });
+			}
+
+			if (ScoreMode is not null)
+			{
+				writer.WriteFluentCall("ScoreMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(ScoreMode.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("QueryWeight");
-			writer.WriteValue(QueryWeight.Value);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery", false);
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
 
-		if (RescoreQueryWeight is not null)
-		{
-			initializer.Property("RescoreQueryWeight");
-			writer.WriteValue(RescoreQueryWeight.Value);
-			writer.Write("d");
-		}
+			if (QueryWeight is not null)
+			{
+				initializer.Property("QueryWeight");
+				writer.WriteValue(QueryWeight.Value);
+				writer.Write("d");
+			}
 
-		if (ScoreMode is not null)
-		{
-			initializer.Property("ScoreMode");
-			Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
-		}
+			if (RescoreQueryWeight is not null)
+			{
+				initializer.Property("RescoreQueryWeight");
+				writer.WriteValue(RescoreQueryWeight.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			if (ScoreMode is not null)
+			{
+				initializer.Property("ScoreMode");
+				Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,12 +27,21 @@ public partial class BucketCorrelationFunctionCountCorrelation : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indicator");
-			Indicator.FormatCode(writer);
+			{
+				writer.WriteFluentDescriptorCall("Indicator", (w) => { Indicator.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation", false);
+			{
+				initializer.Property("Indicator");
+				Indicator.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

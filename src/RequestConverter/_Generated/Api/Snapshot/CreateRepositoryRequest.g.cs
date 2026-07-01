@@ -27,35 +27,69 @@ public partial class CreateRepositoryRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (MasterTimeout is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Verify is not null)
+			{
+				writer.WriteFluentCall("Verify", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Verify.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Repository", (w) => { using var _oi = w.ForceObjectInitializer(); Repository.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (Verify is not null)
-		{
-			initializer.Property("Verify");
-			writer.WriteValue(Verify.Value);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Repository");
-			Repository.FormatCode(writer);
-		}
+			if (Verify is not null)
+			{
+				initializer.Property("Verify");
+				writer.WriteValue(Verify.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Repository");
+				Repository.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,34 +27,49 @@ public partial class MappingLimitSettingsTotalFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields", false);
-		if (IgnoreDynamicBeyondLimit is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IgnoreDynamicBeyondLimit");
-			if (IgnoreDynamicBeyondLimit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (IgnoreDynamicBeyondLimit is not null)
 			{
-				writer.WriteValue(IgnoreDynamicBeyondLimit.Value1);
+				writer.WriteFluentCall("IgnoreDynamicBeyondLimit", (w) => { using var _oi = w.ForceObjectInitializer(); if (IgnoreDynamicBeyondLimit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(IgnoreDynamicBeyondLimit.Value1); } else { w.WriteString(IgnoreDynamicBeyondLimit.Value2); } });
 			}
-			else
+
+			if (Limit is not null)
 			{
-				writer.WriteString(IgnoreDynamicBeyondLimit.Value2);
+				writer.WriteFluentCall("Limit", (w) => { using var _oi = w.ForceObjectInitializer(); if (Limit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Limit.Value1); w.Write("L"); } else { w.WriteString(Limit.Value2); } });
 			}
 		}
-
-		if (Limit is not null)
+		else
 		{
-			initializer.Property("Limit");
-			if (Limit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields", false);
+			if (IgnoreDynamicBeyondLimit is not null)
 			{
-				writer.WriteValue(Limit.Value1);
-				writer.Write("L");
+				initializer.Property("IgnoreDynamicBeyondLimit");
+				if (IgnoreDynamicBeyondLimit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(IgnoreDynamicBeyondLimit.Value1);
+				}
+				else
+				{
+					writer.WriteString(IgnoreDynamicBeyondLimit.Value2);
+				}
 			}
-			else
-			{
-				writer.WriteString(Limit.Value2);
-			}
-		}
 
-		initializer.Dispose();
+			if (Limit is not null)
+			{
+				initializer.Property("Limit");
+				if (Limit.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(Limit.Value1);
+					writer.Write("L");
+				}
+				else
+				{
+					writer.WriteString(Limit.Value2);
+				}
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

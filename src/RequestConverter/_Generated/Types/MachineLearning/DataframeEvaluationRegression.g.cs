@@ -27,23 +27,41 @@ public partial class DataframeEvaluationRegression : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ActualField");
-			ActualField.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); });
+			}
 
-		if (Metrics is not null)
+			if (Metrics is not null)
+			{
+				writer.WriteFluentDescriptorCall("Metrics", (w) => { Metrics.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("PredictedField", (w) => { PredictedField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Metrics");
-			Metrics.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression", false);
+			{
+				initializer.Property("ActualField");
+				ActualField.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("PredictedField");
-			PredictedField.FormatCode(writer);
-		}
+			if (Metrics is not null)
+			{
+				initializer.Property("Metrics");
+				Metrics.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("PredictedField");
+				PredictedField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,55 +27,99 @@ public partial class RRFRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RRFRetriever", false);
-		if (Fields is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Fields");
-			writer.WriteInlineList(Fields, (w, item) => { w.WriteString(item); });
-		}
+			if (Fields is not null)
+			{
+				writer.WriteFluentParams("Fields", Fields, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (MinScore is not null)
+			{
+				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
+
+			if (RankConstant is not null)
+			{
+				writer.WriteFluentCall("RankConstant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankConstant.Value); });
+			}
+
+			if (RankWindowSize is not null)
+			{
+				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Retrievers", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Retrievers, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RRFRetriever", false);
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				writer.WriteInlineList(Fields, (w, item) => { w.WriteString(item); });
+			}
 
-		if (MinScore is not null)
-		{
-			initializer.Property("MinScore");
-			writer.WriteValue(MinScore.Value);
-			writer.Write("f");
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			if (MinScore is not null)
+			{
+				initializer.Property("MinScore");
+				writer.WriteValue(MinScore.Value);
+				writer.Write("f");
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		if (RankConstant is not null)
-		{
-			initializer.Property("RankConstant");
-			writer.WriteValue(RankConstant.Value);
-		}
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
 
-		if (RankWindowSize is not null)
-		{
-			initializer.Property("RankWindowSize");
-			writer.WriteValue(RankWindowSize.Value);
-		}
+			if (RankConstant is not null)
+			{
+				initializer.Property("RankConstant");
+				writer.WriteValue(RankConstant.Value);
+			}
 
-		{
-			initializer.Property("Retrievers");
-			writer.WriteInlineList(Retrievers, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } });
-		}
+			if (RankWindowSize is not null)
+			{
+				initializer.Property("RankWindowSize");
+				writer.WriteValue(RankWindowSize.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Retrievers");
+				writer.WriteInlineList(Retrievers, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

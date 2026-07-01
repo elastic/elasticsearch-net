@@ -27,7 +27,17 @@ public partial class GetManyRoutingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest", false);
-		initializer.Dispose();
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest", false);
+			initializer.Dispose();
+		}
 	}
 }

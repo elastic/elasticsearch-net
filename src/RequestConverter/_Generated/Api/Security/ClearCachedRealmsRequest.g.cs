@@ -27,18 +27,38 @@ public partial class ClearCachedRealmsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Realms");
-			Realms.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Realms.FormatCode(writer);
+			}
 
-		if (Usernames is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Usernames is not null)
+			{
+				writer.WriteFluentParams("Usernames", Usernames, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Usernames");
-			writer.WriteInlineList(Usernames, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest", false);
+			{
+				initializer.Property("Realms");
+				Realms.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Usernames is not null)
+			{
+				initializer.Property("Usernames");
+				writer.WriteInlineList(Usernames, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

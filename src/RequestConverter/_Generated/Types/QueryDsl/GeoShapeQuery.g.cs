@@ -27,36 +27,64 @@ public partial class GeoShapeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (IgnoreUnmapped is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Shape", (w) => { Shape.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (IgnoreUnmapped is not null)
-		{
-			initializer.Property("IgnoreUnmapped");
-			writer.WriteValue(IgnoreUnmapped.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (IgnoreUnmapped is not null)
+			{
+				initializer.Property("IgnoreUnmapped");
+				writer.WriteValue(IgnoreUnmapped.Value);
+			}
 
-		{
-			initializer.Property("Shape");
-			Shape.FormatCode(writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Shape");
+				Shape.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

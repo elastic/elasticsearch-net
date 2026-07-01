@@ -27,31 +27,56 @@ public partial class SearchApplicationSearchRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
-
-		if (TypedKeys is not null)
-		{
-			initializer.Property("TypedKeys");
-			writer.WriteValue(TypedKeys.Value);
-		}
-
-		if (Params is not null)
-		{
-			initializer.Property("Params");
 			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (TypedKeys is not null)
+			{
+				writer.WriteFluentCall("TypedKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TypedKeys.Value); });
+			}
+
+			if (Params is not null)
+			{
+				writer.WriteFluentCall("Params", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
+
+			if (TypedKeys is not null)
+			{
+				initializer.Property("TypedKeys");
+				writer.WriteValue(TypedKeys.Value);
+			}
+
+			if (Params is not null)
+			{
+				initializer.Property("Params");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

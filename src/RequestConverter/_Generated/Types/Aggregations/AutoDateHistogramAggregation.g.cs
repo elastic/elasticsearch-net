@@ -27,68 +27,118 @@ public partial class AutoDateHistogramAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation", false);
-		if (Buckets is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Buckets");
-			writer.WriteValue(Buckets.Value);
-		}
+			if (Buckets is not null)
+			{
+				writer.WriteFluentCall("Buckets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Buckets.Value); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (MinimumInterval is not null)
+			{
+				writer.WriteFluentCall("MinimumInterval", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(MinimumInterval.Value, w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); });
+			}
+
+			if (Offset is not null)
+			{
+				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Offset); });
+			}
+
+			if (Params is not null)
+			{
+				writer.WriteFluentCall("Params", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (TimeZone is not null)
+			{
+				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation", false);
+			if (Buckets is not null)
+			{
+				initializer.Property("Buckets");
+				writer.WriteValue(Buckets.Value);
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MinimumInterval is not null)
-		{
-			initializer.Property("MinimumInterval");
-			Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(MinimumInterval.Value, writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing.Value);
-		}
+			if (MinimumInterval is not null)
+			{
+				initializer.Property("MinimumInterval");
+				Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(MinimumInterval.Value, writer);
+			}
 
-		if (Offset is not null)
-		{
-			initializer.Property("Offset");
-			writer.WriteString(Offset);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteValue(Missing.Value);
+			}
 
-		if (Params is not null)
-		{
-			initializer.Property("Params");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (Offset is not null)
+			{
+				initializer.Property("Offset");
+				writer.WriteString(Offset);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Params is not null)
+			{
+				initializer.Property("Params");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (TimeZone is not null)
-		{
-			initializer.Property("TimeZone");
-			writer.WriteString(TimeZone);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TimeZone is not null)
+			{
+				initializer.Property("TimeZone");
+				writer.WriteString(TimeZone);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

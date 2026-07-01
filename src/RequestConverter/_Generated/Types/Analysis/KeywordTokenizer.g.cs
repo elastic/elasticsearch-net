@@ -27,19 +27,34 @@ public partial class KeywordTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer", true);
-		if (BufferSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BufferSize");
-			writer.WriteValue(BufferSize.Value);
-		}
+			if (BufferSize is not null)
+			{
+				writer.WriteFluentCall("BufferSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BufferSize.Value); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer", true);
+			if (BufferSize is not null)
+			{
+				initializer.Property("BufferSize");
+				writer.WriteValue(BufferSize.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

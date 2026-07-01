@@ -27,37 +27,67 @@ public partial class RankEvalMetric : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric", false);
-		if (Dcg is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Dcg");
-			Dcg.FormatCode(writer);
-		}
+			if (Dcg is not null)
+			{
+				writer.WriteFluentDescriptorCall("Dcg", (w) => { Dcg.FormatCode(w); });
+			}
 
-		if (ExpectedReciprocalRank is not null)
+			if (ExpectedReciprocalRank is not null)
+			{
+				writer.WriteFluentDescriptorCall("ExpectedReciprocalRank", (w) => { ExpectedReciprocalRank.FormatCode(w); });
+			}
+
+			if (MeanReciprocalRank is not null)
+			{
+				writer.WriteFluentDescriptorCall("MeanReciprocalRank", (w) => { MeanReciprocalRank.FormatCode(w); });
+			}
+
+			if (Precision is not null)
+			{
+				writer.WriteFluentDescriptorCall("Precision", (w) => { Precision.FormatCode(w); });
+			}
+
+			if (Recall is not null)
+			{
+				writer.WriteFluentDescriptorCall("Recall", (w) => { Recall.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExpectedReciprocalRank");
-			ExpectedReciprocalRank.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric", false);
+			if (Dcg is not null)
+			{
+				initializer.Property("Dcg");
+				Dcg.FormatCode(writer);
+			}
 
-		if (MeanReciprocalRank is not null)
-		{
-			initializer.Property("MeanReciprocalRank");
-			MeanReciprocalRank.FormatCode(writer);
-		}
+			if (ExpectedReciprocalRank is not null)
+			{
+				initializer.Property("ExpectedReciprocalRank");
+				ExpectedReciprocalRank.FormatCode(writer);
+			}
 
-		if (Precision is not null)
-		{
-			initializer.Property("Precision");
-			Precision.FormatCode(writer);
-		}
+			if (MeanReciprocalRank is not null)
+			{
+				initializer.Property("MeanReciprocalRank");
+				MeanReciprocalRank.FormatCode(writer);
+			}
 
-		if (Recall is not null)
-		{
-			initializer.Property("Recall");
-			Recall.FormatCode(writer);
-		}
+			if (Precision is not null)
+			{
+				initializer.Property("Precision");
+				Precision.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Recall is not null)
+			{
+				initializer.Property("Recall");
+				Recall.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

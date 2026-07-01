@@ -27,12 +27,28 @@ public partial class DeleteJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

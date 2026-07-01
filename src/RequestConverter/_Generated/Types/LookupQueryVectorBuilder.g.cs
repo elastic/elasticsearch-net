@@ -27,28 +27,50 @@ public partial class LookupQueryVectorBuilder : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			writer.WriteString(Id);
-		}
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+			}
 
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Index); });
+			}
+
+			{
+				writer.WriteFluentCall("Path", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Path); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			writer.WriteString(Index);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder", false);
+			{
+				initializer.Property("Id");
+				writer.WriteString(Id);
+			}
 
-		{
-			initializer.Property("Path");
-			writer.WriteString(Path);
-		}
+			{
+				initializer.Property("Index");
+				writer.WriteString(Index);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			writer.WriteString(Routing);
-		}
+			{
+				initializer.Property("Path");
+				writer.WriteString(Path);
+			}
 
-		initializer.Dispose();
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				writer.WriteString(Routing);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

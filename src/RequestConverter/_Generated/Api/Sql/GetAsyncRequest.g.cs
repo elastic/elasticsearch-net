@@ -27,36 +27,71 @@ public partial class GetAsyncRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
 
-		if (Delimiter is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Delimiter is not null)
+			{
+				writer.WriteFluentCall("Delimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Delimiter); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (KeepAlive is not null)
+			{
+				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+			}
+
+			if (WaitForCompletionTimeout is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForCompletionTimeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Delimiter");
-			writer.WriteString(Delimiter);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (Delimiter is not null)
+			{
+				initializer.Property("Delimiter");
+				writer.WriteString(Delimiter);
+			}
 
-		if (KeepAlive is not null)
-		{
-			initializer.Property("KeepAlive");
-			KeepAlive.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (WaitForCompletionTimeout is not null)
-		{
-			initializer.Property("WaitForCompletionTimeout");
-			WaitForCompletionTimeout.FormatCode(writer);
-		}
+			if (KeepAlive is not null)
+			{
+				initializer.Property("KeepAlive");
+				KeepAlive.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletionTimeout is not null)
+			{
+				initializer.Property("WaitForCompletionTimeout");
+				WaitForCompletionTimeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

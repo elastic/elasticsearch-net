@@ -27,30 +27,54 @@ public partial class FieldLookup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
 
-		if (Index is not null)
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (Path is not null)
+			{
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (Path is not null)
-		{
-			initializer.Property("Path");
-			Path.FormatCode(writer);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			writer.WriteString(Routing);
-		}
+			if (Path is not null)
+			{
+				initializer.Property("Path");
+				Path.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				writer.WriteString(Routing);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

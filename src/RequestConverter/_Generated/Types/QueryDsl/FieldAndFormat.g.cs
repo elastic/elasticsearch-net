@@ -27,24 +27,43 @@ public partial class FieldAndFormat : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (IncludeUnmapped is not null)
+			{
+				writer.WriteFluentCall("IncludeUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeUnmapped.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat", false);
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (IncludeUnmapped is not null)
-		{
-			initializer.Property("IncludeUnmapped");
-			writer.WriteValue(IncludeUnmapped.Value);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		initializer.Dispose();
+			if (IncludeUnmapped is not null)
+			{
+				initializer.Property("IncludeUnmapped");
+				writer.WriteValue(IncludeUnmapped.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

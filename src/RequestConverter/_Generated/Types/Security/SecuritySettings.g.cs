@@ -27,13 +27,23 @@ public partial class SecuritySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SecuritySettings", false);
-		if (Index is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
+			if (Index is not null)
+			{
+				writer.WriteFluentDescriptorCall("Index", (w) => { Index.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SecuritySettings", false);
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

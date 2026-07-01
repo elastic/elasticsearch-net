@@ -27,34 +27,53 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Embedding", false);
-		if (InferenceId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InferenceId");
-			writer.WriteString(InferenceId);
-		}
-
-		{
-			initializer.Property("Input");
-			if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (InferenceId is not null)
 			{
-				writer.WriteString(Input.Value1);
+				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InferenceId); });
 			}
-			else
+
 			{
-				writer.Write("new ");
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.InferenceString");
-				writer.Write("[] ");
-				writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+				writer.WriteFluentCall("Input", (w) => { using var _oi = w.ForceObjectInitializer(); if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Input.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.InferenceString"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
 			}
 		}
-
-		if (Timeout is not null)
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Embedding", false);
+			if (InferenceId is not null)
+			{
+				initializer.Property("InferenceId");
+				writer.WriteString(InferenceId);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Input");
+				if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteString(Input.Value1);
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("Elastic.Clients.Elasticsearch.InferenceString");
+					writer.Write("[] ");
+					writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+				}
+			}
+
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

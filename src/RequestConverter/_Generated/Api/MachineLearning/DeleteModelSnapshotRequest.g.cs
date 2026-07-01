@@ -27,17 +27,39 @@ public partial class DeleteModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				JobId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				SnapshotId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("SnapshotId");
-			SnapshotId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("SnapshotId");
+				SnapshotId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

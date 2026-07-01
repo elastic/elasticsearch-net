@@ -27,19 +27,34 @@ public partial class UniqueTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter", true);
-		if (OnlyOnSamePosition is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("OnlyOnSamePosition");
-			writer.WriteValue(OnlyOnSamePosition.Value);
-		}
+			if (OnlyOnSamePosition is not null)
+			{
+				writer.WriteFluentCall("OnlyOnSamePosition", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnlyOnSamePosition.Value); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter", true);
+			if (OnlyOnSamePosition is not null)
+			{
+				initializer.Property("OnlyOnSamePosition");
+				writer.WriteValue(OnlyOnSamePosition.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,398 +27,688 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings", false);
-		if (Analysis is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analysis");
-			Analysis.FormatCode(writer);
-		}
-
-		if (Analyze is not null)
-		{
-			initializer.Property("Analyze");
-			Analyze.FormatCode(writer);
-		}
-
-		if (AutoExpandReplicas is not null)
-		{
-			initializer.Property("AutoExpandReplicas");
-			writer.WriteString(AutoExpandReplicas);
-		}
-
-		if (Blocks is not null)
-		{
-			initializer.Property("Blocks");
-			Blocks.FormatCode(writer);
-		}
-
-		if (CheckOnStartup is not null)
-		{
-			initializer.Property("CheckOnStartup");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupCodeFormatter.FormatCode(CheckOnStartup.Value, writer);
-		}
-
-		if (Codec is not null)
-		{
-			initializer.Property("Codec");
-			writer.WriteString(Codec);
-		}
-
-		if (CreationDate is not null)
-		{
-			initializer.Property("CreationDate");
-			writer.WriteValue(CreationDate.Value);
-		}
-
-		if (CreationDateString is not null)
-		{
-			initializer.Property("CreationDateString");
-			writer.WriteValue(CreationDateString.Value);
-		}
-
-		if (DefaultPipeline is not null)
-		{
-			initializer.Property("DefaultPipeline");
-			writer.WriteString(DefaultPipeline);
-		}
-
-		if (FinalPipeline is not null)
-		{
-			initializer.Property("FinalPipeline");
-			writer.WriteString(FinalPipeline);
-		}
-
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			if (Format.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Analysis is not null)
 			{
-				writer.WriteString(Format.Value1);
+				writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); });
 			}
-			else
+
+			if (Analyze is not null)
 			{
-				writer.WriteValue(Format.Value2);
+				writer.WriteFluentDescriptorCall("Analyze", (w) => { Analyze.FormatCode(w); });
 			}
-		}
 
-		if (GcDeletes is not null)
-		{
-			initializer.Property("GcDeletes");
-			GcDeletes.FormatCode(writer);
-		}
-
-		if (Hidden is not null)
-		{
-			initializer.Property("Hidden");
-			if (Hidden.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (AutoExpandReplicas is not null)
 			{
-				writer.WriteValue(Hidden.Value1);
+				writer.WriteFluentCall("AutoExpandReplicas", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AutoExpandReplicas); });
 			}
-			else
+
+			if (Blocks is not null)
 			{
-				writer.WriteString(Hidden.Value2);
+				writer.WriteFluentDescriptorCall("Blocks", (w) => { Blocks.FormatCode(w); });
 			}
-		}
 
-		if (Highlight is not null)
-		{
-			initializer.Property("Highlight");
-			Highlight.FormatCode(writer);
-		}
-
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
-
-		if (IndexingPressure is not null)
-		{
-			initializer.Property("IndexingPressure");
-			IndexingPressure.FormatCode(writer);
-		}
-
-		if (IndexingSlowlog is not null)
-		{
-			initializer.Property("IndexingSlowlog");
-			IndexingSlowlog.FormatCode(writer);
-		}
-
-		if (Lifecycle is not null)
-		{
-			initializer.Property("Lifecycle");
-			Lifecycle.FormatCode(writer);
-		}
-
-		if (LoadFixedBitsetFiltersEagerly is not null)
-		{
-			initializer.Property("LoadFixedBitsetFiltersEagerly");
-			writer.WriteValue(LoadFixedBitsetFiltersEagerly.Value);
-		}
-
-		if (Mapping is not null)
-		{
-			initializer.Property("Mapping");
-			Mapping.FormatCode(writer);
-		}
-
-		if (MaxDocvalueFieldsSearch is not null)
-		{
-			initializer.Property("MaxDocvalueFieldsSearch");
-			writer.WriteValue(MaxDocvalueFieldsSearch.Value);
-		}
-
-		if (MaxInnerResultWindow is not null)
-		{
-			initializer.Property("MaxInnerResultWindow");
-			writer.WriteValue(MaxInnerResultWindow.Value);
-		}
-
-		if (MaxNgramDiff is not null)
-		{
-			initializer.Property("MaxNgramDiff");
-			writer.WriteValue(MaxNgramDiff.Value);
-		}
-
-		if (MaxRefreshListeners is not null)
-		{
-			initializer.Property("MaxRefreshListeners");
-			writer.WriteValue(MaxRefreshListeners.Value);
-		}
-
-		if (MaxRegexLength is not null)
-		{
-			initializer.Property("MaxRegexLength");
-			writer.WriteValue(MaxRegexLength.Value);
-		}
-
-		if (MaxRescoreWindow is not null)
-		{
-			initializer.Property("MaxRescoreWindow");
-			writer.WriteValue(MaxRescoreWindow.Value);
-		}
-
-		if (MaxResultWindow is not null)
-		{
-			initializer.Property("MaxResultWindow");
-			writer.WriteValue(MaxResultWindow.Value);
-		}
-
-		if (MaxScriptFields is not null)
-		{
-			initializer.Property("MaxScriptFields");
-			writer.WriteValue(MaxScriptFields.Value);
-		}
-
-		if (MaxShingleDiff is not null)
-		{
-			initializer.Property("MaxShingleDiff");
-			writer.WriteValue(MaxShingleDiff.Value);
-		}
-
-		if (MaxSlicesPerScroll is not null)
-		{
-			initializer.Property("MaxSlicesPerScroll");
-			writer.WriteValue(MaxSlicesPerScroll.Value);
-		}
-
-		if (MaxTermsCount is not null)
-		{
-			initializer.Property("MaxTermsCount");
-			writer.WriteValue(MaxTermsCount.Value);
-		}
-
-		if (Merge is not null)
-		{
-			initializer.Property("Merge");
-			Merge.FormatCode(writer);
-		}
-
-		if (Mode is not null)
-		{
-			initializer.Property("Mode");
-			writer.WriteString(Mode);
-		}
-
-		if (NumberOfReplicas is not null)
-		{
-			initializer.Property("NumberOfReplicas");
-			if (NumberOfReplicas.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (CheckOnStartup is not null)
 			{
-				writer.WriteValue(NumberOfReplicas.Value1);
+				writer.WriteFluentCall("CheckOnStartup", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupCodeFormatter.FormatCode(CheckOnStartup.Value, w); });
 			}
-			else
+
+			if (Codec is not null)
 			{
-				writer.WriteString(NumberOfReplicas.Value2);
+				writer.WriteFluentCall("Codec", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Codec); });
 			}
-		}
 
-		if (NumberOfRoutingShards is not null)
-		{
-			initializer.Property("NumberOfRoutingShards");
-			writer.WriteValue(NumberOfRoutingShards.Value);
-		}
-
-		if (NumberOfShards is not null)
-		{
-			initializer.Property("NumberOfShards");
-			if (NumberOfShards.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (CreationDate is not null)
 			{
-				writer.WriteValue(NumberOfShards.Value1);
+				writer.WriteFluentCall("CreationDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreationDate.Value); });
 			}
-			else
+
+			if (CreationDateString is not null)
 			{
-				writer.WriteString(NumberOfShards.Value2);
+				writer.WriteFluentCall("CreationDateString", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreationDateString.Value); });
 			}
-		}
 
-		if (OtherSettings is not null)
-		{
-			initializer.Property("OtherSettings");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(OtherSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
-
-		if (Priority is not null)
-		{
-			initializer.Property("Priority");
-			if (Priority.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (DefaultPipeline is not null)
 			{
-				writer.WriteValue(Priority.Value1);
+				writer.WriteFluentCall("DefaultPipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DefaultPipeline); });
 			}
-			else
+
+			if (FinalPipeline is not null)
 			{
-				writer.WriteString(Priority.Value2);
+				writer.WriteFluentCall("FinalPipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FinalPipeline); });
 			}
-		}
 
-		if (ProvidedName is not null)
-		{
-			initializer.Property("ProvidedName");
-			ProvidedName.FormatCode(writer);
-		}
-
-		if (Queries is not null)
-		{
-			initializer.Property("Queries");
-			Queries.FormatCode(writer);
-		}
-
-		if (QueryString is not null)
-		{
-			initializer.Property("QueryString");
-			QueryString.FormatCode(writer);
-		}
-
-		if (RefreshInterval is not null)
-		{
-			initializer.Property("RefreshInterval");
-			RefreshInterval.FormatCode(writer);
-		}
-
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
-
-		if (RoutingPartitionSize is not null)
-		{
-			initializer.Property("RoutingPartitionSize");
-			writer.WriteValue(RoutingPartitionSize.Value);
-		}
-
-		if (RoutingPath is not null)
-		{
-			initializer.Property("RoutingPath");
-			writer.WriteInlineList(RoutingPath, (w, item) => { w.WriteString(item); });
-		}
-
-		if (Search is not null)
-		{
-			initializer.Property("Search");
-			Search.FormatCode(writer);
-		}
-
-		if (Settings is not null)
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
-
-		if (Similarity is not null)
-		{
-			initializer.Property("Similarity");
-			Similarity.FormatCode(writer);
-		}
-
-		if (SoftDeletes is not null)
-		{
-			initializer.Property("SoftDeletes");
-			SoftDeletes.FormatCode(writer);
-		}
-
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			Sort.FormatCode(writer);
-		}
-
-		if (Store is not null)
-		{
-			initializer.Property("Store");
-			Store.FormatCode(writer);
-		}
-
-		if (TimeSeries is not null)
-		{
-			initializer.Property("TimeSeries");
-			TimeSeries.FormatCode(writer);
-		}
-
-		if (TopMetricsMaxSize is not null)
-		{
-			initializer.Property("TopMetricsMaxSize");
-			writer.WriteValue(TopMetricsMaxSize.Value);
-		}
-
-		if (Translog is not null)
-		{
-			initializer.Property("Translog");
-			Translog.FormatCode(writer);
-		}
-
-		if (Uuid is not null)
-		{
-			initializer.Property("Uuid");
-			writer.WriteString(Uuid);
-		}
-
-		if (VerifiedBeforeClose is not null)
-		{
-			initializer.Property("VerifiedBeforeClose");
-			if (VerifiedBeforeClose.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Format is not null)
 			{
-				writer.WriteValue(VerifiedBeforeClose.Value1);
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); if (Format.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Format.Value1); } else { w.WriteValue(Format.Value2); } });
 			}
-			else
+
+			if (GcDeletes is not null)
 			{
-				writer.WriteString(VerifiedBeforeClose.Value2);
+				writer.WriteFluentCall("GcDeletes", (w) => { using var _oi = w.ForceObjectInitializer(); GcDeletes.FormatCode(w); });
+			}
+
+			if (Hidden is not null)
+			{
+				writer.WriteFluentCall("Hidden", (w) => { using var _oi = w.ForceObjectInitializer(); if (Hidden.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Hidden.Value1); } else { w.WriteString(Hidden.Value2); } });
+			}
+
+			if (Highlight is not null)
+			{
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentDescriptorCall("Index", (w) => { Index.FormatCode(w); });
+			}
+
+			if (IndexingPressure is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexingPressure", (w) => { IndexingPressure.FormatCode(w); });
+			}
+
+			if (IndexingSlowlog is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexingSlowlog", (w) => { IndexingSlowlog.FormatCode(w); });
+			}
+
+			if (Lifecycle is not null)
+			{
+				writer.WriteFluentDescriptorCall("Lifecycle", (w) => { Lifecycle.FormatCode(w); });
+			}
+
+			if (LoadFixedBitsetFiltersEagerly is not null)
+			{
+				writer.WriteFluentCall("LoadFixedBitsetFiltersEagerly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LoadFixedBitsetFiltersEagerly.Value); });
+			}
+
+			if (Mapping is not null)
+			{
+				writer.WriteFluentDescriptorCall("Mapping", (w) => { Mapping.FormatCode(w); });
+			}
+
+			if (MaxDocvalueFieldsSearch is not null)
+			{
+				writer.WriteFluentCall("MaxDocvalueFieldsSearch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocvalueFieldsSearch.Value); });
+			}
+
+			if (MaxInnerResultWindow is not null)
+			{
+				writer.WriteFluentCall("MaxInnerResultWindow", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInnerResultWindow.Value); });
+			}
+
+			if (MaxNgramDiff is not null)
+			{
+				writer.WriteFluentCall("MaxNgramDiff", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNgramDiff.Value); });
+			}
+
+			if (MaxRefreshListeners is not null)
+			{
+				writer.WriteFluentCall("MaxRefreshListeners", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxRefreshListeners.Value); });
+			}
+
+			if (MaxRegexLength is not null)
+			{
+				writer.WriteFluentCall("MaxRegexLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxRegexLength.Value); });
+			}
+
+			if (MaxRescoreWindow is not null)
+			{
+				writer.WriteFluentCall("MaxRescoreWindow", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxRescoreWindow.Value); });
+			}
+
+			if (MaxResultWindow is not null)
+			{
+				writer.WriteFluentCall("MaxResultWindow", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxResultWindow.Value); });
+			}
+
+			if (MaxScriptFields is not null)
+			{
+				writer.WriteFluentCall("MaxScriptFields", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxScriptFields.Value); });
+			}
+
+			if (MaxShingleDiff is not null)
+			{
+				writer.WriteFluentCall("MaxShingleDiff", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxShingleDiff.Value); });
+			}
+
+			if (MaxSlicesPerScroll is not null)
+			{
+				writer.WriteFluentCall("MaxSlicesPerScroll", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxSlicesPerScroll.Value); });
+			}
+
+			if (MaxTermsCount is not null)
+			{
+				writer.WriteFluentCall("MaxTermsCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTermsCount.Value); });
+			}
+
+			if (Merge is not null)
+			{
+				writer.WriteFluentDescriptorCall("Merge", (w) => { Merge.FormatCode(w); });
+			}
+
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Mode); });
+			}
+
+			if (NumberOfReplicas is not null)
+			{
+				writer.WriteFluentCall("NumberOfReplicas", (w) => { using var _oi = w.ForceObjectInitializer(); if (NumberOfReplicas.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(NumberOfReplicas.Value1); } else { w.WriteString(NumberOfReplicas.Value2); } });
+			}
+
+			if (NumberOfRoutingShards is not null)
+			{
+				writer.WriteFluentCall("NumberOfRoutingShards", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfRoutingShards.Value); });
+			}
+
+			if (NumberOfShards is not null)
+			{
+				writer.WriteFluentCall("NumberOfShards", (w) => { using var _oi = w.ForceObjectInitializer(); if (NumberOfShards.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(NumberOfShards.Value1); } else { w.WriteString(NumberOfShards.Value2); } });
+			}
+
+			if (OtherSettings is not null)
+			{
+				writer.WriteFluentCall("OtherSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(OtherSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Priority is not null)
+			{
+				writer.WriteFluentCall("Priority", (w) => { using var _oi = w.ForceObjectInitializer(); if (Priority.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Priority.Value1); } else { w.WriteString(Priority.Value2); } });
+			}
+
+			if (ProvidedName is not null)
+			{
+				writer.WriteFluentCall("ProvidedName", (w) => { using var _oi = w.ForceObjectInitializer(); ProvidedName.FormatCode(w); });
+			}
+
+			if (Queries is not null)
+			{
+				writer.WriteFluentDescriptorCall("Queries", (w) => { Queries.FormatCode(w); });
+			}
+
+			if (QueryString is not null)
+			{
+				writer.WriteFluentDescriptorCall("QueryString", (w) => { QueryString.FormatCode(w); });
+			}
+
+			if (RefreshInterval is not null)
+			{
+				writer.WriteFluentCall("RefreshInterval", (w) => { using var _oi = w.ForceObjectInitializer(); RefreshInterval.FormatCode(w); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentDescriptorCall("Routing", (w) => { Routing.FormatCode(w); });
+			}
+
+			if (RoutingPartitionSize is not null)
+			{
+				writer.WriteFluentCall("RoutingPartitionSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RoutingPartitionSize.Value); });
+			}
+
+			if (RoutingPath is not null)
+			{
+				writer.WriteFluentParams("RoutingPath", RoutingPath, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Search is not null)
+			{
+				writer.WriteFluentDescriptorCall("Search", (w) => { Search.FormatCode(w); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+
+			if (Similarity is not null)
+			{
+				writer.WriteFluentDescriptorCall("Similarity", (w) => { Similarity.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Similarity.FormatCode(w); });
+			}
+
+			if (SoftDeletes is not null)
+			{
+				writer.WriteFluentDescriptorCall("SoftDeletes", (w) => { SoftDeletes.FormatCode(w); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sort", (w) => { Sort.FormatCode(w); });
+			}
+
+			if (Store is not null)
+			{
+				writer.WriteFluentDescriptorCall("Store", (w) => { Store.FormatCode(w); });
+			}
+
+			if (TimeSeries is not null)
+			{
+				writer.WriteFluentDescriptorCall("TimeSeries", (w) => { TimeSeries.FormatCode(w); });
+			}
+
+			if (TopMetricsMaxSize is not null)
+			{
+				writer.WriteFluentCall("TopMetricsMaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopMetricsMaxSize.Value); });
+			}
+
+			if (Translog is not null)
+			{
+				writer.WriteFluentDescriptorCall("Translog", (w) => { Translog.FormatCode(w); });
+			}
+
+			if (Uuid is not null)
+			{
+				writer.WriteFluentCall("Uuid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Uuid); });
+			}
+
+			if (VerifiedBeforeClose is not null)
+			{
+				writer.WriteFluentCall("VerifiedBeforeClose", (w) => { using var _oi = w.ForceObjectInitializer(); if (VerifiedBeforeClose.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(VerifiedBeforeClose.Value1); } else { w.WriteString(VerifiedBeforeClose.Value2); } });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentDescriptorCall("Version", (w) => { Version.FormatCode(w); });
 			}
 		}
-
-		if (Version is not null)
+		else
 		{
-			initializer.Property("Version");
-			Version.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings", false);
+			if (Analysis is not null)
+			{
+				initializer.Property("Analysis");
+				Analysis.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Analyze is not null)
+			{
+				initializer.Property("Analyze");
+				Analyze.FormatCode(writer);
+			}
+
+			if (AutoExpandReplicas is not null)
+			{
+				initializer.Property("AutoExpandReplicas");
+				writer.WriteString(AutoExpandReplicas);
+			}
+
+			if (Blocks is not null)
+			{
+				initializer.Property("Blocks");
+				Blocks.FormatCode(writer);
+			}
+
+			if (CheckOnStartup is not null)
+			{
+				initializer.Property("CheckOnStartup");
+				Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupCodeFormatter.FormatCode(CheckOnStartup.Value, writer);
+			}
+
+			if (Codec is not null)
+			{
+				initializer.Property("Codec");
+				writer.WriteString(Codec);
+			}
+
+			if (CreationDate is not null)
+			{
+				initializer.Property("CreationDate");
+				writer.WriteValue(CreationDate.Value);
+			}
+
+			if (CreationDateString is not null)
+			{
+				initializer.Property("CreationDateString");
+				writer.WriteValue(CreationDateString.Value);
+			}
+
+			if (DefaultPipeline is not null)
+			{
+				initializer.Property("DefaultPipeline");
+				writer.WriteString(DefaultPipeline);
+			}
+
+			if (FinalPipeline is not null)
+			{
+				initializer.Property("FinalPipeline");
+				writer.WriteString(FinalPipeline);
+			}
+
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				if (Format.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteString(Format.Value1);
+				}
+				else
+				{
+					writer.WriteValue(Format.Value2);
+				}
+			}
+
+			if (GcDeletes is not null)
+			{
+				initializer.Property("GcDeletes");
+				GcDeletes.FormatCode(writer);
+			}
+
+			if (Hidden is not null)
+			{
+				initializer.Property("Hidden");
+				if (Hidden.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(Hidden.Value1);
+				}
+				else
+				{
+					writer.WriteString(Hidden.Value2);
+				}
+			}
+
+			if (Highlight is not null)
+			{
+				initializer.Property("Highlight");
+				Highlight.FormatCode(writer);
+			}
+
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
+
+			if (IndexingPressure is not null)
+			{
+				initializer.Property("IndexingPressure");
+				IndexingPressure.FormatCode(writer);
+			}
+
+			if (IndexingSlowlog is not null)
+			{
+				initializer.Property("IndexingSlowlog");
+				IndexingSlowlog.FormatCode(writer);
+			}
+
+			if (Lifecycle is not null)
+			{
+				initializer.Property("Lifecycle");
+				Lifecycle.FormatCode(writer);
+			}
+
+			if (LoadFixedBitsetFiltersEagerly is not null)
+			{
+				initializer.Property("LoadFixedBitsetFiltersEagerly");
+				writer.WriteValue(LoadFixedBitsetFiltersEagerly.Value);
+			}
+
+			if (Mapping is not null)
+			{
+				initializer.Property("Mapping");
+				Mapping.FormatCode(writer);
+			}
+
+			if (MaxDocvalueFieldsSearch is not null)
+			{
+				initializer.Property("MaxDocvalueFieldsSearch");
+				writer.WriteValue(MaxDocvalueFieldsSearch.Value);
+			}
+
+			if (MaxInnerResultWindow is not null)
+			{
+				initializer.Property("MaxInnerResultWindow");
+				writer.WriteValue(MaxInnerResultWindow.Value);
+			}
+
+			if (MaxNgramDiff is not null)
+			{
+				initializer.Property("MaxNgramDiff");
+				writer.WriteValue(MaxNgramDiff.Value);
+			}
+
+			if (MaxRefreshListeners is not null)
+			{
+				initializer.Property("MaxRefreshListeners");
+				writer.WriteValue(MaxRefreshListeners.Value);
+			}
+
+			if (MaxRegexLength is not null)
+			{
+				initializer.Property("MaxRegexLength");
+				writer.WriteValue(MaxRegexLength.Value);
+			}
+
+			if (MaxRescoreWindow is not null)
+			{
+				initializer.Property("MaxRescoreWindow");
+				writer.WriteValue(MaxRescoreWindow.Value);
+			}
+
+			if (MaxResultWindow is not null)
+			{
+				initializer.Property("MaxResultWindow");
+				writer.WriteValue(MaxResultWindow.Value);
+			}
+
+			if (MaxScriptFields is not null)
+			{
+				initializer.Property("MaxScriptFields");
+				writer.WriteValue(MaxScriptFields.Value);
+			}
+
+			if (MaxShingleDiff is not null)
+			{
+				initializer.Property("MaxShingleDiff");
+				writer.WriteValue(MaxShingleDiff.Value);
+			}
+
+			if (MaxSlicesPerScroll is not null)
+			{
+				initializer.Property("MaxSlicesPerScroll");
+				writer.WriteValue(MaxSlicesPerScroll.Value);
+			}
+
+			if (MaxTermsCount is not null)
+			{
+				initializer.Property("MaxTermsCount");
+				writer.WriteValue(MaxTermsCount.Value);
+			}
+
+			if (Merge is not null)
+			{
+				initializer.Property("Merge");
+				Merge.FormatCode(writer);
+			}
+
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				writer.WriteString(Mode);
+			}
+
+			if (NumberOfReplicas is not null)
+			{
+				initializer.Property("NumberOfReplicas");
+				if (NumberOfReplicas.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(NumberOfReplicas.Value1);
+				}
+				else
+				{
+					writer.WriteString(NumberOfReplicas.Value2);
+				}
+			}
+
+			if (NumberOfRoutingShards is not null)
+			{
+				initializer.Property("NumberOfRoutingShards");
+				writer.WriteValue(NumberOfRoutingShards.Value);
+			}
+
+			if (NumberOfShards is not null)
+			{
+				initializer.Property("NumberOfShards");
+				if (NumberOfShards.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(NumberOfShards.Value1);
+				}
+				else
+				{
+					writer.WriteString(NumberOfShards.Value2);
+				}
+			}
+
+			if (OtherSettings is not null)
+			{
+				initializer.Property("OtherSettings");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(OtherSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
+
+			if (Priority is not null)
+			{
+				initializer.Property("Priority");
+				if (Priority.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(Priority.Value1);
+				}
+				else
+				{
+					writer.WriteString(Priority.Value2);
+				}
+			}
+
+			if (ProvidedName is not null)
+			{
+				initializer.Property("ProvidedName");
+				ProvidedName.FormatCode(writer);
+			}
+
+			if (Queries is not null)
+			{
+				initializer.Property("Queries");
+				Queries.FormatCode(writer);
+			}
+
+			if (QueryString is not null)
+			{
+				initializer.Property("QueryString");
+				QueryString.FormatCode(writer);
+			}
+
+			if (RefreshInterval is not null)
+			{
+				initializer.Property("RefreshInterval");
+				RefreshInterval.FormatCode(writer);
+			}
+
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
+
+			if (RoutingPartitionSize is not null)
+			{
+				initializer.Property("RoutingPartitionSize");
+				writer.WriteValue(RoutingPartitionSize.Value);
+			}
+
+			if (RoutingPath is not null)
+			{
+				initializer.Property("RoutingPath");
+				writer.WriteInlineList(RoutingPath, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Search is not null)
+			{
+				initializer.Property("Search");
+				Search.FormatCode(writer);
+			}
+
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
+
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				Similarity.FormatCode(writer);
+			}
+
+			if (SoftDeletes is not null)
+			{
+				initializer.Property("SoftDeletes");
+				SoftDeletes.FormatCode(writer);
+			}
+
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				Sort.FormatCode(writer);
+			}
+
+			if (Store is not null)
+			{
+				initializer.Property("Store");
+				Store.FormatCode(writer);
+			}
+
+			if (TimeSeries is not null)
+			{
+				initializer.Property("TimeSeries");
+				TimeSeries.FormatCode(writer);
+			}
+
+			if (TopMetricsMaxSize is not null)
+			{
+				initializer.Property("TopMetricsMaxSize");
+				writer.WriteValue(TopMetricsMaxSize.Value);
+			}
+
+			if (Translog is not null)
+			{
+				initializer.Property("Translog");
+				Translog.FormatCode(writer);
+			}
+
+			if (Uuid is not null)
+			{
+				initializer.Property("Uuid");
+				writer.WriteString(Uuid);
+			}
+
+			if (VerifiedBeforeClose is not null)
+			{
+				initializer.Property("VerifiedBeforeClose");
+				if (VerifiedBeforeClose.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(VerifiedBeforeClose.Value1);
+				}
+				else
+				{
+					writer.WriteString(VerifiedBeforeClose.Value2);
+				}
+			}
+
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				Version.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

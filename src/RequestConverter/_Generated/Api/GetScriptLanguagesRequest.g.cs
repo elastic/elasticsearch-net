@@ -27,7 +27,17 @@ public partial class GetScriptLanguagesRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest", false);
-		initializer.Dispose();
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest", false);
+			initializer.Dispose();
+		}
 	}
 }

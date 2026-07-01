@@ -27,37 +27,67 @@ public partial class CommonGramsTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter", true);
-		if (CommonWords is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CommonWords");
-			writer.WriteInlineList(CommonWords, (w, item) => { w.WriteString(item); });
-		}
+			if (CommonWords is not null)
+			{
+				writer.WriteFluentParams("CommonWords", CommonWords, (w, item) => { w.WriteString(item); });
+			}
 
-		if (CommonWordsPath is not null)
+			if (CommonWordsPath is not null)
+			{
+				writer.WriteFluentCall("CommonWordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CommonWordsPath); });
+			}
+
+			if (IgnoreCase is not null)
+			{
+				writer.WriteFluentCall("IgnoreCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreCase.Value); });
+			}
+
+			if (QueryMode is not null)
+			{
+				writer.WriteFluentCall("QueryMode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(QueryMode.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("CommonWordsPath");
-			writer.WriteString(CommonWordsPath);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter", true);
+			if (CommonWords is not null)
+			{
+				initializer.Property("CommonWords");
+				writer.WriteInlineList(CommonWords, (w, item) => { w.WriteString(item); });
+			}
 
-		if (IgnoreCase is not null)
-		{
-			initializer.Property("IgnoreCase");
-			writer.WriteValue(IgnoreCase.Value);
-		}
+			if (CommonWordsPath is not null)
+			{
+				initializer.Property("CommonWordsPath");
+				writer.WriteString(CommonWordsPath);
+			}
 
-		if (QueryMode is not null)
-		{
-			initializer.Property("QueryMode");
-			writer.WriteValue(QueryMode.Value);
-		}
+			if (IgnoreCase is not null)
+			{
+				initializer.Property("IgnoreCase");
+				writer.WriteValue(IgnoreCase.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (QueryMode is not null)
+			{
+				initializer.Property("QueryMode");
+				writer.WriteValue(QueryMode.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

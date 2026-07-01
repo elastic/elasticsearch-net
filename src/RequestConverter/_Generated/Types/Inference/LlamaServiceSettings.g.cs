@@ -27,35 +27,63 @@ public partial class LlamaServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings", false);
-		if (MaxInputTokens is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxInputTokens");
-			writer.WriteValue(MaxInputTokens.Value);
-		}
+			if (MaxInputTokens is not null)
+			{
+				writer.WriteFluentCall("MaxInputTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInputTokens.Value); });
+			}
 
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			if (Similarity is not null)
+			{
+				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings", false);
+			if (MaxInputTokens is not null)
+			{
+				initializer.Property("MaxInputTokens");
+				writer.WriteValue(MaxInputTokens.Value);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		if (Similarity is not null)
-		{
-			initializer.Property("Similarity");
-			Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

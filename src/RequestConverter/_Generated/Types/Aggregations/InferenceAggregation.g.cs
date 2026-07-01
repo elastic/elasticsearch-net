@@ -27,36 +27,65 @@ public partial class InferenceAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation", false);
-		if (BucketsPath is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BucketsPath");
-			BucketsPath.FormatCode(writer);
-		}
+			if (BucketsPath is not null)
+			{
+				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (GapPolicy is not null)
+			{
+				writer.WriteFluentCall("GapPolicy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
+			}
+
+			if (InferenceConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); ModelId.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation", false);
+			if (BucketsPath is not null)
+			{
+				initializer.Property("BucketsPath");
+				BucketsPath.FormatCode(writer);
+			}
 
-		if (GapPolicy is not null)
-		{
-			initializer.Property("GapPolicy");
-			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (InferenceConfig is not null)
-		{
-			initializer.Property("InferenceConfig");
-			InferenceConfig.FormatCode(writer);
-		}
+			if (GapPolicy is not null)
+			{
+				initializer.Property("GapPolicy");
+				Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
+			}
 
-		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			if (InferenceConfig is not null)
+			{
+				initializer.Property("InferenceConfig");
+				InferenceConfig.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,7 +27,17 @@ public partial class GetTrialStatusRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest", false);
-		initializer.Dispose();
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest", false);
+			initializer.Dispose();
+		}
 	}
 }

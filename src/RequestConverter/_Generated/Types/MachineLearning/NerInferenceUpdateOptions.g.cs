@@ -27,19 +27,34 @@ public partial class NerInferenceUpdateOptions : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions", false);
-		if (ResultsField is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ResultsField");
-			writer.WriteString(ResultsField);
-		}
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+			}
 
-		if (Tokenization is not null)
+			if (Tokenization is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Tokenization");
-			Tokenization.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions", false);
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				writer.WriteString(ResultsField);
+			}
 
-		initializer.Dispose();
+			if (Tokenization is not null)
+			{
+				initializer.Property("Tokenization");
+				Tokenization.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

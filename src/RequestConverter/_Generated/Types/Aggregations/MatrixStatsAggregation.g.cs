@@ -27,32 +27,52 @@ public partial class MatrixStatsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation", false);
-		if (Fields is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			if (Fields is not null)
+			{
+				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+			}
 
-		if (Missing is not null)
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("double"); w.Write(">()"); w.WriteBlockList(Missing, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }); });
+			}
+
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Missing");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("double");
-			writer.Write(">()");
-			writer.WriteBlockList(Missing, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation", false);
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		if (Mode is not null)
-		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("double");
+				writer.Write(">()");
+				writer.WriteBlockList(Missing, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

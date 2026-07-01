@@ -27,40 +27,72 @@ public partial class EnrichPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy", false);
-		if (ElasticsearchVersion is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ElasticsearchVersion");
-			writer.WriteString(ElasticsearchVersion);
-		}
+			if (ElasticsearchVersion is not null)
+			{
+				writer.WriteFluentCall("ElasticsearchVersion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ElasticsearchVersion); });
+			}
 
+			{
+				writer.WriteFluentCall("EnrichFields", (w) => { using var _oi = w.ForceObjectInitializer(); EnrichFields.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("MatchField", (w) => { MatchField.FormatCode(w); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("EnrichFields");
-			EnrichFields.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy", false);
+			if (ElasticsearchVersion is not null)
+			{
+				initializer.Property("ElasticsearchVersion");
+				writer.WriteString(ElasticsearchVersion);
+			}
 
-		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			{
+				initializer.Property("EnrichFields");
+				EnrichFields.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("MatchField");
-			MatchField.FormatCode(writer);
-		}
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			{
+				initializer.Property("MatchField");
+				MatchField.FormatCode(writer);
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

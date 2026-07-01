@@ -27,19 +27,34 @@ public partial class PhraseSuggestCollateQuery : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery", false);
-		if (Id is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
 
-		if (Source is not null)
+			if (Source is not null)
+			{
+				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Source); });
+			}
+		}
+		else
 		{
-			initializer.Property("Source");
-			writer.WriteString(Source);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery", false);
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				writer.WriteString(Source);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

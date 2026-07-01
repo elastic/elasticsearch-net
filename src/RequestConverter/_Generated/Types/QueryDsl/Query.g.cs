@@ -27,375 +27,687 @@ public partial class Query : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.Query", true);
-		if (Bool is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Bool");
-			Bool.FormatCode(writer);
-		}
+			if (Bool is not null)
+			{
+				writer.WriteFluentDescriptorCall("Bool", (w) => { Bool.FormatCode(w); });
+			}
 
-		if (Boosting is not null)
-		{
-			initializer.Property("Boosting");
-			Boosting.FormatCode(writer);
-		}
+			if (Boosting is not null)
+			{
+				writer.WriteFluentDescriptorCall("Boosting", (w) => { Boosting.FormatCode(w); });
+			}
 
-		if (CombinedFields is not null)
-		{
-			initializer.Property("CombinedFields");
-			CombinedFields.FormatCode(writer);
-		}
+			if (CombinedFields is not null)
+			{
+				writer.WriteFluentDescriptorCall("CombinedFields", (w) => { CombinedFields.FormatCode(w); });
+			}
 #pragma warning disable CS0618
-		if (Common is not null)
-		{
-			initializer.Property("Common");
-			Common.FormatCode(writer);
-		}
+			if (Common is not null)
+			{
+				writer.WriteFluentDescriptorCall("Common", (w) => { Common.FormatCode(w); });
+			}
 #pragma warning restore CS0618
-		if (ConstantScore is not null)
-		{
-			initializer.Property("ConstantScore");
-			ConstantScore.FormatCode(writer);
-		}
+			if (ConstantScore is not null)
+			{
+				writer.WriteFluentDescriptorCall("ConstantScore", (w) => { ConstantScore.FormatCode(w); });
+			}
 
-		if (DisMax is not null)
-		{
-			initializer.Property("DisMax");
-			DisMax.FormatCode(writer);
-		}
+			if (DisMax is not null)
+			{
+				writer.WriteFluentDescriptorCall("DisMax", (w) => { DisMax.FormatCode(w); });
+			}
 
-		if (DistanceFeature is not null)
-		{
-			initializer.Property("DistanceFeature");
-			DistanceFeature.FormatCode(writer);
-		}
+			if (DistanceFeature is not null)
+			{
+				writer.WriteFluentCall("DistanceFeature", (w) => { using var _oi = w.ForceObjectInitializer(); DistanceFeature.FormatCode(w); });
+			}
 
-		if (Exists is not null)
-		{
-			initializer.Property("Exists");
-			Exists.FormatCode(writer);
-		}
+			if (Exists is not null)
+			{
+				writer.WriteFluentDescriptorCall("Exists", (w) => { Exists.FormatCode(w); });
+			}
 
-		if (FunctionScore is not null)
-		{
-			initializer.Property("FunctionScore");
-			FunctionScore.FormatCode(writer);
-		}
+			if (FunctionScore is not null)
+			{
+				writer.WriteFluentDescriptorCall("FunctionScore", (w) => { FunctionScore.FormatCode(w); });
+			}
 
-		if (Fuzzy is not null)
-		{
-			initializer.Property("Fuzzy");
-			Fuzzy.FormatCode(writer);
-		}
+			if (Fuzzy is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); });
+			}
 
-		if (GeoBoundingBox is not null)
-		{
-			initializer.Property("GeoBoundingBox");
-			GeoBoundingBox.FormatCode(writer);
-		}
+			if (GeoBoundingBox is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoBoundingBox", (w) => { GeoBoundingBox.FormatCode(w); });
+			}
 
-		if (GeoDistance is not null)
-		{
-			initializer.Property("GeoDistance");
-			GeoDistance.FormatCode(writer);
-		}
+			if (GeoDistance is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoDistance", (w) => { GeoDistance.FormatCode(w); });
+			}
 
-		if (GeoGrid is not null)
-		{
-			initializer.Property("GeoGrid");
-			GeoGrid.FormatCode(writer);
-		}
+			if (GeoGrid is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoGrid", (w) => { GeoGrid.FormatCode(w); });
+			}
 #pragma warning disable CS0618
-		if (GeoPolygon is not null)
-		{
-			initializer.Property("GeoPolygon");
-			GeoPolygon.FormatCode(writer);
-		}
+			if (GeoPolygon is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoPolygon", (w) => { GeoPolygon.FormatCode(w); });
+			}
 #pragma warning restore CS0618
-		if (GeoShape is not null)
-		{
-			initializer.Property("GeoShape");
-			GeoShape.FormatCode(writer);
-		}
+			if (GeoShape is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoShape", (w) => { GeoShape.FormatCode(w); });
+			}
 
-		if (HasChild is not null)
-		{
-			initializer.Property("HasChild");
-			HasChild.FormatCode(writer);
-		}
+			if (HasChild is not null)
+			{
+				writer.WriteFluentDescriptorCall("HasChild", (w) => { HasChild.FormatCode(w); });
+			}
 
-		if (HasParent is not null)
-		{
-			initializer.Property("HasParent");
-			HasParent.FormatCode(writer);
-		}
+			if (HasParent is not null)
+			{
+				writer.WriteFluentDescriptorCall("HasParent", (w) => { HasParent.FormatCode(w); });
+			}
 
-		if (Ids is not null)
-		{
-			initializer.Property("Ids");
-			Ids.FormatCode(writer);
-		}
+			if (Ids is not null)
+			{
+				writer.WriteFluentDescriptorCall("Ids", (w) => { Ids.FormatCode(w); });
+			}
 
-		if (Intervals is not null)
-		{
-			initializer.Property("Intervals");
-			Intervals.FormatCode(writer);
-		}
+			if (Intervals is not null)
+			{
+				writer.WriteFluentDescriptorCall("Intervals", (w) => { Intervals.FormatCode(w); });
+			}
 
-		if (Knn is not null)
-		{
-			initializer.Property("Knn");
-			Knn.FormatCode(writer);
-		}
+			if (Knn is not null)
+			{
+				writer.WriteFluentDescriptorCall("Knn", (w) => { Knn.FormatCode(w); });
+			}
 
-		if (Match is not null)
-		{
-			initializer.Property("Match");
-			Match.FormatCode(writer);
-		}
+			if (Match is not null)
+			{
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); });
+			}
 
-		if (MatchAll is not null)
-		{
-			initializer.Property("MatchAll");
-			MatchAll.FormatCode(writer);
-		}
+			if (MatchAll is not null)
+			{
+				writer.WriteFluentDescriptorCall("MatchAll", (w) => { MatchAll.FormatCode(w); });
+			}
 
-		if (MatchBoolPrefix is not null)
-		{
-			initializer.Property("MatchBoolPrefix");
-			MatchBoolPrefix.FormatCode(writer);
-		}
+			if (MatchBoolPrefix is not null)
+			{
+				writer.WriteFluentDescriptorCall("MatchBoolPrefix", (w) => { MatchBoolPrefix.FormatCode(w); });
+			}
 
-		if (MatchNone is not null)
-		{
-			initializer.Property("MatchNone");
-			MatchNone.FormatCode(writer);
-		}
+			if (MatchNone is not null)
+			{
+				writer.WriteFluentDescriptorCall("MatchNone", (w) => { MatchNone.FormatCode(w); });
+			}
 
-		if (MatchPhrase is not null)
-		{
-			initializer.Property("MatchPhrase");
-			MatchPhrase.FormatCode(writer);
-		}
+			if (MatchPhrase is not null)
+			{
+				writer.WriteFluentDescriptorCall("MatchPhrase", (w) => { MatchPhrase.FormatCode(w); });
+			}
 
-		if (MatchPhrasePrefix is not null)
-		{
-			initializer.Property("MatchPhrasePrefix");
-			MatchPhrasePrefix.FormatCode(writer);
-		}
+			if (MatchPhrasePrefix is not null)
+			{
+				writer.WriteFluentDescriptorCall("MatchPhrasePrefix", (w) => { MatchPhrasePrefix.FormatCode(w); });
+			}
 
-		if (MoreLikeThis is not null)
-		{
-			initializer.Property("MoreLikeThis");
-			MoreLikeThis.FormatCode(writer);
-		}
+			if (MoreLikeThis is not null)
+			{
+				writer.WriteFluentDescriptorCall("MoreLikeThis", (w) => { MoreLikeThis.FormatCode(w); });
+			}
 
-		if (MultiMatch is not null)
-		{
-			initializer.Property("MultiMatch");
-			MultiMatch.FormatCode(writer);
-		}
+			if (MultiMatch is not null)
+			{
+				writer.WriteFluentDescriptorCall("MultiMatch", (w) => { MultiMatch.FormatCode(w); });
+			}
 
-		if (Nested is not null)
-		{
-			initializer.Property("Nested");
-			Nested.FormatCode(writer);
-		}
+			if (Nested is not null)
+			{
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); });
+			}
 
-		if (ParentId is not null)
-		{
-			initializer.Property("ParentId");
-			ParentId.FormatCode(writer);
-		}
+			if (ParentId is not null)
+			{
+				writer.WriteFluentDescriptorCall("ParentId", (w) => { ParentId.FormatCode(w); });
+			}
 
-		if (Percolate is not null)
-		{
-			initializer.Property("Percolate");
-			Percolate.FormatCode(writer);
-		}
+			if (Percolate is not null)
+			{
+				writer.WriteFluentDescriptorCall("Percolate", (w) => { Percolate.FormatCode(w); });
+			}
 
-		if (Pinned is not null)
-		{
-			initializer.Property("Pinned");
-			Pinned.FormatCode(writer);
-		}
+			if (Pinned is not null)
+			{
+				writer.WriteFluentDescriptorCall("Pinned", (w) => { Pinned.FormatCode(w); });
+			}
 
-		if (Prefix is not null)
-		{
-			initializer.Property("Prefix");
-			Prefix.FormatCode(writer);
-		}
+			if (Prefix is not null)
+			{
+				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); });
+			}
 
-		if (QueryString is not null)
-		{
-			initializer.Property("QueryString");
-			QueryString.FormatCode(writer);
-		}
+			if (QueryString is not null)
+			{
+				writer.WriteFluentDescriptorCall("QueryString", (w) => { QueryString.FormatCode(w); });
+			}
 
-		if (Range is not null)
-		{
-			initializer.Property("Range");
-			Range.FormatCode(writer);
-		}
+			if (Range is not null)
+			{
+				writer.WriteFluentCall("Range", (w) => { using var _oi = w.ForceObjectInitializer(); Range.FormatCode(w); });
+			}
 
-		if (RankFeature is not null)
-		{
-			initializer.Property("RankFeature");
-			RankFeature.FormatCode(writer);
-		}
+			if (RankFeature is not null)
+			{
+				writer.WriteFluentDescriptorCall("RankFeature", (w) => { RankFeature.FormatCode(w); });
+			}
 
-		if (Regexp is not null)
-		{
-			initializer.Property("Regexp");
-			Regexp.FormatCode(writer);
-		}
+			if (Regexp is not null)
+			{
+				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); });
+			}
 
-		if (Rule is not null)
-		{
-			initializer.Property("Rule");
-			Rule.FormatCode(writer);
-		}
+			if (Rule is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rule", (w) => { Rule.FormatCode(w); });
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
 
-		if (ScriptScore is not null)
-		{
-			initializer.Property("ScriptScore");
-			ScriptScore.FormatCode(writer);
-		}
+			if (ScriptScore is not null)
+			{
+				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); });
+			}
 
-		if (Semantic is not null)
-		{
-			initializer.Property("Semantic");
-			Semantic.FormatCode(writer);
-		}
+			if (Semantic is not null)
+			{
+				writer.WriteFluentDescriptorCall("Semantic", (w) => { Semantic.FormatCode(w); });
+			}
 
-		if (Shape is not null)
-		{
-			initializer.Property("Shape");
-			Shape.FormatCode(writer);
-		}
+			if (Shape is not null)
+			{
+				writer.WriteFluentDescriptorCall("Shape", (w) => { Shape.FormatCode(w); });
+			}
 
-		if (SimpleQueryString is not null)
-		{
-			initializer.Property("SimpleQueryString");
-			SimpleQueryString.FormatCode(writer);
-		}
+			if (SimpleQueryString is not null)
+			{
+				writer.WriteFluentDescriptorCall("SimpleQueryString", (w) => { SimpleQueryString.FormatCode(w); });
+			}
 
-		if (SpanContaining is not null)
-		{
-			initializer.Property("SpanContaining");
-			SpanContaining.FormatCode(writer);
-		}
+			if (SpanContaining is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanContaining", (w) => { SpanContaining.FormatCode(w); });
+			}
 
-		if (SpanFieldMasking is not null)
-		{
-			initializer.Property("SpanFieldMasking");
-			SpanFieldMasking.FormatCode(writer);
-		}
+			if (SpanFieldMasking is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanFieldMasking", (w) => { SpanFieldMasking.FormatCode(w); });
+			}
 
-		if (SpanFirst is not null)
-		{
-			initializer.Property("SpanFirst");
-			SpanFirst.FormatCode(writer);
-		}
+			if (SpanFirst is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanFirst", (w) => { SpanFirst.FormatCode(w); });
+			}
 
-		if (SpanMulti is not null)
-		{
-			initializer.Property("SpanMulti");
-			SpanMulti.FormatCode(writer);
-		}
+			if (SpanMulti is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanMulti", (w) => { SpanMulti.FormatCode(w); });
+			}
 
-		if (SpanNear is not null)
-		{
-			initializer.Property("SpanNear");
-			SpanNear.FormatCode(writer);
-		}
+			if (SpanNear is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanNear", (w) => { SpanNear.FormatCode(w); });
+			}
 
-		if (SpanNot is not null)
-		{
-			initializer.Property("SpanNot");
-			SpanNot.FormatCode(writer);
-		}
+			if (SpanNot is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanNot", (w) => { SpanNot.FormatCode(w); });
+			}
 
-		if (SpanOr is not null)
-		{
-			initializer.Property("SpanOr");
-			SpanOr.FormatCode(writer);
-		}
+			if (SpanOr is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanOr", (w) => { SpanOr.FormatCode(w); });
+			}
 
-		if (SpanTerm is not null)
-		{
-			initializer.Property("SpanTerm");
-			SpanTerm.FormatCode(writer);
-		}
+			if (SpanTerm is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanTerm", (w) => { SpanTerm.FormatCode(w); });
+			}
 
-		if (SpanWithin is not null)
-		{
-			initializer.Property("SpanWithin");
-			SpanWithin.FormatCode(writer);
-		}
+			if (SpanWithin is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanWithin", (w) => { SpanWithin.FormatCode(w); });
+			}
 
-		if (SparseVector is not null)
-		{
-			initializer.Property("SparseVector");
-			SparseVector.FormatCode(writer);
-		}
+			if (SparseVector is not null)
+			{
+				writer.WriteFluentDescriptorCall("SparseVector", (w) => { SparseVector.FormatCode(w); });
+			}
 
-		if (Term is not null)
-		{
-			initializer.Property("Term");
-			Term.FormatCode(writer);
-		}
+			if (Term is not null)
+			{
+				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); });
+			}
 
-		if (Terms is not null)
-		{
-			initializer.Property("Terms");
-			Terms.FormatCode(writer);
-		}
+			if (Terms is not null)
+			{
+				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); });
+			}
 
-		if (TermsSet is not null)
-		{
-			initializer.Property("TermsSet");
-			TermsSet.FormatCode(writer);
-		}
+			if (TermsSet is not null)
+			{
+				writer.WriteFluentDescriptorCall("TermsSet", (w) => { TermsSet.FormatCode(w); });
+			}
 #pragma warning disable CS0618
-		if (TextExpansion is not null)
-		{
-			initializer.Property("TextExpansion");
-			TextExpansion.FormatCode(writer);
-		}
+			if (TextExpansion is not null)
+			{
+				writer.WriteFluentDescriptorCall("TextExpansion", (w) => { TextExpansion.FormatCode(w); });
+			}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			Type.FormatCode(writer);
-		}
+			if (Type is not null)
+			{
+				writer.WriteFluentDescriptorCall("Type", (w) => { Type.FormatCode(w); });
+			}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
-		if (WeightedTokens is not null)
-		{
-			initializer.Property("WeightedTokens");
-			WeightedTokens.FormatCode(writer);
-		}
+			if (WeightedTokens is not null)
+			{
+				writer.WriteFluentDescriptorCall("WeightedTokens", (w) => { WeightedTokens.FormatCode(w); });
+			}
 #pragma warning restore CS0618
-		if (Wildcard is not null)
-		{
-			initializer.Property("Wildcard");
-			Wildcard.FormatCode(writer);
-		}
+			if (Wildcard is not null)
+			{
+				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); });
+			}
 
-		if (Wrapper is not null)
-		{
-			initializer.Property("Wrapper");
-			Wrapper.FormatCode(writer);
+			if (Wrapper is not null)
+			{
+				writer.WriteFluentDescriptorCall("Wrapper", (w) => { Wrapper.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.Query", true);
+			if (Bool is not null)
+			{
+				initializer.Property("Bool");
+				Bool.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Boosting is not null)
+			{
+				initializer.Property("Boosting");
+				Boosting.FormatCode(writer);
+			}
+
+			if (CombinedFields is not null)
+			{
+				initializer.Property("CombinedFields");
+				CombinedFields.FormatCode(writer);
+			}
+#pragma warning disable CS0618
+			if (Common is not null)
+			{
+				initializer.Property("Common");
+				Common.FormatCode(writer);
+			}
+#pragma warning restore CS0618
+			if (ConstantScore is not null)
+			{
+				initializer.Property("ConstantScore");
+				ConstantScore.FormatCode(writer);
+			}
+
+			if (DisMax is not null)
+			{
+				initializer.Property("DisMax");
+				DisMax.FormatCode(writer);
+			}
+
+			if (DistanceFeature is not null)
+			{
+				initializer.Property("DistanceFeature");
+				DistanceFeature.FormatCode(writer);
+			}
+
+			if (Exists is not null)
+			{
+				initializer.Property("Exists");
+				Exists.FormatCode(writer);
+			}
+
+			if (FunctionScore is not null)
+			{
+				initializer.Property("FunctionScore");
+				FunctionScore.FormatCode(writer);
+			}
+
+			if (Fuzzy is not null)
+			{
+				initializer.Property("Fuzzy");
+				Fuzzy.FormatCode(writer);
+			}
+
+			if (GeoBoundingBox is not null)
+			{
+				initializer.Property("GeoBoundingBox");
+				GeoBoundingBox.FormatCode(writer);
+			}
+
+			if (GeoDistance is not null)
+			{
+				initializer.Property("GeoDistance");
+				GeoDistance.FormatCode(writer);
+			}
+
+			if (GeoGrid is not null)
+			{
+				initializer.Property("GeoGrid");
+				GeoGrid.FormatCode(writer);
+			}
+#pragma warning disable CS0618
+			if (GeoPolygon is not null)
+			{
+				initializer.Property("GeoPolygon");
+				GeoPolygon.FormatCode(writer);
+			}
+#pragma warning restore CS0618
+			if (GeoShape is not null)
+			{
+				initializer.Property("GeoShape");
+				GeoShape.FormatCode(writer);
+			}
+
+			if (HasChild is not null)
+			{
+				initializer.Property("HasChild");
+				HasChild.FormatCode(writer);
+			}
+
+			if (HasParent is not null)
+			{
+				initializer.Property("HasParent");
+				HasParent.FormatCode(writer);
+			}
+
+			if (Ids is not null)
+			{
+				initializer.Property("Ids");
+				Ids.FormatCode(writer);
+			}
+
+			if (Intervals is not null)
+			{
+				initializer.Property("Intervals");
+				Intervals.FormatCode(writer);
+			}
+
+			if (Knn is not null)
+			{
+				initializer.Property("Knn");
+				Knn.FormatCode(writer);
+			}
+
+			if (Match is not null)
+			{
+				initializer.Property("Match");
+				Match.FormatCode(writer);
+			}
+
+			if (MatchAll is not null)
+			{
+				initializer.Property("MatchAll");
+				MatchAll.FormatCode(writer);
+			}
+
+			if (MatchBoolPrefix is not null)
+			{
+				initializer.Property("MatchBoolPrefix");
+				MatchBoolPrefix.FormatCode(writer);
+			}
+
+			if (MatchNone is not null)
+			{
+				initializer.Property("MatchNone");
+				MatchNone.FormatCode(writer);
+			}
+
+			if (MatchPhrase is not null)
+			{
+				initializer.Property("MatchPhrase");
+				MatchPhrase.FormatCode(writer);
+			}
+
+			if (MatchPhrasePrefix is not null)
+			{
+				initializer.Property("MatchPhrasePrefix");
+				MatchPhrasePrefix.FormatCode(writer);
+			}
+
+			if (MoreLikeThis is not null)
+			{
+				initializer.Property("MoreLikeThis");
+				MoreLikeThis.FormatCode(writer);
+			}
+
+			if (MultiMatch is not null)
+			{
+				initializer.Property("MultiMatch");
+				MultiMatch.FormatCode(writer);
+			}
+
+			if (Nested is not null)
+			{
+				initializer.Property("Nested");
+				Nested.FormatCode(writer);
+			}
+
+			if (ParentId is not null)
+			{
+				initializer.Property("ParentId");
+				ParentId.FormatCode(writer);
+			}
+
+			if (Percolate is not null)
+			{
+				initializer.Property("Percolate");
+				Percolate.FormatCode(writer);
+			}
+
+			if (Pinned is not null)
+			{
+				initializer.Property("Pinned");
+				Pinned.FormatCode(writer);
+			}
+
+			if (Prefix is not null)
+			{
+				initializer.Property("Prefix");
+				Prefix.FormatCode(writer);
+			}
+
+			if (QueryString is not null)
+			{
+				initializer.Property("QueryString");
+				QueryString.FormatCode(writer);
+			}
+
+			if (Range is not null)
+			{
+				initializer.Property("Range");
+				Range.FormatCode(writer);
+			}
+
+			if (RankFeature is not null)
+			{
+				initializer.Property("RankFeature");
+				RankFeature.FormatCode(writer);
+			}
+
+			if (Regexp is not null)
+			{
+				initializer.Property("Regexp");
+				Regexp.FormatCode(writer);
+			}
+
+			if (Rule is not null)
+			{
+				initializer.Property("Rule");
+				Rule.FormatCode(writer);
+			}
+
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			if (ScriptScore is not null)
+			{
+				initializer.Property("ScriptScore");
+				ScriptScore.FormatCode(writer);
+			}
+
+			if (Semantic is not null)
+			{
+				initializer.Property("Semantic");
+				Semantic.FormatCode(writer);
+			}
+
+			if (Shape is not null)
+			{
+				initializer.Property("Shape");
+				Shape.FormatCode(writer);
+			}
+
+			if (SimpleQueryString is not null)
+			{
+				initializer.Property("SimpleQueryString");
+				SimpleQueryString.FormatCode(writer);
+			}
+
+			if (SpanContaining is not null)
+			{
+				initializer.Property("SpanContaining");
+				SpanContaining.FormatCode(writer);
+			}
+
+			if (SpanFieldMasking is not null)
+			{
+				initializer.Property("SpanFieldMasking");
+				SpanFieldMasking.FormatCode(writer);
+			}
+
+			if (SpanFirst is not null)
+			{
+				initializer.Property("SpanFirst");
+				SpanFirst.FormatCode(writer);
+			}
+
+			if (SpanMulti is not null)
+			{
+				initializer.Property("SpanMulti");
+				SpanMulti.FormatCode(writer);
+			}
+
+			if (SpanNear is not null)
+			{
+				initializer.Property("SpanNear");
+				SpanNear.FormatCode(writer);
+			}
+
+			if (SpanNot is not null)
+			{
+				initializer.Property("SpanNot");
+				SpanNot.FormatCode(writer);
+			}
+
+			if (SpanOr is not null)
+			{
+				initializer.Property("SpanOr");
+				SpanOr.FormatCode(writer);
+			}
+
+			if (SpanTerm is not null)
+			{
+				initializer.Property("SpanTerm");
+				SpanTerm.FormatCode(writer);
+			}
+
+			if (SpanWithin is not null)
+			{
+				initializer.Property("SpanWithin");
+				SpanWithin.FormatCode(writer);
+			}
+
+			if (SparseVector is not null)
+			{
+				initializer.Property("SparseVector");
+				SparseVector.FormatCode(writer);
+			}
+
+			if (Term is not null)
+			{
+				initializer.Property("Term");
+				Term.FormatCode(writer);
+			}
+
+			if (Terms is not null)
+			{
+				initializer.Property("Terms");
+				Terms.FormatCode(writer);
+			}
+
+			if (TermsSet is not null)
+			{
+				initializer.Property("TermsSet");
+				TermsSet.FormatCode(writer);
+			}
+#pragma warning disable CS0618
+			if (TextExpansion is not null)
+			{
+				initializer.Property("TextExpansion");
+				TextExpansion.FormatCode(writer);
+			}
+#pragma warning restore CS0618
+#pragma warning disable CS0618
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				Type.FormatCode(writer);
+			}
+#pragma warning restore CS0618
+#pragma warning disable CS0618
+			if (WeightedTokens is not null)
+			{
+				initializer.Property("WeightedTokens");
+				WeightedTokens.FormatCode(writer);
+			}
+#pragma warning restore CS0618
+			if (Wildcard is not null)
+			{
+				initializer.Property("Wildcard");
+				Wildcard.FormatCode(writer);
+			}
+
+			if (Wrapper is not null)
+			{
+				initializer.Property("Wrapper");
+				Wrapper.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

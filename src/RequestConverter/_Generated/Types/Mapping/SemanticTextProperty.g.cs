@@ -27,50 +27,85 @@ public partial class SemanticTextProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty", true);
-		if (ChunkingSettings is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ChunkingSettings");
-			ChunkingSettings.FormatCode(writer);
-		}
+			if (ChunkingSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
+			}
 
-		if (Fields is not null)
+			if (Fields is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fields.FormatCode(w); });
+			}
+
+			if (IndexOptions is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexOptions", (w) => { IndexOptions.FormatCode(w); });
+			}
+
+			if (InferenceId is not null)
+			{
+				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); InferenceId.FormatCode(w); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (SearchInferenceId is not null)
+			{
+				writer.WriteFluentCall("SearchInferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); SearchInferenceId.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty", true);
+			if (ChunkingSettings is not null)
+			{
+				initializer.Property("ChunkingSettings");
+				ChunkingSettings.FormatCode(writer);
+			}
 
-		if (IndexOptions is not null)
-		{
-			initializer.Property("IndexOptions");
-			IndexOptions.FormatCode(writer);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		if (InferenceId is not null)
-		{
-			initializer.Property("InferenceId");
-			InferenceId.FormatCode(writer);
-		}
+			if (IndexOptions is not null)
+			{
+				initializer.Property("IndexOptions");
+				IndexOptions.FormatCode(writer);
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			if (InferenceId is not null)
+			{
+				initializer.Property("InferenceId");
+				InferenceId.FormatCode(writer);
+			}
 
-		if (SearchInferenceId is not null)
-		{
-			initializer.Property("SearchInferenceId");
-			SearchInferenceId.FormatCode(writer);
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (SearchInferenceId is not null)
+			{
+				initializer.Property("SearchInferenceId");
+				SearchInferenceId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

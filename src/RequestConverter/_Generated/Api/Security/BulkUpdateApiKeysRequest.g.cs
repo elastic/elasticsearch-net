@@ -27,44 +27,82 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest", false);
-		if (Expiration is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Expiration");
-			Expiration.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor");
+				writer.Write("()");
+			}
 
+			using var _chainIndent = writer.Indent();
+			if (Expiration is not null)
+			{
+				writer.WriteFluentCall("Expiration", (w) => { using var _oi = w.ForceObjectInitializer(); Expiration.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentParams("Ids", Ids, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (RoleDescriptors is not null)
+			{
+				writer.WriteFluentDescriptorCall("RoleDescriptors", (w) => { w.WriteFluentDictionaryAdds("Add", RoleDescriptors, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Ids");
-			writer.WriteInlineList(Ids, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest", false);
+			if (Expiration is not null)
+			{
+				initializer.Property("Expiration");
+				Expiration.FormatCode(writer);
+			}
 
-		if (Metadata is not null)
-		{
-			initializer.Property("Metadata");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			{
+				initializer.Property("Ids");
+				writer.WriteInlineList(Ids, (w, item) => { w.WriteString(item); });
+			}
 
-		if (RoleDescriptors is not null)
-		{
-			initializer.Property("RoleDescriptors");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RoleDescriptor");
-			writer.Write(">()");
-			writer.WriteBlockList(RoleDescriptors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (RoleDescriptors is not null)
+			{
+				initializer.Property("RoleDescriptors");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RoleDescriptor");
+				writer.Write(">()");
+				writer.WriteBlockList(RoleDescriptors, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

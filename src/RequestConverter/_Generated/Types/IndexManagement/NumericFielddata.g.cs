@@ -27,12 +27,21 @@ public partial class NumericFielddata : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Format");
-			Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormatCodeFormatter.FormatCode(Format, writer);
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormatCodeFormatter.FormatCode(Format, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata", false);
+			{
+				initializer.Property("Format");
+				Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormatCodeFormatter.FormatCode(Format, writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

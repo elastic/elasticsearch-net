@@ -27,44 +27,78 @@ public partial class VertexDefinition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.VertexDefinition", false);
-		if (Exclude is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Exclude");
-			writer.WriteInlineList(Exclude, (w, item) => { w.WriteString(item); });
-		}
+			if (Exclude is not null)
+			{
+				writer.WriteFluentParams("Exclude", Exclude, (w, item) => { w.WriteString(item); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Include is not null)
+			{
+				writer.WriteFluentDescriptorParams("Include", Include, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexInclude>"); w.Write("()"); });
+			}
+
+			if (MinDocCount is not null)
+			{
+				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); w.Write("L"); });
+			}
+
+			if (ShardMinDocCount is not null)
+			{
+				writer.WriteFluentCall("ShardMinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardMinDocCount.Value); w.Write("L"); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.VertexDefinition", false);
+			if (Exclude is not null)
+			{
+				initializer.Property("Exclude");
+				writer.WriteInlineList(Exclude, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Include is not null)
-		{
-			initializer.Property("Include");
-			writer.WriteInlineList(Include, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MinDocCount is not null)
-		{
-			initializer.Property("MinDocCount");
-			writer.WriteValue(MinDocCount.Value);
-			writer.Write("L");
-		}
+			if (Include is not null)
+			{
+				initializer.Property("Include");
+				writer.WriteInlineList(Include, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (ShardMinDocCount is not null)
-		{
-			initializer.Property("ShardMinDocCount");
-			writer.WriteValue(ShardMinDocCount.Value);
-			writer.Write("L");
-		}
+			if (MinDocCount is not null)
+			{
+				initializer.Property("MinDocCount");
+				writer.WriteValue(MinDocCount.Value);
+				writer.Write("L");
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (ShardMinDocCount is not null)
+			{
+				initializer.Property("ShardMinDocCount");
+				writer.WriteValue(ShardMinDocCount.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,91 +27,166 @@ public partial class WordDelimiterTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter", true);
-		if (CatenateAll is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CatenateAll");
-			writer.WriteValue(CatenateAll.Value);
-		}
+			if (CatenateAll is not null)
+			{
+				writer.WriteFluentCall("CatenateAll", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CatenateAll.Value); });
+			}
 
-		if (CatenateNumbers is not null)
+			if (CatenateNumbers is not null)
+			{
+				writer.WriteFluentCall("CatenateNumbers", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CatenateNumbers.Value); });
+			}
+
+			if (CatenateWords is not null)
+			{
+				writer.WriteFluentCall("CatenateWords", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CatenateWords.Value); });
+			}
+
+			if (GenerateNumberParts is not null)
+			{
+				writer.WriteFluentCall("GenerateNumberParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(GenerateNumberParts.Value); });
+			}
+
+			if (GenerateWordParts is not null)
+			{
+				writer.WriteFluentCall("GenerateWordParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(GenerateWordParts.Value); });
+			}
+
+			if (PreserveOriginal is not null)
+			{
+				writer.WriteFluentCall("PreserveOriginal", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveOriginal.Value); });
+			}
+
+			if (ProtectedWords is not null)
+			{
+				writer.WriteFluentParams("ProtectedWords", ProtectedWords, (w, item) => { w.WriteString(item); });
+			}
+
+			if (ProtectedWordsPath is not null)
+			{
+				writer.WriteFluentCall("ProtectedWordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProtectedWordsPath); });
+			}
+
+			if (SplitOnCaseChange is not null)
+			{
+				writer.WriteFluentCall("SplitOnCaseChange", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitOnCaseChange.Value); });
+			}
+
+			if (SplitOnNumerics is not null)
+			{
+				writer.WriteFluentCall("SplitOnNumerics", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitOnNumerics.Value); });
+			}
+
+			if (StemEnglishPossessive is not null)
+			{
+				writer.WriteFluentCall("StemEnglishPossessive", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StemEnglishPossessive.Value); });
+			}
+
+			if (TypeTable is not null)
+			{
+				writer.WriteFluentParams("TypeTable", TypeTable, (w, item) => { w.WriteString(item); });
+			}
+
+			if (TypeTablePath is not null)
+			{
+				writer.WriteFluentCall("TypeTablePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TypeTablePath); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("CatenateNumbers");
-			writer.WriteValue(CatenateNumbers.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter", true);
+			if (CatenateAll is not null)
+			{
+				initializer.Property("CatenateAll");
+				writer.WriteValue(CatenateAll.Value);
+			}
 
-		if (CatenateWords is not null)
-		{
-			initializer.Property("CatenateWords");
-			writer.WriteValue(CatenateWords.Value);
-		}
+			if (CatenateNumbers is not null)
+			{
+				initializer.Property("CatenateNumbers");
+				writer.WriteValue(CatenateNumbers.Value);
+			}
 
-		if (GenerateNumberParts is not null)
-		{
-			initializer.Property("GenerateNumberParts");
-			writer.WriteValue(GenerateNumberParts.Value);
-		}
+			if (CatenateWords is not null)
+			{
+				initializer.Property("CatenateWords");
+				writer.WriteValue(CatenateWords.Value);
+			}
 
-		if (GenerateWordParts is not null)
-		{
-			initializer.Property("GenerateWordParts");
-			writer.WriteValue(GenerateWordParts.Value);
-		}
+			if (GenerateNumberParts is not null)
+			{
+				initializer.Property("GenerateNumberParts");
+				writer.WriteValue(GenerateNumberParts.Value);
+			}
 
-		if (PreserveOriginal is not null)
-		{
-			initializer.Property("PreserveOriginal");
-			writer.WriteValue(PreserveOriginal.Value);
-		}
+			if (GenerateWordParts is not null)
+			{
+				initializer.Property("GenerateWordParts");
+				writer.WriteValue(GenerateWordParts.Value);
+			}
 
-		if (ProtectedWords is not null)
-		{
-			initializer.Property("ProtectedWords");
-			writer.WriteInlineList(ProtectedWords, (w, item) => { w.WriteString(item); });
-		}
+			if (PreserveOriginal is not null)
+			{
+				initializer.Property("PreserveOriginal");
+				writer.WriteValue(PreserveOriginal.Value);
+			}
 
-		if (ProtectedWordsPath is not null)
-		{
-			initializer.Property("ProtectedWordsPath");
-			writer.WriteString(ProtectedWordsPath);
-		}
+			if (ProtectedWords is not null)
+			{
+				initializer.Property("ProtectedWords");
+				writer.WriteInlineList(ProtectedWords, (w, item) => { w.WriteString(item); });
+			}
 
-		if (SplitOnCaseChange is not null)
-		{
-			initializer.Property("SplitOnCaseChange");
-			writer.WriteValue(SplitOnCaseChange.Value);
-		}
+			if (ProtectedWordsPath is not null)
+			{
+				initializer.Property("ProtectedWordsPath");
+				writer.WriteString(ProtectedWordsPath);
+			}
 
-		if (SplitOnNumerics is not null)
-		{
-			initializer.Property("SplitOnNumerics");
-			writer.WriteValue(SplitOnNumerics.Value);
-		}
+			if (SplitOnCaseChange is not null)
+			{
+				initializer.Property("SplitOnCaseChange");
+				writer.WriteValue(SplitOnCaseChange.Value);
+			}
 
-		if (StemEnglishPossessive is not null)
-		{
-			initializer.Property("StemEnglishPossessive");
-			writer.WriteValue(StemEnglishPossessive.Value);
-		}
+			if (SplitOnNumerics is not null)
+			{
+				initializer.Property("SplitOnNumerics");
+				writer.WriteValue(SplitOnNumerics.Value);
+			}
 
-		if (TypeTable is not null)
-		{
-			initializer.Property("TypeTable");
-			writer.WriteInlineList(TypeTable, (w, item) => { w.WriteString(item); });
-		}
+			if (StemEnglishPossessive is not null)
+			{
+				initializer.Property("StemEnglishPossessive");
+				writer.WriteValue(StemEnglishPossessive.Value);
+			}
 
-		if (TypeTablePath is not null)
-		{
-			initializer.Property("TypeTablePath");
-			writer.WriteString(TypeTablePath);
-		}
+			if (TypeTable is not null)
+			{
+				initializer.Property("TypeTable");
+				writer.WriteInlineList(TypeTable, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (TypeTablePath is not null)
+			{
+				initializer.Property("TypeTablePath");
+				writer.WriteString(TypeTablePath);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

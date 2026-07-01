@@ -27,85 +27,155 @@ public partial class MultisearchHeader : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader", true);
-		if (AllowNoIndices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowNoIndices");
-			writer.WriteValue(AllowNoIndices.Value);
-		}
+			if (AllowNoIndices is not null)
+			{
+				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+			}
 
-		if (AllowPartialSearchResults is not null)
+			if (AllowPartialSearchResults is not null)
+			{
+				writer.WriteFluentCall("AllowPartialSearchResults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowPartialSearchResults.Value); });
+			}
+
+			if (CcsMinimizeRoundtrips is not null)
+			{
+				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CcsMinimizeRoundtrips.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (IgnoreThrottled is not null)
+			{
+				writer.WriteFluentCall("IgnoreThrottled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreThrottled.Value); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (Preference is not null)
+			{
+				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+			}
+
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+			}
+
+			if (RequestCache is not null)
+			{
+				writer.WriteFluentCall("RequestCache", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestCache.Value); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+			}
+
+			if (SearchType is not null)
+			{
+				writer.WriteFluentCall("SearchType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
+			}
+
+			if (Slice is not null)
+			{
+				writer.WriteFluentCall("Slice", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Slice); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowPartialSearchResults");
-			writer.WriteValue(AllowPartialSearchResults.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader", true);
+			if (AllowNoIndices is not null)
+			{
+				initializer.Property("AllowNoIndices");
+				writer.WriteValue(AllowNoIndices.Value);
+			}
 
-		if (CcsMinimizeRoundtrips is not null)
-		{
-			initializer.Property("CcsMinimizeRoundtrips");
-			writer.WriteValue(CcsMinimizeRoundtrips.Value);
-		}
+			if (AllowPartialSearchResults is not null)
+			{
+				initializer.Property("AllowPartialSearchResults");
+				writer.WriteValue(AllowPartialSearchResults.Value);
+			}
 
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			if (CcsMinimizeRoundtrips is not null)
+			{
+				initializer.Property("CcsMinimizeRoundtrips");
+				writer.WriteValue(CcsMinimizeRoundtrips.Value);
+			}
 
-		if (IgnoreThrottled is not null)
-		{
-			initializer.Property("IgnoreThrottled");
-			writer.WriteValue(IgnoreThrottled.Value);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (IgnoreThrottled is not null)
+			{
+				initializer.Property("IgnoreThrottled");
+				writer.WriteValue(IgnoreThrottled.Value);
+			}
 
-		if (Indices is not null)
-		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
 
-		if (Preference is not null)
-		{
-			initializer.Property("Preference");
-			writer.WriteString(Preference);
-		}
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (ProjectRouting is not null)
-		{
-			initializer.Property("ProjectRouting");
-			writer.WriteString(ProjectRouting);
-		}
+			if (Preference is not null)
+			{
+				initializer.Property("Preference");
+				writer.WriteString(Preference);
+			}
 
-		if (RequestCache is not null)
-		{
-			initializer.Property("RequestCache");
-			writer.WriteValue(RequestCache.Value);
-		}
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
+			if (RequestCache is not null)
+			{
+				initializer.Property("RequestCache");
+				writer.WriteValue(RequestCache.Value);
+			}
 
-		if (SearchType is not null)
-		{
-			initializer.Property("SearchType");
-			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
 
-		if (Slice is not null)
-		{
-			initializer.Property("Slice");
-			writer.WriteString(Slice);
-		}
+			if (SearchType is not null)
+			{
+				initializer.Property("SearchType");
+				Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Slice is not null)
+			{
+				initializer.Property("Slice");
+				writer.WriteString(Slice);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

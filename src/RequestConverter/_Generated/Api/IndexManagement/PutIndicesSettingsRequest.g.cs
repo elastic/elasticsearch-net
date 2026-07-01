@@ -27,66 +27,134 @@ public partial class PutIndicesSettingsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest", false);
-		if (Indices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (AllowNoIndices is not null)
+			using var _chainIndent = writer.Indent();
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (AllowNoIndices is not null)
+			{
+				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (FlatSettings is not null)
+			{
+				writer.WriteFluentCall("FlatSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatSettings.Value); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (PreserveExisting is not null)
+			{
+				writer.WriteFluentCall("PreserveExisting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveExisting.Value); });
+			}
+
+			if (Reopen is not null)
+			{
+				writer.WriteFluentCall("Reopen", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Reopen.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoIndices");
-			writer.WriteValue(AllowNoIndices.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest", false);
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			if (AllowNoIndices is not null)
+			{
+				initializer.Property("AllowNoIndices");
+				writer.WriteValue(AllowNoIndices.Value);
+			}
 
-		if (FlatSettings is not null)
-		{
-			initializer.Property("FlatSettings");
-			writer.WriteValue(FlatSettings.Value);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (FlatSettings is not null)
+			{
+				initializer.Property("FlatSettings");
+				writer.WriteValue(FlatSettings.Value);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
 
-		if (PreserveExisting is not null)
-		{
-			initializer.Property("PreserveExisting");
-			writer.WriteValue(PreserveExisting.Value);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (Reopen is not null)
-		{
-			initializer.Property("Reopen");
-			writer.WriteValue(Reopen.Value);
-		}
+			if (PreserveExisting is not null)
+			{
+				initializer.Property("PreserveExisting");
+				writer.WriteValue(PreserveExisting.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Reopen is not null)
+			{
+				initializer.Property("Reopen");
+				writer.WriteValue(Reopen.Value);
+			}
 
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

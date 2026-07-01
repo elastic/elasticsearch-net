@@ -27,37 +27,61 @@ public partial class GrantApiKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GrantApiKey", false);
-		if (Expiration is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Expiration");
-			writer.WriteString(Expiration);
-		}
+			if (Expiration is not null)
+			{
+				writer.WriteFluentCall("Expiration", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Expiration); });
+			}
 
-		if (Metadata is not null)
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+
+			if (RoleDescriptors is not null)
+			{
+				writer.WriteFluentCall("RoleDescriptors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(RoleDescriptors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RoleDescriptor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Metadata");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GrantApiKey", false);
+			if (Expiration is not null)
+			{
+				initializer.Property("Expiration");
+				writer.WriteString(Expiration);
+			}
 
-		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (RoleDescriptors is not null)
-		{
-			initializer.Property("RoleDescriptors");
-			writer.WriteInlineList(RoleDescriptors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RoleDescriptor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); });
-		}
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (RoleDescriptors is not null)
+			{
+				initializer.Property("RoleDescriptors");
+				writer.WriteInlineList(RoleDescriptors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.RoleDescriptor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

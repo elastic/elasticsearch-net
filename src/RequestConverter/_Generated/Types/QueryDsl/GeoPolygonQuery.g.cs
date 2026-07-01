@@ -27,42 +27,75 @@ public partial class GeoPolygonQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (IgnoreUnmapped is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Polygon", (w) => { Polygon.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (ValidationMethod is not null)
+			{
+				writer.WriteFluentCall("ValidationMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (IgnoreUnmapped is not null)
-		{
-			initializer.Property("IgnoreUnmapped");
-			writer.WriteValue(IgnoreUnmapped.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Polygon");
-			Polygon.FormatCode(writer);
-		}
+			if (IgnoreUnmapped is not null)
+			{
+				initializer.Property("IgnoreUnmapped");
+				writer.WriteValue(IgnoreUnmapped.Value);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Polygon");
+				Polygon.FormatCode(writer);
+			}
 
-		if (ValidationMethod is not null)
-		{
-			initializer.Property("ValidationMethod");
-			Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (ValidationMethod is not null)
+			{
+				initializer.Property("ValidationMethod");
+				Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

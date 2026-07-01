@@ -27,55 +27,113 @@ public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest", false);
-		if (Indices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (CcsMinimizeRoundtrips is not null)
+			using var _chainIndent = writer.Indent();
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (CcsMinimizeRoundtrips is not null)
+			{
+				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CcsMinimizeRoundtrips.Value); });
+			}
+
+			if (MaxConcurrentSearches is not null)
+			{
+				writer.WriteFluentCall("MaxConcurrentSearches", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentSearches.Value); w.Write("L"); });
+			}
+
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+			}
+
+			if (RestTotalHitsAsInt is not null)
+			{
+				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RestTotalHitsAsInt.Value); });
+			}
+
+			if (SearchType is not null)
+			{
+				writer.WriteFluentCall("SearchType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
+			}
+
+			if (TypedKeys is not null)
+			{
+				writer.WriteFluentCall("TypedKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TypedKeys.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("SearchTemplates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("CcsMinimizeRoundtrips");
-			writer.WriteValue(CcsMinimizeRoundtrips.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest", false);
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (MaxConcurrentSearches is not null)
-		{
-			initializer.Property("MaxConcurrentSearches");
-			writer.WriteValue(MaxConcurrentSearches.Value);
-			writer.Write("L");
-		}
+			if (CcsMinimizeRoundtrips is not null)
+			{
+				initializer.Property("CcsMinimizeRoundtrips");
+				writer.WriteValue(CcsMinimizeRoundtrips.Value);
+			}
 
-		if (ProjectRouting is not null)
-		{
-			initializer.Property("ProjectRouting");
-			writer.WriteString(ProjectRouting);
-		}
+			if (MaxConcurrentSearches is not null)
+			{
+				initializer.Property("MaxConcurrentSearches");
+				writer.WriteValue(MaxConcurrentSearches.Value);
+				writer.Write("L");
+			}
 
-		if (RestTotalHitsAsInt is not null)
-		{
-			initializer.Property("RestTotalHitsAsInt");
-			writer.WriteValue(RestTotalHitsAsInt.Value);
-		}
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
+			}
 
-		if (SearchType is not null)
-		{
-			initializer.Property("SearchType");
-			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
-		}
+			if (RestTotalHitsAsInt is not null)
+			{
+				initializer.Property("RestTotalHitsAsInt");
+				writer.WriteValue(RestTotalHitsAsInt.Value);
+			}
 
-		if (TypedKeys is not null)
-		{
-			initializer.Property("TypedKeys");
-			writer.WriteValue(TypedKeys.Value);
-		}
+			if (SearchType is not null)
+			{
+				initializer.Property("SearchType");
+				Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
+			}
 
-		{
-			initializer.Property("SearchTemplates");
-			writer.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); });
-		}
+			if (TypedKeys is not null)
+			{
+				initializer.Property("TypedKeys");
+				writer.WriteValue(TypedKeys.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("SearchTemplates");
+				writer.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

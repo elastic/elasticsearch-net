@@ -27,12 +27,21 @@ public partial class CompositeSubField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.CompositeSubField", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, writer);
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.CompositeSubField", false);
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

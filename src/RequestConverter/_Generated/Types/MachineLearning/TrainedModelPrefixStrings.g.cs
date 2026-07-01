@@ -27,19 +27,34 @@ public partial class TrainedModelPrefixStrings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings", false);
-		if (Ingest is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Ingest");
-			writer.WriteString(Ingest);
-		}
+			if (Ingest is not null)
+			{
+				writer.WriteFluentCall("Ingest", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Ingest); });
+			}
 
-		if (Search is not null)
+			if (Search is not null)
+			{
+				writer.WriteFluentCall("Search", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Search); });
+			}
+		}
+		else
 		{
-			initializer.Property("Search");
-			writer.WriteString(Search);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings", false);
+			if (Ingest is not null)
+			{
+				initializer.Property("Ingest");
+				writer.WriteString(Ingest);
+			}
 
-		initializer.Dispose();
+			if (Search is not null)
+			{
+				initializer.Property("Search");
+				writer.WriteString(Search);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

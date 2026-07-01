@@ -27,19 +27,34 @@ public partial class PerPartitionCategorization : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization", false);
-		if (Enabled is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
 
-		if (StopOnWarn is not null)
+			if (StopOnWarn is not null)
+			{
+				writer.WriteFluentCall("StopOnWarn", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StopOnWarn.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("StopOnWarn");
-			writer.WriteValue(StopOnWarn.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization", false);
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		initializer.Dispose();
+			if (StopOnWarn is not null)
+			{
+				initializer.Property("StopOnWarn");
+				writer.WriteValue(StopOnWarn.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

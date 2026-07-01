@@ -27,19 +27,34 @@ public partial class TimeSeriesAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation", false);
-		if (Keyed is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Keyed");
-			writer.WriteValue(Keyed.Value);
-		}
+			if (Keyed is not null)
+			{
+				writer.WriteFluentCall("Keyed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Keyed.Value); });
+			}
 
-		if (Size is not null)
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation", false);
+			if (Keyed is not null)
+			{
+				initializer.Property("Keyed");
+				writer.WriteValue(Keyed.Value);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

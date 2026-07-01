@@ -27,37 +27,67 @@ public partial class AmazonSageMakerTaskSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings", false);
-		if (CustomAttributes is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CustomAttributes");
-			writer.WriteString(CustomAttributes);
-		}
+			if (CustomAttributes is not null)
+			{
+				writer.WriteFluentCall("CustomAttributes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CustomAttributes); });
+			}
 
-		if (EnableExplanations is not null)
+			if (EnableExplanations is not null)
+			{
+				writer.WriteFluentCall("EnableExplanations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EnableExplanations); });
+			}
+
+			if (InferenceId is not null)
+			{
+				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InferenceId); });
+			}
+
+			if (SessionId is not null)
+			{
+				writer.WriteFluentCall("SessionId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SessionId); });
+			}
+
+			if (TargetVariant is not null)
+			{
+				writer.WriteFluentCall("TargetVariant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetVariant); });
+			}
+		}
+		else
 		{
-			initializer.Property("EnableExplanations");
-			writer.WriteString(EnableExplanations);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings", false);
+			if (CustomAttributes is not null)
+			{
+				initializer.Property("CustomAttributes");
+				writer.WriteString(CustomAttributes);
+			}
 
-		if (InferenceId is not null)
-		{
-			initializer.Property("InferenceId");
-			writer.WriteString(InferenceId);
-		}
+			if (EnableExplanations is not null)
+			{
+				initializer.Property("EnableExplanations");
+				writer.WriteString(EnableExplanations);
+			}
 
-		if (SessionId is not null)
-		{
-			initializer.Property("SessionId");
-			writer.WriteString(SessionId);
-		}
+			if (InferenceId is not null)
+			{
+				initializer.Property("InferenceId");
+				writer.WriteString(InferenceId);
+			}
 
-		if (TargetVariant is not null)
-		{
-			initializer.Property("TargetVariant");
-			writer.WriteString(TargetVariant);
-		}
+			if (SessionId is not null)
+			{
+				initializer.Property("SessionId");
+				writer.WriteString(SessionId);
+			}
 
-		initializer.Dispose();
+			if (TargetVariant is not null)
+			{
+				initializer.Property("TargetVariant");
+				writer.WriteString(TargetVariant);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

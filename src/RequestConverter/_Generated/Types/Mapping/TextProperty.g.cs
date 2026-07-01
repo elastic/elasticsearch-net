@@ -27,153 +27,273 @@ public partial class TextProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.TextProperty", true);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (Boost is not null)
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("d"); });
+			}
+
+			if (CopyTo is not null)
+			{
+				writer.WriteFluentCall("CopyTo", (w) => { using var _oi = w.ForceObjectInitializer(); CopyTo.FormatCode(w); });
+			}
+
+			if (Dynamic is not null)
+			{
+				writer.WriteFluentCall("Dynamic", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, w); });
+			}
+
+			if (EagerGlobalOrdinals is not null)
+			{
+				writer.WriteFluentCall("EagerGlobalOrdinals", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EagerGlobalOrdinals.Value); });
+			}
+
+			if (Fielddata is not null)
+			{
+				writer.WriteFluentCall("Fielddata", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Fielddata.Value); });
+			}
+
+			if (FielddataFrequencyFilter is not null)
+			{
+				writer.WriteFluentDescriptorCall("FielddataFrequencyFilter", (w) => { FielddataFrequencyFilter.FormatCode(w); });
+			}
+
+			if (Fields is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fields.FormatCode(w); });
+			}
+
+			if (IgnoreAbove is not null)
+			{
+				writer.WriteFluentCall("IgnoreAbove", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreAbove.Value); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Index.Value); });
+			}
+
+			if (IndexOptions is not null)
+			{
+				writer.WriteFluentCall("IndexOptions", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, w); });
+			}
+
+			if (IndexPhrases is not null)
+			{
+				writer.WriteFluentCall("IndexPhrases", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexPhrases.Value); });
+			}
+
+			if (IndexPrefixes is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexPrefixes", (w) => { IndexPrefixes.FormatCode(w); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Norms is not null)
+			{
+				writer.WriteFluentCall("Norms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Norms.Value); });
+			}
+
+			if (PositionIncrementGap is not null)
+			{
+				writer.WriteFluentCall("PositionIncrementGap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PositionIncrementGap.Value); });
+			}
+
+			if (Properties is not null)
+			{
+				writer.WriteFluentDescriptorCall("Properties", (w) => { Properties.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Properties.FormatCode(w); });
+			}
+
+			if (SearchAnalyzer is not null)
+			{
+				writer.WriteFluentCall("SearchAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchAnalyzer); });
+			}
+
+			if (SearchQuoteAnalyzer is not null)
+			{
+				writer.WriteFluentCall("SearchQuoteAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchQuoteAnalyzer); });
+			}
+
+			if (Similarity is not null)
+			{
+				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Similarity); });
+			}
+
+			if (Store is not null)
+			{
+				writer.WriteFluentCall("Store", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Store.Value); });
+			}
+
+			if (SyntheticSourceKeep is not null)
+			{
+				writer.WriteFluentCall("SyntheticSourceKeep", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, w); });
+			}
+
+			if (TermVector is not null)
+			{
+				writer.WriteFluentCall("TermVector", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.TermVectorOptionCodeFormatter.FormatCode(TermVector.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.TextProperty", true);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (CopyTo is not null)
-		{
-			initializer.Property("CopyTo");
-			CopyTo.FormatCode(writer);
-		}
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("d");
+			}
 
-		if (Dynamic is not null)
-		{
-			initializer.Property("Dynamic");
-			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
-		}
+			if (CopyTo is not null)
+			{
+				initializer.Property("CopyTo");
+				CopyTo.FormatCode(writer);
+			}
 
-		if (EagerGlobalOrdinals is not null)
-		{
-			initializer.Property("EagerGlobalOrdinals");
-			writer.WriteValue(EagerGlobalOrdinals.Value);
-		}
+			if (Dynamic is not null)
+			{
+				initializer.Property("Dynamic");
+				Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
+			}
 
-		if (Fielddata is not null)
-		{
-			initializer.Property("Fielddata");
-			writer.WriteValue(Fielddata.Value);
-		}
+			if (EagerGlobalOrdinals is not null)
+			{
+				initializer.Property("EagerGlobalOrdinals");
+				writer.WriteValue(EagerGlobalOrdinals.Value);
+			}
 
-		if (FielddataFrequencyFilter is not null)
-		{
-			initializer.Property("FielddataFrequencyFilter");
-			FielddataFrequencyFilter.FormatCode(writer);
-		}
+			if (Fielddata is not null)
+			{
+				initializer.Property("Fielddata");
+				writer.WriteValue(Fielddata.Value);
+			}
 
-		if (Fields is not null)
-		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			if (FielddataFrequencyFilter is not null)
+			{
+				initializer.Property("FielddataFrequencyFilter");
+				FielddataFrequencyFilter.FormatCode(writer);
+			}
 
-		if (IgnoreAbove is not null)
-		{
-			initializer.Property("IgnoreAbove");
-			writer.WriteValue(IgnoreAbove.Value);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			writer.WriteValue(Index.Value);
-		}
+			if (IgnoreAbove is not null)
+			{
+				initializer.Property("IgnoreAbove");
+				writer.WriteValue(IgnoreAbove.Value);
+			}
 
-		if (IndexOptions is not null)
-		{
-			initializer.Property("IndexOptions");
-			Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, writer);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				writer.WriteValue(Index.Value);
+			}
 
-		if (IndexPhrases is not null)
-		{
-			initializer.Property("IndexPhrases");
-			writer.WriteValue(IndexPhrases.Value);
-		}
+			if (IndexOptions is not null)
+			{
+				initializer.Property("IndexOptions");
+				Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, writer);
+			}
 
-		if (IndexPrefixes is not null)
-		{
-			initializer.Property("IndexPrefixes");
-			IndexPrefixes.FormatCode(writer);
-		}
+			if (IndexPhrases is not null)
+			{
+				initializer.Property("IndexPhrases");
+				writer.WriteValue(IndexPhrases.Value);
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			if (IndexPrefixes is not null)
+			{
+				initializer.Property("IndexPrefixes");
+				IndexPrefixes.FormatCode(writer);
+			}
 
-		if (Norms is not null)
-		{
-			initializer.Property("Norms");
-			writer.WriteValue(Norms.Value);
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		if (PositionIncrementGap is not null)
-		{
-			initializer.Property("PositionIncrementGap");
-			writer.WriteValue(PositionIncrementGap.Value);
-		}
+			if (Norms is not null)
+			{
+				initializer.Property("Norms");
+				writer.WriteValue(Norms.Value);
+			}
 
-		if (Properties is not null)
-		{
-			initializer.Property("Properties");
-			Properties.FormatCode(writer);
-		}
+			if (PositionIncrementGap is not null)
+			{
+				initializer.Property("PositionIncrementGap");
+				writer.WriteValue(PositionIncrementGap.Value);
+			}
 
-		if (SearchAnalyzer is not null)
-		{
-			initializer.Property("SearchAnalyzer");
-			writer.WriteString(SearchAnalyzer);
-		}
+			if (Properties is not null)
+			{
+				initializer.Property("Properties");
+				Properties.FormatCode(writer);
+			}
 
-		if (SearchQuoteAnalyzer is not null)
-		{
-			initializer.Property("SearchQuoteAnalyzer");
-			writer.WriteString(SearchQuoteAnalyzer);
-		}
+			if (SearchAnalyzer is not null)
+			{
+				initializer.Property("SearchAnalyzer");
+				writer.WriteString(SearchAnalyzer);
+			}
 
-		if (Similarity is not null)
-		{
-			initializer.Property("Similarity");
-			writer.WriteString(Similarity);
-		}
+			if (SearchQuoteAnalyzer is not null)
+			{
+				initializer.Property("SearchQuoteAnalyzer");
+				writer.WriteString(SearchQuoteAnalyzer);
+			}
 
-		if (Store is not null)
-		{
-			initializer.Property("Store");
-			writer.WriteValue(Store.Value);
-		}
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				writer.WriteString(Similarity);
+			}
 
-		if (SyntheticSourceKeep is not null)
-		{
-			initializer.Property("SyntheticSourceKeep");
-			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
-		}
+			if (Store is not null)
+			{
+				initializer.Property("Store");
+				writer.WriteValue(Store.Value);
+			}
 
-		if (TermVector is not null)
-		{
-			initializer.Property("TermVector");
-			Elastic.Clients.Elasticsearch.Mapping.TermVectorOptionCodeFormatter.FormatCode(TermVector.Value, writer);
-		}
+			if (SyntheticSourceKeep is not null)
+			{
+				initializer.Property("SyntheticSourceKeep");
+				Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (TermVector is not null)
+			{
+				initializer.Property("TermVector");
+				Elastic.Clients.Elasticsearch.Mapping.TermVectorOptionCodeFormatter.FormatCode(TermVector.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

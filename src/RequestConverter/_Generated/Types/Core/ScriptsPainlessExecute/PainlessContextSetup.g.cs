@@ -27,23 +27,41 @@ public partial class PainlessContextSetup : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Document");
-			writer.WriteValue(Document);
-		}
+			{
+				writer.WriteFluentCall("Document", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Document); });
+			}
 
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup", false);
+			{
+				initializer.Property("Document");
+				writer.WriteObjectValue(Document);
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

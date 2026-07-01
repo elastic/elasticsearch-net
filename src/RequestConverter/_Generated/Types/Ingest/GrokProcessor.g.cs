@@ -27,84 +27,147 @@ public partial class GrokProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.GrokProcessor", false);
-		if (Description is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
 
-		if (EcsCompatibility is not null)
+			if (EcsCompatibility is not null)
+			{
+				writer.WriteFluentCall("EcsCompatibility", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EcsCompatibility); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (IgnoreMissing is not null)
+			{
+				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (PatternDefinitions is not null)
+			{
+				writer.WriteFluentCall("PatternDefinitions", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentParams("Patterns", Patterns, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (TraceMatch is not null)
+			{
+				writer.WriteFluentCall("TraceMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TraceMatch.Value); });
+			}
+
+			if (ValidateOnly is not null)
+			{
+				writer.WriteFluentCall("ValidateOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ValidateOnly.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("EcsCompatibility");
-			writer.WriteString(EcsCompatibility);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.GrokProcessor", false);
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (EcsCompatibility is not null)
+			{
+				initializer.Property("EcsCompatibility");
+				writer.WriteString(EcsCompatibility);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IgnoreMissing is not null)
-		{
-			initializer.Property("IgnoreMissing");
-			writer.WriteValue(IgnoreMissing.Value);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (IgnoreMissing is not null)
+			{
+				initializer.Property("IgnoreMissing");
+				writer.WriteValue(IgnoreMissing.Value);
+			}
 
-		if (PatternDefinitions is not null)
-		{
-			initializer.Property("PatternDefinitions");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		{
-			initializer.Property("Patterns");
-			writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
-		}
+			if (PatternDefinitions is not null)
+			{
+				initializer.Property("PatternDefinitions");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			{
+				initializer.Property("Patterns");
+				writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
+			}
 
-		if (TraceMatch is not null)
-		{
-			initializer.Property("TraceMatch");
-			writer.WriteValue(TraceMatch.Value);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		if (ValidateOnly is not null)
-		{
-			initializer.Property("ValidateOnly");
-			writer.WriteValue(ValidateOnly.Value);
-		}
+			if (TraceMatch is not null)
+			{
+				initializer.Property("TraceMatch");
+				writer.WriteValue(TraceMatch.Value);
+			}
 
-		initializer.Dispose();
+			if (ValidateOnly is not null)
+			{
+				initializer.Property("ValidateOnly");
+				writer.WriteValue(ValidateOnly.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

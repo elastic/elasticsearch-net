@@ -27,19 +27,34 @@ public partial class ChunkRescorer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ChunkRescorer", false);
-		if (ChunkingSettings is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ChunkingSettings");
-			ChunkingSettings.FormatCode(writer);
-		}
+			if (ChunkingSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
+			}
 
-		if (Size is not null)
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ChunkRescorer", false);
+			if (ChunkingSettings is not null)
+			{
+				initializer.Property("ChunkingSettings");
+				ChunkingSettings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

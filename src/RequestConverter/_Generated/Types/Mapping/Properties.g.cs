@@ -27,7 +27,335 @@ public partial class Properties : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
-		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			foreach (var kvp in this)
+			{
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.DynamicProperty c1)
+				{
+					writer.WriteFluentVariantAdd("Dynamic", (w) => { kvp.Key.FormatCode(w); }, (w) => { c1.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty c2)
+				{
+					writer.WriteFluentVariantAdd("AggregateMetricDouble", (w) => { kvp.Key.FormatCode(w); }, (w) => { c2.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty c3)
+				{
+					writer.WriteFluentVariantAdd("FieldAlias", (w) => { kvp.Key.FormatCode(w); }, (w) => { c3.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.BinaryProperty c4)
+				{
+					writer.WriteFluentVariantAdd("Binary", (w) => { kvp.Key.FormatCode(w); }, (w) => { c4.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.BooleanProperty c5)
+				{
+					writer.WriteFluentVariantAdd("Boolean", (w) => { kvp.Key.FormatCode(w); }, (w) => { c5.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty c6)
+				{
+					writer.WriteFluentVariantAdd("ByteNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c6.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.CompletionProperty c7)
+				{
+					writer.WriteFluentVariantAdd("Completion", (w) => { kvp.Key.FormatCode(w); }, (w) => { c7.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty c8)
+				{
+					writer.WriteFluentVariantAdd("ConstantKeyword", (w) => { kvp.Key.FormatCode(w); }, (w) => { c8.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty c9)
+				{
+					writer.WriteFluentVariantAdd("CountedKeyword", (w) => { kvp.Key.FormatCode(w); }, (w) => { c9.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.DateProperty c10)
+				{
+					writer.WriteFluentVariantAdd("Date", (w) => { kvp.Key.FormatCode(w); }, (w) => { c10.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty c11)
+				{
+					writer.WriteFluentVariantAdd("DateNanos", (w) => { kvp.Key.FormatCode(w); }, (w) => { c11.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty c12)
+				{
+					writer.WriteFluentVariantAdd("DateRange", (w) => { kvp.Key.FormatCode(w); }, (w) => { c12.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty c13)
+				{
+					writer.WriteFluentVariantAdd("DenseVector", (w) => { kvp.Key.FormatCode(w); }, (w) => { c13.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty c14)
+				{
+					writer.WriteFluentVariantAdd("DoubleNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c14.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty c15)
+				{
+					writer.WriteFluentVariantAdd("DoubleRange", (w) => { kvp.Key.FormatCode(w); }, (w) => { c15.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty c16)
+				{
+					writer.WriteFluentVariantAdd("ExponentialHistogram", (w) => { kvp.Key.FormatCode(w); }, (w) => { c16.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty c17)
+				{
+					writer.WriteFluentVariantAdd("Flattened", (w) => { kvp.Key.FormatCode(w); }, (w) => { c17.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty c18)
+				{
+					writer.WriteFluentVariantAdd("FloatNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c18.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty c19)
+				{
+					writer.WriteFluentVariantAdd("FloatRange", (w) => { kvp.Key.FormatCode(w); }, (w) => { c19.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty c20)
+				{
+					writer.WriteFluentVariantAdd("GeoPoint", (w) => { kvp.Key.FormatCode(w); }, (w) => { c20.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty c21)
+				{
+					writer.WriteFluentVariantAdd("GeoShape", (w) => { kvp.Key.FormatCode(w); }, (w) => { c21.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty c22)
+				{
+					writer.WriteFluentVariantAdd("HalfFloatNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c22.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.HistogramProperty c23)
+				{
+					writer.WriteFluentVariantAdd("Histogram", (w) => { kvp.Key.FormatCode(w); }, (w) => { c23.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty c24)
+				{
+					writer.WriteFluentVariantAdd("IcuCollation", (w) => { kvp.Key.FormatCode(w); }, (w) => { c24.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty c25)
+				{
+					writer.WriteFluentVariantAdd("IntegerNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c25.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty c26)
+				{
+					writer.WriteFluentVariantAdd("IntegerRange", (w) => { kvp.Key.FormatCode(w); }, (w) => { c26.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.IpProperty c27)
+				{
+					writer.WriteFluentVariantAdd("Ip", (w) => { kvp.Key.FormatCode(w); }, (w) => { c27.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty c28)
+				{
+					writer.WriteFluentVariantAdd("IpRange", (w) => { kvp.Key.FormatCode(w); }, (w) => { c28.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.JoinProperty c29)
+				{
+					writer.WriteFluentVariantAdd("Join", (w) => { kvp.Key.FormatCode(w); }, (w) => { c29.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.KeywordProperty c30)
+				{
+					writer.WriteFluentVariantAdd("Keyword", (w) => { kvp.Key.FormatCode(w); }, (w) => { c30.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty c31)
+				{
+					writer.WriteFluentVariantAdd("LongNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c31.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty c32)
+				{
+					writer.WriteFluentVariantAdd("LongRange", (w) => { kvp.Key.FormatCode(w); }, (w) => { c32.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty c33)
+				{
+					writer.WriteFluentVariantAdd("MatchOnlyText", (w) => { kvp.Key.FormatCode(w); }, (w) => { c33.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty c34)
+				{
+					writer.WriteFluentVariantAdd("Murmur3Hash", (w) => { kvp.Key.FormatCode(w); }, (w) => { c34.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.NestedProperty c35)
+				{
+					writer.WriteFluentVariantAdd("Nested", (w) => { kvp.Key.FormatCode(w); }, (w) => { c35.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.ObjectProperty c36)
+				{
+					writer.WriteFluentVariantAdd("Object", (w) => { kvp.Key.FormatCode(w); }, (w) => { c36.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty c37)
+				{
+					writer.WriteFluentVariantAdd("PassthroughObject", (w) => { kvp.Key.FormatCode(w); }, (w) => { c37.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty c38)
+				{
+					writer.WriteFluentVariantAdd("Percolator", (w) => { kvp.Key.FormatCode(w); }, (w) => { c38.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.PointProperty c39)
+				{
+					writer.WriteFluentVariantAdd("Point", (w) => { kvp.Key.FormatCode(w); }, (w) => { c39.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty c40)
+				{
+					writer.WriteFluentVariantAdd("RankFeature", (w) => { kvp.Key.FormatCode(w); }, (w) => { c40.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty c41)
+				{
+					writer.WriteFluentVariantAdd("RankFeatures", (w) => { kvp.Key.FormatCode(w); }, (w) => { c41.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty c42)
+				{
+					writer.WriteFluentVariantAdd("RankVector", (w) => { kvp.Key.FormatCode(w); }, (w) => { c42.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty c43)
+				{
+					writer.WriteFluentVariantAdd("ScaledFloatNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c43.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty c44)
+				{
+					writer.WriteFluentVariantAdd("SearchAsYouType", (w) => { kvp.Key.FormatCode(w); }, (w) => { c44.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty c45)
+				{
+					writer.WriteFluentVariantAdd("SemanticText", (w) => { kvp.Key.FormatCode(w); }, (w) => { c45.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.ShapeProperty c46)
+				{
+					writer.WriteFluentVariantAdd("Shape", (w) => { kvp.Key.FormatCode(w); }, (w) => { c46.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty c47)
+				{
+					writer.WriteFluentVariantAdd("ShortNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c47.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty c48)
+				{
+					writer.WriteFluentVariantAdd("SparseVector", (w) => { kvp.Key.FormatCode(w); }, (w) => { c48.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.TextProperty c49)
+				{
+					writer.WriteFluentVariantAdd("Text", (w) => { kvp.Key.FormatCode(w); }, (w) => { c49.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty c50)
+				{
+					writer.WriteFluentVariantAdd("TokenCount", (w) => { kvp.Key.FormatCode(w); }, (w) => { c50.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty c51)
+				{
+					writer.WriteFluentVariantAdd("UnsignedLongNumber", (w) => { kvp.Key.FormatCode(w); }, (w) => { c51.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.VersionProperty c52)
+				{
+					writer.WriteFluentVariantAdd("Version", (w) => { kvp.Key.FormatCode(w); }, (w) => { c52.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Mapping.WildcardProperty c53)
+				{
+					writer.WriteFluentVariantAdd("Wildcard", (w) => { kvp.Key.FormatCode(w); }, (w) => { c53.FormatCode(w); });
+					continue;
+				}
+
+				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+			}
+		}
+		else
+		{
+			writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.Mapping.Properties");
+			writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
 	}
 }

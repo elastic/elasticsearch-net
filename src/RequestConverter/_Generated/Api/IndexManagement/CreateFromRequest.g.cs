@@ -27,23 +27,71 @@ public partial class CreateFromRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Dest");
-			Dest.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Source.FormatCode(writer);
+				}
 
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Dest.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Source.FormatCode(writer);
+				}
+
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Dest.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (CreateFrom is not null)
+			{
+				writer.WriteFluentDescriptorCall("CreateFrom", (w) => { CreateFrom.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest", false);
+			{
+				initializer.Property("Dest");
+				Dest.FormatCode(writer);
+			}
 
-		if (CreateFrom is not null)
-		{
-			initializer.Property("CreateFrom");
-			CreateFrom.FormatCode(writer);
-		}
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (CreateFrom is not null)
+			{
+				initializer.Property("CreateFrom");
+				CreateFrom.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,19 +27,34 @@ public partial class ExtendedBounds<T> : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<T>", false);
-		if (Max is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Max");
-			writer.WriteValue(Max);
-		}
+			if (Max is not null)
+			{
+				writer.WriteFluentCall("Max", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Max); });
+			}
 
-		if (Min is not null)
+			if (Min is not null)
+			{
+				writer.WriteFluentCall("Min", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Min); });
+			}
+		}
+		else
 		{
-			initializer.Property("Min");
-			writer.WriteValue(Min);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<T>", false);
+			if (Max is not null)
+			{
+				initializer.Property("Max");
+				writer.WriteValue(Max);
+			}
 
-		initializer.Dispose();
+			if (Min is not null)
+			{
+				initializer.Property("Min");
+				writer.WriteValue(Min);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

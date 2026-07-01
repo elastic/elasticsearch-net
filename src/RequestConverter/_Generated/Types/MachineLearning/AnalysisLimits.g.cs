@@ -27,20 +27,35 @@ public partial class AnalysisLimits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits", false);
-		if (CategorizationExamplesLimit is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CategorizationExamplesLimit");
-			writer.WriteValue(CategorizationExamplesLimit.Value);
-			writer.Write("L");
-		}
+			if (CategorizationExamplesLimit is not null)
+			{
+				writer.WriteFluentCall("CategorizationExamplesLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CategorizationExamplesLimit.Value); w.Write("L"); });
+			}
 
-		if (ModelMemoryLimit is not null)
+			if (ModelMemoryLimit is not null)
+			{
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); ModelMemoryLimit.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ModelMemoryLimit");
-			ModelMemoryLimit.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits", false);
+			if (CategorizationExamplesLimit is not null)
+			{
+				initializer.Property("CategorizationExamplesLimit");
+				writer.WriteValue(CategorizationExamplesLimit.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			if (ModelMemoryLimit is not null)
+			{
+				initializer.Property("ModelMemoryLimit");
+				ModelMemoryLimit.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

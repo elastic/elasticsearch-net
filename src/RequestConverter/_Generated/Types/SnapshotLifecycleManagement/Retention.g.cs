@@ -27,22 +27,39 @@ public partial class Retention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ExpireAfter");
-			ExpireAfter.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("ExpireAfter", (w) => { using var _oi = w.ForceObjectInitializer(); ExpireAfter.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("MaxCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxCount); });
+			}
+
+			{
+				writer.WriteFluentCall("MinCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinCount); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxCount");
-			writer.WriteValue(MaxCount);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention", false);
+			{
+				initializer.Property("ExpireAfter");
+				ExpireAfter.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("MinCount");
-			writer.WriteValue(MinCount);
-		}
+			{
+				initializer.Property("MaxCount");
+				writer.WriteValue(MaxCount);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("MinCount");
+				writer.WriteValue(MinCount);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

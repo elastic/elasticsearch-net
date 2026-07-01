@@ -27,19 +27,34 @@ public partial class DataStreamFailureStoreTemplate : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplate", false);
-		if (Enabled is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
 
-		if (Lifecycle is not null)
+			if (Lifecycle is not null)
+			{
+				writer.WriteFluentDescriptorCall("Lifecycle", (w) => { Lifecycle.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Lifecycle");
-			Lifecycle.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplate", false);
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		initializer.Dispose();
+			if (Lifecycle is not null)
+			{
+				initializer.Property("Lifecycle");
+				Lifecycle.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

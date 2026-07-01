@@ -27,17 +27,39 @@ public partial class DeleteRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RuleId");
-			RuleId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				RulesetId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				RuleId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("RulesetId");
-			RulesetId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest", false);
+			{
+				initializer.Property("RuleId");
+				RuleId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("RulesetId");
+				RulesetId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

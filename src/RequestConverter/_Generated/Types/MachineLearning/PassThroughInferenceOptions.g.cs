@@ -27,25 +27,45 @@ public partial class PassThroughInferenceOptions : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions", false);
-		if (ResultsField is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ResultsField");
-			writer.WriteString(ResultsField);
-		}
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+			}
 
-		if (Tokenization is not null)
+			if (Tokenization is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+			}
+
+			if (Vocabulary is not null)
+			{
+				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Tokenization");
-			Tokenization.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions", false);
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				writer.WriteString(ResultsField);
+			}
 
-		if (Vocabulary is not null)
-		{
-			initializer.Property("Vocabulary");
-			Vocabulary.FormatCode(writer);
-		}
+			if (Tokenization is not null)
+			{
+				initializer.Property("Tokenization");
+				Tokenization.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Vocabulary is not null)
+			{
+				initializer.Property("Vocabulary");
+				Vocabulary.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

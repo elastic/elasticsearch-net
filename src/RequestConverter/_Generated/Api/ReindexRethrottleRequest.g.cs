@@ -27,25 +27,50 @@ public partial class ReindexRethrottleRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ReindexRethrottleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TaskId");
-			TaskId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TaskId.FormatCode(writer);
+			}
 
-		if (GroupBy is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (GroupBy is not null)
+			{
+				writer.WriteFluentCall("GroupBy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, w); });
+			}
+
+			if (RequestsPerSecond is not null)
+			{
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+			}
+		}
+		else
 		{
-			initializer.Property("GroupBy");
-			Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ReindexRethrottleRequest", false);
+			{
+				initializer.Property("TaskId");
+				TaskId.FormatCode(writer);
+			}
 
-		if (RequestsPerSecond is not null)
-		{
-			initializer.Property("RequestsPerSecond");
-			writer.WriteValue(RequestsPerSecond.Value);
-			writer.Write("f");
-		}
+			if (GroupBy is not null)
+			{
+				initializer.Property("GroupBy");
+				Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (RequestsPerSecond is not null)
+			{
+				initializer.Property("RequestsPerSecond");
+				writer.WriteValue(RequestsPerSecond.Value);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

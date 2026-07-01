@@ -27,66 +27,120 @@ public partial class GoogleVertexAIServiceSettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings", false);
-		if (Dimensions is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Dimensions");
-			writer.WriteValue(Dimensions.Value);
-		}
+			if (Dimensions is not null)
+			{
+				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+			}
 
-		if (Location is not null)
+			if (Location is not null)
+			{
+				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Location); });
+			}
+
+			if (MaxBatchSize is not null)
+			{
+				writer.WriteFluentCall("MaxBatchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxBatchSize.Value); });
+			}
+
+			if (ModelId is not null)
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (ProjectId is not null)
+			{
+				writer.WriteFluentCall("ProjectId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectId); });
+			}
+
+			if (Provider is not null)
+			{
+				writer.WriteFluentCall("Provider", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(Provider.Value, w); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("ServiceAccountJson", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ServiceAccountJson); });
+			}
+
+			if (StreamingUrl is not null)
+			{
+				writer.WriteFluentCall("StreamingUrl", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StreamingUrl); });
+			}
+
+			if (Url is not null)
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("Location");
-			writer.WriteString(Location);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings", false);
+			if (Dimensions is not null)
+			{
+				initializer.Property("Dimensions");
+				writer.WriteValue(Dimensions.Value);
+			}
 
-		if (MaxBatchSize is not null)
-		{
-			initializer.Property("MaxBatchSize");
-			writer.WriteValue(MaxBatchSize.Value);
-		}
+			if (Location is not null)
+			{
+				initializer.Property("Location");
+				writer.WriteString(Location);
+			}
 
-		if (ModelId is not null)
-		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			if (MaxBatchSize is not null)
+			{
+				initializer.Property("MaxBatchSize");
+				writer.WriteValue(MaxBatchSize.Value);
+			}
 
-		if (ProjectId is not null)
-		{
-			initializer.Property("ProjectId");
-			writer.WriteString(ProjectId);
-		}
+			if (ModelId is not null)
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		if (Provider is not null)
-		{
-			initializer.Property("Provider");
-			Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(Provider.Value, writer);
-		}
+			if (ProjectId is not null)
+			{
+				initializer.Property("ProjectId");
+				writer.WriteString(ProjectId);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			if (Provider is not null)
+			{
+				initializer.Property("Provider");
+				Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(Provider.Value, writer);
+			}
 
-		{
-			initializer.Property("ServiceAccountJson");
-			writer.WriteString(ServiceAccountJson);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		if (StreamingUrl is not null)
-		{
-			initializer.Property("StreamingUrl");
-			writer.WriteString(StreamingUrl);
-		}
+			{
+				initializer.Property("ServiceAccountJson");
+				writer.WriteString(ServiceAccountJson);
+			}
 
-		if (Url is not null)
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (StreamingUrl is not null)
+			{
+				initializer.Property("StreamingUrl");
+				writer.WriteString(StreamingUrl);
+			}
 
-		initializer.Dispose();
+			if (Url is not null)
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

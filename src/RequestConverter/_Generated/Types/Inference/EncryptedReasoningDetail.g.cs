@@ -27,30 +27,54 @@ public partial class EncryptedReasoningDetail : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.EncryptedReasoningDetail", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Data");
-			writer.WriteString(Data);
-		}
+			{
+				writer.WriteFluentCall("Data", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Data); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Index.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.EncryptedReasoningDetail", true);
+			{
+				initializer.Property("Data");
+				writer.WriteString(Data);
+			}
 
-		if (Id is not null)
-		{
-			initializer.Property("Id");
-			writer.WriteString(Id);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			writer.WriteValue(Index.Value);
-		}
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				writer.WriteString(Id);
+			}
 
-		initializer.Dispose();
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				writer.WriteValue(Index.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

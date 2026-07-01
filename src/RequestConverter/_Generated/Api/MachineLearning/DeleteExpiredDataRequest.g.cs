@@ -27,26 +27,50 @@ public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest", false);
-		if (JobId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (JobId is not null)
+			{
+				writer.WriteFluentCall("JobId", (w) => { using var _oi = w.ForceObjectInitializer(); JobId.FormatCode(w); });
+			}
 
-		if (RequestsPerSecond is not null)
+			if (RequestsPerSecond is not null)
+			{
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("RequestsPerSecond");
-			writer.WriteValue(RequestsPerSecond.Value);
-			writer.Write("f");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest", false);
+			if (JobId is not null)
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (RequestsPerSecond is not null)
+			{
+				initializer.Property("RequestsPerSecond");
+				writer.WriteValue(RequestsPerSecond.Value);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

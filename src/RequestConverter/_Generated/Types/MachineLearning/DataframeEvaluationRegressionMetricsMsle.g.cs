@@ -27,14 +27,24 @@ public partial class DataframeEvaluationRegressionMetricsMsle : RequestConverter
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle", false);
-		if (Offset is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Offset");
-			writer.WriteValue(Offset.Value);
-			writer.Write("d");
+			if (Offset is not null)
+			{
+				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offset.Value); w.Write("d"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle", false);
+			if (Offset is not null)
+			{
+				initializer.Property("Offset");
+				writer.WriteValue(Offset.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

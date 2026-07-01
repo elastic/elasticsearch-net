@@ -36,7 +36,7 @@ public partial class HitsSequence<TEvent> : RequestConverter.ICodeFormattable
 		if (JoinKeys is not null)
 		{
 			initializer.Property("JoinKeys");
-			writer.WriteInlineList(JoinKeys, (w, item) => { w.WriteValue(item); });
+			writer.WriteInlineList(JoinKeys, (w, item) => { w.WriteObjectValue(item); });
 		}
 
 		initializer.Dispose();

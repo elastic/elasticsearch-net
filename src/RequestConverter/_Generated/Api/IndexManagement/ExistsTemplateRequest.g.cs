@@ -27,30 +27,60 @@ public partial class ExistsTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (FlatSettings is not null)
-		{
-			initializer.Property("FlatSettings");
-			writer.WriteValue(FlatSettings.Value);
-		}
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (FlatSettings is not null)
+			{
+				writer.WriteFluentCall("FlatSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatSettings.Value); });
+			}
 #pragma warning disable CS0618
-		if (Local is not null)
-		{
-			initializer.Property("Local");
-			writer.WriteValue(Local.Value);
-		}
+			if (Local is not null)
+			{
+				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+			}
 #pragma warning restore CS0618
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (FlatSettings is not null)
+			{
+				initializer.Property("FlatSettings");
+				writer.WriteValue(FlatSettings.Value);
+			}
+#pragma warning disable CS0618
+			if (Local is not null)
+			{
+				initializer.Property("Local");
+				writer.WriteValue(Local.Value);
+			}
+#pragma warning restore CS0618
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

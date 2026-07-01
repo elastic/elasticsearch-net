@@ -44,7 +44,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		if (Highlight is not null)
@@ -81,7 +81,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyCollection<object>");
 			writer.Write(">()");
-			writer.WriteBlockList(IgnoredFieldValues, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteValue(item); }); w.Write(" }"); });
+			writer.WriteBlockList(IgnoredFieldValues, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteObjectValue(item); }); w.Write(" }"); });
 		}
 
 		{
@@ -185,7 +185,7 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 		if (Source is not null)
 		{
 			initializer.Property("Source");
-			writer.WriteValue(Source);
+			writer.WriteDocument(Source);
 		}
 
 		if (Version is not null)

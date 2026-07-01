@@ -27,19 +27,34 @@ public partial class Access : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Access", false);
-		if (Replication is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Replication");
-			writer.WriteInlineList(Replication, (w, item) => { item.FormatCode(w); });
-		}
+			if (Replication is not null)
+			{
+				writer.WriteFluentDescriptorParams("Replication", Replication, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>"); w.Write("()"); });
+			}
 
-		if (Search is not null)
+			if (Search is not null)
+			{
+				writer.WriteFluentDescriptorParams("Search", Search, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Search");
-			writer.WriteInlineList(Search, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Access", false);
+			if (Replication is not null)
+			{
+				initializer.Property("Replication");
+				writer.WriteInlineList(Replication, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Search is not null)
+			{
+				initializer.Property("Search");
+				writer.WriteInlineList(Search, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

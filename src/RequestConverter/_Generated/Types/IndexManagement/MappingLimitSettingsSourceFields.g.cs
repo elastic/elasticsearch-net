@@ -27,12 +27,21 @@ public partial class MappingLimitSettingsSourceFields : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.IndexManagement.SourceModeCodeFormatter.FormatCode(Mode, writer);
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.SourceModeCodeFormatter.FormatCode(Mode, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields", false);
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.IndexManagement.SourceModeCodeFormatter.FormatCode(Mode, writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

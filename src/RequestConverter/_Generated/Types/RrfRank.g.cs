@@ -27,21 +27,36 @@ public partial class RrfRank : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RrfRank", false);
-		if (RankConstant is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RankConstant");
-			writer.WriteValue(RankConstant.Value);
-			writer.Write("L");
-		}
+			if (RankConstant is not null)
+			{
+				writer.WriteFluentCall("RankConstant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankConstant.Value); w.Write("L"); });
+			}
 
-		if (RankWindowSize is not null)
+			if (RankWindowSize is not null)
+			{
+				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("RankWindowSize");
-			writer.WriteValue(RankWindowSize.Value);
-			writer.Write("L");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RrfRank", false);
+			if (RankConstant is not null)
+			{
+				initializer.Property("RankConstant");
+				writer.WriteValue(RankConstant.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			if (RankWindowSize is not null)
+			{
+				initializer.Property("RankWindowSize");
+				writer.WriteValue(RankWindowSize.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

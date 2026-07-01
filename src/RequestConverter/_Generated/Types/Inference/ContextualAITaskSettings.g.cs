@@ -27,19 +27,34 @@ public partial class ContextualAITaskSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings", false);
-		if (Instruction is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Instruction");
-			writer.WriteString(Instruction);
-		}
+			if (Instruction is not null)
+			{
+				writer.WriteFluentCall("Instruction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Instruction); });
+			}
 
-		if (TopK is not null)
+			if (TopK is not null)
+			{
+				writer.WriteFluentCall("TopK", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopK.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("TopK");
-			writer.WriteValue(TopK.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings", false);
+			if (Instruction is not null)
+			{
+				initializer.Property("Instruction");
+				writer.WriteString(Instruction);
+			}
 
-		initializer.Dispose();
+			if (TopK is not null)
+			{
+				initializer.Property("TopK");
+				writer.WriteValue(TopK.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

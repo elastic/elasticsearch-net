@@ -27,37 +27,67 @@ public partial class EdgeNGramTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer", true);
-		if (CustomTokenChars is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CustomTokenChars");
-			writer.WriteString(CustomTokenChars);
-		}
+			if (CustomTokenChars is not null)
+			{
+				writer.WriteFluentCall("CustomTokenChars", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CustomTokenChars); });
+			}
 
-		if (MaxGram is not null)
+			if (MaxGram is not null)
+			{
+				writer.WriteFluentCall("MaxGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGram.Value); });
+			}
+
+			if (MinGram is not null)
+			{
+				writer.WriteFluentCall("MinGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinGram.Value); });
+			}
+
+			if (TokenChars is not null)
+			{
+				writer.WriteFluentParams("TokenChars", TokenChars, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.TokenCharCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxGram");
-			writer.WriteValue(MaxGram.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer", true);
+			if (CustomTokenChars is not null)
+			{
+				initializer.Property("CustomTokenChars");
+				writer.WriteString(CustomTokenChars);
+			}
 
-		if (MinGram is not null)
-		{
-			initializer.Property("MinGram");
-			writer.WriteValue(MinGram.Value);
-		}
+			if (MaxGram is not null)
+			{
+				initializer.Property("MaxGram");
+				writer.WriteValue(MaxGram.Value);
+			}
 
-		if (TokenChars is not null)
-		{
-			initializer.Property("TokenChars");
-			writer.WriteInlineList(TokenChars, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.TokenCharCodeFormatter.FormatCode(item, w); });
-		}
+			if (MinGram is not null)
+			{
+				initializer.Property("MinGram");
+				writer.WriteValue(MinGram.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (TokenChars is not null)
+			{
+				initializer.Property("TokenChars");
+				writer.WriteInlineList(TokenChars, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.TokenCharCodeFormatter.FormatCode(item, w); });
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

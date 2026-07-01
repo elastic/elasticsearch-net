@@ -27,24 +27,42 @@ public partial class QueryFeatureExtractor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor", false);
-		if (DefaultScore is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DefaultScore");
-			writer.WriteValue(DefaultScore.Value);
-			writer.Write("f");
-		}
+			if (DefaultScore is not null)
+			{
+				writer.WriteFluentCall("DefaultScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DefaultScore.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("FeatureName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FeatureName); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("FeatureName");
-			writer.WriteString(FeatureName);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor", false);
+			if (DefaultScore is not null)
+			{
+				initializer.Property("DefaultScore");
+				writer.WriteValue(DefaultScore.Value);
+				writer.Write("f");
+			}
 
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			{
+				initializer.Property("FeatureName");
+				writer.WriteString(FeatureName);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

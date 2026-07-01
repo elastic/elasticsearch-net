@@ -38,6 +38,13 @@ public sealed class CodeWriter
 	private const char RefOpen = '\uE000';
 	private const char RefClose = '\uE001';
 
+	// Count of line endings emitted so far. A descriptor-lambda body starts every fluent call on its own line, so a body
+	// that grows this counter spans multiple lines and its enclosing call's closing ")" must drop to its own line (rather
+	// than collapse to ")))"). Comparing the counter before/after a body, instead of counting that body's own calls,
+	// cascades the decision up the nesting for free: a wrapped descendant's line endings lie within every ancestor body's
+	// span, so each ancestor on the single-call path also closes on its own line.
+	private int _lineCount;
+
 	public CodeWriter(FormattingOptions? options = null) => Options = options ?? FormattingOptions.Default;
 
 	public FormattingOptions Options { get; }
@@ -84,6 +91,7 @@ public sealed class CodeWriter
 			Write(text);
 
 		_builder.Append(Options.NewLine);
+		_lineCount++;
 		_atLineStart = true;
 		return this;
 	}
@@ -264,6 +272,146 @@ public sealed class CodeWriter
 		return longest;
 	}
 
+	/// <summary>
+	/// Writes a value whose static type is <c>object</c> (e.g. a template parameter in an
+	/// <c>IDictionary&lt;string, object&gt;</c>). A scalar renders as its plain C# literal - quoted string,
+	/// number, boolean, or <c>null</c> - so the output reads naturally rather than as a
+	/// <c>Deserialize&lt;JsonElement&gt;("…")</c> call. Objects, arrays, and numbers whose C# literal would not
+	/// reserialize to the exact original token (see <see cref="TryWriteObjectNumber"/>) keep the
+	/// <see cref="JsonElement"/> form. A non-<see cref="JsonElement"/> value (the static type is <c>object</c> but the
+	/// runtime value was materialized otherwise) falls back to the general <see cref="WriteValue(object?)"/> dispatch.
+	/// </summary>
+	public CodeWriter WriteObjectValue(object? value)
+	{
+		if (value is not JsonElement element)
+			return WriteValue(value);
+
+		switch (element.ValueKind)
+		{
+			case JsonValueKind.String:
+				return WriteString(element.GetString());
+			case JsonValueKind.True:
+				return Write("true");
+			case JsonValueKind.False:
+				return Write("false");
+			case JsonValueKind.Null:
+				return Write("null");
+			case JsonValueKind.Number when TryWriteObjectNumber(element):
+				return this;
+			default:
+				return WriteJsonElement(element);
+		}
+	}
+
+	/// <summary>
+	/// Writes a JSON number boxed into an <c>object</c> as a C# numeric literal, but only when that literal reserializes
+	/// to the exact original token. An <see cref="long"/> integer is emitted verbatim (boxes as a value whose JSON form is
+	/// the same digits). A non-integer is emitted as a <c>double</c> literal (<c>d</c> suffix) only when the parsed
+	/// <see cref="double"/>'s round-trippable (<c>G17</c>) form equals the raw token, which is exactly what the
+	/// transport serializer writes for a boxed <see cref="double"/>. So <c>1.5</c>, <c>-2.5</c>, <c>123.456</c> qualify,
+	/// while a token whose boxed-double form differs (<c>1.1</c> → <c>1.1000000000000001</c>, <c>0.835526591</c>,
+	/// <c>1.0</c>'s dropped zero, <c>6.022e23</c>) does not. Returns <c>false</c> in that case so the caller keeps the
+	/// lossless <see cref="JsonElement"/> form. (A few faithful tokens like <c>2.0</c> are conservatively rejected.)
+	/// </summary>
+	private bool TryWriteObjectNumber(JsonElement element)
+	{
+		var raw = element.GetRawText();
+
+		if (element.TryGetInt64(out var integer))
+		{
+			WriteIndentIfNeeded();
+			_builder.Append(integer.ToString(CultureInfo.InvariantCulture));
+			return true;
+		}
+
+		// A bare C# floating literal binds to double; the transport serializer writes a boxed double in round-trippable
+		// (G17) form, so the value reproduces the original token only when that form already equals it. The 'd' suffix
+		// pins the literal to double so it never silently widens or binds differently.
+		if (element.TryGetDouble(out var number)
+			&& string.Equals(number.ToString("G17", CultureInfo.InvariantCulture), raw, StringComparison.Ordinal))
+		{
+			WriteIndentIfNeeded();
+			_builder.Append(raw).Append('d');
+			return true;
+		}
+
+		return false;
+	}
+
+	/// <summary>
+	/// Renders a generic request's document body. The parameter is <see cref="object"/> because the generated
+	/// <c>FormatCode</c> body runs on the open generic request (the document is typed as the open <c>TDocument</c>
+	/// parameter there); at runtime the materialized value is always a <see cref="JsonElement"/>. When
+	/// <see cref="FormattingOptions.UseStronglyTypedDocument"/> is set and the value is a JSON object, emits a
+	/// strongly-typed initializer against the placeholder document type (<c>new MyDocument { Key = value, ... }</c>,
+	/// nested objects target-typed as <c>new() { ... }</c>); otherwise falls back to the default value dispatch so the
+	/// default and non-object cases are byte-for-byte unchanged.
+	/// </summary>
+	public void WriteDocument(object? value)
+	{
+		if (Options.UseStronglyTypedDocument && value is JsonElement { ValueKind: JsonValueKind.Object } document)
+		{
+			WriteTypedDocument(document, Options.DocumentTypeName);
+			return;
+		}
+
+		WriteValue(value);
+	}
+
+	// Recursively renders a JSON value as an object-initializer tree. The top-level object names the placeholder type
+	// (typeName); nested objects are target-typed (new()), matching how the surrounding generated code reads.
+	private void WriteTypedDocument(JsonElement value, string? typeName)
+	{
+		switch (value.ValueKind)
+		{
+			case JsonValueKind.Object:
+				WriteTypedDocumentObject(value, typeName);
+				break;
+			case JsonValueKind.Array:
+				WriteImplicitArray(value.EnumerateArray(), static (w, item) => w.WriteTypedDocument(item, null));
+				break;
+			case JsonValueKind.String:
+				WriteString(value.GetString());
+				break;
+			case JsonValueKind.Number:
+				// Preserve the source token verbatim (e.g. integer vs. decimal, exponent) rather than reparsing.
+				Write(value.GetRawText());
+				break;
+			case JsonValueKind.True:
+				Write("true");
+				break;
+			case JsonValueKind.False:
+				Write("false");
+				break;
+			default:
+				Write("null");
+				break;
+		}
+	}
+
+	private void WriteTypedDocumentObject(JsonElement value, string? typeName)
+	{
+		if (!string.IsNullOrEmpty(typeName))
+			Write("new ").Write(typeName!).Write("()");
+		else
+			Write("new()");
+
+		using var enumerator = value.EnumerateObject().GetEnumerator();
+		if (!enumerator.MoveNext())
+			return;
+
+		var initializer = new ObjectInitializer(this);
+		do
+		{
+			var member = enumerator.Current;
+			initializer.Property(FieldPath.ToPropertyName(member.Name));
+			WriteTypedDocument(member.Value, null);
+		}
+		while (enumerator.MoveNext());
+
+		initializer.Dispose();
+	}
+
 	// ---- object initializers ---------------------------------------------
 
 	/// <summary>
@@ -277,7 +425,7 @@ public sealed class CodeWriter
 	/// </summary>
 	public ObjectInitializer BeginObjectInitializer(string? typeName = null, bool forceExplicitConstructor = false)
 	{
-		var explicitConstructor = forceExplicitConstructor || _forceExplicitConstructor || Options.ConstructorStyle == ConstructorStyle.Explicit;
+		var explicitConstructor = forceExplicitConstructor || _forceExplicitConstructor || _forceExplicitConstructorDepth > 0 || Options.ConstructorStyle == ConstructorStyle.Explicit;
 		_forceExplicitConstructor = false; // consume: applies to this initializer only, not nested ones
 		if (explicitConstructor && !string.IsNullOrEmpty(typeName))
 		{
@@ -298,6 +446,360 @@ public sealed class CodeWriter
 	/// is added.
 	/// </summary>
 	public ObjectInitializer BeginInitializer() => new(this);
+
+	// ---- descriptor (fluent) syntax ---------------------------------------
+
+	// Descriptor mode falls back to object-initializer rendering for any value whose fluent shape is not
+	// (yet) handled (dictionaries, unions, factory members, ...). A fluent value cannot be a standalone
+	// argument because a descriptor-mode FormatCode emits a receiver-less ".Method(arg)…" chain suffix,
+	// not a "new T { … }" expression. Forcing object-init for that one subtree yields the regular value
+	// expression the fluent setter accepts. Nesting count > 0 suppresses descriptor mode for the subtree.
+	private int _forceObjectInitializerDepth;
+
+	/// <summary>
+	/// The syntax mode in effect right now. Equals <see cref="FormattingOptions.SyntaxMode"/> normally, but is forced to
+	/// <see cref="SyntaxMode.ObjectInitializer"/> while inside a <see cref="ForceObjectInitializer"/> scope (a descriptor
+	/// value rendered through the object-initializer fallback). Descriptor-aware <c>FormatCode</c> bodies and the infer
+	/// partials branch on this, not on <see cref="FormattingOptions.SyntaxMode"/>, so a forced subtree renders correctly.
+	/// </summary>
+	public SyntaxMode EffectiveSyntaxMode =>
+		_forceObjectInitializerDepth > 0 ? SyntaxMode.ObjectInitializer : Options.SyntaxMode;
+
+	/// <summary>
+	/// Forces <see cref="EffectiveSyntaxMode"/> to <see cref="SyntaxMode.ObjectInitializer"/> until the returned scope is
+	/// disposed, so a value emitted inside renders as a plain <c>new T { … }</c> expression even in descriptor mode.
+	/// </summary>
+	public ForceObjectInitializerScope ForceObjectInitializer() => new(this);
+
+	/// <summary>
+	/// Writes a constructor for a value whose type would otherwise be inferred from the assignment target via a
+	/// target-typed <c>new()</c>. In a descriptor fallback position (inside <see cref="ForceObjectInitializer"/> with the
+	/// option set to <see cref="SyntaxMode.Descriptor"/>) the value is passed to a fluent setter that also has an
+	/// <c>Action&lt;Descriptor&gt;</c> overload of the same name, where <c>new()</c> is ambiguous (CS0121); emit
+	/// <c>new <paramref name="fullyQualifiedTypeName"/>()</c> there. Otherwise the target-typed <c>new()</c> is kept so
+	/// object-initializer output is unchanged.
+	/// </summary>
+	public CodeWriter WriteValueConstructor(string fullyQualifiedTypeName)
+	{
+		if (_forceObjectInitializerDepth > 0 && Options.SyntaxMode == SyntaxMode.Descriptor)
+			return Write("new ").WriteTypeRef(fullyQualifiedTypeName).Write("()");
+
+		return Write("new()");
+	}
+
+	/// <summary>
+	/// Opens a constructor call for a value passed by argument: <c>new(</c> normally, or <c>new <paramref
+	/// name="fullyQualifiedTypeName"/>(</c> in a descriptor fallback position (inside <see cref="ForceObjectInitializer"/>
+	/// with the option set to <see cref="SyntaxMode.Descriptor"/>), where a target-typed <c>new(...)</c> would be
+	/// ambiguous against an overloaded fluent setter (CS0121). The caller writes the arguments and the closing <c>)</c>.
+	/// </summary>
+	public CodeWriter WriteArgsConstructorStart(string fullyQualifiedTypeName)
+	{
+		if (_forceObjectInitializerDepth > 0 && Options.SyntaxMode == SyntaxMode.Descriptor)
+			return Write("new ").WriteTypeRef(fullyQualifiedTypeName).Write("(");
+
+		return Write("new(");
+	}
+
+	/// <summary>Disposable returned by <see cref="ForceObjectInitializer"/>; restores the descriptor mode on dispose.</summary>
+	public readonly struct ForceObjectInitializerScope : IDisposable
+	{
+		private readonly CodeWriter _writer;
+
+		internal ForceObjectInitializerScope(CodeWriter writer)
+		{
+			_writer = writer;
+			writer._forceObjectInitializerDepth++;
+		}
+
+		public void Dispose() => _writer._forceObjectInitializerDepth--;
+	}
+
+	// While set, every BeginObjectInitializer renders an explicit "new T()" rather than a target-typed "new()". Used to
+	// disambiguate a value passed to a fluent setter that also has an Action<Descriptor> overload of the same arity (CS0121).
+	private int _forceExplicitConstructorDepth;
+
+	/// <summary>
+	/// Forces <see cref="BeginObjectInitializer"/> to emit an explicit <c>new T()</c> (never a target-typed <c>new()</c>)
+	/// until the returned scope is disposed. Used in descriptor mode for the empty-value fallback of an incremental
+	/// dictionary add (<c>.AddX(key, new T())</c>), where a target-typed <c>new()</c> is ambiguous against the setter's
+	/// <c>Action&lt;Descriptor&gt;</c> overload.
+	/// </summary>
+	public ForceExplicitConstructorScope ForceExplicitConstructor() => new(this);
+
+	/// <summary>Disposable returned by <see cref="ForceExplicitConstructor"/>; restores the constructor style on dispose.</summary>
+	public readonly struct ForceExplicitConstructorScope : IDisposable
+	{
+		private readonly CodeWriter _writer;
+
+		internal ForceExplicitConstructorScope(CodeWriter writer)
+		{
+			_writer = writer;
+			writer._forceExplicitConstructorDepth++;
+		}
+
+		public void Dispose() => _writer._forceExplicitConstructorDepth--;
+	}
+
+	// The current descriptor-lambda nesting depth, used to allocate non-shadowing parameter names
+	// (d0, d1, ...). Bumped while a descriptor lambda body is being written.
+	private int _descriptorDepth;
+
+	/// <summary>
+	/// The parameter name for the descriptor lambda currently being written, e.g. <c>d0</c> at the top level. Valid only
+	/// inside a <see cref="WriteFluentDescriptorCall"/> body; a descriptor-mode <c>FormatCode</c> appends its fluent
+	/// chain onto this receiver implicitly (each <see cref="WriteFluentCall"/> starts with <c>.</c>).
+	/// </summary>
+	public string CurrentDescriptorParameter => "d" + _descriptorDepth;
+
+	/// <summary>
+	/// Writes one fluent call <c>.<paramref name="method"/>(args)</c> on its own line at the current indent, so a chain
+	/// reads one call per line. <paramref name="writeArgs"/> emits the argument list (omit for a no-arg call).
+	/// </summary>
+	public CodeWriter WriteFluentCall(string method, Action<CodeWriter>? writeArgs = null)
+	{
+		WriteLine();
+		Write(".").Write(method).Write("(");
+		writeArgs?.Invoke(this);
+		return Write(")");
+	}
+
+	/// <summary>
+	/// Writes a fluent call whose arguments are a <c>params</c> list of scalar values, one per item:
+	/// <c>.<paramref name="method"/>(v1, v2, …)</c>. Used for a collection-of-scalar member whose fluent setter takes
+	/// <c>params E[]</c> (e.g. <c>.Uids("a", "b")</c>). Each value is written by <paramref name="writeItem"/>; an empty
+	/// collection renders the bare <c>.<paramref name="method"/>()</c>, which the params overload accepts as an empty array.
+	/// </summary>
+	public CodeWriter WriteFluentParams<T>(string method, IEnumerable<T> items, Action<CodeWriter, T> writeItem)
+	{
+		WriteLine();
+		Write(".").Write(method).Write("(");
+
+		var first = true;
+		foreach (var item in items)
+		{
+			if (!first)
+				Write(", ");
+
+			first = false;
+			writeItem(this, item);
+		}
+
+		return Write(")");
+	}
+
+	/// <summary>
+	/// Writes a fluent call whose single argument is a descriptor-configuration lambda:
+	/// <c>.<paramref name="method"/>(dN =&gt; dN.A(..).B(..))</c>. <paramref name="writeBody"/> emits the nested chain
+	/// (typically a nested value's <c>FormatCode</c>), which appends onto the fresh parameter <c>dN</c> allocated by
+	/// nesting depth so lambdas never shadow. When the body emits nothing (an empty nested object, e.g. a no-field
+	/// variant), the identity lambda <c>dN =&gt; dN</c> would be invalid C#: if <paramref name="writeEmpty"/> is supplied it
+	/// emits that argument instead (the value form, for a setter with no no-arg overload), otherwise this collapses to the
+	/// no-arg overload <c>.<paramref name="method"/>()</c> (which exists for a configurable-optional member).
+	/// </summary>
+	public CodeWriter WriteFluentDescriptorCall(string method, Action<CodeWriter> writeBody, Action<CodeWriter>? writeEmpty = null)
+	{
+		WriteLine();
+		Write(".").Write(method).Write("(");
+
+		var beforeReceiver = _builder.Length;
+		_descriptorDepth++;
+		var parameter = CurrentDescriptorParameter;
+		Write(parameter).Write(" => ").Write(parameter);
+		var afterReceiver = _builder.Length;
+
+		var linesBefore = _lineCount;
+		using (Indent())
+		{
+			writeBody(this);
+		}
+
+		_descriptorDepth--;
+
+		// Empty body: the bare "dN => dN" receiver is not a valid lambda body. Drop it, then either emit the explicit empty
+		// argument (a setter lacking a no-arg overload) or collapse to the no-arg call - either way the call stays on one
+		// line. Safe to truncate because an empty body appends no text and therefore no type-reference placeholders.
+		if (_builder.Length == afterReceiver)
+		{
+			_builder.Length = beforeReceiver;
+			writeEmpty?.Invoke(this);
+			return Write(")");
+		}
+
+		// A non-empty body always starts its first call on a new line, so it spans multiple lines: close ")" on its own line
+		// at this call's indent (the body's Indent() block has exited). This cascades up the nesting for free - a wrapped
+		// descendant's line endings lie within every ancestor body's span - so parens never collapse to ")))".
+		return _lineCount > linesBefore ? WriteLine().Write(")") : Write(")");
+	}
+
+	/// <summary>
+	/// Writes a fluent call whose arguments are a <c>params</c> array of descriptor-configuration lambdas, one per item:
+	/// <c>.<paramref name="method"/>(dN =&gt; dN…, dN =&gt; dN…)</c>. Used for collection-of-complex members, whose fluent
+	/// setter takes <c>params Action&lt;ItemDescriptor&gt;[]</c>. Each lambda body is written by
+	/// <paramref name="writeItem"/>; an item whose body is empty collapses to a bare <c>dN =&gt; dN</c> identity, which is
+	/// invalid, so such an item instead emits the item's object-initializer value via <paramref name="writeFallback"/>
+	/// (the <c>params ItemValue[]</c> overload also exists, so a value arg is assignment-compatible).
+	/// </summary>
+	public CodeWriter WriteFluentDescriptorParams<T>(
+		string method,
+		IEnumerable<T> items,
+		Action<CodeWriter, T> writeItem,
+		Action<CodeWriter, T> writeFallback,
+		Action<CodeWriter>? writeEmpty = null)
+	{
+		WriteLine();
+		Write(".").Write(method).Write("(");
+
+		// An empty collection would render as a bare `.Method()`, which is ambiguous between the params-value and
+		// params-Action overloads of the fluent setter; emit an explicitly-typed empty value instead (e.g. an empty typed
+		// array binds unambiguously to the value overload).
+		if (writeEmpty is not null)
+		{
+			using var enumerator = items.GetEnumerator();
+			if (!enumerator.MoveNext())
+			{
+				writeEmpty(this);
+				return Write(")");
+			}
+		}
+
+		var first = true;
+		var linesBefore = _lineCount;
+		foreach (var item in items)
+		{
+			if (!first)
+				Write(", ");
+
+			first = false;
+
+			var beforeReceiver = _builder.Length;
+			_descriptorDepth++;
+			var parameter = CurrentDescriptorParameter;
+			Write(parameter).Write(" => ").Write(parameter);
+			var afterReceiver = _builder.Length;
+
+			using (Indent())
+			{
+				writeItem(this, item);
+			}
+
+			_descriptorDepth--;
+
+			if (_builder.Length == afterReceiver)
+			{
+				// Empty configuration: replace the invalid identity lambda with the item's value form.
+				_builder.Length = beforeReceiver;
+				writeFallback(this, item);
+			}
+		}
+
+		// Close on its own line when any item lambda spanned multiple lines (each starts its first call on a new line);
+		// otherwise stay inline. The line-count delta cascades upward, so an ancestor whose only call is this one also wraps.
+		return _lineCount > linesBefore ? WriteLine().Write(")") : Write(")");
+	}
+
+	/// <summary>
+	/// Writes one incremental fluent add call per entry of a dictionary or key-value-pair collection whose value builds
+	/// fluently: <c>.<paramref name="method"/>(key, dN =&gt; dN…)</c> for each entry, each on its own line. Used as the body
+	/// of a whole-collection <c>.Property(dN =&gt; dN…)</c> lambda, so each <c>.<paramref name="method"/></c> call appends
+	/// onto the lambda's helper receiver. <paramref name="writeKey"/> emits the key argument; <paramref name="writeValue"/>
+	/// emits the value's descriptor chain onto the fresh parameter <c>dN</c> (allocated by nesting depth so lambdas never
+	/// shadow). When an entry's value body is empty (a no-field value), the identity lambda <c>dN =&gt; dN</c> would be
+	/// invalid, so that entry instead emits its value form via <paramref name="writeValueFallback"/> (the scalar
+	/// <c>.<paramref name="method"/>(key, value)</c> overload also exists, so a value arg is assignment-compatible).
+	/// </summary>
+	public CodeWriter WriteFluentDictionaryAdds<T>(
+		string method,
+		IEnumerable<T> entries,
+		Action<CodeWriter, T> writeKey,
+		Action<CodeWriter, T> writeValue,
+		Action<CodeWriter, T> writeValueFallback)
+	{
+		foreach (var entry in entries)
+		{
+			WriteLine();
+			Write(".").Write(method).Write("(");
+			writeKey(this, entry);
+			Write(", ");
+
+			var beforeReceiver = _builder.Length;
+			_descriptorDepth++;
+			var parameter = CurrentDescriptorParameter;
+			Write(parameter).Write(" => ").Write(parameter);
+			var afterReceiver = _builder.Length;
+
+			var linesBefore = _lineCount;
+			using (Indent())
+			{
+				writeValue(this, entry);
+			}
+
+			_descriptorDepth--;
+
+			if (_builder.Length == afterReceiver)
+			{
+				// Empty configuration: replace the invalid identity lambda with the entry's value form, inline.
+				_builder.Length = beforeReceiver;
+				writeValueFallback(this, entry);
+				Write(")");
+			}
+			else if (_lineCount > linesBefore)
+			{
+				// The value lambda spanned multiple lines: close ")" on its own line at the entry call's indent.
+				WriteLine().Write(")");
+			}
+			else
+			{
+				Write(")");
+			}
+		}
+
+		return this;
+	}
+
+	/// <summary>
+	/// Writes one variant-keyed fluent add call for a single entry of a backed (variant-keyed) dictionary descriptor:
+	/// <c>.<paramref name="variant"/>(key, dN =&gt; dN…)</c>, where the method name is the entry value's runtime variant
+	/// (e.g. <c>.Keyword("email", dN =&gt; dN…)</c> on a <c>PropertiesDescriptor</c>). Used inside a whole-collection
+	/// <c>.Property(dN =&gt; dN…)</c> lambda, so the call appends onto that lambda's descriptor receiver.
+	/// <paramref name="writeKey"/> emits the key argument; <paramref name="writeValue"/> emits the value's descriptor
+	/// chain onto the fresh parameter <c>dN</c> (allocated by nesting depth so lambdas never shadow). When the value body
+	/// is empty the identity lambda <c>dN =&gt; dN</c> would be invalid, so this collapses to the parameterless
+	/// <c>.<paramref name="variant"/>(key)</c> overload, which exists exactly for a variant with no required field.
+	/// </summary>
+	public CodeWriter WriteFluentVariantAdd(string variant, Action<CodeWriter> writeKey, Action<CodeWriter> writeValue)
+	{
+		WriteLine();
+		Write(".").Write(variant).Write("(");
+		writeKey(this);
+
+		var beforeSeparator = _builder.Length;
+		Write(", ");
+
+		_descriptorDepth++;
+		var parameter = CurrentDescriptorParameter;
+		Write(parameter).Write(" => ").Write(parameter);
+		var afterReceiver = _builder.Length;
+
+		var linesBefore = _lineCount;
+		using (Indent())
+		{
+			writeValue(this);
+		}
+
+		_descriptorDepth--;
+
+		// Empty value: drop the ", dN => dN" entirely and keep just `.Variant(key)` on one line.
+		if (_builder.Length == afterReceiver)
+		{
+			_builder.Length = beforeSeparator;
+			return Write(")");
+		}
+
+		// The value lambda always starts its first call on a new line, so it spans multiple lines: close ")" on its own line.
+		// The line-count delta cascades up the nesting, so the enclosing whole-collection lambda also drops its own ")".
+		return _lineCount > linesBefore ? WriteLine().Write(")") : Write(")");
+	}
 
 	// ---- collections ------------------------------------------------------
 
@@ -409,6 +911,8 @@ public sealed class CodeWriter
 				var token = typeExpression.Substring(start, i - start);
 				if (token.IndexOf('.') >= 0)
 					AppendTypeRefPlaceholder(token);
+				else if (Options.UseStronglyTypedDocument && IsDocumentTypeParameter(token))
+					_builder.Append(Options.DocumentTypeName); // e.g. IndexRequest<TDocument> -> IndexRequest<MyDocument>
 				else
 					_builder.Append(token); // keyword / primitive / open type parameter
 			}
@@ -430,12 +934,26 @@ public sealed class CodeWriter
 	public CodeWriter WriteTypeName(Type type)
 	{
 		var expression = new StringBuilder();
-		AppendTypeExpression(expression, type);
+
+		// In strongly-typed-document mode a generic request closed over JsonElement (e.g. IndexRequest<JsonElement>) is
+		// rendered against the placeholder document type instead, so the declared variable reads IndexRequest<MyDocument>.
+		var documentSubstitution = Options.UseStronglyTypedDocument ? Options.DocumentTypeName : null;
+		AppendTypeExpression(expression, type, documentSubstitution);
 		return WriteTypeRef(expression.ToString());
 	}
 
-	private static void AppendTypeExpression(StringBuilder builder, Type type)
+	private static void AppendTypeExpression(StringBuilder builder, Type type, string? documentSubstitution)
 	{
+		// JsonElement (or JsonElement?, e.g. UpdateRequest<JsonElement?, JsonElement?>) is the materialized stand-in for an
+		// unspecified document/partial-document type argument; substitute the placeholder type name so the rendered generic
+		// argument matches the typed document body.
+		if (documentSubstitution is not null
+			&& (type == typeof(JsonElement) || Nullable.GetUnderlyingType(type) == typeof(JsonElement)))
+		{
+			builder.Append(documentSubstitution);
+			return;
+		}
+
 		if (type.IsGenericType)
 		{
 			var definition = type.GetGenericTypeDefinition();
@@ -451,7 +969,7 @@ public sealed class CodeWriter
 				if (i > 0)
 					builder.Append(", ");
 
-				AppendTypeExpression(builder, args[i]);
+				AppendTypeExpression(builder, args[i], documentSubstitution);
 			}
 
 			builder.Append('>');
@@ -461,6 +979,12 @@ public sealed class CodeWriter
 			builder.Append((type.FullName ?? type.Name).Replace('+', '.'));
 		}
 	}
+
+	// The open document/source type parameters (ConverterType.Source slots: request documents, Get/Hit results, EQL
+	// events). In strongly-typed-document mode they render as the placeholder document type so an explicit constructor
+	// reads e.g. `new IndexRequest<MyDocument>()` rather than leaking the open `TDocument` token.
+	private static bool IsDocumentTypeParameter(string token) =>
+		token is "TDocument" or "TPartialDocument" or "TEvent";
 
 	private void AppendTypeRefPlaceholder(string fullName)
 	{

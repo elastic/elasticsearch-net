@@ -27,13 +27,23 @@ public partial class IndexSettingsLifecycleStep : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep", false);
-		if (WaitTimeThreshold is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("WaitTimeThreshold");
-			WaitTimeThreshold.FormatCode(writer);
+			if (WaitTimeThreshold is not null)
+			{
+				writer.WriteFluentCall("WaitTimeThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); WaitTimeThreshold.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep", false);
+			if (WaitTimeThreshold is not null)
+			{
+				initializer.Property("WaitTimeThreshold");
+				WaitTimeThreshold.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

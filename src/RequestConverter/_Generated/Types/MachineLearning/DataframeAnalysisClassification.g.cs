@@ -27,135 +27,239 @@ public partial class DataframeAnalysisClassification : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification", false);
-		if (Alpha is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Alpha");
-			writer.WriteValue(Alpha.Value);
-			writer.Write("d");
-		}
+			if (Alpha is not null)
+			{
+				writer.WriteFluentCall("Alpha", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Alpha.Value); w.Write("d"); });
+			}
 
-		if (ClassAssignmentObjective is not null)
+			if (ClassAssignmentObjective is not null)
+			{
+				writer.WriteFluentCall("ClassAssignmentObjective", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ClassAssignmentObjective); });
+			}
+
+			{
+				writer.WriteFluentCall("DependentVariable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DependentVariable); });
+			}
+
+			if (DownsampleFactor is not null)
+			{
+				writer.WriteFluentCall("DownsampleFactor", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DownsampleFactor.Value); w.Write("d"); });
+			}
+
+			if (EarlyStoppingEnabled is not null)
+			{
+				writer.WriteFluentCall("EarlyStoppingEnabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EarlyStoppingEnabled.Value); });
+			}
+
+			if (Eta is not null)
+			{
+				writer.WriteFluentCall("Eta", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Eta.Value); w.Write("d"); });
+			}
+
+			if (EtaGrowthRatePerTree is not null)
+			{
+				writer.WriteFluentCall("EtaGrowthRatePerTree", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EtaGrowthRatePerTree.Value); w.Write("d"); });
+			}
+
+			if (FeatureBagFraction is not null)
+			{
+				writer.WriteFluentCall("FeatureBagFraction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FeatureBagFraction.Value); w.Write("d"); });
+			}
+
+			if (FeatureProcessors is not null)
+			{
+				writer.WriteFluentDescriptorParams("FeatureProcessors", FeatureProcessors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>"); w.Write("()"); });
+			}
+
+			if (Gamma is not null)
+			{
+				writer.WriteFluentCall("Gamma", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Gamma.Value); w.Write("d"); });
+			}
+
+			if (Lambda is not null)
+			{
+				writer.WriteFluentCall("Lambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lambda.Value); w.Write("d"); });
+			}
+
+			if (MaxOptimizationRoundsPerHyperparameter is not null)
+			{
+				writer.WriteFluentCall("MaxOptimizationRoundsPerHyperparameter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxOptimizationRoundsPerHyperparameter.Value); });
+			}
+
+			if (MaxTrees is not null)
+			{
+				writer.WriteFluentCall("MaxTrees", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTrees.Value); });
+			}
+
+			if (NumTopClasses is not null)
+			{
+				writer.WriteFluentCall("NumTopClasses", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopClasses.Value); });
+			}
+
+			if (NumTopFeatureImportanceValues is not null)
+			{
+				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopFeatureImportanceValues.Value); });
+			}
+
+			if (PredictionFieldName is not null)
+			{
+				writer.WriteFluentCall("PredictionFieldName", (w) => { PredictionFieldName.FormatCode(w); });
+			}
+
+			if (RandomizeSeed is not null)
+			{
+				writer.WriteFluentCall("RandomizeSeed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RandomizeSeed.Value); w.Write("d"); });
+			}
+
+			if (SoftTreeDepthLimit is not null)
+			{
+				writer.WriteFluentCall("SoftTreeDepthLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SoftTreeDepthLimit.Value); });
+			}
+
+			if (SoftTreeDepthTolerance is not null)
+			{
+				writer.WriteFluentCall("SoftTreeDepthTolerance", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SoftTreeDepthTolerance.Value); w.Write("d"); });
+			}
+
+			if (TrainingPercent is not null)
+			{
+				writer.WriteFluentCall("TrainingPercent", (w) => { using var _oi = w.ForceObjectInitializer(); TrainingPercent.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ClassAssignmentObjective");
-			writer.WriteString(ClassAssignmentObjective);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification", false);
+			if (Alpha is not null)
+			{
+				initializer.Property("Alpha");
+				writer.WriteValue(Alpha.Value);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("DependentVariable");
-			writer.WriteString(DependentVariable);
-		}
+			if (ClassAssignmentObjective is not null)
+			{
+				initializer.Property("ClassAssignmentObjective");
+				writer.WriteString(ClassAssignmentObjective);
+			}
 
-		if (DownsampleFactor is not null)
-		{
-			initializer.Property("DownsampleFactor");
-			writer.WriteValue(DownsampleFactor.Value);
-			writer.Write("d");
-		}
+			{
+				initializer.Property("DependentVariable");
+				writer.WriteString(DependentVariable);
+			}
 
-		if (EarlyStoppingEnabled is not null)
-		{
-			initializer.Property("EarlyStoppingEnabled");
-			writer.WriteValue(EarlyStoppingEnabled.Value);
-		}
+			if (DownsampleFactor is not null)
+			{
+				initializer.Property("DownsampleFactor");
+				writer.WriteValue(DownsampleFactor.Value);
+				writer.Write("d");
+			}
 
-		if (Eta is not null)
-		{
-			initializer.Property("Eta");
-			writer.WriteValue(Eta.Value);
-			writer.Write("d");
-		}
+			if (EarlyStoppingEnabled is not null)
+			{
+				initializer.Property("EarlyStoppingEnabled");
+				writer.WriteValue(EarlyStoppingEnabled.Value);
+			}
 
-		if (EtaGrowthRatePerTree is not null)
-		{
-			initializer.Property("EtaGrowthRatePerTree");
-			writer.WriteValue(EtaGrowthRatePerTree.Value);
-			writer.Write("d");
-		}
+			if (Eta is not null)
+			{
+				initializer.Property("Eta");
+				writer.WriteValue(Eta.Value);
+				writer.Write("d");
+			}
 
-		if (FeatureBagFraction is not null)
-		{
-			initializer.Property("FeatureBagFraction");
-			writer.WriteValue(FeatureBagFraction.Value);
-			writer.Write("d");
-		}
+			if (EtaGrowthRatePerTree is not null)
+			{
+				initializer.Property("EtaGrowthRatePerTree");
+				writer.WriteValue(EtaGrowthRatePerTree.Value);
+				writer.Write("d");
+			}
 
-		if (FeatureProcessors is not null)
-		{
-			initializer.Property("FeatureProcessors");
-			writer.WriteInlineList(FeatureProcessors, (w, item) => { item.FormatCode(w); });
-		}
+			if (FeatureBagFraction is not null)
+			{
+				initializer.Property("FeatureBagFraction");
+				writer.WriteValue(FeatureBagFraction.Value);
+				writer.Write("d");
+			}
 
-		if (Gamma is not null)
-		{
-			initializer.Property("Gamma");
-			writer.WriteValue(Gamma.Value);
-			writer.Write("d");
-		}
+			if (FeatureProcessors is not null)
+			{
+				initializer.Property("FeatureProcessors");
+				writer.WriteInlineList(FeatureProcessors, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Lambda is not null)
-		{
-			initializer.Property("Lambda");
-			writer.WriteValue(Lambda.Value);
-			writer.Write("d");
-		}
+			if (Gamma is not null)
+			{
+				initializer.Property("Gamma");
+				writer.WriteValue(Gamma.Value);
+				writer.Write("d");
+			}
 
-		if (MaxOptimizationRoundsPerHyperparameter is not null)
-		{
-			initializer.Property("MaxOptimizationRoundsPerHyperparameter");
-			writer.WriteValue(MaxOptimizationRoundsPerHyperparameter.Value);
-		}
+			if (Lambda is not null)
+			{
+				initializer.Property("Lambda");
+				writer.WriteValue(Lambda.Value);
+				writer.Write("d");
+			}
 
-		if (MaxTrees is not null)
-		{
-			initializer.Property("MaxTrees");
-			writer.WriteValue(MaxTrees.Value);
-		}
+			if (MaxOptimizationRoundsPerHyperparameter is not null)
+			{
+				initializer.Property("MaxOptimizationRoundsPerHyperparameter");
+				writer.WriteValue(MaxOptimizationRoundsPerHyperparameter.Value);
+			}
 
-		if (NumTopClasses is not null)
-		{
-			initializer.Property("NumTopClasses");
-			writer.WriteValue(NumTopClasses.Value);
-		}
+			if (MaxTrees is not null)
+			{
+				initializer.Property("MaxTrees");
+				writer.WriteValue(MaxTrees.Value);
+			}
 
-		if (NumTopFeatureImportanceValues is not null)
-		{
-			initializer.Property("NumTopFeatureImportanceValues");
-			writer.WriteValue(NumTopFeatureImportanceValues.Value);
-		}
+			if (NumTopClasses is not null)
+			{
+				initializer.Property("NumTopClasses");
+				writer.WriteValue(NumTopClasses.Value);
+			}
 
-		if (PredictionFieldName is not null)
-		{
-			initializer.Property("PredictionFieldName");
-			PredictionFieldName.FormatCode(writer);
-		}
+			if (NumTopFeatureImportanceValues is not null)
+			{
+				initializer.Property("NumTopFeatureImportanceValues");
+				writer.WriteValue(NumTopFeatureImportanceValues.Value);
+			}
 
-		if (RandomizeSeed is not null)
-		{
-			initializer.Property("RandomizeSeed");
-			writer.WriteValue(RandomizeSeed.Value);
-			writer.Write("d");
-		}
+			if (PredictionFieldName is not null)
+			{
+				initializer.Property("PredictionFieldName");
+				PredictionFieldName.FormatCode(writer);
+			}
 
-		if (SoftTreeDepthLimit is not null)
-		{
-			initializer.Property("SoftTreeDepthLimit");
-			writer.WriteValue(SoftTreeDepthLimit.Value);
-		}
+			if (RandomizeSeed is not null)
+			{
+				initializer.Property("RandomizeSeed");
+				writer.WriteValue(RandomizeSeed.Value);
+				writer.Write("d");
+			}
 
-		if (SoftTreeDepthTolerance is not null)
-		{
-			initializer.Property("SoftTreeDepthTolerance");
-			writer.WriteValue(SoftTreeDepthTolerance.Value);
-			writer.Write("d");
-		}
+			if (SoftTreeDepthLimit is not null)
+			{
+				initializer.Property("SoftTreeDepthLimit");
+				writer.WriteValue(SoftTreeDepthLimit.Value);
+			}
 
-		if (TrainingPercent is not null)
-		{
-			initializer.Property("TrainingPercent");
-			TrainingPercent.FormatCode(writer);
-		}
+			if (SoftTreeDepthTolerance is not null)
+			{
+				initializer.Property("SoftTreeDepthTolerance");
+				writer.WriteValue(SoftTreeDepthTolerance.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			if (TrainingPercent is not null)
+			{
+				initializer.Property("TrainingPercent");
+				TrainingPercent.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

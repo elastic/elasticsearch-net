@@ -27,19 +27,34 @@ public partial class InferenceConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig", false);
-		if (Classification is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Classification");
-			Classification.FormatCode(writer);
-		}
+			if (Classification is not null)
+			{
+				writer.WriteFluentDescriptorCall("Classification", (w) => { Classification.FormatCode(w); });
+			}
 
-		if (Regression is not null)
+			if (Regression is not null)
+			{
+				writer.WriteFluentDescriptorCall("Regression", (w) => { Regression.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Regression");
-			Regression.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig", false);
+			if (Classification is not null)
+			{
+				initializer.Property("Classification");
+				Classification.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Regression is not null)
+			{
+				initializer.Property("Regression");
+				Regression.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

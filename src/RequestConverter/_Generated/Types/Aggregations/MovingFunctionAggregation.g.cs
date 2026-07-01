@@ -27,43 +27,78 @@ public partial class MovingFunctionAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation", false);
-		if (BucketsPath is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BucketsPath");
-			BucketsPath.FormatCode(writer);
-		}
+			if (BucketsPath is not null)
+			{
+				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (GapPolicy is not null)
+			{
+				writer.WriteFluentCall("GapPolicy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentCall("Script", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Script); });
+			}
+
+			if (Shift is not null)
+			{
+				writer.WriteFluentCall("Shift", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Shift.Value); });
+			}
+
+			if (Window is not null)
+			{
+				writer.WriteFluentCall("Window", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Window.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation", false);
+			if (BucketsPath is not null)
+			{
+				initializer.Property("BucketsPath");
+				BucketsPath.FormatCode(writer);
+			}
 
-		if (GapPolicy is not null)
-		{
-			initializer.Property("GapPolicy");
-			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			writer.WriteString(Script);
-		}
+			if (GapPolicy is not null)
+			{
+				initializer.Property("GapPolicy");
+				Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
+			}
 
-		if (Shift is not null)
-		{
-			initializer.Property("Shift");
-			writer.WriteValue(Shift.Value);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				writer.WriteString(Script);
+			}
 
-		if (Window is not null)
-		{
-			initializer.Property("Window");
-			writer.WriteValue(Window.Value);
-		}
+			if (Shift is not null)
+			{
+				initializer.Property("Shift");
+				writer.WriteValue(Shift.Value);
+			}
 
-		initializer.Dispose();
+			if (Window is not null)
+			{
+				initializer.Property("Window");
+				writer.WriteValue(Window.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

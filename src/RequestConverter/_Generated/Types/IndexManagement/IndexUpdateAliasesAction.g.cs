@@ -27,25 +27,45 @@ public partial class IndexUpdateAliasesAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction", false);
-		if (Add is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Add");
-			Add.FormatCode(writer);
-		}
+			if (Add is not null)
+			{
+				writer.WriteFluentDescriptorCall("Add", (w) => { Add.FormatCode(w); });
+			}
 
-		if (Remove is not null)
+			if (Remove is not null)
+			{
+				writer.WriteFluentDescriptorCall("Remove", (w) => { Remove.FormatCode(w); });
+			}
+
+			if (RemoveIndex is not null)
+			{
+				writer.WriteFluentDescriptorCall("RemoveIndex", (w) => { RemoveIndex.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Remove");
-			Remove.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction", false);
+			if (Add is not null)
+			{
+				initializer.Property("Add");
+				Add.FormatCode(writer);
+			}
 
-		if (RemoveIndex is not null)
-		{
-			initializer.Property("RemoveIndex");
-			RemoveIndex.FormatCode(writer);
-		}
+			if (Remove is not null)
+			{
+				initializer.Property("Remove");
+				Remove.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (RemoveIndex is not null)
+			{
+				initializer.Property("RemoveIndex");
+				RemoveIndex.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

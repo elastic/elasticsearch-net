@@ -27,12 +27,21 @@ public partial class CacheQueries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled);
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries", false);
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

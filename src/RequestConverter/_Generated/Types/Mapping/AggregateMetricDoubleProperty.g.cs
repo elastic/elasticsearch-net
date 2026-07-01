@@ -27,72 +27,125 @@ public partial class AggregateMetricDoubleProperty : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DefaultMetric");
-			writer.WriteString(DefaultMetric);
-		}
+			{
+				writer.WriteFluentCall("DefaultMetric", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DefaultMetric); });
+			}
 
-		if (Dynamic is not null)
+			if (Dynamic is not null)
+			{
+				writer.WriteFluentCall("Dynamic", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, w); });
+			}
+
+			if (Fields is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fields.FormatCode(w); });
+			}
+
+			if (IgnoreAbove is not null)
+			{
+				writer.WriteFluentCall("IgnoreAbove", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreAbove.Value); });
+			}
+
+			if (IgnoreMalformed is not null)
+			{
+				writer.WriteFluentCall("IgnoreMalformed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMalformed.Value); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentParams("Metrics", Metrics, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Properties is not null)
+			{
+				writer.WriteFluentDescriptorCall("Properties", (w) => { Properties.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Properties.FormatCode(w); });
+			}
+
+			if (SyntheticSourceKeep is not null)
+			{
+				writer.WriteFluentCall("SyntheticSourceKeep", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, w); });
+			}
+
+			if (TimeSeriesMetric is not null)
+			{
+				writer.WriteFluentCall("TimeSeriesMetric", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(TimeSeriesMetric.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Dynamic");
-			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty", true);
+			{
+				initializer.Property("DefaultMetric");
+				writer.WriteString(DefaultMetric);
+			}
 
-		if (Fields is not null)
-		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			if (Dynamic is not null)
+			{
+				initializer.Property("Dynamic");
+				Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
+			}
 
-		if (IgnoreAbove is not null)
-		{
-			initializer.Property("IgnoreAbove");
-			writer.WriteValue(IgnoreAbove.Value);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		if (IgnoreMalformed is not null)
-		{
-			initializer.Property("IgnoreMalformed");
-			writer.WriteValue(IgnoreMalformed.Value);
-		}
+			if (IgnoreAbove is not null)
+			{
+				initializer.Property("IgnoreAbove");
+				writer.WriteValue(IgnoreAbove.Value);
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			if (IgnoreMalformed is not null)
+			{
+				initializer.Property("IgnoreMalformed");
+				writer.WriteValue(IgnoreMalformed.Value);
+			}
 
-		{
-			initializer.Property("Metrics");
-			writer.WriteInlineList(Metrics, (w, item) => { w.WriteString(item); });
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Properties is not null)
-		{
-			initializer.Property("Properties");
-			Properties.FormatCode(writer);
-		}
+			{
+				initializer.Property("Metrics");
+				writer.WriteInlineList(Metrics, (w, item) => { w.WriteString(item); });
+			}
 
-		if (SyntheticSourceKeep is not null)
-		{
-			initializer.Property("SyntheticSourceKeep");
-			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
-		}
+			if (Properties is not null)
+			{
+				initializer.Property("Properties");
+				Properties.FormatCode(writer);
+			}
 
-		if (TimeSeriesMetric is not null)
-		{
-			initializer.Property("TimeSeriesMetric");
-			Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(TimeSeriesMetric.Value, writer);
-		}
+			if (SyntheticSourceKeep is not null)
+			{
+				initializer.Property("SyntheticSourceKeep");
+				Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (TimeSeriesMetric is not null)
+			{
+				initializer.Property("TimeSeriesMetric");
+				Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricTypeCodeFormatter.FormatCode(TimeSeriesMetric.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

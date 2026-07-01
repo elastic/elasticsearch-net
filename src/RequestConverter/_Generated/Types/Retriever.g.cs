@@ -27,61 +27,111 @@ public partial class Retriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Retriever", true);
-		if (Diversify is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Diversify");
-			Diversify.FormatCode(writer);
-		}
+			if (Diversify is not null)
+			{
+				writer.WriteFluentDescriptorCall("Diversify", (w) => { Diversify.FormatCode(w); });
+			}
 
-		if (Knn is not null)
+			if (Knn is not null)
+			{
+				writer.WriteFluentDescriptorCall("Knn", (w) => { Knn.FormatCode(w); });
+			}
+
+			if (Linear is not null)
+			{
+				writer.WriteFluentDescriptorCall("Linear", (w) => { Linear.FormatCode(w); });
+			}
+
+			if (Pinned is not null)
+			{
+				writer.WriteFluentDescriptorCall("Pinned", (w) => { Pinned.FormatCode(w); });
+			}
+
+			if (Rescorer is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rescorer", (w) => { Rescorer.FormatCode(w); });
+			}
+
+			if (Rrf is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rrf", (w) => { Rrf.FormatCode(w); });
+			}
+
+			if (Rule is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rule", (w) => { Rule.FormatCode(w); });
+			}
+
+			if (Standard is not null)
+			{
+				writer.WriteFluentDescriptorCall("Standard", (w) => { Standard.FormatCode(w); });
+			}
+
+			if (TextSimilarityReranker is not null)
+			{
+				writer.WriteFluentDescriptorCall("TextSimilarityReranker", (w) => { TextSimilarityReranker.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Knn");
-			Knn.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Retriever", true);
+			if (Diversify is not null)
+			{
+				initializer.Property("Diversify");
+				Diversify.FormatCode(writer);
+			}
 
-		if (Linear is not null)
-		{
-			initializer.Property("Linear");
-			Linear.FormatCode(writer);
-		}
+			if (Knn is not null)
+			{
+				initializer.Property("Knn");
+				Knn.FormatCode(writer);
+			}
 
-		if (Pinned is not null)
-		{
-			initializer.Property("Pinned");
-			Pinned.FormatCode(writer);
-		}
+			if (Linear is not null)
+			{
+				initializer.Property("Linear");
+				Linear.FormatCode(writer);
+			}
 
-		if (Rescorer is not null)
-		{
-			initializer.Property("Rescorer");
-			Rescorer.FormatCode(writer);
-		}
+			if (Pinned is not null)
+			{
+				initializer.Property("Pinned");
+				Pinned.FormatCode(writer);
+			}
 
-		if (Rrf is not null)
-		{
-			initializer.Property("Rrf");
-			Rrf.FormatCode(writer);
-		}
+			if (Rescorer is not null)
+			{
+				initializer.Property("Rescorer");
+				Rescorer.FormatCode(writer);
+			}
 
-		if (Rule is not null)
-		{
-			initializer.Property("Rule");
-			Rule.FormatCode(writer);
-		}
+			if (Rrf is not null)
+			{
+				initializer.Property("Rrf");
+				Rrf.FormatCode(writer);
+			}
 
-		if (Standard is not null)
-		{
-			initializer.Property("Standard");
-			Standard.FormatCode(writer);
-		}
+			if (Rule is not null)
+			{
+				initializer.Property("Rule");
+				Rule.FormatCode(writer);
+			}
 
-		if (TextSimilarityReranker is not null)
-		{
-			initializer.Property("TextSimilarityReranker");
-			TextSimilarityReranker.FormatCode(writer);
-		}
+			if (Standard is not null)
+			{
+				initializer.Property("Standard");
+				Standard.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TextSimilarityReranker is not null)
+			{
+				initializer.Property("TextSimilarityReranker");
+				TextSimilarityReranker.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

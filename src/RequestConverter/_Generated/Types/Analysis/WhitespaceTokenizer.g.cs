@@ -27,19 +27,34 @@ public partial class WhitespaceTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer", true);
-		if (MaxTokenLength is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxTokenLength");
-			writer.WriteValue(MaxTokenLength.Value);
-		}
+			if (MaxTokenLength is not null)
+			{
+				writer.WriteFluentCall("MaxTokenLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokenLength.Value); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer", true);
+			if (MaxTokenLength is not null)
+			{
+				initializer.Property("MaxTokenLength");
+				writer.WriteValue(MaxTokenLength.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

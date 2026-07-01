@@ -27,12 +27,28 @@ public partial class SamlServiceProviderMetadataRequest : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RealmName");
-			RealmName.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				RealmName.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest", false);
+			{
+				initializer.Property("RealmName");
+				RealmName.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

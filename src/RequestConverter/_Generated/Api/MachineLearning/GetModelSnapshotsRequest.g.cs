@@ -27,6 +27,7 @@ public partial class GetModelSnapshotsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest", false);
 		{
 			initializer.Property("JobId");

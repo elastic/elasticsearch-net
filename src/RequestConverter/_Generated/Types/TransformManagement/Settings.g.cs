@@ -27,56 +27,101 @@ public partial class Settings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Settings", false);
-		if (AlignCheckpoints is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AlignCheckpoints");
-			writer.WriteValue(AlignCheckpoints.Value);
-		}
+			if (AlignCheckpoints is not null)
+			{
+				writer.WriteFluentCall("AlignCheckpoints", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AlignCheckpoints.Value); });
+			}
 
-		if (DatesAsEpochMillis is not null)
+			if (DatesAsEpochMillis is not null)
+			{
+				writer.WriteFluentCall("DatesAsEpochMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DatesAsEpochMillis.Value); });
+			}
+
+			if (DeduceMappings is not null)
+			{
+				writer.WriteFluentCall("DeduceMappings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeduceMappings.Value); });
+			}
+
+			if (DocsPerSecond is not null)
+			{
+				writer.WriteFluentCall("DocsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocsPerSecond.Value); w.Write("f"); });
+			}
+
+			if (MaxPageSearchSize is not null)
+			{
+				writer.WriteFluentCall("MaxPageSearchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxPageSearchSize.Value); });
+			}
+
+			if (NumFailureRetries is not null)
+			{
+				writer.WriteFluentCall("NumFailureRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumFailureRetries.Value); });
+			}
+
+			if (Unattended is not null)
+			{
+				writer.WriteFluentCall("Unattended", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Unattended.Value); });
+			}
+
+			if (UsePointInTime is not null)
+			{
+				writer.WriteFluentCall("UsePointInTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UsePointInTime.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("DatesAsEpochMillis");
-			writer.WriteValue(DatesAsEpochMillis.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Settings", false);
+			if (AlignCheckpoints is not null)
+			{
+				initializer.Property("AlignCheckpoints");
+				writer.WriteValue(AlignCheckpoints.Value);
+			}
 
-		if (DeduceMappings is not null)
-		{
-			initializer.Property("DeduceMappings");
-			writer.WriteValue(DeduceMappings.Value);
-		}
+			if (DatesAsEpochMillis is not null)
+			{
+				initializer.Property("DatesAsEpochMillis");
+				writer.WriteValue(DatesAsEpochMillis.Value);
+			}
 
-		if (DocsPerSecond is not null)
-		{
-			initializer.Property("DocsPerSecond");
-			writer.WriteValue(DocsPerSecond.Value);
-			writer.Write("f");
-		}
+			if (DeduceMappings is not null)
+			{
+				initializer.Property("DeduceMappings");
+				writer.WriteValue(DeduceMappings.Value);
+			}
 
-		if (MaxPageSearchSize is not null)
-		{
-			initializer.Property("MaxPageSearchSize");
-			writer.WriteValue(MaxPageSearchSize.Value);
-		}
+			if (DocsPerSecond is not null)
+			{
+				initializer.Property("DocsPerSecond");
+				writer.WriteValue(DocsPerSecond.Value);
+				writer.Write("f");
+			}
 
-		if (NumFailureRetries is not null)
-		{
-			initializer.Property("NumFailureRetries");
-			writer.WriteValue(NumFailureRetries.Value);
-		}
+			if (MaxPageSearchSize is not null)
+			{
+				initializer.Property("MaxPageSearchSize");
+				writer.WriteValue(MaxPageSearchSize.Value);
+			}
 
-		if (Unattended is not null)
-		{
-			initializer.Property("Unattended");
-			writer.WriteValue(Unattended.Value);
-		}
+			if (NumFailureRetries is not null)
+			{
+				initializer.Property("NumFailureRetries");
+				writer.WriteValue(NumFailureRetries.Value);
+			}
 
-		if (UsePointInTime is not null)
-		{
-			initializer.Property("UsePointInTime");
-			writer.WriteValue(UsePointInTime.Value);
-		}
+			if (Unattended is not null)
+			{
+				initializer.Property("Unattended");
+				writer.WriteValue(Unattended.Value);
+			}
 
-		initializer.Dispose();
+			if (UsePointInTime is not null)
+			{
+				initializer.Property("UsePointInTime");
+				writer.WriteValue(UsePointInTime.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

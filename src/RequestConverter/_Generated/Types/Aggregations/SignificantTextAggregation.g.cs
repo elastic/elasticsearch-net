@@ -27,111 +27,201 @@ public partial class SignificantTextAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation", false);
-		if (BackgroundFilter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BackgroundFilter");
-			BackgroundFilter.FormatCode(writer);
-		}
+			if (BackgroundFilter is not null)
+			{
+				writer.WriteFluentDescriptorCall("BackgroundFilter", (w) => { BackgroundFilter.FormatCode(w); });
+			}
 
-		if (ChiSquare is not null)
+			if (ChiSquare is not null)
+			{
+				writer.WriteFluentDescriptorCall("ChiSquare", (w) => { ChiSquare.FormatCode(w); });
+			}
+
+			if (Exclude is not null)
+			{
+				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); Exclude.FormatCode(w); });
+			}
+
+			if (ExecutionHint is not null)
+			{
+				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+			}
+
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (FilterDuplicateText is not null)
+			{
+				writer.WriteFluentCall("FilterDuplicateText", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FilterDuplicateText.Value); });
+			}
+
+			if (Gnd is not null)
+			{
+				writer.WriteFluentDescriptorCall("Gnd", (w) => { Gnd.FormatCode(w); });
+			}
+
+			if (Include is not null)
+			{
+				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); Include.FormatCode(w); });
+			}
+
+			if (Jlh is not null)
+			{
+				writer.WriteFluentDescriptorCall("Jlh", (w) => { Jlh.FormatCode(w); });
+			}
+
+			if (MinDocCount is not null)
+			{
+				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); w.Write("L"); });
+			}
+
+			if (MutualInformation is not null)
+			{
+				writer.WriteFluentDescriptorCall("MutualInformation", (w) => { MutualInformation.FormatCode(w); });
+			}
+
+			if (Percentage is not null)
+			{
+				writer.WriteFluentDescriptorCall("Percentage", (w) => { Percentage.FormatCode(w); });
+			}
+
+			if (ScriptHeuristic is not null)
+			{
+				writer.WriteFluentDescriptorCall("ScriptHeuristic", (w) => { ScriptHeuristic.FormatCode(w); });
+			}
+
+			if (ShardMinDocCount is not null)
+			{
+				writer.WriteFluentCall("ShardMinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardMinDocCount.Value); w.Write("L"); });
+			}
+
+			if (ShardSize is not null)
+			{
+				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (SourceFields is not null)
+			{
+				writer.WriteFluentCall("SourceFields", (w) => { using var _oi = w.ForceObjectInitializer(); SourceFields.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ChiSquare");
-			ChiSquare.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation", false);
+			if (BackgroundFilter is not null)
+			{
+				initializer.Property("BackgroundFilter");
+				BackgroundFilter.FormatCode(writer);
+			}
 
-		if (Exclude is not null)
-		{
-			initializer.Property("Exclude");
-			Exclude.FormatCode(writer);
-		}
+			if (ChiSquare is not null)
+			{
+				initializer.Property("ChiSquare");
+				ChiSquare.FormatCode(writer);
+			}
 
-		if (ExecutionHint is not null)
-		{
-			initializer.Property("ExecutionHint");
-			Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
-		}
+			if (Exclude is not null)
+			{
+				initializer.Property("Exclude");
+				Exclude.FormatCode(writer);
+			}
 
-		if (Field is not null)
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (ExecutionHint is not null)
+			{
+				initializer.Property("ExecutionHint");
+				Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
+			}
 
-		if (FilterDuplicateText is not null)
-		{
-			initializer.Property("FilterDuplicateText");
-			writer.WriteValue(FilterDuplicateText.Value);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Gnd is not null)
-		{
-			initializer.Property("Gnd");
-			Gnd.FormatCode(writer);
-		}
+			if (FilterDuplicateText is not null)
+			{
+				initializer.Property("FilterDuplicateText");
+				writer.WriteValue(FilterDuplicateText.Value);
+			}
 
-		if (Include is not null)
-		{
-			initializer.Property("Include");
-			Include.FormatCode(writer);
-		}
+			if (Gnd is not null)
+			{
+				initializer.Property("Gnd");
+				Gnd.FormatCode(writer);
+			}
 
-		if (Jlh is not null)
-		{
-			initializer.Property("Jlh");
-			Jlh.FormatCode(writer);
-		}
+			if (Include is not null)
+			{
+				initializer.Property("Include");
+				Include.FormatCode(writer);
+			}
 
-		if (MinDocCount is not null)
-		{
-			initializer.Property("MinDocCount");
-			writer.WriteValue(MinDocCount.Value);
-			writer.Write("L");
-		}
+			if (Jlh is not null)
+			{
+				initializer.Property("Jlh");
+				Jlh.FormatCode(writer);
+			}
 
-		if (MutualInformation is not null)
-		{
-			initializer.Property("MutualInformation");
-			MutualInformation.FormatCode(writer);
-		}
+			if (MinDocCount is not null)
+			{
+				initializer.Property("MinDocCount");
+				writer.WriteValue(MinDocCount.Value);
+				writer.Write("L");
+			}
 
-		if (Percentage is not null)
-		{
-			initializer.Property("Percentage");
-			Percentage.FormatCode(writer);
-		}
+			if (MutualInformation is not null)
+			{
+				initializer.Property("MutualInformation");
+				MutualInformation.FormatCode(writer);
+			}
 
-		if (ScriptHeuristic is not null)
-		{
-			initializer.Property("ScriptHeuristic");
-			ScriptHeuristic.FormatCode(writer);
-		}
+			if (Percentage is not null)
+			{
+				initializer.Property("Percentage");
+				Percentage.FormatCode(writer);
+			}
 
-		if (ShardMinDocCount is not null)
-		{
-			initializer.Property("ShardMinDocCount");
-			writer.WriteValue(ShardMinDocCount.Value);
-			writer.Write("L");
-		}
+			if (ScriptHeuristic is not null)
+			{
+				initializer.Property("ScriptHeuristic");
+				ScriptHeuristic.FormatCode(writer);
+			}
 
-		if (ShardSize is not null)
-		{
-			initializer.Property("ShardSize");
-			writer.WriteValue(ShardSize.Value);
-		}
+			if (ShardMinDocCount is not null)
+			{
+				initializer.Property("ShardMinDocCount");
+				writer.WriteValue(ShardMinDocCount.Value);
+				writer.Write("L");
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (ShardSize is not null)
+			{
+				initializer.Property("ShardSize");
+				writer.WriteValue(ShardSize.Value);
+			}
 
-		if (SourceFields is not null)
-		{
-			initializer.Property("SourceFields");
-			SourceFields.FormatCode(writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		initializer.Dispose();
+			if (SourceFields is not null)
+			{
+				initializer.Property("SourceFields");
+				SourceFields.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

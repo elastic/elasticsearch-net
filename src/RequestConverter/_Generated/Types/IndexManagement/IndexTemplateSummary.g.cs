@@ -27,44 +27,74 @@ public partial class IndexTemplateSummary : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary", false);
-		if (Aliases is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Aliases");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexName");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
-			writer.Write(">()");
-			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (Aliases is not null)
+			{
+				writer.WriteFluentDescriptorCall("Aliases", (w) => { w.WriteFluentDictionaryAdds("Add", Aliases, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
 
-		if (DataStreamOptions is not null)
+			if (DataStreamOptions is not null)
+			{
+				writer.WriteFluentDescriptorCall("DataStreamOptions", (w) => { DataStreamOptions.FormatCode(w); });
+			}
+
+			if (Lifecycle is not null)
+			{
+				writer.WriteFluentDescriptorCall("Lifecycle", (w) => { Lifecycle.FormatCode(w); });
+			}
+
+			if (Mappings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Mappings", (w) => { Mappings.FormatCode(w); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("DataStreamOptions");
-			DataStreamOptions.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary", false);
+			if (Aliases is not null)
+			{
+				initializer.Property("Aliases");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexName");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
+				writer.Write(">()");
+				writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (Lifecycle is not null)
-		{
-			initializer.Property("Lifecycle");
-			Lifecycle.FormatCode(writer);
-		}
+			if (DataStreamOptions is not null)
+			{
+				initializer.Property("DataStreamOptions");
+				DataStreamOptions.FormatCode(writer);
+			}
 
-		if (Mappings is not null)
-		{
-			initializer.Property("Mappings");
-			Mappings.FormatCode(writer);
-		}
+			if (Lifecycle is not null)
+			{
+				initializer.Property("Lifecycle");
+				Lifecycle.FormatCode(writer);
+			}
 
-		if (Settings is not null)
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			if (Mappings is not null)
+			{
+				initializer.Property("Mappings");
+				Mappings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

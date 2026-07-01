@@ -27,19 +27,33 @@ public partial class VertexInclude : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.VertexInclude", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("d");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("Term", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Term); });
+			}
+		}
+		else
 		{
-			initializer.Property("Term");
-			writer.WriteString(Term);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.VertexInclude", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Term");
+				writer.WriteString(Term);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -71,7 +71,23 @@ public sealed class RequestConverter
 		}
 
 		var writer = new CodeWriter(options);
+
+		// `TypeName variableName = ` goes before the initializer. Writing the type name here (not after FormatCode)
+		// records its namespace up front so the body's collision-aware shortening accounts for it. The materialized
+		// request type is already closed over JsonElement for generic requests (e.g. IndexRequest<JsonElement>), so the
+		// rendered declaration names that concrete type.
+		if (writer.Options.EmitVariableDeclaration)
+		{
+			writer.WriteTypeName(request.GetType()).Write(" ").Write(writer.Options.VariableName).Write(" = ");
+		}
+
 		formattable.FormatCode(writer);
+
+		if (writer.Options.EmitVariableDeclaration)
+		{
+			writer.Write(";");
+		}
+
 		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces));
 	}
 }

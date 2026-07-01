@@ -27,36 +27,65 @@ public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation", false);
-		if (IncludeSort is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IncludeSort");
-			writer.WriteValue(IncludeSort.Value);
-		}
+			if (IncludeSort is not null)
+			{
+				writer.WriteFluentCall("IncludeSort", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeSort.Value); });
+			}
 
+			{
+				writer.WriteFluentDescriptorCall("Point", (w) => { Point.FormatCode(w); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sort", (w) => { Sort.FormatCode(w); });
+			}
+
+			if (SortOrder is not null)
+			{
+				writer.WriteFluentCall("SortOrder", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(SortOrder.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Point");
-			Point.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation", false);
+			if (IncludeSort is not null)
+			{
+				initializer.Property("IncludeSort");
+				writer.WriteValue(IncludeSort.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			{
+				initializer.Property("Point");
+				Point.FormatCode(writer);
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			Sort.FormatCode(writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (SortOrder is not null)
-		{
-			initializer.Property("SortOrder");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(SortOrder.Value, writer);
-		}
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				Sort.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (SortOrder is not null)
+			{
+				initializer.Property("SortOrder");
+				Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(SortOrder.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,37 +27,67 @@ public partial class DiversifiedSamplerAggregation : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation", false);
-		if (ExecutionHint is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ExecutionHint");
-			Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
-		}
+			if (ExecutionHint is not null)
+			{
+				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (MaxDocsPerValue is not null)
+			{
+				writer.WriteFluentCall("MaxDocsPerValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocsPerValue.Value); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (ShardSize is not null)
+			{
+				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation", false);
+			if (ExecutionHint is not null)
+			{
+				initializer.Property("ExecutionHint");
+				Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
+			}
 
-		if (MaxDocsPerValue is not null)
-		{
-			initializer.Property("MaxDocsPerValue");
-			writer.WriteValue(MaxDocsPerValue.Value);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (MaxDocsPerValue is not null)
+			{
+				initializer.Property("MaxDocsPerValue");
+				writer.WriteValue(MaxDocsPerValue.Value);
+			}
 
-		if (ShardSize is not null)
-		{
-			initializer.Property("ShardSize");
-			writer.WriteValue(ShardSize.Value);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ShardSize is not null)
+			{
+				initializer.Property("ShardSize");
+				writer.WriteValue(ShardSize.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

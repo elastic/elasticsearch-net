@@ -27,19 +27,34 @@ public partial class Phase : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase", false);
-		if (Actions is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Actions");
-			Actions.FormatCode(writer);
-		}
+			if (Actions is not null)
+			{
+				writer.WriteFluentDescriptorCall("Actions", (w) => { Actions.FormatCode(w); });
+			}
 
-		if (MinAge is not null)
+			if (MinAge is not null)
+			{
+				writer.WriteFluentCall("MinAge", (w) => { using var _oi = w.ForceObjectInitializer(); MinAge.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MinAge");
-			MinAge.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase", false);
+			if (Actions is not null)
+			{
+				initializer.Property("Actions");
+				Actions.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (MinAge is not null)
+			{
+				initializer.Property("MinAge");
+				MinAge.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

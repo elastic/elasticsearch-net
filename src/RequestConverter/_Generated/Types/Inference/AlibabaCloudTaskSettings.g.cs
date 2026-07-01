@@ -27,19 +27,34 @@ public partial class AlibabaCloudTaskSettings : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings", false);
-		if (InputType is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InputType");
-			writer.WriteString(InputType);
-		}
+			if (InputType is not null)
+			{
+				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+			}
 
-		if (ReturnToken is not null)
+			if (ReturnToken is not null)
+			{
+				writer.WriteFluentCall("ReturnToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnToken.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("ReturnToken");
-			writer.WriteValue(ReturnToken.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings", false);
+			if (InputType is not null)
+			{
+				initializer.Property("InputType");
+				writer.WriteString(InputType);
+			}
 
-		initializer.Dispose();
+			if (ReturnToken is not null)
+			{
+				initializer.Property("ReturnToken");
+				writer.WriteValue(ReturnToken.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

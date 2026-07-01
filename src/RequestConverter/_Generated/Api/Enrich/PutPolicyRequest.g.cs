@@ -27,36 +27,87 @@ public partial class PutPolicyRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
 
-		if (MasterTimeout is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (GeoMatch is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeoMatch", (w) => { GeoMatch.FormatCode(w); });
+			}
+
+			if (Match is not null)
+			{
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); });
+			}
+
+			if (Range is not null)
+			{
+				writer.WriteFluentDescriptorCall("Range", (w) => { Range.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (GeoMatch is not null)
-		{
-			initializer.Property("GeoMatch");
-			GeoMatch.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (Match is not null)
-		{
-			initializer.Property("Match");
-			Match.FormatCode(writer);
-		}
+			if (GeoMatch is not null)
+			{
+				initializer.Property("GeoMatch");
+				GeoMatch.FormatCode(writer);
+			}
 
-		if (Range is not null)
-		{
-			initializer.Property("Range");
-			Range.FormatCode(writer);
-		}
+			if (Match is not null)
+			{
+				initializer.Property("Match");
+				Match.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Range is not null)
+			{
+				initializer.Property("Range");
+				Range.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

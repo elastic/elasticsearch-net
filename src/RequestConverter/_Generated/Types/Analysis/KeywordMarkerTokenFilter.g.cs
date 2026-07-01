@@ -27,37 +27,67 @@ public partial class KeywordMarkerTokenFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter", true);
-		if (IgnoreCase is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IgnoreCase");
-			writer.WriteValue(IgnoreCase.Value);
-		}
+			if (IgnoreCase is not null)
+			{
+				writer.WriteFluentCall("IgnoreCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreCase.Value); });
+			}
 
-		if (Keywords is not null)
+			if (Keywords is not null)
+			{
+				writer.WriteFluentParams("Keywords", Keywords, (w, item) => { w.WriteString(item); });
+			}
+
+			if (KeywordsPath is not null)
+			{
+				writer.WriteFluentCall("KeywordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KeywordsPath); });
+			}
+
+			if (KeywordsPattern is not null)
+			{
+				writer.WriteFluentCall("KeywordsPattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KeywordsPattern); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Keywords");
-			writer.WriteInlineList(Keywords, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter", true);
+			if (IgnoreCase is not null)
+			{
+				initializer.Property("IgnoreCase");
+				writer.WriteValue(IgnoreCase.Value);
+			}
 
-		if (KeywordsPath is not null)
-		{
-			initializer.Property("KeywordsPath");
-			writer.WriteString(KeywordsPath);
-		}
+			if (Keywords is not null)
+			{
+				initializer.Property("Keywords");
+				writer.WriteInlineList(Keywords, (w, item) => { w.WriteString(item); });
+			}
 
-		if (KeywordsPattern is not null)
-		{
-			initializer.Property("KeywordsPattern");
-			writer.WriteString(KeywordsPattern);
-		}
+			if (KeywordsPath is not null)
+			{
+				initializer.Property("KeywordsPath");
+				writer.WriteString(KeywordsPath);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (KeywordsPattern is not null)
+			{
+				initializer.Property("KeywordsPattern");
+				writer.WriteString(KeywordsPattern);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

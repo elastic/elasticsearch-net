@@ -27,24 +27,43 @@ public partial class Storage : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Storage", false);
-		if (AllowMmap is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowMmap");
-			writer.WriteValue(AllowMmap.Value);
-		}
+			if (AllowMmap is not null)
+			{
+				writer.WriteFluentCall("AllowMmap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowMmap.Value); });
+			}
 
-		if (StatsRefreshInterval is not null)
+			if (StatsRefreshInterval is not null)
+			{
+				writer.WriteFluentCall("StatsRefreshInterval", (w) => { using var _oi = w.ForceObjectInitializer(); StatsRefreshInterval.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Type.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("StatsRefreshInterval");
-			StatsRefreshInterval.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Storage", false);
+			if (AllowMmap is not null)
+			{
+				initializer.Property("AllowMmap");
+				writer.WriteValue(AllowMmap.Value);
+			}
 
-		{
-			initializer.Property("Type");
-			Type.FormatCode(writer);
-		}
+			if (StatsRefreshInterval is not null)
+			{
+				initializer.Property("StatsRefreshInterval");
+				StatsRefreshInterval.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Type");
+				Type.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

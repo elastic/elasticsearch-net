@@ -57,7 +57,7 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		if (Id is not null)
@@ -95,7 +95,7 @@ public partial class CompletionSuggestOption<TDocument> : RequestConverter.ICode
 		if (Source is not null)
 		{
 			initializer.Property("Source");
-			writer.WriteValue(Source);
+			writer.WriteDocument(Source);
 		}
 
 		{

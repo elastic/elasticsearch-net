@@ -27,43 +27,82 @@ public partial class GetTokenRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetTokenRequest", false);
-		if (GrantType is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("GrantType");
-			Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(GrantType.Value, writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (GrantType is not null)
+			{
+				writer.WriteFluentCall("GrantType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(GrantType.Value, w); });
+			}
 
-		if (KerberosTicket is not null)
+			if (KerberosTicket is not null)
+			{
+				writer.WriteFluentCall("KerberosTicket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KerberosTicket); });
+			}
+
+			if (Password is not null)
+			{
+				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+			}
+
+			if (RefreshToken is not null)
+			{
+				writer.WriteFluentCall("RefreshToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RefreshToken); });
+			}
+
+			if (Scope is not null)
+			{
+				writer.WriteFluentCall("Scope", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Scope); });
+			}
+
+			if (Username is not null)
+			{
+				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("KerberosTicket");
-			writer.WriteString(KerberosTicket);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetTokenRequest", false);
+			if (GrantType is not null)
+			{
+				initializer.Property("GrantType");
+				Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(GrantType.Value, writer);
+			}
 
-		if (Password is not null)
-		{
-			initializer.Property("Password");
-			writer.WriteString(Password);
-		}
+			if (KerberosTicket is not null)
+			{
+				initializer.Property("KerberosTicket");
+				writer.WriteString(KerberosTicket);
+			}
 
-		if (RefreshToken is not null)
-		{
-			initializer.Property("RefreshToken");
-			writer.WriteString(RefreshToken);
-		}
+			if (Password is not null)
+			{
+				initializer.Property("Password");
+				writer.WriteString(Password);
+			}
 
-		if (Scope is not null)
-		{
-			initializer.Property("Scope");
-			writer.WriteString(Scope);
-		}
+			if (RefreshToken is not null)
+			{
+				initializer.Property("RefreshToken");
+				writer.WriteString(RefreshToken);
+			}
 
-		if (Username is not null)
-		{
-			initializer.Property("Username");
-			Username.FormatCode(writer);
-		}
+			if (Scope is not null)
+			{
+				initializer.Property("Scope");
+				writer.WriteString(Scope);
+			}
 
-		initializer.Dispose();
+			if (Username is not null)
+			{
+				initializer.Property("Username");
+				Username.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

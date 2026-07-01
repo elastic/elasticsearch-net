@@ -27,66 +27,120 @@ public partial class JsonProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.JsonProcessor", false);
-		if (AddToRoot is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AddToRoot");
-			writer.WriteValue(AddToRoot.Value);
-		}
+			if (AddToRoot is not null)
+			{
+				writer.WriteFluentCall("AddToRoot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AddToRoot.Value); });
+			}
 
-		if (AddToRootConflictStrategy is not null)
+			if (AddToRootConflictStrategy is not null)
+			{
+				writer.WriteFluentCall("AddToRootConflictStrategy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategyCodeFormatter.FormatCode(AddToRootConflictStrategy.Value, w); });
+			}
+
+			if (AllowDuplicateKeys is not null)
+			{
+				writer.WriteFluentCall("AllowDuplicateKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowDuplicateKeys.Value); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (TargetField is not null)
+			{
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("AddToRootConflictStrategy");
-			Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategyCodeFormatter.FormatCode(AddToRootConflictStrategy.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.JsonProcessor", false);
+			if (AddToRoot is not null)
+			{
+				initializer.Property("AddToRoot");
+				writer.WriteValue(AddToRoot.Value);
+			}
 
-		if (AllowDuplicateKeys is not null)
-		{
-			initializer.Property("AllowDuplicateKeys");
-			writer.WriteValue(AllowDuplicateKeys.Value);
-		}
+			if (AddToRootConflictStrategy is not null)
+			{
+				initializer.Property("AddToRootConflictStrategy");
+				Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategyCodeFormatter.FormatCode(AddToRootConflictStrategy.Value, writer);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (AllowDuplicateKeys is not null)
+			{
+				initializer.Property("AllowDuplicateKeys");
+				writer.WriteValue(AllowDuplicateKeys.Value);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (TargetField is not null)
-		{
-			initializer.Property("TargetField");
-			TargetField.FormatCode(writer);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		initializer.Dispose();
+			if (TargetField is not null)
+			{
+				initializer.Property("TargetField");
+				TargetField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

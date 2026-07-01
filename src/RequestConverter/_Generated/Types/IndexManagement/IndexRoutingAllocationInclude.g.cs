@@ -27,19 +27,34 @@ public partial class IndexRoutingAllocationInclude : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude", false);
-		if (Id is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
 
-		if (TierPreference is not null)
+			if (TierPreference is not null)
+			{
+				writer.WriteFluentCall("TierPreference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TierPreference); });
+			}
+		}
+		else
 		{
-			initializer.Property("TierPreference");
-			writer.WriteString(TierPreference);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude", false);
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TierPreference is not null)
+			{
+				initializer.Property("TierPreference");
+				writer.WriteString(TierPreference);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

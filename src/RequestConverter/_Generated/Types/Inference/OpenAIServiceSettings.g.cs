@@ -27,47 +27,85 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
-		if (Dimensions is not null)
+			if (Dimensions is not null)
+			{
+				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (OrganizationId is not null)
+			{
+				writer.WriteFluentCall("OrganizationId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(OrganizationId); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			if (Similarity is not null)
+			{
+				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+			}
+
+			if (Url is not null)
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("Dimensions");
-			writer.WriteValue(Dimensions.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			if (Dimensions is not null)
+			{
+				initializer.Property("Dimensions");
+				writer.WriteValue(Dimensions.Value);
+			}
 
-		if (OrganizationId is not null)
-		{
-			initializer.Property("OrganizationId");
-			writer.WriteString(OrganizationId);
-		}
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			if (OrganizationId is not null)
+			{
+				initializer.Property("OrganizationId");
+				writer.WriteString(OrganizationId);
+			}
 
-		if (Similarity is not null)
-		{
-			initializer.Property("Similarity");
-			Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		if (Url is not null)
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Url is not null)
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,37 +27,67 @@ public partial class VariableWidthHistogramAggregation : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation", false);
-		if (Buckets is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Buckets");
-			writer.WriteValue(Buckets.Value);
-		}
+			if (Buckets is not null)
+			{
+				writer.WriteFluentCall("Buckets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Buckets.Value); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (InitialBuffer is not null)
+			{
+				writer.WriteFluentCall("InitialBuffer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(InitialBuffer.Value); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (ShardSize is not null)
+			{
+				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation", false);
+			if (Buckets is not null)
+			{
+				initializer.Property("Buckets");
+				writer.WriteValue(Buckets.Value);
+			}
 
-		if (InitialBuffer is not null)
-		{
-			initializer.Property("InitialBuffer");
-			writer.WriteValue(InitialBuffer.Value);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (InitialBuffer is not null)
+			{
+				initializer.Property("InitialBuffer");
+				writer.WriteValue(InitialBuffer.Value);
+			}
 
-		if (ShardSize is not null)
-		{
-			initializer.Property("ShardSize");
-			writer.WriteValue(ShardSize.Value);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ShardSize is not null)
+			{
+				initializer.Property("ShardSize");
+				writer.WriteValue(ShardSize.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

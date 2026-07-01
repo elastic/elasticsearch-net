@@ -27,31 +27,56 @@ public partial class IndexSegmentSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); Field.FormatCode(w); });
+			}
 
-		if (Missing is not null)
+			if (Missing is not null)
+			{
+				writer.WriteFluentParams("Missing", Missing, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (Mode is not null)
+			{
+				writer.WriteFluentParams("Mode", Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (Order is not null)
+			{
+				writer.WriteFluentParams("Order", Order, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderCodeFormatter.FormatCode(item, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Missing");
-			writer.WriteInlineList(Missing, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Mode is not null)
-		{
-			initializer.Property("Mode");
-			writer.WriteInlineList(Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeCodeFormatter.FormatCode(item, w); });
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteInlineList(Missing, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Order is not null)
-		{
-			initializer.Property("Order");
-			writer.WriteInlineList(Order, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderCodeFormatter.FormatCode(item, w); });
-		}
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				writer.WriteInlineList(Mode, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeCodeFormatter.FormatCode(item, w); });
+			}
 
-		initializer.Dispose();
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				writer.WriteInlineList(Order, (w, item) => { Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderCodeFormatter.FormatCode(item, w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

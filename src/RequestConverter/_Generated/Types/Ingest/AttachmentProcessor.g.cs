@@ -27,91 +27,165 @@ public partial class AttachmentProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor", false);
-		if (Description is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (IgnoreMissing is not null)
+			{
+				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+			}
+
+			if (IndexedChars is not null)
+			{
+				writer.WriteFluentCall("IndexedChars", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexedChars.Value); w.Write("L"); });
+			}
+
+			if (IndexedCharsField is not null)
+			{
+				writer.WriteFluentCall("IndexedCharsField", (w) => { IndexedCharsField.FormatCode(w); });
+			}
+
+			if (MaxFieldBytes is not null)
+			{
+				writer.WriteFluentCall("MaxFieldBytes", (w) => { using var _oi = w.ForceObjectInitializer(); MaxFieldBytes.FormatCode(w); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Properties is not null)
+			{
+				writer.WriteFluentParams("Properties", Properties, (w, item) => { w.WriteString(item); });
+			}
+
+			if (RemoveBinary is not null)
+			{
+				writer.WriteFluentCall("RemoveBinary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RemoveBinary.Value); });
+			}
+
+			if (ResourceName is not null)
+			{
+				writer.WriteFluentCall("ResourceName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResourceName); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (TargetField is not null)
+			{
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor", false);
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IgnoreMissing is not null)
-		{
-			initializer.Property("IgnoreMissing");
-			writer.WriteValue(IgnoreMissing.Value);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (IndexedChars is not null)
-		{
-			initializer.Property("IndexedChars");
-			writer.WriteValue(IndexedChars.Value);
-			writer.Write("L");
-		}
+			if (IgnoreMissing is not null)
+			{
+				initializer.Property("IgnoreMissing");
+				writer.WriteValue(IgnoreMissing.Value);
+			}
 
-		if (IndexedCharsField is not null)
-		{
-			initializer.Property("IndexedCharsField");
-			IndexedCharsField.FormatCode(writer);
-		}
+			if (IndexedChars is not null)
+			{
+				initializer.Property("IndexedChars");
+				writer.WriteValue(IndexedChars.Value);
+				writer.Write("L");
+			}
 
-		if (MaxFieldBytes is not null)
-		{
-			initializer.Property("MaxFieldBytes");
-			MaxFieldBytes.FormatCode(writer);
-		}
+			if (IndexedCharsField is not null)
+			{
+				initializer.Property("IndexedCharsField");
+				IndexedCharsField.FormatCode(writer);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (MaxFieldBytes is not null)
+			{
+				initializer.Property("MaxFieldBytes");
+				MaxFieldBytes.FormatCode(writer);
+			}
 
-		if (Properties is not null)
-		{
-			initializer.Property("Properties");
-			writer.WriteInlineList(Properties, (w, item) => { w.WriteString(item); });
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (RemoveBinary is not null)
-		{
-			initializer.Property("RemoveBinary");
-			writer.WriteValue(RemoveBinary.Value);
-		}
+			if (Properties is not null)
+			{
+				initializer.Property("Properties");
+				writer.WriteInlineList(Properties, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ResourceName is not null)
-		{
-			initializer.Property("ResourceName");
-			writer.WriteString(ResourceName);
-		}
+			if (RemoveBinary is not null)
+			{
+				initializer.Property("RemoveBinary");
+				writer.WriteValue(RemoveBinary.Value);
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (ResourceName is not null)
+			{
+				initializer.Property("ResourceName");
+				writer.WriteString(ResourceName);
+			}
 
-		if (TargetField is not null)
-		{
-			initializer.Property("TargetField");
-			TargetField.FormatCode(writer);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		initializer.Dispose();
+			if (TargetField is not null)
+			{
+				initializer.Property("TargetField");
+				TargetField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

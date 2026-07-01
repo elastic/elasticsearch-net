@@ -27,12 +27,21 @@ public partial class Input : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Input", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FieldNames");
-			FieldNames.FormatCode(writer);
+			{
+				writer.WriteFluentCall("FieldNames", (w) => { using var _oi = w.ForceObjectInitializer(); FieldNames.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Input", false);
+			{
+				initializer.Property("FieldNames");
+				FieldNames.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

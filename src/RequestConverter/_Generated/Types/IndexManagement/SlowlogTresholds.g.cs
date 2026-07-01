@@ -27,19 +27,34 @@ public partial class SlowlogTresholds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds", false);
-		if (Fetch is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Fetch");
-			Fetch.FormatCode(writer);
-		}
+			if (Fetch is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fetch", (w) => { Fetch.FormatCode(w); });
+			}
 
-		if (Query is not null)
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds", false);
+			if (Fetch is not null)
+			{
+				initializer.Property("Fetch");
+				Fetch.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

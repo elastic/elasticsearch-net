@@ -27,36 +27,65 @@ public partial class Ensemble : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Ensemble", false);
-		if (AggregateOutput is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AggregateOutput");
-			AggregateOutput.FormatCode(writer);
-		}
+			if (AggregateOutput is not null)
+			{
+				writer.WriteFluentDescriptorCall("AggregateOutput", (w) => { AggregateOutput.FormatCode(w); });
+			}
 
-		if (ClassificationLabels is not null)
+			if (ClassificationLabels is not null)
+			{
+				writer.WriteFluentParams("ClassificationLabels", ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
+
+			if (FeatureNames is not null)
+			{
+				writer.WriteFluentParams("FeatureNames", FeatureNames, (w, item) => { w.WriteString(item); });
+			}
+
+			if (TargetType is not null)
+			{
+				writer.WriteFluentCall("TargetType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetType); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("TrainedModels", TrainedModels, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("ClassificationLabels");
-			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Ensemble", false);
+			if (AggregateOutput is not null)
+			{
+				initializer.Property("AggregateOutput");
+				AggregateOutput.FormatCode(writer);
+			}
 
-		if (FeatureNames is not null)
-		{
-			initializer.Property("FeatureNames");
-			writer.WriteInlineList(FeatureNames, (w, item) => { w.WriteString(item); });
-		}
+			if (ClassificationLabels is not null)
+			{
+				initializer.Property("ClassificationLabels");
+				writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (TargetType is not null)
-		{
-			initializer.Property("TargetType");
-			writer.WriteString(TargetType);
-		}
+			if (FeatureNames is not null)
+			{
+				initializer.Property("FeatureNames");
+				writer.WriteInlineList(FeatureNames, (w, item) => { w.WriteString(item); });
+			}
 
-		{
-			initializer.Property("TrainedModels");
-			writer.WriteInlineList(TrainedModels, (w, item) => { item.FormatCode(w); });
-		}
+			if (TargetType is not null)
+			{
+				initializer.Property("TargetType");
+				writer.WriteString(TargetType);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("TrainedModels");
+				writer.WriteInlineList(TrainedModels, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,67 +27,143 @@ public partial class GetInfluencersRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
 
-		if (Desc is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (Desc is not null)
+			{
+				writer.WriteFluentCall("Desc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Desc.Value); });
+			}
+
+			if (End is not null)
+			{
+				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+			}
+
+			if (ExcludeInterim is not null)
+			{
+				writer.WriteFluentCall("ExcludeInterim", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeInterim.Value); });
+			}
+
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
+
+			if (InfluencerScore is not null)
+			{
+				writer.WriteFluentCall("InfluencerScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(InfluencerScore.Value); w.Write("d"); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); });
+			}
+
+			if (Start is not null)
+			{
+				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+			}
+
+			if (Page is not null)
+			{
+				writer.WriteFluentDescriptorCall("Page", (w) => { Page.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Desc");
-			writer.WriteValue(Desc.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (End is not null)
-		{
-			initializer.Property("End");
-			writer.WriteValue(End.Value);
-		}
+			if (Desc is not null)
+			{
+				initializer.Property("Desc");
+				writer.WriteValue(Desc.Value);
+			}
 
-		if (ExcludeInterim is not null)
-		{
-			initializer.Property("ExcludeInterim");
-			writer.WriteValue(ExcludeInterim.Value);
-		}
+			if (End is not null)
+			{
+				initializer.Property("End");
+				writer.WriteValue(End.Value);
+			}
 
-		if (From is not null)
-		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			if (ExcludeInterim is not null)
+			{
+				initializer.Property("ExcludeInterim");
+				writer.WriteValue(ExcludeInterim.Value);
+			}
 
-		if (InfluencerScore is not null)
-		{
-			initializer.Property("InfluencerScore");
-			writer.WriteValue(InfluencerScore.Value);
-			writer.Write("d");
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (InfluencerScore is not null)
+			{
+				initializer.Property("InfluencerScore");
+				writer.WriteValue(InfluencerScore.Value);
+				writer.Write("d");
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			Sort.FormatCode(writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (Start is not null)
-		{
-			initializer.Property("Start");
-			writer.WriteValue(Start.Value);
-		}
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				Sort.FormatCode(writer);
+			}
 
-		if (Page is not null)
-		{
-			initializer.Property("Page");
-			Page.FormatCode(writer);
-		}
+			if (Start is not null)
+			{
+				initializer.Property("Start");
+				writer.WriteValue(Start.Value);
+			}
 
-		initializer.Dispose();
+			if (Page is not null)
+			{
+				initializer.Property("Page");
+				Page.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

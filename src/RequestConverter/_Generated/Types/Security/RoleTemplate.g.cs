@@ -27,18 +27,32 @@ public partial class RoleTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleTemplate", false);
-		if (Format is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Format");
-			Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(Format.Value, writer);
-		}
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(Format.Value, w); });
+			}
 
+			{
+				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Template");
-			Template.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleTemplate", false);
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(Format.Value, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Template");
+				Template.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

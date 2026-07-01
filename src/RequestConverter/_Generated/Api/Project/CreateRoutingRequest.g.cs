@@ -27,17 +27,36 @@ public partial class CreateRoutingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteString(Name);
+			}
 
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("Expressions", (w) => { Expressions.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Expressions");
-			Expressions.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest", false);
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Expressions");
+				Expressions.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

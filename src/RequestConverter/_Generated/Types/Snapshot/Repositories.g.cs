@@ -27,7 +27,53 @@ public partial class Repositories : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
-		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			foreach (var kvp in this)
+			{
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.AzureRepository c1)
+				{
+					writer.WriteFluentVariantAdd("Azure", (w) => { w.WriteString(kvp.Key); }, (w) => { c1.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository c2)
+				{
+					writer.WriteFluentVariantAdd("SharedFileSystem", (w) => { w.WriteString(kvp.Key); }, (w) => { c2.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.GcsRepository c3)
+				{
+					writer.WriteFluentVariantAdd("Gcs", (w) => { w.WriteString(kvp.Key); }, (w) => { c3.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.S3Repository c4)
+				{
+					writer.WriteFluentVariantAdd("S3", (w) => { w.WriteString(kvp.Key); }, (w) => { c4.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository c5)
+				{
+					writer.WriteFluentVariantAdd("SourceOnly", (w) => { w.WriteString(kvp.Key); }, (w) => { c5.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository c6)
+				{
+					writer.WriteFluentVariantAdd("ReadOnlyUrl", (w) => { w.WriteString(kvp.Key); }, (w) => { c6.FormatCode(w); });
+					continue;
+				}
+
+				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+			}
+		}
+		else
+		{
+			writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.Snapshot.Repositories");
+			writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
 	}
 }

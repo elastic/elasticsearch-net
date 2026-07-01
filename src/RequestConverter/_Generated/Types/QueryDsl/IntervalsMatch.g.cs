@@ -27,42 +27,76 @@ public partial class IntervalsMatch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
+
+			if (MaxGaps is not null)
+			{
+				writer.WriteFluentCall("MaxGaps", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGaps.Value); });
+			}
+
+			if (Ordered is not null)
+			{
+				writer.WriteFluentCall("Ordered", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Ordered.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
+
+			if (UseField is not null)
+			{
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (MaxGaps is not null)
-		{
-			initializer.Property("MaxGaps");
-			writer.WriteValue(MaxGaps.Value);
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
 
-		if (Ordered is not null)
-		{
-			initializer.Property("Ordered");
-			writer.WriteValue(Ordered.Value);
-		}
+			if (MaxGaps is not null)
+			{
+				initializer.Property("MaxGaps");
+				writer.WriteValue(MaxGaps.Value);
+			}
 
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			if (Ordered is not null)
+			{
+				initializer.Property("Ordered");
+				writer.WriteValue(Ordered.Value);
+			}
 
-		if (UseField is not null)
-		{
-			initializer.Property("UseField");
-			UseField.FormatCode(writer);
-		}
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
 
-		initializer.Dispose();
+			if (UseField is not null)
+			{
+				initializer.Property("UseField");
+				UseField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

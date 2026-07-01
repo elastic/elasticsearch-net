@@ -27,12 +27,21 @@ public partial class WktGeoBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.WktGeoBounds", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Wkt");
-			writer.WriteString(Wkt);
+			{
+				writer.WriteFluentCall("Wkt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Wkt); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.WktGeoBounds", true);
+			{
+				initializer.Property("Wkt");
+				writer.WriteString(Wkt);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,18 +27,32 @@ public partial class DownsampleAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FixedInterval");
-			writer.WriteString(FixedInterval);
-		}
+			{
+				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+			}
 
-		if (WaitTimeout is not null)
+			if (WaitTimeout is not null)
+			{
+				writer.WriteFluentCall("WaitTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); WaitTimeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("WaitTimeout");
-			WaitTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction", false);
+			{
+				initializer.Property("FixedInterval");
+				writer.WriteString(FixedInterval);
+			}
 
-		initializer.Dispose();
+			if (WaitTimeout is not null)
+			{
+				initializer.Property("WaitTimeout");
+				WaitTimeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

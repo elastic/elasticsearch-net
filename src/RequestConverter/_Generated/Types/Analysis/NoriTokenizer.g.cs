@@ -27,37 +27,67 @@ public partial class NoriTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer", true);
-		if (DecompoundMode is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DecompoundMode");
-			Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
-		}
+			if (DecompoundMode is not null)
+			{
+				writer.WriteFluentCall("DecompoundMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, w); });
+			}
 
-		if (DiscardPunctuation is not null)
+			if (DiscardPunctuation is not null)
+			{
+				writer.WriteFluentCall("DiscardPunctuation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscardPunctuation.Value); });
+			}
+
+			if (UserDictionary is not null)
+			{
+				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+			}
+
+			if (UserDictionaryRules is not null)
+			{
+				writer.WriteFluentParams("UserDictionaryRules", UserDictionaryRules, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("DiscardPunctuation");
-			writer.WriteValue(DiscardPunctuation.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer", true);
+			if (DecompoundMode is not null)
+			{
+				initializer.Property("DecompoundMode");
+				Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, writer);
+			}
 
-		if (UserDictionary is not null)
-		{
-			initializer.Property("UserDictionary");
-			writer.WriteString(UserDictionary);
-		}
+			if (DiscardPunctuation is not null)
+			{
+				initializer.Property("DiscardPunctuation");
+				writer.WriteValue(DiscardPunctuation.Value);
+			}
 
-		if (UserDictionaryRules is not null)
-		{
-			initializer.Property("UserDictionaryRules");
-			writer.WriteInlineList(UserDictionaryRules, (w, item) => { w.WriteString(item); });
-		}
+			if (UserDictionary is not null)
+			{
+				initializer.Property("UserDictionary");
+				writer.WriteString(UserDictionary);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (UserDictionaryRules is not null)
+			{
+				initializer.Property("UserDictionaryRules");
+				writer.WriteInlineList(UserDictionaryRules, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

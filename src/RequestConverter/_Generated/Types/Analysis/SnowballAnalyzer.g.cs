@@ -27,34 +27,54 @@ public partial class SnowballAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Language");
-			Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(Language, writer);
-		}
+			{
+				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(Language, w); });
+			}
 
-		if (Stopwords is not null)
-		{
-			initializer.Property("Stopwords");
-			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Stopwords is not null)
 			{
-				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				writer.WriteFluentCall("Stopwords", (w) => { using var _oi = w.ForceObjectInitializer(); if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
 			}
-			else
-			{
-				writer.Write("new ");
-				writer.WriteTypeRef("string");
-				writer.Write("[] ");
-				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
-			}
-		}
 #pragma warning disable CS0618
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
 #pragma warning restore CS0618
-		initializer.Dispose();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer", true);
+			{
+				initializer.Property("Language");
+				Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(Language, writer);
+			}
+
+			if (Stopwords is not null)
+			{
+				initializer.Property("Stopwords");
+				if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("string");
+					writer.Write("[] ");
+					writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				}
+			}
+#pragma warning disable CS0618
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+#pragma warning restore CS0618
+			initializer.Dispose();
+		}
 	}
 }

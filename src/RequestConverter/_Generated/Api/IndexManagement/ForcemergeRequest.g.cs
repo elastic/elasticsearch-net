@@ -27,56 +27,115 @@ public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest", false);
-		if (Indices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (AllowNoIndices is not null)
+			using var _chainIndent = writer.Indent();
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (AllowNoIndices is not null)
+			{
+				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (Flush is not null)
+			{
+				writer.WriteFluentCall("Flush", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Flush.Value); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (MaxNumSegments is not null)
+			{
+				writer.WriteFluentCall("MaxNumSegments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumSegments.Value); w.Write("L"); });
+			}
+
+			if (OnlyExpungeDeletes is not null)
+			{
+				writer.WriteFluentCall("OnlyExpungeDeletes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnlyExpungeDeletes.Value); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoIndices");
-			writer.WriteValue(AllowNoIndices.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest", false);
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			if (AllowNoIndices is not null)
+			{
+				initializer.Property("AllowNoIndices");
+				writer.WriteValue(AllowNoIndices.Value);
+			}
 
-		if (Flush is not null)
-		{
-			initializer.Property("Flush");
-			writer.WriteValue(Flush.Value);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (Flush is not null)
+			{
+				initializer.Property("Flush");
+				writer.WriteValue(Flush.Value);
+			}
 
-		if (MaxNumSegments is not null)
-		{
-			initializer.Property("MaxNumSegments");
-			writer.WriteValue(MaxNumSegments.Value);
-			writer.Write("L");
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
 
-		if (OnlyExpungeDeletes is not null)
-		{
-			initializer.Property("OnlyExpungeDeletes");
-			writer.WriteValue(OnlyExpungeDeletes.Value);
-		}
+			if (MaxNumSegments is not null)
+			{
+				initializer.Property("MaxNumSegments");
+				writer.WriteValue(MaxNumSegments.Value);
+				writer.Write("L");
+			}
 
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
+			if (OnlyExpungeDeletes is not null)
+			{
+				initializer.Property("OnlyExpungeDeletes");
+				writer.WriteValue(OnlyExpungeDeletes.Value);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

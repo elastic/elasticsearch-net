@@ -27,67 +27,121 @@ public partial class DateRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery", true);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (Gt is not null)
+			{
+				writer.WriteFluentCall("Gt", (w) => { using var _oi = w.ForceObjectInitializer(); Gt.FormatCode(w); });
+			}
+
+			if (Gte is not null)
+			{
+				writer.WriteFluentCall("Gte", (w) => { using var _oi = w.ForceObjectInitializer(); Gte.FormatCode(w); });
+			}
+
+			if (Lt is not null)
+			{
+				writer.WriteFluentCall("Lt", (w) => { using var _oi = w.ForceObjectInitializer(); Lt.FormatCode(w); });
+			}
+
+			if (Lte is not null)
+			{
+				writer.WriteFluentCall("Lte", (w) => { using var _oi = w.ForceObjectInitializer(); Lte.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (Relation is not null)
+			{
+				writer.WriteFluentCall("Relation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, w); });
+			}
+
+			if (TimeZone is not null)
+			{
+				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery", true);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Gt is not null)
-		{
-			initializer.Property("Gt");
-			Gt.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Gte is not null)
-		{
-			initializer.Property("Gte");
-			Gte.FormatCode(writer);
-		}
+			if (Gt is not null)
+			{
+				initializer.Property("Gt");
+				Gt.FormatCode(writer);
+			}
 
-		if (Lt is not null)
-		{
-			initializer.Property("Lt");
-			Lt.FormatCode(writer);
-		}
+			if (Gte is not null)
+			{
+				initializer.Property("Gte");
+				Gte.FormatCode(writer);
+			}
 
-		if (Lte is not null)
-		{
-			initializer.Property("Lte");
-			Lte.FormatCode(writer);
-		}
+			if (Lt is not null)
+			{
+				initializer.Property("Lt");
+				Lt.FormatCode(writer);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (Lte is not null)
+			{
+				initializer.Property("Lte");
+				Lte.FormatCode(writer);
+			}
 
-		if (Relation is not null)
-		{
-			initializer.Property("Relation");
-			Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		if (TimeZone is not null)
-		{
-			initializer.Property("TimeZone");
-			writer.WriteString(TimeZone);
-		}
+			if (Relation is not null)
+			{
+				initializer.Property("Relation");
+				Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (TimeZone is not null)
+			{
+				initializer.Property("TimeZone");
+				writer.WriteString(TimeZone);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

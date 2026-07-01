@@ -27,19 +27,34 @@ public partial class DataframeAnalysisAnalyzedFields : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields", false);
-		if (Excludes is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Excludes");
-			writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
-		}
+			if (Excludes is not null)
+			{
+				writer.WriteFluentParams("Excludes", Excludes, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Includes is not null)
+			if (Includes is not null)
+			{
+				writer.WriteFluentParams("Includes", Includes, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Includes");
-			writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields", false);
+			if (Excludes is not null)
+			{
+				initializer.Property("Excludes");
+				writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Includes is not null)
+			{
+				initializer.Property("Includes");
+				writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

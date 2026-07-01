@@ -27,47 +27,85 @@ public partial class JinaAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
-		if (Dimensions is not null)
+			if (Dimensions is not null)
+			{
+				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+			}
+
+			if (EmbeddingType is not null)
+			{
+				writer.WriteFluentCall("EmbeddingType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.JinaAIElementTypeCodeFormatter.FormatCode(EmbeddingType.Value, w); });
+			}
+
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (MultimodalModel is not null)
+			{
+				writer.WriteFluentCall("MultimodalModel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultimodalModel.Value); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			if (Similarity is not null)
+			{
+				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Dimensions");
-			writer.WriteValue(Dimensions.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		if (EmbeddingType is not null)
-		{
-			initializer.Property("EmbeddingType");
-			Elastic.Clients.Elasticsearch.Inference.JinaAIElementTypeCodeFormatter.FormatCode(EmbeddingType.Value, writer);
-		}
+			if (Dimensions is not null)
+			{
+				initializer.Property("Dimensions");
+				writer.WriteValue(Dimensions.Value);
+			}
 
-		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			if (EmbeddingType is not null)
+			{
+				initializer.Property("EmbeddingType");
+				Elastic.Clients.Elasticsearch.Inference.JinaAIElementTypeCodeFormatter.FormatCode(EmbeddingType.Value, writer);
+			}
 
-		if (MultimodalModel is not null)
-		{
-			initializer.Property("MultimodalModel");
-			writer.WriteValue(MultimodalModel.Value);
-		}
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			if (MultimodalModel is not null)
+			{
+				initializer.Property("MultimodalModel");
+				writer.WriteValue(MultimodalModel.Value);
+			}
 
-		if (Similarity is not null)
-		{
-			initializer.Property("Similarity");
-			Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

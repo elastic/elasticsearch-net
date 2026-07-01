@@ -27,31 +27,56 @@ public partial class BucketSortAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation", false);
-		if (From is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
 
-		if (GapPolicy is not null)
+			if (GapPolicy is not null)
+			{
+				writer.WriteFluentCall("GapPolicy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentDescriptorParams("Sort", Sort, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("GapPolicy");
-			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation", false);
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (GapPolicy is not null)
+			{
+				initializer.Property("GapPolicy");
+				Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		initializer.Dispose();
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,36 +27,59 @@ public partial class SuggestContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SuggestContext", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
-
-		if (Path is not null)
-		{
-			initializer.Property("Path");
-			Path.FormatCode(writer);
-		}
-
-		if (Precision is not null)
-		{
-			initializer.Property("Precision");
-			if (Precision.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
-				writer.WriteValue(Precision.Value1);
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
 			}
-			else
+
+			if (Path is not null)
 			{
-				writer.WriteString(Precision.Value2);
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+			}
+
+			if (Precision is not null)
+			{
+				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); if (Precision.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Precision.Value1); } else { w.WriteString(Precision.Value2); } });
+			}
+
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
 			}
 		}
-
+		else
 		{
-			initializer.Property("Type");
-			writer.WriteString(Type);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SuggestContext", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Path is not null)
+			{
+				initializer.Property("Path");
+				Path.FormatCode(writer);
+			}
+
+			if (Precision is not null)
+			{
+				initializer.Property("Precision");
+				if (Precision.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(Precision.Value1);
+				}
+				else
+				{
+					writer.WriteString(Precision.Value2);
+				}
+			}
+
+			{
+				initializer.Property("Type");
+				writer.WriteString(Type);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

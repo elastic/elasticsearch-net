@@ -27,14 +27,24 @@ public partial class DataframeEvaluationRegressionMetricsHuber : RequestConverte
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber", false);
-		if (Delta is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Delta");
-			writer.WriteValue(Delta.Value);
-			writer.Write("d");
+			if (Delta is not null)
+			{
+				writer.WriteFluentCall("Delta", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Delta.Value); w.Write("d"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber", false);
+			if (Delta is not null)
+			{
+				initializer.Property("Delta");
+				writer.WriteValue(Delta.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

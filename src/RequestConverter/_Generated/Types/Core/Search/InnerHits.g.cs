@@ -27,116 +27,206 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.InnerHits", false);
-		if (Collapse is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Collapse");
-			Collapse.FormatCode(writer);
-		}
+			if (Collapse is not null)
+			{
+				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); });
+			}
 
-		if (DocvalueFields is not null)
+			if (DocvalueFields is not null)
+			{
+				writer.WriteFluentDescriptorParams("DocvalueFields", DocvalueFields, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>"); w.Write("()"); });
+			}
+
+			if (Explain is not null)
+			{
+				writer.WriteFluentCall("Explain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Explain.Value); });
+			}
+
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); Field.FormatCode(w); });
+			}
+
+			if (Fields is not null)
+			{
+				writer.WriteFluentDescriptorParams("Fields", Fields, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>"); w.Write("()"); });
+			}
+
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
+
+			if (Highlight is not null)
+			{
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); });
+			}
+
+			if (IgnoreUnmapped is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+
+			if (ScriptFields is not null)
+			{
+				writer.WriteFluentDescriptorCall("ScriptFields", (w) => { w.WriteFluentDictionaryAdds("Add", ScriptFields, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+
+			if (SeqNoPrimaryTerm is not null)
+			{
+				writer.WriteFluentCall("SeqNoPrimaryTerm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SeqNoPrimaryTerm.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentDescriptorParams("Sort", Sort, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>"); w.Write("()"); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); Source.FormatCode(w); });
+			}
+
+			if (StoredFields is not null)
+			{
+				writer.WriteFluentCall("StoredFields", (w) => { using var _oi = w.ForceObjectInitializer(); StoredFields.FormatCode(w); });
+			}
+
+			if (TrackScores is not null)
+			{
+				writer.WriteFluentCall("TrackScores", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TrackScores.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("DocvalueFields");
-			writer.WriteInlineList(DocvalueFields, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.InnerHits", false);
+			if (Collapse is not null)
+			{
+				initializer.Property("Collapse");
+				Collapse.FormatCode(writer);
+			}
 
-		if (Explain is not null)
-		{
-			initializer.Property("Explain");
-			writer.WriteValue(Explain.Value);
-		}
+			if (DocvalueFields is not null)
+			{
+				initializer.Property("DocvalueFields");
+				writer.WriteInlineList(DocvalueFields, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Field is not null)
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Explain is not null)
+			{
+				initializer.Property("Explain");
+				writer.WriteValue(Explain.Value);
+			}
 
-		if (Fields is not null)
-		{
-			initializer.Property("Fields");
-			writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (From is not null)
-		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				writer.WriteInlineList(Fields, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Highlight is not null)
-		{
-			initializer.Property("Highlight");
-			Highlight.FormatCode(writer);
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (IgnoreUnmapped is not null)
-		{
-			initializer.Property("IgnoreUnmapped");
-			writer.WriteValue(IgnoreUnmapped.Value);
-		}
+			if (Highlight is not null)
+			{
+				initializer.Property("Highlight");
+				Highlight.FormatCode(writer);
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (IgnoreUnmapped is not null)
+			{
+				initializer.Property("IgnoreUnmapped");
+				writer.WriteValue(IgnoreUnmapped.Value);
+			}
 
-		if (ScriptFields is not null)
-		{
-			initializer.Property("ScriptFields");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptField");
-			writer.Write(">()");
-			writer.WriteBlockList(ScriptFields, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (SeqNoPrimaryTerm is not null)
-		{
-			initializer.Property("SeqNoPrimaryTerm");
-			writer.WriteValue(SeqNoPrimaryTerm.Value);
-		}
+			if (ScriptFields is not null)
+			{
+				initializer.Property("ScriptFields");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptField");
+				writer.Write(">()");
+				writer.WriteBlockList(ScriptFields, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (SeqNoPrimaryTerm is not null)
+			{
+				initializer.Property("SeqNoPrimaryTerm");
+				writer.WriteValue(SeqNoPrimaryTerm.Value);
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (StoredFields is not null)
-		{
-			initializer.Property("StoredFields");
-			StoredFields.FormatCode(writer);
-		}
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
 
-		if (TrackScores is not null)
-		{
-			initializer.Property("TrackScores");
-			writer.WriteValue(TrackScores.Value);
-		}
+			if (StoredFields is not null)
+			{
+				initializer.Property("StoredFields");
+				StoredFields.FormatCode(writer);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteValue(Version.Value);
-		}
+			if (TrackScores is not null)
+			{
+				initializer.Property("TrackScores");
+				writer.WriteValue(TrackScores.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteValue(Version.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

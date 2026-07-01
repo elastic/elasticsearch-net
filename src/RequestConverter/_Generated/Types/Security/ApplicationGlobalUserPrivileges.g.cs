@@ -27,12 +27,21 @@ public partial class ApplicationGlobalUserPrivileges : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Manage");
-			Manage.FormatCode(writer);
+			{
+				writer.WriteFluentDescriptorCall("Manage", (w) => { Manage.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges", false);
+			{
+				initializer.Property("Manage");
+				Manage.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

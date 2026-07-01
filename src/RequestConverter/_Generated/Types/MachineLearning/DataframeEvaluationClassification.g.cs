@@ -27,30 +27,54 @@ public partial class DataframeEvaluationClassification : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ActualField");
-			ActualField.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); });
+			}
 
-		if (Metrics is not null)
+			if (Metrics is not null)
+			{
+				writer.WriteFluentDescriptorCall("Metrics", (w) => { Metrics.FormatCode(w); });
+			}
+
+			if (PredictedField is not null)
+			{
+				writer.WriteFluentCall("PredictedField", (w) => { PredictedField.FormatCode(w); });
+			}
+
+			if (TopClassesField is not null)
+			{
+				writer.WriteFluentCall("TopClassesField", (w) => { TopClassesField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Metrics");
-			Metrics.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification", false);
+			{
+				initializer.Property("ActualField");
+				ActualField.FormatCode(writer);
+			}
 
-		if (PredictedField is not null)
-		{
-			initializer.Property("PredictedField");
-			PredictedField.FormatCode(writer);
-		}
+			if (Metrics is not null)
+			{
+				initializer.Property("Metrics");
+				Metrics.FormatCode(writer);
+			}
 
-		if (TopClassesField is not null)
-		{
-			initializer.Property("TopClassesField");
-			TopClassesField.FormatCode(writer);
-		}
+			if (PredictedField is not null)
+			{
+				initializer.Property("PredictedField");
+				PredictedField.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TopClassesField is not null)
+			{
+				initializer.Property("TopClassesField");
+				TopClassesField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

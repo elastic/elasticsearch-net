@@ -27,13 +27,27 @@ public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ClearScrollRequest", false);
-		if (ScrollId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ScrollId");
-			ScrollId.FormatCode(writer);
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (ScrollId is not null)
+			{
+				writer.WriteFluentCall("ScrollId", (w) => { using var _oi = w.ForceObjectInitializer(); ScrollId.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ClearScrollRequest", false);
+			if (ScrollId is not null)
+			{
+				initializer.Property("ScrollId");
+				ScrollId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

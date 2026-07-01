@@ -27,39 +27,70 @@ public partial class AmazonBedrockServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AccessKey");
-			writer.WriteString(AccessKey);
-		}
+			{
+				writer.WriteFluentCall("AccessKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AccessKey); });
+			}
 
+			{
+				writer.WriteFluentCall("Model", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Model); });
+			}
+
+			if (Provider is not null)
+			{
+				writer.WriteFluentCall("Provider", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Provider); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Region", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Region); });
+			}
+
+			{
+				writer.WriteFluentCall("SecretKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SecretKey); });
+			}
+		}
+		else
 		{
-			initializer.Property("Model");
-			writer.WriteString(Model);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings", false);
+			{
+				initializer.Property("AccessKey");
+				writer.WriteString(AccessKey);
+			}
 
-		if (Provider is not null)
-		{
-			initializer.Property("Provider");
-			writer.WriteString(Provider);
-		}
+			{
+				initializer.Property("Model");
+				writer.WriteString(Model);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			if (Provider is not null)
+			{
+				initializer.Property("Provider");
+				writer.WriteString(Provider);
+			}
 
-		{
-			initializer.Property("Region");
-			writer.WriteString(Region);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("SecretKey");
-			writer.WriteString(SecretKey);
-		}
+			{
+				initializer.Property("Region");
+				writer.WriteString(Region);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("SecretKey");
+				writer.WriteString(SecretKey);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

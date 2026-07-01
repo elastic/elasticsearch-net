@@ -27,19 +27,32 @@ public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Expressions");
 			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.ProjectRoutingExpression");
-			writer.Write(">()");
-			writer.WriteBlockList(Expressions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("Expressions", (w) => { w.WriteFluentDictionaryAdds("Add", Expressions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest", false);
+			{
+				initializer.Property("Expressions");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.ProjectRoutingExpression");
+				writer.Write(">()");
+				writer.WriteBlockList(Expressions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

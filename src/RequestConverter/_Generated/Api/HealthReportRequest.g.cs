@@ -27,31 +27,60 @@ public partial class HealthReportRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.HealthReportRequest", false);
-		if (Feature is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Feature");
-			writer.WriteInlineList(Feature, (w, item) => { w.WriteString(item); });
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Feature is not null)
+			{
+				writer.WriteFluentParams("Feature", Feature, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Size is not null)
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Verbose is not null)
+			{
+				writer.WriteFluentCall("Verbose", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Verbose.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.HealthReportRequest", false);
+			if (Feature is not null)
+			{
+				initializer.Property("Feature");
+				writer.WriteInlineList(Feature, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (Verbose is not null)
-		{
-			initializer.Property("Verbose");
-			writer.WriteValue(Verbose.Value);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Verbose is not null)
+			{
+				initializer.Property("Verbose");
+				writer.WriteValue(Verbose.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

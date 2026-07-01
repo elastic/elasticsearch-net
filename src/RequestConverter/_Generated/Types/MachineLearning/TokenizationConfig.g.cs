@@ -27,37 +27,67 @@ public partial class TokenizationConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig", false);
-		if (Bert is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Bert");
-			Bert.FormatCode(writer);
-		}
+			if (Bert is not null)
+			{
+				writer.WriteFluentDescriptorCall("Bert", (w) => { Bert.FormatCode(w); });
+			}
 
-		if (BertJa is not null)
+			if (BertJa is not null)
+			{
+				writer.WriteFluentDescriptorCall("BertJa", (w) => { BertJa.FormatCode(w); });
+			}
+
+			if (Mpnet is not null)
+			{
+				writer.WriteFluentDescriptorCall("Mpnet", (w) => { Mpnet.FormatCode(w); });
+			}
+
+			if (Roberta is not null)
+			{
+				writer.WriteFluentDescriptorCall("Roberta", (w) => { Roberta.FormatCode(w); });
+			}
+
+			if (XlmRoberta is not null)
+			{
+				writer.WriteFluentDescriptorCall("XlmRoberta", (w) => { XlmRoberta.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("BertJa");
-			BertJa.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig", false);
+			if (Bert is not null)
+			{
+				initializer.Property("Bert");
+				Bert.FormatCode(writer);
+			}
 
-		if (Mpnet is not null)
-		{
-			initializer.Property("Mpnet");
-			Mpnet.FormatCode(writer);
-		}
+			if (BertJa is not null)
+			{
+				initializer.Property("BertJa");
+				BertJa.FormatCode(writer);
+			}
 
-		if (Roberta is not null)
-		{
-			initializer.Property("Roberta");
-			Roberta.FormatCode(writer);
-		}
+			if (Mpnet is not null)
+			{
+				initializer.Property("Mpnet");
+				Mpnet.FormatCode(writer);
+			}
 
-		if (XlmRoberta is not null)
-		{
-			initializer.Property("XlmRoberta");
-			XlmRoberta.FormatCode(writer);
-		}
+			if (Roberta is not null)
+			{
+				initializer.Property("Roberta");
+				Roberta.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (XlmRoberta is not null)
+			{
+				initializer.Property("XlmRoberta");
+				XlmRoberta.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

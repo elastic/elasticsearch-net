@@ -27,33 +27,69 @@ public partial class CloneSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Repository");
-			Repository.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Repository.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Snapshot.FormatCode(writer);
+			}
+
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TargetSnapshot.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Indices); });
+			}
+		}
+		else
 		{
-			initializer.Property("Snapshot");
-			Snapshot.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest", false);
+			{
+				initializer.Property("Repository");
+				Repository.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("TargetSnapshot");
-			TargetSnapshot.FormatCode(writer);
-		}
+			{
+				initializer.Property("Snapshot");
+				Snapshot.FormatCode(writer);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			{
+				initializer.Property("TargetSnapshot");
+				TargetSnapshot.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Indices");
-			writer.WriteString(Indices);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Indices");
+				writer.WriteString(Indices);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

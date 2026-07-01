@@ -27,100 +27,182 @@ public partial class KeyValueProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor", false);
-		if (Description is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
 
-		if (ExcludeKeys is not null)
+			if (ExcludeKeys is not null)
+			{
+				writer.WriteFluentParams("ExcludeKeys", ExcludeKeys, (w, item) => { w.WriteString(item); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("FieldSplit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FieldSplit); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (IgnoreMissing is not null)
+			{
+				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+			}
+
+			if (IncludeKeys is not null)
+			{
+				writer.WriteFluentParams("IncludeKeys", IncludeKeys, (w, item) => { w.WriteString(item); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Prefix is not null)
+			{
+				writer.WriteFluentCall("Prefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Prefix); });
+			}
+
+			if (StripBrackets is not null)
+			{
+				writer.WriteFluentCall("StripBrackets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StripBrackets.Value); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (TargetField is not null)
+			{
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+			}
+
+			if (TrimKey is not null)
+			{
+				writer.WriteFluentCall("TrimKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TrimKey); });
+			}
+
+			if (TrimValue is not null)
+			{
+				writer.WriteFluentCall("TrimValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TrimValue); });
+			}
+
+			{
+				writer.WriteFluentCall("ValueSplit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ValueSplit); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExcludeKeys");
-			writer.WriteInlineList(ExcludeKeys, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor", false);
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (ExcludeKeys is not null)
+			{
+				initializer.Property("ExcludeKeys");
+				writer.WriteInlineList(ExcludeKeys, (w, item) => { w.WriteString(item); });
+			}
 
-		{
-			initializer.Property("FieldSplit");
-			writer.WriteString(FieldSplit);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			{
+				initializer.Property("FieldSplit");
+				writer.WriteString(FieldSplit);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IgnoreMissing is not null)
-		{
-			initializer.Property("IgnoreMissing");
-			writer.WriteValue(IgnoreMissing.Value);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (IncludeKeys is not null)
-		{
-			initializer.Property("IncludeKeys");
-			writer.WriteInlineList(IncludeKeys, (w, item) => { w.WriteString(item); });
-		}
+			if (IgnoreMissing is not null)
+			{
+				initializer.Property("IgnoreMissing");
+				writer.WriteValue(IgnoreMissing.Value);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (IncludeKeys is not null)
+			{
+				initializer.Property("IncludeKeys");
+				writer.WriteInlineList(IncludeKeys, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Prefix is not null)
-		{
-			initializer.Property("Prefix");
-			writer.WriteString(Prefix);
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (StripBrackets is not null)
-		{
-			initializer.Property("StripBrackets");
-			writer.WriteValue(StripBrackets.Value);
-		}
+			if (Prefix is not null)
+			{
+				initializer.Property("Prefix");
+				writer.WriteString(Prefix);
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (StripBrackets is not null)
+			{
+				initializer.Property("StripBrackets");
+				writer.WriteValue(StripBrackets.Value);
+			}
 
-		if (TargetField is not null)
-		{
-			initializer.Property("TargetField");
-			TargetField.FormatCode(writer);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		if (TrimKey is not null)
-		{
-			initializer.Property("TrimKey");
-			writer.WriteString(TrimKey);
-		}
+			if (TargetField is not null)
+			{
+				initializer.Property("TargetField");
+				TargetField.FormatCode(writer);
+			}
 
-		if (TrimValue is not null)
-		{
-			initializer.Property("TrimValue");
-			writer.WriteString(TrimValue);
-		}
+			if (TrimKey is not null)
+			{
+				initializer.Property("TrimKey");
+				writer.WriteString(TrimKey);
+			}
 
-		{
-			initializer.Property("ValueSplit");
-			writer.WriteString(ValueSplit);
-		}
+			if (TrimValue is not null)
+			{
+				initializer.Property("TrimValue");
+				writer.WriteString(TrimValue);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("ValueSplit");
+				writer.WriteString(ValueSplit);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

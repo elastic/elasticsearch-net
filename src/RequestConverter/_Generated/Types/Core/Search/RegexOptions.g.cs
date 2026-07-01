@@ -27,26 +27,41 @@ public partial class RegexOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.RegexOptions", false);
-		if (Flags is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Flags");
-			if (Flags.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Flags is not null)
 			{
-				writer.WriteValue(Flags.Value1);
+				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); if (Flags.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Flags.Value1); } else { w.WriteString(Flags.Value2); } });
 			}
-			else
+
+			if (MaxDeterminizedStates is not null)
 			{
-				writer.WriteString(Flags.Value2);
+				writer.WriteFluentCall("MaxDeterminizedStates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDeterminizedStates.Value); });
 			}
 		}
-
-		if (MaxDeterminizedStates is not null)
+		else
 		{
-			initializer.Property("MaxDeterminizedStates");
-			writer.WriteValue(MaxDeterminizedStates.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.RegexOptions", false);
+			if (Flags is not null)
+			{
+				initializer.Property("Flags");
+				if (Flags.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(Flags.Value1);
+				}
+				else
+				{
+					writer.WriteString(Flags.Value2);
+				}
+			}
 
-		initializer.Dispose();
+			if (MaxDeterminizedStates is not null)
+			{
+				initializer.Property("MaxDeterminizedStates");
+				writer.WriteValue(MaxDeterminizedStates.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

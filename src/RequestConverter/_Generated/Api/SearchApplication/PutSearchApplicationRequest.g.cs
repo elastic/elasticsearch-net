@@ -27,23 +27,47 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (Create is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Create is not null)
+			{
+				writer.WriteFluentCall("Create", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Create.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("SearchApplication", (w) => { SearchApplication.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Create");
-			writer.WriteValue(Create.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("SearchApplication");
-			SearchApplication.FormatCode(writer);
-		}
+			if (Create is not null)
+			{
+				initializer.Property("Create");
+				writer.WriteValue(Create.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("SearchApplication");
+				SearchApplication.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

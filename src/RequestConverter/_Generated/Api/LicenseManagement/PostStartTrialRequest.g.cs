@@ -27,25 +27,49 @@ public partial class PostStartTrialRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest", false);
-		if (Acknowledge is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Acknowledge");
-			writer.WriteValue(Acknowledge.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Acknowledge is not null)
+			{
+				writer.WriteFluentCall("Acknowledge", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Acknowledge.Value); });
+			}
 
-		if (MasterTimeout is not null)
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest", false);
+			if (Acknowledge is not null)
+			{
+				initializer.Property("Acknowledge");
+				writer.WriteValue(Acknowledge.Value);
+			}
 
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			writer.WriteString(Type);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				writer.WriteString(Type);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

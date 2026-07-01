@@ -27,18 +27,32 @@ public partial class ChunkingConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.MachineLearning.ChunkingModeCodeFormatter.FormatCode(Mode, writer);
-		}
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.ChunkingModeCodeFormatter.FormatCode(Mode, w); });
+			}
 
-		if (TimeSpan is not null)
+			if (TimeSpan is not null)
+			{
+				writer.WriteFluentCall("TimeSpan", (w) => { using var _oi = w.ForceObjectInitializer(); TimeSpan.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TimeSpan");
-			TimeSpan.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig", false);
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.MachineLearning.ChunkingModeCodeFormatter.FormatCode(Mode, writer);
+			}
 
-		initializer.Dispose();
+			if (TimeSpan is not null)
+			{
+				initializer.Property("TimeSpan");
+				TimeSpan.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,12 +27,21 @@ public partial class IndexRoutingRebalance : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Enable");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, writer);
+			{
+				writer.WriteFluentCall("Enable", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance", false);
+			{
+				initializer.Property("Enable");
+				Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

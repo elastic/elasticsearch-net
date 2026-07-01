@@ -27,28 +27,58 @@ public partial class PutGroqRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutGroqRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("GroqInferenceId");
-			GroqInferenceId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Elastic.Clients.Elasticsearch.Inference.GroqTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				GroqInferenceId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TaskType");
-			Elastic.Clients.Elasticsearch.Inference.GroqTaskTypeCodeFormatter.FormatCode(TaskType, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutGroqRequest", false);
+			{
+				initializer.Property("GroqInferenceId");
+				GroqInferenceId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			{
+				initializer.Property("TaskType");
+				Elastic.Clients.Elasticsearch.Inference.GroqTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
-		{
-			initializer.Property("ServiceSettings");
-			ServiceSettings.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("ServiceSettings");
+				ServiceSettings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

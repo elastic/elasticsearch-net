@@ -27,17 +27,34 @@ public partial class HasPrivilegesUserProfileRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Privileges");
-			Privileges.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("Privileges", (w) => { Privileges.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentParams("Uids", Uids, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Uids");
-			writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest", false);
+			{
+				initializer.Property("Privileges");
+				Privileges.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Uids");
+				writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

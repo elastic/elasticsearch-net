@@ -27,24 +27,43 @@ public partial class AdaptiveAllocationsSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled);
-		}
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+			}
 
-		if (MaxNumberOfAllocations is not null)
+			if (MaxNumberOfAllocations is not null)
+			{
+				writer.WriteFluentCall("MaxNumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfAllocations.Value); });
+			}
+
+			if (MinNumberOfAllocations is not null)
+			{
+				writer.WriteFluentCall("MinNumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinNumberOfAllocations.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxNumberOfAllocations");
-			writer.WriteValue(MaxNumberOfAllocations.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings", false);
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled);
+			}
 
-		if (MinNumberOfAllocations is not null)
-		{
-			initializer.Property("MinNumberOfAllocations");
-			writer.WriteValue(MinNumberOfAllocations.Value);
-		}
+			if (MaxNumberOfAllocations is not null)
+			{
+				initializer.Property("MaxNumberOfAllocations");
+				writer.WriteValue(MaxNumberOfAllocations.Value);
+			}
 
-		initializer.Dispose();
+			if (MinNumberOfAllocations is not null)
+			{
+				initializer.Property("MinNumberOfAllocations");
+				writer.WriteValue(MinNumberOfAllocations.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,13 +27,22 @@ public partial class RescoreVector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RescoreVector", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Oversample");
-			writer.WriteValue(Oversample);
-			writer.Write("f");
+			{
+				writer.WriteFluentCall("Oversample", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Oversample); w.Write("f"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RescoreVector", false);
+			{
+				initializer.Property("Oversample");
+				writer.WriteValue(Oversample);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

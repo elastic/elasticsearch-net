@@ -27,13 +27,23 @@ public partial class GoogleNormalizedDistanceHeuristic : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic", false);
-		if (BackgroundIsSuperset is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BackgroundIsSuperset");
-			writer.WriteValue(BackgroundIsSuperset.Value);
+			if (BackgroundIsSuperset is not null)
+			{
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic", false);
+			if (BackgroundIsSuperset is not null)
+			{
+				initializer.Property("BackgroundIsSuperset");
+				writer.WriteValue(BackgroundIsSuperset.Value);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

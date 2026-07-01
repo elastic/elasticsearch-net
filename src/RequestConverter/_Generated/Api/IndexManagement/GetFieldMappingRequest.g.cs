@@ -27,6 +27,7 @@ public partial class GetFieldMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest", false);
 		{
 			initializer.Property("Fields");

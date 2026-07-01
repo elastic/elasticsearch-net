@@ -27,25 +27,45 @@ public partial class CjkBigramTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter", true);
-		if (IgnoredScripts is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IgnoredScripts");
-			writer.WriteInlineList(IgnoredScripts, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScriptCodeFormatter.FormatCode(item, w); });
-		}
+			if (IgnoredScripts is not null)
+			{
+				writer.WriteFluentParams("IgnoredScripts", IgnoredScripts, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScriptCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (OutputUnigrams is not null)
+			if (OutputUnigrams is not null)
+			{
+				writer.WriteFluentCall("OutputUnigrams", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OutputUnigrams.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("OutputUnigrams");
-			writer.WriteValue(OutputUnigrams.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter", true);
+			if (IgnoredScripts is not null)
+			{
+				initializer.Property("IgnoredScripts");
+				writer.WriteInlineList(IgnoredScripts, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScriptCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (OutputUnigrams is not null)
+			{
+				initializer.Property("OutputUnigrams");
+				writer.WriteValue(OutputUnigrams.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

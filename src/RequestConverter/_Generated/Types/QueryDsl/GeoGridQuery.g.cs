@@ -27,43 +27,77 @@ public partial class GeoGridQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (Geohash is not null)
+			{
+				writer.WriteFluentCall("Geohash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Geohash); });
+			}
+
+			if (Geohex is not null)
+			{
+				writer.WriteFluentCall("Geohex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Geohex); });
+			}
+
+			if (Geotile is not null)
+			{
+				writer.WriteFluentCall("Geotile", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Geotile); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Geohash is not null)
-		{
-			initializer.Property("Geohash");
-			writer.WriteString(Geohash);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		if (Geohex is not null)
-		{
-			initializer.Property("Geohex");
-			writer.WriteString(Geohex);
-		}
+			if (Geohash is not null)
+			{
+				initializer.Property("Geohash");
+				writer.WriteString(Geohash);
+			}
 
-		if (Geotile is not null)
-		{
-			initializer.Property("Geotile");
-			writer.WriteString(Geotile);
-		}
+			if (Geohex is not null)
+			{
+				initializer.Property("Geohex");
+				writer.WriteString(Geohex);
+			}
 
-		initializer.Dispose();
+			if (Geotile is not null)
+			{
+				initializer.Property("Geotile");
+				writer.WriteString(Geotile);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

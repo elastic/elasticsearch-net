@@ -27,26 +27,41 @@ public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation", false);
-		if (Filters is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filters");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.Query");
-			writer.Write(">()");
-			writer.WriteBlockList(Filters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (Filters is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filters", (w) => { w.WriteFluentDictionaryAdds("Add", Filters, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
 
-		if (Separator is not null)
+			if (Separator is not null)
+			{
+				writer.WriteFluentCall("Separator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Separator); });
+			}
+		}
+		else
 		{
-			initializer.Property("Separator");
-			writer.WriteString(Separator);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation", false);
+			if (Filters is not null)
+			{
+				initializer.Property("Filters");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryDsl.Query");
+				writer.Write(">()");
+				writer.WriteBlockList(Filters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (Separator is not null)
+			{
+				initializer.Property("Separator");
+				writer.WriteString(Separator);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

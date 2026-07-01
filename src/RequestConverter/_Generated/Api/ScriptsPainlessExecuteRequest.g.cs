@@ -27,25 +27,59 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest", false);
-		if (Context is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Context");
-			Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (ContextSetup is not null)
+			using var _chainIndent = writer.Indent();
+			if (Context is not null)
+			{
+				writer.WriteFluentCall("Context", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, w); });
+			}
+
+			if (ContextSetup is not null)
+			{
+				writer.WriteFluentDescriptorCall("ContextSetup", (w) => { ContextSetup.FormatCode(w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ContextSetup");
-			ContextSetup.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest", false);
+			if (Context is not null)
+			{
+				initializer.Property("Context");
+				Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (ContextSetup is not null)
+			{
+				initializer.Property("ContextSetup");
+				ContextSetup.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

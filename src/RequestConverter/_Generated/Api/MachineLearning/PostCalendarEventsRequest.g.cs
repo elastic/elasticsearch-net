@@ -27,17 +27,36 @@ public partial class PostCalendarEventsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CalendarId");
-			CalendarId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				CalendarId.FormatCode(writer);
+			}
 
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorParams("Events", Events, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Events");
-			writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest", false);
+			{
+				initializer.Property("CalendarId");
+				CalendarId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Events");
+				writer.WriteInlineList(Events, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

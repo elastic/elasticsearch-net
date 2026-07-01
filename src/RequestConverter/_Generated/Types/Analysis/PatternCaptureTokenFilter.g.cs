@@ -27,24 +27,43 @@ public partial class PatternCaptureTokenFilter : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Patterns");
-			writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
-		}
+			{
+				writer.WriteFluentParams("Patterns", Patterns, (w, item) => { w.WriteString(item); });
+			}
 
-		if (PreserveOriginal is not null)
+			if (PreserveOriginal is not null)
+			{
+				writer.WriteFluentCall("PreserveOriginal", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveOriginal.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("PreserveOriginal");
-			writer.WriteValue(PreserveOriginal.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter", true);
+			{
+				initializer.Property("Patterns");
+				writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (PreserveOriginal is not null)
+			{
+				initializer.Property("PreserveOriginal");
+				writer.WriteValue(PreserveOriginal.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

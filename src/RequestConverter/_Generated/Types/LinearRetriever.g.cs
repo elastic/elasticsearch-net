@@ -27,56 +27,101 @@ public partial class LinearRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LinearRetriever", false);
-		if (Fields is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Fields");
-			writer.WriteInlineList(Fields, (w, item) => { w.WriteString(item); });
-		}
+			if (Fields is not null)
+			{
+				writer.WriteFluentParams("Fields", Fields, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (MinScore is not null)
+			{
+				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (Normalizer is not null)
+			{
+				writer.WriteFluentCall("Normalizer", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer.Value, w); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
+
+			if (RankWindowSize is not null)
+			{
+				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); });
+			}
+
+			if (Retrievers is not null)
+			{
+				writer.WriteFluentDescriptorParams("Retrievers", Retrievers, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.InnerRetriever>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LinearRetriever", false);
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				writer.WriteInlineList(Fields, (w, item) => { w.WriteString(item); });
+			}
 
-		if (MinScore is not null)
-		{
-			initializer.Property("MinScore");
-			writer.WriteValue(MinScore.Value);
-			writer.Write("f");
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			if (MinScore is not null)
+			{
+				initializer.Property("MinScore");
+				writer.WriteValue(MinScore.Value);
+				writer.Write("f");
+			}
 
-		if (Normalizer is not null)
-		{
-			initializer.Property("Normalizer");
-			Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer.Value, writer);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			if (Normalizer is not null)
+			{
+				initializer.Property("Normalizer");
+				Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer.Value, writer);
+			}
 
-		if (RankWindowSize is not null)
-		{
-			initializer.Property("RankWindowSize");
-			writer.WriteValue(RankWindowSize.Value);
-		}
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
 
-		if (Retrievers is not null)
-		{
-			initializer.Property("Retrievers");
-			writer.WriteInlineList(Retrievers, (w, item) => { item.FormatCode(w); });
-		}
+			if (RankWindowSize is not null)
+			{
+				initializer.Property("RankWindowSize");
+				writer.WriteValue(RankWindowSize.Value);
+			}
 
-		initializer.Dispose();
+			if (Retrievers is not null)
+			{
+				initializer.Property("Retrievers");
+				writer.WriteInlineList(Retrievers, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

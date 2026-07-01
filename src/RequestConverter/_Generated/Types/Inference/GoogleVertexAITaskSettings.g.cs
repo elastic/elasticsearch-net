@@ -27,31 +27,56 @@ public partial class GoogleVertexAITaskSettings : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings", false);
-		if (AutoTruncate is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AutoTruncate");
-			writer.WriteValue(AutoTruncate.Value);
-		}
+			if (AutoTruncate is not null)
+			{
+				writer.WriteFluentCall("AutoTruncate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoTruncate.Value); });
+			}
 
-		if (MaxTokens is not null)
+			if (MaxTokens is not null)
+			{
+				writer.WriteFluentCall("MaxTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokens.Value); });
+			}
+
+			if (ThinkingConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("ThinkingConfig", (w) => { ThinkingConfig.FormatCode(w); });
+			}
+
+			if (TopN is not null)
+			{
+				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxTokens");
-			writer.WriteValue(MaxTokens.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings", false);
+			if (AutoTruncate is not null)
+			{
+				initializer.Property("AutoTruncate");
+				writer.WriteValue(AutoTruncate.Value);
+			}
 
-		if (ThinkingConfig is not null)
-		{
-			initializer.Property("ThinkingConfig");
-			ThinkingConfig.FormatCode(writer);
-		}
+			if (MaxTokens is not null)
+			{
+				initializer.Property("MaxTokens");
+				writer.WriteValue(MaxTokens.Value);
+			}
 
-		if (TopN is not null)
-		{
-			initializer.Property("TopN");
-			writer.WriteValue(TopN.Value);
-		}
+			if (ThinkingConfig is not null)
+			{
+				initializer.Property("ThinkingConfig");
+				ThinkingConfig.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TopN is not null)
+			{
+				initializer.Property("TopN");
+				writer.WriteValue(TopN.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

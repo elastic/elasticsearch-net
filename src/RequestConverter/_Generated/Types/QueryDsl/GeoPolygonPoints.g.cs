@@ -27,12 +27,21 @@ public partial class GeoPolygonPoints : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Points");
-			writer.WriteInlineList(Points, (w, item) => { item.FormatCode(w); });
+			{
+				writer.WriteFluentCall("Points", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Points, (w, item) => { item.FormatCode(w); }); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints", false);
+			{
+				initializer.Property("Points");
+				writer.WriteInlineList(Points, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

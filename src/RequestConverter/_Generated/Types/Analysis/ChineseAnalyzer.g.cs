@@ -27,29 +27,44 @@ public partial class ChineseAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer", true);
-		if (Stopwords is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Stopwords");
-			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Stopwords is not null)
 			{
-				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				writer.WriteFluentCall("Stopwords", (w) => { using var _oi = w.ForceObjectInitializer(); if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
 			}
-			else
+
+			if (StopwordsPath is not null)
 			{
-				writer.Write("new ");
-				writer.WriteTypeRef("string");
-				writer.Write("[] ");
-				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				writer.WriteFluentCall("StopwordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StopwordsPath); });
 			}
 		}
-
-		if (StopwordsPath is not null)
+		else
 		{
-			initializer.Property("StopwordsPath");
-			writer.WriteString(StopwordsPath);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer", true);
+			if (Stopwords is not null)
+			{
+				initializer.Property("Stopwords");
+				if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("string");
+					writer.Write("[] ");
+					writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				}
+			}
 
-		initializer.Dispose();
+			if (StopwordsPath is not null)
+			{
+				initializer.Property("StopwordsPath");
+				writer.WriteString(StopwordsPath);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

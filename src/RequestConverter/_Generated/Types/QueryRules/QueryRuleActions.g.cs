@@ -27,19 +27,34 @@ public partial class QueryRuleActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions", false);
-		if (Docs is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Docs");
-			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
-		}
+			if (Docs is not null)
+			{
+				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>"); w.Write("()"); });
+			}
 
-		if (Ids is not null)
+			if (Ids is not null)
+			{
+				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Ids");
-			writer.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions", false);
+			if (Docs is not null)
+			{
+				initializer.Property("Docs");
+				writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Ids is not null)
+			{
+				initializer.Property("Ids");
+				writer.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

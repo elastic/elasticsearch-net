@@ -27,133 +27,254 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.UpdateRequest<TDocument,TPartialDocument>", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.UpdateRequestDescriptor");
+			writer.Write("<");
+			writer.WriteTypeName(typeof(TDocument));
+			writer.Write(", ");
+			writer.WriteTypeName(typeof(TPartialDocument));
+			writer.Write(">");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Index.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (IfPrimaryTerm is not null)
+			{
+				writer.WriteFluentCall("IfPrimaryTerm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+			}
+
+			if (IfSeqNo is not null)
+			{
+				writer.WriteFluentCall("IfSeqNo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+			}
+
+			if (IncludeSourceOnError is not null)
+			{
+				writer.WriteFluentCall("IncludeSourceOnError", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeSourceOnError.Value); });
+			}
+
+			if (Lang is not null)
+			{
+				writer.WriteFluentCall("Lang", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lang); });
+			}
+
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+
+			if (RequireAlias is not null)
+			{
+				writer.WriteFluentCall("RequireAlias", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequireAlias.Value); });
+			}
+
+			if (RetryOnConflict is not null)
+			{
+				writer.WriteFluentCall("RetryOnConflict", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RetryOnConflict.Value); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+			}
+
+			if (SourceExcludes is not null)
+			{
+				writer.WriteFluentCall("SourceExcludes", (w) => { using var _oi = w.ForceObjectInitializer(); SourceExcludes.FormatCode(w); });
+			}
+
+			if (SourceIncludes is not null)
+			{
+				writer.WriteFluentCall("SourceIncludes", (w) => { using var _oi = w.ForceObjectInitializer(); SourceIncludes.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (WaitForActiveShards is not null)
+			{
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+			}
+
+			if (DetectNoop is not null)
+			{
+				writer.WriteFluentCall("DetectNoop", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DetectNoop.Value); });
+			}
+
+			if (Doc is not null)
+			{
+				writer.WriteFluentCall("Doc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteDocument(Doc); });
+			}
+
+			if (DocAsUpsert is not null)
+			{
+				writer.WriteFluentCall("DocAsUpsert", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocAsUpsert.Value); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (ScriptedUpsert is not null)
+			{
+				writer.WriteFluentCall("ScriptedUpsert", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ScriptedUpsert.Value); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); Source.FormatCode(w); });
+			}
+
+			if (Upsert is not null)
+			{
+				writer.WriteFluentCall("Upsert", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteDocument(Upsert); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.UpdateRequest<TDocument,TPartialDocument>", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (IfPrimaryTerm is not null)
-		{
-			initializer.Property("IfPrimaryTerm");
-			writer.WriteValue(IfPrimaryTerm.Value);
-			writer.Write("L");
-		}
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (IfSeqNo is not null)
-		{
-			initializer.Property("IfSeqNo");
-			writer.WriteValue(IfSeqNo.Value);
-			writer.Write("L");
-		}
+			if (IfPrimaryTerm is not null)
+			{
+				initializer.Property("IfPrimaryTerm");
+				writer.WriteValue(IfPrimaryTerm.Value);
+				writer.Write("L");
+			}
 
-		if (IncludeSourceOnError is not null)
-		{
-			initializer.Property("IncludeSourceOnError");
-			writer.WriteValue(IncludeSourceOnError.Value);
-		}
+			if (IfSeqNo is not null)
+			{
+				initializer.Property("IfSeqNo");
+				writer.WriteValue(IfSeqNo.Value);
+				writer.Write("L");
+			}
 
-		if (Lang is not null)
-		{
-			initializer.Property("Lang");
-			writer.WriteString(Lang);
-		}
+			if (IncludeSourceOnError is not null)
+			{
+				initializer.Property("IncludeSourceOnError");
+				writer.WriteValue(IncludeSourceOnError.Value);
+			}
 
-		if (Refresh is not null)
-		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			if (Lang is not null)
+			{
+				initializer.Property("Lang");
+				writer.WriteString(Lang);
+			}
 
-		if (RequireAlias is not null)
-		{
-			initializer.Property("RequireAlias");
-			writer.WriteValue(RequireAlias.Value);
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
 
-		if (RetryOnConflict is not null)
-		{
-			initializer.Property("RetryOnConflict");
-			writer.WriteValue(RetryOnConflict.Value);
-		}
+			if (RequireAlias is not null)
+			{
+				initializer.Property("RequireAlias");
+				writer.WriteValue(RequireAlias.Value);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
+			if (RetryOnConflict is not null)
+			{
+				initializer.Property("RetryOnConflict");
+				writer.WriteValue(RetryOnConflict.Value);
+			}
 
-		if (SourceExcludes is not null)
-		{
-			initializer.Property("SourceExcludes");
-			SourceExcludes.FormatCode(writer);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
 
-		if (SourceIncludes is not null)
-		{
-			initializer.Property("SourceIncludes");
-			SourceIncludes.FormatCode(writer);
-		}
+			if (SourceExcludes is not null)
+			{
+				initializer.Property("SourceExcludes");
+				SourceExcludes.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (SourceIncludes is not null)
+			{
+				initializer.Property("SourceIncludes");
+				SourceIncludes.FormatCode(writer);
+			}
 
-		if (WaitForActiveShards is not null)
-		{
-			initializer.Property("WaitForActiveShards");
-			WaitForActiveShards.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (DetectNoop is not null)
-		{
-			initializer.Property("DetectNoop");
-			writer.WriteValue(DetectNoop.Value);
-		}
+			if (WaitForActiveShards is not null)
+			{
+				initializer.Property("WaitForActiveShards");
+				WaitForActiveShards.FormatCode(writer);
+			}
 
-		if (Doc is not null)
-		{
-			initializer.Property("Doc");
-			writer.WriteValue(Doc);
-		}
+			if (DetectNoop is not null)
+			{
+				initializer.Property("DetectNoop");
+				writer.WriteValue(DetectNoop.Value);
+			}
 
-		if (DocAsUpsert is not null)
-		{
-			initializer.Property("DocAsUpsert");
-			writer.WriteValue(DocAsUpsert.Value);
-		}
+			if (Doc is not null)
+			{
+				initializer.Property("Doc");
+				writer.WriteDocument(Doc);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (DocAsUpsert is not null)
+			{
+				initializer.Property("DocAsUpsert");
+				writer.WriteValue(DocAsUpsert.Value);
+			}
 
-		if (ScriptedUpsert is not null)
-		{
-			initializer.Property("ScriptedUpsert");
-			writer.WriteValue(ScriptedUpsert.Value);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (ScriptedUpsert is not null)
+			{
+				initializer.Property("ScriptedUpsert");
+				writer.WriteValue(ScriptedUpsert.Value);
+			}
 
-		if (Upsert is not null)
-		{
-			initializer.Property("Upsert");
-			writer.WriteValue(Upsert);
-		}
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Upsert is not null)
+			{
+				initializer.Property("Upsert");
+				writer.WriteDocument(Upsert);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

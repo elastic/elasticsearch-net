@@ -27,49 +27,89 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure", true);
-		if (BasePath is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BasePath");
-			writer.WriteString(BasePath);
-		}
+			if (BasePath is not null)
+			{
+				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+			}
 
-		if (Client is not null)
+			if (Client is not null)
+			{
+				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+			}
+
+			if (Container is not null)
+			{
+				writer.WriteFluentCall("Container", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Container); });
+			}
+
+			if (DeleteObjectsMaxSize is not null)
+			{
+				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteObjectsMaxSize.Value); });
+			}
+
+			if (LocationMode is not null)
+			{
+				writer.WriteFluentCall("LocationMode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LocationMode); });
+			}
+
+			if (MaxConcurrentBatchDeletes is not null)
+			{
+				writer.WriteFluentCall("MaxConcurrentBatchDeletes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentBatchDeletes.Value); });
+			}
+
+			if (Readonly is not null)
+			{
+				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Client");
-			writer.WriteString(Client);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure", true);
+			if (BasePath is not null)
+			{
+				initializer.Property("BasePath");
+				writer.WriteString(BasePath);
+			}
 
-		if (Container is not null)
-		{
-			initializer.Property("Container");
-			writer.WriteString(Container);
-		}
+			if (Client is not null)
+			{
+				initializer.Property("Client");
+				writer.WriteString(Client);
+			}
 
-		if (DeleteObjectsMaxSize is not null)
-		{
-			initializer.Property("DeleteObjectsMaxSize");
-			writer.WriteValue(DeleteObjectsMaxSize.Value);
-		}
+			if (Container is not null)
+			{
+				initializer.Property("Container");
+				writer.WriteString(Container);
+			}
 
-		if (LocationMode is not null)
-		{
-			initializer.Property("LocationMode");
-			writer.WriteString(LocationMode);
-		}
+			if (DeleteObjectsMaxSize is not null)
+			{
+				initializer.Property("DeleteObjectsMaxSize");
+				writer.WriteValue(DeleteObjectsMaxSize.Value);
+			}
 
-		if (MaxConcurrentBatchDeletes is not null)
-		{
-			initializer.Property("MaxConcurrentBatchDeletes");
-			writer.WriteValue(MaxConcurrentBatchDeletes.Value);
-		}
+			if (LocationMode is not null)
+			{
+				initializer.Property("LocationMode");
+				writer.WriteString(LocationMode);
+			}
 
-		if (Readonly is not null)
-		{
-			initializer.Property("Readonly");
-			writer.WriteValue(Readonly.Value);
-		}
+			if (MaxConcurrentBatchDeletes is not null)
+			{
+				initializer.Property("MaxConcurrentBatchDeletes");
+				writer.WriteValue(MaxConcurrentBatchDeletes.Value);
+			}
 
-		initializer.Dispose();
+			if (Readonly is not null)
+			{
+				initializer.Property("Readonly");
+				writer.WriteValue(Readonly.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

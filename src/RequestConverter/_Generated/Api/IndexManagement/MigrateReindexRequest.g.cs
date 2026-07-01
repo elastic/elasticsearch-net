@@ -27,12 +27,25 @@ public partial class MigrateReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Reindex");
-			Reindex.FormatCode(writer);
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("Reindex", (w) => { Reindex.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest", false);
+			{
+				initializer.Property("Reindex");
+				Reindex.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

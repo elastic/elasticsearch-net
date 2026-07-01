@@ -27,67 +27,116 @@ public partial class Source : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Reindex.Source", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
 
-		if (ProjectRouting is not null)
-		{
-			initializer.Property("ProjectRouting");
-			writer.WriteString(ProjectRouting);
-		}
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
 
-		if (Remote is not null)
-		{
-			initializer.Property("Remote");
-			Remote.FormatCode(writer);
-		}
+			if (Remote is not null)
+			{
+				writer.WriteFluentDescriptorCall("Remote", (w) => { Remote.FormatCode(w); });
+			}
 
-		if (RuntimeMappings is not null)
-		{
-			initializer.Property("RuntimeMappings");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
-			writer.Write(">()");
-			writer.WriteBlockList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (RuntimeMappings is not null)
+			{
+				writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
 
-		if (Slice is not null)
-		{
-			initializer.Property("Slice");
-			Slice.FormatCode(writer);
-		}
+			if (Slice is not null)
+			{
+				writer.WriteFluentDescriptorCall("Slice", (w) => { Slice.FormatCode(w); });
+			}
 #pragma warning disable CS0618
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
-		}
+			if (Sort is not null)
+			{
+				writer.WriteFluentDescriptorParams("Sort", Sort, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>"); w.Write("()"); });
+			}
 #pragma warning restore CS0618
-		if (SourceFields is not null)
-		{
-			initializer.Property("SourceFields");
-			SourceFields.FormatCode(writer);
+			if (SourceFields is not null)
+			{
+				writer.WriteFluentCall("SourceFields", (w) => { using var _oi = w.ForceObjectInitializer(); SourceFields.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Reindex.Source", false);
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
+			}
+
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
+
+			if (Remote is not null)
+			{
+				initializer.Property("Remote");
+				Remote.FormatCode(writer);
+			}
+
+			if (RuntimeMappings is not null)
+			{
+				initializer.Property("RuntimeMappings");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.RuntimeField");
+				writer.Write(">()");
+				writer.WriteBlockList(RuntimeMappings, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
+
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			if (Slice is not null)
+			{
+				initializer.Property("Slice");
+				Slice.FormatCode(writer);
+			}
+#pragma warning disable CS0618
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
+			}
+#pragma warning restore CS0618
+			if (SourceFields is not null)
+			{
+				initializer.Property("SourceFields");
+				SourceFields.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

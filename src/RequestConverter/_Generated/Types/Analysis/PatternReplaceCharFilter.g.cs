@@ -27,30 +27,54 @@ public partial class PatternReplaceCharFilter : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter", true);
-		if (Flags is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Flags");
-			writer.WriteString(Flags);
-		}
+			if (Flags is not null)
+			{
+				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Flags); });
+			}
 
+			{
+				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+			}
+
+			if (Replacement is not null)
+			{
+				writer.WriteFluentCall("Replacement", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Replacement); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Pattern");
-			writer.WriteString(Pattern);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter", true);
+			if (Flags is not null)
+			{
+				initializer.Property("Flags");
+				writer.WriteString(Flags);
+			}
 
-		if (Replacement is not null)
-		{
-			initializer.Property("Replacement");
-			writer.WriteString(Replacement);
-		}
+			{
+				initializer.Property("Pattern");
+				writer.WriteString(Pattern);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Replacement is not null)
+			{
+				initializer.Property("Replacement");
+				writer.WriteString(Replacement);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

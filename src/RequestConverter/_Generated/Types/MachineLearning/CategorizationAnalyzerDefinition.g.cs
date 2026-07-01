@@ -27,25 +27,45 @@ public partial class CategorizationAnalyzerDefinition : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition", true);
-		if (CharFilter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CharFilter");
-			writer.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); });
-		}
+			if (CharFilter is not null)
+			{
+				writer.WriteFluentCall("CharFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); }); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentCall("Filter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			if (Tokenizer is not null)
+			{
+				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); Tokenizer.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition", true);
+			if (CharFilter is not null)
+			{
+				initializer.Property("CharFilter");
+				writer.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Tokenizer is not null)
-		{
-			initializer.Property("Tokenizer");
-			Tokenizer.FormatCode(writer);
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Tokenizer is not null)
+			{
+				initializer.Property("Tokenizer");
+				Tokenizer.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

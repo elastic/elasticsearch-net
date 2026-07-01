@@ -27,25 +27,45 @@ public partial class DelimitedPayloadTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter", true);
-		if (Delimiter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Delimiter");
-			writer.WriteString(Delimiter);
-		}
+			if (Delimiter is not null)
+			{
+				writer.WriteFluentCall("Delimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Delimiter); });
+			}
 
-		if (Encoding is not null)
+			if (Encoding is not null)
+			{
+				writer.WriteFluentCall("Encoding", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(Encoding.Value, w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Encoding");
-			Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(Encoding.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter", true);
+			if (Delimiter is not null)
+			{
+				initializer.Property("Delimiter");
+				writer.WriteString(Delimiter);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Encoding is not null)
+			{
+				initializer.Property("Encoding");
+				Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(Encoding.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

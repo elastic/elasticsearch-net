@@ -27,31 +27,56 @@ public partial class PivotGroupBy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy", false);
-		if (DateHistogram is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DateHistogram");
-			DateHistogram.FormatCode(writer);
-		}
+			if (DateHistogram is not null)
+			{
+				writer.WriteFluentDescriptorCall("DateHistogram", (w) => { DateHistogram.FormatCode(w); });
+			}
 
-		if (GeotileGrid is not null)
+			if (GeotileGrid is not null)
+			{
+				writer.WriteFluentDescriptorCall("GeotileGrid", (w) => { GeotileGrid.FormatCode(w); });
+			}
+
+			if (Histogram is not null)
+			{
+				writer.WriteFluentDescriptorCall("Histogram", (w) => { Histogram.FormatCode(w); });
+			}
+
+			if (Terms is not null)
+			{
+				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("GeotileGrid");
-			GeotileGrid.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy", false);
+			if (DateHistogram is not null)
+			{
+				initializer.Property("DateHistogram");
+				DateHistogram.FormatCode(writer);
+			}
 
-		if (Histogram is not null)
-		{
-			initializer.Property("Histogram");
-			Histogram.FormatCode(writer);
-		}
+			if (GeotileGrid is not null)
+			{
+				initializer.Property("GeotileGrid");
+				GeotileGrid.FormatCode(writer);
+			}
 
-		if (Terms is not null)
-		{
-			initializer.Property("Terms");
-			Terms.FormatCode(writer);
-		}
+			if (Histogram is not null)
+			{
+				initializer.Property("Histogram");
+				Histogram.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Terms is not null)
+			{
+				initializer.Property("Terms");
+				Terms.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

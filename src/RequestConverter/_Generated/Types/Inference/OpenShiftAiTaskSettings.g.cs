@@ -27,19 +27,34 @@ public partial class OpenShiftAiTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings", false);
-		if (ReturnDocuments is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ReturnDocuments");
-			writer.WriteValue(ReturnDocuments.Value);
-		}
+			if (ReturnDocuments is not null)
+			{
+				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+			}
 
-		if (TopN is not null)
+			if (TopN is not null)
+			{
+				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("TopN");
-			writer.WriteValue(TopN.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings", false);
+			if (ReturnDocuments is not null)
+			{
+				initializer.Property("ReturnDocuments");
+				writer.WriteValue(ReturnDocuments.Value);
+			}
 
-		initializer.Dispose();
+			if (TopN is not null)
+			{
+				initializer.Property("TopN");
+				writer.WriteValue(TopN.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

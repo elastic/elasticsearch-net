@@ -30,7 +30,7 @@ public partial class EnrichSummary : RequestConverter.ICodeFormattable
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Enrich.EnrichSummary", false);
 		{
 			initializer.Property("Config");
-			writer.Write("new(");
+			writer.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Enrich.PolicyType,Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy>");
 			Elastic.Clients.Elasticsearch.Enrich.PolicyTypeCodeFormatter.FormatCode(Config.Key, writer);
 			writer.Write(", ");
 			Config.Value.FormatCode(writer);

@@ -116,7 +116,7 @@ public partial class TaskInfo : RequestConverter.ICodeFormattable
 		if (Status is not null)
 		{
 			initializer.Property("Status");
-			writer.WriteValue(Status);
+			writer.WriteObjectValue(Status);
 		}
 
 		{

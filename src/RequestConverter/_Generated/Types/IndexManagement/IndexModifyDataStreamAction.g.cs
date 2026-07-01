@@ -27,19 +27,34 @@ public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction", false);
-		if (AddBackingIndex is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AddBackingIndex");
-			AddBackingIndex.FormatCode(writer);
-		}
+			if (AddBackingIndex is not null)
+			{
+				writer.WriteFluentDescriptorCall("AddBackingIndex", (w) => { AddBackingIndex.FormatCode(w); });
+			}
 
-		if (RemoveBackingIndex is not null)
+			if (RemoveBackingIndex is not null)
+			{
+				writer.WriteFluentDescriptorCall("RemoveBackingIndex", (w) => { RemoveBackingIndex.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("RemoveBackingIndex");
-			RemoveBackingIndex.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction", false);
+			if (AddBackingIndex is not null)
+			{
+				initializer.Property("AddBackingIndex");
+				AddBackingIndex.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (RemoveBackingIndex is not null)
+			{
+				initializer.Property("RemoveBackingIndex");
+				RemoveBackingIndex.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

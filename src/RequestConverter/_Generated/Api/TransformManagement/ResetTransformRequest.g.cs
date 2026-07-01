@@ -27,24 +27,49 @@ public partial class ResetTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TransformId.FormatCode(writer);
+			}
 
-		if (Force is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Force is not null)
+			{
+				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Force");
-			writer.WriteValue(Force.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest", false);
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Force is not null)
+			{
+				initializer.Property("Force");
+				writer.WriteValue(Force.Value);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,36 +27,65 @@ public partial class Destination : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Reindex.Destination", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
 
-		if (OpType is not null)
+			if (OpType is not null)
+			{
+				writer.WriteFluentCall("OpType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, w); });
+			}
+
+			if (Pipeline is not null)
+			{
+				writer.WriteFluentCall("Pipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pipeline); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+			}
+
+			if (VersionType is not null)
+			{
+				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("OpType");
-			Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Reindex.Destination", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (Pipeline is not null)
-		{
-			initializer.Property("Pipeline");
-			writer.WriteString(Pipeline);
-		}
+			if (OpType is not null)
+			{
+				initializer.Property("OpType");
+				Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, writer);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			writer.WriteString(Routing);
-		}
+			if (Pipeline is not null)
+			{
+				initializer.Property("Pipeline");
+				writer.WriteString(Pipeline);
+			}
 
-		if (VersionType is not null)
-		{
-			initializer.Property("VersionType");
-			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				writer.WriteString(Routing);
+			}
 
-		initializer.Dispose();
+			if (VersionType is not null)
+			{
+				initializer.Property("VersionType");
+				Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

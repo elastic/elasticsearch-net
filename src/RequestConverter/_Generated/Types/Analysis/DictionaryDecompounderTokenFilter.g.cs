@@ -27,49 +27,89 @@ public partial class DictionaryDecompounderTokenFilter : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter", true);
-		if (MaxSubwordSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxSubwordSize");
-			writer.WriteValue(MaxSubwordSize.Value);
-		}
+			if (MaxSubwordSize is not null)
+			{
+				writer.WriteFluentCall("MaxSubwordSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxSubwordSize.Value); });
+			}
 
-		if (MinSubwordSize is not null)
+			if (MinSubwordSize is not null)
+			{
+				writer.WriteFluentCall("MinSubwordSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinSubwordSize.Value); });
+			}
+
+			if (MinWordSize is not null)
+			{
+				writer.WriteFluentCall("MinWordSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinWordSize.Value); });
+			}
+
+			if (OnlyLongestMatch is not null)
+			{
+				writer.WriteFluentCall("OnlyLongestMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnlyLongestMatch.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+
+			if (WordList is not null)
+			{
+				writer.WriteFluentParams("WordList", WordList, (w, item) => { w.WriteString(item); });
+			}
+
+			if (WordListPath is not null)
+			{
+				writer.WriteFluentCall("WordListPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(WordListPath); });
+			}
+		}
+		else
 		{
-			initializer.Property("MinSubwordSize");
-			writer.WriteValue(MinSubwordSize.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter", true);
+			if (MaxSubwordSize is not null)
+			{
+				initializer.Property("MaxSubwordSize");
+				writer.WriteValue(MaxSubwordSize.Value);
+			}
 
-		if (MinWordSize is not null)
-		{
-			initializer.Property("MinWordSize");
-			writer.WriteValue(MinWordSize.Value);
-		}
+			if (MinSubwordSize is not null)
+			{
+				initializer.Property("MinSubwordSize");
+				writer.WriteValue(MinSubwordSize.Value);
+			}
 
-		if (OnlyLongestMatch is not null)
-		{
-			initializer.Property("OnlyLongestMatch");
-			writer.WriteValue(OnlyLongestMatch.Value);
-		}
+			if (MinWordSize is not null)
+			{
+				initializer.Property("MinWordSize");
+				writer.WriteValue(MinWordSize.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (OnlyLongestMatch is not null)
+			{
+				initializer.Property("OnlyLongestMatch");
+				writer.WriteValue(OnlyLongestMatch.Value);
+			}
 
-		if (WordList is not null)
-		{
-			initializer.Property("WordList");
-			writer.WriteInlineList(WordList, (w, item) => { w.WriteString(item); });
-		}
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
 
-		if (WordListPath is not null)
-		{
-			initializer.Property("WordListPath");
-			writer.WriteString(WordListPath);
-		}
+			if (WordList is not null)
+			{
+				initializer.Property("WordList");
+				writer.WriteInlineList(WordList, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (WordListPath is not null)
+			{
+				initializer.Property("WordListPath");
+				writer.WriteString(WordListPath);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,60 +27,115 @@ public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (BlobThreadPoolConcurrency is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (BlobThreadPoolConcurrency is not null)
+			{
+				writer.WriteFluentCall("BlobThreadPoolConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BlobThreadPoolConcurrency.Value); });
+			}
+
+			if (IndexSnapshotVerificationConcurrency is not null)
+			{
+				writer.WriteFluentCall("IndexSnapshotVerificationConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexSnapshotVerificationConcurrency.Value); });
+			}
+
+			if (IndexVerificationConcurrency is not null)
+			{
+				writer.WriteFluentCall("IndexVerificationConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexVerificationConcurrency.Value); });
+			}
+
+			if (MaxBytesPerSec is not null)
+			{
+				writer.WriteFluentCall("MaxBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MaxBytesPerSec); });
+			}
+
+			if (MaxFailedShardSnapshots is not null)
+			{
+				writer.WriteFluentCall("MaxFailedShardSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxFailedShardSnapshots.Value); });
+			}
+
+			if (MetaThreadPoolConcurrency is not null)
+			{
+				writer.WriteFluentCall("MetaThreadPoolConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MetaThreadPoolConcurrency.Value); });
+			}
+
+			if (SnapshotVerificationConcurrency is not null)
+			{
+				writer.WriteFluentCall("SnapshotVerificationConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SnapshotVerificationConcurrency.Value); });
+			}
+
+			if (VerifyBlobContents is not null)
+			{
+				writer.WriteFluentCall("VerifyBlobContents", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(VerifyBlobContents.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("BlobThreadPoolConcurrency");
-			writer.WriteValue(BlobThreadPoolConcurrency.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (IndexSnapshotVerificationConcurrency is not null)
-		{
-			initializer.Property("IndexSnapshotVerificationConcurrency");
-			writer.WriteValue(IndexSnapshotVerificationConcurrency.Value);
-		}
+			if (BlobThreadPoolConcurrency is not null)
+			{
+				initializer.Property("BlobThreadPoolConcurrency");
+				writer.WriteValue(BlobThreadPoolConcurrency.Value);
+			}
 
-		if (IndexVerificationConcurrency is not null)
-		{
-			initializer.Property("IndexVerificationConcurrency");
-			writer.WriteValue(IndexVerificationConcurrency.Value);
-		}
+			if (IndexSnapshotVerificationConcurrency is not null)
+			{
+				initializer.Property("IndexSnapshotVerificationConcurrency");
+				writer.WriteValue(IndexSnapshotVerificationConcurrency.Value);
+			}
 
-		if (MaxBytesPerSec is not null)
-		{
-			initializer.Property("MaxBytesPerSec");
-			writer.WriteString(MaxBytesPerSec);
-		}
+			if (IndexVerificationConcurrency is not null)
+			{
+				initializer.Property("IndexVerificationConcurrency");
+				writer.WriteValue(IndexVerificationConcurrency.Value);
+			}
 
-		if (MaxFailedShardSnapshots is not null)
-		{
-			initializer.Property("MaxFailedShardSnapshots");
-			writer.WriteValue(MaxFailedShardSnapshots.Value);
-		}
+			if (MaxBytesPerSec is not null)
+			{
+				initializer.Property("MaxBytesPerSec");
+				writer.WriteString(MaxBytesPerSec);
+			}
 
-		if (MetaThreadPoolConcurrency is not null)
-		{
-			initializer.Property("MetaThreadPoolConcurrency");
-			writer.WriteValue(MetaThreadPoolConcurrency.Value);
-		}
+			if (MaxFailedShardSnapshots is not null)
+			{
+				initializer.Property("MaxFailedShardSnapshots");
+				writer.WriteValue(MaxFailedShardSnapshots.Value);
+			}
 
-		if (SnapshotVerificationConcurrency is not null)
-		{
-			initializer.Property("SnapshotVerificationConcurrency");
-			writer.WriteValue(SnapshotVerificationConcurrency.Value);
-		}
+			if (MetaThreadPoolConcurrency is not null)
+			{
+				initializer.Property("MetaThreadPoolConcurrency");
+				writer.WriteValue(MetaThreadPoolConcurrency.Value);
+			}
 
-		if (VerifyBlobContents is not null)
-		{
-			initializer.Property("VerifyBlobContents");
-			writer.WriteValue(VerifyBlobContents.Value);
-		}
+			if (SnapshotVerificationConcurrency is not null)
+			{
+				initializer.Property("SnapshotVerificationConcurrency");
+				writer.WriteValue(SnapshotVerificationConcurrency.Value);
+			}
 
-		initializer.Dispose();
+			if (VerifyBlobContents is not null)
+			{
+				initializer.Property("VerifyBlobContents");
+				writer.WriteValue(VerifyBlobContents.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

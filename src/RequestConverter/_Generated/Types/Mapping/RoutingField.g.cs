@@ -27,12 +27,21 @@ public partial class RoutingField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.RoutingField", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Required");
-			writer.WriteValue(Required);
+			{
+				writer.WriteFluentCall("Required", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Required); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.RoutingField", false);
+			{
+				initializer.Property("Required");
+				writer.WriteValue(Required);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

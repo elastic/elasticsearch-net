@@ -27,57 +27,106 @@ public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest", false);
-		if (NodeId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("NodeId");
-			NodeId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (NodeId is not null)
+			{
+				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+			}
 
-		if (IgnoreIdleThreads is not null)
+			if (IgnoreIdleThreads is not null)
+			{
+				writer.WriteFluentCall("IgnoreIdleThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreIdleThreads.Value); });
+			}
+
+			if (Interval is not null)
+			{
+				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); Interval.FormatCode(w); });
+			}
+
+			if (Snapshots is not null)
+			{
+				writer.WriteFluentCall("Snapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Snapshots.Value); w.Write("L"); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentCall("Sort", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, w); });
+			}
+
+			if (Threads is not null)
+			{
+				writer.WriteFluentCall("Threads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Threads.Value); w.Write("L"); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("IgnoreIdleThreads");
-			writer.WriteValue(IgnoreIdleThreads.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest", false);
+			if (NodeId is not null)
+			{
+				initializer.Property("NodeId");
+				NodeId.FormatCode(writer);
+			}
 
-		if (Interval is not null)
-		{
-			initializer.Property("Interval");
-			Interval.FormatCode(writer);
-		}
+			if (IgnoreIdleThreads is not null)
+			{
+				initializer.Property("IgnoreIdleThreads");
+				writer.WriteValue(IgnoreIdleThreads.Value);
+			}
 
-		if (Snapshots is not null)
-		{
-			initializer.Property("Snapshots");
-			writer.WriteValue(Snapshots.Value);
-			writer.Write("L");
-		}
+			if (Interval is not null)
+			{
+				initializer.Property("Interval");
+				Interval.FormatCode(writer);
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, writer);
-		}
+			if (Snapshots is not null)
+			{
+				initializer.Property("Snapshots");
+				writer.WriteValue(Snapshots.Value);
+				writer.Write("L");
+			}
 
-		if (Threads is not null)
-		{
-			initializer.Property("Threads");
-			writer.WriteValue(Threads.Value);
-			writer.Write("L");
-		}
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Threads is not null)
+			{
+				initializer.Property("Threads");
+				writer.WriteValue(Threads.Value);
+				writer.Write("L");
+			}
 
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

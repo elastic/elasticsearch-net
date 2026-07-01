@@ -27,31 +27,56 @@ public partial class StringStatsAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (Missing is not null)
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (ShowDistribution is not null)
+			{
+				writer.WriteFluentCall("ShowDistribution", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShowDistribution.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		if (ShowDistribution is not null)
-		{
-			initializer.Property("ShowDistribution");
-			writer.WriteValue(ShowDistribution.Value);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ShowDistribution is not null)
+			{
+				initializer.Property("ShowDistribution");
+				writer.WriteValue(ShowDistribution.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

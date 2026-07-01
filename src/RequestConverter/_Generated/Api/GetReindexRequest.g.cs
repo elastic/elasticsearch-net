@@ -27,24 +27,49 @@ public partial class GetReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetReindexRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TaskId");
-			TaskId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TaskId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetReindexRequest", false);
+			{
+				initializer.Property("TaskId");
+				TaskId.FormatCode(writer);
+			}
 
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,7 +27,47 @@ public partial class SourceOnlyRepositorySettingses : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
-		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			foreach (var kvp in this)
+			{
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure c1)
+				{
+					writer.WriteFluentVariantAdd("ForAzure", (w) => { w.WriteString(kvp.Key); }, (w) => { c1.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem c2)
+				{
+					writer.WriteFluentVariantAdd("ForSharedFileSystem", (w) => { w.WriteString(kvp.Key); }, (w) => { c2.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs c3)
+				{
+					writer.WriteFluentVariantAdd("ForGcs", (w) => { w.WriteString(kvp.Key); }, (w) => { c3.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3 c4)
+				{
+					writer.WriteFluentVariantAdd("ForS3", (w) => { w.WriteString(kvp.Key); }, (w) => { c4.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl c5)
+				{
+					writer.WriteFluentVariantAdd("ForReadOnlyUrl", (w) => { w.WriteString(kvp.Key); }, (w) => { c5.FormatCode(w); });
+					continue;
+				}
+
+				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+			}
+		}
+		else
+		{
+			writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingses");
+			writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
 	}
 }

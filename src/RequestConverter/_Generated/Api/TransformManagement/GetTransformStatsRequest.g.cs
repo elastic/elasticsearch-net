@@ -27,38 +27,73 @@ public partial class GetTransformStatsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TransformId.FormatCode(writer);
+			}
 
-		if (AllowNoMatch is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); w.Write("L"); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); w.Write("L"); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest", false);
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (From is not null)
-		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-			writer.Write("L");
-		}
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-			writer.Write("L");
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+				writer.Write("L");
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

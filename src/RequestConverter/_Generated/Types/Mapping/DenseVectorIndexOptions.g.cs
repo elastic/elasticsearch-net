@@ -27,49 +27,88 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions", false);
-		if (ConfidenceInterval is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ConfidenceInterval");
-			writer.WriteValue(ConfidenceInterval.Value);
-			writer.Write("f");
-		}
+			if (ConfidenceInterval is not null)
+			{
+				writer.WriteFluentCall("ConfidenceInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ConfidenceInterval.Value); w.Write("f"); });
+			}
 
-		if (EfConstruction is not null)
+			if (EfConstruction is not null)
+			{
+				writer.WriteFluentCall("EfConstruction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EfConstruction.Value); });
+			}
+
+			if (FlatIndexThreshold is not null)
+			{
+				writer.WriteFluentCall("FlatIndexThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatIndexThreshold.Value); });
+			}
+
+			if (M is not null)
+			{
+				writer.WriteFluentCall("M", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(M.Value); });
+			}
+
+			if (OnDiskRescore is not null)
+			{
+				writer.WriteFluentCall("OnDiskRescore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnDiskRescore.Value); });
+			}
+
+			if (RescoreVector is not null)
+			{
+				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(Type, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("EfConstruction");
-			writer.WriteValue(EfConstruction.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions", false);
+			if (ConfidenceInterval is not null)
+			{
+				initializer.Property("ConfidenceInterval");
+				writer.WriteValue(ConfidenceInterval.Value);
+				writer.Write("f");
+			}
 
-		if (FlatIndexThreshold is not null)
-		{
-			initializer.Property("FlatIndexThreshold");
-			writer.WriteValue(FlatIndexThreshold.Value);
-		}
+			if (EfConstruction is not null)
+			{
+				initializer.Property("EfConstruction");
+				writer.WriteValue(EfConstruction.Value);
+			}
 
-		if (M is not null)
-		{
-			initializer.Property("M");
-			writer.WriteValue(M.Value);
-		}
+			if (FlatIndexThreshold is not null)
+			{
+				initializer.Property("FlatIndexThreshold");
+				writer.WriteValue(FlatIndexThreshold.Value);
+			}
 
-		if (OnDiskRescore is not null)
-		{
-			initializer.Property("OnDiskRescore");
-			writer.WriteValue(OnDiskRescore.Value);
-		}
+			if (M is not null)
+			{
+				initializer.Property("M");
+				writer.WriteValue(M.Value);
+			}
 
-		if (RescoreVector is not null)
-		{
-			initializer.Property("RescoreVector");
-			RescoreVector.FormatCode(writer);
-		}
+			if (OnDiskRescore is not null)
+			{
+				initializer.Property("OnDiskRescore");
+				writer.WriteValue(OnDiskRescore.Value);
+			}
 
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(Type, writer);
-		}
+			if (RescoreVector is not null)
+			{
+				initializer.Property("RescoreVector");
+				RescoreVector.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(Type, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

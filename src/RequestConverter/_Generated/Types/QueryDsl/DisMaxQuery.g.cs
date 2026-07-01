@@ -27,32 +27,56 @@ public partial class DisMaxQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentDescriptorParams("Queries", Queries, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (TieBreaker is not null)
+			{
+				writer.WriteFluentCall("TieBreaker", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TieBreaker.Value); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Queries");
-			writer.WriteInlineList(Queries, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Queries");
+				writer.WriteInlineList(Queries, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (TieBreaker is not null)
-		{
-			initializer.Property("TieBreaker");
-			writer.WriteValue(TieBreaker.Value);
-			writer.Write("d");
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (TieBreaker is not null)
+			{
+				initializer.Property("TieBreaker");
+				writer.WriteValue(TieBreaker.Value);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

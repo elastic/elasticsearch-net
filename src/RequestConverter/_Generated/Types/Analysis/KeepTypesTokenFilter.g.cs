@@ -27,24 +27,43 @@ public partial class KeepTypesTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter", true);
-		if (Mode is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(Mode.Value, writer);
-		}
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(Mode.Value, w); });
+			}
 
+			{
+				writer.WriteFluentParams("Types", Types, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Types");
-			writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter", true);
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(Mode.Value, writer);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			{
+				initializer.Property("Types");
+				writer.WriteInlineList(Types, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

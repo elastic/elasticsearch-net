@@ -27,36 +27,71 @@ public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DatafeedId");
-			DatafeedId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				DatafeedId.FormatCode(writer);
+			}
 
-		if (AllowNoMatch is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+
+			if (CloseJob is not null)
+			{
+				writer.WriteFluentCall("CloseJob", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CloseJob.Value); });
+			}
+
+			if (Force is not null)
+			{
+				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest", false);
+			{
+				initializer.Property("DatafeedId");
+				DatafeedId.FormatCode(writer);
+			}
 
-		if (CloseJob is not null)
-		{
-			initializer.Property("CloseJob");
-			writer.WriteValue(CloseJob.Value);
-		}
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
 
-		if (Force is not null)
-		{
-			initializer.Property("Force");
-			writer.WriteValue(Force.Value);
-		}
+			if (CloseJob is not null)
+			{
+				initializer.Property("CloseJob");
+				writer.WriteValue(CloseJob.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Force is not null)
+			{
+				initializer.Property("Force");
+				writer.WriteValue(Force.Value);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

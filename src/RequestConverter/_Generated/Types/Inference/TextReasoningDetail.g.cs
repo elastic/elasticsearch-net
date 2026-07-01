@@ -27,37 +27,67 @@ public partial class TextReasoningDetail : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.TextReasoningDetail", true);
-		if (Format is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
 
-		if (Id is not null)
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Index.Value); });
+			}
+
+			if (Signature is not null)
+			{
+				writer.WriteFluentCall("Signature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Signature); });
+			}
+
+			if (Text is not null)
+			{
+				writer.WriteFluentCall("Text", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Text); });
+			}
+		}
+		else
 		{
-			initializer.Property("Id");
-			writer.WriteString(Id);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.TextReasoningDetail", true);
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			writer.WriteValue(Index.Value);
-		}
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				writer.WriteString(Id);
+			}
 
-		if (Signature is not null)
-		{
-			initializer.Property("Signature");
-			writer.WriteString(Signature);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				writer.WriteValue(Index.Value);
+			}
 
-		if (Text is not null)
-		{
-			initializer.Property("Text");
-			writer.WriteString(Text);
-		}
+			if (Signature is not null)
+			{
+				initializer.Property("Signature");
+				writer.WriteString(Signature);
+			}
 
-		initializer.Dispose();
+			if (Text is not null)
+			{
+				initializer.Property("Text");
+				writer.WriteString(Text);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,31 +27,60 @@ public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest", false);
-		if (RealmName is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RealmName");
-			RealmName.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (RealmName is not null)
+			{
+				writer.WriteFluentCall("RealmName", (w) => { using var _oi = w.ForceObjectInitializer(); RealmName.FormatCode(w); });
+			}
 
-		if (RefreshToken is not null)
+			if (RefreshToken is not null)
+			{
+				writer.WriteFluentCall("RefreshToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RefreshToken); });
+			}
+
+			if (Token is not null)
+			{
+				writer.WriteFluentCall("Token", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Token); });
+			}
+
+			if (Username is not null)
+			{
+				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("RefreshToken");
-			writer.WriteString(RefreshToken);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest", false);
+			if (RealmName is not null)
+			{
+				initializer.Property("RealmName");
+				RealmName.FormatCode(writer);
+			}
 
-		if (Token is not null)
-		{
-			initializer.Property("Token");
-			writer.WriteString(Token);
-		}
+			if (RefreshToken is not null)
+			{
+				initializer.Property("RefreshToken");
+				writer.WriteString(RefreshToken);
+			}
 
-		if (Username is not null)
-		{
-			initializer.Property("Username");
-			Username.FormatCode(writer);
-		}
+			if (Token is not null)
+			{
+				initializer.Property("Token");
+				writer.WriteString(Token);
+			}
 
-		initializer.Dispose();
+			if (Username is not null)
+			{
+				initializer.Property("Username");
+				Username.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

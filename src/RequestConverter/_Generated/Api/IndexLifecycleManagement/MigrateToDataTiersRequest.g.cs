@@ -27,31 +27,60 @@ public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest", false);
-		if (DryRun is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DryRun");
-			writer.WriteValue(DryRun.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (DryRun is not null)
+			{
+				writer.WriteFluentCall("DryRun", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DryRun.Value); });
+			}
 
-		if (MasterTimeout is not null)
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (LegacyTemplateToDelete is not null)
+			{
+				writer.WriteFluentCall("LegacyTemplateToDelete", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LegacyTemplateToDelete); });
+			}
+
+			if (NodeAttribute is not null)
+			{
+				writer.WriteFluentCall("NodeAttribute", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(NodeAttribute); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest", false);
+			if (DryRun is not null)
+			{
+				initializer.Property("DryRun");
+				writer.WriteValue(DryRun.Value);
+			}
 
-		if (LegacyTemplateToDelete is not null)
-		{
-			initializer.Property("LegacyTemplateToDelete");
-			writer.WriteString(LegacyTemplateToDelete);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (NodeAttribute is not null)
-		{
-			initializer.Property("NodeAttribute");
-			writer.WriteString(NodeAttribute);
-		}
+			if (LegacyTemplateToDelete is not null)
+			{
+				initializer.Property("LegacyTemplateToDelete");
+				writer.WriteString(LegacyTemplateToDelete);
+			}
 
-		initializer.Dispose();
+			if (NodeAttribute is not null)
+			{
+				initializer.Property("NodeAttribute");
+				writer.WriteString(NodeAttribute);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

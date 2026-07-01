@@ -27,22 +27,39 @@ public partial class DocumentRating : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Rating", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Rating); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Rating");
-			writer.WriteValue(Rating);
-		}
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Rating");
+				writer.WriteValue(Rating);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

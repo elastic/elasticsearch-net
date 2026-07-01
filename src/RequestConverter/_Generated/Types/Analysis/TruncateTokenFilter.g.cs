@@ -27,19 +27,34 @@ public partial class TruncateTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter", true);
-		if (Length is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Length");
-			writer.WriteValue(Length.Value);
-		}
+			if (Length is not null)
+			{
+				writer.WriteFluentCall("Length", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Length.Value); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter", true);
+			if (Length is not null)
+			{
+				initializer.Property("Length");
+				writer.WriteValue(Length.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

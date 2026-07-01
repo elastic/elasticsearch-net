@@ -42,7 +42,7 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyDictionary<string,object>");
 			writer.Write(">()");
-			writer.WriteBlockList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); }); w.Write(" }"); });
+			writer.WriteBlockList(MetricDetails, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); w.Write(" }"); });
 		}
 
 		{

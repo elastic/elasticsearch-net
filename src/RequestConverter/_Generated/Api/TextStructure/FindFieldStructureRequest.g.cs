@@ -27,97 +27,191 @@ public partial class FindFieldStructureRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest", false);
-		if (ColumnNames is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ColumnNames");
-			writer.WriteInlineList(ColumnNames, (w, item) => { w.WriteString(item); });
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (Delimiter is not null)
+			using var _chainIndent = writer.Indent();
+			if (ColumnNames is not null)
+			{
+				writer.WriteFluentParams("ColumnNames", ColumnNames, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Delimiter is not null)
+			{
+				writer.WriteFluentCall("Delimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Delimiter); });
+			}
+
+			if (DocumentsToSample is not null)
+			{
+				writer.WriteFluentCall("DocumentsToSample", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocumentsToSample.Value); });
+			}
+
+			if (EcsCompatibility is not null)
+			{
+				writer.WriteFluentCall("EcsCompatibility", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, w); });
+			}
+
+			if (Explain is not null)
+			{
+				writer.WriteFluentCall("Explain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Explain.Value); });
+			}
+
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, w); });
+			}
+
+			if (GrokPattern is not null)
+			{
+				writer.WriteFluentCall("GrokPattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(GrokPattern); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (Quote is not null)
+			{
+				writer.WriteFluentCall("Quote", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Quote); });
+			}
+
+			if (ShouldParseRecursively is not null)
+			{
+				writer.WriteFluentCall("ShouldParseRecursively", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShouldParseRecursively.Value); });
+			}
+
+			if (ShouldTrimFields is not null)
+			{
+				writer.WriteFluentCall("ShouldTrimFields", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShouldTrimFields.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (TimestampField is not null)
+			{
+				writer.WriteFluentCall("TimestampField", (w) => { TimestampField.FormatCode(w); });
+			}
+
+			if (TimestampFormat is not null)
+			{
+				writer.WriteFluentCall("TimestampFormat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimestampFormat); });
+			}
+		}
+		else
 		{
-			initializer.Property("Delimiter");
-			writer.WriteString(Delimiter);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest", false);
+			if (ColumnNames is not null)
+			{
+				initializer.Property("ColumnNames");
+				writer.WriteInlineList(ColumnNames, (w, item) => { w.WriteString(item); });
+			}
 
-		if (DocumentsToSample is not null)
-		{
-			initializer.Property("DocumentsToSample");
-			writer.WriteValue(DocumentsToSample.Value);
-		}
+			if (Delimiter is not null)
+			{
+				initializer.Property("Delimiter");
+				writer.WriteString(Delimiter);
+			}
 
-		if (EcsCompatibility is not null)
-		{
-			initializer.Property("EcsCompatibility");
-			Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, writer);
-		}
+			if (DocumentsToSample is not null)
+			{
+				initializer.Property("DocumentsToSample");
+				writer.WriteValue(DocumentsToSample.Value);
+			}
 
-		if (Explain is not null)
-		{
-			initializer.Property("Explain");
-			writer.WriteValue(Explain.Value);
-		}
+			if (EcsCompatibility is not null)
+			{
+				initializer.Property("EcsCompatibility");
+				Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, writer);
+			}
 
-		if (Field is not null)
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Explain is not null)
+			{
+				initializer.Property("Explain");
+				writer.WriteValue(Explain.Value);
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, writer);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (GrokPattern is not null)
-		{
-			initializer.Property("GrokPattern");
-			writer.WriteString(GrokPattern);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, writer);
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (GrokPattern is not null)
+			{
+				initializer.Property("GrokPattern");
+				writer.WriteString(GrokPattern);
+			}
 
-		if (Quote is not null)
-		{
-			initializer.Property("Quote");
-			writer.WriteString(Quote);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (ShouldParseRecursively is not null)
-		{
-			initializer.Property("ShouldParseRecursively");
-			writer.WriteValue(ShouldParseRecursively.Value);
-		}
+			if (Quote is not null)
+			{
+				initializer.Property("Quote");
+				writer.WriteString(Quote);
+			}
 
-		if (ShouldTrimFields is not null)
-		{
-			initializer.Property("ShouldTrimFields");
-			writer.WriteValue(ShouldTrimFields.Value);
-		}
+			if (ShouldParseRecursively is not null)
+			{
+				initializer.Property("ShouldParseRecursively");
+				writer.WriteValue(ShouldParseRecursively.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (ShouldTrimFields is not null)
+			{
+				initializer.Property("ShouldTrimFields");
+				writer.WriteValue(ShouldTrimFields.Value);
+			}
 
-		if (TimestampField is not null)
-		{
-			initializer.Property("TimestampField");
-			TimestampField.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (TimestampFormat is not null)
-		{
-			initializer.Property("TimestampFormat");
-			writer.WriteString(TimestampFormat);
-		}
+			if (TimestampField is not null)
+			{
+				initializer.Property("TimestampField");
+				TimestampField.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TimestampFormat is not null)
+			{
+				initializer.Property("TimestampFormat");
+				writer.WriteString(TimestampFormat);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

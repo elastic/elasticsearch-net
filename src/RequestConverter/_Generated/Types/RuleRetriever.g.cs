@@ -27,47 +27,84 @@ public partial class RuleRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RuleRetriever", false);
-		if (Filter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
 
+			{
+				writer.WriteFluentCall("MatchCriteria", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(MatchCriteria); });
+			}
+
+			if (MinScore is not null)
+			{
+				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (RankWindowSize is not null)
+			{
+				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("RulesetIds", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("MatchCriteria");
-			writer.WriteValue(MatchCriteria);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.RuleRetriever", false);
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (MinScore is not null)
-		{
-			initializer.Property("MinScore");
-			writer.WriteValue(MinScore.Value);
-			writer.Write("f");
-		}
+			{
+				initializer.Property("MatchCriteria");
+				writer.WriteObjectValue(MatchCriteria);
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			if (MinScore is not null)
+			{
+				initializer.Property("MinScore");
+				writer.WriteValue(MinScore.Value);
+				writer.Write("f");
+			}
 
-		if (RankWindowSize is not null)
-		{
-			initializer.Property("RankWindowSize");
-			writer.WriteValue(RankWindowSize.Value);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		{
-			initializer.Property("Retriever");
-			Retriever.FormatCode(writer);
-		}
+			if (RankWindowSize is not null)
+			{
+				initializer.Property("RankWindowSize");
+				writer.WriteValue(RankWindowSize.Value);
+			}
 
-		{
-			initializer.Property("RulesetIds");
-			writer.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("Retriever");
+				Retriever.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("RulesetIds");
+				writer.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

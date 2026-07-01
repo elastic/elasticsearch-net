@@ -27,17 +27,30 @@ public partial class TimeRetentionPolicy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("MaxAge", (w) => { using var _oi = w.ForceObjectInitializer(); MaxAge.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxAge");
-			MaxAge.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy", false);
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("MaxAge");
+				MaxAge.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

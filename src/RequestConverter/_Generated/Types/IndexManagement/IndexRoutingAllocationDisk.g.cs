@@ -27,20 +27,30 @@ public partial class IndexRoutingAllocationDisk : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk", false);
-		if (ThresholdEnabled is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ThresholdEnabled");
-			if (ThresholdEnabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (ThresholdEnabled is not null)
 			{
-				writer.WriteValue(ThresholdEnabled.Value1);
-			}
-			else
-			{
-				writer.WriteString(ThresholdEnabled.Value2);
+				writer.WriteFluentCall("ThresholdEnabled", (w) => { using var _oi = w.ForceObjectInitializer(); if (ThresholdEnabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(ThresholdEnabled.Value1); } else { w.WriteString(ThresholdEnabled.Value2); } });
 			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk", false);
+			if (ThresholdEnabled is not null)
+			{
+				initializer.Property("ThresholdEnabled");
+				if (ThresholdEnabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(ThresholdEnabled.Value1);
+				}
+				else
+				{
+					writer.WriteString(ThresholdEnabled.Value2);
+				}
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

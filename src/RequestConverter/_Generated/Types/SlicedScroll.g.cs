@@ -27,23 +27,41 @@ public partial class SlicedScroll : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SlicedScroll", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Max", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Max); });
+			}
+		}
+		else
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SlicedScroll", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Max");
-			writer.WriteValue(Max);
-		}
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Max");
+				writer.WriteValue(Max);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

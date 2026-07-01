@@ -27,35 +27,63 @@ public partial class DataframePreviewConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analysis");
-			Analysis.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); });
+			}
 
-		if (AnalyzedFields is not null)
+			if (AnalyzedFields is not null)
+			{
+				writer.WriteFluentDescriptorCall("AnalyzedFields", (w) => { AnalyzedFields.FormatCode(w); });
+			}
+
+			if (MaxNumThreads is not null)
+			{
+				writer.WriteFluentCall("MaxNumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumThreads.Value); });
+			}
+
+			if (ModelMemoryLimit is not null)
+			{
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelMemoryLimit); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("AnalyzedFields");
-			AnalyzedFields.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig", false);
+			{
+				initializer.Property("Analysis");
+				Analysis.FormatCode(writer);
+			}
 
-		if (MaxNumThreads is not null)
-		{
-			initializer.Property("MaxNumThreads");
-			writer.WriteValue(MaxNumThreads.Value);
-		}
+			if (AnalyzedFields is not null)
+			{
+				initializer.Property("AnalyzedFields");
+				AnalyzedFields.FormatCode(writer);
+			}
 
-		if (ModelMemoryLimit is not null)
-		{
-			initializer.Property("ModelMemoryLimit");
-			writer.WriteString(ModelMemoryLimit);
-		}
+			if (MaxNumThreads is not null)
+			{
+				initializer.Property("MaxNumThreads");
+				writer.WriteValue(MaxNumThreads.Value);
+			}
 
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (ModelMemoryLimit is not null)
+			{
+				initializer.Property("ModelMemoryLimit");
+				writer.WriteString(ModelMemoryLimit);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

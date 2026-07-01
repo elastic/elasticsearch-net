@@ -27,19 +27,34 @@ public partial class SemanticTextIndexOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions", false);
-		if (DenseVector is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DenseVector");
-			DenseVector.FormatCode(writer);
-		}
+			if (DenseVector is not null)
+			{
+				writer.WriteFluentDescriptorCall("DenseVector", (w) => { DenseVector.FormatCode(w); });
+			}
 
-		if (SparseVector is not null)
+			if (SparseVector is not null)
+			{
+				writer.WriteFluentDescriptorCall("SparseVector", (w) => { SparseVector.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("SparseVector");
-			SparseVector.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions", false);
+			if (DenseVector is not null)
+			{
+				initializer.Property("DenseVector");
+				DenseVector.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (SparseVector is not null)
+			{
+				initializer.Property("SparseVector");
+				SparseVector.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

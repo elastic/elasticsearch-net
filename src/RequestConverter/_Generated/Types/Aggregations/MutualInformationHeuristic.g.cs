@@ -27,19 +27,34 @@ public partial class MutualInformationHeuristic : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic", false);
-		if (BackgroundIsSuperset is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BackgroundIsSuperset");
-			writer.WriteValue(BackgroundIsSuperset.Value);
-		}
+			if (BackgroundIsSuperset is not null)
+			{
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset.Value); });
+			}
 
-		if (IncludeNegatives is not null)
+			if (IncludeNegatives is not null)
+			{
+				writer.WriteFluentCall("IncludeNegatives", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeNegatives.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("IncludeNegatives");
-			writer.WriteValue(IncludeNegatives.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic", false);
+			if (BackgroundIsSuperset is not null)
+			{
+				initializer.Property("BackgroundIsSuperset");
+				writer.WriteValue(BackgroundIsSuperset.Value);
+			}
 
-		initializer.Dispose();
+			if (IncludeNegatives is not null)
+			{
+				initializer.Property("IncludeNegatives");
+				writer.WriteValue(IncludeNegatives.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

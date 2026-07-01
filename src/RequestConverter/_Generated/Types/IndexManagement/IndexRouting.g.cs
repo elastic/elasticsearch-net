@@ -27,19 +27,34 @@ public partial class IndexRouting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting", false);
-		if (Allocation is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Allocation");
-			Allocation.FormatCode(writer);
-		}
+			if (Allocation is not null)
+			{
+				writer.WriteFluentDescriptorCall("Allocation", (w) => { Allocation.FormatCode(w); });
+			}
 
-		if (Rebalance is not null)
+			if (Rebalance is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rebalance", (w) => { Rebalance.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Rebalance");
-			Rebalance.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting", false);
+			if (Allocation is not null)
+			{
+				initializer.Property("Allocation");
+				Allocation.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Rebalance is not null)
+			{
+				initializer.Property("Rebalance");
+				Rebalance.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

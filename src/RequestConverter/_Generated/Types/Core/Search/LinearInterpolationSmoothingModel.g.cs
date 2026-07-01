@@ -27,25 +27,42 @@ public partial class LinearInterpolationSmoothingModel : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BigramLambda");
-			writer.WriteValue(BigramLambda);
-			writer.Write("d");
-		}
+			{
+				writer.WriteFluentCall("BigramLambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BigramLambda); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("TrigramLambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TrigramLambda); w.Write("d"); });
+			}
+
+			{
+				writer.WriteFluentCall("UnigramLambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UnigramLambda); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("TrigramLambda");
-			writer.WriteValue(TrigramLambda);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel", false);
+			{
+				initializer.Property("BigramLambda");
+				writer.WriteValue(BigramLambda);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("UnigramLambda");
-			writer.WriteValue(UnigramLambda);
-			writer.Write("d");
-		}
+			{
+				initializer.Property("TrigramLambda");
+				writer.WriteValue(TrigramLambda);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("UnigramLambda");
+				writer.WriteValue(UnigramLambda);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

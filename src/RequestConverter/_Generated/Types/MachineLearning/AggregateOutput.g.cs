@@ -27,31 +27,56 @@ public partial class AggregateOutput : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput", false);
-		if (Exponent is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Exponent");
-			Exponent.FormatCode(writer);
-		}
+			if (Exponent is not null)
+			{
+				writer.WriteFluentDescriptorCall("Exponent", (w) => { Exponent.FormatCode(w); });
+			}
 
-		if (LogisticRegression is not null)
+			if (LogisticRegression is not null)
+			{
+				writer.WriteFluentDescriptorCall("LogisticRegression", (w) => { LogisticRegression.FormatCode(w); });
+			}
+
+			if (WeightedMode is not null)
+			{
+				writer.WriteFluentDescriptorCall("WeightedMode", (w) => { WeightedMode.FormatCode(w); });
+			}
+
+			if (WeightedSum is not null)
+			{
+				writer.WriteFluentDescriptorCall("WeightedSum", (w) => { WeightedSum.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("LogisticRegression");
-			LogisticRegression.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput", false);
+			if (Exponent is not null)
+			{
+				initializer.Property("Exponent");
+				Exponent.FormatCode(writer);
+			}
 
-		if (WeightedMode is not null)
-		{
-			initializer.Property("WeightedMode");
-			WeightedMode.FormatCode(writer);
-		}
+			if (LogisticRegression is not null)
+			{
+				initializer.Property("LogisticRegression");
+				LogisticRegression.FormatCode(writer);
+			}
 
-		if (WeightedSum is not null)
-		{
-			initializer.Property("WeightedSum");
-			WeightedSum.FormatCode(writer);
-		}
+			if (WeightedMode is not null)
+			{
+				initializer.Property("WeightedMode");
+				WeightedMode.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (WeightedSum is not null)
+			{
+				initializer.Property("WeightedSum");
+				WeightedSum.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

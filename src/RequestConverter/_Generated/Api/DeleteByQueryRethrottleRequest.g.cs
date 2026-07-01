@@ -27,19 +27,39 @@ public partial class DeleteByQueryRethrottleRequest : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TaskId");
-			TaskId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TaskId.FormatCode(writer);
+			}
 
-		if (RequestsPerSecond is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (RequestsPerSecond is not null)
+			{
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+			}
+		}
+		else
 		{
-			initializer.Property("RequestsPerSecond");
-			writer.WriteValue(RequestsPerSecond.Value);
-			writer.Write("f");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest", false);
+			{
+				initializer.Property("TaskId");
+				TaskId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (RequestsPerSecond is not null)
+			{
+				initializer.Property("RequestsPerSecond");
+				writer.WriteValue(RequestsPerSecond.Value);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

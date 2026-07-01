@@ -27,62 +27,107 @@ public partial class ScriptedMetricAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation", false);
-		if (CombineScript is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CombineScript");
-			CombineScript.FormatCode(writer);
-		}
+			if (CombineScript is not null)
+			{
+				writer.WriteFluentDescriptorCall("CombineScript", (w) => { CombineScript.FormatCode(w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (InitScript is not null)
+			{
+				writer.WriteFluentDescriptorCall("InitScript", (w) => { InitScript.FormatCode(w); });
+			}
+
+			if (MapScript is not null)
+			{
+				writer.WriteFluentDescriptorCall("MapScript", (w) => { MapScript.FormatCode(w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (Params is not null)
+			{
+				writer.WriteFluentCall("Params", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (ReduceScript is not null)
+			{
+				writer.WriteFluentDescriptorCall("ReduceScript", (w) => { ReduceScript.FormatCode(w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation", false);
+			if (CombineScript is not null)
+			{
+				initializer.Property("CombineScript");
+				CombineScript.FormatCode(writer);
+			}
 
-		if (InitScript is not null)
-		{
-			initializer.Property("InitScript");
-			InitScript.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MapScript is not null)
-		{
-			initializer.Property("MapScript");
-			MapScript.FormatCode(writer);
-		}
+			if (InitScript is not null)
+			{
+				initializer.Property("InitScript");
+				InitScript.FormatCode(writer);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			if (MapScript is not null)
+			{
+				initializer.Property("MapScript");
+				MapScript.FormatCode(writer);
+			}
 
-		if (Params is not null)
-		{
-			initializer.Property("Params");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		if (ReduceScript is not null)
-		{
-			initializer.Property("ReduceScript");
-			ReduceScript.FormatCode(writer);
-		}
+			if (Params is not null)
+			{
+				initializer.Property("Params");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (ReduceScript is not null)
+			{
+				initializer.Property("ReduceScript");
+				ReduceScript.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

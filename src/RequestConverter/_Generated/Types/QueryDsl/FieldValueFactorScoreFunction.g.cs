@@ -27,32 +27,56 @@ public partial class FieldValueFactorScoreFunction : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction", false);
-		if (Factor is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Factor");
-			writer.WriteValue(Factor.Value);
-			writer.Write("d");
-		}
+			if (Factor is not null)
+			{
+				writer.WriteFluentCall("Factor", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Factor.Value); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); w.Write("d"); });
+			}
+
+			if (Modifier is not null)
+			{
+				writer.WriteFluentCall("Modifier", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(Modifier.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction", false);
+			if (Factor is not null)
+			{
+				initializer.Property("Factor");
+				writer.WriteValue(Factor.Value);
+				writer.Write("d");
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing.Value);
-			writer.Write("d");
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Modifier is not null)
-		{
-			initializer.Property("Modifier");
-			Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(Modifier.Value, writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteValue(Missing.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			if (Modifier is not null)
+			{
+				initializer.Property("Modifier");
+				Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(Modifier.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

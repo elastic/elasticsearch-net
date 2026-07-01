@@ -27,12 +27,21 @@ public partial class GeoHashLocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GeoHashLocation", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Geohash");
-			writer.WriteString(Geohash);
+			{
+				writer.WriteFluentCall("Geohash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Geohash); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GeoHashLocation", true);
+			{
+				initializer.Property("Geohash");
+				writer.WriteString(Geohash);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,29 +27,58 @@ public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelId.FormatCode(writer);
+			}
 
-		if (Merges is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Merges is not null)
+			{
+				writer.WriteFluentParams("Merges", Merges, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Scores is not null)
+			{
+				writer.WriteFluentParams("Scores", Scores, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+
+			{
+				writer.WriteFluentParams("Vocabulary", Vocabulary, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Merges");
-			writer.WriteInlineList(Merges, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest", false);
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
 
-		if (Scores is not null)
-		{
-			initializer.Property("Scores");
-			writer.WriteInlineList(Scores, (w, item) => { w.WriteValue(item); w.Write("d"); });
-		}
+			if (Merges is not null)
+			{
+				initializer.Property("Merges");
+				writer.WriteInlineList(Merges, (w, item) => { w.WriteString(item); });
+			}
 
-		{
-			initializer.Property("Vocabulary");
-			writer.WriteInlineList(Vocabulary, (w, item) => { w.WriteString(item); });
-		}
+			if (Scores is not null)
+			{
+				initializer.Property("Scores");
+				writer.WriteInlineList(Scores, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Vocabulary");
+				writer.WriteInlineList(Vocabulary, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

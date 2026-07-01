@@ -27,29 +27,46 @@ public partial class FrequencyEncodingPreprocessor : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FeatureName");
-			writer.WriteString(FeatureName);
-		}
+			{
+				writer.WriteFluentCall("FeatureName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FeatureName); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Field); });
+			}
+
+			{
+				writer.WriteFluentCall("FrequencyMap", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("double"); w.Write(">()"); w.WriteBlockList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			writer.WriteString(Field);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor", false);
+			{
+				initializer.Property("FeatureName");
+				writer.WriteString(FeatureName);
+			}
 
-		{
-			initializer.Property("FrequencyMap");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("double");
-			writer.Write(">()");
-			writer.WriteBlockList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
-		}
+			{
+				initializer.Property("Field");
+				writer.WriteString(Field);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("FrequencyMap");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("double");
+				writer.Write(">()");
+				writer.WriteBlockList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

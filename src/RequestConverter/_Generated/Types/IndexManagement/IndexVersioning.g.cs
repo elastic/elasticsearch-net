@@ -27,19 +27,34 @@ public partial class IndexVersioning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning", false);
-		if (Created is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Created");
-			writer.WriteString(Created);
-		}
+			if (Created is not null)
+			{
+				writer.WriteFluentCall("Created", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Created); });
+			}
 
-		if (CreatedString is not null)
+			if (CreatedString is not null)
+			{
+				writer.WriteFluentCall("CreatedString", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CreatedString); });
+			}
+		}
+		else
 		{
-			initializer.Property("CreatedString");
-			writer.WriteString(CreatedString);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning", false);
+			if (Created is not null)
+			{
+				initializer.Property("Created");
+				writer.WriteString(Created);
+			}
 
-		initializer.Dispose();
+			if (CreatedString is not null)
+			{
+				initializer.Property("CreatedString");
+				writer.WriteString(CreatedString);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

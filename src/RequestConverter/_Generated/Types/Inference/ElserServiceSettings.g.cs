@@ -27,23 +27,41 @@ public partial class ElserServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings", false);
-		if (AdaptiveAllocations is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AdaptiveAllocations");
-			AdaptiveAllocations.FormatCode(writer);
-		}
+			if (AdaptiveAllocations is not null)
+			{
+				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("NumAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumAllocations); });
+			}
+
+			{
+				writer.WriteFluentCall("NumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumThreads); });
+			}
+		}
+		else
 		{
-			initializer.Property("NumAllocations");
-			writer.WriteValue(NumAllocations);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings", false);
+			if (AdaptiveAllocations is not null)
+			{
+				initializer.Property("AdaptiveAllocations");
+				AdaptiveAllocations.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("NumThreads");
-			writer.WriteValue(NumThreads);
-		}
+			{
+				initializer.Property("NumAllocations");
+				writer.WriteValue(NumAllocations);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("NumThreads");
+				writer.WriteValue(NumThreads);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

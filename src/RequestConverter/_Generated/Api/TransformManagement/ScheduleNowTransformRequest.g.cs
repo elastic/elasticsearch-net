@@ -27,24 +27,49 @@ public partial class ScheduleNowTransformRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TransformId.FormatCode(writer);
+			}
 
-		if (Defer is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Defer is not null)
+			{
+				writer.WriteFluentCall("Defer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Defer.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Defer");
-			writer.WriteValue(Defer.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest", false);
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Defer is not null)
+			{
+				initializer.Property("Defer");
+				writer.WriteValue(Defer.Value);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

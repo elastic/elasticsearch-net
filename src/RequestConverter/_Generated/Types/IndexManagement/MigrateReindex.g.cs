@@ -27,17 +27,30 @@ public partial class MigrateReindex : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, writer);
-		}
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, w); });
+			}
 
+			{
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex", false);
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

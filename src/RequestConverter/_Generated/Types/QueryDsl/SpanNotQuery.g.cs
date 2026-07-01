@@ -27,48 +27,86 @@ public partial class SpanNotQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
-		if (Dist is not null)
+			if (Dist is not null)
+			{
+				writer.WriteFluentCall("Dist", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dist.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Exclude", (w) => { Exclude.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Include", (w) => { Include.FormatCode(w); });
+			}
+
+			if (Post is not null)
+			{
+				writer.WriteFluentCall("Post", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Post.Value); });
+			}
+
+			if (Pre is not null)
+			{
+				writer.WriteFluentCall("Pre", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Pre.Value); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+		}
+		else
 		{
-			initializer.Property("Dist");
-			writer.WriteValue(Dist.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		{
-			initializer.Property("Exclude");
-			Exclude.FormatCode(writer);
-		}
+			if (Dist is not null)
+			{
+				initializer.Property("Dist");
+				writer.WriteValue(Dist.Value);
+			}
 
-		{
-			initializer.Property("Include");
-			Include.FormatCode(writer);
-		}
+			{
+				initializer.Property("Exclude");
+				Exclude.FormatCode(writer);
+			}
 
-		if (Post is not null)
-		{
-			initializer.Property("Post");
-			writer.WriteValue(Post.Value);
-		}
+			{
+				initializer.Property("Include");
+				Include.FormatCode(writer);
+			}
 
-		if (Pre is not null)
-		{
-			initializer.Property("Pre");
-			writer.WriteValue(Pre.Value);
-		}
+			if (Post is not null)
+			{
+				initializer.Property("Post");
+				writer.WriteValue(Post.Value);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (Pre is not null)
+			{
+				initializer.Property("Pre");
+				writer.WriteValue(Pre.Value);
+			}
 
-		initializer.Dispose();
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

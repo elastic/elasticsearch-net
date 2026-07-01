@@ -27,13 +27,23 @@ public partial class DataStreamOptionsTemplate : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate", false);
-		if (FailureStore is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FailureStore");
-			FailureStore.FormatCode(writer);
+			if (FailureStore is not null)
+			{
+				writer.WriteFluentDescriptorCall("FailureStore", (w) => { FailureStore.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate", false);
+			if (FailureStore is not null)
+			{
+				initializer.Property("FailureStore");
+				FailureStore.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

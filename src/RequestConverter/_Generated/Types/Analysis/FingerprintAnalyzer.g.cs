@@ -27,47 +27,78 @@ public partial class FingerprintAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer", true);
-		if (MaxOutputSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxOutputSize");
-			writer.WriteValue(MaxOutputSize.Value);
-		}
-
-		if (Separator is not null)
-		{
-			initializer.Property("Separator");
-			writer.WriteString(Separator);
-		}
-
-		if (Stopwords is not null)
-		{
-			initializer.Property("Stopwords");
-			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (MaxOutputSize is not null)
 			{
-				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				writer.WriteFluentCall("MaxOutputSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxOutputSize.Value); });
 			}
-			else
-			{
-				writer.Write("new ");
-				writer.WriteTypeRef("string");
-				writer.Write("[] ");
-				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
-			}
-		}
 
-		if (StopwordsPath is not null)
-		{
-			initializer.Property("StopwordsPath");
-			writer.WriteString(StopwordsPath);
-		}
+			if (Separator is not null)
+			{
+				writer.WriteFluentCall("Separator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Separator); });
+			}
+
+			if (Stopwords is not null)
+			{
+				writer.WriteFluentCall("Stopwords", (w) => { using var _oi = w.ForceObjectInitializer(); if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
+			}
+
+			if (StopwordsPath is not null)
+			{
+				writer.WriteFluentCall("StopwordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StopwordsPath); });
+			}
 #pragma warning disable CS0618
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
 #pragma warning restore CS0618
-		initializer.Dispose();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer", true);
+			if (MaxOutputSize is not null)
+			{
+				initializer.Property("MaxOutputSize");
+				writer.WriteValue(MaxOutputSize.Value);
+			}
+
+			if (Separator is not null)
+			{
+				initializer.Property("Separator");
+				writer.WriteString(Separator);
+			}
+
+			if (Stopwords is not null)
+			{
+				initializer.Property("Stopwords");
+				if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("string");
+					writer.Write("[] ");
+					writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				}
+			}
+
+			if (StopwordsPath is not null)
+			{
+				initializer.Property("StopwordsPath");
+				writer.WriteString(StopwordsPath);
+			}
+#pragma warning disable CS0618
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+#pragma warning restore CS0618
+			initializer.Dispose();
+		}
 	}
 }

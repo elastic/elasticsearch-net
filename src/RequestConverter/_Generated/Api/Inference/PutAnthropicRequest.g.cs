@@ -27,34 +27,69 @@ public partial class PutAnthropicRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AnthropicInferenceId");
-			AnthropicInferenceId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Elastic.Clients.Elasticsearch.Inference.AnthropicTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				AnthropicInferenceId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); });
+			}
+
+			if (TaskSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("TaskSettings", (w) => { TaskSettings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TaskType");
-			Elastic.Clients.Elasticsearch.Inference.AnthropicTaskTypeCodeFormatter.FormatCode(TaskType, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest", false);
+			{
+				initializer.Property("AnthropicInferenceId");
+				AnthropicInferenceId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			{
+				initializer.Property("TaskType");
+				Elastic.Clients.Elasticsearch.Inference.AnthropicTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
-		{
-			initializer.Property("ServiceSettings");
-			ServiceSettings.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (TaskSettings is not null)
-		{
-			initializer.Property("TaskSettings");
-			TaskSettings.FormatCode(writer);
-		}
+			{
+				initializer.Property("ServiceSettings");
+				ServiceSettings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TaskSettings is not null)
+			{
+				initializer.Property("TaskSettings");
+				TaskSettings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

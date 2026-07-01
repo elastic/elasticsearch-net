@@ -27,48 +27,86 @@ public partial class HasParentQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
-		if (IgnoreUnmapped is not null)
+			if (IgnoreUnmapped is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+			}
+
+			if (InnerHits is not null)
+			{
+				writer.WriteFluentDescriptorCall("InnerHits", (w) => { InnerHits.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("ParentType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ParentType); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (Score is not null)
+			{
+				writer.WriteFluentCall("Score", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Score.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("IgnoreUnmapped");
-			writer.WriteValue(IgnoreUnmapped.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (InnerHits is not null)
-		{
-			initializer.Property("InnerHits");
-			InnerHits.FormatCode(writer);
-		}
+			if (IgnoreUnmapped is not null)
+			{
+				initializer.Property("IgnoreUnmapped");
+				writer.WriteValue(IgnoreUnmapped.Value);
+			}
 
-		{
-			initializer.Property("ParentType");
-			writer.WriteString(ParentType);
-		}
+			if (InnerHits is not null)
+			{
+				initializer.Property("InnerHits");
+				InnerHits.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			{
+				initializer.Property("ParentType");
+				writer.WriteString(ParentType);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
 
-		if (Score is not null)
-		{
-			initializer.Property("Score");
-			writer.WriteValue(Score.Value);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (Score is not null)
+			{
+				initializer.Property("Score");
+				writer.WriteValue(Score.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

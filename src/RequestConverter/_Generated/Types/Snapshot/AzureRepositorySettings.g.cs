@@ -27,73 +27,133 @@ public partial class AzureRepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings", false);
-		if (BasePath is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BasePath");
-			writer.WriteString(BasePath);
-		}
+			if (BasePath is not null)
+			{
+				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+			}
 
-		if (ChunkSize is not null)
+			if (ChunkSize is not null)
+			{
+				writer.WriteFluentCall("ChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); ChunkSize.FormatCode(w); });
+			}
+
+			if (Client is not null)
+			{
+				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+			}
+
+			if (Compress is not null)
+			{
+				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+			}
+
+			if (Container is not null)
+			{
+				writer.WriteFluentCall("Container", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Container); });
+			}
+
+			if (DeleteObjectsMaxSize is not null)
+			{
+				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteObjectsMaxSize.Value); });
+			}
+
+			if (LocationMode is not null)
+			{
+				writer.WriteFluentCall("LocationMode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LocationMode); });
+			}
+
+			if (MaxConcurrentBatchDeletes is not null)
+			{
+				writer.WriteFluentCall("MaxConcurrentBatchDeletes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentBatchDeletes.Value); });
+			}
+
+			if (MaxRestoreBytesPerSec is not null)
+			{
+				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRestoreBytesPerSec.FormatCode(w); });
+			}
+
+			if (MaxSnapshotBytesPerSec is not null)
+			{
+				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSnapshotBytesPerSec.FormatCode(w); });
+			}
+
+			if (Readonly is not null)
+			{
+				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("ChunkSize");
-			ChunkSize.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings", false);
+			if (BasePath is not null)
+			{
+				initializer.Property("BasePath");
+				writer.WriteString(BasePath);
+			}
 
-		if (Client is not null)
-		{
-			initializer.Property("Client");
-			writer.WriteString(Client);
-		}
+			if (ChunkSize is not null)
+			{
+				initializer.Property("ChunkSize");
+				ChunkSize.FormatCode(writer);
+			}
 
-		if (Compress is not null)
-		{
-			initializer.Property("Compress");
-			writer.WriteValue(Compress.Value);
-		}
+			if (Client is not null)
+			{
+				initializer.Property("Client");
+				writer.WriteString(Client);
+			}
 
-		if (Container is not null)
-		{
-			initializer.Property("Container");
-			writer.WriteString(Container);
-		}
+			if (Compress is not null)
+			{
+				initializer.Property("Compress");
+				writer.WriteValue(Compress.Value);
+			}
 
-		if (DeleteObjectsMaxSize is not null)
-		{
-			initializer.Property("DeleteObjectsMaxSize");
-			writer.WriteValue(DeleteObjectsMaxSize.Value);
-		}
+			if (Container is not null)
+			{
+				initializer.Property("Container");
+				writer.WriteString(Container);
+			}
 
-		if (LocationMode is not null)
-		{
-			initializer.Property("LocationMode");
-			writer.WriteString(LocationMode);
-		}
+			if (DeleteObjectsMaxSize is not null)
+			{
+				initializer.Property("DeleteObjectsMaxSize");
+				writer.WriteValue(DeleteObjectsMaxSize.Value);
+			}
 
-		if (MaxConcurrentBatchDeletes is not null)
-		{
-			initializer.Property("MaxConcurrentBatchDeletes");
-			writer.WriteValue(MaxConcurrentBatchDeletes.Value);
-		}
+			if (LocationMode is not null)
+			{
+				initializer.Property("LocationMode");
+				writer.WriteString(LocationMode);
+			}
 
-		if (MaxRestoreBytesPerSec is not null)
-		{
-			initializer.Property("MaxRestoreBytesPerSec");
-			MaxRestoreBytesPerSec.FormatCode(writer);
-		}
+			if (MaxConcurrentBatchDeletes is not null)
+			{
+				initializer.Property("MaxConcurrentBatchDeletes");
+				writer.WriteValue(MaxConcurrentBatchDeletes.Value);
+			}
 
-		if (MaxSnapshotBytesPerSec is not null)
-		{
-			initializer.Property("MaxSnapshotBytesPerSec");
-			MaxSnapshotBytesPerSec.FormatCode(writer);
-		}
+			if (MaxRestoreBytesPerSec is not null)
+			{
+				initializer.Property("MaxRestoreBytesPerSec");
+				MaxRestoreBytesPerSec.FormatCode(writer);
+			}
 
-		if (Readonly is not null)
-		{
-			initializer.Property("Readonly");
-			writer.WriteValue(Readonly.Value);
-		}
+			if (MaxSnapshotBytesPerSec is not null)
+			{
+				initializer.Property("MaxSnapshotBytesPerSec");
+				MaxSnapshotBytesPerSec.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Readonly is not null)
+			{
+				initializer.Property("Readonly");
+				writer.WriteValue(Readonly.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

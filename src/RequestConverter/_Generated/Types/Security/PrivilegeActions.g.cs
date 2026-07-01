@@ -27,37 +27,61 @@ public partial class PrivilegeActions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PrivilegeActions", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Actions");
-			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
-		}
+			{
+				writer.WriteFluentParams("Actions", Actions, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Application is not null)
+			if (Application is not null)
+			{
+				writer.WriteFluentCall("Application", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Application); });
+			}
+
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Application");
-			writer.WriteString(Application);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PrivilegeActions", false);
+			{
+				initializer.Property("Actions");
+				writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Metadata is not null)
-		{
-			initializer.Property("Metadata");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (Application is not null)
+			{
+				initializer.Property("Application");
+				writer.WriteString(Application);
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

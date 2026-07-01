@@ -27,12 +27,28 @@ public partial class ClearTrainedModelDeploymentCacheRequest : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest", false);
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

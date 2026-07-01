@@ -27,66 +27,142 @@ public partial class OpenPointInTimeRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.OpenPointInTimeRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Indices.FormatCode(writer);
+				}
 
-		if (AllowPartialSearchResults is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Indices.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (AllowPartialSearchResults is not null)
+			{
+				writer.WriteFluentCall("AllowPartialSearchResults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowPartialSearchResults.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (KeepAlive is not null)
+			{
+				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+			}
+
+			if (MaxConcurrentShardRequests is not null)
+			{
+				writer.WriteFluentCall("MaxConcurrentShardRequests", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentShardRequests.Value); });
+			}
+
+			if (Preference is not null)
+			{
+				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+			}
+
+			if (IndexFilter is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); });
+			}
+
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowPartialSearchResults");
-			writer.WriteValue(AllowPartialSearchResults.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.OpenPointInTimeRequest", false);
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			if (AllowPartialSearchResults is not null)
+			{
+				initializer.Property("AllowPartialSearchResults");
+				writer.WriteValue(AllowPartialSearchResults.Value);
+			}
 
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (KeepAlive is not null)
-		{
-			initializer.Property("KeepAlive");
-			KeepAlive.FormatCode(writer);
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
 
-		if (MaxConcurrentShardRequests is not null)
-		{
-			initializer.Property("MaxConcurrentShardRequests");
-			writer.WriteValue(MaxConcurrentShardRequests.Value);
-		}
+			if (KeepAlive is not null)
+			{
+				initializer.Property("KeepAlive");
+				KeepAlive.FormatCode(writer);
+			}
 
-		if (Preference is not null)
-		{
-			initializer.Property("Preference");
-			writer.WriteString(Preference);
-		}
+			if (MaxConcurrentShardRequests is not null)
+			{
+				initializer.Property("MaxConcurrentShardRequests");
+				writer.WriteValue(MaxConcurrentShardRequests.Value);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
+			if (Preference is not null)
+			{
+				initializer.Property("Preference");
+				writer.WriteString(Preference);
+			}
 
-		if (IndexFilter is not null)
-		{
-			initializer.Property("IndexFilter");
-			IndexFilter.FormatCode(writer);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
 
-		if (ProjectRouting is not null)
-		{
-			initializer.Property("ProjectRouting");
-			writer.WriteString(ProjectRouting);
-		}
+			if (IndexFilter is not null)
+			{
+				initializer.Property("IndexFilter");
+				IndexFilter.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

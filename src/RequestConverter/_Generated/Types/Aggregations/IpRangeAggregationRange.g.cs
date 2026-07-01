@@ -27,25 +27,45 @@ public partial class IpRangeAggregationRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange", false);
-		if (From is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("From");
-			writer.WriteString(From);
-		}
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(From); });
+			}
 
-		if (Mask is not null)
+			if (Mask is not null)
+			{
+				writer.WriteFluentCall("Mask", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Mask); });
+			}
+
+			if (To is not null)
+			{
+				writer.WriteFluentCall("To", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(To); });
+			}
+		}
+		else
 		{
-			initializer.Property("Mask");
-			writer.WriteString(Mask);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange", false);
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteString(From);
+			}
 
-		if (To is not null)
-		{
-			initializer.Property("To");
-			writer.WriteString(To);
-		}
+			if (Mask is not null)
+			{
+				initializer.Property("Mask");
+				writer.WriteString(Mask);
+			}
 
-		initializer.Dispose();
+			if (To is not null)
+			{
+				initializer.Property("To");
+				writer.WriteString(To);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

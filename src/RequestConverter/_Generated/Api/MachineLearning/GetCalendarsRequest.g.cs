@@ -27,31 +27,60 @@ public partial class GetCalendarsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest", false);
-		if (CalendarId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CalendarId");
-			CalendarId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (CalendarId is not null)
+			{
+				writer.WriteFluentCall("CalendarId", (w) => { using var _oi = w.ForceObjectInitializer(); CalendarId.FormatCode(w); });
+			}
 
-		if (From is not null)
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Page is not null)
+			{
+				writer.WriteFluentDescriptorCall("Page", (w) => { Page.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest", false);
+			if (CalendarId is not null)
+			{
+				initializer.Property("CalendarId");
+				CalendarId.FormatCode(writer);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (Page is not null)
-		{
-			initializer.Property("Page");
-			Page.FormatCode(writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		initializer.Dispose();
+			if (Page is not null)
+			{
+				initializer.Property("Page");
+				Page.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

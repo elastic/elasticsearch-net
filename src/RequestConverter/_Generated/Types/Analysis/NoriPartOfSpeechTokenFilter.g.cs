@@ -27,19 +27,34 @@ public partial class NoriPartOfSpeechTokenFilter : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter", true);
-		if (Stoptags is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Stoptags");
-			writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
-		}
+			if (Stoptags is not null)
+			{
+				writer.WriteFluentParams("Stoptags", Stoptags, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter", true);
+			if (Stoptags is not null)
+			{
+				initializer.Property("Stoptags");
+				writer.WriteInlineList(Stoptags, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

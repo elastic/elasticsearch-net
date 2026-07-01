@@ -27,73 +27,133 @@ public partial class InferenceConfigCreate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate", false);
-		if (Classification is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Classification");
-			Classification.FormatCode(writer);
-		}
+			if (Classification is not null)
+			{
+				writer.WriteFluentDescriptorCall("Classification", (w) => { Classification.FormatCode(w); });
+			}
 
-		if (FillMask is not null)
+			if (FillMask is not null)
+			{
+				writer.WriteFluentDescriptorCall("FillMask", (w) => { FillMask.FormatCode(w); });
+			}
+
+			if (LearningToRank is not null)
+			{
+				writer.WriteFluentDescriptorCall("LearningToRank", (w) => { LearningToRank.FormatCode(w); });
+			}
+
+			if (Ner is not null)
+			{
+				writer.WriteFluentDescriptorCall("Ner", (w) => { Ner.FormatCode(w); });
+			}
+
+			if (PassThrough is not null)
+			{
+				writer.WriteFluentDescriptorCall("PassThrough", (w) => { PassThrough.FormatCode(w); });
+			}
+
+			if (QuestionAnswering is not null)
+			{
+				writer.WriteFluentDescriptorCall("QuestionAnswering", (w) => { QuestionAnswering.FormatCode(w); });
+			}
+
+			if (Regression is not null)
+			{
+				writer.WriteFluentDescriptorCall("Regression", (w) => { Regression.FormatCode(w); });
+			}
+
+			if (TextClassification is not null)
+			{
+				writer.WriteFluentDescriptorCall("TextClassification", (w) => { TextClassification.FormatCode(w); });
+			}
+
+			if (TextEmbedding is not null)
+			{
+				writer.WriteFluentDescriptorCall("TextEmbedding", (w) => { TextEmbedding.FormatCode(w); });
+			}
+
+			if (TextExpansion is not null)
+			{
+				writer.WriteFluentDescriptorCall("TextExpansion", (w) => { TextExpansion.FormatCode(w); });
+			}
+
+			if (ZeroShotClassification is not null)
+			{
+				writer.WriteFluentDescriptorCall("ZeroShotClassification", (w) => { ZeroShotClassification.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("FillMask");
-			FillMask.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate", false);
+			if (Classification is not null)
+			{
+				initializer.Property("Classification");
+				Classification.FormatCode(writer);
+			}
 
-		if (LearningToRank is not null)
-		{
-			initializer.Property("LearningToRank");
-			LearningToRank.FormatCode(writer);
-		}
+			if (FillMask is not null)
+			{
+				initializer.Property("FillMask");
+				FillMask.FormatCode(writer);
+			}
 
-		if (Ner is not null)
-		{
-			initializer.Property("Ner");
-			Ner.FormatCode(writer);
-		}
+			if (LearningToRank is not null)
+			{
+				initializer.Property("LearningToRank");
+				LearningToRank.FormatCode(writer);
+			}
 
-		if (PassThrough is not null)
-		{
-			initializer.Property("PassThrough");
-			PassThrough.FormatCode(writer);
-		}
+			if (Ner is not null)
+			{
+				initializer.Property("Ner");
+				Ner.FormatCode(writer);
+			}
 
-		if (QuestionAnswering is not null)
-		{
-			initializer.Property("QuestionAnswering");
-			QuestionAnswering.FormatCode(writer);
-		}
+			if (PassThrough is not null)
+			{
+				initializer.Property("PassThrough");
+				PassThrough.FormatCode(writer);
+			}
 
-		if (Regression is not null)
-		{
-			initializer.Property("Regression");
-			Regression.FormatCode(writer);
-		}
+			if (QuestionAnswering is not null)
+			{
+				initializer.Property("QuestionAnswering");
+				QuestionAnswering.FormatCode(writer);
+			}
 
-		if (TextClassification is not null)
-		{
-			initializer.Property("TextClassification");
-			TextClassification.FormatCode(writer);
-		}
+			if (Regression is not null)
+			{
+				initializer.Property("Regression");
+				Regression.FormatCode(writer);
+			}
 
-		if (TextEmbedding is not null)
-		{
-			initializer.Property("TextEmbedding");
-			TextEmbedding.FormatCode(writer);
-		}
+			if (TextClassification is not null)
+			{
+				initializer.Property("TextClassification");
+				TextClassification.FormatCode(writer);
+			}
 
-		if (TextExpansion is not null)
-		{
-			initializer.Property("TextExpansion");
-			TextExpansion.FormatCode(writer);
-		}
+			if (TextEmbedding is not null)
+			{
+				initializer.Property("TextEmbedding");
+				TextEmbedding.FormatCode(writer);
+			}
 
-		if (ZeroShotClassification is not null)
-		{
-			initializer.Property("ZeroShotClassification");
-			ZeroShotClassification.FormatCode(writer);
-		}
+			if (TextExpansion is not null)
+			{
+				initializer.Property("TextExpansion");
+				TextExpansion.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ZeroShotClassification is not null)
+			{
+				initializer.Property("ZeroShotClassification");
+				ZeroShotClassification.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

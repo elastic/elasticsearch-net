@@ -27,17 +27,30 @@ public partial class FieldMetric : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.FieldMetric", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentParams("Metrics", Metrics, (w, item) => { Elastic.Clients.Elasticsearch.Rollup.MetricCodeFormatter.FormatCode(item, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Metrics");
-			writer.WriteInlineList(Metrics, (w, item) => { Elastic.Clients.Elasticsearch.Rollup.MetricCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rollup.FieldMetric", false);
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Metrics");
+				writer.WriteInlineList(Metrics, (w, item) => { Elastic.Clients.Elasticsearch.Rollup.MetricCodeFormatter.FormatCode(item, w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

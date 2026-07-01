@@ -27,22 +27,39 @@ public partial class ApplicationPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Application");
-			writer.WriteString(Application);
-		}
+			{
+				writer.WriteFluentCall("Application", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Application); });
+			}
 
+			{
+				writer.WriteFluentParams("Privileges", Privileges, (w, item) => { w.WriteString(item); });
+			}
+
+			{
+				writer.WriteFluentParams("Resources", Resources, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Privileges");
-			writer.WriteInlineList(Privileges, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges", false);
+			{
+				initializer.Property("Application");
+				writer.WriteString(Application);
+			}
 
-		{
-			initializer.Property("Resources");
-			writer.WriteInlineList(Resources, (w, item) => { w.WriteString(item); });
-		}
+			{
+				initializer.Property("Privileges");
+				writer.WriteInlineList(Privileges, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Resources");
+				writer.WriteInlineList(Resources, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

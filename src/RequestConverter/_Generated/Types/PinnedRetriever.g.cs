@@ -27,49 +27,88 @@ public partial class PinnedRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.PinnedRetriever", false);
-		if (Docs is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Docs");
-			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
-		}
+			if (Docs is not null)
+			{
+				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SpecifiedDocument>"); w.Write("()"); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (Ids is not null)
+			{
+				writer.WriteFluentParams("Ids", Ids, (w, item) => { w.WriteString(item); });
+			}
+
+			if (MinScore is not null)
+			{
+				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (RankWindowSize is not null)
+			{
+				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.PinnedRetriever", false);
+			if (Docs is not null)
+			{
+				initializer.Property("Docs");
+				writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Ids is not null)
-		{
-			initializer.Property("Ids");
-			writer.WriteInlineList(Ids, (w, item) => { w.WriteString(item); });
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (MinScore is not null)
-		{
-			initializer.Property("MinScore");
-			writer.WriteValue(MinScore.Value);
-			writer.Write("f");
-		}
+			if (Ids is not null)
+			{
+				initializer.Property("Ids");
+				writer.WriteInlineList(Ids, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			if (MinScore is not null)
+			{
+				initializer.Property("MinScore");
+				writer.WriteValue(MinScore.Value);
+				writer.Write("f");
+			}
 
-		if (RankWindowSize is not null)
-		{
-			initializer.Property("RankWindowSize");
-			writer.WriteValue(RankWindowSize.Value);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		{
-			initializer.Property("Retriever");
-			Retriever.FormatCode(writer);
-		}
+			if (RankWindowSize is not null)
+			{
+				initializer.Property("RankWindowSize");
+				writer.WriteValue(RankWindowSize.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Retriever");
+				Retriever.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

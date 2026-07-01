@@ -27,31 +27,56 @@ public partial class VoyageAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings", false);
-		if (InputType is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InputType");
-			writer.WriteString(InputType);
-		}
+			if (InputType is not null)
+			{
+				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+			}
 
-		if (ReturnDocuments is not null)
+			if (ReturnDocuments is not null)
+			{
+				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+			}
+
+			if (TopK is not null)
+			{
+				writer.WriteFluentCall("TopK", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopK.Value); });
+			}
+
+			if (Truncation is not null)
+			{
+				writer.WriteFluentCall("Truncation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Truncation.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("ReturnDocuments");
-			writer.WriteValue(ReturnDocuments.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings", false);
+			if (InputType is not null)
+			{
+				initializer.Property("InputType");
+				writer.WriteString(InputType);
+			}
 
-		if (TopK is not null)
-		{
-			initializer.Property("TopK");
-			writer.WriteValue(TopK.Value);
-		}
+			if (ReturnDocuments is not null)
+			{
+				initializer.Property("ReturnDocuments");
+				writer.WriteValue(ReturnDocuments.Value);
+			}
 
-		if (Truncation is not null)
-		{
-			initializer.Property("Truncation");
-			writer.WriteValue(Truncation.Value);
-		}
+			if (TopK is not null)
+			{
+				initializer.Property("TopK");
+				writer.WriteValue(TopK.Value);
+			}
 
-		initializer.Dispose();
+			if (Truncation is not null)
+			{
+				initializer.Property("Truncation");
+				writer.WriteValue(Truncation.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,17 +27,39 @@ public partial class GetSynonymRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RuleId");
-			RuleId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				SetId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				RuleId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("SetId");
-			SetId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest", false);
+			{
+				initializer.Property("RuleId");
+				RuleId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("SetId");
+				SetId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

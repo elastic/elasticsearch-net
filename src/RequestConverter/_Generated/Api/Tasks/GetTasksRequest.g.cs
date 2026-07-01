@@ -27,30 +27,60 @@ public partial class GetTasksRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TaskId");
-			TaskId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TaskId.FormatCode(writer);
+			}
 
-		if (FollowRelocations is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (FollowRelocations is not null)
+			{
+				writer.WriteFluentCall("FollowRelocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FollowRelocations.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("FollowRelocations");
-			writer.WriteValue(FollowRelocations.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest", false);
+			{
+				initializer.Property("TaskId");
+				TaskId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (FollowRelocations is not null)
+			{
+				initializer.Property("FollowRelocations");
+				writer.WriteValue(FollowRelocations.Value);
+			}
 
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

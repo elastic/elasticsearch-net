@@ -27,61 +27,105 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.RuntimeField", false);
-		if (FetchFields is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FetchFields");
-			writer.WriteInlineList(FetchFields, (w, item) => { item.FormatCode(w); });
-		}
+			if (FetchFields is not null)
+			{
+				writer.WriteFluentDescriptorParams("FetchFields", FetchFields, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>"); w.Write("()"); });
+			}
 
-		if (Fields is not null)
+			if (Fields is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fields", (w) => { w.WriteFluentDictionaryAdds("Add", Fields, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (InputField is not null)
+			{
+				writer.WriteFluentCall("InputField", (w) => { InputField.FormatCode(w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (TargetField is not null)
+			{
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+			}
+
+			if (TargetIndex is not null)
+			{
+				writer.WriteFluentCall("TargetIndex", (w) => { using var _oi = w.ForceObjectInitializer(); TargetIndex.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Fields");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.CompositeSubField");
-			writer.Write(">()");
-			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.RuntimeField", false);
+			if (FetchFields is not null)
+			{
+				initializer.Property("FetchFields");
+				writer.WriteInlineList(FetchFields, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.CompositeSubField");
+				writer.Write(">()");
+				writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (InputField is not null)
-		{
-			initializer.Property("InputField");
-			InputField.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (InputField is not null)
+			{
+				initializer.Property("InputField");
+				InputField.FormatCode(writer);
+			}
 
-		if (TargetField is not null)
-		{
-			initializer.Property("TargetField");
-			TargetField.FormatCode(writer);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		if (TargetIndex is not null)
-		{
-			initializer.Property("TargetIndex");
-			TargetIndex.FormatCode(writer);
-		}
+			if (TargetField is not null)
+			{
+				initializer.Property("TargetField");
+				TargetField.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, writer);
-		}
+			if (TargetIndex is not null)
+			{
+				initializer.Property("TargetIndex");
+				TargetIndex.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

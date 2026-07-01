@@ -27,25 +27,45 @@ public partial class PrivilegesCheck : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PrivilegesCheck", false);
-		if (Application is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Application");
-			writer.WriteInlineList(Application, (w, item) => { item.FormatCode(w); });
-		}
+			if (Application is not null)
+			{
+				writer.WriteFluentDescriptorParams("Application", Application, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>"); w.Write("()"); });
+			}
 
-		if (Cluster is not null)
+			if (Cluster is not null)
+			{
+				writer.WriteFluentParams("Cluster", Cluster, (w, item) => { item.FormatCode(w); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentDescriptorParams("Index", Index, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Cluster");
-			writer.WriteInlineList(Cluster, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PrivilegesCheck", false);
+			if (Application is not null)
+			{
+				initializer.Property("Application");
+				writer.WriteInlineList(Application, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			writer.WriteInlineList(Index, (w, item) => { item.FormatCode(w); });
-		}
+			if (Cluster is not null)
+			{
+				initializer.Property("Cluster");
+				writer.WriteInlineList(Cluster, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				writer.WriteInlineList(Index, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

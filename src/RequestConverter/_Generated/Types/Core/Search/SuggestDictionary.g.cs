@@ -27,7 +27,7 @@ public partial class SuggestDictionary<TDocument> : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
+		writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>");
 		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); });
 	}
 }

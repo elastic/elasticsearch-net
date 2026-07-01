@@ -27,17 +27,30 @@ public partial class InputConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InputConfig", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InputField");
-			writer.WriteString(InputField);
-		}
+			{
+				writer.WriteFluentCall("InputField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputField); });
+			}
 
+			{
+				writer.WriteFluentCall("OutputField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(OutputField); });
+			}
+		}
+		else
 		{
-			initializer.Property("OutputField");
-			writer.WriteString(OutputField);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InputConfig", false);
+			{
+				initializer.Property("InputField");
+				writer.WriteString(InputField);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("OutputField");
+				writer.WriteString(OutputField);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

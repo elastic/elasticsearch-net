@@ -27,13 +27,27 @@ public partial class ListReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ListReindexRequest", false);
-		if (Detailed is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Detailed");
-			writer.WriteValue(Detailed.Value);
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Detailed is not null)
+			{
+				writer.WriteFluentCall("Detailed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Detailed.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ListReindexRequest", false);
+			if (Detailed is not null)
+			{
+				initializer.Property("Detailed");
+				writer.WriteValue(Detailed.Value);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

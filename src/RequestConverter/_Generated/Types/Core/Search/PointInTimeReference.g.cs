@@ -27,18 +27,32 @@ public partial class PointInTimeReference : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			writer.WriteString(Id);
-		}
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+			}
 
-		if (KeepAlive is not null)
+			if (KeepAlive is not null)
+			{
+				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("KeepAlive");
-			KeepAlive.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference", false);
+			{
+				initializer.Property("Id");
+				writer.WriteString(Id);
+			}
 
-		initializer.Dispose();
+			if (KeepAlive is not null)
+			{
+				initializer.Property("KeepAlive");
+				KeepAlive.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

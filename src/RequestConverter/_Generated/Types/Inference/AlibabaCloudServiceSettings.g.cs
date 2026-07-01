@@ -27,33 +27,59 @@ public partial class AlibabaCloudServiceSettings : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
+			{
+				writer.WriteFluentCall("Host", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Host); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("ServiceId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ServiceId); });
+			}
+
+			{
+				writer.WriteFluentCall("Workspace", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Workspace); });
+			}
+		}
+		else
 		{
-			initializer.Property("Host");
-			writer.WriteString(Host);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			{
+				initializer.Property("Host");
+				writer.WriteString(Host);
+			}
 
-		{
-			initializer.Property("ServiceId");
-			writer.WriteString(ServiceId);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Workspace");
-			writer.WriteString(Workspace);
-		}
+			{
+				initializer.Property("ServiceId");
+				writer.WriteString(ServiceId);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Workspace");
+				writer.WriteString(Workspace);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

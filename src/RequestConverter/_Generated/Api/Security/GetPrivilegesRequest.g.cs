@@ -27,19 +27,38 @@ public partial class GetPrivilegesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest", false);
-		if (Application is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Application");
-			Application.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Application is not null)
+			{
+				writer.WriteFluentCall("Application", (w) => { using var _oi = w.ForceObjectInitializer(); Application.FormatCode(w); });
+			}
 
-		if (Name is not null)
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest", false);
+			if (Application is not null)
+			{
+				initializer.Property("Application");
+				Application.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

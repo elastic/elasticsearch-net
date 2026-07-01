@@ -27,19 +27,34 @@ public partial class AsciiFoldingTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter", true);
-		if (PreserveOriginal is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("PreserveOriginal");
-			writer.WriteValue(PreserveOriginal.Value);
-		}
+			if (PreserveOriginal is not null)
+			{
+				writer.WriteFluentCall("PreserveOriginal", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveOriginal.Value); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter", true);
+			if (PreserveOriginal is not null)
+			{
+				initializer.Property("PreserveOriginal");
+				writer.WriteValue(PreserveOriginal.Value);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

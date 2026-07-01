@@ -27,6 +27,7 @@ public partial class GetCategoriesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest", false);
 		if (CategoryId is not null)
 		{

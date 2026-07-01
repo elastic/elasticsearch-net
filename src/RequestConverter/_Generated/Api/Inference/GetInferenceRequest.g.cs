@@ -27,19 +27,38 @@ public partial class GetInferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest", false);
-		if (InferenceId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InferenceId");
-			InferenceId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (InferenceId is not null)
+			{
+				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); InferenceId.FormatCode(w); });
+			}
 
-		if (TaskType is not null)
+			if (TaskType is not null)
+			{
+				writer.WriteFluentCall("TaskType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TaskType");
-			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest", false);
+			if (InferenceId is not null)
+			{
+				initializer.Property("InferenceId");
+				InferenceId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TaskType is not null)
+			{
+				initializer.Property("TaskType");
+				Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

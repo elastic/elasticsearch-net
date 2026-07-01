@@ -27,31 +27,56 @@ public partial class Reasoning : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.Reasoning", false);
-		if (Effort is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Effort");
-			Elastic.Clients.Elasticsearch.Inference.ReasoningEffortCodeFormatter.FormatCode(Effort.Value, writer);
-		}
+			if (Effort is not null)
+			{
+				writer.WriteFluentCall("Effort", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.ReasoningEffortCodeFormatter.FormatCode(Effort.Value, w); });
+			}
 
-		if (Enabled is not null)
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+
+			if (Exclude is not null)
+			{
+				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Exclude.Value); });
+			}
+
+			if (Summary is not null)
+			{
+				writer.WriteFluentCall("Summary", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.ReasoningSummaryCodeFormatter.FormatCode(Summary.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.Reasoning", false);
+			if (Effort is not null)
+			{
+				initializer.Property("Effort");
+				Elastic.Clients.Elasticsearch.Inference.ReasoningEffortCodeFormatter.FormatCode(Effort.Value, writer);
+			}
 
-		if (Exclude is not null)
-		{
-			initializer.Property("Exclude");
-			writer.WriteValue(Exclude.Value);
-		}
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		if (Summary is not null)
-		{
-			initializer.Property("Summary");
-			Elastic.Clients.Elasticsearch.Inference.ReasoningSummaryCodeFormatter.FormatCode(Summary.Value, writer);
-		}
+			if (Exclude is not null)
+			{
+				initializer.Property("Exclude");
+				writer.WriteValue(Exclude.Value);
+			}
 
-		initializer.Dispose();
+			if (Summary is not null)
+			{
+				initializer.Property("Summary");
+				Elastic.Clients.Elasticsearch.Inference.ReasoningSummaryCodeFormatter.FormatCode(Summary.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

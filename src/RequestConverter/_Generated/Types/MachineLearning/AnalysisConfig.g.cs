@@ -27,72 +27,131 @@ public partial class AnalysisConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig", false);
-		if (BucketSpan is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BucketSpan");
-			BucketSpan.FormatCode(writer);
-		}
+			if (BucketSpan is not null)
+			{
+				writer.WriteFluentCall("BucketSpan", (w) => { using var _oi = w.ForceObjectInitializer(); BucketSpan.FormatCode(w); });
+			}
 
-		if (CategorizationAnalyzer is not null)
+			if (CategorizationAnalyzer is not null)
+			{
+				writer.WriteFluentCall("CategorizationAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); CategorizationAnalyzer.FormatCode(w); });
+			}
+
+			if (CategorizationFieldName is not null)
+			{
+				writer.WriteFluentCall("CategorizationFieldName", (w) => { CategorizationFieldName.FormatCode(w); });
+			}
+
+			if (CategorizationFilters is not null)
+			{
+				writer.WriteFluentParams("CategorizationFilters", CategorizationFilters, (w, item) => { w.WriteString(item); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Detector>"); w.Write("()"); });
+			}
+
+			if (Influencers is not null)
+			{
+				writer.WriteFluentCall("Influencers", (w) => { using var _oi = w.ForceObjectInitializer(); Influencers.FormatCode(w); });
+			}
+
+			if (Latency is not null)
+			{
+				writer.WriteFluentCall("Latency", (w) => { using var _oi = w.ForceObjectInitializer(); Latency.FormatCode(w); });
+			}
+
+			if (ModelPruneWindow is not null)
+			{
+				writer.WriteFluentCall("ModelPruneWindow", (w) => { using var _oi = w.ForceObjectInitializer(); ModelPruneWindow.FormatCode(w); });
+			}
+
+			if (MultivariateByFields is not null)
+			{
+				writer.WriteFluentCall("MultivariateByFields", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultivariateByFields.Value); });
+			}
+
+			if (PerPartitionCategorization is not null)
+			{
+				writer.WriteFluentDescriptorCall("PerPartitionCategorization", (w) => { PerPartitionCategorization.FormatCode(w); });
+			}
+
+			if (SummaryCountFieldName is not null)
+			{
+				writer.WriteFluentCall("SummaryCountFieldName", (w) => { SummaryCountFieldName.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("CategorizationAnalyzer");
-			CategorizationAnalyzer.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig", false);
+			if (BucketSpan is not null)
+			{
+				initializer.Property("BucketSpan");
+				BucketSpan.FormatCode(writer);
+			}
 
-		if (CategorizationFieldName is not null)
-		{
-			initializer.Property("CategorizationFieldName");
-			CategorizationFieldName.FormatCode(writer);
-		}
+			if (CategorizationAnalyzer is not null)
+			{
+				initializer.Property("CategorizationAnalyzer");
+				CategorizationAnalyzer.FormatCode(writer);
+			}
 
-		if (CategorizationFilters is not null)
-		{
-			initializer.Property("CategorizationFilters");
-			writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
-		}
+			if (CategorizationFieldName is not null)
+			{
+				initializer.Property("CategorizationFieldName");
+				CategorizationFieldName.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Detectors");
-			writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
-		}
+			if (CategorizationFilters is not null)
+			{
+				initializer.Property("CategorizationFilters");
+				writer.WriteInlineList(CategorizationFilters, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Influencers is not null)
-		{
-			initializer.Property("Influencers");
-			Influencers.FormatCode(writer);
-		}
+			{
+				initializer.Property("Detectors");
+				writer.WriteInlineList(Detectors, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Latency is not null)
-		{
-			initializer.Property("Latency");
-			Latency.FormatCode(writer);
-		}
+			if (Influencers is not null)
+			{
+				initializer.Property("Influencers");
+				Influencers.FormatCode(writer);
+			}
 
-		if (ModelPruneWindow is not null)
-		{
-			initializer.Property("ModelPruneWindow");
-			ModelPruneWindow.FormatCode(writer);
-		}
+			if (Latency is not null)
+			{
+				initializer.Property("Latency");
+				Latency.FormatCode(writer);
+			}
 
-		if (MultivariateByFields is not null)
-		{
-			initializer.Property("MultivariateByFields");
-			writer.WriteValue(MultivariateByFields.Value);
-		}
+			if (ModelPruneWindow is not null)
+			{
+				initializer.Property("ModelPruneWindow");
+				ModelPruneWindow.FormatCode(writer);
+			}
 
-		if (PerPartitionCategorization is not null)
-		{
-			initializer.Property("PerPartitionCategorization");
-			PerPartitionCategorization.FormatCode(writer);
-		}
+			if (MultivariateByFields is not null)
+			{
+				initializer.Property("MultivariateByFields");
+				writer.WriteValue(MultivariateByFields.Value);
+			}
 
-		if (SummaryCountFieldName is not null)
-		{
-			initializer.Property("SummaryCountFieldName");
-			SummaryCountFieldName.FormatCode(writer);
-		}
+			if (PerPartitionCategorization is not null)
+			{
+				initializer.Property("PerPartitionCategorization");
+				PerPartitionCategorization.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (SummaryCountFieldName is not null)
+			{
+				initializer.Property("SummaryCountFieldName");
+				SummaryCountFieldName.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

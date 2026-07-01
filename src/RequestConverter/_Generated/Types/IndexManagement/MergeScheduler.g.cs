@@ -27,19 +27,34 @@ public partial class MergeScheduler : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler", false);
-		if (MaxMergeCount is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxMergeCount");
-			writer.WriteValue(MaxMergeCount.Value);
-		}
+			if (MaxMergeCount is not null)
+			{
+				writer.WriteFluentCall("MaxMergeCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMergeCount.Value); });
+			}
 
-		if (MaxThreadCount is not null)
+			if (MaxThreadCount is not null)
+			{
+				writer.WriteFluentCall("MaxThreadCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxThreadCount.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxThreadCount");
-			writer.WriteValue(MaxThreadCount.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler", false);
+			if (MaxMergeCount is not null)
+			{
+				initializer.Property("MaxMergeCount");
+				writer.WriteValue(MaxMergeCount.Value);
+			}
 
-		initializer.Dispose();
+			if (MaxThreadCount is not null)
+			{
+				initializer.Property("MaxThreadCount");
+				writer.WriteValue(MaxThreadCount.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

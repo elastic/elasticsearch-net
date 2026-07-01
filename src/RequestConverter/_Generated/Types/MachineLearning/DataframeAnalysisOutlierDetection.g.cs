@@ -27,45 +27,80 @@ public partial class DataframeAnalysisOutlierDetection : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection", false);
-		if (ComputeFeatureInfluence is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ComputeFeatureInfluence");
-			writer.WriteValue(ComputeFeatureInfluence.Value);
-		}
+			if (ComputeFeatureInfluence is not null)
+			{
+				writer.WriteFluentCall("ComputeFeatureInfluence", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ComputeFeatureInfluence.Value); });
+			}
 
-		if (FeatureInfluenceThreshold is not null)
+			if (FeatureInfluenceThreshold is not null)
+			{
+				writer.WriteFluentCall("FeatureInfluenceThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FeatureInfluenceThreshold.Value); w.Write("d"); });
+			}
+
+			if (Method is not null)
+			{
+				writer.WriteFluentCall("Method", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Method); });
+			}
+
+			if (NNeighbors is not null)
+			{
+				writer.WriteFluentCall("NNeighbors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NNeighbors.Value); });
+			}
+
+			if (OutlierFraction is not null)
+			{
+				writer.WriteFluentCall("OutlierFraction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OutlierFraction.Value); w.Write("d"); });
+			}
+
+			if (StandardizationEnabled is not null)
+			{
+				writer.WriteFluentCall("StandardizationEnabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StandardizationEnabled.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("FeatureInfluenceThreshold");
-			writer.WriteValue(FeatureInfluenceThreshold.Value);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection", false);
+			if (ComputeFeatureInfluence is not null)
+			{
+				initializer.Property("ComputeFeatureInfluence");
+				writer.WriteValue(ComputeFeatureInfluence.Value);
+			}
 
-		if (Method is not null)
-		{
-			initializer.Property("Method");
-			writer.WriteString(Method);
-		}
+			if (FeatureInfluenceThreshold is not null)
+			{
+				initializer.Property("FeatureInfluenceThreshold");
+				writer.WriteValue(FeatureInfluenceThreshold.Value);
+				writer.Write("d");
+			}
 
-		if (NNeighbors is not null)
-		{
-			initializer.Property("NNeighbors");
-			writer.WriteValue(NNeighbors.Value);
-		}
+			if (Method is not null)
+			{
+				initializer.Property("Method");
+				writer.WriteString(Method);
+			}
 
-		if (OutlierFraction is not null)
-		{
-			initializer.Property("OutlierFraction");
-			writer.WriteValue(OutlierFraction.Value);
-			writer.Write("d");
-		}
+			if (NNeighbors is not null)
+			{
+				initializer.Property("NNeighbors");
+				writer.WriteValue(NNeighbors.Value);
+			}
 
-		if (StandardizationEnabled is not null)
-		{
-			initializer.Property("StandardizationEnabled");
-			writer.WriteValue(StandardizationEnabled.Value);
-		}
+			if (OutlierFraction is not null)
+			{
+				initializer.Property("OutlierFraction");
+				writer.WriteValue(OutlierFraction.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			if (StandardizationEnabled is not null)
+			{
+				initializer.Property("StandardizationEnabled");
+				writer.WriteValue(StandardizationEnabled.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

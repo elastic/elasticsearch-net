@@ -27,55 +27,99 @@ public partial class TermRangeQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery", true);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Gt is not null)
+			{
+				writer.WriteFluentCall("Gt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gt); });
+			}
+
+			if (Gte is not null)
+			{
+				writer.WriteFluentCall("Gte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gte); });
+			}
+
+			if (Lt is not null)
+			{
+				writer.WriteFluentCall("Lt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lt); });
+			}
+
+			if (Lte is not null)
+			{
+				writer.WriteFluentCall("Lte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lte); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (Relation is not null)
+			{
+				writer.WriteFluentCall("Relation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery", true);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (Gt is not null)
-		{
-			initializer.Property("Gt");
-			writer.WriteString(Gt);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Gte is not null)
-		{
-			initializer.Property("Gte");
-			writer.WriteString(Gte);
-		}
+			if (Gt is not null)
+			{
+				initializer.Property("Gt");
+				writer.WriteString(Gt);
+			}
 
-		if (Lt is not null)
-		{
-			initializer.Property("Lt");
-			writer.WriteString(Lt);
-		}
+			if (Gte is not null)
+			{
+				initializer.Property("Gte");
+				writer.WriteString(Gte);
+			}
 
-		if (Lte is not null)
-		{
-			initializer.Property("Lte");
-			writer.WriteString(Lte);
-		}
+			if (Lt is not null)
+			{
+				initializer.Property("Lt");
+				writer.WriteString(Lt);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (Lte is not null)
+			{
+				initializer.Property("Lte");
+				writer.WriteString(Lte);
+			}
 
-		if (Relation is not null)
-		{
-			initializer.Property("Relation");
-			Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (Relation is not null)
+			{
+				initializer.Property("Relation");
+				Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

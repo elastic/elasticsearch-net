@@ -27,22 +27,50 @@ public partial class ClearCachedServiceTokensRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteString(Namespace);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteString(Service);
+			}
+
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("Namespace");
-			writer.WriteString(Namespace);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Service");
-			writer.WriteString(Service);
-		}
+			{
+				initializer.Property("Namespace");
+				writer.WriteString(Namespace);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Service");
+				writer.WriteString(Service);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

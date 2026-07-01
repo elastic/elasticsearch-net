@@ -27,19 +27,34 @@ public partial class IndexTemplateDataStreamConfiguration : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration", false);
-		if (AllowCustomRouting is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowCustomRouting");
-			writer.WriteValue(AllowCustomRouting.Value);
-		}
+			if (AllowCustomRouting is not null)
+			{
+				writer.WriteFluentCall("AllowCustomRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowCustomRouting.Value); });
+			}
 
-		if (Hidden is not null)
+			if (Hidden is not null)
+			{
+				writer.WriteFluentCall("Hidden", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Hidden.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Hidden");
-			writer.WriteValue(Hidden.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration", false);
+			if (AllowCustomRouting is not null)
+			{
+				initializer.Property("AllowCustomRouting");
+				writer.WriteValue(AllowCustomRouting.Value);
+			}
 
-		initializer.Dispose();
+			if (Hidden is not null)
+			{
+				initializer.Property("Hidden");
+				writer.WriteValue(Hidden.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

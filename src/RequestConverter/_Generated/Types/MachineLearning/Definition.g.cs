@@ -27,18 +27,32 @@ public partial class Definition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Definition", false);
-		if (Preprocessors is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Preprocessors");
-			writer.WriteInlineList(Preprocessors, (w, item) => { item.FormatCode(w); });
-		}
+			if (Preprocessors is not null)
+			{
+				writer.WriteFluentDescriptorParams("Preprocessors", Preprocessors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>"); w.Write("()"); });
+			}
 
+			{
+				writer.WriteFluentDescriptorCall("TrainedModel", (w) => { TrainedModel.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TrainedModel");
-			TrainedModel.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Definition", false);
+			if (Preprocessors is not null)
+			{
+				initializer.Property("Preprocessors");
+				writer.WriteInlineList(Preprocessors, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("TrainedModel");
+				TrainedModel.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

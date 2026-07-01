@@ -27,35 +27,69 @@ public partial class TextEmbeddingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InferenceId");
-			InferenceId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				InferenceId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentParams("Input", Input, (w, item) => { w.WriteString(item); });
+			}
+
+			if (InputType is not null)
+			{
+				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+			}
+
+			if (TaskSettings is not null)
+			{
+				writer.WriteFluentCall("TaskSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(TaskSettings); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest", false);
+			{
+				initializer.Property("InferenceId");
+				InferenceId.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Input");
-			writer.WriteInlineList(Input, (w, item) => { w.WriteString(item); });
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (InputType is not null)
-		{
-			initializer.Property("InputType");
-			writer.WriteString(InputType);
-		}
+			{
+				initializer.Property("Input");
+				writer.WriteInlineList(Input, (w, item) => { w.WriteString(item); });
+			}
 
-		if (TaskSettings is not null)
-		{
-			initializer.Property("TaskSettings");
-			writer.WriteValue(TaskSettings);
-		}
+			if (InputType is not null)
+			{
+				initializer.Property("InputType");
+				writer.WriteString(InputType);
+			}
 
-		initializer.Dispose();
+			if (TaskSettings is not null)
+			{
+				initializer.Property("TaskSettings");
+				writer.WriteObjectValue(TaskSettings);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

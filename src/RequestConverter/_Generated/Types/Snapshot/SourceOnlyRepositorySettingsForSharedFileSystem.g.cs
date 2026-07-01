@@ -27,24 +27,43 @@ public partial class SourceOnlyRepositorySettingsForSharedFileSystem : RequestCo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Location");
-			writer.WriteString(Location);
-		}
+			{
+				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Location); });
+			}
 
-		if (MaxNumberOfSnapshots is not null)
+			if (MaxNumberOfSnapshots is not null)
+			{
+				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfSnapshots.Value); });
+			}
+
+			if (Readonly is not null)
+			{
+				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxNumberOfSnapshots");
-			writer.WriteValue(MaxNumberOfSnapshots.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem", true);
+			{
+				initializer.Property("Location");
+				writer.WriteString(Location);
+			}
 
-		if (Readonly is not null)
-		{
-			initializer.Property("Readonly");
-			writer.WriteValue(Readonly.Value);
-		}
+			if (MaxNumberOfSnapshots is not null)
+			{
+				initializer.Property("MaxNumberOfSnapshots");
+				writer.WriteValue(MaxNumberOfSnapshots.Value);
+			}
 
-		initializer.Dispose();
+			if (Readonly is not null)
+			{
+				initializer.Property("Readonly");
+				writer.WriteValue(Readonly.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

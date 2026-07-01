@@ -27,37 +27,81 @@ public partial class UpdateSettingsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest", false);
-		if (MasterTimeout is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (Timeout is not null)
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Security is not null)
+			{
+				writer.WriteFluentDescriptorCall("Security", (w) => { Security.FormatCode(w); });
+			}
+
+			if (SecurityProfile is not null)
+			{
+				writer.WriteFluentDescriptorCall("SecurityProfile", (w) => { SecurityProfile.FormatCode(w); });
+			}
+
+			if (SecurityTokens is not null)
+			{
+				writer.WriteFluentDescriptorCall("SecurityTokens", (w) => { SecurityTokens.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest", false);
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (Security is not null)
-		{
-			initializer.Property("Security");
-			Security.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (SecurityProfile is not null)
-		{
-			initializer.Property("SecurityProfile");
-			SecurityProfile.FormatCode(writer);
-		}
+			if (Security is not null)
+			{
+				initializer.Property("Security");
+				Security.FormatCode(writer);
+			}
 
-		if (SecurityTokens is not null)
-		{
-			initializer.Property("SecurityTokens");
-			SecurityTokens.FormatCode(writer);
-		}
+			if (SecurityProfile is not null)
+			{
+				initializer.Property("SecurityProfile");
+				SecurityProfile.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (SecurityTokens is not null)
+			{
+				initializer.Property("SecurityTokens");
+				SecurityTokens.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

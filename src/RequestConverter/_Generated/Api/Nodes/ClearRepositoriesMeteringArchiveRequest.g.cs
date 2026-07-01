@@ -27,18 +27,41 @@ public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxArchiveVersion");
-			writer.WriteValue(MaxArchiveVersion);
-			writer.Write("L");
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				NodeId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteValue(MaxArchiveVersion);
+				writer.Write("L");
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("NodeId");
-			NodeId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest", false);
+			{
+				initializer.Property("MaxArchiveVersion");
+				writer.WriteValue(MaxArchiveVersion);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("NodeId");
+				NodeId.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,12 +27,21 @@ public partial class AnalysisMemoryLimit : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelMemoryLimit");
-			writer.WriteString(ModelMemoryLimit);
+			{
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelMemoryLimit); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit", false);
+			{
+				initializer.Property("ModelMemoryLimit");
+				writer.WriteString(ModelMemoryLimit);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

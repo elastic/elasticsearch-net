@@ -27,13 +27,23 @@ public partial class Queries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Queries", false);
-		if (Cache is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Cache");
-			Cache.FormatCode(writer);
+			if (Cache is not null)
+			{
+				writer.WriteFluentDescriptorCall("Cache", (w) => { Cache.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Queries", false);
+			if (Cache is not null)
+			{
+				initializer.Property("Cache");
+				Cache.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

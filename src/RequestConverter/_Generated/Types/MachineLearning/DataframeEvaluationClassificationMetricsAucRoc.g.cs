@@ -27,19 +27,34 @@ public partial class DataframeEvaluationClassificationMetricsAucRoc : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc", false);
-		if (ClassName is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ClassName");
-			ClassName.FormatCode(writer);
-		}
+			if (ClassName is not null)
+			{
+				writer.WriteFluentCall("ClassName", (w) => { using var _oi = w.ForceObjectInitializer(); ClassName.FormatCode(w); });
+			}
 
-		if (IncludeCurve is not null)
+			if (IncludeCurve is not null)
+			{
+				writer.WriteFluentCall("IncludeCurve", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeCurve.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("IncludeCurve");
-			writer.WriteValue(IncludeCurve.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc", false);
+			if (ClassName is not null)
+			{
+				initializer.Property("ClassName");
+				ClassName.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (IncludeCurve is not null)
+			{
+				initializer.Property("IncludeCurve");
+				writer.WriteValue(IncludeCurve.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

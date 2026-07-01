@@ -27,31 +27,56 @@ public partial class KeepWordsTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter", true);
-		if (KeepWords is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("KeepWords");
-			writer.WriteInlineList(KeepWords, (w, item) => { w.WriteString(item); });
-		}
+			if (KeepWords is not null)
+			{
+				writer.WriteFluentParams("KeepWords", KeepWords, (w, item) => { w.WriteString(item); });
+			}
 
-		if (KeepWordsCase is not null)
+			if (KeepWordsCase is not null)
+			{
+				writer.WriteFluentCall("KeepWordsCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(KeepWordsCase.Value); });
+			}
+
+			if (KeepWordsPath is not null)
+			{
+				writer.WriteFluentCall("KeepWordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KeepWordsPath); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("KeepWordsCase");
-			writer.WriteValue(KeepWordsCase.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter", true);
+			if (KeepWords is not null)
+			{
+				initializer.Property("KeepWords");
+				writer.WriteInlineList(KeepWords, (w, item) => { w.WriteString(item); });
+			}
 
-		if (KeepWordsPath is not null)
-		{
-			initializer.Property("KeepWordsPath");
-			writer.WriteString(KeepWordsPath);
-		}
+			if (KeepWordsCase is not null)
+			{
+				initializer.Property("KeepWordsCase");
+				writer.WriteValue(KeepWordsCase.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (KeepWordsPath is not null)
+			{
+				initializer.Property("KeepWordsPath");
+				writer.WriteString(KeepWordsPath);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

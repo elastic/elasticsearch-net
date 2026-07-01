@@ -27,49 +27,88 @@ public partial class MultiGetOperation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
 
-		if (Index is not null)
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); Source.FormatCode(w); });
+			}
+
+			if (StoredFields is not null)
+			{
+				writer.WriteFluentCall("StoredFields", (w) => { using var _oi = w.ForceObjectInitializer(); StoredFields.FormatCode(w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+			}
+
+			if (VersionType is not null)
+			{
+				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
 
-		if (StoredFields is not null)
-		{
-			initializer.Property("StoredFields");
-			StoredFields.FormatCode(writer);
-		}
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteValue(Version.Value);
-			writer.Write("L");
-		}
+			if (StoredFields is not null)
+			{
+				initializer.Property("StoredFields");
+				StoredFields.FormatCode(writer);
+			}
 
-		if (VersionType is not null)
-		{
-			initializer.Property("VersionType");
-			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
-		}
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteValue(Version.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			if (VersionType is not null)
+			{
+				initializer.Property("VersionType");
+				Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

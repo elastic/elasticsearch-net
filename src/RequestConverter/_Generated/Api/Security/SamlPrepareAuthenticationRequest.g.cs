@@ -27,25 +27,49 @@ public partial class SamlPrepareAuthenticationRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest", false);
-		if (Acs is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Acs");
-			writer.WriteString(Acs);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Acs is not null)
+			{
+				writer.WriteFluentCall("Acs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Acs); });
+			}
 
-		if (Realm is not null)
+			if (Realm is not null)
+			{
+				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+			}
+
+			if (RelayState is not null)
+			{
+				writer.WriteFluentCall("RelayState", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RelayState); });
+			}
+		}
+		else
 		{
-			initializer.Property("Realm");
-			writer.WriteString(Realm);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest", false);
+			if (Acs is not null)
+			{
+				initializer.Property("Acs");
+				writer.WriteString(Acs);
+			}
 
-		if (RelayState is not null)
-		{
-			initializer.Property("RelayState");
-			writer.WriteString(RelayState);
-		}
+			if (Realm is not null)
+			{
+				initializer.Property("Realm");
+				writer.WriteString(Realm);
+			}
 
-		initializer.Dispose();
+			if (RelayState is not null)
+			{
+				initializer.Property("RelayState");
+				writer.WriteString(RelayState);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

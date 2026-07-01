@@ -27,19 +27,34 @@ public partial class LowercaseTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter", true);
-		if (Language is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Language");
-			Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguagesCodeFormatter.FormatCode(Language.Value, writer);
-		}
+			if (Language is not null)
+			{
+				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguagesCodeFormatter.FormatCode(Language.Value, w); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter", true);
+			if (Language is not null)
+			{
+				initializer.Property("Language");
+				Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguagesCodeFormatter.FormatCode(Language.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

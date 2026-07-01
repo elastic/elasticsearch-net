@@ -27,29 +27,60 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				JobId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				SnapshotId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (Retain is not null)
+			{
+				writer.WriteFluentCall("Retain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Retain.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("SnapshotId");
-			SnapshotId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			{
+				initializer.Property("SnapshotId");
+				SnapshotId.FormatCode(writer);
+			}
 
-		if (Retain is not null)
-		{
-			initializer.Property("Retain");
-			writer.WriteValue(Retain.Value);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		initializer.Dispose();
+			if (Retain is not null)
+			{
+				initializer.Property("Retain");
+				writer.WriteValue(Retain.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -65,7 +65,7 @@ public partial class Job : RequestConverter.ICodeFormattable
 		if (CustomSettings is not null)
 		{
 			initializer.Property("CustomSettings");
-			writer.WriteValue(CustomSettings);
+			writer.WriteObjectValue(CustomSettings);
 		}
 
 		if (DailyModelSnapshotRetentionAfterDays is not null)

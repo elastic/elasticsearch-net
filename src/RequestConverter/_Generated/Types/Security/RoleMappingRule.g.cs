@@ -27,35 +27,60 @@ public partial class RoleMappingRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleMappingRule", false);
-		if (All is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("All");
-			writer.WriteInlineList(All, (w, item) => { item.FormatCode(w); });
-		}
+			if (All is not null)
+			{
+				writer.WriteFluentDescriptorParams("All", All, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>"); w.Write("()"); });
+			}
 
-		if (Any is not null)
+			if (Any is not null)
+			{
+				writer.WriteFluentDescriptorParams("Any", Any, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>"); w.Write("()"); });
+			}
+
+			if (Except is not null)
+			{
+				writer.WriteFluentDescriptorCall("Except", (w) => { Except.FormatCode(w); });
+			}
+
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>"); Field.Value.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(Field.Value.Value, (w, item) => { item.FormatCode(w); }); w.Write(")"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Any");
-			writer.WriteInlineList(Any, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleMappingRule", false);
+			if (All is not null)
+			{
+				initializer.Property("All");
+				writer.WriteInlineList(All, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Except is not null)
-		{
-			initializer.Property("Except");
-			Except.FormatCode(writer);
-		}
+			if (Any is not null)
+			{
+				initializer.Property("Any");
+				writer.WriteInlineList(Any, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Field is not null)
-		{
-			initializer.Property("Field");
-			writer.Write("new(");
-			Field.Value.Key.FormatCode(writer);
-			writer.Write(", ");
-			writer.WriteInlineList(Field.Value.Value, (w, item) => { item.FormatCode(w); });
-			writer.Write(")");
-		}
+			if (Except is not null)
+			{
+				initializer.Property("Except");
+				Except.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				writer.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>");
+				Field.Value.Key.FormatCode(writer);
+				writer.Write(", ");
+				writer.WriteInlineList(Field.Value.Value, (w, item) => { item.FormatCode(w); });
+				writer.Write(")");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

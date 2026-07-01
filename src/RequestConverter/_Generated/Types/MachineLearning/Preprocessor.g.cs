@@ -27,25 +27,45 @@ public partial class Preprocessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor", false);
-		if (FrequencyEncoding is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FrequencyEncoding");
-			FrequencyEncoding.FormatCode(writer);
-		}
+			if (FrequencyEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("FrequencyEncoding", (w) => { FrequencyEncoding.FormatCode(w); });
+			}
 
-		if (OneHotEncoding is not null)
+			if (OneHotEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("OneHotEncoding", (w) => { OneHotEncoding.FormatCode(w); });
+			}
+
+			if (TargetMeanEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("TargetMeanEncoding", (w) => { TargetMeanEncoding.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("OneHotEncoding");
-			OneHotEncoding.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor", false);
+			if (FrequencyEncoding is not null)
+			{
+				initializer.Property("FrequencyEncoding");
+				FrequencyEncoding.FormatCode(writer);
+			}
 
-		if (TargetMeanEncoding is not null)
-		{
-			initializer.Property("TargetMeanEncoding");
-			TargetMeanEncoding.FormatCode(writer);
-		}
+			if (OneHotEncoding is not null)
+			{
+				initializer.Property("OneHotEncoding");
+				OneHotEncoding.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TargetMeanEncoding is not null)
+			{
+				initializer.Property("TargetMeanEncoding");
+				TargetMeanEncoding.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

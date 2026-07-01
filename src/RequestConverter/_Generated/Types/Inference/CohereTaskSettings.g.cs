@@ -27,30 +27,54 @@ public partial class CohereTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InputType");
-			Elastic.Clients.Elasticsearch.Inference.CohereInputTypeCodeFormatter.FormatCode(InputType, writer);
-		}
+			{
+				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.CohereInputTypeCodeFormatter.FormatCode(InputType, w); });
+			}
 
-		if (ReturnDocuments is not null)
+			if (ReturnDocuments is not null)
+			{
+				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+			}
+
+			if (TopN is not null)
+			{
+				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+			}
+
+			if (Truncate is not null)
+			{
+				writer.WriteFluentCall("Truncate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ReturnDocuments");
-			writer.WriteValue(ReturnDocuments.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings", false);
+			{
+				initializer.Property("InputType");
+				Elastic.Clients.Elasticsearch.Inference.CohereInputTypeCodeFormatter.FormatCode(InputType, writer);
+			}
 
-		if (TopN is not null)
-		{
-			initializer.Property("TopN");
-			writer.WriteValue(TopN.Value);
-		}
+			if (ReturnDocuments is not null)
+			{
+				initializer.Property("ReturnDocuments");
+				writer.WriteValue(ReturnDocuments.Value);
+			}
 
-		if (Truncate is not null)
-		{
-			initializer.Property("Truncate");
-			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
-		}
+			if (TopN is not null)
+			{
+				initializer.Property("TopN");
+				writer.WriteValue(TopN.Value);
+			}
 
-		initializer.Dispose();
+			if (Truncate is not null)
+			{
+				initializer.Property("Truncate");
+				Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

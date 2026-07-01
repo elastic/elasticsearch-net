@@ -27,19 +27,38 @@ public partial class GetJobStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest", false);
-		if (JobId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (JobId is not null)
+			{
+				writer.WriteFluentCall("JobId", (w) => { using var _oi = w.ForceObjectInitializer(); JobId.FormatCode(w); });
+			}
 
-		if (AllowNoMatch is not null)
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest", false);
+			if (JobId is not null)
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

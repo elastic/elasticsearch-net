@@ -27,17 +27,30 @@ public partial class TopRightBottomLeftGeoBounds : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BottomLeft");
-			BottomLeft.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("BottomLeft", (w) => { using var _oi = w.ForceObjectInitializer(); BottomLeft.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("TopRight", (w) => { using var _oi = w.ForceObjectInitializer(); TopRight.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TopRight");
-			TopRight.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds", true);
+			{
+				initializer.Property("BottomLeft");
+				BottomLeft.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("TopRight");
+				TopRight.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

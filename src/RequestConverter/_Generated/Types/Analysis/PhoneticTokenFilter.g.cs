@@ -27,48 +27,87 @@ public partial class PhoneticTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Encoder");
-			Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderCodeFormatter.FormatCode(Encoder, writer);
-		}
+			{
+				writer.WriteFluentCall("Encoder", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderCodeFormatter.FormatCode(Encoder, w); });
+			}
 
-		if (Languageset is not null)
+			if (Languageset is not null)
+			{
+				writer.WriteFluentParams("Languageset", Languageset, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (MaxCodeLen is not null)
+			{
+				writer.WriteFluentCall("MaxCodeLen", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxCodeLen.Value); });
+			}
+
+			if (NameType is not null)
+			{
+				writer.WriteFluentCall("NameType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeCodeFormatter.FormatCode(NameType.Value, w); });
+			}
+
+			if (Replace is not null)
+			{
+				writer.WriteFluentCall("Replace", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Replace.Value); });
+			}
+
+			if (RuleType is not null)
+			{
+				writer.WriteFluentCall("RuleType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleTypeCodeFormatter.FormatCode(RuleType.Value, w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Languageset");
-			writer.WriteInlineList(Languageset, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter", true);
+			{
+				initializer.Property("Encoder");
+				Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoderCodeFormatter.FormatCode(Encoder, writer);
+			}
 
-		if (MaxCodeLen is not null)
-		{
-			initializer.Property("MaxCodeLen");
-			writer.WriteValue(MaxCodeLen.Value);
-		}
+			if (Languageset is not null)
+			{
+				initializer.Property("Languageset");
+				writer.WriteInlineList(Languageset, (w, item) => { Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (NameType is not null)
-		{
-			initializer.Property("NameType");
-			Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeCodeFormatter.FormatCode(NameType.Value, writer);
-		}
+			if (MaxCodeLen is not null)
+			{
+				initializer.Property("MaxCodeLen");
+				writer.WriteValue(MaxCodeLen.Value);
+			}
 
-		if (Replace is not null)
-		{
-			initializer.Property("Replace");
-			writer.WriteValue(Replace.Value);
-		}
+			if (NameType is not null)
+			{
+				initializer.Property("NameType");
+				Elastic.Clients.Elasticsearch.Analysis.PhoneticNameTypeCodeFormatter.FormatCode(NameType.Value, writer);
+			}
 
-		if (RuleType is not null)
-		{
-			initializer.Property("RuleType");
-			Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleTypeCodeFormatter.FormatCode(RuleType.Value, writer);
-		}
+			if (Replace is not null)
+			{
+				initializer.Property("Replace");
+				writer.WriteValue(Replace.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (RuleType is not null)
+			{
+				initializer.Property("RuleType");
+				Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleTypeCodeFormatter.FormatCode(RuleType.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

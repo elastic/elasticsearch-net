@@ -27,27 +27,47 @@ public partial class AggregationRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AggregationRange", false);
-		if (From is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-			writer.Write("d");
-		}
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); w.Write("d"); });
+			}
 
-		if (Key is not null)
+			if (Key is not null)
+			{
+				writer.WriteFluentCall("Key", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Key); });
+			}
+
+			if (To is not null)
+			{
+				writer.WriteFluentCall("To", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(To.Value); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Key");
-			writer.WriteString(Key);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.AggregationRange", false);
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+				writer.Write("d");
+			}
 
-		if (To is not null)
-		{
-			initializer.Property("To");
-			writer.WriteValue(To.Value);
-			writer.Write("d");
-		}
+			if (Key is not null)
+			{
+				initializer.Property("Key");
+				writer.WriteString(Key);
+			}
 
-		initializer.Dispose();
+			if (To is not null)
+			{
+				initializer.Property("To");
+				writer.WriteValue(To.Value);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

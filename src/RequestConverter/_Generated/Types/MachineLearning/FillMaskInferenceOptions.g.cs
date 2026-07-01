@@ -27,37 +27,67 @@ public partial class FillMaskInferenceOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions", false);
-		if (MaskToken is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaskToken");
-			writer.WriteString(MaskToken);
-		}
+			if (MaskToken is not null)
+			{
+				writer.WriteFluentCall("MaskToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MaskToken); });
+			}
 
-		if (NumTopClasses is not null)
+			if (NumTopClasses is not null)
+			{
+				writer.WriteFluentCall("NumTopClasses", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopClasses.Value); });
+			}
+
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+			}
+
+			if (Tokenization is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+			}
+
+			if (Vocabulary is not null)
+			{
+				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("NumTopClasses");
-			writer.WriteValue(NumTopClasses.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions", false);
+			if (MaskToken is not null)
+			{
+				initializer.Property("MaskToken");
+				writer.WriteString(MaskToken);
+			}
 
-		if (ResultsField is not null)
-		{
-			initializer.Property("ResultsField");
-			writer.WriteString(ResultsField);
-		}
+			if (NumTopClasses is not null)
+			{
+				initializer.Property("NumTopClasses");
+				writer.WriteValue(NumTopClasses.Value);
+			}
 
-		if (Tokenization is not null)
-		{
-			initializer.Property("Tokenization");
-			Tokenization.FormatCode(writer);
-		}
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				writer.WriteString(ResultsField);
+			}
 
-		if (Vocabulary is not null)
-		{
-			initializer.Property("Vocabulary");
-			Vocabulary.FormatCode(writer);
-		}
+			if (Tokenization is not null)
+			{
+				initializer.Property("Tokenization");
+				Tokenization.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Vocabulary is not null)
+			{
+				initializer.Property("Vocabulary");
+				Vocabulary.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

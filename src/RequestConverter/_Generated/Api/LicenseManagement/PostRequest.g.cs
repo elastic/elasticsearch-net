@@ -27,37 +27,71 @@ public partial class PostRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest", false);
-		if (Acknowledge is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Acknowledge");
-			writer.WriteValue(Acknowledge.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Acknowledge is not null)
+			{
+				writer.WriteFluentCall("Acknowledge", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Acknowledge.Value); });
+			}
 
-		if (MasterTimeout is not null)
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (License is not null)
+			{
+				writer.WriteFluentDescriptorCall("License", (w) => { License.FormatCode(w); });
+			}
+
+			if (Licenses is not null)
+			{
+				writer.WriteFluentDescriptorParams("Licenses", Licenses, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.LicenseManagement.License>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest", false);
+			if (Acknowledge is not null)
+			{
+				initializer.Property("Acknowledge");
+				writer.WriteValue(Acknowledge.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (License is not null)
-		{
-			initializer.Property("License");
-			License.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (Licenses is not null)
-		{
-			initializer.Property("Licenses");
-			writer.WriteInlineList(Licenses, (w, item) => { item.FormatCode(w); });
-		}
+			if (License is not null)
+			{
+				initializer.Property("License");
+				License.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Licenses is not null)
+			{
+				initializer.Property("Licenses");
+				writer.WriteInlineList(Licenses, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

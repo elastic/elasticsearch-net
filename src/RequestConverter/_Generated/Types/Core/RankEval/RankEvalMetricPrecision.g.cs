@@ -27,25 +27,45 @@ public partial class RankEvalMetricPrecision : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision", false);
-		if (IgnoreUnlabeled is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IgnoreUnlabeled");
-			writer.WriteValue(IgnoreUnlabeled.Value);
-		}
+			if (IgnoreUnlabeled is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnlabeled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnlabeled.Value); });
+			}
 
-		if (K is not null)
+			if (K is not null)
+			{
+				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K.Value); });
+			}
+
+			if (RelevantRatingThreshold is not null)
+			{
+				writer.WriteFluentCall("RelevantRatingThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RelevantRatingThreshold.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("K");
-			writer.WriteValue(K.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision", false);
+			if (IgnoreUnlabeled is not null)
+			{
+				initializer.Property("IgnoreUnlabeled");
+				writer.WriteValue(IgnoreUnlabeled.Value);
+			}
 
-		if (RelevantRatingThreshold is not null)
-		{
-			initializer.Property("RelevantRatingThreshold");
-			writer.WriteValue(RelevantRatingThreshold.Value);
-		}
+			if (K is not null)
+			{
+				initializer.Property("K");
+				writer.WriteValue(K.Value);
+			}
 
-		initializer.Dispose();
+			if (RelevantRatingThreshold is not null)
+			{
+				initializer.Property("RelevantRatingThreshold");
+				writer.WriteValue(RelevantRatingThreshold.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,12 +27,25 @@ public partial class DelegatePkiRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("X509CertificateChain");
-			writer.WriteInlineList(X509CertificateChain, (w, item) => { w.WriteString(item); });
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentParams("X509CertificateChain", X509CertificateChain, (w, item) => { w.WriteString(item); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest", false);
+			{
+				initializer.Property("X509CertificateChain");
+				writer.WriteInlineList(X509CertificateChain, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

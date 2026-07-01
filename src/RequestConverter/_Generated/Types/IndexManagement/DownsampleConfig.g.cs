@@ -27,18 +27,32 @@ public partial class DownsampleConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FixedInterval");
-			writer.WriteString(FixedInterval);
-		}
+			{
+				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+			}
 
-		if (SamplingMethod is not null)
+			if (SamplingMethod is not null)
+			{
+				writer.WriteFluentCall("SamplingMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(SamplingMethod.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("SamplingMethod");
-			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(SamplingMethod.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig", false);
+			{
+				initializer.Property("FixedInterval");
+				writer.WriteString(FixedInterval);
+			}
 
-		initializer.Dispose();
+			if (SamplingMethod is not null)
+			{
+				initializer.Property("SamplingMethod");
+				Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(SamplingMethod.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

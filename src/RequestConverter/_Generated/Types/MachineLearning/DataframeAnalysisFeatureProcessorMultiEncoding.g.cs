@@ -27,12 +27,21 @@ public partial class DataframeAnalysisFeatureProcessorMultiEncoding : RequestCon
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Processors");
-			writer.WriteInlineList(Processors, (w, item) => { w.WriteValue(item); });
+			{
+				writer.WriteFluentParams("Processors", Processors, (w, item) => { w.WriteValue(item); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding", false);
+			{
+				initializer.Property("Processors");
+				writer.WriteInlineList(Processors, (w, item) => { w.WriteValue(item); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,78 +27,144 @@ public partial class CreateSnapshotRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Repository");
-			Repository.FormatCode(writer);
-		}
-
-		{
-			initializer.Property("Snapshot");
-			Snapshot.FormatCode(writer);
-		}
-
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
-
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
-
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
-
-		if (FeatureStates is not null)
-		{
-			initializer.Property("FeatureStates");
-			writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
-		}
-
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
-
-		if (IncludeGlobalState is not null)
-		{
-			initializer.Property("IncludeGlobalState");
-			writer.WriteValue(IncludeGlobalState.Value);
-		}
-
-		if (Indices is not null)
-		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
-
-		if (Metadata is not null)
-		{
-			initializer.Property("Metadata");
 			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Repository.FormatCode(writer);
+			}
+
 			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Snapshot.FormatCode(writer);
+			}
 
-		if (Partial is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (FeatureStates is not null)
+			{
+				writer.WriteFluentParams("FeatureStates", FeatureStates, (w, item) => { w.WriteString(item); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (IncludeGlobalState is not null)
+			{
+				writer.WriteFluentCall("IncludeGlobalState", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeGlobalState.Value); });
+			}
+
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Partial is not null)
+			{
+				writer.WriteFluentCall("Partial", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Partial.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Partial");
-			writer.WriteValue(Partial.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest", false);
+			{
+				initializer.Property("Repository");
+				Repository.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Snapshot");
+				Snapshot.FormatCode(writer);
+			}
+
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (FeatureStates is not null)
+			{
+				initializer.Property("FeatureStates");
+				writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
+
+			if (IncludeGlobalState is not null)
+			{
+				initializer.Property("IncludeGlobalState");
+				writer.WriteValue(IncludeGlobalState.Value);
+			}
+
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
+
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
+
+			if (Partial is not null)
+			{
+				initializer.Property("Partial");
+				writer.WriteValue(Partial.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

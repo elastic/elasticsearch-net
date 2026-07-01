@@ -27,17 +27,36 @@ public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RulesetId");
-			RulesetId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				RulesetId.FormatCode(writer);
+			}
 
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorParams("Rules", Rules, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Rules");
-			writer.WriteInlineList(Rules, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest", false);
+			{
+				initializer.Property("RulesetId");
+				RulesetId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Rules");
+				writer.WriteInlineList(Rules, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

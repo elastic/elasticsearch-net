@@ -27,17 +27,39 @@ public partial class GetServiceCredentialsRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Namespace");
-			writer.WriteString(Namespace);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteString(Namespace);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Service.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
 		{
-			initializer.Property("Service");
-			Service.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest", false);
+			{
+				initializer.Property("Namespace");
+				writer.WriteString(Namespace);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Service");
+				Service.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

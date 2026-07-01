@@ -27,31 +27,56 @@ public partial class PatternTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer", true);
-		if (Flags is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Flags");
-			writer.WriteString(Flags);
-		}
+			if (Flags is not null)
+			{
+				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Flags); });
+			}
 
-		if (Group is not null)
+			if (Group is not null)
+			{
+				writer.WriteFluentCall("Group", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Group.Value); });
+			}
+
+			if (Pattern is not null)
+			{
+				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Group");
-			writer.WriteValue(Group.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer", true);
+			if (Flags is not null)
+			{
+				initializer.Property("Flags");
+				writer.WriteString(Flags);
+			}
 
-		if (Pattern is not null)
-		{
-			initializer.Property("Pattern");
-			writer.WriteString(Pattern);
-		}
+			if (Group is not null)
+			{
+				initializer.Property("Group");
+				writer.WriteValue(Group.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Pattern is not null)
+			{
+				initializer.Property("Pattern");
+				writer.WriteString(Pattern);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

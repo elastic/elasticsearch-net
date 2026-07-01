@@ -27,164 +27,294 @@ public partial class IcuCollationProperty : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty", true);
-		if (Alternate is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Alternate");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(Alternate.Value, writer);
-		}
+			if (Alternate is not null)
+			{
+				writer.WriteFluentCall("Alternate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(Alternate.Value, w); });
+			}
 
-		if (CaseFirst is not null)
+			if (CaseFirst is not null)
+			{
+				writer.WriteFluentCall("CaseFirst", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(CaseFirst.Value, w); });
+			}
+
+			if (CaseLevel is not null)
+			{
+				writer.WriteFluentCall("CaseLevel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CaseLevel.Value); });
+			}
+
+			if (CopyTo is not null)
+			{
+				writer.WriteFluentCall("CopyTo", (w) => { using var _oi = w.ForceObjectInitializer(); CopyTo.FormatCode(w); });
+			}
+
+			if (Country is not null)
+			{
+				writer.WriteFluentCall("Country", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Country); });
+			}
+
+			if (Decomposition is not null)
+			{
+				writer.WriteFluentCall("Decomposition", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(Decomposition.Value, w); });
+			}
+
+			if (DocValues is not null)
+			{
+				writer.WriteFluentCall("DocValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocValues.Value); });
+			}
+
+			if (Dynamic is not null)
+			{
+				writer.WriteFluentCall("Dynamic", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, w); });
+			}
+
+			if (Fields is not null)
+			{
+				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fields.FormatCode(w); });
+			}
+
+			if (HiraganaQuaternaryMode is not null)
+			{
+				writer.WriteFluentCall("HiraganaQuaternaryMode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HiraganaQuaternaryMode.Value); });
+			}
+
+			if (IgnoreAbove is not null)
+			{
+				writer.WriteFluentCall("IgnoreAbove", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreAbove.Value); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Index.Value); });
+			}
+
+			if (IndexOptions is not null)
+			{
+				writer.WriteFluentCall("IndexOptions", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, w); });
+			}
+
+			if (Language is not null)
+			{
+				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Language); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Norms is not null)
+			{
+				writer.WriteFluentCall("Norms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Norms.Value); });
+			}
+
+			if (NullValue is not null)
+			{
+				writer.WriteFluentCall("NullValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(NullValue); });
+			}
+
+			if (Numeric is not null)
+			{
+				writer.WriteFluentCall("Numeric", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Numeric.Value); });
+			}
+
+			if (Properties is not null)
+			{
+				writer.WriteFluentDescriptorCall("Properties", (w) => { Properties.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Properties.FormatCode(w); });
+			}
+
+			if (Rules is not null)
+			{
+				writer.WriteFluentCall("Rules", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Rules); });
+			}
+
+			if (Store is not null)
+			{
+				writer.WriteFluentCall("Store", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Store.Value); });
+			}
+
+			if (Strength is not null)
+			{
+				writer.WriteFluentCall("Strength", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(Strength.Value, w); });
+			}
+
+			if (SyntheticSourceKeep is not null)
+			{
+				writer.WriteFluentCall("SyntheticSourceKeep", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, w); });
+			}
+
+			if (VariableTop is not null)
+			{
+				writer.WriteFluentCall("VariableTop", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(VariableTop); });
+			}
+
+			if (Variant is not null)
+			{
+				writer.WriteFluentCall("Variant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Variant); });
+			}
+		}
+		else
 		{
-			initializer.Property("CaseFirst");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(CaseFirst.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty", true);
+			if (Alternate is not null)
+			{
+				initializer.Property("Alternate");
+				Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(Alternate.Value, writer);
+			}
 
-		if (CaseLevel is not null)
-		{
-			initializer.Property("CaseLevel");
-			writer.WriteValue(CaseLevel.Value);
-		}
+			if (CaseFirst is not null)
+			{
+				initializer.Property("CaseFirst");
+				Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(CaseFirst.Value, writer);
+			}
 
-		if (CopyTo is not null)
-		{
-			initializer.Property("CopyTo");
-			CopyTo.FormatCode(writer);
-		}
+			if (CaseLevel is not null)
+			{
+				initializer.Property("CaseLevel");
+				writer.WriteValue(CaseLevel.Value);
+			}
 
-		if (Country is not null)
-		{
-			initializer.Property("Country");
-			writer.WriteString(Country);
-		}
+			if (CopyTo is not null)
+			{
+				initializer.Property("CopyTo");
+				CopyTo.FormatCode(writer);
+			}
 
-		if (Decomposition is not null)
-		{
-			initializer.Property("Decomposition");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(Decomposition.Value, writer);
-		}
+			if (Country is not null)
+			{
+				initializer.Property("Country");
+				writer.WriteString(Country);
+			}
 
-		if (DocValues is not null)
-		{
-			initializer.Property("DocValues");
-			writer.WriteValue(DocValues.Value);
-		}
+			if (Decomposition is not null)
+			{
+				initializer.Property("Decomposition");
+				Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(Decomposition.Value, writer);
+			}
 
-		if (Dynamic is not null)
-		{
-			initializer.Property("Dynamic");
-			Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
-		}
+			if (DocValues is not null)
+			{
+				initializer.Property("DocValues");
+				writer.WriteValue(DocValues.Value);
+			}
 
-		if (Fields is not null)
-		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			if (Dynamic is not null)
+			{
+				initializer.Property("Dynamic");
+				Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, writer);
+			}
 
-		if (HiraganaQuaternaryMode is not null)
-		{
-			initializer.Property("HiraganaQuaternaryMode");
-			writer.WriteValue(HiraganaQuaternaryMode.Value);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		if (IgnoreAbove is not null)
-		{
-			initializer.Property("IgnoreAbove");
-			writer.WriteValue(IgnoreAbove.Value);
-		}
+			if (HiraganaQuaternaryMode is not null)
+			{
+				initializer.Property("HiraganaQuaternaryMode");
+				writer.WriteValue(HiraganaQuaternaryMode.Value);
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			writer.WriteValue(Index.Value);
-		}
+			if (IgnoreAbove is not null)
+			{
+				initializer.Property("IgnoreAbove");
+				writer.WriteValue(IgnoreAbove.Value);
+			}
 
-		if (IndexOptions is not null)
-		{
-			initializer.Property("IndexOptions");
-			Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, writer);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				writer.WriteValue(Index.Value);
+			}
 
-		if (Language is not null)
-		{
-			initializer.Property("Language");
-			writer.WriteString(Language);
-		}
+			if (IndexOptions is not null)
+			{
+				initializer.Property("IndexOptions");
+				Elastic.Clients.Elasticsearch.Mapping.IndexOptionsCodeFormatter.FormatCode(IndexOptions.Value, writer);
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			if (Language is not null)
+			{
+				initializer.Property("Language");
+				writer.WriteString(Language);
+			}
 
-		if (Norms is not null)
-		{
-			initializer.Property("Norms");
-			writer.WriteValue(Norms.Value);
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		if (NullValue is not null)
-		{
-			initializer.Property("NullValue");
-			writer.WriteString(NullValue);
-		}
+			if (Norms is not null)
+			{
+				initializer.Property("Norms");
+				writer.WriteValue(Norms.Value);
+			}
 
-		if (Numeric is not null)
-		{
-			initializer.Property("Numeric");
-			writer.WriteValue(Numeric.Value);
-		}
+			if (NullValue is not null)
+			{
+				initializer.Property("NullValue");
+				writer.WriteString(NullValue);
+			}
 
-		if (Properties is not null)
-		{
-			initializer.Property("Properties");
-			Properties.FormatCode(writer);
-		}
+			if (Numeric is not null)
+			{
+				initializer.Property("Numeric");
+				writer.WriteValue(Numeric.Value);
+			}
 
-		if (Rules is not null)
-		{
-			initializer.Property("Rules");
-			writer.WriteString(Rules);
-		}
+			if (Properties is not null)
+			{
+				initializer.Property("Properties");
+				Properties.FormatCode(writer);
+			}
 
-		if (Store is not null)
-		{
-			initializer.Property("Store");
-			writer.WriteValue(Store.Value);
-		}
+			if (Rules is not null)
+			{
+				initializer.Property("Rules");
+				writer.WriteString(Rules);
+			}
 
-		if (Strength is not null)
-		{
-			initializer.Property("Strength");
-			Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(Strength.Value, writer);
-		}
+			if (Store is not null)
+			{
+				initializer.Property("Store");
+				writer.WriteValue(Store.Value);
+			}
 
-		if (SyntheticSourceKeep is not null)
-		{
-			initializer.Property("SyntheticSourceKeep");
-			Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
-		}
+			if (Strength is not null)
+			{
+				initializer.Property("Strength");
+				Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(Strength.Value, writer);
+			}
 
-		if (VariableTop is not null)
-		{
-			initializer.Property("VariableTop");
-			writer.WriteString(VariableTop);
-		}
+			if (SyntheticSourceKeep is not null)
+			{
+				initializer.Property("SyntheticSourceKeep");
+				Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, writer);
+			}
 
-		if (Variant is not null)
-		{
-			initializer.Property("Variant");
-			writer.WriteString(Variant);
-		}
+			if (VariableTop is not null)
+			{
+				initializer.Property("VariableTop");
+				writer.WriteString(VariableTop);
+			}
 
-		initializer.Dispose();
+			if (Variant is not null)
+			{
+				initializer.Property("Variant");
+				writer.WriteString(Variant);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

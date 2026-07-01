@@ -27,25 +27,45 @@ public partial class CreateFrom : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom", false);
-		if (MappingsOverride is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MappingsOverride");
-			MappingsOverride.FormatCode(writer);
-		}
+			if (MappingsOverride is not null)
+			{
+				writer.WriteFluentDescriptorCall("MappingsOverride", (w) => { MappingsOverride.FormatCode(w); });
+			}
 
-		if (RemoveIndexBlocks is not null)
+			if (RemoveIndexBlocks is not null)
+			{
+				writer.WriteFluentCall("RemoveIndexBlocks", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RemoveIndexBlocks.Value); });
+			}
+
+			if (SettingsOverride is not null)
+			{
+				writer.WriteFluentDescriptorCall("SettingsOverride", (w) => { SettingsOverride.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("RemoveIndexBlocks");
-			writer.WriteValue(RemoveIndexBlocks.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom", false);
+			if (MappingsOverride is not null)
+			{
+				initializer.Property("MappingsOverride");
+				MappingsOverride.FormatCode(writer);
+			}
 
-		if (SettingsOverride is not null)
-		{
-			initializer.Property("SettingsOverride");
-			SettingsOverride.FormatCode(writer);
-		}
+			if (RemoveIndexBlocks is not null)
+			{
+				initializer.Property("RemoveIndexBlocks");
+				writer.WriteValue(RemoveIndexBlocks.Value);
+			}
 
-		initializer.Dispose();
+			if (SettingsOverride is not null)
+			{
+				initializer.Property("SettingsOverride");
+				SettingsOverride.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

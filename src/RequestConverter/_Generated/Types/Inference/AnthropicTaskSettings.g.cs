@@ -27,32 +27,56 @@ public partial class AnthropicTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxTokens");
-			writer.WriteValue(MaxTokens);
-		}
+			{
+				writer.WriteFluentCall("MaxTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokens); });
+			}
 
-		if (Temperature is not null)
+			if (Temperature is not null)
+			{
+				writer.WriteFluentCall("Temperature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Temperature.Value); w.Write("f"); });
+			}
+
+			if (TopK is not null)
+			{
+				writer.WriteFluentCall("TopK", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopK.Value); });
+			}
+
+			if (TopP is not null)
+			{
+				writer.WriteFluentCall("TopP", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopP.Value); w.Write("f"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Temperature");
-			writer.WriteValue(Temperature.Value);
-			writer.Write("f");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings", false);
+			{
+				initializer.Property("MaxTokens");
+				writer.WriteValue(MaxTokens);
+			}
 
-		if (TopK is not null)
-		{
-			initializer.Property("TopK");
-			writer.WriteValue(TopK.Value);
-		}
+			if (Temperature is not null)
+			{
+				initializer.Property("Temperature");
+				writer.WriteValue(Temperature.Value);
+				writer.Write("f");
+			}
 
-		if (TopP is not null)
-		{
-			initializer.Property("TopP");
-			writer.WriteValue(TopP.Value);
-			writer.Write("f");
-		}
+			if (TopK is not null)
+			{
+				initializer.Property("TopK");
+				writer.WriteValue(TopK.Value);
+			}
 
-		initializer.Dispose();
+			if (TopP is not null)
+			{
+				initializer.Property("TopP");
+				writer.WriteValue(TopP.Value);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

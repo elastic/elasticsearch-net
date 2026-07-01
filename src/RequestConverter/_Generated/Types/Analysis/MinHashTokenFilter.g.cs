@@ -27,37 +27,67 @@ public partial class MinHashTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter", true);
-		if (BucketCount is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BucketCount");
-			writer.WriteValue(BucketCount.Value);
-		}
+			if (BucketCount is not null)
+			{
+				writer.WriteFluentCall("BucketCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BucketCount.Value); });
+			}
 
-		if (HashCount is not null)
+			if (HashCount is not null)
+			{
+				writer.WriteFluentCall("HashCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HashCount.Value); });
+			}
+
+			if (HashSetSize is not null)
+			{
+				writer.WriteFluentCall("HashSetSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HashSetSize.Value); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+
+			if (WithRotation is not null)
+			{
+				writer.WriteFluentCall("WithRotation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithRotation.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("HashCount");
-			writer.WriteValue(HashCount.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter", true);
+			if (BucketCount is not null)
+			{
+				initializer.Property("BucketCount");
+				writer.WriteValue(BucketCount.Value);
+			}
 
-		if (HashSetSize is not null)
-		{
-			initializer.Property("HashSetSize");
-			writer.WriteValue(HashSetSize.Value);
-		}
+			if (HashCount is not null)
+			{
+				initializer.Property("HashCount");
+				writer.WriteValue(HashCount.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (HashSetSize is not null)
+			{
+				initializer.Property("HashSetSize");
+				writer.WriteValue(HashSetSize.Value);
+			}
 
-		if (WithRotation is not null)
-		{
-			initializer.Property("WithRotation");
-			writer.WriteValue(WithRotation.Value);
-		}
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
 
-		initializer.Dispose();
+			if (WithRotation is not null)
+			{
+				initializer.Property("WithRotation");
+				writer.WriteValue(WithRotation.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

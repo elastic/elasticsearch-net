@@ -27,43 +27,78 @@ public partial class IntervalsRange : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (Gt is not null)
+			if (Gt is not null)
+			{
+				writer.WriteFluentCall("Gt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gt); });
+			}
+
+			if (Gte is not null)
+			{
+				writer.WriteFluentCall("Gte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gte); });
+			}
+
+			if (Lt is not null)
+			{
+				writer.WriteFluentCall("Lt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lt); });
+			}
+
+			if (Lte is not null)
+			{
+				writer.WriteFluentCall("Lte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lte); });
+			}
+
+			if (UseField is not null)
+			{
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Gt");
-			writer.WriteString(Gt);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (Gte is not null)
-		{
-			initializer.Property("Gte");
-			writer.WriteString(Gte);
-		}
+			if (Gt is not null)
+			{
+				initializer.Property("Gt");
+				writer.WriteString(Gt);
+			}
 
-		if (Lt is not null)
-		{
-			initializer.Property("Lt");
-			writer.WriteString(Lt);
-		}
+			if (Gte is not null)
+			{
+				initializer.Property("Gte");
+				writer.WriteString(Gte);
+			}
 
-		if (Lte is not null)
-		{
-			initializer.Property("Lte");
-			writer.WriteString(Lte);
-		}
+			if (Lt is not null)
+			{
+				initializer.Property("Lt");
+				writer.WriteString(Lt);
+			}
 
-		if (UseField is not null)
-		{
-			initializer.Property("UseField");
-			UseField.FormatCode(writer);
-		}
+			if (Lte is not null)
+			{
+				initializer.Property("Lte");
+				writer.WriteString(Lte);
+			}
 
-		initializer.Dispose();
+			if (UseField is not null)
+			{
+				initializer.Property("UseField");
+				UseField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,23 +27,41 @@ public partial class UntypedDecayFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (MultiValueMode is not null)
+			if (MultiValueMode is not null)
+			{
+				writer.WriteFluentCall("MultiValueMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(MultiValueMode.Value, w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Placement", (w) => { Placement.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MultiValueMode");
-			Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(MultiValueMode.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction", true);
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Placement");
-			Placement.FormatCode(writer);
-		}
+			if (MultiValueMode is not null)
+			{
+				initializer.Property("MultiValueMode");
+				Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(MultiValueMode.Value, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Placement");
+				Placement.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

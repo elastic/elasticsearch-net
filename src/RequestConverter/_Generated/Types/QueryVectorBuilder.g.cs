@@ -27,25 +27,45 @@ public partial class QueryVectorBuilder : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryVectorBuilder", false);
-		if (Embedding is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Embedding");
-			Embedding.FormatCode(writer);
-		}
+			if (Embedding is not null)
+			{
+				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); });
+			}
 
-		if (Lookup is not null)
+			if (Lookup is not null)
+			{
+				writer.WriteFluentDescriptorCall("Lookup", (w) => { Lookup.FormatCode(w); });
+			}
+
+			if (TextEmbedding is not null)
+			{
+				writer.WriteFluentDescriptorCall("TextEmbedding", (w) => { TextEmbedding.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Lookup");
-			Lookup.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryVectorBuilder", false);
+			if (Embedding is not null)
+			{
+				initializer.Property("Embedding");
+				Embedding.FormatCode(writer);
+			}
 
-		if (TextEmbedding is not null)
-		{
-			initializer.Property("TextEmbedding");
-			TextEmbedding.FormatCode(writer);
-		}
+			if (Lookup is not null)
+			{
+				initializer.Property("Lookup");
+				Lookup.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TextEmbedding is not null)
+			{
+				initializer.Property("TextEmbedding");
+				TextEmbedding.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

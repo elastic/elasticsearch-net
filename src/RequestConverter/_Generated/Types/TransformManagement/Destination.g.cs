@@ -27,19 +27,34 @@ public partial class Destination : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Destination", false);
-		if (Index is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
 
-		if (Pipeline is not null)
+			if (Pipeline is not null)
+			{
+				writer.WriteFluentCall("Pipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pipeline); });
+			}
+		}
+		else
 		{
-			initializer.Property("Pipeline");
-			writer.WriteString(Pipeline);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Destination", false);
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Pipeline is not null)
+			{
+				initializer.Property("Pipeline");
+				writer.WriteString(Pipeline);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

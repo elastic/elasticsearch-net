@@ -122,7 +122,7 @@ public partial class ParentTaskInfo : RequestConverter.ICodeFormattable
 		if (Status is not null)
 		{
 			initializer.Property("Status");
-			writer.WriteValue(Status);
+			writer.WriteObjectValue(Status);
 		}
 
 		{

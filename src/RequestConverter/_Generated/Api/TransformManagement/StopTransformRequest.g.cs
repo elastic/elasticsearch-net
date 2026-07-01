@@ -27,42 +27,82 @@ public partial class StopTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				TransformId.FormatCode(writer);
+			}
 
-		if (AllowNoMatch is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+
+			if (Force is not null)
+			{
+				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (WaitForCheckpoint is not null)
+			{
+				writer.WriteFluentCall("WaitForCheckpoint", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCheckpoint.Value); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest", false);
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (Force is not null)
-		{
-			initializer.Property("Force");
-			writer.WriteValue(Force.Value);
-		}
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Force is not null)
+			{
+				initializer.Property("Force");
+				writer.WriteValue(Force.Value);
+			}
 
-		if (WaitForCheckpoint is not null)
-		{
-			initializer.Property("WaitForCheckpoint");
-			writer.WriteValue(WaitForCheckpoint.Value);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
+			if (WaitForCheckpoint is not null)
+			{
+				initializer.Property("WaitForCheckpoint");
+				writer.WriteValue(WaitForCheckpoint.Value);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,12 +27,25 @@ public partial class ModifyDataStreamRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Actions");
-			writer.WriteInlineList(Actions, (w, item) => { item.FormatCode(w); });
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorParams("Actions", Actions, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction>"); w.Write("()"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest", false);
+			{
+				initializer.Property("Actions");
+				writer.WriteInlineList(Actions, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

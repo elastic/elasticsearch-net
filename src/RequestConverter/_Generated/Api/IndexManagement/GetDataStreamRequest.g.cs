@@ -27,37 +27,71 @@ public partial class GetDataStreamRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest", false);
-		if (Name is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
 
-		if (ExpandWildcards is not null)
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (IncludeDefaults is not null)
+			{
+				writer.WriteFluentCall("IncludeDefaults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDefaults.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Verbose is not null)
+			{
+				writer.WriteFluentCall("Verbose", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Verbose.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest", false);
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (IncludeDefaults is not null)
-		{
-			initializer.Property("IncludeDefaults");
-			writer.WriteValue(IncludeDefaults.Value);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (IncludeDefaults is not null)
+			{
+				initializer.Property("IncludeDefaults");
+				writer.WriteValue(IncludeDefaults.Value);
+			}
 
-		if (Verbose is not null)
-		{
-			initializer.Property("Verbose");
-			writer.WriteValue(Verbose.Value);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Verbose is not null)
+			{
+				initializer.Property("Verbose");
+				writer.WriteValue(Verbose.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

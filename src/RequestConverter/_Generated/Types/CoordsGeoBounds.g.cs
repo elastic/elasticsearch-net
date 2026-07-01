@@ -27,31 +27,52 @@ public partial class CoordsGeoBounds : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CoordsGeoBounds", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Bottom");
-			writer.WriteValue(Bottom);
-			writer.Write("d");
-		}
+			{
+				writer.WriteFluentCall("Bottom", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Bottom); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("Left", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Left); w.Write("d"); });
+			}
+
+			{
+				writer.WriteFluentCall("Right", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Right); w.Write("d"); });
+			}
+
+			{
+				writer.WriteFluentCall("Top", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Top); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Left");
-			writer.WriteValue(Left);
-			writer.Write("d");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CoordsGeoBounds", true);
+			{
+				initializer.Property("Bottom");
+				writer.WriteValue(Bottom);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("Right");
-			writer.WriteValue(Right);
-			writer.Write("d");
-		}
+			{
+				initializer.Property("Left");
+				writer.WriteValue(Left);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("Top");
-			writer.WriteValue(Top);
-			writer.Write("d");
-		}
+			{
+				initializer.Property("Right");
+				writer.WriteValue(Right);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Top");
+				writer.WriteValue(Top);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

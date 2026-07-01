@@ -27,54 +27,98 @@ public partial class ReadOnlyUrlRepositorySettings : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings", false);
-		if (ChunkSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ChunkSize");
-			ChunkSize.FormatCode(writer);
-		}
+			if (ChunkSize is not null)
+			{
+				writer.WriteFluentCall("ChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); ChunkSize.FormatCode(w); });
+			}
 
-		if (Compress is not null)
+			if (Compress is not null)
+			{
+				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+			}
+
+			if (HttpMaxRetries is not null)
+			{
+				writer.WriteFluentCall("HttpMaxRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HttpMaxRetries.Value); });
+			}
+
+			if (HttpSocketTimeout is not null)
+			{
+				writer.WriteFluentCall("HttpSocketTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); HttpSocketTimeout.FormatCode(w); });
+			}
+
+			if (MaxNumberOfSnapshots is not null)
+			{
+				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfSnapshots.Value); });
+			}
+
+			if (MaxRestoreBytesPerSec is not null)
+			{
+				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRestoreBytesPerSec.FormatCode(w); });
+			}
+
+			if (MaxSnapshotBytesPerSec is not null)
+			{
+				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSnapshotBytesPerSec.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+			}
+		}
+		else
 		{
-			initializer.Property("Compress");
-			writer.WriteValue(Compress.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings", false);
+			if (ChunkSize is not null)
+			{
+				initializer.Property("ChunkSize");
+				ChunkSize.FormatCode(writer);
+			}
 
-		if (HttpMaxRetries is not null)
-		{
-			initializer.Property("HttpMaxRetries");
-			writer.WriteValue(HttpMaxRetries.Value);
-		}
+			if (Compress is not null)
+			{
+				initializer.Property("Compress");
+				writer.WriteValue(Compress.Value);
+			}
 
-		if (HttpSocketTimeout is not null)
-		{
-			initializer.Property("HttpSocketTimeout");
-			HttpSocketTimeout.FormatCode(writer);
-		}
+			if (HttpMaxRetries is not null)
+			{
+				initializer.Property("HttpMaxRetries");
+				writer.WriteValue(HttpMaxRetries.Value);
+			}
 
-		if (MaxNumberOfSnapshots is not null)
-		{
-			initializer.Property("MaxNumberOfSnapshots");
-			writer.WriteValue(MaxNumberOfSnapshots.Value);
-		}
+			if (HttpSocketTimeout is not null)
+			{
+				initializer.Property("HttpSocketTimeout");
+				HttpSocketTimeout.FormatCode(writer);
+			}
 
-		if (MaxRestoreBytesPerSec is not null)
-		{
-			initializer.Property("MaxRestoreBytesPerSec");
-			MaxRestoreBytesPerSec.FormatCode(writer);
-		}
+			if (MaxNumberOfSnapshots is not null)
+			{
+				initializer.Property("MaxNumberOfSnapshots");
+				writer.WriteValue(MaxNumberOfSnapshots.Value);
+			}
 
-		if (MaxSnapshotBytesPerSec is not null)
-		{
-			initializer.Property("MaxSnapshotBytesPerSec");
-			MaxSnapshotBytesPerSec.FormatCode(writer);
-		}
+			if (MaxRestoreBytesPerSec is not null)
+			{
+				initializer.Property("MaxRestoreBytesPerSec");
+				MaxRestoreBytesPerSec.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Url");
-			writer.WriteString(Url);
-		}
+			if (MaxSnapshotBytesPerSec is not null)
+			{
+				initializer.Property("MaxSnapshotBytesPerSec");
+				MaxSnapshotBytesPerSec.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Url");
+				writer.WriteString(Url);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

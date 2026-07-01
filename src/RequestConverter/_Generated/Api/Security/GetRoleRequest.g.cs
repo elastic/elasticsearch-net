@@ -27,19 +27,38 @@ public partial class GetRoleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetRoleRequest", false);
-		if (Name is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
 
-		if (IncludeImplicit is not null)
+			if (IncludeImplicit is not null)
+			{
+				writer.WriteFluentCall("IncludeImplicit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeImplicit.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("IncludeImplicit");
-			writer.WriteValue(IncludeImplicit.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetRoleRequest", false);
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (IncludeImplicit is not null)
+			{
+				initializer.Property("IncludeImplicit");
+				writer.WriteValue(IncludeImplicit.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

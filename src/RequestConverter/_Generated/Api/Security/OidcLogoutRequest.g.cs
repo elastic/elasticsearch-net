@@ -27,18 +27,36 @@ public partial class OidcLogoutRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest", false);
-		if (RefreshToken is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RefreshToken");
-			writer.WriteString(RefreshToken);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (RefreshToken is not null)
+			{
+				writer.WriteFluentCall("RefreshToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RefreshToken); });
+			}
 
+			{
+				writer.WriteFluentCall("Token", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Token); });
+			}
+		}
+		else
 		{
-			initializer.Property("Token");
-			writer.WriteString(Token);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest", false);
+			if (RefreshToken is not null)
+			{
+				initializer.Property("RefreshToken");
+				writer.WriteString(RefreshToken);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Token");
+				writer.WriteString(Token);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

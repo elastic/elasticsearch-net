@@ -27,13 +27,23 @@ public partial class Rank : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rank", false);
-		if (Rrf is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Rrf");
-			Rrf.FormatCode(writer);
+			if (Rrf is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rrf", (w) => { Rrf.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Rank", false);
+			if (Rrf is not null)
+			{
+				initializer.Property("Rrf");
+				Rrf.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

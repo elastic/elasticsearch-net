@@ -27,17 +27,30 @@ public partial class TextIndexPrefixes : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxChars");
-			writer.WriteValue(MaxChars);
-		}
+			{
+				writer.WriteFluentCall("MaxChars", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChars); });
+			}
 
+			{
+				writer.WriteFluentCall("MinChars", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinChars); });
+			}
+		}
+		else
 		{
-			initializer.Property("MinChars");
-			writer.WriteValue(MinChars);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes", false);
+			{
+				initializer.Property("MaxChars");
+				writer.WriteValue(MaxChars);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("MinChars");
+				writer.WriteValue(MinChars);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

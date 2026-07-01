@@ -27,53 +27,118 @@ public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TermsEnumRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Indices.FormatCode(writer);
+				}
 
-		if (CaseInsensitive is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Indices.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (CaseInsensitive is not null)
+			{
+				writer.WriteFluentCall("CaseInsensitive", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CaseInsensitive.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (IndexFilter is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); });
+			}
+
+			if (SearchAfter is not null)
+			{
+				writer.WriteFluentCall("SearchAfter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchAfter); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (String is not null)
+			{
+				writer.WriteFluentCall("String", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(String); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("CaseInsensitive");
-			writer.WriteValue(CaseInsensitive.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TermsEnumRequest", false);
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (CaseInsensitive is not null)
+			{
+				initializer.Property("CaseInsensitive");
+				writer.WriteValue(CaseInsensitive.Value);
+			}
 
-		if (IndexFilter is not null)
-		{
-			initializer.Property("IndexFilter");
-			IndexFilter.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (SearchAfter is not null)
-		{
-			initializer.Property("SearchAfter");
-			writer.WriteString(SearchAfter);
-		}
+			if (IndexFilter is not null)
+			{
+				initializer.Property("IndexFilter");
+				IndexFilter.FormatCode(writer);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (SearchAfter is not null)
+			{
+				initializer.Property("SearchAfter");
+				writer.WriteString(SearchAfter);
+			}
 
-		if (String is not null)
-		{
-			initializer.Property("String");
-			writer.WriteString(String);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (String is not null)
+			{
+				initializer.Property("String");
+				writer.WriteString(String);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

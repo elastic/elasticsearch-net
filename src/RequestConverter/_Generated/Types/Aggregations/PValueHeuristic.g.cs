@@ -27,20 +27,35 @@ public partial class PValueHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic", false);
-		if (BackgroundIsSuperset is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BackgroundIsSuperset");
-			writer.WriteValue(BackgroundIsSuperset.Value);
-		}
+			if (BackgroundIsSuperset is not null)
+			{
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset.Value); });
+			}
 
-		if (NormalizeAbove is not null)
+			if (NormalizeAbove is not null)
+			{
+				writer.WriteFluentCall("NormalizeAbove", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NormalizeAbove.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("NormalizeAbove");
-			writer.WriteValue(NormalizeAbove.Value);
-			writer.Write("L");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic", false);
+			if (BackgroundIsSuperset is not null)
+			{
+				initializer.Property("BackgroundIsSuperset");
+				writer.WriteValue(BackgroundIsSuperset.Value);
+			}
 
-		initializer.Dispose();
+			if (NormalizeAbove is not null)
+			{
+				initializer.Property("NormalizeAbove");
+				writer.WriteValue(NormalizeAbove.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

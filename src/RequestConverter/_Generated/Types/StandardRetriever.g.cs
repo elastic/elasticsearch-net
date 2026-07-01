@@ -27,56 +27,101 @@ public partial class StandardRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.StandardRetriever", false);
-		if (Collapse is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Collapse");
-			Collapse.FormatCode(writer);
-		}
+			if (Collapse is not null)
+			{
+				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			if (MinScore is not null)
+			{
+				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+
+			if (SearchAfter is not null)
+			{
+				writer.WriteFluentCall("SearchAfter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentDescriptorParams("Sort", Sort, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>"); w.Write("()"); });
+			}
+
+			if (TerminateAfter is not null)
+			{
+				writer.WriteFluentCall("TerminateAfter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TerminateAfter.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.StandardRetriever", false);
+			if (Collapse is not null)
+			{
+				initializer.Property("Collapse");
+				Collapse.FormatCode(writer);
+			}
 
-		if (MinScore is not null)
-		{
-			initializer.Property("MinScore");
-			writer.WriteValue(MinScore.Value);
-			writer.Write("f");
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			if (MinScore is not null)
+			{
+				initializer.Property("MinScore");
+				writer.WriteValue(MinScore.Value);
+				writer.Write("f");
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		if (SearchAfter is not null)
-		{
-			initializer.Property("SearchAfter");
-			writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
-		}
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
-		}
+			if (SearchAfter is not null)
+			{
+				initializer.Property("SearchAfter");
+				writer.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (TerminateAfter is not null)
-		{
-			initializer.Property("TerminateAfter");
-			writer.WriteValue(TerminateAfter.Value);
-		}
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (TerminateAfter is not null)
+			{
+				initializer.Property("TerminateAfter");
+				writer.WriteValue(TerminateAfter.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

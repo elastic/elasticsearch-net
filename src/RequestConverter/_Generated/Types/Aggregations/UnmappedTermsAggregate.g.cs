@@ -30,7 +30,7 @@ public partial class UnmappedTermsAggregate : RequestConverter.ICodeFormattable
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate", true);
 		{
 			initializer.Property("Buckets");
-			writer.WriteInlineList(Buckets, (w, item) => { w.WriteValue(item); });
+			writer.WriteInlineList(Buckets, (w, item) => { w.WriteObjectValue(item); });
 		}
 
 		if (DocCountErrorUpperBound is not null)
@@ -50,7 +50,7 @@ public partial class UnmappedTermsAggregate : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		if (SumOtherDocCount is not null)

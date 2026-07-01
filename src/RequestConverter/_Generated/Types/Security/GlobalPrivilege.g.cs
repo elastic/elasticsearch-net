@@ -27,12 +27,21 @@ public partial class GlobalPrivilege : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GlobalPrivilege", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Application");
-			Application.FormatCode(writer);
+			{
+				writer.WriteFluentDescriptorCall("Application", (w) => { Application.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GlobalPrivilege", false);
+			{
+				initializer.Property("Application");
+				Application.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

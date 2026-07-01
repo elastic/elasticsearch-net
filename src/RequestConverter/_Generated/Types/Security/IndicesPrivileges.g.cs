@@ -27,35 +27,63 @@ public partial class IndicesPrivileges : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.IndicesPrivileges", false);
-		if (AllowRestrictedIndices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowRestrictedIndices");
-			writer.WriteValue(AllowRestrictedIndices.Value);
-		}
+			if (AllowRestrictedIndices is not null)
+			{
+				writer.WriteFluentCall("AllowRestrictedIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowRestrictedIndices.Value); });
+			}
 
-		if (FieldSecurity is not null)
+			if (FieldSecurity is not null)
+			{
+				writer.WriteFluentDescriptorCall("FieldSecurity", (w) => { FieldSecurity.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Names", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Names, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			{
+				writer.WriteFluentParams("Privileges", Privileges, (w, item) => { item.FormatCode(w); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Query); });
+			}
+		}
+		else
 		{
-			initializer.Property("FieldSecurity");
-			FieldSecurity.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.IndicesPrivileges", false);
+			if (AllowRestrictedIndices is not null)
+			{
+				initializer.Property("AllowRestrictedIndices");
+				writer.WriteValue(AllowRestrictedIndices.Value);
+			}
 
-		{
-			initializer.Property("Names");
-			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
-		}
+			if (FieldSecurity is not null)
+			{
+				initializer.Property("FieldSecurity");
+				FieldSecurity.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Privileges");
-			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("Names");
+				writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			writer.WriteValue(Query);
-		}
+			{
+				initializer.Property("Privileges");
+				writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				writer.WriteObjectValue(Query);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

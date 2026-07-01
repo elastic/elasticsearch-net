@@ -27,18 +27,38 @@ public partial class GetUserProfileRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Uid");
-			writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Data is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Data is not null)
+			{
+				writer.WriteFluentParams("Data", Data, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Data");
-			writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest", false);
+			{
+				initializer.Property("Uid");
+				writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Data is not null)
+			{
+				initializer.Property("Data");
+				writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

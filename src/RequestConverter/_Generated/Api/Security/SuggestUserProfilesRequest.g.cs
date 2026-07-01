@@ -27,32 +27,61 @@ public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest", false);
-		if (Data is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Data");
-			writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Data is not null)
+			{
+				writer.WriteFluentParams("Data", Data, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Hint is not null)
+			if (Hint is not null)
+			{
+				writer.WriteFluentDescriptorCall("Hint", (w) => { Hint.FormatCode(w); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Hint");
-			Hint.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest", false);
+			if (Data is not null)
+			{
+				initializer.Property("Data");
+				writer.WriteInlineList(Data, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			if (Hint is not null)
+			{
+				initializer.Property("Hint");
+				Hint.FormatCode(writer);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-			writer.Write("L");
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

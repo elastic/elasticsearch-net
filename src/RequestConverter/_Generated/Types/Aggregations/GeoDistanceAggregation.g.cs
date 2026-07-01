@@ -27,37 +27,67 @@ public partial class GeoDistanceAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation", false);
-		if (DistanceType is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DistanceType");
-			Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
-		}
+			if (DistanceType is not null)
+			{
+				writer.WriteFluentCall("DistanceType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Origin is not null)
+			{
+				writer.WriteFluentCall("Origin", (w) => { using var _oi = w.ForceObjectInitializer(); Origin.FormatCode(w); });
+			}
+
+			if (Ranges is not null)
+			{
+				writer.WriteFluentDescriptorParams("Ranges", Ranges, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>"); w.Write("()"); });
+			}
+
+			if (Unit is not null)
+			{
+				writer.WriteFluentCall("Unit", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation", false);
+			if (DistanceType is not null)
+			{
+				initializer.Property("DistanceType");
+				Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, writer);
+			}
 
-		if (Origin is not null)
-		{
-			initializer.Property("Origin");
-			Origin.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Ranges is not null)
-		{
-			initializer.Property("Ranges");
-			writer.WriteInlineList(Ranges, (w, item) => { item.FormatCode(w); });
-		}
+			if (Origin is not null)
+			{
+				initializer.Property("Origin");
+				Origin.FormatCode(writer);
+			}
 
-		if (Unit is not null)
-		{
-			initializer.Property("Unit");
-			Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, writer);
-		}
+			if (Ranges is not null)
+			{
+				initializer.Property("Ranges");
+				writer.WriteInlineList(Ranges, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Unit is not null)
+			{
+				initializer.Property("Unit");
+				Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

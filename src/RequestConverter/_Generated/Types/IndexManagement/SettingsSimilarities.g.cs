@@ -27,7 +27,65 @@ public partial class SettingsSimilarities : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		writer.Write("new()");
-		writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			foreach (var kvp in this)
+			{
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 c1)
+				{
+					writer.WriteFluentVariantAdd("Bm25", (w) => { w.WriteString(kvp.Key); }, (w) => { c1.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean c2)
+				{
+					writer.WriteFluentVariantAdd("Boolean", (w) => { w.WriteString(kvp.Key); }, (w) => { c2.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi c3)
+				{
+					writer.WriteFluentVariantAdd("Dfi", (w) => { w.WriteString(kvp.Key); }, (w) => { c3.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr c4)
+				{
+					writer.WriteFluentVariantAdd("Dfr", (w) => { w.WriteString(kvp.Key); }, (w) => { c4.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb c5)
+				{
+					writer.WriteFluentVariantAdd("Ib", (w) => { w.WriteString(kvp.Key); }, (w) => { c5.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd c6)
+				{
+					writer.WriteFluentVariantAdd("Lmd", (w) => { w.WriteString(kvp.Key); }, (w) => { c6.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj c7)
+				{
+					writer.WriteFluentVariantAdd("Lmj", (w) => { w.WriteString(kvp.Key); }, (w) => { c7.FormatCode(w); });
+					continue;
+				}
+
+				if (kvp.Value is Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted c8)
+				{
+					writer.WriteFluentVariantAdd("Scripted", (w) => { w.WriteString(kvp.Key); }, (w) => { c8.FormatCode(w); });
+					continue;
+				}
+
+				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+			}
+		}
+		else
+		{
+			writer.WriteValueConstructor("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities");
+			writer.WriteBlockList(this, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
 	}
 }

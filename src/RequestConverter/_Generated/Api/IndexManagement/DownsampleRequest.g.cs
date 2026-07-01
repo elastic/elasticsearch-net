@@ -27,22 +27,69 @@ public partial class DownsampleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
 
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					TargetIndex.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
+
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					TargetIndex.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TargetIndex");
-			TargetIndex.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Config");
-			Config.FormatCode(writer);
-		}
+			{
+				initializer.Property("TargetIndex");
+				TargetIndex.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Config");
+				Config.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

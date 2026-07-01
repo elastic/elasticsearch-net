@@ -27,25 +27,45 @@ public partial class CustomCategorizeTextAnalyzer : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer", true);
-		if (CharFilter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CharFilter");
-			writer.WriteInlineList(CharFilter, (w, item) => { w.WriteString(item); });
-		}
+			if (CharFilter is not null)
+			{
+				writer.WriteFluentParams("CharFilter", CharFilter, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentParams("Filter", Filter, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Tokenizer is not null)
+			{
+				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tokenizer); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer", true);
+			if (CharFilter is not null)
+			{
+				initializer.Property("CharFilter");
+				writer.WriteInlineList(CharFilter, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Tokenizer is not null)
-		{
-			initializer.Property("Tokenizer");
-			writer.WriteString(Tokenizer);
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Tokenizer is not null)
+			{
+				initializer.Property("Tokenizer");
+				writer.WriteString(Tokenizer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

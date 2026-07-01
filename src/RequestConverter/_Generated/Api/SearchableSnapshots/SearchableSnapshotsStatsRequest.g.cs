@@ -27,19 +27,48 @@ public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest", false);
-		if (Indices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (Level is not null)
+			using var _chainIndent = writer.Indent();
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (Level is not null)
+			{
+				writer.WriteFluentCall("Level", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Level");
-			Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest", false);
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Level is not null)
+			{
+				initializer.Property("Level");
+				Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

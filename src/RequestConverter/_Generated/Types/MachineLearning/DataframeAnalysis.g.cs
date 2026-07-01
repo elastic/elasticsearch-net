@@ -27,25 +27,45 @@ public partial class DataframeAnalysis : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis", false);
-		if (Classification is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Classification");
-			Classification.FormatCode(writer);
-		}
+			if (Classification is not null)
+			{
+				writer.WriteFluentDescriptorCall("Classification", (w) => { Classification.FormatCode(w); });
+			}
 
-		if (OutlierDetection is not null)
+			if (OutlierDetection is not null)
+			{
+				writer.WriteFluentDescriptorCall("OutlierDetection", (w) => { OutlierDetection.FormatCode(w); });
+			}
+
+			if (Regression is not null)
+			{
+				writer.WriteFluentDescriptorCall("Regression", (w) => { Regression.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("OutlierDetection");
-			OutlierDetection.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis", false);
+			if (Classification is not null)
+			{
+				initializer.Property("Classification");
+				Classification.FormatCode(writer);
+			}
 
-		if (Regression is not null)
-		{
-			initializer.Property("Regression");
-			Regression.FormatCode(writer);
-		}
+			if (OutlierDetection is not null)
+			{
+				initializer.Property("OutlierDetection");
+				OutlierDetection.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Regression is not null)
+			{
+				initializer.Property("Regression");
+				Regression.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

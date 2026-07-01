@@ -27,107 +27,216 @@ public partial class FollowRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
 
-		if (MasterTimeout is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (WaitForActiveShards is not null)
+			{
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+			}
+
+			if (DataStreamName is not null)
+			{
+				writer.WriteFluentCall("DataStreamName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DataStreamName); });
+			}
+
+			{
+				writer.WriteFluentCall("LeaderIndex", (w) => { using var _oi = w.ForceObjectInitializer(); LeaderIndex.FormatCode(w); });
+			}
+
+			if (MaxOutstandingReadRequests is not null)
+			{
+				writer.WriteFluentCall("MaxOutstandingReadRequests", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxOutstandingReadRequests.Value); w.Write("L"); });
+			}
+
+			if (MaxOutstandingWriteRequests is not null)
+			{
+				writer.WriteFluentCall("MaxOutstandingWriteRequests", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxOutstandingWriteRequests.Value); });
+			}
+
+			if (MaxReadRequestOperationCount is not null)
+			{
+				writer.WriteFluentCall("MaxReadRequestOperationCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxReadRequestOperationCount.Value); });
+			}
+
+			if (MaxReadRequestSize is not null)
+			{
+				writer.WriteFluentCall("MaxReadRequestSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxReadRequestSize.FormatCode(w); });
+			}
+
+			if (MaxRetryDelay is not null)
+			{
+				writer.WriteFluentCall("MaxRetryDelay", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRetryDelay.FormatCode(w); });
+			}
+
+			if (MaxWriteBufferCount is not null)
+			{
+				writer.WriteFluentCall("MaxWriteBufferCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxWriteBufferCount.Value); });
+			}
+
+			if (MaxWriteBufferSize is not null)
+			{
+				writer.WriteFluentCall("MaxWriteBufferSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxWriteBufferSize.FormatCode(w); });
+			}
+
+			if (MaxWriteRequestOperationCount is not null)
+			{
+				writer.WriteFluentCall("MaxWriteRequestOperationCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxWriteRequestOperationCount.Value); });
+			}
+
+			if (MaxWriteRequestSize is not null)
+			{
+				writer.WriteFluentCall("MaxWriteRequestSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxWriteRequestSize.FormatCode(w); });
+			}
+
+			if (ReadPollTimeout is not null)
+			{
+				writer.WriteFluentCall("ReadPollTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); ReadPollTimeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("RemoteCluster", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RemoteCluster); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (WaitForActiveShards is not null)
-		{
-			initializer.Property("WaitForActiveShards");
-			WaitForActiveShards.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (DataStreamName is not null)
-		{
-			initializer.Property("DataStreamName");
-			writer.WriteString(DataStreamName);
-		}
+			if (WaitForActiveShards is not null)
+			{
+				initializer.Property("WaitForActiveShards");
+				WaitForActiveShards.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("LeaderIndex");
-			LeaderIndex.FormatCode(writer);
-		}
+			if (DataStreamName is not null)
+			{
+				initializer.Property("DataStreamName");
+				writer.WriteString(DataStreamName);
+			}
 
-		if (MaxOutstandingReadRequests is not null)
-		{
-			initializer.Property("MaxOutstandingReadRequests");
-			writer.WriteValue(MaxOutstandingReadRequests.Value);
-			writer.Write("L");
-		}
+			{
+				initializer.Property("LeaderIndex");
+				LeaderIndex.FormatCode(writer);
+			}
 
-		if (MaxOutstandingWriteRequests is not null)
-		{
-			initializer.Property("MaxOutstandingWriteRequests");
-			writer.WriteValue(MaxOutstandingWriteRequests.Value);
-		}
+			if (MaxOutstandingReadRequests is not null)
+			{
+				initializer.Property("MaxOutstandingReadRequests");
+				writer.WriteValue(MaxOutstandingReadRequests.Value);
+				writer.Write("L");
+			}
 
-		if (MaxReadRequestOperationCount is not null)
-		{
-			initializer.Property("MaxReadRequestOperationCount");
-			writer.WriteValue(MaxReadRequestOperationCount.Value);
-		}
+			if (MaxOutstandingWriteRequests is not null)
+			{
+				initializer.Property("MaxOutstandingWriteRequests");
+				writer.WriteValue(MaxOutstandingWriteRequests.Value);
+			}
 
-		if (MaxReadRequestSize is not null)
-		{
-			initializer.Property("MaxReadRequestSize");
-			MaxReadRequestSize.FormatCode(writer);
-		}
+			if (MaxReadRequestOperationCount is not null)
+			{
+				initializer.Property("MaxReadRequestOperationCount");
+				writer.WriteValue(MaxReadRequestOperationCount.Value);
+			}
 
-		if (MaxRetryDelay is not null)
-		{
-			initializer.Property("MaxRetryDelay");
-			MaxRetryDelay.FormatCode(writer);
-		}
+			if (MaxReadRequestSize is not null)
+			{
+				initializer.Property("MaxReadRequestSize");
+				MaxReadRequestSize.FormatCode(writer);
+			}
 
-		if (MaxWriteBufferCount is not null)
-		{
-			initializer.Property("MaxWriteBufferCount");
-			writer.WriteValue(MaxWriteBufferCount.Value);
-		}
+			if (MaxRetryDelay is not null)
+			{
+				initializer.Property("MaxRetryDelay");
+				MaxRetryDelay.FormatCode(writer);
+			}
 
-		if (MaxWriteBufferSize is not null)
-		{
-			initializer.Property("MaxWriteBufferSize");
-			MaxWriteBufferSize.FormatCode(writer);
-		}
+			if (MaxWriteBufferCount is not null)
+			{
+				initializer.Property("MaxWriteBufferCount");
+				writer.WriteValue(MaxWriteBufferCount.Value);
+			}
 
-		if (MaxWriteRequestOperationCount is not null)
-		{
-			initializer.Property("MaxWriteRequestOperationCount");
-			writer.WriteValue(MaxWriteRequestOperationCount.Value);
-		}
+			if (MaxWriteBufferSize is not null)
+			{
+				initializer.Property("MaxWriteBufferSize");
+				MaxWriteBufferSize.FormatCode(writer);
+			}
 
-		if (MaxWriteRequestSize is not null)
-		{
-			initializer.Property("MaxWriteRequestSize");
-			MaxWriteRequestSize.FormatCode(writer);
-		}
+			if (MaxWriteRequestOperationCount is not null)
+			{
+				initializer.Property("MaxWriteRequestOperationCount");
+				writer.WriteValue(MaxWriteRequestOperationCount.Value);
+			}
 
-		if (ReadPollTimeout is not null)
-		{
-			initializer.Property("ReadPollTimeout");
-			ReadPollTimeout.FormatCode(writer);
-		}
+			if (MaxWriteRequestSize is not null)
+			{
+				initializer.Property("MaxWriteRequestSize");
+				MaxWriteRequestSize.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("RemoteCluster");
-			writer.WriteString(RemoteCluster);
-		}
+			if (ReadPollTimeout is not null)
+			{
+				initializer.Property("ReadPollTimeout");
+				ReadPollTimeout.FormatCode(writer);
+			}
 
-		if (Settings is not null)
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			{
+				initializer.Property("RemoteCluster");
+				writer.WriteString(RemoteCluster);
+			}
 
-		initializer.Dispose();
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

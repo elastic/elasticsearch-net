@@ -27,18 +27,32 @@ public partial class FilterRef : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FilterRef", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FilterId");
-			FilterId.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("FilterId", (w) => { using var _oi = w.ForceObjectInitializer(); FilterId.FormatCode(w); });
+			}
 
-		if (FilterType is not null)
+			if (FilterType is not null)
+			{
+				writer.WriteFluentCall("FilterType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(FilterType.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("FilterType");
-			Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(FilterType.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.FilterRef", false);
+			{
+				initializer.Property("FilterId");
+				FilterId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (FilterType is not null)
+			{
+				initializer.Property("FilterType");
+				Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(FilterType.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

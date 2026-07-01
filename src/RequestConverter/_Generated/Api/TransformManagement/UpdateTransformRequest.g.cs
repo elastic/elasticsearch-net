@@ -27,79 +27,160 @@ public partial class UpdateTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					TransformId.FormatCode(writer);
+				}
 
-		if (DeferValidation is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					TransformId.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (DeferValidation is not null)
+			{
+				writer.WriteFluentCall("DeferValidation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeferValidation.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (Dest is not null)
+			{
+				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); });
+			}
+
+			if (Frequency is not null)
+			{
+				writer.WriteFluentCall("Frequency", (w) => { using var _oi = w.ForceObjectInitializer(); Frequency.FormatCode(w); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (RetentionPolicy is not null)
+			{
+				writer.WriteFluentDescriptorCall("RetentionPolicy", (w) => { RetentionPolicy.FormatCode(w); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+			}
+
+			if (Sync is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("DeferValidation");
-			writer.WriteValue(DeferValidation.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest", false);
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (DeferValidation is not null)
+			{
+				initializer.Property("DeferValidation");
+				writer.WriteValue(DeferValidation.Value);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (Dest is not null)
-		{
-			initializer.Property("Dest");
-			Dest.FormatCode(writer);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (Frequency is not null)
-		{
-			initializer.Property("Frequency");
-			Frequency.FormatCode(writer);
-		}
+			if (Dest is not null)
+			{
+				initializer.Property("Dest");
+				Dest.FormatCode(writer);
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (Frequency is not null)
+			{
+				initializer.Property("Frequency");
+				Frequency.FormatCode(writer);
+			}
 
-		if (RetentionPolicy is not null)
-		{
-			initializer.Property("RetentionPolicy");
-			RetentionPolicy.FormatCode(writer);
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Settings is not null)
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			if (RetentionPolicy is not null)
+			{
+				initializer.Property("RetentionPolicy");
+				RetentionPolicy.FormatCode(writer);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
 
-		if (Sync is not null)
-		{
-			initializer.Property("Sync");
-			Sync.FormatCode(writer);
-		}
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Sync is not null)
+			{
+				initializer.Property("Sync");
+				Sync.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

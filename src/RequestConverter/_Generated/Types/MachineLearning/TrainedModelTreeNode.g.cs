@@ -27,62 +27,111 @@ public partial class TrainedModelTreeNode : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode", false);
-		if (DecisionType is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DecisionType");
-			writer.WriteString(DecisionType);
-		}
+			if (DecisionType is not null)
+			{
+				writer.WriteFluentCall("DecisionType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DecisionType); });
+			}
 
-		if (DefaultLeft is not null)
+			if (DefaultLeft is not null)
+			{
+				writer.WriteFluentCall("DefaultLeft", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DefaultLeft.Value); });
+			}
+
+			if (LeafValue is not null)
+			{
+				writer.WriteFluentCall("LeafValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LeafValue.Value); w.Write("d"); });
+			}
+
+			if (LeftChild is not null)
+			{
+				writer.WriteFluentCall("LeftChild", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LeftChild.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("NodeIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NodeIndex); });
+			}
+
+			if (RightChild is not null)
+			{
+				writer.WriteFluentCall("RightChild", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RightChild.Value); });
+			}
+
+			if (SplitFeature is not null)
+			{
+				writer.WriteFluentCall("SplitFeature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitFeature.Value); });
+			}
+
+			if (SplitGain is not null)
+			{
+				writer.WriteFluentCall("SplitGain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitGain.Value); });
+			}
+
+			if (Threshold is not null)
+			{
+				writer.WriteFluentCall("Threshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Threshold.Value); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("DefaultLeft");
-			writer.WriteValue(DefaultLeft.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode", false);
+			if (DecisionType is not null)
+			{
+				initializer.Property("DecisionType");
+				writer.WriteString(DecisionType);
+			}
 
-		if (LeafValue is not null)
-		{
-			initializer.Property("LeafValue");
-			writer.WriteValue(LeafValue.Value);
-			writer.Write("d");
-		}
+			if (DefaultLeft is not null)
+			{
+				initializer.Property("DefaultLeft");
+				writer.WriteValue(DefaultLeft.Value);
+			}
 
-		if (LeftChild is not null)
-		{
-			initializer.Property("LeftChild");
-			writer.WriteValue(LeftChild.Value);
-		}
+			if (LeafValue is not null)
+			{
+				initializer.Property("LeafValue");
+				writer.WriteValue(LeafValue.Value);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("NodeIndex");
-			writer.WriteValue(NodeIndex);
-		}
+			if (LeftChild is not null)
+			{
+				initializer.Property("LeftChild");
+				writer.WriteValue(LeftChild.Value);
+			}
 
-		if (RightChild is not null)
-		{
-			initializer.Property("RightChild");
-			writer.WriteValue(RightChild.Value);
-		}
+			{
+				initializer.Property("NodeIndex");
+				writer.WriteValue(NodeIndex);
+			}
 
-		if (SplitFeature is not null)
-		{
-			initializer.Property("SplitFeature");
-			writer.WriteValue(SplitFeature.Value);
-		}
+			if (RightChild is not null)
+			{
+				initializer.Property("RightChild");
+				writer.WriteValue(RightChild.Value);
+			}
 
-		if (SplitGain is not null)
-		{
-			initializer.Property("SplitGain");
-			writer.WriteValue(SplitGain.Value);
-		}
+			if (SplitFeature is not null)
+			{
+				initializer.Property("SplitFeature");
+				writer.WriteValue(SplitFeature.Value);
+			}
 
-		if (Threshold is not null)
-		{
-			initializer.Property("Threshold");
-			writer.WriteValue(Threshold.Value);
-			writer.Write("d");
-		}
+			if (SplitGain is not null)
+			{
+				initializer.Property("SplitGain");
+				writer.WriteValue(SplitGain.Value);
+			}
 
-		initializer.Dispose();
+			if (Threshold is not null)
+			{
+				initializer.Property("Threshold");
+				writer.WriteValue(Threshold.Value);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

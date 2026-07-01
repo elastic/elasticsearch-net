@@ -27,48 +27,86 @@ public partial class TermsSetQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (MinimumShouldMatch is not null)
+			{
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+			}
+
+			if (MinimumShouldMatchField is not null)
+			{
+				writer.WriteFluentCall("MinimumShouldMatchField", (w) => { MinimumShouldMatchField.FormatCode(w); });
+			}
+
+			if (MinimumShouldMatchScript is not null)
+			{
+				writer.WriteFluentDescriptorCall("MinimumShouldMatchScript", (w) => { MinimumShouldMatchScript.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			{
+				writer.WriteFluentCall("Terms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Terms, (w, item) => { item.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (MinimumShouldMatch is not null)
-		{
-			initializer.Property("MinimumShouldMatch");
-			MinimumShouldMatch.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MinimumShouldMatchField is not null)
-		{
-			initializer.Property("MinimumShouldMatchField");
-			MinimumShouldMatchField.FormatCode(writer);
-		}
+			if (MinimumShouldMatch is not null)
+			{
+				initializer.Property("MinimumShouldMatch");
+				MinimumShouldMatch.FormatCode(writer);
+			}
 
-		if (MinimumShouldMatchScript is not null)
-		{
-			initializer.Property("MinimumShouldMatchScript");
-			MinimumShouldMatchScript.FormatCode(writer);
-		}
+			if (MinimumShouldMatchField is not null)
+			{
+				initializer.Property("MinimumShouldMatchField");
+				MinimumShouldMatchField.FormatCode(writer);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (MinimumShouldMatchScript is not null)
+			{
+				initializer.Property("MinimumShouldMatchScript");
+				MinimumShouldMatchScript.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Terms");
-			writer.WriteInlineList(Terms, (w, item) => { item.FormatCode(w); });
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Terms");
+				writer.WriteInlineList(Terms, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

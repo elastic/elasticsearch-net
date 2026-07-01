@@ -27,43 +27,78 @@ public partial class AliasDefinition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition", false);
-		if (Filter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
 
-		if (IndexRouting is not null)
+			if (IndexRouting is not null)
+			{
+				writer.WriteFluentCall("IndexRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexRouting); });
+			}
+
+			if (IsHidden is not null)
+			{
+				writer.WriteFluentCall("IsHidden", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsHidden.Value); });
+			}
+
+			if (IsWriteIndex is not null)
+			{
+				writer.WriteFluentCall("IsWriteIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsWriteIndex.Value); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+			}
+
+			if (SearchRouting is not null)
+			{
+				writer.WriteFluentCall("SearchRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchRouting); });
+			}
+		}
+		else
 		{
-			initializer.Property("IndexRouting");
-			writer.WriteString(IndexRouting);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition", false);
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
 
-		if (IsHidden is not null)
-		{
-			initializer.Property("IsHidden");
-			writer.WriteValue(IsHidden.Value);
-		}
+			if (IndexRouting is not null)
+			{
+				initializer.Property("IndexRouting");
+				writer.WriteString(IndexRouting);
+			}
 
-		if (IsWriteIndex is not null)
-		{
-			initializer.Property("IsWriteIndex");
-			writer.WriteValue(IsWriteIndex.Value);
-		}
+			if (IsHidden is not null)
+			{
+				initializer.Property("IsHidden");
+				writer.WriteValue(IsHidden.Value);
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			writer.WriteString(Routing);
-		}
+			if (IsWriteIndex is not null)
+			{
+				initializer.Property("IsWriteIndex");
+				writer.WriteValue(IsWriteIndex.Value);
+			}
 
-		if (SearchRouting is not null)
-		{
-			initializer.Property("SearchRouting");
-			writer.WriteString(SearchRouting);
-		}
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				writer.WriteString(Routing);
+			}
 
-		initializer.Dispose();
+			if (SearchRouting is not null)
+			{
+				initializer.Property("SearchRouting");
+				writer.WriteString(SearchRouting);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

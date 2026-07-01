@@ -27,40 +27,80 @@ public partial class PutAlibabacloudRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AlibabacloudInferenceId");
-			AlibabacloudInferenceId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				AlibabacloudInferenceId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (ChunkingSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); });
+			}
+
+			if (TaskSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("TaskSettings", (w) => { TaskSettings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TaskType");
-			Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskTypeCodeFormatter.FormatCode(TaskType, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest", false);
+			{
+				initializer.Property("AlibabacloudInferenceId");
+				AlibabacloudInferenceId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			{
+				initializer.Property("TaskType");
+				Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
-		if (ChunkingSettings is not null)
-		{
-			initializer.Property("ChunkingSettings");
-			ChunkingSettings.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("ServiceSettings");
-			ServiceSettings.FormatCode(writer);
-		}
+			if (ChunkingSettings is not null)
+			{
+				initializer.Property("ChunkingSettings");
+				ChunkingSettings.FormatCode(writer);
+			}
 
-		if (TaskSettings is not null)
-		{
-			initializer.Property("TaskSettings");
-			TaskSettings.FormatCode(writer);
-		}
+			{
+				initializer.Property("ServiceSettings");
+				ServiceSettings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TaskSettings is not null)
+			{
+				initializer.Property("TaskSettings");
+				TaskSettings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

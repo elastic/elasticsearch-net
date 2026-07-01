@@ -27,37 +27,67 @@ public partial class SourceOnlyRepositorySettingsForGcs : RequestConverter.ICode
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
 #pragma warning disable CS0618
-		if (ApplicationName is not null)
-		{
-			initializer.Property("ApplicationName");
-			writer.WriteString(ApplicationName);
-		}
+			if (ApplicationName is not null)
+			{
+				writer.WriteFluentCall("ApplicationName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApplicationName); });
+			}
 #pragma warning restore CS0618
-		if (BasePath is not null)
-		{
-			initializer.Property("BasePath");
-			writer.WriteString(BasePath);
-		}
+			if (BasePath is not null)
+			{
+				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+			}
 
-		{
-			initializer.Property("Bucket");
-			writer.WriteString(Bucket);
-		}
+			{
+				writer.WriteFluentCall("Bucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Bucket); });
+			}
 
-		if (Client is not null)
-		{
-			initializer.Property("Client");
-			writer.WriteString(Client);
-		}
+			if (Client is not null)
+			{
+				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+			}
 
-		if (Readonly is not null)
-		{
-			initializer.Property("Readonly");
-			writer.WriteValue(Readonly.Value);
+			if (Readonly is not null)
+			{
+				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs", true);
+#pragma warning disable CS0618
+			if (ApplicationName is not null)
+			{
+				initializer.Property("ApplicationName");
+				writer.WriteString(ApplicationName);
+			}
+#pragma warning restore CS0618
+			if (BasePath is not null)
+			{
+				initializer.Property("BasePath");
+				writer.WriteString(BasePath);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Bucket");
+				writer.WriteString(Bucket);
+			}
+
+			if (Client is not null)
+			{
+				initializer.Property("Client");
+				writer.WriteString(Client);
+			}
+
+			if (Readonly is not null)
+			{
+				initializer.Property("Readonly");
+				writer.WriteValue(Readonly.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

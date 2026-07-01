@@ -27,33 +27,59 @@ public partial class AzureAiStudioServiceSettings : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ApiKey");
-			writer.WriteString(ApiKey);
-		}
+			{
+				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+			}
 
+			{
+				writer.WriteFluentCall("EndpointType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EndpointType); });
+			}
+
+			{
+				writer.WriteFluentCall("Provider", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Provider); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Target", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Target); });
+			}
+		}
+		else
 		{
-			initializer.Property("EndpointType");
-			writer.WriteString(EndpointType);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings", false);
+			{
+				initializer.Property("ApiKey");
+				writer.WriteString(ApiKey);
+			}
 
-		{
-			initializer.Property("Provider");
-			writer.WriteString(Provider);
-		}
+			{
+				initializer.Property("EndpointType");
+				writer.WriteString(EndpointType);
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			{
+				initializer.Property("Provider");
+				writer.WriteString(Provider);
+			}
 
-		{
-			initializer.Property("Target");
-			writer.WriteString(Target);
-		}
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Target");
+				writer.WriteString(Target);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

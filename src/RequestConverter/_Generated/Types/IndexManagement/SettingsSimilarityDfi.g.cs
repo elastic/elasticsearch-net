@@ -27,12 +27,21 @@ public partial class SettingsSimilarityDfi : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IndependenceMeasure");
-			Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, writer);
+			{
+				writer.WriteFluentCall("IndependenceMeasure", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi", true);
+			{
+				initializer.Property("IndependenceMeasure");
+				Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

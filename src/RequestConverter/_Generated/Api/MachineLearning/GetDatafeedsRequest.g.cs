@@ -27,25 +27,49 @@ public partial class GetDatafeedsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest", false);
-		if (DatafeedId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DatafeedId");
-			DatafeedId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (DatafeedId is not null)
+			{
+				writer.WriteFluentCall("DatafeedId", (w) => { using var _oi = w.ForceObjectInitializer(); DatafeedId.FormatCode(w); });
+			}
 
-		if (AllowNoMatch is not null)
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+
+			if (ExcludeGenerated is not null)
+			{
+				writer.WriteFluentCall("ExcludeGenerated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeGenerated.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest", false);
+			if (DatafeedId is not null)
+			{
+				initializer.Property("DatafeedId");
+				DatafeedId.FormatCode(writer);
+			}
 
-		if (ExcludeGenerated is not null)
-		{
-			initializer.Property("ExcludeGenerated");
-			writer.WriteValue(ExcludeGenerated.Value);
-		}
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
 
-		initializer.Dispose();
+			if (ExcludeGenerated is not null)
+			{
+				initializer.Property("ExcludeGenerated");
+				writer.WriteValue(ExcludeGenerated.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

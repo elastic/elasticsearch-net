@@ -27,171 +27,310 @@ public partial class QueryStringQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery", false);
-		if (AllowLeadingWildcard is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowLeadingWildcard");
-			writer.WriteValue(AllowLeadingWildcard.Value);
-		}
+			if (AllowLeadingWildcard is not null)
+			{
+				writer.WriteFluentCall("AllowLeadingWildcard", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLeadingWildcard.Value); });
+			}
 
-		if (Analyzer is not null)
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
+
+			if (AnalyzeWildcard is not null)
+			{
+				writer.WriteFluentCall("AnalyzeWildcard", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AnalyzeWildcard.Value); });
+			}
+
+			if (AutoGenerateSynonymsPhraseQuery is not null)
+			{
+				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
+			}
+
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
+
+			if (DefaultField is not null)
+			{
+				writer.WriteFluentCall("DefaultField", (w) => { DefaultField.FormatCode(w); });
+			}
+
+			if (DefaultOperator is not null)
+			{
+				writer.WriteFluentCall("DefaultOperator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, w); });
+			}
+
+			if (EnablePositionIncrements is not null)
+			{
+				writer.WriteFluentCall("EnablePositionIncrements", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EnablePositionIncrements.Value); });
+			}
+
+			if (Escape is not null)
+			{
+				writer.WriteFluentCall("Escape", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Escape.Value); });
+			}
+
+			if (Fields is not null)
+			{
+				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+			}
+
+			if (Fuzziness is not null)
+			{
+				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+			}
+
+			if (FuzzyMaxExpansions is not null)
+			{
+				writer.WriteFluentCall("FuzzyMaxExpansions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyMaxExpansions.Value); });
+			}
+
+			if (FuzzyPrefixLength is not null)
+			{
+				writer.WriteFluentCall("FuzzyPrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyPrefixLength.Value); });
+			}
+
+			if (FuzzyRewrite is not null)
+			{
+				writer.WriteFluentCall("FuzzyRewrite", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FuzzyRewrite); });
+			}
+
+			if (FuzzyTranspositions is not null)
+			{
+				writer.WriteFluentCall("FuzzyTranspositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyTranspositions.Value); });
+			}
+
+			if (Lenient is not null)
+			{
+				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+			}
+
+			if (MaxDeterminizedStates is not null)
+			{
+				writer.WriteFluentCall("MaxDeterminizedStates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDeterminizedStates.Value); });
+			}
+
+			if (MinimumShouldMatch is not null)
+			{
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+			}
+
+			if (PhraseSlop is not null)
+			{
+				writer.WriteFluentCall("PhraseSlop", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PhraseSlop.Value); w.Write("d"); });
+			}
+
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (QuoteAnalyzer is not null)
+			{
+				writer.WriteFluentCall("QuoteAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QuoteAnalyzer); });
+			}
+
+			if (QuoteFieldSuffix is not null)
+			{
+				writer.WriteFluentCall("QuoteFieldSuffix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QuoteFieldSuffix); });
+			}
+
+			if (Rewrite is not null)
+			{
+				writer.WriteFluentCall("Rewrite", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Rewrite); });
+			}
+
+			if (TieBreaker is not null)
+			{
+				writer.WriteFluentCall("TieBreaker", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TieBreaker.Value); w.Write("d"); });
+			}
+
+			if (TimeZone is not null)
+			{
+				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+			}
+
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.TextQueryTypeCodeFormatter.FormatCode(Type.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery", false);
+			if (AllowLeadingWildcard is not null)
+			{
+				initializer.Property("AllowLeadingWildcard");
+				writer.WriteValue(AllowLeadingWildcard.Value);
+			}
 
-		if (AnalyzeWildcard is not null)
-		{
-			initializer.Property("AnalyzeWildcard");
-			writer.WriteValue(AnalyzeWildcard.Value);
-		}
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (AutoGenerateSynonymsPhraseQuery is not null)
-		{
-			initializer.Property("AutoGenerateSynonymsPhraseQuery");
-			writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
-		}
+			if (AnalyzeWildcard is not null)
+			{
+				initializer.Property("AnalyzeWildcard");
+				writer.WriteValue(AnalyzeWildcard.Value);
+			}
 
-		if (Boost is not null)
-		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (AutoGenerateSynonymsPhraseQuery is not null)
+			{
+				initializer.Property("AutoGenerateSynonymsPhraseQuery");
+				writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
+			}
 
-		if (DefaultField is not null)
-		{
-			initializer.Property("DefaultField");
-			DefaultField.FormatCode(writer);
-		}
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (DefaultOperator is not null)
-		{
-			initializer.Property("DefaultOperator");
-			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
-		}
+			if (DefaultField is not null)
+			{
+				initializer.Property("DefaultField");
+				DefaultField.FormatCode(writer);
+			}
 
-		if (EnablePositionIncrements is not null)
-		{
-			initializer.Property("EnablePositionIncrements");
-			writer.WriteValue(EnablePositionIncrements.Value);
-		}
+			if (DefaultOperator is not null)
+			{
+				initializer.Property("DefaultOperator");
+				Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
+			}
 
-		if (Escape is not null)
-		{
-			initializer.Property("Escape");
-			writer.WriteValue(Escape.Value);
-		}
+			if (EnablePositionIncrements is not null)
+			{
+				initializer.Property("EnablePositionIncrements");
+				writer.WriteValue(EnablePositionIncrements.Value);
+			}
 
-		if (Fields is not null)
-		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			if (Escape is not null)
+			{
+				initializer.Property("Escape");
+				writer.WriteValue(Escape.Value);
+			}
 
-		if (Fuzziness is not null)
-		{
-			initializer.Property("Fuzziness");
-			Fuzziness.FormatCode(writer);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		if (FuzzyMaxExpansions is not null)
-		{
-			initializer.Property("FuzzyMaxExpansions");
-			writer.WriteValue(FuzzyMaxExpansions.Value);
-		}
+			if (Fuzziness is not null)
+			{
+				initializer.Property("Fuzziness");
+				Fuzziness.FormatCode(writer);
+			}
 
-		if (FuzzyPrefixLength is not null)
-		{
-			initializer.Property("FuzzyPrefixLength");
-			writer.WriteValue(FuzzyPrefixLength.Value);
-		}
+			if (FuzzyMaxExpansions is not null)
+			{
+				initializer.Property("FuzzyMaxExpansions");
+				writer.WriteValue(FuzzyMaxExpansions.Value);
+			}
 
-		if (FuzzyRewrite is not null)
-		{
-			initializer.Property("FuzzyRewrite");
-			writer.WriteString(FuzzyRewrite);
-		}
+			if (FuzzyPrefixLength is not null)
+			{
+				initializer.Property("FuzzyPrefixLength");
+				writer.WriteValue(FuzzyPrefixLength.Value);
+			}
 
-		if (FuzzyTranspositions is not null)
-		{
-			initializer.Property("FuzzyTranspositions");
-			writer.WriteValue(FuzzyTranspositions.Value);
-		}
+			if (FuzzyRewrite is not null)
+			{
+				initializer.Property("FuzzyRewrite");
+				writer.WriteString(FuzzyRewrite);
+			}
 
-		if (Lenient is not null)
-		{
-			initializer.Property("Lenient");
-			writer.WriteValue(Lenient.Value);
-		}
+			if (FuzzyTranspositions is not null)
+			{
+				initializer.Property("FuzzyTranspositions");
+				writer.WriteValue(FuzzyTranspositions.Value);
+			}
 
-		if (MaxDeterminizedStates is not null)
-		{
-			initializer.Property("MaxDeterminizedStates");
-			writer.WriteValue(MaxDeterminizedStates.Value);
-		}
+			if (Lenient is not null)
+			{
+				initializer.Property("Lenient");
+				writer.WriteValue(Lenient.Value);
+			}
 
-		if (MinimumShouldMatch is not null)
-		{
-			initializer.Property("MinimumShouldMatch");
-			MinimumShouldMatch.FormatCode(writer);
-		}
+			if (MaxDeterminizedStates is not null)
+			{
+				initializer.Property("MaxDeterminizedStates");
+				writer.WriteValue(MaxDeterminizedStates.Value);
+			}
 
-		if (PhraseSlop is not null)
-		{
-			initializer.Property("PhraseSlop");
-			writer.WriteValue(PhraseSlop.Value);
-			writer.Write("d");
-		}
+			if (MinimumShouldMatch is not null)
+			{
+				initializer.Property("MinimumShouldMatch");
+				MinimumShouldMatch.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			if (PhraseSlop is not null)
+			{
+				initializer.Property("PhraseSlop");
+				writer.WriteValue(PhraseSlop.Value);
+				writer.Write("d");
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
 
-		if (QuoteAnalyzer is not null)
-		{
-			initializer.Property("QuoteAnalyzer");
-			writer.WriteString(QuoteAnalyzer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		if (QuoteFieldSuffix is not null)
-		{
-			initializer.Property("QuoteFieldSuffix");
-			writer.WriteString(QuoteFieldSuffix);
-		}
+			if (QuoteAnalyzer is not null)
+			{
+				initializer.Property("QuoteAnalyzer");
+				writer.WriteString(QuoteAnalyzer);
+			}
 
-		if (Rewrite is not null)
-		{
-			initializer.Property("Rewrite");
-			writer.WriteString(Rewrite);
-		}
+			if (QuoteFieldSuffix is not null)
+			{
+				initializer.Property("QuoteFieldSuffix");
+				writer.WriteString(QuoteFieldSuffix);
+			}
 
-		if (TieBreaker is not null)
-		{
-			initializer.Property("TieBreaker");
-			writer.WriteValue(TieBreaker.Value);
-			writer.Write("d");
-		}
+			if (Rewrite is not null)
+			{
+				initializer.Property("Rewrite");
+				writer.WriteString(Rewrite);
+			}
 
-		if (TimeZone is not null)
-		{
-			initializer.Property("TimeZone");
-			writer.WriteString(TimeZone);
-		}
+			if (TieBreaker is not null)
+			{
+				initializer.Property("TieBreaker");
+				writer.WriteValue(TieBreaker.Value);
+				writer.Write("d");
+			}
 
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.QueryDsl.TextQueryTypeCodeFormatter.FormatCode(Type.Value, writer);
-		}
+			if (TimeZone is not null)
+			{
+				initializer.Property("TimeZone");
+				writer.WriteString(TimeZone);
+			}
 
-		initializer.Dispose();
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.QueryDsl.TextQueryTypeCodeFormatter.FormatCode(Type.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

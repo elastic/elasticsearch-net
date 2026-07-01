@@ -27,62 +27,110 @@ public partial class License : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.License", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ExpiryDateInMillis");
-			writer.WriteValue(ExpiryDateInMillis);
-		}
+			{
+				writer.WriteFluentCall("ExpiryDateInMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExpiryDateInMillis); });
+			}
 
+			{
+				writer.WriteFluentCall("IssueDateInMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IssueDateInMillis); });
+			}
+
+			{
+				writer.WriteFluentCall("IssuedTo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IssuedTo); });
+			}
+
+			{
+				writer.WriteFluentCall("Issuer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Issuer); });
+			}
+
+			if (MaxNodes is not null)
+			{
+				writer.WriteFluentCall("MaxNodes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNodes.Value); w.Write("L"); });
+			}
+
+			if (MaxResourceUnits is not null)
+			{
+				writer.WriteFluentCall("MaxResourceUnits", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxResourceUnits.Value); w.Write("L"); });
+			}
+
+			{
+				writer.WriteFluentCall("Signature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Signature); });
+			}
+
+			if (StartDateInMillis is not null)
+			{
+				writer.WriteFluentCall("StartDateInMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StartDateInMillis.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Uid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Uid); });
+			}
+		}
+		else
 		{
-			initializer.Property("IssueDateInMillis");
-			writer.WriteValue(IssueDateInMillis);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.LicenseManagement.License", false);
+			{
+				initializer.Property("ExpiryDateInMillis");
+				writer.WriteValue(ExpiryDateInMillis);
+			}
 
-		{
-			initializer.Property("IssuedTo");
-			writer.WriteString(IssuedTo);
-		}
+			{
+				initializer.Property("IssueDateInMillis");
+				writer.WriteValue(IssueDateInMillis);
+			}
 
-		{
-			initializer.Property("Issuer");
-			writer.WriteString(Issuer);
-		}
+			{
+				initializer.Property("IssuedTo");
+				writer.WriteString(IssuedTo);
+			}
 
-		if (MaxNodes is not null)
-		{
-			initializer.Property("MaxNodes");
-			writer.WriteValue(MaxNodes.Value);
-			writer.Write("L");
-		}
+			{
+				initializer.Property("Issuer");
+				writer.WriteString(Issuer);
+			}
 
-		if (MaxResourceUnits is not null)
-		{
-			initializer.Property("MaxResourceUnits");
-			writer.WriteValue(MaxResourceUnits.Value);
-			writer.Write("L");
-		}
+			if (MaxNodes is not null)
+			{
+				initializer.Property("MaxNodes");
+				writer.WriteValue(MaxNodes.Value);
+				writer.Write("L");
+			}
 
-		{
-			initializer.Property("Signature");
-			writer.WriteString(Signature);
-		}
+			if (MaxResourceUnits is not null)
+			{
+				initializer.Property("MaxResourceUnits");
+				writer.WriteValue(MaxResourceUnits.Value);
+				writer.Write("L");
+			}
 
-		if (StartDateInMillis is not null)
-		{
-			initializer.Property("StartDateInMillis");
-			writer.WriteValue(StartDateInMillis.Value);
-		}
+			{
+				initializer.Property("Signature");
+				writer.WriteString(Signature);
+			}
 
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, writer);
-		}
+			if (StartDateInMillis is not null)
+			{
+				initializer.Property("StartDateInMillis");
+				writer.WriteValue(StartDateInMillis.Value);
+			}
 
-		{
-			initializer.Property("Uid");
-			writer.WriteString(Uid);
-		}
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Uid");
+				writer.WriteString(Uid);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,17 +27,30 @@ public partial class SampleDiversity : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.SampleDiversity", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("MaxDocsPerValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocsPerValue); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxDocsPerValue");
-			writer.WriteValue(MaxDocsPerValue);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.SampleDiversity", false);
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("MaxDocsPerValue");
+				writer.WriteValue(MaxDocsPerValue);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

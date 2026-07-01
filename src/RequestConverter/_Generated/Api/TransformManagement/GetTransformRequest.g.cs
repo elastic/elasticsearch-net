@@ -27,37 +27,71 @@ public partial class GetTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest", false);
-		if (TransformId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (TransformId is not null)
+			{
+				writer.WriteFluentCall("TransformId", (w) => { using var _oi = w.ForceObjectInitializer(); TransformId.FormatCode(w); });
+			}
 
-		if (AllowNoMatch is not null)
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+
+			if (ExcludeGenerated is not null)
+			{
+				writer.WriteFluentCall("ExcludeGenerated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeGenerated.Value); });
+			}
+
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest", false);
+			if (TransformId is not null)
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (ExcludeGenerated is not null)
-		{
-			initializer.Property("ExcludeGenerated");
-			writer.WriteValue(ExcludeGenerated.Value);
-		}
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
 
-		if (From is not null)
-		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			if (ExcludeGenerated is not null)
+			{
+				initializer.Property("ExcludeGenerated");
+				writer.WriteValue(ExcludeGenerated.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

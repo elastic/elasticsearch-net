@@ -27,24 +27,43 @@ public partial class Hop : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.Hop", false);
-		if (Connections is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Connections");
-			Connections.FormatCode(writer);
-		}
+			if (Connections is not null)
+			{
+				writer.WriteFluentDescriptorCall("Connections", (w) => { Connections.FormatCode(w); });
+			}
 
-		if (Query is not null)
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("Vertices", Vertices, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.Hop", false);
+			if (Connections is not null)
+			{
+				initializer.Property("Connections");
+				Connections.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Vertices");
-			writer.WriteInlineList(Vertices, (w, item) => { item.FormatCode(w); });
-		}
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Vertices");
+				writer.WriteInlineList(Vertices, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

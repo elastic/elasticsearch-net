@@ -27,25 +27,45 @@ public partial class DateRangeExpression : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression", false);
-		if (From is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("From");
-			From.FormatCode(writer);
-		}
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); From.FormatCode(w); });
+			}
 
-		if (Key is not null)
+			if (Key is not null)
+			{
+				writer.WriteFluentCall("Key", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Key); });
+			}
+
+			if (To is not null)
+			{
+				writer.WriteFluentCall("To", (w) => { using var _oi = w.ForceObjectInitializer(); To.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Key");
-			writer.WriteString(Key);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression", false);
+			if (From is not null)
+			{
+				initializer.Property("From");
+				From.FormatCode(writer);
+			}
 
-		if (To is not null)
-		{
-			initializer.Property("To");
-			To.FormatCode(writer);
-		}
+			if (Key is not null)
+			{
+				initializer.Property("Key");
+				writer.WriteString(Key);
+			}
 
-		initializer.Dispose();
+			if (To is not null)
+			{
+				initializer.Property("To");
+				To.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,18 +27,32 @@ public partial class IntervalsAnyOf : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf", false);
-		if (Filter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentDescriptorParams("Intervals", Intervals, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Intervals");
-			writer.WriteInlineList(Intervals, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf", false);
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Intervals");
+				writer.WriteInlineList(Intervals, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

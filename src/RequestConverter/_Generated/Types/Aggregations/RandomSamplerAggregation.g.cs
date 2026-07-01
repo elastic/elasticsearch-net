@@ -27,25 +27,44 @@ public partial class RandomSamplerAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Probability");
-			writer.WriteValue(Probability);
-			writer.Write("d");
-		}
+			{
+				writer.WriteFluentCall("Probability", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Probability); w.Write("d"); });
+			}
 
-		if (Seed is not null)
+			if (Seed is not null)
+			{
+				writer.WriteFluentCall("Seed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Seed.Value); });
+			}
+
+			if (ShardSeed is not null)
+			{
+				writer.WriteFluentCall("ShardSeed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSeed.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Seed");
-			writer.WriteValue(Seed.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation", false);
+			{
+				initializer.Property("Probability");
+				writer.WriteValue(Probability);
+				writer.Write("d");
+			}
 
-		if (ShardSeed is not null)
-		{
-			initializer.Property("ShardSeed");
-			writer.WriteValue(ShardSeed.Value);
-		}
+			if (Seed is not null)
+			{
+				initializer.Property("Seed");
+				writer.WriteValue(Seed.Value);
+			}
 
-		initializer.Dispose();
+			if (ShardSeed is not null)
+			{
+				initializer.Property("ShardSeed");
+				writer.WriteValue(ShardSeed.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

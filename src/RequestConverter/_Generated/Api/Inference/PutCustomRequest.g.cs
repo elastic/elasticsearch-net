@@ -27,34 +27,69 @@ public partial class PutCustomRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutCustomRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CustomInferenceId");
-			CustomInferenceId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Elastic.Clients.Elasticsearch.Inference.CustomTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				CustomInferenceId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (ChunkingSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); });
+			}
+
+			if (TaskSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("TaskSettings", (w) => { TaskSettings.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("TaskType");
-			Elastic.Clients.Elasticsearch.Inference.CustomTaskTypeCodeFormatter.FormatCode(TaskType, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.PutCustomRequest", false);
+			{
+				initializer.Property("CustomInferenceId");
+				CustomInferenceId.FormatCode(writer);
+			}
 
-		if (ChunkingSettings is not null)
-		{
-			initializer.Property("ChunkingSettings");
-			ChunkingSettings.FormatCode(writer);
-		}
+			{
+				initializer.Property("TaskType");
+				Elastic.Clients.Elasticsearch.Inference.CustomTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+			}
 
-		{
-			initializer.Property("ServiceSettings");
-			ServiceSettings.FormatCode(writer);
-		}
+			if (ChunkingSettings is not null)
+			{
+				initializer.Property("ChunkingSettings");
+				ChunkingSettings.FormatCode(writer);
+			}
 
-		if (TaskSettings is not null)
-		{
-			initializer.Property("TaskSettings");
-			TaskSettings.FormatCode(writer);
-		}
+			{
+				initializer.Property("ServiceSettings");
+				ServiceSettings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TaskSettings is not null)
+			{
+				initializer.Property("TaskSettings");
+				TaskSettings.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

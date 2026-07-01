@@ -27,30 +27,60 @@ public partial class UpdateFilterRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FilterId");
-			FilterId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				FilterId.FormatCode(writer);
+			}
 
-		if (AddItems is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AddItems is not null)
+			{
+				writer.WriteFluentParams("AddItems", AddItems, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (RemoveItems is not null)
+			{
+				writer.WriteFluentParams("RemoveItems", RemoveItems, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("AddItems");
-			writer.WriteInlineList(AddItems, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest", false);
+			{
+				initializer.Property("FilterId");
+				FilterId.FormatCode(writer);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (AddItems is not null)
+			{
+				initializer.Property("AddItems");
+				writer.WriteInlineList(AddItems, (w, item) => { w.WriteString(item); });
+			}
 
-		if (RemoveItems is not null)
-		{
-			initializer.Property("RemoveItems");
-			writer.WriteInlineList(RemoveItems, (w, item) => { w.WriteString(item); });
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		initializer.Dispose();
+			if (RemoveItems is not null)
+			{
+				initializer.Property("RemoveItems");
+				writer.WriteInlineList(RemoveItems, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

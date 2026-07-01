@@ -27,36 +27,71 @@ public partial class AsyncQueryGetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
 
-		if (DropNullColumns is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (DropNullColumns is not null)
+			{
+				writer.WriteFluentCall("DropNullColumns", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DropNullColumns.Value); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(Format.Value, w); });
+			}
+
+			if (KeepAlive is not null)
+			{
+				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+			}
+
+			if (WaitForCompletionTimeout is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForCompletionTimeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("DropNullColumns");
-			writer.WriteValue(DropNullColumns.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(Format.Value, writer);
-		}
+			if (DropNullColumns is not null)
+			{
+				initializer.Property("DropNullColumns");
+				writer.WriteValue(DropNullColumns.Value);
+			}
 
-		if (KeepAlive is not null)
-		{
-			initializer.Property("KeepAlive");
-			KeepAlive.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(Format.Value, writer);
+			}
 
-		if (WaitForCompletionTimeout is not null)
-		{
-			initializer.Property("WaitForCompletionTimeout");
-			WaitForCompletionTimeout.FormatCode(writer);
-		}
+			if (KeepAlive is not null)
+			{
+				initializer.Property("KeepAlive");
+				KeepAlive.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletionTimeout is not null)
+			{
+				initializer.Property("WaitForCompletionTimeout");
+				WaitForCompletionTimeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

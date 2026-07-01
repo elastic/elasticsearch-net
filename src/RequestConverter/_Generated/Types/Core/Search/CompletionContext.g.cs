@@ -27,37 +27,66 @@ public partial class CompletionContext : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.CompletionContext", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("d");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("Context", (w) => { using var _oi = w.ForceObjectInitializer(); Context.FormatCode(w); });
+			}
+
+			if (Neighbours is not null)
+			{
+				writer.WriteFluentCall("Neighbours", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Neighbours, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			if (Precision is not null)
+			{
+				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); Precision.FormatCode(w); });
+			}
+
+			if (Prefix is not null)
+			{
+				writer.WriteFluentCall("Prefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Prefix.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Context");
-			Context.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.CompletionContext", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("d");
+			}
 
-		if (Neighbours is not null)
-		{
-			initializer.Property("Neighbours");
-			writer.WriteInlineList(Neighbours, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("Context");
+				Context.FormatCode(writer);
+			}
 
-		if (Precision is not null)
-		{
-			initializer.Property("Precision");
-			Precision.FormatCode(writer);
-		}
+			if (Neighbours is not null)
+			{
+				initializer.Property("Neighbours");
+				writer.WriteInlineList(Neighbours, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Prefix is not null)
-		{
-			initializer.Property("Prefix");
-			writer.WriteValue(Prefix.Value);
-		}
+			if (Precision is not null)
+			{
+				initializer.Property("Precision");
+				Precision.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Prefix is not null)
+			{
+				initializer.Property("Prefix");
+				writer.WriteValue(Prefix.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

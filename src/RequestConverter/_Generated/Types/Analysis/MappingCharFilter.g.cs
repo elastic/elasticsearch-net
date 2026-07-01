@@ -27,25 +27,45 @@ public partial class MappingCharFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter", true);
-		if (Mappings is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mappings");
-			writer.WriteInlineList(Mappings, (w, item) => { w.WriteString(item); });
-		}
+			if (Mappings is not null)
+			{
+				writer.WriteFluentParams("Mappings", Mappings, (w, item) => { w.WriteString(item); });
+			}
 
-		if (MappingsPath is not null)
+			if (MappingsPath is not null)
+			{
+				writer.WriteFluentCall("MappingsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MappingsPath); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("MappingsPath");
-			writer.WriteString(MappingsPath);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter", true);
+			if (Mappings is not null)
+			{
+				initializer.Property("Mappings");
+				writer.WriteInlineList(Mappings, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (MappingsPath is not null)
+			{
+				initializer.Property("MappingsPath");
+				writer.WriteString(MappingsPath);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

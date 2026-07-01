@@ -27,18 +27,32 @@ public partial class ReplicationAccess : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ReplicationAccess", false);
-		if (AllowRestrictedIndices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowRestrictedIndices");
-			writer.WriteValue(AllowRestrictedIndices.Value);
-		}
+			if (AllowRestrictedIndices is not null)
+			{
+				writer.WriteFluentCall("AllowRestrictedIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowRestrictedIndices.Value); });
+			}
 
+			{
+				writer.WriteFluentCall("Names", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Names, (w, item) => { item.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Names");
-			writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ReplicationAccess", false);
+			if (AllowRestrictedIndices is not null)
+			{
+				initializer.Property("AllowRestrictedIndices");
+				writer.WriteValue(AllowRestrictedIndices.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Names");
+				writer.WriteInlineList(Names, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

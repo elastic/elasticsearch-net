@@ -27,13 +27,23 @@ public partial class ThinkingConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ThinkingConfig", false);
-		if (ThinkingBudget is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ThinkingBudget");
-			writer.WriteValue(ThinkingBudget.Value);
+			if (ThinkingBudget is not null)
+			{
+				writer.WriteFluentCall("ThinkingBudget", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ThinkingBudget.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ThinkingConfig", false);
+			if (ThinkingBudget is not null)
+			{
+				initializer.Property("ThinkingBudget");
+				writer.WriteValue(ThinkingBudget.Value);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

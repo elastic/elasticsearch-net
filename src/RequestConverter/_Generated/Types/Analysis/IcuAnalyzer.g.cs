@@ -27,17 +27,30 @@ public partial class IcuAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Method");
-			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, writer);
-		}
+			{
+				writer.WriteFluentCall("Method", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, w); });
+			}
 
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuAnalyzer", true);
+			{
+				initializer.Property("Method");
+				Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

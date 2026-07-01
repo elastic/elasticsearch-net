@@ -27,55 +27,105 @@ public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				JobId.FormatCode(writer);
+			}
 
-		if (AllowNoMatch is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+
+			if (BucketSpan is not null)
+			{
+				writer.WriteFluentCall("BucketSpan", (w) => { using var _oi = w.ForceObjectInitializer(); BucketSpan.FormatCode(w); });
+			}
+
+			if (End is not null)
+			{
+				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+			}
+
+			if (ExcludeInterim is not null)
+			{
+				writer.WriteFluentCall("ExcludeInterim", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeInterim.Value); });
+			}
+
+			if (OverallScore is not null)
+			{
+				writer.WriteFluentCall("OverallScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OverallScore.Value); w.Write("d"); });
+			}
+
+			if (Start is not null)
+			{
+				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+			}
+
+			if (TopN is not null)
+			{
+				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (BucketSpan is not null)
-		{
-			initializer.Property("BucketSpan");
-			BucketSpan.FormatCode(writer);
-		}
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
 
-		if (End is not null)
-		{
-			initializer.Property("End");
-			writer.WriteValue(End.Value);
-		}
+			if (BucketSpan is not null)
+			{
+				initializer.Property("BucketSpan");
+				BucketSpan.FormatCode(writer);
+			}
 
-		if (ExcludeInterim is not null)
-		{
-			initializer.Property("ExcludeInterim");
-			writer.WriteValue(ExcludeInterim.Value);
-		}
+			if (End is not null)
+			{
+				initializer.Property("End");
+				writer.WriteValue(End.Value);
+			}
 
-		if (OverallScore is not null)
-		{
-			initializer.Property("OverallScore");
-			writer.WriteValue(OverallScore.Value);
-			writer.Write("d");
-		}
+			if (ExcludeInterim is not null)
+			{
+				initializer.Property("ExcludeInterim");
+				writer.WriteValue(ExcludeInterim.Value);
+			}
 
-		if (Start is not null)
-		{
-			initializer.Property("Start");
-			writer.WriteValue(Start.Value);
-		}
+			if (OverallScore is not null)
+			{
+				initializer.Property("OverallScore");
+				writer.WriteValue(OverallScore.Value);
+				writer.Write("d");
+			}
 
-		if (TopN is not null)
-		{
-			initializer.Property("TopN");
-			writer.WriteValue(TopN.Value);
-		}
+			if (Start is not null)
+			{
+				initializer.Property("Start");
+				writer.WriteValue(Start.Value);
+			}
 
-		initializer.Dispose();
+			if (TopN is not null)
+			{
+				initializer.Property("TopN");
+				writer.WriteValue(TopN.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

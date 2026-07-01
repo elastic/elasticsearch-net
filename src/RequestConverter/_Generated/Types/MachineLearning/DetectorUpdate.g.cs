@@ -27,24 +27,43 @@ public partial class DetectorUpdate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate", false);
-		if (CustomRules is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CustomRules");
-			writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
-		}
+			if (CustomRules is not null)
+			{
+				writer.WriteFluentDescriptorParams("CustomRules", CustomRules, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>"); w.Write("()"); });
+			}
 
-		if (Description is not null)
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			{
+				writer.WriteFluentCall("DetectorIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DetectorIndex); });
+			}
+		}
+		else
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate", false);
+			if (CustomRules is not null)
+			{
+				initializer.Property("CustomRules");
+				writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
+			}
 
-		{
-			initializer.Property("DetectorIndex");
-			writer.WriteValue(DetectorIndex);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("DetectorIndex");
+				writer.WriteValue(DetectorIndex);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

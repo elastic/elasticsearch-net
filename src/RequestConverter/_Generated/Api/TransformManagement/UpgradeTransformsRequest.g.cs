@@ -27,19 +27,38 @@ public partial class UpgradeTransformsRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest", false);
-		if (DryRun is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DryRun");
-			writer.WriteValue(DryRun.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (DryRun is not null)
+			{
+				writer.WriteFluentCall("DryRun", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DryRun.Value); });
+			}
 
-		if (Timeout is not null)
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest", false);
+			if (DryRun is not null)
+			{
+				initializer.Property("DryRun");
+				writer.WriteValue(DryRun.Value);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

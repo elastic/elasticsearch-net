@@ -27,19 +27,34 @@ public partial class NvidiaTaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettings", false);
-		if (InputType is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InputType");
-			Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(InputType.Value, writer);
-		}
+			if (InputType is not null)
+			{
+				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(InputType.Value, w); });
+			}
 
-		if (Truncate is not null)
+			if (Truncate is not null)
+			{
+				writer.WriteFluentCall("Truncate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Truncate");
-			Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettings", false);
+			if (InputType is not null)
+			{
+				initializer.Property("InputType");
+				Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(InputType.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Truncate is not null)
+			{
+				initializer.Property("Truncate");
+				Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

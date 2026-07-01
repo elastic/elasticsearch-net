@@ -27,37 +27,71 @@ public partial class CancelRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.CancelRequest", false);
-		if (TaskId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TaskId");
-			TaskId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (TaskId is not null)
+			{
+				writer.WriteFluentCall("TaskId", (w) => { using var _oi = w.ForceObjectInitializer(); TaskId.FormatCode(w); });
+			}
 
-		if (Actions is not null)
+			if (Actions is not null)
+			{
+				writer.WriteFluentParams("Actions", Actions, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Nodes is not null)
+			{
+				writer.WriteFluentParams("Nodes", Nodes, (w, item) => { w.WriteString(item); });
+			}
+
+			if (ParentTaskId is not null)
+			{
+				writer.WriteFluentCall("ParentTaskId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ParentTaskId); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Actions");
-			writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Tasks.CancelRequest", false);
+			if (TaskId is not null)
+			{
+				initializer.Property("TaskId");
+				TaskId.FormatCode(writer);
+			}
 
-		if (Nodes is not null)
-		{
-			initializer.Property("Nodes");
-			writer.WriteInlineList(Nodes, (w, item) => { w.WriteString(item); });
-		}
+			if (Actions is not null)
+			{
+				initializer.Property("Actions");
+				writer.WriteInlineList(Actions, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ParentTaskId is not null)
-		{
-			initializer.Property("ParentTaskId");
-			writer.WriteString(ParentTaskId);
-		}
+			if (Nodes is not null)
+			{
+				initializer.Property("Nodes");
+				writer.WriteInlineList(Nodes, (w, item) => { w.WriteString(item); });
+			}
 
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
+			if (ParentTaskId is not null)
+			{
+				initializer.Property("ParentTaskId");
+				writer.WriteString(ParentTaskId);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

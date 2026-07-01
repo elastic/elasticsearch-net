@@ -27,6 +27,7 @@ public partial class DeleteInferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest", false);
 		{
 			initializer.Property("InferenceId");

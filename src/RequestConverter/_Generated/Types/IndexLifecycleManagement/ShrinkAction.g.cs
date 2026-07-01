@@ -27,25 +27,45 @@ public partial class ShrinkAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction", false);
-		if (AllowWriteAfterShrink is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowWriteAfterShrink");
-			writer.WriteValue(AllowWriteAfterShrink.Value);
-		}
+			if (AllowWriteAfterShrink is not null)
+			{
+				writer.WriteFluentCall("AllowWriteAfterShrink", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowWriteAfterShrink.Value); });
+			}
 
-		if (MaxPrimaryShardSize is not null)
+			if (MaxPrimaryShardSize is not null)
+			{
+				writer.WriteFluentCall("MaxPrimaryShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxPrimaryShardSize.FormatCode(w); });
+			}
+
+			if (NumberOfShards is not null)
+			{
+				writer.WriteFluentCall("NumberOfShards", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfShards.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxPrimaryShardSize");
-			MaxPrimaryShardSize.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction", false);
+			if (AllowWriteAfterShrink is not null)
+			{
+				initializer.Property("AllowWriteAfterShrink");
+				writer.WriteValue(AllowWriteAfterShrink.Value);
+			}
 
-		if (NumberOfShards is not null)
-		{
-			initializer.Property("NumberOfShards");
-			writer.WriteValue(NumberOfShards.Value);
-		}
+			if (MaxPrimaryShardSize is not null)
+			{
+				initializer.Property("MaxPrimaryShardSize");
+				MaxPrimaryShardSize.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (NumberOfShards is not null)
+			{
+				initializer.Property("NumberOfShards");
+				writer.WriteValue(NumberOfShards.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

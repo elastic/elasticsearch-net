@@ -27,29 +27,58 @@ public partial class PutSynonymRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
 
-		if (Append is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Append is not null)
+			{
+				writer.WriteFluentCall("Append", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Append.Value); });
+			}
+
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("SynonymsSet", SynonymsSet, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>"); w.Write("()"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Append");
-			writer.WriteValue(Append.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (Refresh is not null)
-		{
-			initializer.Property("Refresh");
-			writer.WriteValue(Refresh.Value);
-		}
+			if (Append is not null)
+			{
+				initializer.Property("Append");
+				writer.WriteValue(Append.Value);
+			}
 
-		{
-			initializer.Property("SynonymsSet");
-			writer.WriteInlineList(SynonymsSet, (w, item) => { item.FormatCode(w); });
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				writer.WriteValue(Refresh.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("SynonymsSet");
+				writer.WriteInlineList(SynonymsSet, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

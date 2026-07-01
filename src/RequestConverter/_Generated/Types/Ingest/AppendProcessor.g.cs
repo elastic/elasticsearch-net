@@ -27,72 +27,131 @@ public partial class AppendProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.AppendProcessor", false);
-		if (AllowDuplicates is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowDuplicates");
-			writer.WriteValue(AllowDuplicates.Value);
-		}
+			if (AllowDuplicates is not null)
+			{
+				writer.WriteFluentCall("AllowDuplicates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowDuplicates.Value); });
+			}
 
-		if (CopyFrom is not null)
+			if (CopyFrom is not null)
+			{
+				writer.WriteFluentCall("CopyFrom", (w) => { CopyFrom.FormatCode(w); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreEmptyValues is not null)
+			{
+				writer.WriteFluentCall("IgnoreEmptyValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreEmptyValues.Value); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (MediaType is not null)
+			{
+				writer.WriteFluentCall("MediaType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MediaType); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (Value is not null)
+			{
+				writer.WriteFluentCall("Value", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Value, (w, item) => { w.WriteObjectValue(item); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("CopyFrom");
-			CopyFrom.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.AppendProcessor", false);
+			if (AllowDuplicates is not null)
+			{
+				initializer.Property("AllowDuplicates");
+				writer.WriteValue(AllowDuplicates.Value);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (CopyFrom is not null)
+			{
+				initializer.Property("CopyFrom");
+				CopyFrom.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (IgnoreEmptyValues is not null)
-		{
-			initializer.Property("IgnoreEmptyValues");
-			writer.WriteValue(IgnoreEmptyValues.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (IgnoreEmptyValues is not null)
+			{
+				initializer.Property("IgnoreEmptyValues");
+				writer.WriteValue(IgnoreEmptyValues.Value);
+			}
 
-		if (MediaType is not null)
-		{
-			initializer.Property("MediaType");
-			writer.WriteString(MediaType);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (MediaType is not null)
+			{
+				initializer.Property("MediaType");
+				writer.WriteString(MediaType);
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Value is not null)
-		{
-			initializer.Property("Value");
-			writer.WriteInlineList(Value, (w, item) => { w.WriteValue(item); });
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		initializer.Dispose();
+			if (Value is not null)
+			{
+				initializer.Property("Value");
+				writer.WriteInlineList(Value, (w, item) => { w.WriteObjectValue(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

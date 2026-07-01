@@ -27,18 +27,32 @@ public partial class TimeSync : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TimeSync", false);
-		if (Delay is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Delay");
-			Delay.FormatCode(writer);
-		}
+			if (Delay is not null)
+			{
+				writer.WriteFluentCall("Delay", (w) => { using var _oi = w.ForceObjectInitializer(); Delay.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.TimeSync", false);
+			if (Delay is not null)
+			{
+				initializer.Property("Delay");
+				Delay.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

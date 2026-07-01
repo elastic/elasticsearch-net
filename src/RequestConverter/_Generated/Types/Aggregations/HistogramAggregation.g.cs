@@ -27,70 +27,125 @@ public partial class HistogramAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation", false);
-		if (ExtendedBounds is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ExtendedBounds");
-			ExtendedBounds.FormatCode(writer);
-		}
+			if (ExtendedBounds is not null)
+			{
+				writer.WriteFluentDescriptorCall("ExtendedBounds", (w) => { ExtendedBounds.FormatCode(w); });
+			}
 
-		if (Field is not null)
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (HardBounds is not null)
+			{
+				writer.WriteFluentDescriptorCall("HardBounds", (w) => { HardBounds.FormatCode(w); });
+			}
+
+			if (Interval is not null)
+			{
+				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Interval.Value); w.Write("d"); });
+			}
+
+			if (MinDocCount is not null)
+			{
+				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); w.Write("d"); });
+			}
+
+			if (Offset is not null)
+			{
+				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offset.Value); w.Write("d"); });
+			}
+
+			if (Order is not null)
+			{
+				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); }); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation", false);
+			if (ExtendedBounds is not null)
+			{
+				initializer.Property("ExtendedBounds");
+				ExtendedBounds.FormatCode(writer);
+			}
 
-		if (Format is not null)
-		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (HardBounds is not null)
-		{
-			initializer.Property("HardBounds");
-			HardBounds.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Interval is not null)
-		{
-			initializer.Property("Interval");
-			writer.WriteValue(Interval.Value);
-			writer.Write("d");
-		}
+			if (HardBounds is not null)
+			{
+				initializer.Property("HardBounds");
+				HardBounds.FormatCode(writer);
+			}
 
-		if (MinDocCount is not null)
-		{
-			initializer.Property("MinDocCount");
-			writer.WriteValue(MinDocCount.Value);
-		}
+			if (Interval is not null)
+			{
+				initializer.Property("Interval");
+				writer.WriteValue(Interval.Value);
+				writer.Write("d");
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing.Value);
-			writer.Write("d");
-		}
+			if (MinDocCount is not null)
+			{
+				initializer.Property("MinDocCount");
+				writer.WriteValue(MinDocCount.Value);
+			}
 
-		if (Offset is not null)
-		{
-			initializer.Property("Offset");
-			writer.WriteValue(Offset.Value);
-			writer.Write("d");
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteValue(Missing.Value);
+				writer.Write("d");
+			}
 
-		if (Order is not null)
-		{
-			initializer.Property("Order");
-			writer.WriteInlineList(Order, (w, item) => { w.Write("new("); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
-		}
+			if (Offset is not null)
+			{
+				initializer.Property("Offset");
+				writer.WriteValue(Offset.Value);
+				writer.Write("d");
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				writer.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); });
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

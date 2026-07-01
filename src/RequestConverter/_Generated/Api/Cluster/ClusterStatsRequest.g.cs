@@ -27,25 +27,49 @@ public partial class ClusterStatsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest", false);
-		if (NodeId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("NodeId");
-			NodeId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (NodeId is not null)
+			{
+				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+			}
 
-		if (IncludeRemotes is not null)
+			if (IncludeRemotes is not null)
+			{
+				writer.WriteFluentCall("IncludeRemotes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeRemotes.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("IncludeRemotes");
-			writer.WriteValue(IncludeRemotes.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest", false);
+			if (NodeId is not null)
+			{
+				initializer.Property("NodeId");
+				NodeId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (IncludeRemotes is not null)
+			{
+				initializer.Property("IncludeRemotes");
+				writer.WriteValue(IncludeRemotes.Value);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

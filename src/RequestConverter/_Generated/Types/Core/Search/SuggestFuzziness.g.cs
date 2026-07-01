@@ -27,37 +27,67 @@ public partial class SuggestFuzziness : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness", false);
-		if (Fuzziness is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Fuzziness");
-			Fuzziness.FormatCode(writer);
-		}
+			if (Fuzziness is not null)
+			{
+				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+			}
 
-		if (MinLength is not null)
+			if (MinLength is not null)
+			{
+				writer.WriteFluentCall("MinLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinLength.Value); });
+			}
+
+			if (PrefixLength is not null)
+			{
+				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+			}
+
+			if (Transpositions is not null)
+			{
+				writer.WriteFluentCall("Transpositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Transpositions.Value); });
+			}
+
+			if (UnicodeAware is not null)
+			{
+				writer.WriteFluentCall("UnicodeAware", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UnicodeAware.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("MinLength");
-			writer.WriteValue(MinLength.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness", false);
+			if (Fuzziness is not null)
+			{
+				initializer.Property("Fuzziness");
+				Fuzziness.FormatCode(writer);
+			}
 
-		if (PrefixLength is not null)
-		{
-			initializer.Property("PrefixLength");
-			writer.WriteValue(PrefixLength.Value);
-		}
+			if (MinLength is not null)
+			{
+				initializer.Property("MinLength");
+				writer.WriteValue(MinLength.Value);
+			}
 
-		if (Transpositions is not null)
-		{
-			initializer.Property("Transpositions");
-			writer.WriteValue(Transpositions.Value);
-		}
+			if (PrefixLength is not null)
+			{
+				initializer.Property("PrefixLength");
+				writer.WriteValue(PrefixLength.Value);
+			}
 
-		if (UnicodeAware is not null)
-		{
-			initializer.Property("UnicodeAware");
-			writer.WriteValue(UnicodeAware.Value);
-		}
+			if (Transpositions is not null)
+			{
+				initializer.Property("Transpositions");
+				writer.WriteValue(Transpositions.Value);
+			}
 
-		initializer.Dispose();
+			if (UnicodeAware is not null)
+			{
+				initializer.Property("UnicodeAware");
+				writer.WriteValue(UnicodeAware.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,30 +27,54 @@ public partial class ExploreControls : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.ExploreControls", false);
-		if (SampleDiversity is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("SampleDiversity");
-			SampleDiversity.FormatCode(writer);
-		}
+			if (SampleDiversity is not null)
+			{
+				writer.WriteFluentDescriptorCall("SampleDiversity", (w) => { SampleDiversity.FormatCode(w); });
+			}
 
-		if (SampleSize is not null)
+			if (SampleSize is not null)
+			{
+				writer.WriteFluentCall("SampleSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SampleSize.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("UseSignificance", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UseSignificance); });
+			}
+		}
+		else
 		{
-			initializer.Property("SampleSize");
-			writer.WriteValue(SampleSize.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Graph.ExploreControls", false);
+			if (SampleDiversity is not null)
+			{
+				initializer.Property("SampleDiversity");
+				SampleDiversity.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (SampleSize is not null)
+			{
+				initializer.Property("SampleSize");
+				writer.WriteValue(SampleSize.Value);
+			}
 
-		{
-			initializer.Property("UseSignificance");
-			writer.WriteValue(UseSignificance);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("UseSignificance");
+				writer.WriteValue(UseSignificance);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

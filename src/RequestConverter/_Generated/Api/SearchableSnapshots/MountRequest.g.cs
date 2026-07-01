@@ -27,65 +27,120 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Repository");
-			Repository.FormatCode(writer);
-		}
-
-		{
-			initializer.Property("Snapshot");
-			Snapshot.FormatCode(writer);
-		}
-
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
-
-		if (Storage is not null)
-		{
-			initializer.Property("Storage");
-			Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, writer);
-		}
-
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
-
-		if (IgnoreIndexSettings is not null)
-		{
-			initializer.Property("IgnoreIndexSettings");
-			writer.WriteInlineList(IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
-		}
-
-		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
-
-		if (IndexSettings is not null)
-		{
-			initializer.Property("IndexSettings");
 			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Repository.FormatCode(writer);
+			}
+
 			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Snapshot.FormatCode(writer);
+			}
 
-		if (RenamedIndex is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Storage is not null)
+			{
+				writer.WriteFluentCall("Storage", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, w); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+
+			if (IgnoreIndexSettings is not null)
+			{
+				writer.WriteFluentParams("IgnoreIndexSettings", IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
+			}
+
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (IndexSettings is not null)
+			{
+				writer.WriteFluentCall("IndexSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (RenamedIndex is not null)
+			{
+				writer.WriteFluentCall("RenamedIndex", (w) => { using var _oi = w.ForceObjectInitializer(); RenamedIndex.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("RenamedIndex");
-			RenamedIndex.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest", false);
+			{
+				initializer.Property("Repository");
+				Repository.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Snapshot");
+				Snapshot.FormatCode(writer);
+			}
+
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
+
+			if (Storage is not null)
+			{
+				initializer.Property("Storage");
+				Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, writer);
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
+
+			if (IgnoreIndexSettings is not null)
+			{
+				initializer.Property("IgnoreIndexSettings");
+				writer.WriteInlineList(IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
+			}
+
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
+
+			if (IndexSettings is not null)
+			{
+				initializer.Property("IndexSettings");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
+
+			if (RenamedIndex is not null)
+			{
+				initializer.Property("RenamedIndex");
+				RenamedIndex.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

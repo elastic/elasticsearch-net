@@ -27,19 +27,38 @@ public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest", false);
-		if (Namespace is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Namespace");
-			writer.WriteString(Namespace);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Namespace is not null)
+			{
+				writer.WriteFluentCall("Namespace", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Namespace); });
+			}
 
-		if (Service is not null)
+			if (Service is not null)
+			{
+				writer.WriteFluentCall("Service", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Service); });
+			}
+		}
+		else
 		{
-			initializer.Property("Service");
-			writer.WriteString(Service);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest", false);
+			if (Namespace is not null)
+			{
+				initializer.Property("Namespace");
+				writer.WriteString(Namespace);
+			}
 
-		initializer.Dispose();
+			if (Service is not null)
+			{
+				initializer.Property("Service");
+				writer.WriteString(Service);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

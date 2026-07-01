@@ -27,53 +27,89 @@ public partial class PatternAnalyzer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer", true);
-		if (Flags is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Flags");
-			writer.WriteString(Flags);
-		}
-
-		if (Lowercase is not null)
-		{
-			initializer.Property("Lowercase");
-			writer.WriteValue(Lowercase.Value);
-		}
-
-		if (Pattern is not null)
-		{
-			initializer.Property("Pattern");
-			writer.WriteString(Pattern);
-		}
-
-		if (Stopwords is not null)
-		{
-			initializer.Property("Stopwords");
-			if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Flags is not null)
 			{
-				Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Flags); });
 			}
-			else
-			{
-				writer.Write("new ");
-				writer.WriteTypeRef("string");
-				writer.Write("[] ");
-				writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
-			}
-		}
 
-		if (StopwordsPath is not null)
-		{
-			initializer.Property("StopwordsPath");
-			writer.WriteString(StopwordsPath);
-		}
+			if (Lowercase is not null)
+			{
+				writer.WriteFluentCall("Lowercase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lowercase.Value); });
+			}
+
+			if (Pattern is not null)
+			{
+				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+			}
+
+			if (Stopwords is not null)
+			{
+				writer.WriteFluentCall("Stopwords", (w) => { using var _oi = w.ForceObjectInitializer(); if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
+			}
+
+			if (StopwordsPath is not null)
+			{
+				writer.WriteFluentCall("StopwordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StopwordsPath); });
+			}
 #pragma warning disable CS0618
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
 #pragma warning restore CS0618
-		initializer.Dispose();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer", true);
+			if (Flags is not null)
+			{
+				initializer.Property("Flags");
+				writer.WriteString(Flags);
+			}
+
+			if (Lowercase is not null)
+			{
+				initializer.Property("Lowercase");
+				writer.WriteValue(Lowercase.Value);
+			}
+
+			if (Pattern is not null)
+			{
+				initializer.Property("Pattern");
+				writer.WriteString(Pattern);
+			}
+
+			if (Stopwords is not null)
+			{
+				initializer.Property("Stopwords");
+				if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, writer);
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("string");
+					writer.Write("[] ");
+					writer.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				}
+			}
+
+			if (StopwordsPath is not null)
+			{
+				initializer.Property("StopwordsPath");
+				writer.WriteString(StopwordsPath);
+			}
+#pragma warning disable CS0618
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+#pragma warning restore CS0618
+			initializer.Dispose();
+		}
 	}
 }

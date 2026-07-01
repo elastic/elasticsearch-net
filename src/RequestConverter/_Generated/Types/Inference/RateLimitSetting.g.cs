@@ -27,13 +27,23 @@ public partial class RateLimitSetting : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RateLimitSetting", false);
-		if (RequestsPerMinute is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RequestsPerMinute");
-			writer.WriteValue(RequestsPerMinute.Value);
+			if (RequestsPerMinute is not null)
+			{
+				writer.WriteFluentCall("RequestsPerMinute", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerMinute.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RateLimitSetting", false);
+			if (RequestsPerMinute is not null)
+			{
+				initializer.Property("RequestsPerMinute");
+				writer.WriteValue(RequestsPerMinute.Value);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

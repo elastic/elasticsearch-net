@@ -27,61 +27,127 @@ public partial class PutRoleMappingRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
 
-		if (Refresh is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Roles is not null)
+			{
+				writer.WriteFluentParams("Roles", Roles, (w, item) => { w.WriteString(item); });
+			}
+
+			if (RoleTemplates is not null)
+			{
+				writer.WriteFluentDescriptorParams("RoleTemplates", RoleTemplates, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleTemplate>"); w.Write("()"); });
+			}
+
+			if (Rules is not null)
+			{
+				writer.WriteFluentDescriptorCall("Rules", (w) => { Rules.FormatCode(w); });
+			}
+
+			if (RunAs is not null)
+			{
+				writer.WriteFluentParams("RunAs", RunAs, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (Enabled is not null)
-		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
 
-		if (Metadata is not null)
-		{
-			initializer.Property("Metadata");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		if (Roles is not null)
-		{
-			initializer.Property("Roles");
-			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
-		}
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (RoleTemplates is not null)
-		{
-			initializer.Property("RoleTemplates");
-			writer.WriteInlineList(RoleTemplates, (w, item) => { item.FormatCode(w); });
-		}
+			if (Roles is not null)
+			{
+				initializer.Property("Roles");
+				writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Rules is not null)
-		{
-			initializer.Property("Rules");
-			Rules.FormatCode(writer);
-		}
+			if (RoleTemplates is not null)
+			{
+				initializer.Property("RoleTemplates");
+				writer.WriteInlineList(RoleTemplates, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (RunAs is not null)
-		{
-			initializer.Property("RunAs");
-			writer.WriteInlineList(RunAs, (w, item) => { w.WriteString(item); });
-		}
+			if (Rules is not null)
+			{
+				initializer.Property("Rules");
+				Rules.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (RunAs is not null)
+			{
+				initializer.Property("RunAs");
+				writer.WriteInlineList(RunAs, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

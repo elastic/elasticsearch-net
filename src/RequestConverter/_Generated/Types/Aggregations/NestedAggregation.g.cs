@@ -27,13 +27,23 @@ public partial class NestedAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation", false);
-		if (Path is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Path");
-			Path.FormatCode(writer);
+			if (Path is not null)
+			{
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation", false);
+			if (Path is not null)
+			{
+				initializer.Property("Path");
+				Path.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

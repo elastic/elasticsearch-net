@@ -27,92 +27,166 @@ public partial class TermSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.TermSuggester", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (LowercaseTerms is not null)
+			{
+				writer.WriteFluentCall("LowercaseTerms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LowercaseTerms.Value); });
+			}
+
+			if (MaxEdits is not null)
+			{
+				writer.WriteFluentCall("MaxEdits", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxEdits.Value); });
+			}
+
+			if (MaxInspections is not null)
+			{
+				writer.WriteFluentCall("MaxInspections", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInspections.Value); });
+			}
+
+			if (MaxTermFreq is not null)
+			{
+				writer.WriteFluentCall("MaxTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTermFreq.Value); w.Write("f"); });
+			}
+
+			if (MinDocFreq is not null)
+			{
+				writer.WriteFluentCall("MinDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocFreq.Value); w.Write("f"); });
+			}
+
+			if (MinWordLength is not null)
+			{
+				writer.WriteFluentCall("MinWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinWordLength.Value); });
+			}
+
+			if (PrefixLength is not null)
+			{
+				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+			}
+
+			if (ShardSize is not null)
+			{
+				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Sort is not null)
+			{
+				writer.WriteFluentCall("Sort", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(Sort.Value, w); });
+			}
+
+			if (StringDistance is not null)
+			{
+				writer.WriteFluentCall("StringDistance", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(StringDistance.Value, w); });
+			}
+
+			if (SuggestMode is not null)
+			{
+				writer.WriteFluentCall("SuggestMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.TermSuggester", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (LowercaseTerms is not null)
-		{
-			initializer.Property("LowercaseTerms");
-			writer.WriteValue(LowercaseTerms.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MaxEdits is not null)
-		{
-			initializer.Property("MaxEdits");
-			writer.WriteValue(MaxEdits.Value);
-		}
+			if (LowercaseTerms is not null)
+			{
+				initializer.Property("LowercaseTerms");
+				writer.WriteValue(LowercaseTerms.Value);
+			}
 
-		if (MaxInspections is not null)
-		{
-			initializer.Property("MaxInspections");
-			writer.WriteValue(MaxInspections.Value);
-		}
+			if (MaxEdits is not null)
+			{
+				initializer.Property("MaxEdits");
+				writer.WriteValue(MaxEdits.Value);
+			}
 
-		if (MaxTermFreq is not null)
-		{
-			initializer.Property("MaxTermFreq");
-			writer.WriteValue(MaxTermFreq.Value);
-			writer.Write("f");
-		}
+			if (MaxInspections is not null)
+			{
+				initializer.Property("MaxInspections");
+				writer.WriteValue(MaxInspections.Value);
+			}
 
-		if (MinDocFreq is not null)
-		{
-			initializer.Property("MinDocFreq");
-			writer.WriteValue(MinDocFreq.Value);
-			writer.Write("f");
-		}
+			if (MaxTermFreq is not null)
+			{
+				initializer.Property("MaxTermFreq");
+				writer.WriteValue(MaxTermFreq.Value);
+				writer.Write("f");
+			}
 
-		if (MinWordLength is not null)
-		{
-			initializer.Property("MinWordLength");
-			writer.WriteValue(MinWordLength.Value);
-		}
+			if (MinDocFreq is not null)
+			{
+				initializer.Property("MinDocFreq");
+				writer.WriteValue(MinDocFreq.Value);
+				writer.Write("f");
+			}
 
-		if (PrefixLength is not null)
-		{
-			initializer.Property("PrefixLength");
-			writer.WriteValue(PrefixLength.Value);
-		}
+			if (MinWordLength is not null)
+			{
+				initializer.Property("MinWordLength");
+				writer.WriteValue(MinWordLength.Value);
+			}
 
-		if (ShardSize is not null)
-		{
-			initializer.Property("ShardSize");
-			writer.WriteValue(ShardSize.Value);
-		}
+			if (PrefixLength is not null)
+			{
+				initializer.Property("PrefixLength");
+				writer.WriteValue(PrefixLength.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (ShardSize is not null)
+			{
+				initializer.Property("ShardSize");
+				writer.WriteValue(ShardSize.Value);
+			}
 
-		if (Sort is not null)
-		{
-			initializer.Property("Sort");
-			Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(Sort.Value, writer);
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		if (StringDistance is not null)
-		{
-			initializer.Property("StringDistance");
-			Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(StringDistance.Value, writer);
-		}
+			if (Sort is not null)
+			{
+				initializer.Property("Sort");
+				Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(Sort.Value, writer);
+			}
 
-		if (SuggestMode is not null)
-		{
-			initializer.Property("SuggestMode");
-			Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, writer);
-		}
+			if (StringDistance is not null)
+			{
+				initializer.Property("StringDistance");
+				Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(StringDistance.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (SuggestMode is not null)
+			{
+				initializer.Property("SuggestMode");
+				Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

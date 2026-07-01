@@ -27,13 +27,27 @@ public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest", false);
-		if (Name is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			writer.WriteInlineList(Name, (w, item) => { item.FormatCode(w); });
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Name, (w, item) => { item.FormatCode(w); }); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest", false);
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteInlineList(Name, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

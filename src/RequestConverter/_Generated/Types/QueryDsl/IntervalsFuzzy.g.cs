@@ -27,42 +27,76 @@ public partial class IntervalsFuzzy : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (Fuzziness is not null)
+			if (Fuzziness is not null)
+			{
+				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+			}
+
+			if (PrefixLength is not null)
+			{
+				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Term", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Term); });
+			}
+
+			if (Transpositions is not null)
+			{
+				writer.WriteFluentCall("Transpositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Transpositions.Value); });
+			}
+
+			if (UseField is not null)
+			{
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Fuzziness");
-			Fuzziness.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (PrefixLength is not null)
-		{
-			initializer.Property("PrefixLength");
-			writer.WriteValue(PrefixLength.Value);
-		}
+			if (Fuzziness is not null)
+			{
+				initializer.Property("Fuzziness");
+				Fuzziness.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Term");
-			writer.WriteString(Term);
-		}
+			if (PrefixLength is not null)
+			{
+				initializer.Property("PrefixLength");
+				writer.WriteValue(PrefixLength.Value);
+			}
 
-		if (Transpositions is not null)
-		{
-			initializer.Property("Transpositions");
-			writer.WriteValue(Transpositions.Value);
-		}
+			{
+				initializer.Property("Term");
+				writer.WriteString(Term);
+			}
 
-		if (UseField is not null)
-		{
-			initializer.Property("UseField");
-			UseField.FormatCode(writer);
-		}
+			if (Transpositions is not null)
+			{
+				initializer.Property("Transpositions");
+				writer.WriteValue(Transpositions.Value);
+			}
 
-		initializer.Dispose();
+			if (UseField is not null)
+			{
+				initializer.Property("UseField");
+				UseField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

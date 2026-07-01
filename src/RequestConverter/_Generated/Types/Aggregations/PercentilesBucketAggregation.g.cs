@@ -27,31 +27,56 @@ public partial class PercentilesBucketAggregation : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation", false);
-		if (BucketsPath is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BucketsPath");
-			BucketsPath.FormatCode(writer);
-		}
+			if (BucketsPath is not null)
+			{
+				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (GapPolicy is not null)
+			{
+				writer.WriteFluentCall("GapPolicy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
+			}
+
+			if (Percents is not null)
+			{
+				writer.WriteFluentParams("Percents", Percents, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation", false);
+			if (BucketsPath is not null)
+			{
+				initializer.Property("BucketsPath");
+				BucketsPath.FormatCode(writer);
+			}
 
-		if (GapPolicy is not null)
-		{
-			initializer.Property("GapPolicy");
-			Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Percents is not null)
-		{
-			initializer.Property("Percents");
-			writer.WriteInlineList(Percents, (w, item) => { w.WriteValue(item); w.Write("d"); });
-		}
+			if (GapPolicy is not null)
+			{
+				initializer.Property("GapPolicy");
+				Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Percents is not null)
+			{
+				initializer.Property("Percents");
+				writer.WriteInlineList(Percents, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

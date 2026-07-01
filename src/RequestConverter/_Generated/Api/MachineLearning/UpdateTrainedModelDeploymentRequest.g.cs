@@ -27,24 +27,49 @@ public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelId.FormatCode(writer);
+			}
 
-		if (AdaptiveAllocations is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AdaptiveAllocations is not null)
+			{
+				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); });
+			}
+
+			if (NumberOfAllocations is not null)
+			{
+				writer.WriteFluentCall("NumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfAllocations.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("AdaptiveAllocations");
-			AdaptiveAllocations.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest", false);
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
 
-		if (NumberOfAllocations is not null)
-		{
-			initializer.Property("NumberOfAllocations");
-			writer.WriteValue(NumberOfAllocations.Value);
-		}
+			if (AdaptiveAllocations is not null)
+			{
+				initializer.Property("AdaptiveAllocations");
+				AdaptiveAllocations.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (NumberOfAllocations is not null)
+			{
+				initializer.Property("NumberOfAllocations");
+				writer.WriteValue(NumberOfAllocations.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

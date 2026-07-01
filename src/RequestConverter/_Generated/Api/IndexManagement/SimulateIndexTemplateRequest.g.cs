@@ -27,42 +27,98 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
 
-		if (Cause is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (Cause is not null)
+			{
+				writer.WriteFluentCall("Cause", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Cause); });
+			}
+
+			if (Create is not null)
+			{
+				writer.WriteFluentCall("Create", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Create.Value); });
+			}
+
+			if (IncludeDefaults is not null)
+			{
+				writer.WriteFluentCall("IncludeDefaults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDefaults.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (IndexTemplate is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexTemplate", (w) => { IndexTemplate.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Cause");
-			writer.WriteString(Cause);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (Create is not null)
-		{
-			initializer.Property("Create");
-			writer.WriteValue(Create.Value);
-		}
+			if (Cause is not null)
+			{
+				initializer.Property("Cause");
+				writer.WriteString(Cause);
+			}
 
-		if (IncludeDefaults is not null)
-		{
-			initializer.Property("IncludeDefaults");
-			writer.WriteValue(IncludeDefaults.Value);
-		}
+			if (Create is not null)
+			{
+				initializer.Property("Create");
+				writer.WriteValue(Create.Value);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (IncludeDefaults is not null)
+			{
+				initializer.Property("IncludeDefaults");
+				writer.WriteValue(IncludeDefaults.Value);
+			}
 
-		if (IndexTemplate is not null)
-		{
-			initializer.Property("IndexTemplate");
-			IndexTemplate.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (IndexTemplate is not null)
+			{
+				initializer.Property("IndexTemplate");
+				IndexTemplate.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

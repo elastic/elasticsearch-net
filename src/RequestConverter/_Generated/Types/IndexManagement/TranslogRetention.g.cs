@@ -27,19 +27,34 @@ public partial class TranslogRetention : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention", false);
-		if (Age is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Age");
-			Age.FormatCode(writer);
-		}
+			if (Age is not null)
+			{
+				writer.WriteFluentCall("Age", (w) => { using var _oi = w.ForceObjectInitializer(); Age.FormatCode(w); });
+			}
 
-		if (Size is not null)
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); Size.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Size");
-			Size.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention", false);
+			if (Age is not null)
+			{
+				initializer.Property("Age");
+				Age.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				Size.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

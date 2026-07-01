@@ -35,7 +35,7 @@ public partial class FieldMapping : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Mapping");
-			writer.Write("new(");
+			writer.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<string,Elastic.Clients.Elasticsearch.Mapping.IProperty>");
 			writer.WriteString(Mapping.Key);
 			writer.Write(", ");
 			Mapping.Value.FormatCode(writer);

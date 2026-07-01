@@ -27,73 +27,130 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.KnnRetriever", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			writer.WriteString(Field);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Field); });
+			}
 
-		if (Filter is not null)
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+			}
+
+			{
+				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K); });
+			}
+
+			if (MinScore is not null)
+			{
+				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			{
+				writer.WriteFluentCall("NumCandidates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumCandidates); });
+			}
+
+			if (QueryVector is not null)
+			{
+				writer.WriteFluentParams("QueryVector", QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
+			}
+
+			if (QueryVectorBuilder is not null)
+			{
+				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); });
+			}
+
+			if (RescoreVector is not null)
+			{
+				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); });
+			}
+
+			if (Similarity is not null)
+			{
+				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Similarity.Value); w.Write("f"); });
+			}
+
+			if (VisitPercentage is not null)
+			{
+				writer.WriteFluentCall("VisitPercentage", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(VisitPercentage.Value); w.Write("f"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Filter");
-			writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.KnnRetriever", false);
+			{
+				initializer.Property("Field");
+				writer.WriteString(Field);
+			}
 
-		{
-			initializer.Property("K");
-			writer.WriteValue(K);
-		}
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				writer.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (MinScore is not null)
-		{
-			initializer.Property("MinScore");
-			writer.WriteValue(MinScore.Value);
-			writer.Write("f");
-		}
+			{
+				initializer.Property("K");
+				writer.WriteValue(K);
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			if (MinScore is not null)
+			{
+				initializer.Property("MinScore");
+				writer.WriteValue(MinScore.Value);
+				writer.Write("f");
+			}
 
-		{
-			initializer.Property("NumCandidates");
-			writer.WriteValue(NumCandidates);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		if (QueryVector is not null)
-		{
-			initializer.Property("QueryVector");
-			writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
-		}
+			{
+				initializer.Property("NumCandidates");
+				writer.WriteValue(NumCandidates);
+			}
 
-		if (QueryVectorBuilder is not null)
-		{
-			initializer.Property("QueryVectorBuilder");
-			QueryVectorBuilder.FormatCode(writer);
-		}
+			if (QueryVector is not null)
+			{
+				initializer.Property("QueryVector");
+				writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
+			}
 
-		if (RescoreVector is not null)
-		{
-			initializer.Property("RescoreVector");
-			RescoreVector.FormatCode(writer);
-		}
+			if (QueryVectorBuilder is not null)
+			{
+				initializer.Property("QueryVectorBuilder");
+				QueryVectorBuilder.FormatCode(writer);
+			}
 
-		if (Similarity is not null)
-		{
-			initializer.Property("Similarity");
-			writer.WriteValue(Similarity.Value);
-			writer.Write("f");
-		}
+			if (RescoreVector is not null)
+			{
+				initializer.Property("RescoreVector");
+				RescoreVector.FormatCode(writer);
+			}
 
-		if (VisitPercentage is not null)
-		{
-			initializer.Property("VisitPercentage");
-			writer.WriteValue(VisitPercentage.Value);
-			writer.Write("f");
-		}
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				writer.WriteValue(Similarity.Value);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			if (VisitPercentage is not null)
+			{
+				initializer.Property("VisitPercentage");
+				writer.WriteValue(VisitPercentage.Value);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

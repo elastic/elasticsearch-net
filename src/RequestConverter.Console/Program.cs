@@ -24,17 +24,6 @@ internal class Program
 {
 	private static readonly FrozenSet<string> Blacklist = new HashSet<string>
 	{
-		// Missing 'ObjectProperty.synthetic_source_keep' property.
-		"8b8b6aac2111b2d8b93758ac737e6543",
-
-		// Missing support for non-exhaustive internal tagged variants.
-		"5d428ea66252fd252b6a8d6f47605c86",
-		"464dffb6a6e24a860223d1c32b232f95",
-
-		// Missing shortcut property for 'DataStreamLifecycleDownsampling' to 'rounds'.
-		"fe208d94ec93eabf3bd06139fa70701e",
-		"e2a753029b450942a3228e3003a55a7d",
-
 		// 'PutAutoFollowPatternRequest.leader_index_exclusion_patterns' should be "single or many" (based on this example).
 		"46a0eaaf5c881f1ba716d1812b36c724",
 
@@ -58,27 +47,6 @@ internal class Program
 		"fbb38243221c8fb311660616e3add9ce",
 		"aee4734ee63dbbbd12a21ee886f7a829",
 
-		// 'FunctionScoreQuery.functions' shortcut property should be "single or many" (FunctionScoreContainer | FunctionScoreContainer[]).
-		// We have to check, if deserialization works after this change as we are now dealing with either an array, or an object. This
-		// most certainly requires a change in the converter generation!
-		"9334ccd09548b585cd637d7c66c5ae65",
-		"eff2fc92d46eb3c8f4d424eed18f54a2",
-		"6c00dae1a456ae5e854e98e895dca2ab",
-		"996f320a0f537c24b9cd0d71b5f7c1f8",
-		"fad524db23eb5718ff310956e590b00d",
-		"1153bd92ca18356db927054958cd95c6",
-		"4f3366fc26e7ea4de446dfa5cdec9683",
-		"807c0c9763f8c1114b3c8278c2a0cb56",
-		"35260b615d0b5628c95d7cc814c39bd3",
-		"234cec3ead32d7ed71afbe1edfea23df",
-		"6326f5c6fd2a6e6b1aff9a643b94f455",
-		"07ba3eaa931f2cf110052e3544db51f8",
-
-		// We don't capture the alternative array representation for 'Highlight.fields' in the spec.
-		// See:
-		// https://www.elastic.co/guide/en/elasticsearch/reference/current/highlighting.html#explicit-field-order
-		"e6faae2e272ee57727f38e55a3de5bb2",
-
 		// We don't capture the object representation for 'Script.source' in the spec.
 		"f8833488041f3d318435b60917fa877c",
 		"634ecacf14b83c5f0bb8b6273cf6418e",
@@ -101,28 +69,11 @@ internal class Program
 		// 'QueryVector' must be handcrafted as it accepts a HEX-string representation.
 		"856c10ad554c26b70f1121454caff40a",
 
-		// The 'dictionary' property is missing for 'Script' (might be a bug in the documentation example).
-		"32b8a5152b47930f2e16c40c8615c7bb",
-		"6b6fd0a5942dfb9762ad2790cf421a80",
-		"16634cfa7916cf4e8048a1d70e6240f2",
-
 		// ESQL named query parameters are currently not captured in the spec.
 		"7fde3ff91c4a2e7080444af37d5cd287",
 
 		// No simplified "single or many" as a dictionary value.
 		"c4272ad0309ffbcbe9ce96bf9fb4352a",
-
-		// Shortcut property converter generation does not work correctly. Shortcut property of type 'CompletionContext'
-		// is of type 'Context' (string | GeoLocation) => ultimately allows 'object' BUT not only object.
-		// The converter incorrectly checks for TokenType == Object.
-		"25ae1a698f867ba5139605cc952436c0",
-		"6521c3578dc4ad4a6db697700986e78e",
-
-		// SQL positional query parameters are currently not captured in the spec.
-		"d9e0cba8e150681d861f5fd1545514e2",
-
-		// Missing variant 'text_similarity' for 'InferenceConfigUpdateContainer'.
-		"095e3f21941a9cc75f398389a075152d",
 
 		// 'PhraseSuggestCollateQuery.source' can be 'string' or 'object'.
 		"89a6b24618cafd60de1702a5b9f28a8d",
@@ -131,10 +82,6 @@ internal class Program
 		// "Comma-separated list of search groups to include in the search statistics."
 		// and apparently accepts the "_all" syntax.
 		"bd68666ca2e0be12f7624016317a62bc",
-
-		// 'WeightedTokensQuery` is mapped incorrectly
-		"086ec4c5d86bbf80fb80162e94037689",
-		"ee0fd67acc807f1bddf5e9807c06e7eb",
 
 		// We incorrectly simplify the 'Tokenizer', 'CharFilter' and 'TokenFilter' unions.
 		"f7ec9062b3a7578fed55f119d7c22b74",
@@ -211,10 +158,6 @@ internal class Program
 		"15a34bfe0ef8ef6333c8c7b55c011e5d",
 		"89f8eac24f3ec6a7668d580aaf0eeefa",
 
-		// We do not allow to set the 'keyed' property for aggregations.
-		"ecc57597f6b791d1151ad79d9f4ce67b",
-		"b7ad394975863a8f5ee29627c3ab738b",
-
 		// Invalid example
 		"d0c03847106d23ad632ceb624d647c37",
 		"16a9ebe102b53495de9d2231f5ae7158",
@@ -223,8 +166,6 @@ internal class Program
 		"e9ae959608d128202921b174f4faa7a8",
 		"7c862a20772467e0f5beebbd1b80c4cb",
 		"2d633b7f346b828d01f923ce9dbf6ad5", // Invalid JSON
-		"59726e3c90e1218487a781508788c243", // Invalid 'DateTime' value
-		"316cd43feb3b86396483903af1a048b1", // Invalid 'DateTime' value
 		"f5815d573cee0447910c9668003887b8", // Invalid 'CalendarInterval' value (intentional)
 		"f43d551aaaad73d979adf1b86533e6a3", // Invalid 'Duration' value (intentional)
 

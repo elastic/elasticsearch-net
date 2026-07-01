@@ -27,18 +27,32 @@ public partial class IcuFoldingTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("UnicodeSetFilter");
-			writer.WriteString(UnicodeSetFilter);
-		}
+			{
+				writer.WriteFluentCall("UnicodeSetFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UnicodeSetFilter); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.IcuFoldingTokenFilter", true);
+			{
+				initializer.Property("UnicodeSetFilter");
+				writer.WriteString(UnicodeSetFilter);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

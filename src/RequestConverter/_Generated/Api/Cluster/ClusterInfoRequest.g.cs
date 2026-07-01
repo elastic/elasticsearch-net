@@ -27,12 +27,28 @@ public partial class ClusterInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Target");
-			writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });
+			}
 
-		initializer.Dispose();
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest", false);
+			{
+				initializer.Property("Target");
+				writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

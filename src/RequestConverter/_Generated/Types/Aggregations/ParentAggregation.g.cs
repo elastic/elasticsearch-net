@@ -27,13 +27,23 @@ public partial class ParentAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation", false);
-		if (Type is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Type");
-			writer.WriteString(Type);
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation", false);
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				writer.WriteString(Type);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

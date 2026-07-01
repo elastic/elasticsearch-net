@@ -27,24 +27,47 @@ public partial class SamlInvalidateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest", false);
-		if (Acs is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Acs");
-			writer.WriteString(Acs);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Acs is not null)
+			{
+				writer.WriteFluentCall("Acs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Acs); });
+			}
 
+			{
+				writer.WriteFluentCall("QueryString", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryString); });
+			}
+
+			if (Realm is not null)
+			{
+				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+			}
+		}
+		else
 		{
-			initializer.Property("QueryString");
-			writer.WriteString(QueryString);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest", false);
+			if (Acs is not null)
+			{
+				initializer.Property("Acs");
+				writer.WriteString(Acs);
+			}
 
-		if (Realm is not null)
-		{
-			initializer.Property("Realm");
-			writer.WriteString(Realm);
-		}
+			{
+				initializer.Property("QueryString");
+				writer.WriteString(QueryString);
+			}
 
-		initializer.Dispose();
+			if (Realm is not null)
+			{
+				initializer.Property("Realm");
+				writer.WriteString(Realm);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

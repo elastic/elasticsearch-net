@@ -27,33 +27,59 @@ public partial class QueryRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRule", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Actions");
-			Actions.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentDescriptorCall("Actions", (w) => { Actions.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentDescriptorParams("Criteria", Criteria, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>"); w.Write("()"); });
+			}
+
+			if (Priority is not null)
+			{
+				writer.WriteFluentCall("Priority", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Priority.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("RuleId", (w) => { using var _oi = w.ForceObjectInitializer(); RuleId.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(Type, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Criteria");
-			writer.WriteInlineList(Criteria, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRule", false);
+			{
+				initializer.Property("Actions");
+				Actions.FormatCode(writer);
+			}
 
-		if (Priority is not null)
-		{
-			initializer.Property("Priority");
-			writer.WriteValue(Priority.Value);
-		}
+			{
+				initializer.Property("Criteria");
+				writer.WriteInlineList(Criteria, (w, item) => { item.FormatCode(w); });
+			}
 
-		{
-			initializer.Property("RuleId");
-			RuleId.FormatCode(writer);
-		}
+			if (Priority is not null)
+			{
+				initializer.Property("Priority");
+				writer.WriteValue(Priority.Value);
+			}
 
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(Type, writer);
-		}
+			{
+				initializer.Property("RuleId");
+				RuleId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(Type, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

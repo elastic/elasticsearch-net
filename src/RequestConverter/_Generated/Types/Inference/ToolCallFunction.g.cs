@@ -27,17 +27,30 @@ public partial class ToolCallFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ToolCallFunction", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Arguments");
-			writer.WriteString(Arguments);
-		}
+			{
+				writer.WriteFluentCall("Arguments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Arguments); });
+			}
 
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+		}
+		else
 		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ToolCallFunction", false);
+			{
+				initializer.Property("Arguments");
+				writer.WriteString(Arguments);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

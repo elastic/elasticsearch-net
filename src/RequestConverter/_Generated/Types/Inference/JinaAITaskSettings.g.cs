@@ -27,31 +27,56 @@ public partial class JinaAITaskSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.JinaAITaskSettings", false);
-		if (InputType is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("InputType");
-			Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(InputType.Value, writer);
-		}
+			if (InputType is not null)
+			{
+				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(InputType.Value, w); });
+			}
 
-		if (LateChunking is not null)
+			if (LateChunking is not null)
+			{
+				writer.WriteFluentCall("LateChunking", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LateChunking.Value); });
+			}
+
+			if (ReturnDocuments is not null)
+			{
+				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+			}
+
+			if (TopN is not null)
+			{
+				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("LateChunking");
-			writer.WriteValue(LateChunking.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.JinaAITaskSettings", false);
+			if (InputType is not null)
+			{
+				initializer.Property("InputType");
+				Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(InputType.Value, writer);
+			}
 
-		if (ReturnDocuments is not null)
-		{
-			initializer.Property("ReturnDocuments");
-			writer.WriteValue(ReturnDocuments.Value);
-		}
+			if (LateChunking is not null)
+			{
+				initializer.Property("LateChunking");
+				writer.WriteValue(LateChunking.Value);
+			}
 
-		if (TopN is not null)
-		{
-			initializer.Property("TopN");
-			writer.WriteValue(TopN.Value);
-		}
+			if (ReturnDocuments is not null)
+			{
+				initializer.Property("ReturnDocuments");
+				writer.WriteValue(ReturnDocuments.Value);
+			}
 
-		initializer.Dispose();
+			if (TopN is not null)
+			{
+				initializer.Property("TopN");
+				writer.WriteValue(TopN.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

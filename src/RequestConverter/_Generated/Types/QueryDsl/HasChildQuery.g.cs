@@ -27,60 +27,108 @@ public partial class HasChildQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
-		if (IgnoreUnmapped is not null)
+			if (IgnoreUnmapped is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+			}
+
+			if (InnerHits is not null)
+			{
+				writer.WriteFluentDescriptorCall("InnerHits", (w) => { InnerHits.FormatCode(w); });
+			}
+
+			if (MaxChildren is not null)
+			{
+				writer.WriteFluentCall("MaxChildren", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChildren.Value); });
+			}
+
+			if (MinChildren is not null)
+			{
+				writer.WriteFluentCall("MinChildren", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinChildren.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (ScoreMode is not null)
+			{
+				writer.WriteFluentCall("ScoreMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+			}
+		}
+		else
 		{
-			initializer.Property("IgnoreUnmapped");
-			writer.WriteValue(IgnoreUnmapped.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (InnerHits is not null)
-		{
-			initializer.Property("InnerHits");
-			InnerHits.FormatCode(writer);
-		}
+			if (IgnoreUnmapped is not null)
+			{
+				initializer.Property("IgnoreUnmapped");
+				writer.WriteValue(IgnoreUnmapped.Value);
+			}
 
-		if (MaxChildren is not null)
-		{
-			initializer.Property("MaxChildren");
-			writer.WriteValue(MaxChildren.Value);
-		}
+			if (InnerHits is not null)
+			{
+				initializer.Property("InnerHits");
+				InnerHits.FormatCode(writer);
+			}
 
-		if (MinChildren is not null)
-		{
-			initializer.Property("MinChildren");
-			writer.WriteValue(MinChildren.Value);
-		}
+			if (MaxChildren is not null)
+			{
+				initializer.Property("MaxChildren");
+				writer.WriteValue(MaxChildren.Value);
+			}
 
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			if (MinChildren is not null)
+			{
+				initializer.Property("MinChildren");
+				writer.WriteValue(MinChildren.Value);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
 
-		if (ScoreMode is not null)
-		{
-			initializer.Property("ScoreMode");
-			Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		{
-			initializer.Property("Type");
-			writer.WriteString(Type);
-		}
+			if (ScoreMode is not null)
+			{
+				initializer.Property("ScoreMode");
+				Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Type");
+				writer.WriteString(Type);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

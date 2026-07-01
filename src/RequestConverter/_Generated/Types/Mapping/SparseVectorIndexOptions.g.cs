@@ -27,19 +27,34 @@ public partial class SparseVectorIndexOptions : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions", false);
-		if (Prune is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Prune");
-			writer.WriteValue(Prune.Value);
-		}
+			if (Prune is not null)
+			{
+				writer.WriteFluentCall("Prune", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Prune.Value); });
+			}
 
-		if (PruningConfig is not null)
+			if (PruningConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("PruningConfig", (w) => { PruningConfig.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("PruningConfig");
-			PruningConfig.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions", false);
+			if (Prune is not null)
+			{
+				initializer.Property("Prune");
+				writer.WriteValue(Prune.Value);
+			}
 
-		initializer.Dispose();
+			if (PruningConfig is not null)
+			{
+				initializer.Property("PruningConfig");
+				PruningConfig.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

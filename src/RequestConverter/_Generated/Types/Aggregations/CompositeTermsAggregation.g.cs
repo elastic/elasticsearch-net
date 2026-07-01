@@ -27,43 +27,78 @@ public partial class CompositeTermsAggregation : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (MissingBucket is not null)
+			if (MissingBucket is not null)
+			{
+				writer.WriteFluentCall("MissingBucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MissingBucket.Value); });
+			}
+
+			if (MissingOrder is not null)
+			{
+				writer.WriteFluentCall("MissingOrder", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, w); });
+			}
+
+			if (Order is not null)
+			{
+				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (ValueType is not null)
+			{
+				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MissingBucket");
-			writer.WriteValue(MissingBucket.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (MissingOrder is not null)
-		{
-			initializer.Property("MissingOrder");
-			Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
-		}
+			if (MissingBucket is not null)
+			{
+				initializer.Property("MissingBucket");
+				writer.WriteValue(MissingBucket.Value);
+			}
 
-		if (Order is not null)
-		{
-			initializer.Property("Order");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
-		}
+			if (MissingOrder is not null)
+			{
+				initializer.Property("MissingOrder");
+				Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
+			}
 
-		if (ValueType is not null)
-		{
-			initializer.Property("ValueType");
-			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ValueType is not null)
+			{
+				initializer.Property("ValueType");
+				Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

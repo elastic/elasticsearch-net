@@ -27,6 +27,7 @@ public partial class DeleteForecastRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest", false);
 		if (ForecastId is not null)
 		{

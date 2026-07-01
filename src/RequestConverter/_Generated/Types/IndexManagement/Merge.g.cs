@@ -27,13 +27,23 @@ public partial class Merge : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Merge", false);
-		if (Scheduler is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Scheduler");
-			Scheduler.FormatCode(writer);
+			if (Scheduler is not null)
+			{
+				writer.WriteFluentDescriptorCall("Scheduler", (w) => { Scheduler.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Merge", false);
+			if (Scheduler is not null)
+			{
+				initializer.Property("Scheduler");
+				Scheduler.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,31 +27,56 @@ public partial class WeightedAverageAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation", false);
-		if (Format is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
 
-		if (Value is not null)
+			if (Value is not null)
+			{
+				writer.WriteFluentDescriptorCall("Value", (w) => { Value.FormatCode(w); });
+			}
+
+			if (ValueType is not null)
+			{
+				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
+			}
+
+			if (Weight is not null)
+			{
+				writer.WriteFluentDescriptorCall("Weight", (w) => { Weight.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Value");
-			Value.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation", false);
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (ValueType is not null)
-		{
-			initializer.Property("ValueType");
-			Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
-		}
+			if (Value is not null)
+			{
+				initializer.Property("Value");
+				Value.FormatCode(writer);
+			}
 
-		if (Weight is not null)
-		{
-			initializer.Property("Weight");
-			Weight.FormatCode(writer);
-		}
+			if (ValueType is not null)
+			{
+				initializer.Property("ValueType");
+				Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Weight is not null)
+			{
+				initializer.Property("Weight");
+				Weight.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

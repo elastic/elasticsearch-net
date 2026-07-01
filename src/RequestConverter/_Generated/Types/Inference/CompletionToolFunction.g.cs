@@ -27,30 +27,54 @@ public partial class CompletionToolFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction", false);
-		if (Description is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
 
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (Parameters is not null)
+			{
+				writer.WriteFluentCall("Parameters", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Parameters); });
+			}
+
+			if (Strict is not null)
+			{
+				writer.WriteFluentCall("Strict", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Strict.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction", false);
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (Parameters is not null)
-		{
-			initializer.Property("Parameters");
-			writer.WriteValue(Parameters);
-		}
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		if (Strict is not null)
-		{
-			initializer.Property("Strict");
-			writer.WriteValue(Strict.Value);
-		}
+			if (Parameters is not null)
+			{
+				initializer.Property("Parameters");
+				writer.WriteObjectValue(Parameters);
+			}
 
-		initializer.Dispose();
+			if (Strict is not null)
+			{
+				initializer.Property("Strict");
+				writer.WriteValue(Strict.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,28 +27,54 @@ public partial class OidcAuthenticateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Nonce");
-			writer.WriteString(Nonce);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentCall("Nonce", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Nonce); });
+			}
 
-		if (Realm is not null)
+			if (Realm is not null)
+			{
+				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+			}
+
+			{
+				writer.WriteFluentCall("RedirectUri", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RedirectUri); });
+			}
+
+			{
+				writer.WriteFluentCall("State", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(State); });
+			}
+		}
+		else
 		{
-			initializer.Property("Realm");
-			writer.WriteString(Realm);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest", false);
+			{
+				initializer.Property("Nonce");
+				writer.WriteString(Nonce);
+			}
 
-		{
-			initializer.Property("RedirectUri");
-			writer.WriteString(RedirectUri);
-		}
+			if (Realm is not null)
+			{
+				initializer.Property("Realm");
+				writer.WriteString(Realm);
+			}
 
-		{
-			initializer.Property("State");
-			writer.WriteString(State);
-		}
+			{
+				initializer.Property("RedirectUri");
+				writer.WriteString(RedirectUri);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("State");
+				writer.WriteString(State);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

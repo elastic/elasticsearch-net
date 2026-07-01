@@ -27,13 +27,22 @@ public partial class StupidBackoffSmoothingModel : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Discount");
-			writer.WriteValue(Discount);
-			writer.Write("d");
+			{
+				writer.WriteFluentCall("Discount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Discount); w.Write("d"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel", false);
+			{
+				initializer.Property("Discount");
+				writer.WriteValue(Discount);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

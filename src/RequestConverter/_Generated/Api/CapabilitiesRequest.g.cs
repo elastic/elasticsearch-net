@@ -27,43 +27,82 @@ public partial class CapabilitiesRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CapabilitiesRequest", false);
-		if (Capabilities is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Capabilities");
-			writer.WriteInlineList(Capabilities, (w, item) => { w.WriteString(item); });
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Capabilities is not null)
+			{
+				writer.WriteFluentParams("Capabilities", Capabilities, (w, item) => { w.WriteString(item); });
+			}
 
-		if (LocalOnly is not null)
+			if (LocalOnly is not null)
+			{
+				writer.WriteFluentCall("LocalOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LocalOnly.Value); });
+			}
+
+			if (Method is not null)
+			{
+				writer.WriteFluentCall("Method", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(Method.Value, w); });
+			}
+
+			if (Parameters is not null)
+			{
+				writer.WriteFluentParams("Parameters", Parameters, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Path is not null)
+			{
+				writer.WriteFluentCall("Path", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Path); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("LocalOnly");
-			writer.WriteValue(LocalOnly.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.CapabilitiesRequest", false);
+			if (Capabilities is not null)
+			{
+				initializer.Property("Capabilities");
+				writer.WriteInlineList(Capabilities, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Method is not null)
-		{
-			initializer.Property("Method");
-			Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(Method.Value, writer);
-		}
+			if (LocalOnly is not null)
+			{
+				initializer.Property("LocalOnly");
+				writer.WriteValue(LocalOnly.Value);
+			}
 
-		if (Parameters is not null)
-		{
-			initializer.Property("Parameters");
-			writer.WriteInlineList(Parameters, (w, item) => { w.WriteString(item); });
-		}
+			if (Method is not null)
+			{
+				initializer.Property("Method");
+				Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(Method.Value, writer);
+			}
 
-		if (Path is not null)
-		{
-			initializer.Property("Path");
-			writer.WriteString(Path);
-		}
+			if (Parameters is not null)
+			{
+				initializer.Property("Parameters");
+				writer.WriteInlineList(Parameters, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Path is not null)
+			{
+				initializer.Property("Path");
+				writer.WriteString(Path);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

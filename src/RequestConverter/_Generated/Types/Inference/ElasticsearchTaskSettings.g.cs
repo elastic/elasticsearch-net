@@ -27,13 +27,23 @@ public partial class ElasticsearchTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings", false);
-		if (ReturnDocuments is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ReturnDocuments");
-			writer.WriteValue(ReturnDocuments.Value);
+			if (ReturnDocuments is not null)
+			{
+				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings", false);
+			if (ReturnDocuments is not null)
+			{
+				initializer.Property("ReturnDocuments");
+				writer.WriteValue(ReturnDocuments.Value);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,90 +27,158 @@ public partial class RedactProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.RedactProcessor", false);
-		if (Description is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (IgnoreMissing is not null)
+			{
+				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (PatternDefinitions is not null)
+			{
+				writer.WriteFluentCall("PatternDefinitions", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentParams("Patterns", Patterns, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Prefix is not null)
+			{
+				writer.WriteFluentCall("Prefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Prefix); });
+			}
+
+			if (SkipIfUnlicensed is not null)
+			{
+				writer.WriteFluentCall("SkipIfUnlicensed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipIfUnlicensed.Value); });
+			}
+
+			if (Suffix is not null)
+			{
+				writer.WriteFluentCall("Suffix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Suffix); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (TraceRedact is not null)
+			{
+				writer.WriteFluentCall("TraceRedact", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TraceRedact.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.RedactProcessor", false);
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IgnoreMissing is not null)
-		{
-			initializer.Property("IgnoreMissing");
-			writer.WriteValue(IgnoreMissing.Value);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (IgnoreMissing is not null)
+			{
+				initializer.Property("IgnoreMissing");
+				writer.WriteValue(IgnoreMissing.Value);
+			}
 
-		if (PatternDefinitions is not null)
-		{
-			initializer.Property("PatternDefinitions");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		{
-			initializer.Property("Patterns");
-			writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
-		}
+			if (PatternDefinitions is not null)
+			{
+				initializer.Property("PatternDefinitions");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(PatternDefinitions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		if (Prefix is not null)
-		{
-			initializer.Property("Prefix");
-			writer.WriteString(Prefix);
-		}
+			{
+				initializer.Property("Patterns");
+				writer.WriteInlineList(Patterns, (w, item) => { w.WriteString(item); });
+			}
 
-		if (SkipIfUnlicensed is not null)
-		{
-			initializer.Property("SkipIfUnlicensed");
-			writer.WriteValue(SkipIfUnlicensed.Value);
-		}
+			if (Prefix is not null)
+			{
+				initializer.Property("Prefix");
+				writer.WriteString(Prefix);
+			}
 
-		if (Suffix is not null)
-		{
-			initializer.Property("Suffix");
-			writer.WriteString(Suffix);
-		}
+			if (SkipIfUnlicensed is not null)
+			{
+				initializer.Property("SkipIfUnlicensed");
+				writer.WriteValue(SkipIfUnlicensed.Value);
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (Suffix is not null)
+			{
+				initializer.Property("Suffix");
+				writer.WriteString(Suffix);
+			}
 
-		if (TraceRedact is not null)
-		{
-			initializer.Property("TraceRedact");
-			writer.WriteValue(TraceRedact.Value);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		initializer.Dispose();
+			if (TraceRedact is not null)
+			{
+				initializer.Property("TraceRedact");
+				writer.WriteValue(TraceRedact.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

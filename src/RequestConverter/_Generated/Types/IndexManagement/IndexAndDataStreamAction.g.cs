@@ -27,17 +27,30 @@ public partial class IndexAndDataStreamAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DataStream");
-			DataStream.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("DataStream", (w) => { using var _oi = w.ForceObjectInitializer(); DataStream.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction", false);
+			{
+				initializer.Property("DataStream");
+				DataStream.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

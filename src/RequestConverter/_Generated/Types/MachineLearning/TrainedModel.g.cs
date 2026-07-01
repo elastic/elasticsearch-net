@@ -27,25 +27,45 @@ public partial class TrainedModel : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel", false);
-		if (Ensemble is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Ensemble");
-			Ensemble.FormatCode(writer);
-		}
+			if (Ensemble is not null)
+			{
+				writer.WriteFluentDescriptorCall("Ensemble", (w) => { Ensemble.FormatCode(w); });
+			}
 
-		if (Tree is not null)
+			if (Tree is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tree", (w) => { Tree.FormatCode(w); });
+			}
+
+			if (TreeNode is not null)
+			{
+				writer.WriteFluentDescriptorCall("TreeNode", (w) => { TreeNode.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Tree");
-			Tree.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel", false);
+			if (Ensemble is not null)
+			{
+				initializer.Property("Ensemble");
+				Ensemble.FormatCode(writer);
+			}
 
-		if (TreeNode is not null)
-		{
-			initializer.Property("TreeNode");
-			TreeNode.FormatCode(writer);
-		}
+			if (Tree is not null)
+			{
+				initializer.Property("Tree");
+				Tree.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TreeNode is not null)
+			{
+				initializer.Property("TreeNode");
+				TreeNode.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

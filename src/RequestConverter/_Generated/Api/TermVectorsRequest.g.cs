@@ -27,6 +27,7 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>", false);
 		if (Id is not null)
 		{
@@ -54,7 +55,7 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 		if (Doc is not null)
 		{
 			initializer.Property("Doc");
-			writer.WriteValue(Doc);
+			writer.WriteDocument(Doc);
 		}
 
 		if (Fields is not null)

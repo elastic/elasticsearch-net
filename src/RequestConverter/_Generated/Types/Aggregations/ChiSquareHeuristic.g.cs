@@ -27,17 +27,30 @@ public partial class ChiSquareHeuristic : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("BackgroundIsSuperset");
-			writer.WriteValue(BackgroundIsSuperset);
-		}
+			{
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset); });
+			}
 
+			{
+				writer.WriteFluentCall("IncludeNegatives", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeNegatives); });
+			}
+		}
+		else
 		{
-			initializer.Property("IncludeNegatives");
-			writer.WriteValue(IncludeNegatives);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic", false);
+			{
+				initializer.Property("BackgroundIsSuperset");
+				writer.WriteValue(BackgroundIsSuperset);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("IncludeNegatives");
+				writer.WriteValue(IncludeNegatives);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

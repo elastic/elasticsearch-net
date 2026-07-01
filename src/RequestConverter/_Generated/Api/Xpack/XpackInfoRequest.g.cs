@@ -27,20 +27,40 @@ public partial class XpackInfoRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
 #pragma warning disable CS0618
-		if (AcceptEnterprise is not null)
-		{
-			initializer.Property("AcceptEnterprise");
-			writer.WriteValue(AcceptEnterprise.Value);
-		}
+			if (AcceptEnterprise is not null)
+			{
+				writer.WriteFluentCall("AcceptEnterprise", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AcceptEnterprise.Value); });
+			}
 #pragma warning restore CS0618
-		if (Categories is not null)
-		{
-			initializer.Property("Categories");
-			writer.WriteInlineList(Categories, (w, item) => { Elastic.Clients.Elasticsearch.Xpack.XPackCategoryCodeFormatter.FormatCode(item, w); });
+			if (Categories is not null)
+			{
+				writer.WriteFluentParams("Categories", Categories, (w, item) => { Elastic.Clients.Elasticsearch.Xpack.XPackCategoryCodeFormatter.FormatCode(item, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest", false);
+#pragma warning disable CS0618
+			if (AcceptEnterprise is not null)
+			{
+				initializer.Property("AcceptEnterprise");
+				writer.WriteValue(AcceptEnterprise.Value);
+			}
+#pragma warning restore CS0618
+			if (Categories is not null)
+			{
+				initializer.Property("Categories");
+				writer.WriteInlineList(Categories, (w, item) => { Elastic.Clients.Elasticsearch.Xpack.XPackCategoryCodeFormatter.FormatCode(item, w); });
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

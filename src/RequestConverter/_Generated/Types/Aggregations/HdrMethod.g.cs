@@ -27,13 +27,23 @@ public partial class HdrMethod : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.HdrMethod", false);
-		if (NumberOfSignificantValueDigits is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("NumberOfSignificantValueDigits");
-			writer.WriteValue(NumberOfSignificantValueDigits.Value);
+			if (NumberOfSignificantValueDigits is not null)
+			{
+				writer.WriteFluentCall("NumberOfSignificantValueDigits", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfSignificantValueDigits.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.HdrMethod", false);
+			if (NumberOfSignificantValueDigits is not null)
+			{
+				initializer.Property("NumberOfSignificantValueDigits");
+				writer.WriteValue(NumberOfSignificantValueDigits.Value);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

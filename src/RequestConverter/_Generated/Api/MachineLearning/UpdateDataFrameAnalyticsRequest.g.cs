@@ -27,36 +27,71 @@ public partial class UpdateDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
 
-		if (AllowLazyStart is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (AllowLazyStart is not null)
+			{
+				writer.WriteFluentCall("AllowLazyStart", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLazyStart.Value); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (MaxNumThreads is not null)
+			{
+				writer.WriteFluentCall("MaxNumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumThreads.Value); });
+			}
+
+			if (ModelMemoryLimit is not null)
+			{
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelMemoryLimit); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowLazyStart");
-			writer.WriteValue(AllowLazyStart.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (AllowLazyStart is not null)
+			{
+				initializer.Property("AllowLazyStart");
+				writer.WriteValue(AllowLazyStart.Value);
+			}
 
-		if (MaxNumThreads is not null)
-		{
-			initializer.Property("MaxNumThreads");
-			writer.WriteValue(MaxNumThreads.Value);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (ModelMemoryLimit is not null)
-		{
-			initializer.Property("ModelMemoryLimit");
-			writer.WriteString(ModelMemoryLimit);
-		}
+			if (MaxNumThreads is not null)
+			{
+				initializer.Property("MaxNumThreads");
+				writer.WriteValue(MaxNumThreads.Value);
+			}
 
-		initializer.Dispose();
+			if (ModelMemoryLimit is not null)
+			{
+				initializer.Property("ModelMemoryLimit");
+				writer.WriteString(ModelMemoryLimit);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

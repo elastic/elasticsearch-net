@@ -27,30 +27,58 @@ public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest", false);
-		if (AccessToken is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AccessToken");
-			writer.WriteString(AccessToken);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (AccessToken is not null)
+			{
+				writer.WriteFluentCall("AccessToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AccessToken); });
+			}
 
+			{
+				writer.WriteFluentCall("GrantType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, w); });
+			}
+
+			if (Password is not null)
+			{
+				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+			}
+
+			if (Username is not null)
+			{
+				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Username); });
+			}
+		}
+		else
 		{
-			initializer.Property("GrantType");
-			Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest", false);
+			if (AccessToken is not null)
+			{
+				initializer.Property("AccessToken");
+				writer.WriteString(AccessToken);
+			}
 
-		if (Password is not null)
-		{
-			initializer.Property("Password");
-			writer.WriteString(Password);
-		}
+			{
+				initializer.Property("GrantType");
+				Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, writer);
+			}
 
-		if (Username is not null)
-		{
-			initializer.Property("Username");
-			writer.WriteString(Username);
-		}
+			if (Password is not null)
+			{
+				initializer.Property("Password");
+				writer.WriteString(Password);
+			}
 
-		initializer.Dispose();
+			if (Username is not null)
+			{
+				initializer.Property("Username");
+				writer.WriteString(Username);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

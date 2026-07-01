@@ -27,61 +27,111 @@ public partial class IntervalsFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter", false);
-		if (After is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("After");
-			After.FormatCode(writer);
-		}
+			if (After is not null)
+			{
+				writer.WriteFluentDescriptorCall("After", (w) => { After.FormatCode(w); });
+			}
 
-		if (Before is not null)
+			if (Before is not null)
+			{
+				writer.WriteFluentDescriptorCall("Before", (w) => { Before.FormatCode(w); });
+			}
+
+			if (ContainedBy is not null)
+			{
+				writer.WriteFluentDescriptorCall("ContainedBy", (w) => { ContainedBy.FormatCode(w); });
+			}
+
+			if (Containing is not null)
+			{
+				writer.WriteFluentDescriptorCall("Containing", (w) => { Containing.FormatCode(w); });
+			}
+
+			if (NotContainedBy is not null)
+			{
+				writer.WriteFluentDescriptorCall("NotContainedBy", (w) => { NotContainedBy.FormatCode(w); });
+			}
+
+			if (NotContaining is not null)
+			{
+				writer.WriteFluentDescriptorCall("NotContaining", (w) => { NotContaining.FormatCode(w); });
+			}
+
+			if (NotOverlapping is not null)
+			{
+				writer.WriteFluentDescriptorCall("NotOverlapping", (w) => { NotOverlapping.FormatCode(w); });
+			}
+
+			if (Overlapping is not null)
+			{
+				writer.WriteFluentDescriptorCall("Overlapping", (w) => { Overlapping.FormatCode(w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Before");
-			Before.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter", false);
+			if (After is not null)
+			{
+				initializer.Property("After");
+				After.FormatCode(writer);
+			}
 
-		if (ContainedBy is not null)
-		{
-			initializer.Property("ContainedBy");
-			ContainedBy.FormatCode(writer);
-		}
+			if (Before is not null)
+			{
+				initializer.Property("Before");
+				Before.FormatCode(writer);
+			}
 
-		if (Containing is not null)
-		{
-			initializer.Property("Containing");
-			Containing.FormatCode(writer);
-		}
+			if (ContainedBy is not null)
+			{
+				initializer.Property("ContainedBy");
+				ContainedBy.FormatCode(writer);
+			}
 
-		if (NotContainedBy is not null)
-		{
-			initializer.Property("NotContainedBy");
-			NotContainedBy.FormatCode(writer);
-		}
+			if (Containing is not null)
+			{
+				initializer.Property("Containing");
+				Containing.FormatCode(writer);
+			}
 
-		if (NotContaining is not null)
-		{
-			initializer.Property("NotContaining");
-			NotContaining.FormatCode(writer);
-		}
+			if (NotContainedBy is not null)
+			{
+				initializer.Property("NotContainedBy");
+				NotContainedBy.FormatCode(writer);
+			}
 
-		if (NotOverlapping is not null)
-		{
-			initializer.Property("NotOverlapping");
-			NotOverlapping.FormatCode(writer);
-		}
+			if (NotContaining is not null)
+			{
+				initializer.Property("NotContaining");
+				NotContaining.FormatCode(writer);
+			}
 
-		if (Overlapping is not null)
-		{
-			initializer.Property("Overlapping");
-			Overlapping.FormatCode(writer);
-		}
+			if (NotOverlapping is not null)
+			{
+				initializer.Property("NotOverlapping");
+				NotOverlapping.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Overlapping is not null)
+			{
+				initializer.Property("Overlapping");
+				Overlapping.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

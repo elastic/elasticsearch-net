@@ -27,123 +27,222 @@ public partial class MultiMatchQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (AutoGenerateSynonymsPhraseQuery is not null)
-		{
-			initializer.Property("AutoGenerateSynonymsPhraseQuery");
-			writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
-		}
+			if (AutoGenerateSynonymsPhraseQuery is not null)
+			{
+				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
+			}
 
-		if (Boost is not null)
-		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 #pragma warning disable CS0618
-		if (CutoffFrequency is not null)
-		{
-			initializer.Property("CutoffFrequency");
-			writer.WriteValue(CutoffFrequency.Value);
-			writer.Write("d");
-		}
+			if (CutoffFrequency is not null)
+			{
+				writer.WriteFluentCall("CutoffFrequency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CutoffFrequency.Value); w.Write("d"); });
+			}
 #pragma warning restore CS0618
-		if (Fields is not null)
-		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			if (Fields is not null)
+			{
+				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+			}
 
-		if (Fuzziness is not null)
-		{
-			initializer.Property("Fuzziness");
-			Fuzziness.FormatCode(writer);
-		}
+			if (Fuzziness is not null)
+			{
+				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+			}
 
-		if (FuzzyRewrite is not null)
-		{
-			initializer.Property("FuzzyRewrite");
-			writer.WriteString(FuzzyRewrite);
-		}
+			if (FuzzyRewrite is not null)
+			{
+				writer.WriteFluentCall("FuzzyRewrite", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FuzzyRewrite); });
+			}
 
-		if (FuzzyTranspositions is not null)
-		{
-			initializer.Property("FuzzyTranspositions");
-			writer.WriteValue(FuzzyTranspositions.Value);
-		}
+			if (FuzzyTranspositions is not null)
+			{
+				writer.WriteFluentCall("FuzzyTranspositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyTranspositions.Value); });
+			}
 
-		if (Lenient is not null)
-		{
-			initializer.Property("Lenient");
-			writer.WriteValue(Lenient.Value);
-		}
+			if (Lenient is not null)
+			{
+				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+			}
 
-		if (MaxExpansions is not null)
-		{
-			initializer.Property("MaxExpansions");
-			writer.WriteValue(MaxExpansions.Value);
-		}
+			if (MaxExpansions is not null)
+			{
+				writer.WriteFluentCall("MaxExpansions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxExpansions.Value); });
+			}
 
-		if (MinimumShouldMatch is not null)
-		{
-			initializer.Property("MinimumShouldMatch");
-			MinimumShouldMatch.FormatCode(writer);
-		}
+			if (MinimumShouldMatch is not null)
+			{
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+			}
 
-		if (Operator is not null)
-		{
-			initializer.Property("Operator");
-			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(Operator.Value, writer);
-		}
+			if (Operator is not null)
+			{
+				writer.WriteFluentCall("Operator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(Operator.Value, w); });
+			}
 
-		if (PrefixLength is not null)
-		{
-			initializer.Property("PrefixLength");
-			writer.WriteValue(PrefixLength.Value);
-		}
+			if (PrefixLength is not null)
+			{
+				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+			}
 
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
 
-		if (Slop is not null)
-		{
-			initializer.Property("Slop");
-			writer.WriteValue(Slop.Value);
-		}
+			if (Slop is not null)
+			{
+				writer.WriteFluentCall("Slop", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Slop.Value); });
+			}
 
-		if (TieBreaker is not null)
-		{
-			initializer.Property("TieBreaker");
-			writer.WriteValue(TieBreaker.Value);
-			writer.Write("d");
-		}
+			if (TieBreaker is not null)
+			{
+				writer.WriteFluentCall("TieBreaker", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TieBreaker.Value); w.Write("d"); });
+			}
 
-		if (Type is not null)
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.QueryDsl.TextQueryTypeCodeFormatter.FormatCode(Type.Value, writer);
-		}
+			if (Type is not null)
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.TextQueryTypeCodeFormatter.FormatCode(Type.Value, w); });
+			}
 
-		if (ZeroTermsQuery is not null)
-		{
-			initializer.Property("ZeroTermsQuery");
-			Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, writer);
+			if (ZeroTermsQuery is not null)
+			{
+				writer.WriteFluentCall("ZeroTermsQuery", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		initializer.Dispose();
+			if (AutoGenerateSynonymsPhraseQuery is not null)
+			{
+				initializer.Property("AutoGenerateSynonymsPhraseQuery");
+				writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
+			}
+
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
+#pragma warning disable CS0618
+			if (CutoffFrequency is not null)
+			{
+				initializer.Property("CutoffFrequency");
+				writer.WriteValue(CutoffFrequency.Value);
+				writer.Write("d");
+			}
+#pragma warning restore CS0618
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
+
+			if (Fuzziness is not null)
+			{
+				initializer.Property("Fuzziness");
+				Fuzziness.FormatCode(writer);
+			}
+
+			if (FuzzyRewrite is not null)
+			{
+				initializer.Property("FuzzyRewrite");
+				writer.WriteString(FuzzyRewrite);
+			}
+
+			if (FuzzyTranspositions is not null)
+			{
+				initializer.Property("FuzzyTranspositions");
+				writer.WriteValue(FuzzyTranspositions.Value);
+			}
+
+			if (Lenient is not null)
+			{
+				initializer.Property("Lenient");
+				writer.WriteValue(Lenient.Value);
+			}
+
+			if (MaxExpansions is not null)
+			{
+				initializer.Property("MaxExpansions");
+				writer.WriteValue(MaxExpansions.Value);
+			}
+
+			if (MinimumShouldMatch is not null)
+			{
+				initializer.Property("MinimumShouldMatch");
+				MinimumShouldMatch.FormatCode(writer);
+			}
+
+			if (Operator is not null)
+			{
+				initializer.Property("Operator");
+				Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(Operator.Value, writer);
+			}
+
+			if (PrefixLength is not null)
+			{
+				initializer.Property("PrefixLength");
+				writer.WriteValue(PrefixLength.Value);
+			}
+
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
+
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
+
+			if (Slop is not null)
+			{
+				initializer.Property("Slop");
+				writer.WriteValue(Slop.Value);
+			}
+
+			if (TieBreaker is not null)
+			{
+				initializer.Property("TieBreaker");
+				writer.WriteValue(TieBreaker.Value);
+				writer.Write("d");
+			}
+
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.QueryDsl.TextQueryTypeCodeFormatter.FormatCode(Type.Value, writer);
+			}
+
+			if (ZeroTermsQuery is not null)
+			{
+				initializer.Property("ZeroTermsQuery");
+				Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

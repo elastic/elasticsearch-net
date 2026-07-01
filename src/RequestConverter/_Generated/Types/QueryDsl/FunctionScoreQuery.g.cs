@@ -27,58 +27,103 @@ public partial class FunctionScoreQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery", false);
-		if (Boost is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
 
-		if (BoostMode is not null)
+			if (BoostMode is not null)
+			{
+				writer.WriteFluentCall("BoostMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostModeCodeFormatter.FormatCode(BoostMode.Value, w); });
+			}
+
+			if (Functions is not null)
+			{
+				writer.WriteFluentDescriptorParams("Functions", Functions, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>"); w.Write("()"); });
+			}
+
+			if (MaxBoost is not null)
+			{
+				writer.WriteFluentCall("MaxBoost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxBoost.Value); w.Write("d"); });
+			}
+
+			if (MinScore is not null)
+			{
+				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("d"); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (ScoreMode is not null)
+			{
+				writer.WriteFluentCall("ScoreMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreModeCodeFormatter.FormatCode(ScoreMode.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("BoostMode");
-			Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostModeCodeFormatter.FormatCode(BoostMode.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery", false);
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (Functions is not null)
-		{
-			initializer.Property("Functions");
-			writer.WriteInlineList(Functions, (w, item) => { item.FormatCode(w); });
-		}
+			if (BoostMode is not null)
+			{
+				initializer.Property("BoostMode");
+				Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostModeCodeFormatter.FormatCode(BoostMode.Value, writer);
+			}
 
-		if (MaxBoost is not null)
-		{
-			initializer.Property("MaxBoost");
-			writer.WriteValue(MaxBoost.Value);
-			writer.Write("d");
-		}
+			if (Functions is not null)
+			{
+				initializer.Property("Functions");
+				writer.WriteInlineList(Functions, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (MinScore is not null)
-		{
-			initializer.Property("MinScore");
-			writer.WriteValue(MinScore.Value);
-			writer.Write("d");
-		}
+			if (MaxBoost is not null)
+			{
+				initializer.Property("MaxBoost");
+				writer.WriteValue(MaxBoost.Value);
+				writer.Write("d");
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			if (MinScore is not null)
+			{
+				initializer.Property("MinScore");
+				writer.WriteValue(MinScore.Value);
+				writer.Write("d");
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
 
-		if (ScoreMode is not null)
-		{
-			initializer.Property("ScoreMode");
-			Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (ScoreMode is not null)
+			{
+				initializer.Property("ScoreMode");
+				Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreModeCodeFormatter.FormatCode(ScoreMode.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

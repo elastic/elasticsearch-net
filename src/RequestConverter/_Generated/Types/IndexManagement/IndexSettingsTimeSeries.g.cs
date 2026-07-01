@@ -27,19 +27,34 @@ public partial class IndexSettingsTimeSeries : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries", false);
-		if (EndTime is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("EndTime");
-			writer.WriteValue(EndTime.Value);
-		}
+			if (EndTime is not null)
+			{
+				writer.WriteFluentCall("EndTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EndTime.Value); });
+			}
 
-		if (StartTime is not null)
+			if (StartTime is not null)
+			{
+				writer.WriteFluentCall("StartTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StartTime.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("StartTime");
-			writer.WriteValue(StartTime.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries", false);
+			if (EndTime is not null)
+			{
+				initializer.Property("EndTime");
+				writer.WriteValue(EndTime.Value);
+			}
 
-		initializer.Dispose();
+			if (StartTime is not null)
+			{
+				initializer.Property("StartTime");
+				writer.WriteValue(StartTime.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

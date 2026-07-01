@@ -57,7 +57,7 @@ public partial class RemoteUserIndicesPrivileges : RequestConverter.ICodeFormatt
 		if (Query is not null)
 		{
 			initializer.Property("Query");
-			writer.WriteInlineList(Query, (w, item) => { w.WriteValue(item); });
+			writer.WriteInlineList(Query, (w, item) => { w.WriteObjectValue(item); });
 		}
 
 		initializer.Dispose();

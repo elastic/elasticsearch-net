@@ -27,128 +27,252 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
 
-		if (AllowNoIndices is not null)
-		{
-			initializer.Property("AllowNoIndices");
-			writer.WriteValue(AllowNoIndices.Value);
-		}
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					JobId.FormatCode(writer);
+				}
 
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (AllowNoIndices is not null)
+			{
+				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 #pragma warning disable CS0618
-		if (IgnoreThrottled is not null)
-		{
-			initializer.Property("IgnoreThrottled");
-			writer.WriteValue(IgnoreThrottled.Value);
-		}
+			if (IgnoreThrottled is not null)
+			{
+				writer.WriteFluentCall("IgnoreThrottled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreThrottled.Value); });
+			}
 #pragma warning restore CS0618
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
 
-		if (AllowLazyOpen is not null)
-		{
-			initializer.Property("AllowLazyOpen");
-			writer.WriteValue(AllowLazyOpen.Value);
-		}
+			if (AllowLazyOpen is not null)
+			{
+				writer.WriteFluentCall("AllowLazyOpen", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLazyOpen.Value); });
+			}
 
-		{
-			initializer.Property("AnalysisConfig");
-			AnalysisConfig.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); });
+			}
 
-		if (AnalysisLimits is not null)
-		{
-			initializer.Property("AnalysisLimits");
-			AnalysisLimits.FormatCode(writer);
-		}
+			if (AnalysisLimits is not null)
+			{
+				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); });
+			}
 
-		if (BackgroundPersistInterval is not null)
-		{
-			initializer.Property("BackgroundPersistInterval");
-			BackgroundPersistInterval.FormatCode(writer);
-		}
+			if (BackgroundPersistInterval is not null)
+			{
+				writer.WriteFluentCall("BackgroundPersistInterval", (w) => { using var _oi = w.ForceObjectInitializer(); BackgroundPersistInterval.FormatCode(w); });
+			}
 
-		if (CustomSettings is not null)
-		{
-			initializer.Property("CustomSettings");
-			writer.WriteValue(CustomSettings);
-		}
+			if (CustomSettings is not null)
+			{
+				writer.WriteFluentCall("CustomSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(CustomSettings); });
+			}
 
-		if (DailyModelSnapshotRetentionAfterDays is not null)
-		{
-			initializer.Property("DailyModelSnapshotRetentionAfterDays");
-			writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
-			writer.Write("L");
-		}
+			if (DailyModelSnapshotRetentionAfterDays is not null)
+			{
+				writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
+			}
 
-		{
-			initializer.Property("DataDescription");
-			DataDescription.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentDescriptorCall("DataDescription", (w) => { DataDescription.FormatCode(w); });
+			}
 
-		if (DatafeedConfig is not null)
-		{
-			initializer.Property("DatafeedConfig");
-			DatafeedConfig.FormatCode(writer);
-		}
+			if (DatafeedConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("DatafeedConfig", (w) => { DatafeedConfig.FormatCode(w); });
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
 
-		if (Groups is not null)
-		{
-			initializer.Property("Groups");
-			writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
-		}
+			if (Groups is not null)
+			{
+				writer.WriteFluentParams("Groups", Groups, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ModelPlotConfig is not null)
-		{
-			initializer.Property("ModelPlotConfig");
-			ModelPlotConfig.FormatCode(writer);
-		}
+			if (ModelPlotConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("ModelPlotConfig", (w) => { ModelPlotConfig.FormatCode(w); });
+			}
 
-		if (ModelSnapshotRetentionDays is not null)
-		{
-			initializer.Property("ModelSnapshotRetentionDays");
-			writer.WriteValue(ModelSnapshotRetentionDays.Value);
-			writer.Write("L");
-		}
+			if (ModelSnapshotRetentionDays is not null)
+			{
+				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
+			}
 
-		if (RenormalizationWindowDays is not null)
-		{
-			initializer.Property("RenormalizationWindowDays");
-			writer.WriteValue(RenormalizationWindowDays.Value);
-			writer.Write("L");
-		}
+			if (RenormalizationWindowDays is not null)
+			{
+				writer.WriteFluentCall("RenormalizationWindowDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
+			}
 
-		if (ResultsIndexName is not null)
-		{
-			initializer.Property("ResultsIndexName");
-			ResultsIndexName.FormatCode(writer);
-		}
+			if (ResultsIndexName is not null)
+			{
+				writer.WriteFluentCall("ResultsIndexName", (w) => { using var _oi = w.ForceObjectInitializer(); ResultsIndexName.FormatCode(w); });
+			}
 
-		if (ResultsRetentionDays is not null)
-		{
-			initializer.Property("ResultsRetentionDays");
-			writer.WriteValue(ResultsRetentionDays.Value);
-			writer.Write("L");
+			if (ResultsRetentionDays is not null)
+			{
+				writer.WriteFluentCall("ResultsRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (AllowNoIndices is not null)
+			{
+				initializer.Property("AllowNoIndices");
+				writer.WriteValue(AllowNoIndices.Value);
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+#pragma warning disable CS0618
+			if (IgnoreThrottled is not null)
+			{
+				initializer.Property("IgnoreThrottled");
+				writer.WriteValue(IgnoreThrottled.Value);
+			}
+#pragma warning restore CS0618
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
+
+			if (AllowLazyOpen is not null)
+			{
+				initializer.Property("AllowLazyOpen");
+				writer.WriteValue(AllowLazyOpen.Value);
+			}
+
+			{
+				initializer.Property("AnalysisConfig");
+				AnalysisConfig.FormatCode(writer);
+			}
+
+			if (AnalysisLimits is not null)
+			{
+				initializer.Property("AnalysisLimits");
+				AnalysisLimits.FormatCode(writer);
+			}
+
+			if (BackgroundPersistInterval is not null)
+			{
+				initializer.Property("BackgroundPersistInterval");
+				BackgroundPersistInterval.FormatCode(writer);
+			}
+
+			if (CustomSettings is not null)
+			{
+				initializer.Property("CustomSettings");
+				writer.WriteObjectValue(CustomSettings);
+			}
+
+			if (DailyModelSnapshotRetentionAfterDays is not null)
+			{
+				initializer.Property("DailyModelSnapshotRetentionAfterDays");
+				writer.WriteValue(DailyModelSnapshotRetentionAfterDays.Value);
+				writer.Write("L");
+			}
+
+			{
+				initializer.Property("DataDescription");
+				DataDescription.FormatCode(writer);
+			}
+
+			if (DatafeedConfig is not null)
+			{
+				initializer.Property("DatafeedConfig");
+				DatafeedConfig.FormatCode(writer);
+			}
+
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
+
+			if (Groups is not null)
+			{
+				initializer.Property("Groups");
+				writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
+			}
+
+			if (ModelPlotConfig is not null)
+			{
+				initializer.Property("ModelPlotConfig");
+				ModelPlotConfig.FormatCode(writer);
+			}
+
+			if (ModelSnapshotRetentionDays is not null)
+			{
+				initializer.Property("ModelSnapshotRetentionDays");
+				writer.WriteValue(ModelSnapshotRetentionDays.Value);
+				writer.Write("L");
+			}
+
+			if (RenormalizationWindowDays is not null)
+			{
+				initializer.Property("RenormalizationWindowDays");
+				writer.WriteValue(RenormalizationWindowDays.Value);
+				writer.Write("L");
+			}
+
+			if (ResultsIndexName is not null)
+			{
+				initializer.Property("ResultsIndexName");
+				ResultsIndexName.FormatCode(writer);
+			}
+
+			if (ResultsRetentionDays is not null)
+			{
+				initializer.Property("ResultsRetentionDays");
+				writer.WriteValue(ResultsRetentionDays.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

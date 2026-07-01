@@ -27,25 +27,49 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.ListRequest", false);
-		if (From is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
 
-		if (QueryLuceneSyntax is not null)
+			if (QueryLuceneSyntax is not null)
+			{
+				writer.WriteFluentCall("QueryLuceneSyntax", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryLuceneSyntax); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("QueryLuceneSyntax");
-			writer.WriteString(QueryLuceneSyntax);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.ListRequest", false);
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (QueryLuceneSyntax is not null)
+			{
+				initializer.Property("QueryLuceneSyntax");
+				writer.WriteString(QueryLuceneSyntax);
+			}
 
-		initializer.Dispose();
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

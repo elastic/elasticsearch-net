@@ -27,67 +27,122 @@ public partial class PutUserRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PutUserRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Username");
-			Username.FormatCode(writer);
-		}
-
-		if (Refresh is not null)
-		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
-
-		if (Email is not null)
-		{
-			initializer.Property("Email");
-			writer.WriteString(Email);
-		}
-
-		if (Enabled is not null)
-		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
-
-		if (FullName is not null)
-		{
-			initializer.Property("FullName");
-			writer.WriteString(FullName);
-		}
-
-		if (Metadata is not null)
-		{
-			initializer.Property("Metadata");
 			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Username.FormatCode(writer);
+			}
 
-		if (Password is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+
+			if (Email is not null)
+			{
+				writer.WriteFluentCall("Email", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Email); });
+			}
+
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+
+			if (FullName is not null)
+			{
+				writer.WriteFluentCall("FullName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FullName); });
+			}
+
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Password is not null)
+			{
+				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+			}
+
+			if (PasswordHash is not null)
+			{
+				writer.WriteFluentCall("PasswordHash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PasswordHash); });
+			}
+
+			if (Roles is not null)
+			{
+				writer.WriteFluentParams("Roles", Roles, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Password");
-			writer.WriteString(Password);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.PutUserRequest", false);
+			{
+				initializer.Property("Username");
+				Username.FormatCode(writer);
+			}
 
-		if (PasswordHash is not null)
-		{
-			initializer.Property("PasswordHash");
-			writer.WriteString(PasswordHash);
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
 
-		if (Roles is not null)
-		{
-			initializer.Property("Roles");
-			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
-		}
+			if (Email is not null)
+			{
+				initializer.Property("Email");
+				writer.WriteString(Email);
+			}
 
-		initializer.Dispose();
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
+
+			if (FullName is not null)
+			{
+				initializer.Property("FullName");
+				writer.WriteString(FullName);
+			}
+
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
+
+			if (Password is not null)
+			{
+				initializer.Property("Password");
+				writer.WriteString(Password);
+			}
+
+			if (PasswordHash is not null)
+			{
+				initializer.Property("PasswordHash");
+				writer.WriteString(PasswordHash);
+			}
+
+			if (Roles is not null)
+			{
+				initializer.Property("Roles");
+				writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

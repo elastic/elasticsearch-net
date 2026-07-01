@@ -27,74 +27,150 @@ public partial class PutTemplateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
 
-		if (Cause is not null)
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Name.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (Cause is not null)
+			{
+				writer.WriteFluentCall("Cause", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Cause); });
+			}
+
+			if (Create is not null)
+			{
+				writer.WriteFluentCall("Create", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Create.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Aliases is not null)
+			{
+				writer.WriteFluentDescriptorCall("Aliases", (w) => { w.WriteFluentDictionaryAdds("Add", Aliases, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+
+			if (IndexPatterns is not null)
+			{
+				writer.WriteFluentParams("IndexPatterns", IndexPatterns, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Mappings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Mappings", (w) => { Mappings.FormatCode(w); });
+			}
+
+			if (Order is not null)
+			{
+				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Order.Value); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Cause");
-			writer.WriteString(Cause);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (Create is not null)
-		{
-			initializer.Property("Create");
-			writer.WriteValue(Create.Value);
-		}
+			if (Cause is not null)
+			{
+				initializer.Property("Cause");
+				writer.WriteString(Cause);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (Create is not null)
+			{
+				initializer.Property("Create");
+				writer.WriteValue(Create.Value);
+			}
 
-		if (Aliases is not null)
-		{
-			initializer.Property("Aliases");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexName");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
-			writer.Write(">()");
-			writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (IndexPatterns is not null)
-		{
-			initializer.Property("IndexPatterns");
-			writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });
-		}
+			if (Aliases is not null)
+			{
+				initializer.Property("Aliases");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexName");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.Alias");
+				writer.Write(">()");
+				writer.WriteBlockList(Aliases, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (Mappings is not null)
-		{
-			initializer.Property("Mappings");
-			Mappings.FormatCode(writer);
-		}
+			if (IndexPatterns is not null)
+			{
+				initializer.Property("IndexPatterns");
+				writer.WriteInlineList(IndexPatterns, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Order is not null)
-		{
-			initializer.Property("Order");
-			writer.WriteValue(Order.Value);
-		}
+			if (Mappings is not null)
+			{
+				initializer.Property("Mappings");
+				Mappings.FormatCode(writer);
+			}
 
-		if (Settings is not null)
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				writer.WriteValue(Order.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteValue(Version.Value);
-			writer.Write("L");
-		}
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteValue(Version.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

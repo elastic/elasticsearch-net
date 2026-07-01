@@ -27,62 +27,112 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore", false);
-		if (Filter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
 
-		if (Name is not null)
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			if (Weight is not null)
+			{
+				writer.WriteFluentCall("Weight", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Weight.Value); w.Write("d"); });
+			}
+
+			if (Exp is not null)
+			{
+				writer.WriteFluentCall("Exp", (w) => { using var _oi = w.ForceObjectInitializer(); Exp.FormatCode(w); });
+			}
+
+			if (FieldValueFactor is not null)
+			{
+				writer.WriteFluentDescriptorCall("FieldValueFactor", (w) => { FieldValueFactor.FormatCode(w); });
+			}
+
+			if (Gauss is not null)
+			{
+				writer.WriteFluentCall("Gauss", (w) => { using var _oi = w.ForceObjectInitializer(); Gauss.FormatCode(w); });
+			}
+
+			if (Linear is not null)
+			{
+				writer.WriteFluentCall("Linear", (w) => { using var _oi = w.ForceObjectInitializer(); Linear.FormatCode(w); });
+			}
+
+			if (RandomScore is not null)
+			{
+				writer.WriteFluentDescriptorCall("RandomScore", (w) => { RandomScore.FormatCode(w); });
+			}
+
+			if (ScriptScore is not null)
+			{
+				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore", false);
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
 
-		if (Weight is not null)
-		{
-			initializer.Property("Weight");
-			writer.WriteValue(Weight.Value);
-			writer.Write("d");
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		if (Exp is not null)
-		{
-			initializer.Property("Exp");
-			Exp.FormatCode(writer);
-		}
+			if (Weight is not null)
+			{
+				initializer.Property("Weight");
+				writer.WriteValue(Weight.Value);
+				writer.Write("d");
+			}
 
-		if (FieldValueFactor is not null)
-		{
-			initializer.Property("FieldValueFactor");
-			FieldValueFactor.FormatCode(writer);
-		}
+			if (Exp is not null)
+			{
+				initializer.Property("Exp");
+				Exp.FormatCode(writer);
+			}
 
-		if (Gauss is not null)
-		{
-			initializer.Property("Gauss");
-			Gauss.FormatCode(writer);
-		}
+			if (FieldValueFactor is not null)
+			{
+				initializer.Property("FieldValueFactor");
+				FieldValueFactor.FormatCode(writer);
+			}
 
-		if (Linear is not null)
-		{
-			initializer.Property("Linear");
-			Linear.FormatCode(writer);
-		}
+			if (Gauss is not null)
+			{
+				initializer.Property("Gauss");
+				Gauss.FormatCode(writer);
+			}
 
-		if (RandomScore is not null)
-		{
-			initializer.Property("RandomScore");
-			RandomScore.FormatCode(writer);
-		}
+			if (Linear is not null)
+			{
+				initializer.Property("Linear");
+				Linear.FormatCode(writer);
+			}
 
-		if (ScriptScore is not null)
-		{
-			initializer.Property("ScriptScore");
-			ScriptScore.FormatCode(writer);
-		}
+			if (RandomScore is not null)
+			{
+				initializer.Property("RandomScore");
+				RandomScore.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ScriptScore is not null)
+			{
+				initializer.Property("ScriptScore");
+				ScriptScore.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

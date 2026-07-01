@@ -27,17 +27,30 @@ public partial class CompletionTool : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CompletionTool", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Function");
-			Function.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentDescriptorCall("Function", (w) => { Function.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+			}
+		}
+		else
 		{
-			initializer.Property("Type");
-			writer.WriteString(Type);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CompletionTool", false);
+			{
+				initializer.Property("Function");
+				Function.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Type");
+				writer.WriteString(Type);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

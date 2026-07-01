@@ -27,25 +27,45 @@ public partial class ShapeFieldQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery", false);
-		if (IndexedShape is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("IndexedShape");
-			IndexedShape.FormatCode(writer);
-		}
+			if (IndexedShape is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexedShape", (w) => { IndexedShape.FormatCode(w); });
+			}
 
-		if (Relation is not null)
+			if (Relation is not null)
+			{
+				writer.WriteFluentCall("Relation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(Relation.Value, w); });
+			}
+
+			if (Shape is not null)
+			{
+				writer.WriteFluentCall("Shape", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Shape); });
+			}
+		}
+		else
 		{
-			initializer.Property("Relation");
-			Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(Relation.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery", false);
+			if (IndexedShape is not null)
+			{
+				initializer.Property("IndexedShape");
+				IndexedShape.FormatCode(writer);
+			}
 
-		if (Shape is not null)
-		{
-			initializer.Property("Shape");
-			writer.WriteValue(Shape);
-		}
+			if (Relation is not null)
+			{
+				initializer.Property("Relation");
+				Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(Relation.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Shape is not null)
+			{
+				initializer.Property("Shape");
+				writer.WriteObjectValue(Shape);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,25 +27,45 @@ public partial class ApiKeyFiltersAggregation : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation", false);
-		if (Filters is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filters");
-			Filters.FormatCode(writer);
-		}
+			if (Filters is not null)
+			{
+				writer.WriteFluentCall("Filters", (w) => { using var _oi = w.ForceObjectInitializer(); Filters.FormatCode(w); });
+			}
 
-		if (OtherBucket is not null)
+			if (OtherBucket is not null)
+			{
+				writer.WriteFluentCall("OtherBucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OtherBucket.Value); });
+			}
+
+			if (OtherBucketKey is not null)
+			{
+				writer.WriteFluentCall("OtherBucketKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(OtherBucketKey); });
+			}
+		}
+		else
 		{
-			initializer.Property("OtherBucket");
-			writer.WriteValue(OtherBucket.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation", false);
+			if (Filters is not null)
+			{
+				initializer.Property("Filters");
+				Filters.FormatCode(writer);
+			}
 
-		if (OtherBucketKey is not null)
-		{
-			initializer.Property("OtherBucketKey");
-			writer.WriteString(OtherBucketKey);
-		}
+			if (OtherBucket is not null)
+			{
+				initializer.Property("OtherBucket");
+				writer.WriteValue(OtherBucket.Value);
+			}
 
-		initializer.Dispose();
+			if (OtherBucketKey is not null)
+			{
+				initializer.Property("OtherBucketKey");
+				writer.WriteString(OtherBucketKey);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

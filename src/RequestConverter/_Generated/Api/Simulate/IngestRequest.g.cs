@@ -27,75 +27,133 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Simulate.IngestRequest", false);
-		if (Index is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (MergeType is not null)
+			using var _chainIndent = writer.Indent();
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (MergeType is not null)
+			{
+				writer.WriteFluentCall("MergeType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(MergeType.Value, w); });
+			}
+
+			if (Pipeline is not null)
+			{
+				writer.WriteFluentCall("Pipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pipeline); });
+			}
+
+			if (ComponentTemplateSubstitutions is not null)
+			{
+				writer.WriteFluentDescriptorCall("ComponentTemplateSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", ComponentTemplateSubstitutions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>"); w.Write("()"); });
+			}
+
+			if (IndexTemplateSubstitutions is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexTemplateSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", IndexTemplateSubstitutions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+
+			if (MappingAddition is not null)
+			{
+				writer.WriteFluentDescriptorCall("MappingAddition", (w) => { MappingAddition.FormatCode(w); });
+			}
+
+			if (PipelineSubstitutions is not null)
+			{
+				writer.WriteFluentDescriptorCall("PipelineSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", PipelineSubstitutions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("MergeType");
-			Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(MergeType.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Simulate.IngestRequest", false);
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (Pipeline is not null)
-		{
-			initializer.Property("Pipeline");
-			writer.WriteString(Pipeline);
-		}
+			if (MergeType is not null)
+			{
+				initializer.Property("MergeType");
+				Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(MergeType.Value, writer);
+			}
 
-		if (ComponentTemplateSubstitutions is not null)
-		{
-			initializer.Property("ComponentTemplateSubstitutions");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode");
-			writer.Write(">()");
-			writer.WriteBlockList(ComponentTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (Pipeline is not null)
+			{
+				initializer.Property("Pipeline");
+				writer.WriteString(Pipeline);
+			}
 
-		{
-			initializer.Property("Docs");
-			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
-		}
+			if (ComponentTemplateSubstitutions is not null)
+			{
+				initializer.Property("ComponentTemplateSubstitutions");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode");
+				writer.Write(">()");
+				writer.WriteBlockList(ComponentTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (IndexTemplateSubstitutions is not null)
-		{
-			initializer.Property("IndexTemplateSubstitutions");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate");
-			writer.Write(">()");
-			writer.WriteBlockList(IndexTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			{
+				initializer.Property("Docs");
+				writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (MappingAddition is not null)
-		{
-			initializer.Property("MappingAddition");
-			MappingAddition.FormatCode(writer);
-		}
+			if (IndexTemplateSubstitutions is not null)
+			{
+				initializer.Property("IndexTemplateSubstitutions");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate");
+				writer.Write(">()");
+				writer.WriteBlockList(IndexTemplateSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (PipelineSubstitutions is not null)
-		{
-			initializer.Property("PipelineSubstitutions");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.Pipeline");
-			writer.Write(">()");
-			writer.WriteBlockList(PipelineSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (MappingAddition is not null)
+			{
+				initializer.Property("MappingAddition");
+				MappingAddition.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (PipelineSubstitutions is not null)
+			{
+				initializer.Property("PipelineSubstitutions");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.Pipeline");
+				writer.Write(">()");
+				writer.WriteBlockList(PipelineSubstitutions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

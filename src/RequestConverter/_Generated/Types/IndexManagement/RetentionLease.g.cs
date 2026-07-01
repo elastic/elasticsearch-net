@@ -27,12 +27,21 @@ public partial class RetentionLease : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Period");
-			Period.FormatCode(writer);
+			{
+				writer.WriteFluentCall("Period", (w) => { using var _oi = w.ForceObjectInitializer(); Period.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease", false);
+			{
+				initializer.Property("Period");
+				Period.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

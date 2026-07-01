@@ -27,42 +27,92 @@ public partial class UpdateCrossClusterApiKeyRequest : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Id.FormatCode(writer);
+				}
 
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Id.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("Access", (w) => { Access.FormatCode(w); });
+			}
+
+			if (CertificateIdentity is not null)
+			{
+				writer.WriteFluentCall("CertificateIdentity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CertificateIdentity); });
+			}
+
+			if (Expiration is not null)
+			{
+				writer.WriteFluentCall("Expiration", (w) => { using var _oi = w.ForceObjectInitializer(); Expiration.FormatCode(w); });
+			}
+
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Access");
-			Access.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (CertificateIdentity is not null)
-		{
-			initializer.Property("CertificateIdentity");
-			writer.WriteString(CertificateIdentity);
-		}
+			{
+				initializer.Property("Access");
+				Access.FormatCode(writer);
+			}
 
-		if (Expiration is not null)
-		{
-			initializer.Property("Expiration");
-			Expiration.FormatCode(writer);
-		}
+			if (CertificateIdentity is not null)
+			{
+				initializer.Property("CertificateIdentity");
+				writer.WriteString(CertificateIdentity);
+			}
 
-		if (Metadata is not null)
-		{
-			initializer.Property("Metadata");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (Expiration is not null)
+			{
+				initializer.Property("Expiration");
+				Expiration.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

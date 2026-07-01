@@ -27,39 +27,73 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest", false);
-		if (AnalysisConfig is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AnalysisConfig");
-			AnalysisConfig.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (MaxBucketCardinality is not null)
+			using var _chainIndent = writer.Indent();
+			if (AnalysisConfig is not null)
+			{
+				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); });
+			}
+
+			if (MaxBucketCardinality is not null)
+			{
+				writer.WriteFluentCall("MaxBucketCardinality", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); });
+			}
+
+			if (OverallCardinality is not null)
+			{
+				writer.WriteFluentCall("OverallCardinality", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxBucketCardinality");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("long");
-			writer.Write(">()");
-			writer.WriteBlockList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest", false);
+			if (AnalysisConfig is not null)
+			{
+				initializer.Property("AnalysisConfig");
+				AnalysisConfig.FormatCode(writer);
+			}
 
-		if (OverallCardinality is not null)
-		{
-			initializer.Property("OverallCardinality");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("long");
-			writer.Write(">()");
-			writer.WriteBlockList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
-		}
+			if (MaxBucketCardinality is not null)
+			{
+				initializer.Property("MaxBucketCardinality");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("long");
+				writer.Write(">()");
+				writer.WriteBlockList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (OverallCardinality is not null)
+			{
+				initializer.Property("OverallCardinality");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("long");
+				writer.Write(">()");
+				writer.WriteBlockList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

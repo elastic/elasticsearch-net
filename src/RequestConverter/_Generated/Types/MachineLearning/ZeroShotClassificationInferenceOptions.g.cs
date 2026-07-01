@@ -27,42 +27,76 @@ public partial class ZeroShotClassificationInferenceOptions : RequestConverter.I
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ClassificationLabels");
-			writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
-		}
+			{
+				writer.WriteFluentParams("ClassificationLabels", ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (HypothesisTemplate is not null)
+			if (HypothesisTemplate is not null)
+			{
+				writer.WriteFluentCall("HypothesisTemplate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(HypothesisTemplate); });
+			}
+
+			if (Labels is not null)
+			{
+				writer.WriteFluentParams("Labels", Labels, (w, item) => { w.WriteString(item); });
+			}
+
+			if (MultiLabel is not null)
+			{
+				writer.WriteFluentCall("MultiLabel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultiLabel.Value); });
+			}
+
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+			}
+
+			if (Tokenization is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("HypothesisTemplate");
-			writer.WriteString(HypothesisTemplate);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions", false);
+			{
+				initializer.Property("ClassificationLabels");
+				writer.WriteInlineList(ClassificationLabels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Labels is not null)
-		{
-			initializer.Property("Labels");
-			writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });
-		}
+			if (HypothesisTemplate is not null)
+			{
+				initializer.Property("HypothesisTemplate");
+				writer.WriteString(HypothesisTemplate);
+			}
 
-		if (MultiLabel is not null)
-		{
-			initializer.Property("MultiLabel");
-			writer.WriteValue(MultiLabel.Value);
-		}
+			if (Labels is not null)
+			{
+				initializer.Property("Labels");
+				writer.WriteInlineList(Labels, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ResultsField is not null)
-		{
-			initializer.Property("ResultsField");
-			writer.WriteString(ResultsField);
-		}
+			if (MultiLabel is not null)
+			{
+				initializer.Property("MultiLabel");
+				writer.WriteValue(MultiLabel.Value);
+			}
 
-		if (Tokenization is not null)
-		{
-			initializer.Property("Tokenization");
-			Tokenization.FormatCode(writer);
-		}
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				writer.WriteString(ResultsField);
+			}
 
-		initializer.Dispose();
+			if (Tokenization is not null)
+			{
+				initializer.Property("Tokenization");
+				Tokenization.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

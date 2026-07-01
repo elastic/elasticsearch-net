@@ -27,49 +27,89 @@ public partial class ShingleTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter", true);
-		if (FillerToken is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FillerToken");
-			writer.WriteString(FillerToken);
-		}
+			if (FillerToken is not null)
+			{
+				writer.WriteFluentCall("FillerToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FillerToken); });
+			}
 
-		if (MaxShingleSize is not null)
+			if (MaxShingleSize is not null)
+			{
+				writer.WriteFluentCall("MaxShingleSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxShingleSize.Value); });
+			}
+
+			if (MinShingleSize is not null)
+			{
+				writer.WriteFluentCall("MinShingleSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinShingleSize.Value); });
+			}
+
+			if (OutputUnigrams is not null)
+			{
+				writer.WriteFluentCall("OutputUnigrams", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OutputUnigrams.Value); });
+			}
+
+			if (OutputUnigramsIfNoShingles is not null)
+			{
+				writer.WriteFluentCall("OutputUnigramsIfNoShingles", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OutputUnigramsIfNoShingles.Value); });
+			}
+
+			if (TokenSeparator is not null)
+			{
+				writer.WriteFluentCall("TokenSeparator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TokenSeparator); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxShingleSize");
-			writer.WriteValue(MaxShingleSize.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter", true);
+			if (FillerToken is not null)
+			{
+				initializer.Property("FillerToken");
+				writer.WriteString(FillerToken);
+			}
 
-		if (MinShingleSize is not null)
-		{
-			initializer.Property("MinShingleSize");
-			writer.WriteValue(MinShingleSize.Value);
-		}
+			if (MaxShingleSize is not null)
+			{
+				initializer.Property("MaxShingleSize");
+				writer.WriteValue(MaxShingleSize.Value);
+			}
 
-		if (OutputUnigrams is not null)
-		{
-			initializer.Property("OutputUnigrams");
-			writer.WriteValue(OutputUnigrams.Value);
-		}
+			if (MinShingleSize is not null)
+			{
+				initializer.Property("MinShingleSize");
+				writer.WriteValue(MinShingleSize.Value);
+			}
 
-		if (OutputUnigramsIfNoShingles is not null)
-		{
-			initializer.Property("OutputUnigramsIfNoShingles");
-			writer.WriteValue(OutputUnigramsIfNoShingles.Value);
-		}
+			if (OutputUnigrams is not null)
+			{
+				initializer.Property("OutputUnigrams");
+				writer.WriteValue(OutputUnigrams.Value);
+			}
 
-		if (TokenSeparator is not null)
-		{
-			initializer.Property("TokenSeparator");
-			writer.WriteString(TokenSeparator);
-		}
+			if (OutputUnigramsIfNoShingles is not null)
+			{
+				initializer.Property("OutputUnigramsIfNoShingles");
+				writer.WriteValue(OutputUnigramsIfNoShingles.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (TokenSeparator is not null)
+			{
+				initializer.Property("TokenSeparator");
+				writer.WriteString(TokenSeparator);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

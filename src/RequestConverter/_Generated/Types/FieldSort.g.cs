@@ -27,54 +27,98 @@ public partial class FieldSort : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.FieldSort", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
+			}
+
+			if (Nested is not null)
+			{
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); });
+			}
+
+			if (NumericType is not null)
+			{
+				writer.WriteFluentCall("NumericType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.FieldSortNumericTypeCodeFormatter.FormatCode(NumericType.Value, w); });
+			}
+
+			if (Order is not null)
+			{
+				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+			}
+
+			if (UnmappedType is not null)
+			{
+				writer.WriteFluentCall("UnmappedType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.FieldTypeCodeFormatter.FormatCode(UnmappedType.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.FieldSort", false);
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Mode is not null)
-		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		if (Nested is not null)
-		{
-			initializer.Property("Nested");
-			Nested.FormatCode(writer);
-		}
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, writer);
+			}
 
-		if (NumericType is not null)
-		{
-			initializer.Property("NumericType");
-			Elastic.Clients.Elasticsearch.FieldSortNumericTypeCodeFormatter.FormatCode(NumericType.Value, writer);
-		}
+			if (Nested is not null)
+			{
+				initializer.Property("Nested");
+				Nested.FormatCode(writer);
+			}
 
-		if (Order is not null)
-		{
-			initializer.Property("Order");
-			Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
-		}
+			if (NumericType is not null)
+			{
+				initializer.Property("NumericType");
+				Elastic.Clients.Elasticsearch.FieldSortNumericTypeCodeFormatter.FormatCode(NumericType.Value, writer);
+			}
 
-		if (UnmappedType is not null)
-		{
-			initializer.Property("UnmappedType");
-			Elastic.Clients.Elasticsearch.Mapping.FieldTypeCodeFormatter.FormatCode(UnmappedType.Value, writer);
-		}
+			if (Order is not null)
+			{
+				initializer.Property("Order");
+				Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (UnmappedType is not null)
+			{
+				initializer.Property("UnmappedType");
+				Elastic.Clients.Elasticsearch.Mapping.FieldTypeCodeFormatter.FormatCode(UnmappedType.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

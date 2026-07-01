@@ -27,24 +27,43 @@ public partial class FrequentItemSetsField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField", false);
-		if (Exclude is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Exclude");
-			Exclude.FormatCode(writer);
-		}
+			if (Exclude is not null)
+			{
+				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); Exclude.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (Include is not null)
+			{
+				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); Include.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField", false);
+			if (Exclude is not null)
+			{
+				initializer.Property("Exclude");
+				Exclude.FormatCode(writer);
+			}
 
-		if (Include is not null)
-		{
-			initializer.Property("Include");
-			Include.FormatCode(writer);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Include is not null)
+			{
+				initializer.Property("Include");
+				Include.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

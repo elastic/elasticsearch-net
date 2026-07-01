@@ -27,37 +27,67 @@ public partial class DataframeAnalysisFeatureProcessor : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor", false);
-		if (FrequencyEncoding is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FrequencyEncoding");
-			FrequencyEncoding.FormatCode(writer);
-		}
+			if (FrequencyEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("FrequencyEncoding", (w) => { FrequencyEncoding.FormatCode(w); });
+			}
 
-		if (MultiEncoding is not null)
+			if (MultiEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("MultiEncoding", (w) => { MultiEncoding.FormatCode(w); });
+			}
+
+			if (NGramEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("NGramEncoding", (w) => { NGramEncoding.FormatCode(w); });
+			}
+
+			if (OneHotEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("OneHotEncoding", (w) => { OneHotEncoding.FormatCode(w); });
+			}
+
+			if (TargetMeanEncoding is not null)
+			{
+				writer.WriteFluentDescriptorCall("TargetMeanEncoding", (w) => { TargetMeanEncoding.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MultiEncoding");
-			MultiEncoding.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor", false);
+			if (FrequencyEncoding is not null)
+			{
+				initializer.Property("FrequencyEncoding");
+				FrequencyEncoding.FormatCode(writer);
+			}
 
-		if (NGramEncoding is not null)
-		{
-			initializer.Property("NGramEncoding");
-			NGramEncoding.FormatCode(writer);
-		}
+			if (MultiEncoding is not null)
+			{
+				initializer.Property("MultiEncoding");
+				MultiEncoding.FormatCode(writer);
+			}
 
-		if (OneHotEncoding is not null)
-		{
-			initializer.Property("OneHotEncoding");
-			OneHotEncoding.FormatCode(writer);
-		}
+			if (NGramEncoding is not null)
+			{
+				initializer.Property("NGramEncoding");
+				NGramEncoding.FormatCode(writer);
+			}
 
-		if (TargetMeanEncoding is not null)
-		{
-			initializer.Property("TargetMeanEncoding");
-			TargetMeanEncoding.FormatCode(writer);
-		}
+			if (OneHotEncoding is not null)
+			{
+				initializer.Property("OneHotEncoding");
+				OneHotEncoding.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TargetMeanEncoding is not null)
+			{
+				initializer.Property("TargetMeanEncoding");
+				TargetMeanEncoding.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

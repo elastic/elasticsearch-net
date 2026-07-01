@@ -27,30 +27,54 @@ public partial class IntervalsAllOf : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf", false);
-		if (Filter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentDescriptorParams("Intervals", Intervals, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>"); w.Write("()"); });
+			}
+
+			if (MaxGaps is not null)
+			{
+				writer.WriteFluentCall("MaxGaps", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGaps.Value); });
+			}
+
+			if (Ordered is not null)
+			{
+				writer.WriteFluentCall("Ordered", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Ordered.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Intervals");
-			writer.WriteInlineList(Intervals, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf", false);
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
 
-		if (MaxGaps is not null)
-		{
-			initializer.Property("MaxGaps");
-			writer.WriteValue(MaxGaps.Value);
-		}
+			{
+				initializer.Property("Intervals");
+				writer.WriteInlineList(Intervals, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Ordered is not null)
-		{
-			initializer.Property("Ordered");
-			writer.WriteValue(Ordered.Value);
-		}
+			if (MaxGaps is not null)
+			{
+				initializer.Property("MaxGaps");
+				writer.WriteValue(MaxGaps.Value);
+			}
 
-		initializer.Dispose();
+			if (Ordered is not null)
+			{
+				initializer.Property("Ordered");
+				writer.WriteValue(Ordered.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

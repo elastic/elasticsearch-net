@@ -27,30 +27,68 @@ public partial class SimulateRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.SimulateRequest", false);
-		if (Id is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (Verbose is not null)
+			using var _chainIndent = writer.Indent();
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
+
+			if (Verbose is not null)
+			{
+				writer.WriteFluentCall("Verbose", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Verbose.Value); });
+			}
+
+			{
+				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>"); w.Write("()"); });
+			}
+
+			if (Pipeline is not null)
+			{
+				writer.WriteFluentDescriptorCall("Pipeline", (w) => { Pipeline.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Verbose");
-			writer.WriteValue(Verbose.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.SimulateRequest", false);
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Docs");
-			writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
-		}
+			if (Verbose is not null)
+			{
+				initializer.Property("Verbose");
+				writer.WriteValue(Verbose.Value);
+			}
 
-		if (Pipeline is not null)
-		{
-			initializer.Property("Pipeline");
-			Pipeline.FormatCode(writer);
-		}
+			{
+				initializer.Property("Docs");
+				writer.WriteInlineList(Docs, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Pipeline is not null)
+			{
+				initializer.Property("Pipeline");
+				Pipeline.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

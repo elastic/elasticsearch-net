@@ -27,23 +27,41 @@ public partial class BucketCorrelationFunctionCountCorrelationIndicator : Reques
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DocCount");
-			writer.WriteValue(DocCount);
-		}
+			{
+				writer.WriteFluentCall("DocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocCount); });
+			}
 
+			{
+				writer.WriteFluentParams("Expectations", Expectations, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+
+			if (Fractions is not null)
+			{
+				writer.WriteFluentParams("Fractions", Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Expectations");
-			writer.WriteInlineList(Expectations, (w, item) => { w.WriteValue(item); w.Write("d"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator", false);
+			{
+				initializer.Property("DocCount");
+				writer.WriteValue(DocCount);
+			}
 
-		if (Fractions is not null)
-		{
-			initializer.Property("Fractions");
-			writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
-		}
+			{
+				initializer.Property("Expectations");
+				writer.WriteInlineList(Expectations, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
 
-		initializer.Dispose();
+			if (Fractions is not null)
+			{
+				initializer.Property("Fractions");
+				writer.WriteInlineList(Fractions, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

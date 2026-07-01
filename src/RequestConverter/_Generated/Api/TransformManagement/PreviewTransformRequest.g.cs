@@ -27,73 +27,147 @@ public partial class PreviewTransformRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest", false);
-		if (TransformId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("TransformId");
-			TransformId.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (Timeout is not null)
+			using var _chainIndent = writer.Indent();
+			if (TransformId is not null)
+			{
+				writer.WriteFluentCall("TransformId", (w) => { using var _oi = w.ForceObjectInitializer(); TransformId.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (Dest is not null)
+			{
+				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); });
+			}
+
+			if (Frequency is not null)
+			{
+				writer.WriteFluentCall("Frequency", (w) => { using var _oi = w.ForceObjectInitializer(); Frequency.FormatCode(w); });
+			}
+
+			if (Latest is not null)
+			{
+				writer.WriteFluentDescriptorCall("Latest", (w) => { Latest.FormatCode(w); });
+			}
+
+			if (Pivot is not null)
+			{
+				writer.WriteFluentDescriptorCall("Pivot", (w) => { Pivot.FormatCode(w); });
+			}
+
+			if (RetentionPolicy is not null)
+			{
+				writer.WriteFluentDescriptorCall("RetentionPolicy", (w) => { RetentionPolicy.FormatCode(w); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+			}
+
+			if (Sync is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest", false);
+			if (TransformId is not null)
+			{
+				initializer.Property("TransformId");
+				TransformId.FormatCode(writer);
+			}
 
-		if (Description is not null)
-		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (Dest is not null)
-		{
-			initializer.Property("Dest");
-			Dest.FormatCode(writer);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (Frequency is not null)
-		{
-			initializer.Property("Frequency");
-			Frequency.FormatCode(writer);
-		}
+			if (Dest is not null)
+			{
+				initializer.Property("Dest");
+				Dest.FormatCode(writer);
+			}
 
-		if (Latest is not null)
-		{
-			initializer.Property("Latest");
-			Latest.FormatCode(writer);
-		}
+			if (Frequency is not null)
+			{
+				initializer.Property("Frequency");
+				Frequency.FormatCode(writer);
+			}
 
-		if (Pivot is not null)
-		{
-			initializer.Property("Pivot");
-			Pivot.FormatCode(writer);
-		}
+			if (Latest is not null)
+			{
+				initializer.Property("Latest");
+				Latest.FormatCode(writer);
+			}
 
-		if (RetentionPolicy is not null)
-		{
-			initializer.Property("RetentionPolicy");
-			RetentionPolicy.FormatCode(writer);
-		}
+			if (Pivot is not null)
+			{
+				initializer.Property("Pivot");
+				Pivot.FormatCode(writer);
+			}
 
-		if (Settings is not null)
-		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			if (RetentionPolicy is not null)
+			{
+				initializer.Property("RetentionPolicy");
+				RetentionPolicy.FormatCode(writer);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
 
-		if (Sync is not null)
-		{
-			initializer.Property("Sync");
-			Sync.FormatCode(writer);
-		}
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Sync is not null)
+			{
+				initializer.Property("Sync");
+				Sync.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

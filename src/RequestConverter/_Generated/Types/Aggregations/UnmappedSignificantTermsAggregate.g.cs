@@ -37,7 +37,7 @@ public partial class UnmappedSignificantTermsAggregate : RequestConverter.ICodeF
 
 		{
 			initializer.Property("Buckets");
-			writer.WriteInlineList(Buckets, (w, item) => { w.WriteValue(item); });
+			writer.WriteInlineList(Buckets, (w, item) => { w.WriteObjectValue(item); });
 		}
 
 		if (DocCount is not null)
@@ -57,7 +57,7 @@ public partial class UnmappedSignificantTermsAggregate : RequestConverter.ICodeF
 			writer.Write(", ");
 			writer.WriteTypeRef("object");
 			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
+			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 		}
 
 		initializer.Dispose();

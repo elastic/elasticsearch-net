@@ -27,32 +27,52 @@ public partial class CompositeAggregation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation", false);
-		if (After is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("After");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue");
-			writer.Write(">()");
-			writer.WriteBlockList(After, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (After is not null)
+			{
+				writer.WriteFluentCall("After", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue"); w.Write(">()"); w.WriteBlockList(After, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); });
+			}
 
-		if (Size is not null)
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Sources is not null)
+			{
+				writer.WriteFluentDescriptorCall("Sources", (w) => { w.WriteFluentDictionaryAdds("Add", Sources, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation", false);
+			if (After is not null)
+			{
+				initializer.Property("After");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue");
+				writer.Write(">()");
+				writer.WriteBlockList(After, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
 
-		if (Sources is not null)
-		{
-			initializer.Property("Sources");
-			writer.WriteInlineList(Sources, (w, item) => { w.Write("new("); w.WriteString(item.Key); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		initializer.Dispose();
+			if (Sources is not null)
+			{
+				initializer.Property("Sources");
+				writer.WriteInlineList(Sources, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<string,Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>"); w.WriteString(item.Key); w.Write(", "); item.Value.FormatCode(w); w.Write(")"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

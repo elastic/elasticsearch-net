@@ -27,55 +27,104 @@ public partial class GetTrainedModelsRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest", false);
-		if (ModelId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (ModelId is not null)
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); ModelId.FormatCode(w); });
+			}
 
-		if (AllowNoMatch is not null)
+			if (AllowNoMatch is not null)
+			{
+				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+			}
+
+			if (DecompressDefinition is not null)
+			{
+				writer.WriteFluentCall("DecompressDefinition", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DecompressDefinition.Value); });
+			}
+
+			if (ExcludeGenerated is not null)
+			{
+				writer.WriteFluentCall("ExcludeGenerated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeGenerated.Value); });
+			}
+
+			if (From is not null)
+			{
+				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+			}
+
+			if (Include is not null)
+			{
+				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.IncludeCodeFormatter.FormatCode(Include.Value, w); });
+			}
+
+			if (Size is not null)
+			{
+				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+			}
+
+			if (Tags is not null)
+			{
+				writer.WriteFluentParams("Tags", Tags, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("AllowNoMatch");
-			writer.WriteValue(AllowNoMatch.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest", false);
+			if (ModelId is not null)
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
 
-		if (DecompressDefinition is not null)
-		{
-			initializer.Property("DecompressDefinition");
-			writer.WriteValue(DecompressDefinition.Value);
-		}
+			if (AllowNoMatch is not null)
+			{
+				initializer.Property("AllowNoMatch");
+				writer.WriteValue(AllowNoMatch.Value);
+			}
 
-		if (ExcludeGenerated is not null)
-		{
-			initializer.Property("ExcludeGenerated");
-			writer.WriteValue(ExcludeGenerated.Value);
-		}
+			if (DecompressDefinition is not null)
+			{
+				initializer.Property("DecompressDefinition");
+				writer.WriteValue(DecompressDefinition.Value);
+			}
 
-		if (From is not null)
-		{
-			initializer.Property("From");
-			writer.WriteValue(From.Value);
-		}
+			if (ExcludeGenerated is not null)
+			{
+				initializer.Property("ExcludeGenerated");
+				writer.WriteValue(ExcludeGenerated.Value);
+			}
 
-		if (Include is not null)
-		{
-			initializer.Property("Include");
-			Elastic.Clients.Elasticsearch.MachineLearning.IncludeCodeFormatter.FormatCode(Include.Value, writer);
-		}
+			if (From is not null)
+			{
+				initializer.Property("From");
+				writer.WriteValue(From.Value);
+			}
 
-		if (Size is not null)
-		{
-			initializer.Property("Size");
-			writer.WriteValue(Size.Value);
-		}
+			if (Include is not null)
+			{
+				initializer.Property("Include");
+				Elastic.Clients.Elasticsearch.MachineLearning.IncludeCodeFormatter.FormatCode(Include.Value, writer);
+			}
 
-		if (Tags is not null)
-		{
-			initializer.Property("Tags");
-			writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
-		}
+			if (Size is not null)
+			{
+				initializer.Property("Size");
+				writer.WriteValue(Size.Value);
+			}
 
-		initializer.Dispose();
+			if (Tags is not null)
+			{
+				initializer.Property("Tags");
+				writer.WriteInlineList(Tags, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

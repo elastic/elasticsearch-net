@@ -27,12 +27,25 @@ public partial class ClearCursorRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Cursor");
-			writer.WriteString(Cursor);
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentCall("Cursor", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Cursor); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest", false);
+			{
+				initializer.Property("Cursor");
+				writer.WriteString(Cursor);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,12 +27,21 @@ public partial class CustomRequestParams : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CustomRequestParams", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Content");
-			writer.WriteString(Content);
+			{
+				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Content); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.CustomRequestParams", false);
+			{
+				initializer.Property("Content");
+				writer.WriteString(Content);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

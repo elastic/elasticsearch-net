@@ -27,6 +27,7 @@ public partial class ExistsAliasRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest", false);
 		if (Indices is not null)
 		{

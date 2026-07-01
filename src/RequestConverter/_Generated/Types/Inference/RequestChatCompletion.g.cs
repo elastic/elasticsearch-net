@@ -27,70 +27,119 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion", false);
-		if (MaxCompletionTokens is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxCompletionTokens");
-			writer.WriteValue(MaxCompletionTokens.Value);
-			writer.Write("L");
-		}
-
-		{
-			initializer.Property("Messages");
-			writer.WriteInlineList(Messages, (w, item) => { item.FormatCode(w); });
-		}
-
-		if (Model is not null)
-		{
-			initializer.Property("Model");
-			writer.WriteString(Model);
-		}
-
-		if (Reasoning is not null)
-		{
-			initializer.Property("Reasoning");
-			Reasoning.FormatCode(writer);
-		}
-
-		if (Stop is not null)
-		{
-			initializer.Property("Stop");
-			writer.WriteInlineList(Stop, (w, item) => { w.WriteString(item); });
-		}
-
-		if (Temperature is not null)
-		{
-			initializer.Property("Temperature");
-			writer.WriteValue(Temperature.Value);
-			writer.Write("f");
-		}
-
-		if (ToolChoice is not null)
-		{
-			initializer.Property("ToolChoice");
-			if (ToolChoice.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (MaxCompletionTokens is not null)
 			{
-				writer.WriteString(ToolChoice.Value1);
+				writer.WriteFluentCall("MaxCompletionTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxCompletionTokens.Value); w.Write("L"); });
 			}
-			else
+
 			{
-				ToolChoice.Value2.FormatCode(writer);
+				writer.WriteFluentDescriptorParams("Messages", Messages, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.Message>"); w.Write("()"); });
+			}
+
+			if (Model is not null)
+			{
+				writer.WriteFluentCall("Model", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Model); });
+			}
+
+			if (Reasoning is not null)
+			{
+				writer.WriteFluentDescriptorCall("Reasoning", (w) => { Reasoning.FormatCode(w); });
+			}
+
+			if (Stop is not null)
+			{
+				writer.WriteFluentParams("Stop", Stop, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Temperature is not null)
+			{
+				writer.WriteFluentCall("Temperature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Temperature.Value); w.Write("f"); });
+			}
+
+			if (ToolChoice is not null)
+			{
+				writer.WriteFluentCall("ToolChoice", (w) => { using var _oi = w.ForceObjectInitializer(); if (ToolChoice.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(ToolChoice.Value1); } else { ToolChoice.Value2.FormatCode(w); } });
+			}
+
+			if (Tools is not null)
+			{
+				writer.WriteFluentDescriptorParams("Tools", Tools, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.CompletionTool>"); w.Write("()"); });
+			}
+
+			if (TopP is not null)
+			{
+				writer.WriteFluentCall("TopP", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopP.Value); w.Write("f"); });
 			}
 		}
-
-		if (Tools is not null)
+		else
 		{
-			initializer.Property("Tools");
-			writer.WriteInlineList(Tools, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion", false);
+			if (MaxCompletionTokens is not null)
+			{
+				initializer.Property("MaxCompletionTokens");
+				writer.WriteValue(MaxCompletionTokens.Value);
+				writer.Write("L");
+			}
 
-		if (TopP is not null)
-		{
-			initializer.Property("TopP");
-			writer.WriteValue(TopP.Value);
-			writer.Write("f");
-		}
+			{
+				initializer.Property("Messages");
+				writer.WriteInlineList(Messages, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Model is not null)
+			{
+				initializer.Property("Model");
+				writer.WriteString(Model);
+			}
+
+			if (Reasoning is not null)
+			{
+				initializer.Property("Reasoning");
+				Reasoning.FormatCode(writer);
+			}
+
+			if (Stop is not null)
+			{
+				initializer.Property("Stop");
+				writer.WriteInlineList(Stop, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Temperature is not null)
+			{
+				initializer.Property("Temperature");
+				writer.WriteValue(Temperature.Value);
+				writer.Write("f");
+			}
+
+			if (ToolChoice is not null)
+			{
+				initializer.Property("ToolChoice");
+				if (ToolChoice.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteString(ToolChoice.Value1);
+				}
+				else
+				{
+					ToolChoice.Value2.FormatCode(writer);
+				}
+			}
+
+			if (Tools is not null)
+			{
+				initializer.Property("Tools");
+				writer.WriteInlineList(Tools, (w, item) => { item.FormatCode(w); });
+			}
+
+			if (TopP is not null)
+			{
+				initializer.Property("TopP");
+				writer.WriteValue(TopP.Value);
+				writer.Write("f");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

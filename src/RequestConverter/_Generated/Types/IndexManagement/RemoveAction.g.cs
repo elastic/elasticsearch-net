@@ -27,37 +27,67 @@ public partial class RemoveAction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction", false);
-		if (Alias is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Alias");
-			Alias.FormatCode(writer);
-		}
+			if (Alias is not null)
+			{
+				writer.WriteFluentCall("Alias", (w) => { using var _oi = w.ForceObjectInitializer(); Alias.FormatCode(w); });
+			}
 
-		if (Aliases is not null)
+			if (Aliases is not null)
+			{
+				writer.WriteFluentCall("Aliases", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			if (Index is not null)
+			{
+				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+			}
+
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (MustExist is not null)
+			{
+				writer.WriteFluentCall("MustExist", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MustExist.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("Aliases");
-			writer.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction", false);
+			if (Alias is not null)
+			{
+				initializer.Property("Alias");
+				Alias.FormatCode(writer);
+			}
 
-		if (Index is not null)
-		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (Aliases is not null)
+			{
+				initializer.Property("Aliases");
+				writer.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Indices is not null)
-		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (Index is not null)
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		if (MustExist is not null)
-		{
-			initializer.Property("MustExist");
-			writer.WriteValue(MustExist.Value);
-		}
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (MustExist is not null)
+			{
+				initializer.Property("MustExist");
+				writer.WriteValue(MustExist.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

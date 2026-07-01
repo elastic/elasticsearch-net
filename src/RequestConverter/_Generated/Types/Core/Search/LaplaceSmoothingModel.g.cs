@@ -27,13 +27,22 @@ public partial class LaplaceSmoothingModel : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Alpha");
-			writer.WriteValue(Alpha);
-			writer.Write("d");
+			{
+				writer.WriteFluentCall("Alpha", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Alpha); w.Write("d"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel", false);
+			{
+				initializer.Property("Alpha");
+				writer.WriteValue(Alpha);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

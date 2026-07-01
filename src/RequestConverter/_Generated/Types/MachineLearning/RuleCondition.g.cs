@@ -27,23 +27,40 @@ public partial class RuleCondition : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AppliesTo");
-			Elastic.Clients.Elasticsearch.MachineLearning.AppliesToCodeFormatter.FormatCode(AppliesTo, writer);
-		}
+			{
+				writer.WriteFluentCall("AppliesTo", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.AppliesToCodeFormatter.FormatCode(AppliesTo, w); });
+			}
 
+			{
+				writer.WriteFluentCall("Operator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperatorCodeFormatter.FormatCode(Operator, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Value", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Value); w.Write("d"); });
+			}
+		}
+		else
 		{
-			initializer.Property("Operator");
-			Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperatorCodeFormatter.FormatCode(Operator, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition", false);
+			{
+				initializer.Property("AppliesTo");
+				Elastic.Clients.Elasticsearch.MachineLearning.AppliesToCodeFormatter.FormatCode(AppliesTo, writer);
+			}
 
-		{
-			initializer.Property("Value");
-			writer.WriteValue(Value);
-			writer.Write("d");
-		}
+			{
+				initializer.Property("Operator");
+				Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperatorCodeFormatter.FormatCode(Operator, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Value");
+				writer.WriteValue(Value);
+				writer.Write("d");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,30 +27,60 @@ public partial class ForecastRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				JobId.FormatCode(writer);
+			}
 
-		if (Duration is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Duration is not null)
+			{
+				writer.WriteFluentCall("Duration", (w) => { using var _oi = w.ForceObjectInitializer(); Duration.FormatCode(w); });
+			}
+
+			if (ExpiresIn is not null)
+			{
+				writer.WriteFluentCall("ExpiresIn", (w) => { using var _oi = w.ForceObjectInitializer(); ExpiresIn.FormatCode(w); });
+			}
+
+			if (MaxModelMemory is not null)
+			{
+				writer.WriteFluentCall("MaxModelMemory", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MaxModelMemory); });
+			}
+		}
+		else
 		{
-			initializer.Property("Duration");
-			Duration.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (ExpiresIn is not null)
-		{
-			initializer.Property("ExpiresIn");
-			ExpiresIn.FormatCode(writer);
-		}
+			if (Duration is not null)
+			{
+				initializer.Property("Duration");
+				Duration.FormatCode(writer);
+			}
 
-		if (MaxModelMemory is not null)
-		{
-			initializer.Property("MaxModelMemory");
-			writer.WriteString(MaxModelMemory);
-		}
+			if (ExpiresIn is not null)
+			{
+				initializer.Property("ExpiresIn");
+				ExpiresIn.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (MaxModelMemory is not null)
+			{
+				initializer.Property("MaxModelMemory");
+				writer.WriteString(MaxModelMemory);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

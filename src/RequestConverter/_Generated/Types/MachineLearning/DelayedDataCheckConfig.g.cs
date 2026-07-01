@@ -27,18 +27,32 @@ public partial class DelayedDataCheckConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig", false);
-		if (CheckWindow is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("CheckWindow");
-			CheckWindow.FormatCode(writer);
-		}
+			if (CheckWindow is not null)
+			{
+				writer.WriteFluentCall("CheckWindow", (w) => { using var _oi = w.ForceObjectInitializer(); CheckWindow.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+			}
+		}
+		else
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig", false);
+			if (CheckWindow is not null)
+			{
+				initializer.Property("CheckWindow");
+				CheckWindow.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

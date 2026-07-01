@@ -27,36 +27,65 @@ public partial class QuestionAnsweringInferenceUpdateOptions : RequestConverter.
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions", false);
-		if (MaxAnswerLength is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxAnswerLength");
-			writer.WriteValue(MaxAnswerLength.Value);
-		}
+			if (MaxAnswerLength is not null)
+			{
+				writer.WriteFluentCall("MaxAnswerLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxAnswerLength.Value); });
+			}
 
-		if (NumTopClasses is not null)
+			if (NumTopClasses is not null)
+			{
+				writer.WriteFluentCall("NumTopClasses", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopClasses.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Question", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Question); });
+			}
+
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+			}
+
+			if (Tokenization is not null)
+			{
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("NumTopClasses");
-			writer.WriteValue(NumTopClasses.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions", false);
+			if (MaxAnswerLength is not null)
+			{
+				initializer.Property("MaxAnswerLength");
+				writer.WriteValue(MaxAnswerLength.Value);
+			}
 
-		{
-			initializer.Property("Question");
-			writer.WriteString(Question);
-		}
+			if (NumTopClasses is not null)
+			{
+				initializer.Property("NumTopClasses");
+				writer.WriteValue(NumTopClasses.Value);
+			}
 
-		if (ResultsField is not null)
-		{
-			initializer.Property("ResultsField");
-			writer.WriteString(ResultsField);
-		}
+			{
+				initializer.Property("Question");
+				writer.WriteString(Question);
+			}
 
-		if (Tokenization is not null)
-		{
-			initializer.Property("Tokenization");
-			Tokenization.FormatCode(writer);
-		}
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				writer.WriteString(ResultsField);
+			}
 
-		initializer.Dispose();
+			if (Tokenization is not null)
+			{
+				initializer.Property("Tokenization");
+				Tokenization.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

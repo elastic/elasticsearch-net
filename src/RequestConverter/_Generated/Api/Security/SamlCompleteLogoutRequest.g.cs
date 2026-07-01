@@ -27,29 +27,56 @@ public partial class SamlCompleteLogoutRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest", false);
-		if (Content is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Content");
-			writer.WriteString(Content);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Content is not null)
+			{
+				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Content); });
+			}
 
+			{
+				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); Ids.FormatCode(w); });
+			}
+
+			if (QueryString is not null)
+			{
+				writer.WriteFluentCall("QueryString", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryString); });
+			}
+
+			{
+				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+			}
+		}
+		else
 		{
-			initializer.Property("Ids");
-			Ids.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest", false);
+			if (Content is not null)
+			{
+				initializer.Property("Content");
+				writer.WriteString(Content);
+			}
 
-		if (QueryString is not null)
-		{
-			initializer.Property("QueryString");
-			writer.WriteString(QueryString);
-		}
+			{
+				initializer.Property("Ids");
+				Ids.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Realm");
-			writer.WriteString(Realm);
-		}
+			if (QueryString is not null)
+			{
+				initializer.Property("QueryString");
+				writer.WriteString(QueryString);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Realm");
+				writer.WriteString(Realm);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

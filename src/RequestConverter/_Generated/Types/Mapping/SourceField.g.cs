@@ -27,43 +27,78 @@ public partial class SourceField : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SourceField", false);
-		if (Compress is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Compress");
-			writer.WriteValue(Compress.Value);
-		}
+			if (Compress is not null)
+			{
+				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+			}
 
-		if (CompressThreshold is not null)
+			if (CompressThreshold is not null)
+			{
+				writer.WriteFluentCall("CompressThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CompressThreshold); });
+			}
+
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+
+			if (Excludes is not null)
+			{
+				writer.WriteFluentParams("Excludes", Excludes, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Includes is not null)
+			{
+				writer.WriteFluentParams("Includes", Includes, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Mode is not null)
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(Mode.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("CompressThreshold");
-			writer.WriteString(CompressThreshold);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SourceField", false);
+			if (Compress is not null)
+			{
+				initializer.Property("Compress");
+				writer.WriteValue(Compress.Value);
+			}
 
-		if (Enabled is not null)
-		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			if (CompressThreshold is not null)
+			{
+				initializer.Property("CompressThreshold");
+				writer.WriteString(CompressThreshold);
+			}
 
-		if (Excludes is not null)
-		{
-			initializer.Property("Excludes");
-			writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
-		}
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		if (Includes is not null)
-		{
-			initializer.Property("Includes");
-			writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
-		}
+			if (Excludes is not null)
+			{
+				initializer.Property("Excludes");
+				writer.WriteInlineList(Excludes, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Mode is not null)
-		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(Mode.Value, writer);
-		}
+			if (Includes is not null)
+			{
+				initializer.Property("Includes");
+				writer.WriteInlineList(Includes, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Mode is not null)
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(Mode.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

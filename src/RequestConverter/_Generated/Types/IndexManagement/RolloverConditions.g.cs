@@ -27,105 +27,185 @@ public partial class RolloverConditions : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions", false);
-		if (MaxAge is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxAge");
-			MaxAge.FormatCode(writer);
-		}
+			if (MaxAge is not null)
+			{
+				writer.WriteFluentCall("MaxAge", (w) => { using var _oi = w.ForceObjectInitializer(); MaxAge.FormatCode(w); });
+			}
 
-		if (MaxAgeMillis is not null)
-		{
-			initializer.Property("MaxAgeMillis");
-			writer.WriteValue(MaxAgeMillis.Value);
-		}
+			if (MaxAgeMillis is not null)
+			{
+				writer.WriteFluentCall("MaxAgeMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxAgeMillis.Value); });
+			}
 
-		if (MaxDocs is not null)
-		{
-			initializer.Property("MaxDocs");
-			writer.WriteValue(MaxDocs.Value);
-			writer.Write("L");
-		}
+			if (MaxDocs is not null)
+			{
+				writer.WriteFluentCall("MaxDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocs.Value); w.Write("L"); });
+			}
 
-		if (MaxPrimaryShardDocs is not null)
-		{
-			initializer.Property("MaxPrimaryShardDocs");
-			writer.WriteValue(MaxPrimaryShardDocs.Value);
-			writer.Write("L");
-		}
+			if (MaxPrimaryShardDocs is not null)
+			{
+				writer.WriteFluentCall("MaxPrimaryShardDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxPrimaryShardDocs.Value); w.Write("L"); });
+			}
 
-		if (MaxPrimaryShardSize is not null)
-		{
-			initializer.Property("MaxPrimaryShardSize");
-			MaxPrimaryShardSize.FormatCode(writer);
-		}
+			if (MaxPrimaryShardSize is not null)
+			{
+				writer.WriteFluentCall("MaxPrimaryShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxPrimaryShardSize.FormatCode(w); });
+			}
 
-		if (MaxPrimaryShardSizeBytes is not null)
-		{
-			initializer.Property("MaxPrimaryShardSizeBytes");
-			writer.WriteValue(MaxPrimaryShardSizeBytes.Value);
-			writer.Write("L");
-		}
+			if (MaxPrimaryShardSizeBytes is not null)
+			{
+				writer.WriteFluentCall("MaxPrimaryShardSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxPrimaryShardSizeBytes.Value); w.Write("L"); });
+			}
 #pragma warning disable CS0618
-		if (MaxSize is not null)
-		{
-			initializer.Property("MaxSize");
-			MaxSize.FormatCode(writer);
-		}
+			if (MaxSize is not null)
+			{
+				writer.WriteFluentCall("MaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSize.FormatCode(w); });
+			}
 #pragma warning restore CS0618
-		if (MaxSizeBytes is not null)
-		{
-			initializer.Property("MaxSizeBytes");
-			writer.WriteValue(MaxSizeBytes.Value);
-			writer.Write("L");
-		}
+			if (MaxSizeBytes is not null)
+			{
+				writer.WriteFluentCall("MaxSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxSizeBytes.Value); w.Write("L"); });
+			}
 
-		if (MinAge is not null)
-		{
-			initializer.Property("MinAge");
-			MinAge.FormatCode(writer);
-		}
+			if (MinAge is not null)
+			{
+				writer.WriteFluentCall("MinAge", (w) => { using var _oi = w.ForceObjectInitializer(); MinAge.FormatCode(w); });
+			}
 
-		if (MinDocs is not null)
-		{
-			initializer.Property("MinDocs");
-			writer.WriteValue(MinDocs.Value);
-			writer.Write("L");
-		}
+			if (MinDocs is not null)
+			{
+				writer.WriteFluentCall("MinDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocs.Value); w.Write("L"); });
+			}
 
-		if (MinPrimaryShardDocs is not null)
-		{
-			initializer.Property("MinPrimaryShardDocs");
-			writer.WriteValue(MinPrimaryShardDocs.Value);
-			writer.Write("L");
-		}
+			if (MinPrimaryShardDocs is not null)
+			{
+				writer.WriteFluentCall("MinPrimaryShardDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinPrimaryShardDocs.Value); w.Write("L"); });
+			}
 
-		if (MinPrimaryShardSize is not null)
-		{
-			initializer.Property("MinPrimaryShardSize");
-			MinPrimaryShardSize.FormatCode(writer);
-		}
+			if (MinPrimaryShardSize is not null)
+			{
+				writer.WriteFluentCall("MinPrimaryShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); MinPrimaryShardSize.FormatCode(w); });
+			}
 
-		if (MinPrimaryShardSizeBytes is not null)
-		{
-			initializer.Property("MinPrimaryShardSizeBytes");
-			writer.WriteValue(MinPrimaryShardSizeBytes.Value);
-			writer.Write("L");
-		}
+			if (MinPrimaryShardSizeBytes is not null)
+			{
+				writer.WriteFluentCall("MinPrimaryShardSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinPrimaryShardSizeBytes.Value); w.Write("L"); });
+			}
 
-		if (MinSize is not null)
-		{
-			initializer.Property("MinSize");
-			MinSize.FormatCode(writer);
-		}
+			if (MinSize is not null)
+			{
+				writer.WriteFluentCall("MinSize", (w) => { using var _oi = w.ForceObjectInitializer(); MinSize.FormatCode(w); });
+			}
 
-		if (MinSizeBytes is not null)
-		{
-			initializer.Property("MinSizeBytes");
-			writer.WriteValue(MinSizeBytes.Value);
-			writer.Write("L");
+			if (MinSizeBytes is not null)
+			{
+				writer.WriteFluentCall("MinSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinSizeBytes.Value); w.Write("L"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions", false);
+			if (MaxAge is not null)
+			{
+				initializer.Property("MaxAge");
+				MaxAge.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (MaxAgeMillis is not null)
+			{
+				initializer.Property("MaxAgeMillis");
+				writer.WriteValue(MaxAgeMillis.Value);
+			}
+
+			if (MaxDocs is not null)
+			{
+				initializer.Property("MaxDocs");
+				writer.WriteValue(MaxDocs.Value);
+				writer.Write("L");
+			}
+
+			if (MaxPrimaryShardDocs is not null)
+			{
+				initializer.Property("MaxPrimaryShardDocs");
+				writer.WriteValue(MaxPrimaryShardDocs.Value);
+				writer.Write("L");
+			}
+
+			if (MaxPrimaryShardSize is not null)
+			{
+				initializer.Property("MaxPrimaryShardSize");
+				MaxPrimaryShardSize.FormatCode(writer);
+			}
+
+			if (MaxPrimaryShardSizeBytes is not null)
+			{
+				initializer.Property("MaxPrimaryShardSizeBytes");
+				writer.WriteValue(MaxPrimaryShardSizeBytes.Value);
+				writer.Write("L");
+			}
+#pragma warning disable CS0618
+			if (MaxSize is not null)
+			{
+				initializer.Property("MaxSize");
+				MaxSize.FormatCode(writer);
+			}
+#pragma warning restore CS0618
+			if (MaxSizeBytes is not null)
+			{
+				initializer.Property("MaxSizeBytes");
+				writer.WriteValue(MaxSizeBytes.Value);
+				writer.Write("L");
+			}
+
+			if (MinAge is not null)
+			{
+				initializer.Property("MinAge");
+				MinAge.FormatCode(writer);
+			}
+
+			if (MinDocs is not null)
+			{
+				initializer.Property("MinDocs");
+				writer.WriteValue(MinDocs.Value);
+				writer.Write("L");
+			}
+
+			if (MinPrimaryShardDocs is not null)
+			{
+				initializer.Property("MinPrimaryShardDocs");
+				writer.WriteValue(MinPrimaryShardDocs.Value);
+				writer.Write("L");
+			}
+
+			if (MinPrimaryShardSize is not null)
+			{
+				initializer.Property("MinPrimaryShardSize");
+				MinPrimaryShardSize.FormatCode(writer);
+			}
+
+			if (MinPrimaryShardSizeBytes is not null)
+			{
+				initializer.Property("MinPrimaryShardSizeBytes");
+				writer.WriteValue(MinPrimaryShardSizeBytes.Value);
+				writer.Write("L");
+			}
+
+			if (MinSize is not null)
+			{
+				initializer.Property("MinSize");
+				MinSize.FormatCode(writer);
+			}
+
+			if (MinSizeBytes is not null)
+			{
+				initializer.Property("MinSizeBytes");
+				writer.WriteValue(MinSizeBytes.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

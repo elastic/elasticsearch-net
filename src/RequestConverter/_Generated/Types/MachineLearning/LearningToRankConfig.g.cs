@@ -27,31 +27,50 @@ public partial class LearningToRankConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig", false);
-		if (DefaultParams is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DefaultParams");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(DefaultParams, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (DefaultParams is not null)
+			{
+				writer.WriteFluentCall("DefaultParams", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(DefaultParams, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
 
-		if (FeatureExtractors is not null)
+			if (FeatureExtractors is not null)
+			{
+				writer.WriteFluentCall("FeatureExtractors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(FeatureExtractors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); }); });
+			}
+
+			{
+				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopFeatureImportanceValues); });
+			}
+		}
+		else
 		{
-			initializer.Property("FeatureExtractors");
-			writer.WriteInlineList(FeatureExtractors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig", false);
+			if (DefaultParams is not null)
+			{
+				initializer.Property("DefaultParams");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(DefaultParams, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		{
-			initializer.Property("NumTopFeatureImportanceValues");
-			writer.WriteValue(NumTopFeatureImportanceValues);
-		}
+			if (FeatureExtractors is not null)
+			{
+				initializer.Property("FeatureExtractors");
+				writer.WriteInlineList(FeatureExtractors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); });
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("NumTopFeatureImportanceValues");
+				writer.WriteValue(NumTopFeatureImportanceValues);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

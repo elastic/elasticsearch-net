@@ -27,17 +27,30 @@ public partial class DownsamplingRound : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("After");
-			After.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("After", (w) => { using var _oi = w.ForceObjectInitializer(); After.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+			}
+		}
+		else
 		{
-			initializer.Property("FixedInterval");
-			writer.WriteString(FixedInterval);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound", false);
+			{
+				initializer.Property("After");
+				After.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("FixedInterval");
+				writer.WriteString(FixedInterval);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

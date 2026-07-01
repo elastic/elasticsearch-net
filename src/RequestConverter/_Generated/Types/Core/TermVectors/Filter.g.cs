@@ -27,49 +27,89 @@ public partial class Filter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.TermVectors.Filter", false);
-		if (MaxDocFreq is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxDocFreq");
-			writer.WriteValue(MaxDocFreq.Value);
-		}
+			if (MaxDocFreq is not null)
+			{
+				writer.WriteFluentCall("MaxDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocFreq.Value); });
+			}
 
-		if (MaxNumTerms is not null)
+			if (MaxNumTerms is not null)
+			{
+				writer.WriteFluentCall("MaxNumTerms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumTerms.Value); });
+			}
+
+			if (MaxTermFreq is not null)
+			{
+				writer.WriteFluentCall("MaxTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTermFreq.Value); });
+			}
+
+			if (MaxWordLength is not null)
+			{
+				writer.WriteFluentCall("MaxWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxWordLength.Value); });
+			}
+
+			if (MinDocFreq is not null)
+			{
+				writer.WriteFluentCall("MinDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocFreq.Value); });
+			}
+
+			if (MinTermFreq is not null)
+			{
+				writer.WriteFluentCall("MinTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinTermFreq.Value); });
+			}
+
+			if (MinWordLength is not null)
+			{
+				writer.WriteFluentCall("MinWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinWordLength.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxNumTerms");
-			writer.WriteValue(MaxNumTerms.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.TermVectors.Filter", false);
+			if (MaxDocFreq is not null)
+			{
+				initializer.Property("MaxDocFreq");
+				writer.WriteValue(MaxDocFreq.Value);
+			}
 
-		if (MaxTermFreq is not null)
-		{
-			initializer.Property("MaxTermFreq");
-			writer.WriteValue(MaxTermFreq.Value);
-		}
+			if (MaxNumTerms is not null)
+			{
+				initializer.Property("MaxNumTerms");
+				writer.WriteValue(MaxNumTerms.Value);
+			}
 
-		if (MaxWordLength is not null)
-		{
-			initializer.Property("MaxWordLength");
-			writer.WriteValue(MaxWordLength.Value);
-		}
+			if (MaxTermFreq is not null)
+			{
+				initializer.Property("MaxTermFreq");
+				writer.WriteValue(MaxTermFreq.Value);
+			}
 
-		if (MinDocFreq is not null)
-		{
-			initializer.Property("MinDocFreq");
-			writer.WriteValue(MinDocFreq.Value);
-		}
+			if (MaxWordLength is not null)
+			{
+				initializer.Property("MaxWordLength");
+				writer.WriteValue(MaxWordLength.Value);
+			}
 
-		if (MinTermFreq is not null)
-		{
-			initializer.Property("MinTermFreq");
-			writer.WriteValue(MinTermFreq.Value);
-		}
+			if (MinDocFreq is not null)
+			{
+				initializer.Property("MinDocFreq");
+				writer.WriteValue(MinDocFreq.Value);
+			}
 
-		if (MinWordLength is not null)
-		{
-			initializer.Property("MinWordLength");
-			writer.WriteValue(MinWordLength.Value);
-		}
+			if (MinTermFreq is not null)
+			{
+				initializer.Property("MinTermFreq");
+				writer.WriteValue(MinTermFreq.Value);
+			}
 
-		initializer.Dispose();
+			if (MinWordLength is not null)
+			{
+				initializer.Property("MinWordLength");
+				writer.WriteValue(MinWordLength.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,32 +27,57 @@ public partial class DecayPlacement<TOrigin, TScale> : RequestConverter.ICodeFor
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin,TScale>", false);
-		if (Decay is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Decay");
-			writer.WriteValue(Decay.Value);
-			writer.Write("d");
-		}
+			if (Decay is not null)
+			{
+				writer.WriteFluentCall("Decay", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Decay.Value); w.Write("d"); });
+			}
 
-		if (Offset is not null)
+			if (Offset is not null)
+			{
+				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offset); });
+			}
+
+			if (Origin is not null)
+			{
+				writer.WriteFluentCall("Origin", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Origin); });
+			}
+
+			if (Scale is not null)
+			{
+				writer.WriteFluentCall("Scale", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Scale); });
+			}
+		}
+		else
 		{
-			initializer.Property("Offset");
-			writer.WriteValue(Offset);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin,TScale>", false);
+			if (Decay is not null)
+			{
+				initializer.Property("Decay");
+				writer.WriteValue(Decay.Value);
+				writer.Write("d");
+			}
 
-		if (Origin is not null)
-		{
-			initializer.Property("Origin");
-			writer.WriteValue(Origin);
-		}
+			if (Offset is not null)
+			{
+				initializer.Property("Offset");
+				writer.WriteValue(Offset);
+			}
 
-		if (Scale is not null)
-		{
-			initializer.Property("Scale");
-			writer.WriteValue(Scale);
-		}
+			if (Origin is not null)
+			{
+				initializer.Property("Origin");
+				writer.WriteValue(Origin);
+			}
 
-		initializer.Dispose();
+			if (Scale is not null)
+			{
+				initializer.Property("Scale");
+				writer.WriteValue(Scale);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

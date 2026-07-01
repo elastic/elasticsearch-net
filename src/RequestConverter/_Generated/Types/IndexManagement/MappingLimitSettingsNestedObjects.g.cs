@@ -27,14 +27,24 @@ public partial class MappingLimitSettingsNestedObjects : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects", false);
-		if (Limit is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Limit");
-			writer.WriteValue(Limit.Value);
-			writer.Write("L");
+			if (Limit is not null)
+			{
+				writer.WriteFluentCall("Limit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Limit.Value); w.Write("L"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects", false);
+			if (Limit is not null)
+			{
+				initializer.Property("Limit");
+				writer.WriteValue(Limit.Value);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

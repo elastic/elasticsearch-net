@@ -27,31 +27,56 @@ public partial class DataDescription : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataDescription", false);
-		if (FieldDelimiter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FieldDelimiter");
-			writer.WriteString(FieldDelimiter);
-		}
+			if (FieldDelimiter is not null)
+			{
+				writer.WriteFluentCall("FieldDelimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FieldDelimiter); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (TimeField is not null)
+			{
+				writer.WriteFluentCall("TimeField", (w) => { TimeField.FormatCode(w); });
+			}
+
+			if (TimeFormat is not null)
+			{
+				writer.WriteFluentCall("TimeFormat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeFormat); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DataDescription", false);
+			if (FieldDelimiter is not null)
+			{
+				initializer.Property("FieldDelimiter");
+				writer.WriteString(FieldDelimiter);
+			}
 
-		if (TimeField is not null)
-		{
-			initializer.Property("TimeField");
-			TimeField.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (TimeFormat is not null)
-		{
-			initializer.Property("TimeFormat");
-			writer.WriteString(TimeFormat);
-		}
+			if (TimeField is not null)
+			{
+				initializer.Property("TimeField");
+				TimeField.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TimeFormat is not null)
+			{
+				initializer.Property("TimeFormat");
+				writer.WriteString(TimeFormat);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

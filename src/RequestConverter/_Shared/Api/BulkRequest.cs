@@ -14,6 +14,11 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		// Bulk has no fluent-descriptor form here (the generator cannot model the NDJSON Operations), so this
+		// hand-crafted body always emits object-initializer syntax; force that mode for the whole subtree so a
+		// descriptor-capable nested value (e.g. an update operation's Script) renders as a value, not a chain.
+		using var _objectInitializer = writer.ForceObjectInitializer();
+
 		var initializer = writer.BeginObjectInitializer("BulkRequest", false);
 		if (Index is not null)
 		{

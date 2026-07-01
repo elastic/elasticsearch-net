@@ -27,23 +27,49 @@ public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("JobId");
-			JobId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				JobId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				SnapshotId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (DeleteInterveningResults is not null)
+			{
+				writer.WriteFluentCall("DeleteInterveningResults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteInterveningResults.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("SnapshotId");
-			SnapshotId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest", false);
+			{
+				initializer.Property("JobId");
+				JobId.FormatCode(writer);
+			}
 
-		if (DeleteInterveningResults is not null)
-		{
-			initializer.Property("DeleteInterveningResults");
-			writer.WriteValue(DeleteInterveningResults.Value);
-		}
+			{
+				initializer.Property("SnapshotId");
+				SnapshotId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (DeleteInterveningResults is not null)
+			{
+				initializer.Property("DeleteInterveningResults");
+				writer.WriteValue(DeleteInterveningResults.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

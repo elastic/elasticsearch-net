@@ -27,49 +27,89 @@ public partial class DataStreamLifecycle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle", false);
-		if (DataRetention is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DataRetention");
-			DataRetention.FormatCode(writer);
-		}
+			if (DataRetention is not null)
+			{
+				writer.WriteFluentCall("DataRetention", (w) => { using var _oi = w.ForceObjectInitializer(); DataRetention.FormatCode(w); });
+			}
 
-		if (Downsampling is not null)
+			if (Downsampling is not null)
+			{
+				writer.WriteFluentDescriptorParams("Downsampling", Downsampling, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>"); w.Write("()"); });
+			}
+
+			if (DownsamplingMethod is not null)
+			{
+				writer.WriteFluentCall("DownsamplingMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, w); });
+			}
+
+			if (EffectiveRetention is not null)
+			{
+				writer.WriteFluentCall("EffectiveRetention", (w) => { using var _oi = w.ForceObjectInitializer(); EffectiveRetention.FormatCode(w); });
+			}
+
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+
+			if (FrozenAfter is not null)
+			{
+				writer.WriteFluentCall("FrozenAfter", (w) => { using var _oi = w.ForceObjectInitializer(); FrozenAfter.FormatCode(w); });
+			}
+
+			if (RetentionDeterminedBy is not null)
+			{
+				writer.WriteFluentCall("RetentionDeterminedBy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.RetentionSourceCodeFormatter.FormatCode(RetentionDeterminedBy.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Downsampling");
-			writer.WriteInlineList(Downsampling, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle", false);
+			if (DataRetention is not null)
+			{
+				initializer.Property("DataRetention");
+				DataRetention.FormatCode(writer);
+			}
 
-		if (DownsamplingMethod is not null)
-		{
-			initializer.Property("DownsamplingMethod");
-			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, writer);
-		}
+			if (Downsampling is not null)
+			{
+				initializer.Property("Downsampling");
+				writer.WriteInlineList(Downsampling, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (EffectiveRetention is not null)
-		{
-			initializer.Property("EffectiveRetention");
-			EffectiveRetention.FormatCode(writer);
-		}
+			if (DownsamplingMethod is not null)
+			{
+				initializer.Property("DownsamplingMethod");
+				Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, writer);
+			}
 
-		if (Enabled is not null)
-		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			if (EffectiveRetention is not null)
+			{
+				initializer.Property("EffectiveRetention");
+				EffectiveRetention.FormatCode(writer);
+			}
 
-		if (FrozenAfter is not null)
-		{
-			initializer.Property("FrozenAfter");
-			FrozenAfter.FormatCode(writer);
-		}
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		if (RetentionDeterminedBy is not null)
-		{
-			initializer.Property("RetentionDeterminedBy");
-			Elastic.Clients.Elasticsearch.IndexManagement.RetentionSourceCodeFormatter.FormatCode(RetentionDeterminedBy.Value, writer);
-		}
+			if (FrozenAfter is not null)
+			{
+				initializer.Property("FrozenAfter");
+				FrozenAfter.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (RetentionDeterminedBy is not null)
+			{
+				initializer.Property("RetentionDeterminedBy");
+				Elastic.Clients.Elasticsearch.IndexManagement.RetentionSourceCodeFormatter.FormatCode(RetentionDeterminedBy.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

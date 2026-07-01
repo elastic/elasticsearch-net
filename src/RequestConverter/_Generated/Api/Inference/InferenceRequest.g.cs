@@ -27,6 +27,7 @@ public partial class InferenceRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.InferenceRequest", false);
 		{
 			initializer.Property("InferenceId");
@@ -65,7 +66,7 @@ public partial class InferenceRequest : RequestConverter.ICodeFormattable
 		if (TaskSettings is not null)
 		{
 			initializer.Property("TaskSettings");
-			writer.WriteValue(TaskSettings);
+			writer.WriteObjectValue(TaskSettings);
 		}
 
 		initializer.Dispose();

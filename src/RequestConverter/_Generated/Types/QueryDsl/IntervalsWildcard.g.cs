@@ -27,24 +27,43 @@ public partial class IntervalsWildcard : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
+			{
+				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+			}
+
+			if (UseField is not null)
+			{
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Pattern");
-			writer.WriteString(Pattern);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (UseField is not null)
-		{
-			initializer.Property("UseField");
-			UseField.FormatCode(writer);
-		}
+			{
+				initializer.Property("Pattern");
+				writer.WriteString(Pattern);
+			}
 
-		initializer.Dispose();
+			if (UseField is not null)
+			{
+				initializer.Property("UseField");
+				UseField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,24 +27,43 @@ public partial class SearchApplicationParameters : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters", false);
-		if (AnalyticsCollectionName is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AnalyticsCollectionName");
-			AnalyticsCollectionName.FormatCode(writer);
-		}
+			if (AnalyticsCollectionName is not null)
+			{
+				writer.WriteFluentCall("AnalyticsCollectionName", (w) => { using var _oi = w.ForceObjectInitializer(); AnalyticsCollectionName.FormatCode(w); });
+			}
 
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			if (Template is not null)
+			{
+				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Indices");
-			writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters", false);
+			if (AnalyticsCollectionName is not null)
+			{
+				initializer.Property("AnalyticsCollectionName");
+				AnalyticsCollectionName.FormatCode(writer);
+			}
 
-		if (Template is not null)
-		{
-			initializer.Property("Template");
-			Template.FormatCode(writer);
-		}
+			{
+				initializer.Property("Indices");
+				writer.WriteInlineList(Indices, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Template is not null)
+			{
+				initializer.Property("Template");
+				Template.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

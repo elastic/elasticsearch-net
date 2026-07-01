@@ -27,22 +27,39 @@ public partial class SettingsSimilarityDfr : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AfterEffect");
-			Elastic.Clients.Elasticsearch.DFRAfterEffectCodeFormatter.FormatCode(AfterEffect, writer);
-		}
+			{
+				writer.WriteFluentCall("AfterEffect", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.DFRAfterEffectCodeFormatter.FormatCode(AfterEffect, w); });
+			}
 
+			{
+				writer.WriteFluentCall("BasicModel", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.DFRBasicModelCodeFormatter.FormatCode(BasicModel, w); });
+			}
+
+			{
+				writer.WriteFluentCall("Normalization", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("BasicModel");
-			Elastic.Clients.Elasticsearch.DFRBasicModelCodeFormatter.FormatCode(BasicModel, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr", true);
+			{
+				initializer.Property("AfterEffect");
+				Elastic.Clients.Elasticsearch.DFRAfterEffectCodeFormatter.FormatCode(AfterEffect, writer);
+			}
 
-		{
-			initializer.Property("Normalization");
-			Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
-		}
+			{
+				initializer.Property("BasicModel");
+				Elastic.Clients.Elasticsearch.DFRBasicModelCodeFormatter.FormatCode(BasicModel, writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Normalization");
+				Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,36 +27,71 @@ public partial class GetAsyncSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Id.FormatCode(writer);
+			}
 
-		if (KeepAlive is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (KeepAlive is not null)
+			{
+				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+			}
+
+			if (ReturnIntermediateResults is not null)
+			{
+				writer.WriteFluentCall("ReturnIntermediateResults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnIntermediateResults.Value); });
+			}
+
+			if (TypedKeys is not null)
+			{
+				writer.WriteFluentCall("TypedKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TypedKeys.Value); });
+			}
+
+			if (WaitForCompletionTimeout is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForCompletionTimeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("KeepAlive");
-			KeepAlive.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest", false);
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		if (ReturnIntermediateResults is not null)
-		{
-			initializer.Property("ReturnIntermediateResults");
-			writer.WriteValue(ReturnIntermediateResults.Value);
-		}
+			if (KeepAlive is not null)
+			{
+				initializer.Property("KeepAlive");
+				KeepAlive.FormatCode(writer);
+			}
 
-		if (TypedKeys is not null)
-		{
-			initializer.Property("TypedKeys");
-			writer.WriteValue(TypedKeys.Value);
-		}
+			if (ReturnIntermediateResults is not null)
+			{
+				initializer.Property("ReturnIntermediateResults");
+				writer.WriteValue(ReturnIntermediateResults.Value);
+			}
 
-		if (WaitForCompletionTimeout is not null)
-		{
-			initializer.Property("WaitForCompletionTimeout");
-			WaitForCompletionTimeout.FormatCode(writer);
-		}
+			if (TypedKeys is not null)
+			{
+				initializer.Property("TypedKeys");
+				writer.WriteValue(TypedKeys.Value);
+			}
 
-		initializer.Dispose();
+			if (WaitForCompletionTimeout is not null)
+			{
+				initializer.Property("WaitForCompletionTimeout");
+				WaitForCompletionTimeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

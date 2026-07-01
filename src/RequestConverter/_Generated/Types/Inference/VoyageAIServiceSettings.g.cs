@@ -27,31 +27,55 @@ public partial class VoyageAIServiceSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings", false);
-		if (Dimensions is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Dimensions");
-			writer.WriteValue(Dimensions.Value);
-		}
+			if (Dimensions is not null)
+			{
+				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+			}
 
-		if (EmbeddingType is not null)
+			if (EmbeddingType is not null)
+			{
+				writer.WriteFluentCall("EmbeddingType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EmbeddingType.Value); w.Write("f"); });
+			}
+
+			{
+				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+			}
+
+			if (RateLimit is not null)
+			{
+				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("EmbeddingType");
-			writer.WriteValue(EmbeddingType.Value);
-			writer.Write("f");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings", false);
+			if (Dimensions is not null)
+			{
+				initializer.Property("Dimensions");
+				writer.WriteValue(Dimensions.Value);
+			}
 
-		{
-			initializer.Property("ModelId");
-			writer.WriteString(ModelId);
-		}
+			if (EmbeddingType is not null)
+			{
+				initializer.Property("EmbeddingType");
+				writer.WriteValue(EmbeddingType.Value);
+				writer.Write("f");
+			}
 
-		if (RateLimit is not null)
-		{
-			initializer.Property("RateLimit");
-			RateLimit.FormatCode(writer);
-		}
+			{
+				initializer.Property("ModelId");
+				writer.WriteString(ModelId);
+			}
 
-		initializer.Dispose();
+			if (RateLimit is not null)
+			{
+				initializer.Property("RateLimit");
+				RateLimit.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

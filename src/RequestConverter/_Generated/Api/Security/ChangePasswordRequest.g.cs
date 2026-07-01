@@ -27,31 +27,60 @@ public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest", false);
-		if (Username is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Username");
-			Username.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (Username is not null)
+			{
+				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+			}
 
-		if (Refresh is not null)
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+			}
+
+			if (Password is not null)
+			{
+				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+			}
+
+			if (PasswordHash is not null)
+			{
+				writer.WriteFluentCall("PasswordHash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PasswordHash); });
+			}
+		}
+		else
 		{
-			initializer.Property("Refresh");
-			Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest", false);
+			if (Username is not null)
+			{
+				initializer.Property("Username");
+				Username.FormatCode(writer);
+			}
 
-		if (Password is not null)
-		{
-			initializer.Property("Password");
-			writer.WriteString(Password);
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
+			}
 
-		if (PasswordHash is not null)
-		{
-			initializer.Property("PasswordHash");
-			writer.WriteString(PasswordHash);
-		}
+			if (Password is not null)
+			{
+				initializer.Property("Password");
+				writer.WriteString(Password);
+			}
 
-		initializer.Dispose();
+			if (PasswordHash is not null)
+			{
+				initializer.Property("PasswordHash");
+				writer.WriteString(PasswordHash);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

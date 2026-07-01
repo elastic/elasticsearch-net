@@ -27,54 +27,104 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("PolicyId");
-			PolicyId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				PolicyId.FormatCode(writer);
+			}
 
-		if (MasterTimeout is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (Config is not null)
+			{
+				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); });
+			}
+
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+			}
+
+			if (Repository is not null)
+			{
+				writer.WriteFluentCall("Repository", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Repository); });
+			}
+
+			if (Retention is not null)
+			{
+				writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); });
+			}
+
+			if (Schedule is not null)
+			{
+				writer.WriteFluentCall("Schedule", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Schedule); });
+			}
+		}
+		else
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest", false);
+			{
+				initializer.Property("PolicyId");
+				PolicyId.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (Config is not null)
-		{
-			initializer.Property("Config");
-			Config.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (Name is not null)
-		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			if (Config is not null)
+			{
+				initializer.Property("Config");
+				Config.FormatCode(writer);
+			}
 
-		if (Repository is not null)
-		{
-			initializer.Property("Repository");
-			writer.WriteString(Repository);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (Retention is not null)
-		{
-			initializer.Property("Retention");
-			Retention.FormatCode(writer);
-		}
+			if (Repository is not null)
+			{
+				initializer.Property("Repository");
+				writer.WriteString(Repository);
+			}
 
-		if (Schedule is not null)
-		{
-			initializer.Property("Schedule");
-			writer.WriteString(Schedule);
-		}
+			if (Retention is not null)
+			{
+				initializer.Property("Retention");
+				Retention.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Schedule is not null)
+			{
+				initializer.Property("Schedule");
+				writer.WriteString(Schedule);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

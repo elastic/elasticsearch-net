@@ -27,31 +27,56 @@ public partial class ElisionTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter", true);
-		if (Articles is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Articles");
-			writer.WriteInlineList(Articles, (w, item) => { w.WriteString(item); });
-		}
+			if (Articles is not null)
+			{
+				writer.WriteFluentParams("Articles", Articles, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ArticlesCase is not null)
+			if (ArticlesCase is not null)
+			{
+				writer.WriteFluentCall("ArticlesCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ArticlesCase.Value); });
+			}
+
+			if (ArticlesPath is not null)
+			{
+				writer.WriteFluentCall("ArticlesPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ArticlesPath); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("ArticlesCase");
-			writer.WriteValue(ArticlesCase.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter", true);
+			if (Articles is not null)
+			{
+				initializer.Property("Articles");
+				writer.WriteInlineList(Articles, (w, item) => { w.WriteString(item); });
+			}
 
-		if (ArticlesPath is not null)
-		{
-			initializer.Property("ArticlesPath");
-			writer.WriteString(ArticlesPath);
-		}
+			if (ArticlesCase is not null)
+			{
+				initializer.Property("ArticlesCase");
+				writer.WriteValue(ArticlesCase.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (ArticlesPath is not null)
+			{
+				initializer.Property("ArticlesPath");
+				writer.WriteString(ArticlesPath);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

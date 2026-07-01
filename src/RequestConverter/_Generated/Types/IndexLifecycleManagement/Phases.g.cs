@@ -27,37 +27,67 @@ public partial class Phases : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases", false);
-		if (Cold is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Cold");
-			Cold.FormatCode(writer);
-		}
+			if (Cold is not null)
+			{
+				writer.WriteFluentDescriptorCall("Cold", (w) => { Cold.FormatCode(w); });
+			}
 
-		if (Delete is not null)
+			if (Delete is not null)
+			{
+				writer.WriteFluentDescriptorCall("Delete", (w) => { Delete.FormatCode(w); });
+			}
+
+			if (Frozen is not null)
+			{
+				writer.WriteFluentDescriptorCall("Frozen", (w) => { Frozen.FormatCode(w); });
+			}
+
+			if (Hot is not null)
+			{
+				writer.WriteFluentDescriptorCall("Hot", (w) => { Hot.FormatCode(w); });
+			}
+
+			if (Warm is not null)
+			{
+				writer.WriteFluentDescriptorCall("Warm", (w) => { Warm.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Delete");
-			Delete.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases", false);
+			if (Cold is not null)
+			{
+				initializer.Property("Cold");
+				Cold.FormatCode(writer);
+			}
 
-		if (Frozen is not null)
-		{
-			initializer.Property("Frozen");
-			Frozen.FormatCode(writer);
-		}
+			if (Delete is not null)
+			{
+				initializer.Property("Delete");
+				Delete.FormatCode(writer);
+			}
 
-		if (Hot is not null)
-		{
-			initializer.Property("Hot");
-			Hot.FormatCode(writer);
-		}
+			if (Frozen is not null)
+			{
+				initializer.Property("Frozen");
+				Frozen.FormatCode(writer);
+			}
 
-		if (Warm is not null)
-		{
-			initializer.Property("Warm");
-			Warm.FormatCode(writer);
-		}
+			if (Hot is not null)
+			{
+				initializer.Property("Hot");
+				Hot.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Warm is not null)
+			{
+				initializer.Property("Warm");
+				Warm.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

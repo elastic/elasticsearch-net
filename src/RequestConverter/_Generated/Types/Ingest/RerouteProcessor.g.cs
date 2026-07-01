@@ -27,55 +27,100 @@ public partial class RerouteProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor", false);
-		if (Dataset is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Dataset");
-			writer.WriteInlineList(Dataset, (w, item) => { w.WriteString(item); });
-		}
+			if (Dataset is not null)
+			{
+				writer.WriteFluentParams("Dataset", Dataset, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Description is not null)
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (Destination is not null)
+			{
+				writer.WriteFluentCall("Destination", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Destination); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (Namespace is not null)
+			{
+				writer.WriteFluentParams("Namespace", Namespace, (w, item) => { w.WriteString(item); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+		}
+		else
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor", false);
+			if (Dataset is not null)
+			{
+				initializer.Property("Dataset");
+				writer.WriteInlineList(Dataset, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Destination is not null)
-		{
-			initializer.Property("Destination");
-			writer.WriteString(Destination);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			if (Destination is not null)
+			{
+				initializer.Property("Destination");
+				writer.WriteString(Destination);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (Namespace is not null)
-		{
-			initializer.Property("Namespace");
-			writer.WriteInlineList(Namespace, (w, item) => { w.WriteString(item); });
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (Namespace is not null)
+			{
+				initializer.Property("Namespace");
+				writer.WriteInlineList(Namespace, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

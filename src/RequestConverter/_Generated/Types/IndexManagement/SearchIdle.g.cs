@@ -27,13 +27,23 @@ public partial class SearchIdle : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle", false);
-		if (After is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("After");
-			After.FormatCode(writer);
+			if (After is not null)
+			{
+				writer.WriteFluentCall("After", (w) => { using var _oi = w.ForceObjectInitializer(); After.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle", false);
+			if (After is not null)
+			{
+				initializer.Property("After");
+				After.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

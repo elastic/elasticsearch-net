@@ -27,30 +27,48 @@ public partial class StoredScript : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.StoredScript", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Language");
-			Language.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); Language.FormatCode(w); });
+			}
 
-		if (Options is not null)
+			if (Options is not null)
+			{
+				writer.WriteFluentCall("Options", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+			}
+
+			{
+				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Source); });
+			}
+		}
+		else
 		{
-			initializer.Property("Options");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("string");
-			writer.Write(">()");
-			writer.WriteBlockList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.StoredScript", false);
+			{
+				initializer.Property("Language");
+				Language.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Source");
-			writer.WriteString(Source);
-		}
+			if (Options is not null)
+			{
+				initializer.Property("Options");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("string");
+				writer.Write(">()");
+				writer.WriteBlockList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Source");
+				writer.WriteString(Source);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

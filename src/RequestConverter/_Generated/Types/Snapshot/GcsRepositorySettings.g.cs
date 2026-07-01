@@ -27,61 +27,111 @@ public partial class GcsRepositorySettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		{
 #pragma warning disable CS0618
-		if (ApplicationName is not null)
-		{
-			initializer.Property("ApplicationName");
-			writer.WriteString(ApplicationName);
-		}
+			if (ApplicationName is not null)
+			{
+				writer.WriteFluentCall("ApplicationName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApplicationName); });
+			}
 #pragma warning restore CS0618
-		if (BasePath is not null)
-		{
-			initializer.Property("BasePath");
-			writer.WriteString(BasePath);
-		}
+			if (BasePath is not null)
+			{
+				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+			}
 
-		{
-			initializer.Property("Bucket");
-			writer.WriteString(Bucket);
-		}
+			{
+				writer.WriteFluentCall("Bucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Bucket); });
+			}
 
-		if (ChunkSize is not null)
-		{
-			initializer.Property("ChunkSize");
-			ChunkSize.FormatCode(writer);
-		}
+			if (ChunkSize is not null)
+			{
+				writer.WriteFluentCall("ChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); ChunkSize.FormatCode(w); });
+			}
 
-		if (Client is not null)
-		{
-			initializer.Property("Client");
-			writer.WriteString(Client);
-		}
+			if (Client is not null)
+			{
+				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+			}
 
-		if (Compress is not null)
-		{
-			initializer.Property("Compress");
-			writer.WriteValue(Compress.Value);
-		}
+			if (Compress is not null)
+			{
+				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+			}
 
-		if (MaxRestoreBytesPerSec is not null)
-		{
-			initializer.Property("MaxRestoreBytesPerSec");
-			MaxRestoreBytesPerSec.FormatCode(writer);
-		}
+			if (MaxRestoreBytesPerSec is not null)
+			{
+				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRestoreBytesPerSec.FormatCode(w); });
+			}
 
-		if (MaxSnapshotBytesPerSec is not null)
-		{
-			initializer.Property("MaxSnapshotBytesPerSec");
-			MaxSnapshotBytesPerSec.FormatCode(writer);
-		}
+			if (MaxSnapshotBytesPerSec is not null)
+			{
+				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSnapshotBytesPerSec.FormatCode(w); });
+			}
 
-		if (Readonly is not null)
-		{
-			initializer.Property("Readonly");
-			writer.WriteValue(Readonly.Value);
+			if (Readonly is not null)
+			{
+				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings", false);
+#pragma warning disable CS0618
+			if (ApplicationName is not null)
+			{
+				initializer.Property("ApplicationName");
+				writer.WriteString(ApplicationName);
+			}
+#pragma warning restore CS0618
+			if (BasePath is not null)
+			{
+				initializer.Property("BasePath");
+				writer.WriteString(BasePath);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Bucket");
+				writer.WriteString(Bucket);
+			}
+
+			if (ChunkSize is not null)
+			{
+				initializer.Property("ChunkSize");
+				ChunkSize.FormatCode(writer);
+			}
+
+			if (Client is not null)
+			{
+				initializer.Property("Client");
+				writer.WriteString(Client);
+			}
+
+			if (Compress is not null)
+			{
+				initializer.Property("Compress");
+				writer.WriteValue(Compress.Value);
+			}
+
+			if (MaxRestoreBytesPerSec is not null)
+			{
+				initializer.Property("MaxRestoreBytesPerSec");
+				MaxRestoreBytesPerSec.FormatCode(writer);
+			}
+
+			if (MaxSnapshotBytesPerSec is not null)
+			{
+				initializer.Property("MaxSnapshotBytesPerSec");
+				MaxSnapshotBytesPerSec.FormatCode(writer);
+			}
+
+			if (Readonly is not null)
+			{
+				initializer.Property("Readonly");
+				writer.WriteValue(Readonly.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

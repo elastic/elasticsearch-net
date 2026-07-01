@@ -27,32 +27,52 @@ public partial class DetectionRule : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule", false);
-		if (Actions is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Actions");
-			writer.WriteInlineList(Actions, (w, item) => { Elastic.Clients.Elasticsearch.MachineLearning.RuleActionCodeFormatter.FormatCode(item, w); });
-		}
+			if (Actions is not null)
+			{
+				writer.WriteFluentParams("Actions", Actions, (w, item) => { Elastic.Clients.Elasticsearch.MachineLearning.RuleActionCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Conditions is not null)
+			if (Conditions is not null)
+			{
+				writer.WriteFluentDescriptorParams("Conditions", Conditions, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>"); w.Write("()"); });
+			}
+
+			if (Scope is not null)
+			{
+				writer.WriteFluentDescriptorCall("Scope", (w) => { w.WriteFluentDictionaryAdds("Add", Scope, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Conditions");
-			writer.WriteInlineList(Conditions, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule", false);
+			if (Actions is not null)
+			{
+				initializer.Property("Actions");
+				writer.WriteInlineList(Actions, (w, item) => { Elastic.Clients.Elasticsearch.MachineLearning.RuleActionCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Scope is not null)
-		{
-			initializer.Property("Scope");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
-			writer.Write(", ");
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.FilterRef");
-			writer.Write(">()");
-			writer.WriteBlockList(Scope, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
-		}
+			if (Conditions is not null)
+			{
+				initializer.Property("Conditions");
+				writer.WriteInlineList(Conditions, (w, item) => { item.FormatCode(w); });
+			}
 
-		initializer.Dispose();
+			if (Scope is not null)
+			{
+				initializer.Property("Scope");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Field");
+				writer.Write(", ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.FilterRef");
+				writer.Write(">()");
+				writer.WriteBlockList(Scope, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

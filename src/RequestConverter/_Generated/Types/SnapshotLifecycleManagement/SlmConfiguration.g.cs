@@ -27,50 +27,85 @@ public partial class SlmConfiguration : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration", false);
-		if (FeatureStates is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("FeatureStates");
-			writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
-		}
+			if (FeatureStates is not null)
+			{
+				writer.WriteFluentParams("FeatureStates", FeatureStates, (w, item) => { w.WriteString(item); });
+			}
 
-		if (IgnoreUnavailable is not null)
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (IncludeGlobalState is not null)
+			{
+				writer.WriteFluentCall("IncludeGlobalState", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeGlobalState.Value); });
+			}
+
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (Partial is not null)
+			{
+				writer.WriteFluentCall("Partial", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Partial.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration", false);
+			if (FeatureStates is not null)
+			{
+				initializer.Property("FeatureStates");
+				writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
+			}
 
-		if (IncludeGlobalState is not null)
-		{
-			initializer.Property("IncludeGlobalState");
-			writer.WriteValue(IncludeGlobalState.Value);
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
 
-		if (Indices is not null)
-		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (IncludeGlobalState is not null)
+			{
+				initializer.Property("IncludeGlobalState");
+				writer.WriteValue(IncludeGlobalState.Value);
+			}
 
-		if (Metadata is not null)
-		{
-			initializer.Property("Metadata");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (Partial is not null)
-		{
-			initializer.Property("Partial");
-			writer.WriteValue(Partial.Value);
-		}
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (Partial is not null)
+			{
+				initializer.Property("Partial");
+				writer.WriteValue(Partial.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

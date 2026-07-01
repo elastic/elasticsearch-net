@@ -27,54 +27,104 @@ public partial class PutDataLifecycleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (ExpandWildcards is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (DataRetention is not null)
+			{
+				writer.WriteFluentCall("DataRetention", (w) => { using var _oi = w.ForceObjectInitializer(); DataRetention.FormatCode(w); });
+			}
+
+			if (Downsampling is not null)
+			{
+				writer.WriteFluentDescriptorParams("Downsampling", Downsampling, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>"); w.Write("()"); });
+			}
+
+			if (DownsamplingMethod is not null)
+			{
+				writer.WriteFluentCall("DownsamplingMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, w); });
+			}
+
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (DataRetention is not null)
-		{
-			initializer.Property("DataRetention");
-			DataRetention.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (Downsampling is not null)
-		{
-			initializer.Property("Downsampling");
-			writer.WriteInlineList(Downsampling, (w, item) => { item.FormatCode(w); });
-		}
+			if (DataRetention is not null)
+			{
+				initializer.Property("DataRetention");
+				DataRetention.FormatCode(writer);
+			}
 
-		if (DownsamplingMethod is not null)
-		{
-			initializer.Property("DownsamplingMethod");
-			Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, writer);
-		}
+			if (Downsampling is not null)
+			{
+				initializer.Property("Downsampling");
+				writer.WriteInlineList(Downsampling, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Enabled is not null)
-		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			if (DownsamplingMethod is not null)
+			{
+				initializer.Property("DownsamplingMethod");
+				Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, writer);
+			}
 
-		initializer.Dispose();
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

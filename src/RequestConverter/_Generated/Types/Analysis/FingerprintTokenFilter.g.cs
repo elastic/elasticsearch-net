@@ -27,25 +27,45 @@ public partial class FingerprintTokenFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter", true);
-		if (MaxOutputSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MaxOutputSize");
-			writer.WriteValue(MaxOutputSize.Value);
-		}
+			if (MaxOutputSize is not null)
+			{
+				writer.WriteFluentCall("MaxOutputSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxOutputSize.Value); });
+			}
 
-		if (Separator is not null)
+			if (Separator is not null)
+			{
+				writer.WriteFluentCall("Separator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Separator); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Separator");
-			writer.WriteString(Separator);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter", true);
+			if (MaxOutputSize is not null)
+			{
+				initializer.Property("MaxOutputSize");
+				writer.WriteValue(MaxOutputSize.Value);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Separator is not null)
+			{
+				initializer.Property("Separator");
+				writer.WriteString(Separator);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

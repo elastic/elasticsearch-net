@@ -27,28 +27,58 @@ public partial class PutSynonymRuleRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("RuleId");
-			RuleId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				SetId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				RuleId.FormatCode(writer);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Synonyms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Synonyms); });
+			}
+		}
+		else
 		{
-			initializer.Property("SetId");
-			SetId.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest", false);
+			{
+				initializer.Property("RuleId");
+				RuleId.FormatCode(writer);
+			}
 
-		if (Refresh is not null)
-		{
-			initializer.Property("Refresh");
-			writer.WriteValue(Refresh.Value);
-		}
+			{
+				initializer.Property("SetId");
+				SetId.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Synonyms");
-			writer.WriteString(Synonyms);
-		}
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				writer.WriteValue(Refresh.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Synonyms");
+				writer.WriteString(Synonyms);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

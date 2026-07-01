@@ -27,33 +27,66 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ModelId");
-			ModelId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				ModelId.FormatCode(writer);
+			}
 
+			writer.Write(", ");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				writer.WriteValue(Part);
+			}
+
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentCall("Definition", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Definition); });
+			}
+
+			{
+				writer.WriteFluentCall("TotalDefinitionLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TotalDefinitionLength); w.Write("L"); });
+			}
+
+			{
+				writer.WriteFluentCall("TotalParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TotalParts); });
+			}
+		}
+		else
 		{
-			initializer.Property("Part");
-			writer.WriteValue(Part);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest", false);
+			{
+				initializer.Property("ModelId");
+				ModelId.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("Definition");
-			writer.WriteString(Definition);
-		}
+			{
+				initializer.Property("Part");
+				writer.WriteValue(Part);
+			}
 
-		{
-			initializer.Property("TotalDefinitionLength");
-			writer.WriteValue(TotalDefinitionLength);
-			writer.Write("L");
-		}
+			{
+				initializer.Property("Definition");
+				writer.WriteString(Definition);
+			}
 
-		{
-			initializer.Property("TotalParts");
-			writer.WriteValue(TotalParts);
-		}
+			{
+				initializer.Property("TotalDefinitionLength");
+				writer.WriteValue(TotalDefinitionLength);
+				writer.Write("L");
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("TotalParts");
+				writer.WriteValue(TotalParts);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

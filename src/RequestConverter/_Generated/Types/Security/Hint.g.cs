@@ -27,26 +27,41 @@ public partial class Hint : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Hint", false);
-		if (Labels is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Labels");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("System.Collections.Generic.ICollection<string>");
-			writer.Write(">()");
-			writer.WriteBlockList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
-		}
+			if (Labels is not null)
+			{
+				writer.WriteFluentCall("Labels", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<string>"); w.Write(">()"); w.WriteBlockList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }); });
+			}
 
-		if (Uids is not null)
+			if (Uids is not null)
+			{
+				writer.WriteFluentParams("Uids", Uids, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("Uids");
-			writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.Hint", false);
+			if (Labels is not null)
+			{
+				initializer.Property("Labels");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("System.Collections.Generic.ICollection<string>");
+				writer.Write(">()");
+				writer.WriteBlockList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
+			}
 
-		initializer.Dispose();
+			if (Uids is not null)
+			{
+				initializer.Property("Uids");
+				writer.WriteInlineList(Uids, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

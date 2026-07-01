@@ -27,12 +27,21 @@ public partial class Maxmind : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Maxmind", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AccountId");
-			AccountId.FormatCode(writer);
+			{
+				writer.WriteFluentCall("AccountId", (w) => { using var _oi = w.ForceObjectInitializer(); AccountId.FormatCode(w); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.Maxmind", false);
+			{
+				initializer.Property("AccountId");
+				AccountId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

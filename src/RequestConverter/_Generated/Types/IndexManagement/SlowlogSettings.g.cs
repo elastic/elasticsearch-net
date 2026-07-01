@@ -27,31 +27,56 @@ public partial class SlowlogSettings : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings", false);
-		if (Level is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Level");
-			writer.WriteString(Level);
-		}
+			if (Level is not null)
+			{
+				writer.WriteFluentCall("Level", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Level); });
+			}
 
-		if (Reformat is not null)
+			if (Reformat is not null)
+			{
+				writer.WriteFluentCall("Reformat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Reformat.Value); });
+			}
+
+			if (Source is not null)
+			{
+				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Source.Value); });
+			}
+
+			if (Threshold is not null)
+			{
+				writer.WriteFluentDescriptorCall("Threshold", (w) => { Threshold.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Reformat");
-			writer.WriteValue(Reformat.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings", false);
+			if (Level is not null)
+			{
+				initializer.Property("Level");
+				writer.WriteString(Level);
+			}
 
-		if (Source is not null)
-		{
-			initializer.Property("Source");
-			writer.WriteValue(Source.Value);
-		}
+			if (Reformat is not null)
+			{
+				initializer.Property("Reformat");
+				writer.WriteValue(Reformat.Value);
+			}
 
-		if (Threshold is not null)
-		{
-			initializer.Property("Threshold");
-			Threshold.FormatCode(writer);
-		}
+			if (Source is not null)
+			{
+				initializer.Property("Source");
+				writer.WriteValue(Source.Value);
+			}
 
-		initializer.Dispose();
+			if (Threshold is not null)
+			{
+				initializer.Property("Threshold");
+				Threshold.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

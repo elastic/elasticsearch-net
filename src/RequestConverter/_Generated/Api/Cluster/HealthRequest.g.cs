@@ -27,79 +27,158 @@ public partial class HealthRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.HealthRequest", false);
-		if (Indices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (ExpandWildcards is not null)
+			using var _chainIndent = writer.Indent();
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+
+			if (Level is not null)
+			{
+				writer.WriteFluentCall("Level", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, w); });
+			}
+
+			if (Local is not null)
+			{
+				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+			}
+
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (WaitForActiveShards is not null)
+			{
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+			}
+
+			if (WaitForEvents is not null)
+			{
+				writer.WriteFluentCall("WaitForEvents", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(WaitForEvents.Value, w); });
+			}
+
+			if (WaitForNodes is not null)
+			{
+				writer.WriteFluentCall("WaitForNodes", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForNodes.FormatCode(w); });
+			}
+
+			if (WaitForNoInitializingShards is not null)
+			{
+				writer.WriteFluentCall("WaitForNoInitializingShards", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForNoInitializingShards.Value); });
+			}
+
+			if (WaitForNoRelocatingShards is not null)
+			{
+				writer.WriteFluentCall("WaitForNoRelocatingShards", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForNoRelocatingShards.Value); });
+			}
+
+			if (WaitForStatus is not null)
+			{
+				writer.WriteFluentCall("WaitForStatus", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(WaitForStatus.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.HealthRequest", false);
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (Level is not null)
-		{
-			initializer.Property("Level");
-			Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, writer);
-		}
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 
-		if (Local is not null)
-		{
-			initializer.Property("Local");
-			writer.WriteValue(Local.Value);
-		}
+			if (Level is not null)
+			{
+				initializer.Property("Level");
+				Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, writer);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			if (Local is not null)
+			{
+				initializer.Property("Local");
+				writer.WriteValue(Local.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (WaitForActiveShards is not null)
-		{
-			initializer.Property("WaitForActiveShards");
-			WaitForActiveShards.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (WaitForEvents is not null)
-		{
-			initializer.Property("WaitForEvents");
-			Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(WaitForEvents.Value, writer);
-		}
+			if (WaitForActiveShards is not null)
+			{
+				initializer.Property("WaitForActiveShards");
+				WaitForActiveShards.FormatCode(writer);
+			}
 
-		if (WaitForNodes is not null)
-		{
-			initializer.Property("WaitForNodes");
-			WaitForNodes.FormatCode(writer);
-		}
+			if (WaitForEvents is not null)
+			{
+				initializer.Property("WaitForEvents");
+				Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(WaitForEvents.Value, writer);
+			}
 
-		if (WaitForNoInitializingShards is not null)
-		{
-			initializer.Property("WaitForNoInitializingShards");
-			writer.WriteValue(WaitForNoInitializingShards.Value);
-		}
+			if (WaitForNodes is not null)
+			{
+				initializer.Property("WaitForNodes");
+				WaitForNodes.FormatCode(writer);
+			}
 
-		if (WaitForNoRelocatingShards is not null)
-		{
-			initializer.Property("WaitForNoRelocatingShards");
-			writer.WriteValue(WaitForNoRelocatingShards.Value);
-		}
+			if (WaitForNoInitializingShards is not null)
+			{
+				initializer.Property("WaitForNoInitializingShards");
+				writer.WriteValue(WaitForNoInitializingShards.Value);
+			}
 
-		if (WaitForStatus is not null)
-		{
-			initializer.Property("WaitForStatus");
-			Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(WaitForStatus.Value, writer);
-		}
+			if (WaitForNoRelocatingShards is not null)
+			{
+				initializer.Property("WaitForNoRelocatingShards");
+				writer.WriteValue(WaitForNoRelocatingShards.Value);
+			}
 
-		initializer.Dispose();
+			if (WaitForStatus is not null)
+			{
+				initializer.Property("WaitForStatus");
+				Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(WaitForStatus.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

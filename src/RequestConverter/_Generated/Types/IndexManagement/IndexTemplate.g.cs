@@ -27,98 +27,171 @@ public partial class IndexTemplate : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate", false);
-		if (AllowAutoCreate is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowAutoCreate");
-			writer.WriteValue(AllowAutoCreate.Value);
-		}
+			if (AllowAutoCreate is not null)
+			{
+				writer.WriteFluentCall("AllowAutoCreate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowAutoCreate.Value); });
+			}
 
+			{
+				writer.WriteFluentCall("ComposedOf", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			if (CreatedDate is not null)
+			{
+				writer.WriteFluentCall("CreatedDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreatedDate.Value); });
+			}
+
+			if (CreatedDateMillis is not null)
+			{
+				writer.WriteFluentCall("CreatedDateMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreatedDateMillis.Value); });
+			}
+
+			if (DataStream is not null)
+			{
+				writer.WriteFluentDescriptorCall("DataStream", (w) => { DataStream.FormatCode(w); });
+			}
+
+			if (Deprecated is not null)
+			{
+				writer.WriteFluentCall("Deprecated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Deprecated.Value); });
+			}
+
+			if (IgnoreMissingComponentTemplates is not null)
+			{
+				writer.WriteFluentCall("IgnoreMissingComponentTemplates", (w) => { using var _oi = w.ForceObjectInitializer(); IgnoreMissingComponentTemplates.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("IndexPatterns", (w) => { using var _oi = w.ForceObjectInitializer(); IndexPatterns.FormatCode(w); });
+			}
+
+			if (Meta is not null)
+			{
+				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+			}
+
+			if (ModifiedDate is not null)
+			{
+				writer.WriteFluentCall("ModifiedDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModifiedDate.Value); });
+			}
+
+			if (ModifiedDateMillis is not null)
+			{
+				writer.WriteFluentCall("ModifiedDateMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModifiedDateMillis.Value); });
+			}
+
+			if (Priority is not null)
+			{
+				writer.WriteFluentCall("Priority", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Priority.Value); w.Write("L"); });
+			}
+
+			if (Template is not null)
+			{
+				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+			}
+		}
+		else
 		{
-			initializer.Property("ComposedOf");
-			writer.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate", false);
+			if (AllowAutoCreate is not null)
+			{
+				initializer.Property("AllowAutoCreate");
+				writer.WriteValue(AllowAutoCreate.Value);
+			}
 
-		if (CreatedDate is not null)
-		{
-			initializer.Property("CreatedDate");
-			writer.WriteValue(CreatedDate.Value);
-		}
+			{
+				initializer.Property("ComposedOf");
+				writer.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (CreatedDateMillis is not null)
-		{
-			initializer.Property("CreatedDateMillis");
-			writer.WriteValue(CreatedDateMillis.Value);
-		}
+			if (CreatedDate is not null)
+			{
+				initializer.Property("CreatedDate");
+				writer.WriteValue(CreatedDate.Value);
+			}
 
-		if (DataStream is not null)
-		{
-			initializer.Property("DataStream");
-			DataStream.FormatCode(writer);
-		}
+			if (CreatedDateMillis is not null)
+			{
+				initializer.Property("CreatedDateMillis");
+				writer.WriteValue(CreatedDateMillis.Value);
+			}
 
-		if (Deprecated is not null)
-		{
-			initializer.Property("Deprecated");
-			writer.WriteValue(Deprecated.Value);
-		}
+			if (DataStream is not null)
+			{
+				initializer.Property("DataStream");
+				DataStream.FormatCode(writer);
+			}
 
-		if (IgnoreMissingComponentTemplates is not null)
-		{
-			initializer.Property("IgnoreMissingComponentTemplates");
-			IgnoreMissingComponentTemplates.FormatCode(writer);
-		}
+			if (Deprecated is not null)
+			{
+				initializer.Property("Deprecated");
+				writer.WriteValue(Deprecated.Value);
+			}
 
-		{
-			initializer.Property("IndexPatterns");
-			IndexPatterns.FormatCode(writer);
-		}
+			if (IgnoreMissingComponentTemplates is not null)
+			{
+				initializer.Property("IgnoreMissingComponentTemplates");
+				IgnoreMissingComponentTemplates.FormatCode(writer);
+			}
 
-		if (Meta is not null)
-		{
-			initializer.Property("Meta");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("object");
-			writer.Write(">()");
-			writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write(" }"); });
-		}
+			{
+				initializer.Property("IndexPatterns");
+				IndexPatterns.FormatCode(writer);
+			}
 
-		if (ModifiedDate is not null)
-		{
-			initializer.Property("ModifiedDate");
-			writer.WriteValue(ModifiedDate.Value);
-		}
+			if (Meta is not null)
+			{
+				initializer.Property("Meta");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("object");
+				writer.Write(">()");
+				writer.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+			}
 
-		if (ModifiedDateMillis is not null)
-		{
-			initializer.Property("ModifiedDateMillis");
-			writer.WriteValue(ModifiedDateMillis.Value);
-		}
+			if (ModifiedDate is not null)
+			{
+				initializer.Property("ModifiedDate");
+				writer.WriteValue(ModifiedDate.Value);
+			}
 
-		if (Priority is not null)
-		{
-			initializer.Property("Priority");
-			writer.WriteValue(Priority.Value);
-			writer.Write("L");
-		}
+			if (ModifiedDateMillis is not null)
+			{
+				initializer.Property("ModifiedDateMillis");
+				writer.WriteValue(ModifiedDateMillis.Value);
+			}
 
-		if (Template is not null)
-		{
-			initializer.Property("Template");
-			Template.FormatCode(writer);
-		}
+			if (Priority is not null)
+			{
+				initializer.Property("Priority");
+				writer.WriteValue(Priority.Value);
+				writer.Write("L");
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteValue(Version.Value);
-			writer.Write("L");
-		}
+			if (Template is not null)
+			{
+				initializer.Property("Template");
+				Template.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteValue(Version.Value);
+				writer.Write("L");
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,49 +27,89 @@ public partial class PercentileRanksAggregation : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (Field is not null)
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
 
-		if (Format is not null)
+			if (Format is not null)
+			{
+				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+			}
+
+			if (Hdr is not null)
+			{
+				writer.WriteFluentDescriptorCall("Hdr", (w) => { Hdr.FormatCode(w); });
+			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			if (TDigest is not null)
+			{
+				writer.WriteFluentDescriptorCall("TDigest", (w) => { TDigest.FormatCode(w); });
+			}
+
+			if (Values is not null)
+			{
+				writer.WriteFluentCall("Values", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Values, (w, item) => { w.WriteValue(item); w.Write("d"); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Format");
-			writer.WriteString(Format);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (Hdr is not null)
-		{
-			initializer.Property("Hdr");
-			Hdr.FormatCode(writer);
-		}
+			if (Format is not null)
+			{
+				initializer.Property("Format");
+				writer.WriteString(Format);
+			}
 
-		if (Missing is not null)
-		{
-			initializer.Property("Missing");
-			writer.WriteValue(Missing);
-		}
+			if (Hdr is not null)
+			{
+				initializer.Property("Hdr");
+				Hdr.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
+			}
 
-		if (TDigest is not null)
-		{
-			initializer.Property("TDigest");
-			TDigest.FormatCode(writer);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		if (Values is not null)
-		{
-			initializer.Property("Values");
-			writer.WriteInlineList(Values, (w, item) => { w.WriteValue(item); w.Write("d"); });
-		}
+			if (TDigest is not null)
+			{
+				initializer.Property("TDigest");
+				TDigest.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Values is not null)
+			{
+				initializer.Property("Values");
+				writer.WriteInlineList(Values, (w, item) => { w.WriteValue(item); w.Write("d"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

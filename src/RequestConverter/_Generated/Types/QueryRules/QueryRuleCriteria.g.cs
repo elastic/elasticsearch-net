@@ -27,24 +27,43 @@ public partial class QueryRuleCriteria : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria", false);
-		if (Metadata is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Metadata");
-			writer.WriteString(Metadata);
-		}
+			if (Metadata is not null)
+			{
+				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Metadata); });
+			}
 
+			{
+				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(Type, w); });
+			}
+
+			if (Values is not null)
+			{
+				writer.WriteFluentCall("Values", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Values, (w, item) => { w.WriteObjectValue(item); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(Type, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria", false);
+			if (Metadata is not null)
+			{
+				initializer.Property("Metadata");
+				writer.WriteString(Metadata);
+			}
 
-		if (Values is not null)
-		{
-			initializer.Property("Values");
-			writer.WriteInlineList(Values, (w, item) => { w.WriteValue(item); });
-		}
+			{
+				initializer.Property("Type");
+				Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(Type, writer);
+			}
 
-		initializer.Dispose();
+			if (Values is not null)
+			{
+				initializer.Property("Values");
+				writer.WriteInlineList(Values, (w, item) => { w.WriteObjectValue(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

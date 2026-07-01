@@ -27,25 +27,45 @@ public partial class SourceFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SourceFilter", true);
-		if (Excludes is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Excludes");
-			Excludes.FormatCode(writer);
-		}
+			if (Excludes is not null)
+			{
+				writer.WriteFluentCall("Excludes", (w) => { using var _oi = w.ForceObjectInitializer(); Excludes.FormatCode(w); });
+			}
 
-		if (ExcludeVectors is not null)
+			if (ExcludeVectors is not null)
+			{
+				writer.WriteFluentCall("ExcludeVectors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeVectors.Value); });
+			}
+
+			if (Includes is not null)
+			{
+				writer.WriteFluentCall("Includes", (w) => { using var _oi = w.ForceObjectInitializer(); Includes.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExcludeVectors");
-			writer.WriteValue(ExcludeVectors.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SourceFilter", true);
+			if (Excludes is not null)
+			{
+				initializer.Property("Excludes");
+				Excludes.FormatCode(writer);
+			}
 
-		if (Includes is not null)
-		{
-			initializer.Property("Includes");
-			Includes.FormatCode(writer);
-		}
+			if (ExcludeVectors is not null)
+			{
+				initializer.Property("ExcludeVectors");
+				writer.WriteValue(ExcludeVectors.Value);
+			}
 
-		initializer.Dispose();
+			if (Includes is not null)
+			{
+				initializer.Property("Includes");
+				Includes.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

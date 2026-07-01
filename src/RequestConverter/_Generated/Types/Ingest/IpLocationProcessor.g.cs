@@ -27,78 +27,142 @@ public partial class IpLocationProcessor : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor", false);
-		if (DatabaseFile is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DatabaseFile");
-			writer.WriteString(DatabaseFile);
-		}
+			if (DatabaseFile is not null)
+			{
+				writer.WriteFluentCall("DatabaseFile", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DatabaseFile); });
+			}
 
-		if (Description is not null)
+			if (Description is not null)
+			{
+				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+			}
+
+			if (DownloadDatabaseOnPipelineCreation is not null)
+			{
+				writer.WriteFluentCall("DownloadDatabaseOnPipelineCreation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DownloadDatabaseOnPipelineCreation.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+			}
+
+			if (FirstOnly is not null)
+			{
+				writer.WriteFluentCall("FirstOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FirstOnly.Value); });
+			}
+
+			if (If is not null)
+			{
+				writer.WriteFluentDescriptorCall("If", (w) => { If.FormatCode(w); });
+			}
+
+			if (IgnoreFailure is not null)
+			{
+				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+			}
+
+			if (IgnoreMissing is not null)
+			{
+				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+			}
+
+			if (OnFailure is not null)
+			{
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+			}
+
+			if (Properties is not null)
+			{
+				writer.WriteFluentParams("Properties", Properties, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Tag is not null)
+			{
+				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+			}
+
+			if (TargetField is not null)
+			{
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Description");
-			writer.WriteString(Description);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor", false);
+			if (DatabaseFile is not null)
+			{
+				initializer.Property("DatabaseFile");
+				writer.WriteString(DatabaseFile);
+			}
 
-		if (DownloadDatabaseOnPipelineCreation is not null)
-		{
-			initializer.Property("DownloadDatabaseOnPipelineCreation");
-			writer.WriteValue(DownloadDatabaseOnPipelineCreation.Value);
-		}
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
 
-		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
+			if (DownloadDatabaseOnPipelineCreation is not null)
+			{
+				initializer.Property("DownloadDatabaseOnPipelineCreation");
+				writer.WriteValue(DownloadDatabaseOnPipelineCreation.Value);
+			}
 
-		if (FirstOnly is not null)
-		{
-			initializer.Property("FirstOnly");
-			writer.WriteValue(FirstOnly.Value);
-		}
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		if (If is not null)
-		{
-			initializer.Property("If");
-			If.FormatCode(writer);
-		}
+			if (FirstOnly is not null)
+			{
+				initializer.Property("FirstOnly");
+				writer.WriteValue(FirstOnly.Value);
+			}
 
-		if (IgnoreFailure is not null)
-		{
-			initializer.Property("IgnoreFailure");
-			writer.WriteValue(IgnoreFailure.Value);
-		}
+			if (If is not null)
+			{
+				initializer.Property("If");
+				If.FormatCode(writer);
+			}
 
-		if (IgnoreMissing is not null)
-		{
-			initializer.Property("IgnoreMissing");
-			writer.WriteValue(IgnoreMissing.Value);
-		}
+			if (IgnoreFailure is not null)
+			{
+				initializer.Property("IgnoreFailure");
+				writer.WriteValue(IgnoreFailure.Value);
+			}
 
-		if (OnFailure is not null)
-		{
-			initializer.Property("OnFailure");
-			writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
-		}
+			if (IgnoreMissing is not null)
+			{
+				initializer.Property("IgnoreMissing");
+				writer.WriteValue(IgnoreMissing.Value);
+			}
 
-		if (Properties is not null)
-		{
-			initializer.Property("Properties");
-			writer.WriteInlineList(Properties, (w, item) => { w.WriteString(item); });
-		}
+			if (OnFailure is not null)
+			{
+				initializer.Property("OnFailure");
+				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (Tag is not null)
-		{
-			initializer.Property("Tag");
-			writer.WriteString(Tag);
-		}
+			if (Properties is not null)
+			{
+				initializer.Property("Properties");
+				writer.WriteInlineList(Properties, (w, item) => { w.WriteString(item); });
+			}
 
-		if (TargetField is not null)
-		{
-			initializer.Property("TargetField");
-			TargetField.FormatCode(writer);
-		}
+			if (Tag is not null)
+			{
+				initializer.Property("Tag");
+				writer.WriteString(Tag);
+			}
 
-		initializer.Dispose();
+			if (TargetField is not null)
+			{
+				initializer.Property("TargetField");
+				TargetField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

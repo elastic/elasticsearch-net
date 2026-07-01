@@ -46,13 +46,13 @@ public partial class InferenceEndpointInfo : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("ServiceSettings");
-			writer.WriteValue(ServiceSettings);
+			writer.WriteObjectValue(ServiceSettings);
 		}
 
 		if (TaskSettings is not null)
 		{
 			initializer.Property("TaskSettings");
-			writer.WriteValue(TaskSettings);
+			writer.WriteObjectValue(TaskSettings);
 		}
 
 		{

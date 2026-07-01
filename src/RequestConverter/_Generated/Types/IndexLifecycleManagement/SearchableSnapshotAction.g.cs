@@ -27,18 +27,32 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction", false);
-		if (ForceMergeIndex is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ForceMergeIndex");
-			writer.WriteValue(ForceMergeIndex.Value);
-		}
+			if (ForceMergeIndex is not null)
+			{
+				writer.WriteFluentCall("ForceMergeIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ForceMergeIndex.Value); });
+			}
 
+			{
+				writer.WriteFluentCall("SnapshotRepository", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SnapshotRepository); });
+			}
+		}
+		else
 		{
-			initializer.Property("SnapshotRepository");
-			writer.WriteString(SnapshotRepository);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction", false);
+			if (ForceMergeIndex is not null)
+			{
+				initializer.Property("ForceMergeIndex");
+				writer.WriteValue(ForceMergeIndex.Value);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("SnapshotRepository");
+				writer.WriteString(SnapshotRepository);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

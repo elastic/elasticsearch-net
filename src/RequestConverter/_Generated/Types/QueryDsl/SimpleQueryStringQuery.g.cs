@@ -27,97 +27,176 @@ public partial class SimpleQueryStringQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery", false);
-		if (Analyzer is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Analyzer");
-			writer.WriteString(Analyzer);
-		}
+			if (Analyzer is not null)
+			{
+				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+			}
 
-		if (AnalyzeWildcard is not null)
+			if (AnalyzeWildcard is not null)
+			{
+				writer.WriteFluentCall("AnalyzeWildcard", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AnalyzeWildcard.Value); });
+			}
+
+			if (AutoGenerateSynonymsPhraseQuery is not null)
+			{
+				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
+			}
+
+			if (Boost is not null)
+			{
+				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+			}
+
+			if (DefaultOperator is not null)
+			{
+				writer.WriteFluentCall("DefaultOperator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, w); });
+			}
+
+			if (Fields is not null)
+			{
+				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+			}
+
+			if (Flags is not null)
+			{
+				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlagsCodeFormatter.FormatCode(Flags.Value, w); });
+			}
+
+			if (FuzzyMaxExpansions is not null)
+			{
+				writer.WriteFluentCall("FuzzyMaxExpansions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyMaxExpansions.Value); });
+			}
+
+			if (FuzzyPrefixLength is not null)
+			{
+				writer.WriteFluentCall("FuzzyPrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyPrefixLength.Value); });
+			}
+
+			if (FuzzyTranspositions is not null)
+			{
+				writer.WriteFluentCall("FuzzyTranspositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyTranspositions.Value); });
+			}
+
+			if (Lenient is not null)
+			{
+				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+			}
+
+			if (MinimumShouldMatch is not null)
+			{
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+			}
+
+			if (QueryName is not null)
+			{
+				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+			}
+
+			if (QuoteFieldSuffix is not null)
+			{
+				writer.WriteFluentCall("QuoteFieldSuffix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QuoteFieldSuffix); });
+			}
+		}
+		else
 		{
-			initializer.Property("AnalyzeWildcard");
-			writer.WriteValue(AnalyzeWildcard.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery", false);
+			if (Analyzer is not null)
+			{
+				initializer.Property("Analyzer");
+				writer.WriteString(Analyzer);
+			}
 
-		if (AutoGenerateSynonymsPhraseQuery is not null)
-		{
-			initializer.Property("AutoGenerateSynonymsPhraseQuery");
-			writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
-		}
+			if (AnalyzeWildcard is not null)
+			{
+				initializer.Property("AnalyzeWildcard");
+				writer.WriteValue(AnalyzeWildcard.Value);
+			}
 
-		if (Boost is not null)
-		{
-			initializer.Property("Boost");
-			writer.WriteValue(Boost.Value);
-			writer.Write("f");
-		}
+			if (AutoGenerateSynonymsPhraseQuery is not null)
+			{
+				initializer.Property("AutoGenerateSynonymsPhraseQuery");
+				writer.WriteValue(AutoGenerateSynonymsPhraseQuery.Value);
+			}
 
-		if (DefaultOperator is not null)
-		{
-			initializer.Property("DefaultOperator");
-			Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
-		}
+			if (Boost is not null)
+			{
+				initializer.Property("Boost");
+				writer.WriteValue(Boost.Value);
+				writer.Write("f");
+			}
 
-		if (Fields is not null)
-		{
-			initializer.Property("Fields");
-			Fields.FormatCode(writer);
-		}
+			if (DefaultOperator is not null)
+			{
+				initializer.Property("DefaultOperator");
+				Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, writer);
+			}
 
-		if (Flags is not null)
-		{
-			initializer.Property("Flags");
-			Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlagsCodeFormatter.FormatCode(Flags.Value, writer);
-		}
+			if (Fields is not null)
+			{
+				initializer.Property("Fields");
+				Fields.FormatCode(writer);
+			}
 
-		if (FuzzyMaxExpansions is not null)
-		{
-			initializer.Property("FuzzyMaxExpansions");
-			writer.WriteValue(FuzzyMaxExpansions.Value);
-		}
+			if (Flags is not null)
+			{
+				initializer.Property("Flags");
+				Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlagsCodeFormatter.FormatCode(Flags.Value, writer);
+			}
 
-		if (FuzzyPrefixLength is not null)
-		{
-			initializer.Property("FuzzyPrefixLength");
-			writer.WriteValue(FuzzyPrefixLength.Value);
-		}
+			if (FuzzyMaxExpansions is not null)
+			{
+				initializer.Property("FuzzyMaxExpansions");
+				writer.WriteValue(FuzzyMaxExpansions.Value);
+			}
 
-		if (FuzzyTranspositions is not null)
-		{
-			initializer.Property("FuzzyTranspositions");
-			writer.WriteValue(FuzzyTranspositions.Value);
-		}
+			if (FuzzyPrefixLength is not null)
+			{
+				initializer.Property("FuzzyPrefixLength");
+				writer.WriteValue(FuzzyPrefixLength.Value);
+			}
 
-		if (Lenient is not null)
-		{
-			initializer.Property("Lenient");
-			writer.WriteValue(Lenient.Value);
-		}
+			if (FuzzyTranspositions is not null)
+			{
+				initializer.Property("FuzzyTranspositions");
+				writer.WriteValue(FuzzyTranspositions.Value);
+			}
 
-		if (MinimumShouldMatch is not null)
-		{
-			initializer.Property("MinimumShouldMatch");
-			MinimumShouldMatch.FormatCode(writer);
-		}
+			if (Lenient is not null)
+			{
+				initializer.Property("Lenient");
+				writer.WriteValue(Lenient.Value);
+			}
 
-		{
-			initializer.Property("Query");
-			writer.WriteString(Query);
-		}
+			if (MinimumShouldMatch is not null)
+			{
+				initializer.Property("MinimumShouldMatch");
+				MinimumShouldMatch.FormatCode(writer);
+			}
 
-		if (QueryName is not null)
-		{
-			initializer.Property("QueryName");
-			writer.WriteString(QueryName);
-		}
+			{
+				initializer.Property("Query");
+				writer.WriteString(Query);
+			}
 
-		if (QuoteFieldSuffix is not null)
-		{
-			initializer.Property("QuoteFieldSuffix");
-			writer.WriteString(QuoteFieldSuffix);
-		}
+			if (QueryName is not null)
+			{
+				initializer.Property("QueryName");
+				writer.WriteString(QueryName);
+			}
 
-		initializer.Dispose();
+			if (QuoteFieldSuffix is not null)
+			{
+				initializer.Property("QuoteFieldSuffix");
+				writer.WriteString(QuoteFieldSuffix);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

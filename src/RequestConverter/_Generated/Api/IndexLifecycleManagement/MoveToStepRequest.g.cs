@@ -27,22 +27,61 @@ public partial class MoveToStepRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Index");
-			Index.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
 
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Index.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			{
+				writer.WriteFluentDescriptorCall("CurrentStep", (w) => { CurrentStep.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("NextStep", (w) => { NextStep.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("CurrentStep");
-			CurrentStep.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest", false);
+			{
+				initializer.Property("Index");
+				Index.FormatCode(writer);
+			}
 
-		{
-			initializer.Property("NextStep");
-			NextStep.FormatCode(writer);
-		}
+			{
+				initializer.Property("CurrentStep");
+				CurrentStep.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("NextStep");
+				NextStep.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

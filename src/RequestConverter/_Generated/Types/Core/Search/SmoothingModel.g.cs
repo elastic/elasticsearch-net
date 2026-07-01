@@ -27,25 +27,45 @@ public partial class SmoothingModel : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel", false);
-		if (Laplace is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Laplace");
-			Laplace.FormatCode(writer);
-		}
+			if (Laplace is not null)
+			{
+				writer.WriteFluentDescriptorCall("Laplace", (w) => { Laplace.FormatCode(w); });
+			}
 
-		if (LinearInterpolation is not null)
+			if (LinearInterpolation is not null)
+			{
+				writer.WriteFluentDescriptorCall("LinearInterpolation", (w) => { LinearInterpolation.FormatCode(w); });
+			}
+
+			if (StupidBackoff is not null)
+			{
+				writer.WriteFluentDescriptorCall("StupidBackoff", (w) => { StupidBackoff.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("LinearInterpolation");
-			LinearInterpolation.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel", false);
+			if (Laplace is not null)
+			{
+				initializer.Property("Laplace");
+				Laplace.FormatCode(writer);
+			}
 
-		if (StupidBackoff is not null)
-		{
-			initializer.Property("StupidBackoff");
-			StupidBackoff.FormatCode(writer);
-		}
+			if (LinearInterpolation is not null)
+			{
+				initializer.Property("LinearInterpolation");
+				LinearInterpolation.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (StupidBackoff is not null)
+			{
+				initializer.Property("StupidBackoff");
+				StupidBackoff.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

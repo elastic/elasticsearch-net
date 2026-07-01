@@ -27,18 +27,32 @@ public partial class SourceOnlyRepository : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository", true);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Settings");
-			Settings.FormatCode(writer);
-		}
+			{
+				writer.WriteFluentCall("Settings", (w) => { using var _oi = w.ForceObjectInitializer(); Settings.FormatCode(w); });
+			}
 
-		if (Uuid is not null)
+			if (Uuid is not null)
+			{
+				writer.WriteFluentCall("Uuid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Uuid); });
+			}
+		}
+		else
 		{
-			initializer.Property("Uuid");
-			writer.WriteString(Uuid);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository", true);
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Uuid is not null)
+			{
+				initializer.Property("Uuid");
+				writer.WriteString(Uuid);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

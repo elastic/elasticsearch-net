@@ -27,13 +27,22 @@ public partial class Weights : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Weights", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("WeightsValue");
-			writer.WriteValue(WeightsValue);
-			writer.Write("d");
+			{
+				writer.WriteFluentCall("WeightsValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WeightsValue); w.Write("d"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Weights", false);
+			{
+				initializer.Property("WeightsValue");
+				writer.WriteValue(WeightsValue);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

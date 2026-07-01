@@ -27,19 +27,34 @@ public partial class TDigest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TDigest", false);
-		if (Compression is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Compression");
-			writer.WriteValue(Compression.Value);
-		}
+			if (Compression is not null)
+			{
+				writer.WriteFluentCall("Compression", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compression.Value); });
+			}
 
-		if (ExecutionHint is not null)
+			if (ExecutionHint is not null)
+			{
+				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+			}
+		}
+		else
 		{
-			initializer.Property("ExecutionHint");
-			Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TDigest", false);
+			if (Compression is not null)
+			{
+				initializer.Property("Compression");
+				writer.WriteValue(Compression.Value);
+			}
 
-		initializer.Dispose();
+			if (ExecutionHint is not null)
+			{
+				initializer.Property("ExecutionHint");
+				Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

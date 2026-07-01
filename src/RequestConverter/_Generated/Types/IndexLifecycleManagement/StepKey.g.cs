@@ -27,24 +27,43 @@ public partial class StepKey : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey", false);
-		if (Action is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Action");
-			writer.WriteString(Action);
-		}
+			if (Action is not null)
+			{
+				writer.WriteFluentCall("Action", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Action); });
+			}
 
-		if (Name is not null)
+			if (Name is not null)
+			{
+				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+			}
+
+			{
+				writer.WriteFluentCall("Phase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Phase); });
+			}
+		}
+		else
 		{
-			initializer.Property("Name");
-			writer.WriteString(Name);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey", false);
+			if (Action is not null)
+			{
+				initializer.Property("Action");
+				writer.WriteString(Action);
+			}
 
-		{
-			initializer.Property("Phase");
-			writer.WriteString(Phase);
-		}
+			if (Name is not null)
+			{
+				initializer.Property("Name");
+				writer.WriteString(Name);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Phase");
+				writer.WriteString(Phase);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,23 +27,41 @@ public partial class IndexPrivilegesCheck : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck", false);
-		if (AllowRestrictedIndices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AllowRestrictedIndices");
-			writer.WriteValue(AllowRestrictedIndices.Value);
-		}
+			if (AllowRestrictedIndices is not null)
+			{
+				writer.WriteFluentCall("AllowRestrictedIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowRestrictedIndices.Value); });
+			}
 
+			{
+				writer.WriteFluentCall("Names", (w) => { using var _oi = w.ForceObjectInitializer(); Names.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentParams("Privileges", Privileges, (w, item) => { item.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Names");
-			Names.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck", false);
+			if (AllowRestrictedIndices is not null)
+			{
+				initializer.Property("AllowRestrictedIndices");
+				writer.WriteValue(AllowRestrictedIndices.Value);
+			}
 
-		{
-			initializer.Property("Privileges");
-			writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
-		}
+			{
+				initializer.Property("Names");
+				Names.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Privileges");
+				writer.WriteInlineList(Privileges, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

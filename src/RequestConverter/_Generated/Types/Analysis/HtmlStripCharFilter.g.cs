@@ -27,19 +27,34 @@ public partial class HtmlStripCharFilter : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter", true);
-		if (EscapedTags is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("EscapedTags");
-			writer.WriteInlineList(EscapedTags, (w, item) => { w.WriteString(item); });
-		}
+			if (EscapedTags is not null)
+			{
+				writer.WriteFluentParams("EscapedTags", EscapedTags, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Version is not null)
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter", true);
+			if (EscapedTags is not null)
+			{
+				initializer.Property("EscapedTags");
+				writer.WriteInlineList(EscapedTags, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

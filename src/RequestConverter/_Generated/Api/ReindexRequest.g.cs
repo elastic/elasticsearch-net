@@ -27,85 +27,167 @@ public partial class ReindexRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ReindexRequest", false);
-		if (Refresh is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Refresh");
-			writer.WriteValue(Refresh.Value);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ReindexRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (RequestsPerSecond is not null)
+			using var _chainIndent = writer.Indent();
+			if (Refresh is not null)
+			{
+				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+			}
+
+			if (RequestsPerSecond is not null)
+			{
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+			}
+
+			if (RequireAlias is not null)
+			{
+				writer.WriteFluentCall("RequireAlias", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequireAlias.Value); });
+			}
+
+			if (Scroll is not null)
+			{
+				writer.WriteFluentCall("Scroll", (w) => { using var _oi = w.ForceObjectInitializer(); Scroll.FormatCode(w); });
+			}
+
+			if (Slices is not null)
+			{
+				writer.WriteFluentCall("Slices", (w) => { using var _oi = w.ForceObjectInitializer(); Slices.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (WaitForActiveShards is not null)
+			{
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+
+			if (Conflicts is not null)
+			{
+				writer.WriteFluentCall("Conflicts", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); });
+			}
+
+			if (MaxDocs is not null)
+			{
+				writer.WriteFluentCall("MaxDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocs.Value); w.Write("L"); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("RequestsPerSecond");
-			writer.WriteValue(RequestsPerSecond.Value);
-			writer.Write("f");
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.ReindexRequest", false);
+			if (Refresh is not null)
+			{
+				initializer.Property("Refresh");
+				writer.WriteValue(Refresh.Value);
+			}
 
-		if (RequireAlias is not null)
-		{
-			initializer.Property("RequireAlias");
-			writer.WriteValue(RequireAlias.Value);
-		}
+			if (RequestsPerSecond is not null)
+			{
+				initializer.Property("RequestsPerSecond");
+				writer.WriteValue(RequestsPerSecond.Value);
+				writer.Write("f");
+			}
 
-		if (Scroll is not null)
-		{
-			initializer.Property("Scroll");
-			Scroll.FormatCode(writer);
-		}
+			if (RequireAlias is not null)
+			{
+				initializer.Property("RequireAlias");
+				writer.WriteValue(RequireAlias.Value);
+			}
 
-		if (Slices is not null)
-		{
-			initializer.Property("Slices");
-			Slices.FormatCode(writer);
-		}
+			if (Scroll is not null)
+			{
+				initializer.Property("Scroll");
+				Scroll.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Slices is not null)
+			{
+				initializer.Property("Slices");
+				Slices.FormatCode(writer);
+			}
 
-		if (WaitForActiveShards is not null)
-		{
-			initializer.Property("WaitForActiveShards");
-			WaitForActiveShards.FormatCode(writer);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
+			if (WaitForActiveShards is not null)
+			{
+				initializer.Property("WaitForActiveShards");
+				WaitForActiveShards.FormatCode(writer);
+			}
 
-		if (Conflicts is not null)
-		{
-			initializer.Property("Conflicts");
-			Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, writer);
-		}
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
 
-		{
-			initializer.Property("Dest");
-			Dest.FormatCode(writer);
-		}
+			if (Conflicts is not null)
+			{
+				initializer.Property("Conflicts");
+				Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, writer);
+			}
 
-		if (MaxDocs is not null)
-		{
-			initializer.Property("MaxDocs");
-			writer.WriteValue(MaxDocs.Value);
-			writer.Write("L");
-		}
+			{
+				initializer.Property("Dest");
+				Dest.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (MaxDocs is not null)
+			{
+				initializer.Property("MaxDocs");
+				writer.WriteValue(MaxDocs.Value);
+				writer.Write("L");
+			}
 
-		{
-			initializer.Property("Source");
-			Source.FormatCode(writer);
-		}
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Source");
+				Source.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

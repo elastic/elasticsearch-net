@@ -27,31 +27,56 @@ public partial class IndexRoutingAllocation : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation", false);
-		if (Disk is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Disk");
-			Disk.FormatCode(writer);
-		}
+			if (Disk is not null)
+			{
+				writer.WriteFluentDescriptorCall("Disk", (w) => { Disk.FormatCode(w); });
+			}
 
-		if (Enable is not null)
+			if (Enable is not null)
+			{
+				writer.WriteFluentCall("Enable", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(Enable.Value, w); });
+			}
+
+			if (Include is not null)
+			{
+				writer.WriteFluentDescriptorCall("Include", (w) => { Include.FormatCode(w); });
+			}
+
+			if (InitialRecovery is not null)
+			{
+				writer.WriteFluentDescriptorCall("InitialRecovery", (w) => { InitialRecovery.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Enable");
-			Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(Enable.Value, writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation", false);
+			if (Disk is not null)
+			{
+				initializer.Property("Disk");
+				Disk.FormatCode(writer);
+			}
 
-		if (Include is not null)
-		{
-			initializer.Property("Include");
-			Include.FormatCode(writer);
-		}
+			if (Enable is not null)
+			{
+				initializer.Property("Enable");
+				Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(Enable.Value, writer);
+			}
 
-		if (InitialRecovery is not null)
-		{
-			initializer.Property("InitialRecovery");
-			InitialRecovery.FormatCode(writer);
-		}
+			if (Include is not null)
+			{
+				initializer.Property("Include");
+				Include.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (InitialRecovery is not null)
+			{
+				initializer.Property("InitialRecovery");
+				InitialRecovery.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

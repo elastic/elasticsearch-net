@@ -27,89 +27,192 @@ public partial class RestoreRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Repository");
-			Repository.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Repository.FormatCode(writer);
+				}
 
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Snapshot.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor");
+				writer.Write("(");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Repository.FormatCode(writer);
+				}
+
+				writer.Write(", ");
+				{
+					using var _oi = writer.ForceObjectInitializer();
+					Snapshot.FormatCode(writer);
+				}
+
+				writer.Write(")");
+			}
+
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
+
+			if (WaitForCompletion is not null)
+			{
+				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+			}
+
+			if (FeatureStates is not null)
+			{
+				writer.WriteFluentParams("FeatureStates", FeatureStates, (w, item) => { w.WriteString(item); });
+			}
+
+			if (IgnoreIndexSettings is not null)
+			{
+				writer.WriteFluentParams("IgnoreIndexSettings", IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
+			}
+
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
+
+			if (IncludeAliases is not null)
+			{
+				writer.WriteFluentCall("IncludeAliases", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeAliases.Value); });
+			}
+
+			if (IncludeGlobalState is not null)
+			{
+				writer.WriteFluentCall("IncludeGlobalState", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeGlobalState.Value); });
+			}
+
+			if (IndexSettings is not null)
+			{
+				writer.WriteFluentDescriptorCall("IndexSettings", (w) => { IndexSettings.FormatCode(w); });
+			}
+
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
+
+			if (Partial is not null)
+			{
+				writer.WriteFluentCall("Partial", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Partial.Value); });
+			}
+
+			if (RenamePattern is not null)
+			{
+				writer.WriteFluentCall("RenamePattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RenamePattern); });
+			}
+
+			if (RenameReplacement is not null)
+			{
+				writer.WriteFluentCall("RenameReplacement", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RenameReplacement); });
+			}
+		}
+		else
 		{
-			initializer.Property("Snapshot");
-			Snapshot.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest", false);
+			{
+				initializer.Property("Repository");
+				Repository.FormatCode(writer);
+			}
 
-		if (MasterTimeout is not null)
-		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			{
+				initializer.Property("Snapshot");
+				Snapshot.FormatCode(writer);
+			}
 
-		if (WaitForCompletion is not null)
-		{
-			initializer.Property("WaitForCompletion");
-			writer.WriteValue(WaitForCompletion.Value);
-		}
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (FeatureStates is not null)
-		{
-			initializer.Property("FeatureStates");
-			writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
-		}
+			if (WaitForCompletion is not null)
+			{
+				initializer.Property("WaitForCompletion");
+				writer.WriteValue(WaitForCompletion.Value);
+			}
 
-		if (IgnoreIndexSettings is not null)
-		{
-			initializer.Property("IgnoreIndexSettings");
-			writer.WriteInlineList(IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
-		}
+			if (FeatureStates is not null)
+			{
+				initializer.Property("FeatureStates");
+				writer.WriteInlineList(FeatureStates, (w, item) => { w.WriteString(item); });
+			}
 
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (IgnoreIndexSettings is not null)
+			{
+				initializer.Property("IgnoreIndexSettings");
+				writer.WriteInlineList(IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
+			}
 
-		if (IncludeAliases is not null)
-		{
-			initializer.Property("IncludeAliases");
-			writer.WriteValue(IncludeAliases.Value);
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
 
-		if (IncludeGlobalState is not null)
-		{
-			initializer.Property("IncludeGlobalState");
-			writer.WriteValue(IncludeGlobalState.Value);
-		}
+			if (IncludeAliases is not null)
+			{
+				initializer.Property("IncludeAliases");
+				writer.WriteValue(IncludeAliases.Value);
+			}
 
-		if (IndexSettings is not null)
-		{
-			initializer.Property("IndexSettings");
-			IndexSettings.FormatCode(writer);
-		}
+			if (IncludeGlobalState is not null)
+			{
+				initializer.Property("IncludeGlobalState");
+				writer.WriteValue(IncludeGlobalState.Value);
+			}
 
-		if (Indices is not null)
-		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (IndexSettings is not null)
+			{
+				initializer.Property("IndexSettings");
+				IndexSettings.FormatCode(writer);
+			}
 
-		if (Partial is not null)
-		{
-			initializer.Property("Partial");
-			writer.WriteValue(Partial.Value);
-		}
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		if (RenamePattern is not null)
-		{
-			initializer.Property("RenamePattern");
-			writer.WriteString(RenamePattern);
-		}
+			if (Partial is not null)
+			{
+				initializer.Property("Partial");
+				writer.WriteValue(Partial.Value);
+			}
 
-		if (RenameReplacement is not null)
-		{
-			initializer.Property("RenameReplacement");
-			writer.WriteString(RenameReplacement);
-		}
+			if (RenamePattern is not null)
+			{
+				initializer.Property("RenamePattern");
+				writer.WriteString(RenamePattern);
+			}
 
-		initializer.Dispose();
+			if (RenameReplacement is not null)
+			{
+				initializer.Property("RenameReplacement");
+				writer.WriteString(RenameReplacement);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

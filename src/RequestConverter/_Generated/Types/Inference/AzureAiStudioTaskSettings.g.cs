@@ -27,52 +27,92 @@ public partial class AzureAiStudioTaskSettings : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings", false);
-		if (DoSample is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DoSample");
-			writer.WriteValue(DoSample.Value);
-			writer.Write("f");
-		}
+			if (DoSample is not null)
+			{
+				writer.WriteFluentCall("DoSample", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DoSample.Value); w.Write("f"); });
+			}
 
-		if (MaxNewTokens is not null)
+			if (MaxNewTokens is not null)
+			{
+				writer.WriteFluentCall("MaxNewTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNewTokens.Value); });
+			}
+
+			if (ReturnDocuments is not null)
+			{
+				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+			}
+
+			if (Temperature is not null)
+			{
+				writer.WriteFluentCall("Temperature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Temperature.Value); w.Write("f"); });
+			}
+
+			if (TopN is not null)
+			{
+				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+			}
+
+			if (TopP is not null)
+			{
+				writer.WriteFluentCall("TopP", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopP.Value); w.Write("f"); });
+			}
+
+			if (User is not null)
+			{
+				writer.WriteFluentCall("User", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(User); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxNewTokens");
-			writer.WriteValue(MaxNewTokens.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings", false);
+			if (DoSample is not null)
+			{
+				initializer.Property("DoSample");
+				writer.WriteValue(DoSample.Value);
+				writer.Write("f");
+			}
 
-		if (ReturnDocuments is not null)
-		{
-			initializer.Property("ReturnDocuments");
-			writer.WriteValue(ReturnDocuments.Value);
-		}
+			if (MaxNewTokens is not null)
+			{
+				initializer.Property("MaxNewTokens");
+				writer.WriteValue(MaxNewTokens.Value);
+			}
 
-		if (Temperature is not null)
-		{
-			initializer.Property("Temperature");
-			writer.WriteValue(Temperature.Value);
-			writer.Write("f");
-		}
+			if (ReturnDocuments is not null)
+			{
+				initializer.Property("ReturnDocuments");
+				writer.WriteValue(ReturnDocuments.Value);
+			}
 
-		if (TopN is not null)
-		{
-			initializer.Property("TopN");
-			writer.WriteValue(TopN.Value);
-		}
+			if (Temperature is not null)
+			{
+				initializer.Property("Temperature");
+				writer.WriteValue(Temperature.Value);
+				writer.Write("f");
+			}
 
-		if (TopP is not null)
-		{
-			initializer.Property("TopP");
-			writer.WriteValue(TopP.Value);
-			writer.Write("f");
-		}
+			if (TopN is not null)
+			{
+				initializer.Property("TopN");
+				writer.WriteValue(TopN.Value);
+			}
 
-		if (User is not null)
-		{
-			initializer.Property("User");
-			writer.WriteString(User);
-		}
+			if (TopP is not null)
+			{
+				initializer.Property("TopP");
+				writer.WriteValue(TopP.Value);
+				writer.Write("f");
+			}
 
-		initializer.Dispose();
+			if (User is not null)
+			{
+				initializer.Property("User");
+				writer.WriteString(User);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,36 +27,65 @@ public partial class PatternReplaceTokenFilter : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter", true);
-		if (All is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("All");
-			writer.WriteValue(All.Value);
-		}
+			if (All is not null)
+			{
+				writer.WriteFluentCall("All", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(All.Value); });
+			}
 
-		if (Flags is not null)
+			if (Flags is not null)
+			{
+				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Flags); });
+			}
+
+			{
+				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+			}
+
+			if (Replacement is not null)
+			{
+				writer.WriteFluentCall("Replacement", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Replacement); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("Flags");
-			writer.WriteString(Flags);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter", true);
+			if (All is not null)
+			{
+				initializer.Property("All");
+				writer.WriteValue(All.Value);
+			}
 
-		{
-			initializer.Property("Pattern");
-			writer.WriteString(Pattern);
-		}
+			if (Flags is not null)
+			{
+				initializer.Property("Flags");
+				writer.WriteString(Flags);
+			}
 
-		if (Replacement is not null)
-		{
-			initializer.Property("Replacement");
-			writer.WriteString(Replacement);
-		}
+			{
+				initializer.Property("Pattern");
+				writer.WriteString(Pattern);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (Replacement is not null)
+			{
+				initializer.Property("Replacement");
+				writer.WriteString(Replacement);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

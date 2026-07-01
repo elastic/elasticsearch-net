@@ -27,54 +27,98 @@ public partial class KuromojiTokenizer : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer", true);
-		if (DiscardCompoundToken is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DiscardCompoundToken");
-			writer.WriteValue(DiscardCompoundToken.Value);
-		}
+			if (DiscardCompoundToken is not null)
+			{
+				writer.WriteFluentCall("DiscardCompoundToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscardCompoundToken.Value); });
+			}
 
-		if (DiscardPunctuation is not null)
+			if (DiscardPunctuation is not null)
+			{
+				writer.WriteFluentCall("DiscardPunctuation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscardPunctuation.Value); });
+			}
+
+			{
+				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode, w); });
+			}
+
+			if (NbestCost is not null)
+			{
+				writer.WriteFluentCall("NbestCost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NbestCost.Value); });
+			}
+
+			if (NbestExamples is not null)
+			{
+				writer.WriteFluentCall("NbestExamples", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(NbestExamples); });
+			}
+
+			if (UserDictionary is not null)
+			{
+				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+			}
+
+			if (UserDictionaryRules is not null)
+			{
+				writer.WriteFluentParams("UserDictionaryRules", UserDictionaryRules, (w, item) => { w.WriteString(item); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("DiscardPunctuation");
-			writer.WriteValue(DiscardPunctuation.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer", true);
+			if (DiscardCompoundToken is not null)
+			{
+				initializer.Property("DiscardCompoundToken");
+				writer.WriteValue(DiscardCompoundToken.Value);
+			}
 
-		{
-			initializer.Property("Mode");
-			Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode, writer);
-		}
+			if (DiscardPunctuation is not null)
+			{
+				initializer.Property("DiscardPunctuation");
+				writer.WriteValue(DiscardPunctuation.Value);
+			}
 
-		if (NbestCost is not null)
-		{
-			initializer.Property("NbestCost");
-			writer.WriteValue(NbestCost.Value);
-		}
+			{
+				initializer.Property("Mode");
+				Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode, writer);
+			}
 
-		if (NbestExamples is not null)
-		{
-			initializer.Property("NbestExamples");
-			writer.WriteString(NbestExamples);
-		}
+			if (NbestCost is not null)
+			{
+				initializer.Property("NbestCost");
+				writer.WriteValue(NbestCost.Value);
+			}
 
-		if (UserDictionary is not null)
-		{
-			initializer.Property("UserDictionary");
-			writer.WriteString(UserDictionary);
-		}
+			if (NbestExamples is not null)
+			{
+				initializer.Property("NbestExamples");
+				writer.WriteString(NbestExamples);
+			}
 
-		if (UserDictionaryRules is not null)
-		{
-			initializer.Property("UserDictionaryRules");
-			writer.WriteInlineList(UserDictionaryRules, (w, item) => { w.WriteString(item); });
-		}
+			if (UserDictionary is not null)
+			{
+				initializer.Property("UserDictionary");
+				writer.WriteString(UserDictionary);
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (UserDictionaryRules is not null)
+			{
+				initializer.Property("UserDictionaryRules");
+				writer.WriteInlineList(UserDictionaryRules, (w, item) => { w.WriteString(item); });
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

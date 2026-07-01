@@ -27,25 +27,49 @@ public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormatt
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest", false);
-		if (NodeId is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("NodeId");
-			NodeId.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (NodeId is not null)
+			{
+				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+			}
 
-		if (Timeout is not null)
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+
+			if (SecureSettingsPassword is not null)
+			{
+				writer.WriteFluentCall("SecureSettingsPassword", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SecureSettingsPassword); });
+			}
+		}
+		else
 		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest", false);
+			if (NodeId is not null)
+			{
+				initializer.Property("NodeId");
+				NodeId.FormatCode(writer);
+			}
 
-		if (SecureSettingsPassword is not null)
-		{
-			initializer.Property("SecureSettingsPassword");
-			writer.WriteString(SecureSettingsPassword);
-		}
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (SecureSettingsPassword is not null)
+			{
+				initializer.Property("SecureSettingsPassword");
+				writer.WriteString(SecureSettingsPassword);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

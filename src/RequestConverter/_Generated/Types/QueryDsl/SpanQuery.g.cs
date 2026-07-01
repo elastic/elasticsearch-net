@@ -27,71 +27,126 @@ public partial class SpanQuery : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery", false);
-		if (SpanContaining is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("SpanContaining");
-			SpanContaining.FormatCode(writer);
-		}
+			if (SpanContaining is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanContaining", (w) => { SpanContaining.FormatCode(w); });
+			}
 
-		if (SpanFieldMasking is not null)
+			if (SpanFieldMasking is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanFieldMasking", (w) => { SpanFieldMasking.FormatCode(w); });
+			}
+
+			if (SpanFirst is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanFirst", (w) => { SpanFirst.FormatCode(w); });
+			}
+
+			if (SpanGap is not null)
+			{
+				writer.WriteFluentCall("SpanGap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,int>"); SpanGap.Value.Key.FormatCode(w); w.Write(", "); w.WriteValue(SpanGap.Value.Value); w.Write(")"); });
+			}
+
+			if (SpanMulti is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanMulti", (w) => { SpanMulti.FormatCode(w); });
+			}
+
+			if (SpanNear is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanNear", (w) => { SpanNear.FormatCode(w); });
+			}
+
+			if (SpanNot is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanNot", (w) => { SpanNot.FormatCode(w); });
+			}
+
+			if (SpanOr is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanOr", (w) => { SpanOr.FormatCode(w); });
+			}
+
+			if (SpanTerm is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanTerm", (w) => { SpanTerm.FormatCode(w); });
+			}
+
+			if (SpanWithin is not null)
+			{
+				writer.WriteFluentDescriptorCall("SpanWithin", (w) => { SpanWithin.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("SpanFieldMasking");
-			SpanFieldMasking.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery", false);
+			if (SpanContaining is not null)
+			{
+				initializer.Property("SpanContaining");
+				SpanContaining.FormatCode(writer);
+			}
 
-		if (SpanFirst is not null)
-		{
-			initializer.Property("SpanFirst");
-			SpanFirst.FormatCode(writer);
-		}
+			if (SpanFieldMasking is not null)
+			{
+				initializer.Property("SpanFieldMasking");
+				SpanFieldMasking.FormatCode(writer);
+			}
 
-		if (SpanGap is not null)
-		{
-			initializer.Property("SpanGap");
-			writer.Write("new(");
-			SpanGap.Value.Key.FormatCode(writer);
-			writer.Write(", ");
-			writer.WriteValue(SpanGap.Value.Value);
-			writer.Write(")");
-		}
+			if (SpanFirst is not null)
+			{
+				initializer.Property("SpanFirst");
+				SpanFirst.FormatCode(writer);
+			}
 
-		if (SpanMulti is not null)
-		{
-			initializer.Property("SpanMulti");
-			SpanMulti.FormatCode(writer);
-		}
+			if (SpanGap is not null)
+			{
+				initializer.Property("SpanGap");
+				writer.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,int>");
+				SpanGap.Value.Key.FormatCode(writer);
+				writer.Write(", ");
+				writer.WriteValue(SpanGap.Value.Value);
+				writer.Write(")");
+			}
 
-		if (SpanNear is not null)
-		{
-			initializer.Property("SpanNear");
-			SpanNear.FormatCode(writer);
-		}
+			if (SpanMulti is not null)
+			{
+				initializer.Property("SpanMulti");
+				SpanMulti.FormatCode(writer);
+			}
 
-		if (SpanNot is not null)
-		{
-			initializer.Property("SpanNot");
-			SpanNot.FormatCode(writer);
-		}
+			if (SpanNear is not null)
+			{
+				initializer.Property("SpanNear");
+				SpanNear.FormatCode(writer);
+			}
 
-		if (SpanOr is not null)
-		{
-			initializer.Property("SpanOr");
-			SpanOr.FormatCode(writer);
-		}
+			if (SpanNot is not null)
+			{
+				initializer.Property("SpanNot");
+				SpanNot.FormatCode(writer);
+			}
 
-		if (SpanTerm is not null)
-		{
-			initializer.Property("SpanTerm");
-			SpanTerm.FormatCode(writer);
-		}
+			if (SpanOr is not null)
+			{
+				initializer.Property("SpanOr");
+				SpanOr.FormatCode(writer);
+			}
 
-		if (SpanWithin is not null)
-		{
-			initializer.Property("SpanWithin");
-			SpanWithin.FormatCode(writer);
-		}
+			if (SpanTerm is not null)
+			{
+				initializer.Property("SpanTerm");
+				SpanTerm.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (SpanWithin is not null)
+			{
+				initializer.Property("SpanWithin");
+				SpanWithin.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

@@ -27,27 +27,42 @@ public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction", false);
-		if (Field is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Field");
-			Field.FormatCode(writer);
-		}
-
-		if (Seed is not null)
-		{
-			initializer.Property("Seed");
-			if (Seed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Field is not null)
 			{
-				writer.WriteValue(Seed.Value1);
-				writer.Write("L");
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
 			}
-			else
+
+			if (Seed is not null)
 			{
-				writer.WriteString(Seed.Value2);
+				writer.WriteFluentCall("Seed", (w) => { using var _oi = w.ForceObjectInitializer(); if (Seed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Seed.Value1); w.Write("L"); } else { w.WriteString(Seed.Value2); } });
 			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction", false);
+			if (Field is not null)
+			{
+				initializer.Property("Field");
+				Field.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Seed is not null)
+			{
+				initializer.Property("Seed");
+				if (Seed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(Seed.Value1);
+					writer.Write("L");
+				}
+				else
+				{
+					writer.WriteString(Seed.Value2);
+				}
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

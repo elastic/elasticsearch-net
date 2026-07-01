@@ -27,14 +27,24 @@ public partial class SettingsSimilarityLmd : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd", true);
-		if (Mu is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Mu");
-			writer.WriteValue(Mu.Value);
-			writer.Write("d");
+			if (Mu is not null)
+			{
+				writer.WriteFluentCall("Mu", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Mu.Value); w.Write("d"); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd", true);
+			if (Mu is not null)
+			{
+				initializer.Property("Mu");
+				writer.WriteValue(Mu.Value);
+				writer.Write("d");
+			}
 
-		initializer.Dispose();
+			initializer.Dispose();
+		}
 	}
 }

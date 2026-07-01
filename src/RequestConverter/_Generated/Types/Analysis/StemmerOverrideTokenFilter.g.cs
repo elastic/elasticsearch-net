@@ -27,25 +27,45 @@ public partial class StemmerOverrideTokenFilter : RequestConverter.ICodeFormatta
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter", true);
-		if (Rules is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Rules");
-			writer.WriteInlineList(Rules, (w, item) => { w.WriteString(item); });
-		}
+			if (Rules is not null)
+			{
+				writer.WriteFluentParams("Rules", Rules, (w, item) => { w.WriteString(item); });
+			}
 
-		if (RulesPath is not null)
+			if (RulesPath is not null)
+			{
+				writer.WriteFluentCall("RulesPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RulesPath); });
+			}
+
+			if (Version is not null)
+			{
+				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+			}
+		}
+		else
 		{
-			initializer.Property("RulesPath");
-			writer.WriteString(RulesPath);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter", true);
+			if (Rules is not null)
+			{
+				initializer.Property("Rules");
+				writer.WriteInlineList(Rules, (w, item) => { w.WriteString(item); });
+			}
 
-		if (Version is not null)
-		{
-			initializer.Property("Version");
-			writer.WriteString(Version);
-		}
+			if (RulesPath is not null)
+			{
+				initializer.Property("RulesPath");
+				writer.WriteString(RulesPath);
+			}
 
-		initializer.Dispose();
+			if (Version is not null)
+			{
+				initializer.Property("Version");
+				writer.WriteString(Version);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

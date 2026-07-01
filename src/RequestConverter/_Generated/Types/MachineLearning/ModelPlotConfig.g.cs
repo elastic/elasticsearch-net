@@ -27,25 +27,45 @@ public partial class ModelPlotConfig : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig", false);
-		if (AnnotationsEnabled is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("AnnotationsEnabled");
-			writer.WriteValue(AnnotationsEnabled.Value);
-		}
+			if (AnnotationsEnabled is not null)
+			{
+				writer.WriteFluentCall("AnnotationsEnabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AnnotationsEnabled.Value); });
+			}
 
-		if (Enabled is not null)
+			if (Enabled is not null)
+			{
+				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+			}
+
+			if (Terms is not null)
+			{
+				writer.WriteFluentCall("Terms", (w) => { Terms.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Enabled");
-			writer.WriteValue(Enabled.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig", false);
+			if (AnnotationsEnabled is not null)
+			{
+				initializer.Property("AnnotationsEnabled");
+				writer.WriteValue(AnnotationsEnabled.Value);
+			}
 
-		if (Terms is not null)
-		{
-			initializer.Property("Terms");
-			Terms.FormatCode(writer);
-		}
+			if (Enabled is not null)
+			{
+				initializer.Property("Enabled");
+				writer.WriteValue(Enabled.Value);
+			}
 
-		initializer.Dispose();
+			if (Terms is not null)
+			{
+				initializer.Property("Terms");
+				Terms.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

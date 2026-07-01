@@ -27,37 +27,56 @@ public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RequestEmbedding", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Input");
-			if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
 			{
-				writer.Write("new ");
-				writer.WriteTypeRef("string");
-				writer.Write("[] ");
-				writer.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				writer.WriteFluentCall("Input", (w) => { using var _oi = w.ForceObjectInitializer(); if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
 			}
-			else
+
+			if (InputType is not null)
 			{
-				writer.Write("new ");
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject");
-				writer.Write("[] ");
-				writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+			}
+
+			if (TaskSettings is not null)
+			{
+				writer.WriteFluentCall("TaskSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(TaskSettings); });
 			}
 		}
-
-		if (InputType is not null)
+		else
 		{
-			initializer.Property("InputType");
-			writer.WriteString(InputType);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RequestEmbedding", false);
+			{
+				initializer.Property("Input");
+				if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("string");
+					writer.Write("[] ");
+					writer.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject");
+					writer.Write("[] ");
+					writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+				}
+			}
 
-		if (TaskSettings is not null)
-		{
-			initializer.Property("TaskSettings");
-			writer.WriteValue(TaskSettings);
-		}
+			if (InputType is not null)
+			{
+				initializer.Property("InputType");
+				writer.WriteString(InputType);
+			}
 
-		initializer.Dispose();
+			if (TaskSettings is not null)
+			{
+				initializer.Property("TaskSettings");
+				writer.WriteObjectValue(TaskSettings);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

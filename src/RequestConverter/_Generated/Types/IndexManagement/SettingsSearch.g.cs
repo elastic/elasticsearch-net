@@ -27,19 +27,34 @@ public partial class SettingsSearch : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch", false);
-		if (Idle is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Idle");
-			Idle.FormatCode(writer);
-		}
+			if (Idle is not null)
+			{
+				writer.WriteFluentDescriptorCall("Idle", (w) => { Idle.FormatCode(w); });
+			}
 
-		if (Slowlog is not null)
+			if (Slowlog is not null)
+			{
+				writer.WriteFluentDescriptorCall("Slowlog", (w) => { Slowlog.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Slowlog");
-			Slowlog.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch", false);
+			if (Idle is not null)
+			{
+				initializer.Property("Idle");
+				Idle.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Slowlog is not null)
+			{
+				initializer.Property("Slowlog");
+				Slowlog.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

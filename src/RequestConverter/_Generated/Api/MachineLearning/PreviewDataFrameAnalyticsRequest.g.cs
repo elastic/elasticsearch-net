@@ -27,19 +27,48 @@ public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest", false);
-		if (Id is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Id");
-			Id.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (Config is not null)
+			using var _chainIndent = writer.Indent();
+			if (Id is not null)
+			{
+				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+			}
+
+			if (Config is not null)
+			{
+				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Config");
-			Config.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest", false);
+			if (Id is not null)
+			{
+				initializer.Property("Id");
+				Id.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Config is not null)
+			{
+				initializer.Property("Config");
+				Config.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

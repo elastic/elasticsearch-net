@@ -27,6 +27,7 @@ public partial class CreateServiceTokenRequest : RequestConverter.ICodeFormattab
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
+		using var _objectInitializer = writer.ForceObjectInitializer();
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest", false);
 		if (Name is not null)
 		{

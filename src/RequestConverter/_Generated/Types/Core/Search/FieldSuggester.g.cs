@@ -27,43 +27,78 @@ public partial class FieldSuggester : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester", false);
-		if (Prefix is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Prefix");
-			writer.WriteString(Prefix);
-		}
+			if (Prefix is not null)
+			{
+				writer.WriteFluentCall("Prefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Prefix); });
+			}
 
-		if (Regex is not null)
+			if (Regex is not null)
+			{
+				writer.WriteFluentCall("Regex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Regex); });
+			}
+
+			if (Text is not null)
+			{
+				writer.WriteFluentCall("Text", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Text); });
+			}
+
+			if (Completion is not null)
+			{
+				writer.WriteFluentDescriptorCall("Completion", (w) => { Completion.FormatCode(w); });
+			}
+
+			if (Phrase is not null)
+			{
+				writer.WriteFluentDescriptorCall("Phrase", (w) => { Phrase.FormatCode(w); });
+			}
+
+			if (Term is not null)
+			{
+				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("Regex");
-			writer.WriteString(Regex);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester", false);
+			if (Prefix is not null)
+			{
+				initializer.Property("Prefix");
+				writer.WriteString(Prefix);
+			}
 
-		if (Text is not null)
-		{
-			initializer.Property("Text");
-			writer.WriteString(Text);
-		}
+			if (Regex is not null)
+			{
+				initializer.Property("Regex");
+				writer.WriteString(Regex);
+			}
 
-		if (Completion is not null)
-		{
-			initializer.Property("Completion");
-			Completion.FormatCode(writer);
-		}
+			if (Text is not null)
+			{
+				initializer.Property("Text");
+				writer.WriteString(Text);
+			}
 
-		if (Phrase is not null)
-		{
-			initializer.Property("Phrase");
-			Phrase.FormatCode(writer);
-		}
+			if (Completion is not null)
+			{
+				initializer.Property("Completion");
+				Completion.FormatCode(writer);
+			}
 
-		if (Term is not null)
-		{
-			initializer.Property("Term");
-			Term.FormatCode(writer);
-		}
+			if (Phrase is not null)
+			{
+				initializer.Property("Phrase");
+				Phrase.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Term is not null)
+			{
+				initializer.Property("Term");
+				Term.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

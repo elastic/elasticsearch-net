@@ -27,109 +27,212 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MultiSearchRequest", false);
-		if (Indices is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Indices");
-			Indices.FormatCode(writer);
-		}
+			if (writer.Options.UseStronglyTypedDocument)
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>");
+				writer.Write("()");
+			}
+			else
+			{
+				writer.Write("new ");
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor");
+				writer.Write("()");
+			}
 
-		if (AllowNoIndices is not null)
-		{
-			initializer.Property("AllowNoIndices");
-			writer.WriteValue(AllowNoIndices.Value);
-		}
+			using var _chainIndent = writer.Indent();
+			if (Indices is not null)
+			{
+				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+			}
 
-		if (CcsMinimizeRoundtrips is not null)
-		{
-			initializer.Property("CcsMinimizeRoundtrips");
-			writer.WriteValue(CcsMinimizeRoundtrips.Value);
-		}
+			if (AllowNoIndices is not null)
+			{
+				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+			}
 
-		if (ExpandWildcards is not null)
-		{
-			initializer.Property("ExpandWildcards");
-			writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-		}
+			if (CcsMinimizeRoundtrips is not null)
+			{
+				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CcsMinimizeRoundtrips.Value); });
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
 #pragma warning disable CS0618
-		if (IgnoreThrottled is not null)
-		{
-			initializer.Property("IgnoreThrottled");
-			writer.WriteValue(IgnoreThrottled.Value);
-		}
+			if (IgnoreThrottled is not null)
+			{
+				writer.WriteFluentCall("IgnoreThrottled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreThrottled.Value); });
+			}
 #pragma warning restore CS0618
-		if (IgnoreUnavailable is not null)
-		{
-			initializer.Property("IgnoreUnavailable");
-			writer.WriteValue(IgnoreUnavailable.Value);
-		}
+			if (IgnoreUnavailable is not null)
+			{
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+			}
 
-		if (IncludeNamedQueriesScore is not null)
-		{
-			initializer.Property("IncludeNamedQueriesScore");
-			writer.WriteValue(IncludeNamedQueriesScore.Value);
-		}
+			if (IncludeNamedQueriesScore is not null)
+			{
+				writer.WriteFluentCall("IncludeNamedQueriesScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeNamedQueriesScore.Value); });
+			}
 
-		if (MaxConcurrentSearches is not null)
-		{
-			initializer.Property("MaxConcurrentSearches");
-			writer.WriteValue(MaxConcurrentSearches.Value);
-		}
+			if (MaxConcurrentSearches is not null)
+			{
+				writer.WriteFluentCall("MaxConcurrentSearches", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentSearches.Value); });
+			}
 
-		if (MaxConcurrentShardRequests is not null)
-		{
-			initializer.Property("MaxConcurrentShardRequests");
-			writer.WriteValue(MaxConcurrentShardRequests.Value);
-		}
+			if (MaxConcurrentShardRequests is not null)
+			{
+				writer.WriteFluentCall("MaxConcurrentShardRequests", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentShardRequests.Value); });
+			}
 
-		if (PreFilterShardSize is not null)
-		{
-			initializer.Property("PreFilterShardSize");
-			writer.WriteValue(PreFilterShardSize.Value);
-			writer.Write("L");
-		}
+			if (PreFilterShardSize is not null)
+			{
+				writer.WriteFluentCall("PreFilterShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreFilterShardSize.Value); w.Write("L"); });
+			}
 
-		if (ProjectRouting is not null)
-		{
-			initializer.Property("ProjectRouting");
-			writer.WriteString(ProjectRouting);
-		}
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+			}
 
-		if (RestTotalHitsAsInt is not null)
-		{
-			initializer.Property("RestTotalHitsAsInt");
-			writer.WriteValue(RestTotalHitsAsInt.Value);
-		}
+			if (RestTotalHitsAsInt is not null)
+			{
+				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RestTotalHitsAsInt.Value); });
+			}
 
-		if (Routing is not null)
-		{
-			initializer.Property("Routing");
-			Routing.FormatCode(writer);
-		}
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+			}
 
-		if (SearchType is not null)
-		{
-			initializer.Property("SearchType");
-			Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
-		}
+			if (SearchType is not null)
+			{
+				writer.WriteFluentCall("SearchType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
+			}
 
-		if (Slice is not null)
-		{
-			initializer.Property("Slice");
-			writer.WriteString(Slice);
-		}
+			if (Slice is not null)
+			{
+				writer.WriteFluentCall("Slice", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Slice); });
+			}
 
-		if (TypedKeys is not null)
-		{
-			initializer.Property("TypedKeys");
-			writer.WriteValue(TypedKeys.Value);
-		}
+			if (TypedKeys is not null)
+			{
+				writer.WriteFluentCall("TypedKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TypedKeys.Value); });
+			}
 
-		{
-			initializer.Property("Searches");
-			writer.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); });
+			{
+				writer.WriteFluentCall("Searches", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); }); });
+			}
 		}
+		else
+		{
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MultiSearchRequest", false);
+			if (Indices is not null)
+			{
+				initializer.Property("Indices");
+				Indices.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (AllowNoIndices is not null)
+			{
+				initializer.Property("AllowNoIndices");
+				writer.WriteValue(AllowNoIndices.Value);
+			}
+
+			if (CcsMinimizeRoundtrips is not null)
+			{
+				initializer.Property("CcsMinimizeRoundtrips");
+				writer.WriteValue(CcsMinimizeRoundtrips.Value);
+			}
+
+			if (ExpandWildcards is not null)
+			{
+				initializer.Property("ExpandWildcards");
+				writer.WriteInlineList(ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+			}
+#pragma warning disable CS0618
+			if (IgnoreThrottled is not null)
+			{
+				initializer.Property("IgnoreThrottled");
+				writer.WriteValue(IgnoreThrottled.Value);
+			}
+#pragma warning restore CS0618
+			if (IgnoreUnavailable is not null)
+			{
+				initializer.Property("IgnoreUnavailable");
+				writer.WriteValue(IgnoreUnavailable.Value);
+			}
+
+			if (IncludeNamedQueriesScore is not null)
+			{
+				initializer.Property("IncludeNamedQueriesScore");
+				writer.WriteValue(IncludeNamedQueriesScore.Value);
+			}
+
+			if (MaxConcurrentSearches is not null)
+			{
+				initializer.Property("MaxConcurrentSearches");
+				writer.WriteValue(MaxConcurrentSearches.Value);
+			}
+
+			if (MaxConcurrentShardRequests is not null)
+			{
+				initializer.Property("MaxConcurrentShardRequests");
+				writer.WriteValue(MaxConcurrentShardRequests.Value);
+			}
+
+			if (PreFilterShardSize is not null)
+			{
+				initializer.Property("PreFilterShardSize");
+				writer.WriteValue(PreFilterShardSize.Value);
+				writer.Write("L");
+			}
+
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
+			}
+
+			if (RestTotalHitsAsInt is not null)
+			{
+				initializer.Property("RestTotalHitsAsInt");
+				writer.WriteValue(RestTotalHitsAsInt.Value);
+			}
+
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
+			}
+
+			if (SearchType is not null)
+			{
+				initializer.Property("SearchType");
+				Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
+			}
+
+			if (Slice is not null)
+			{
+				initializer.Property("Slice");
+				writer.WriteString(Slice);
+			}
+
+			if (TypedKeys is not null)
+			{
+				initializer.Property("TypedKeys");
+				writer.WriteValue(TypedKeys.Value);
+			}
+
+			{
+				initializer.Property("Searches");
+				writer.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

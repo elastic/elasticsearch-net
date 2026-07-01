@@ -27,52 +27,86 @@ public partial class Message : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.Message", false);
-		if (Content is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Content");
-			if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+			if (Content is not null)
 			{
-				writer.WriteString(Content.Value1);
+				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Content.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject"); w.Write("[] "); w.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
 			}
-			else
+
+			if (Reasoning is not null)
 			{
-				writer.Write("new ");
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject");
-				writer.Write("[] ");
-				writer.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+				writer.WriteFluentCall("Reasoning", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Reasoning); });
+			}
+
+			if (ReasoningDetails is not null)
+			{
+				writer.WriteFluentCall("ReasoningDetails", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(ReasoningDetails, (w, item) => { item.FormatCode(w); }); });
+			}
+
+			{
+				writer.WriteFluentCall("Role", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Role); });
+			}
+
+			if (ToolCallId is not null)
+			{
+				writer.WriteFluentCall("ToolCallId", (w) => { using var _oi = w.ForceObjectInitializer(); ToolCallId.FormatCode(w); });
+			}
+
+			if (ToolCalls is not null)
+			{
+				writer.WriteFluentDescriptorParams("ToolCalls", ToolCalls, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.ToolCall>"); w.Write("()"); });
 			}
 		}
-
-		if (Reasoning is not null)
+		else
 		{
-			initializer.Property("Reasoning");
-			writer.WriteString(Reasoning);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.Message", false);
+			if (Content is not null)
+			{
+				initializer.Property("Content");
+				if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteString(Content.Value1);
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject");
+					writer.Write("[] ");
+					writer.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+				}
+			}
 
-		if (ReasoningDetails is not null)
-		{
-			initializer.Property("ReasoningDetails");
-			writer.WriteInlineList(ReasoningDetails, (w, item) => { item.FormatCode(w); });
-		}
+			if (Reasoning is not null)
+			{
+				initializer.Property("Reasoning");
+				writer.WriteString(Reasoning);
+			}
 
-		{
-			initializer.Property("Role");
-			writer.WriteString(Role);
-		}
+			if (ReasoningDetails is not null)
+			{
+				initializer.Property("ReasoningDetails");
+				writer.WriteInlineList(ReasoningDetails, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (ToolCallId is not null)
-		{
-			initializer.Property("ToolCallId");
-			ToolCallId.FormatCode(writer);
-		}
+			{
+				initializer.Property("Role");
+				writer.WriteString(Role);
+			}
 
-		if (ToolCalls is not null)
-		{
-			initializer.Property("ToolCalls");
-			writer.WriteInlineList(ToolCalls, (w, item) => { item.FormatCode(w); });
-		}
+			if (ToolCallId is not null)
+			{
+				initializer.Property("ToolCallId");
+				ToolCallId.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (ToolCalls is not null)
+			{
+				initializer.Property("ToolCalls");
+				writer.WriteInlineList(ToolCalls, (w, item) => { item.FormatCode(w); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

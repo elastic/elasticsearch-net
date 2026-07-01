@@ -27,67 +27,122 @@ public partial class Detector : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Detector", false);
-		if (ByFieldName is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("ByFieldName");
-			ByFieldName.FormatCode(writer);
-		}
+			if (ByFieldName is not null)
+			{
+				writer.WriteFluentCall("ByFieldName", (w) => { ByFieldName.FormatCode(w); });
+			}
 
-		if (CustomRules is not null)
+			if (CustomRules is not null)
+			{
+				writer.WriteFluentDescriptorParams("CustomRules", CustomRules, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>"); w.Write("()"); });
+			}
+
+			if (DetectorDescription is not null)
+			{
+				writer.WriteFluentCall("DetectorDescription", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DetectorDescription); });
+			}
+
+			if (DetectorIndex is not null)
+			{
+				writer.WriteFluentCall("DetectorIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DetectorIndex.Value); });
+			}
+
+			if (ExcludeFrequent is not null)
+			{
+				writer.WriteFluentCall("ExcludeFrequent", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(ExcludeFrequent.Value, w); });
+			}
+
+			if (FieldName is not null)
+			{
+				writer.WriteFluentCall("FieldName", (w) => { FieldName.FormatCode(w); });
+			}
+
+			if (Function is not null)
+			{
+				writer.WriteFluentCall("Function", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Function); });
+			}
+
+			if (OverFieldName is not null)
+			{
+				writer.WriteFluentCall("OverFieldName", (w) => { OverFieldName.FormatCode(w); });
+			}
+
+			if (PartitionFieldName is not null)
+			{
+				writer.WriteFluentCall("PartitionFieldName", (w) => { PartitionFieldName.FormatCode(w); });
+			}
+
+			if (UseNull is not null)
+			{
+				writer.WriteFluentCall("UseNull", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UseNull.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("CustomRules");
-			writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.Detector", false);
+			if (ByFieldName is not null)
+			{
+				initializer.Property("ByFieldName");
+				ByFieldName.FormatCode(writer);
+			}
 
-		if (DetectorDescription is not null)
-		{
-			initializer.Property("DetectorDescription");
-			writer.WriteString(DetectorDescription);
-		}
+			if (CustomRules is not null)
+			{
+				initializer.Property("CustomRules");
+				writer.WriteInlineList(CustomRules, (w, item) => { item.FormatCode(w); });
+			}
 
-		if (DetectorIndex is not null)
-		{
-			initializer.Property("DetectorIndex");
-			writer.WriteValue(DetectorIndex.Value);
-		}
+			if (DetectorDescription is not null)
+			{
+				initializer.Property("DetectorDescription");
+				writer.WriteString(DetectorDescription);
+			}
 
-		if (ExcludeFrequent is not null)
-		{
-			initializer.Property("ExcludeFrequent");
-			Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(ExcludeFrequent.Value, writer);
-		}
+			if (DetectorIndex is not null)
+			{
+				initializer.Property("DetectorIndex");
+				writer.WriteValue(DetectorIndex.Value);
+			}
 
-		if (FieldName is not null)
-		{
-			initializer.Property("FieldName");
-			FieldName.FormatCode(writer);
-		}
+			if (ExcludeFrequent is not null)
+			{
+				initializer.Property("ExcludeFrequent");
+				Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(ExcludeFrequent.Value, writer);
+			}
 
-		if (Function is not null)
-		{
-			initializer.Property("Function");
-			writer.WriteString(Function);
-		}
+			if (FieldName is not null)
+			{
+				initializer.Property("FieldName");
+				FieldName.FormatCode(writer);
+			}
 
-		if (OverFieldName is not null)
-		{
-			initializer.Property("OverFieldName");
-			OverFieldName.FormatCode(writer);
-		}
+			if (Function is not null)
+			{
+				initializer.Property("Function");
+				writer.WriteString(Function);
+			}
 
-		if (PartitionFieldName is not null)
-		{
-			initializer.Property("PartitionFieldName");
-			PartitionFieldName.FormatCode(writer);
-		}
+			if (OverFieldName is not null)
+			{
+				initializer.Property("OverFieldName");
+				OverFieldName.FormatCode(writer);
+			}
 
-		if (UseNull is not null)
-		{
-			initializer.Property("UseNull");
-			writer.WriteValue(UseNull.Value);
-		}
+			if (PartitionFieldName is not null)
+			{
+				initializer.Property("PartitionFieldName");
+				PartitionFieldName.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (UseNull is not null)
+			{
+				initializer.Property("UseNull");
+				writer.WriteValue(UseNull.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

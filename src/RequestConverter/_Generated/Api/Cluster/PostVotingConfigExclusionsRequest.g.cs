@@ -27,31 +27,60 @@ public partial class PostVotingConfigExclusionsRequest : RequestConverter.ICodeF
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest", false);
-		if (MasterTimeout is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
 
-		if (NodeIds is not null)
+			if (NodeIds is not null)
+			{
+				writer.WriteFluentCall("NodeIds", (w) => { using var _oi = w.ForceObjectInitializer(); NodeIds.FormatCode(w); });
+			}
+
+			if (NodeNames is not null)
+			{
+				writer.WriteFluentCall("NodeNames", (w) => { using var _oi = w.ForceObjectInitializer(); NodeNames.FormatCode(w); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("NodeIds");
-			NodeIds.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest", false);
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		if (NodeNames is not null)
-		{
-			initializer.Property("NodeNames");
-			NodeNames.FormatCode(writer);
-		}
+			if (NodeIds is not null)
+			{
+				initializer.Property("NodeIds");
+				NodeIds.FormatCode(writer);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (NodeNames is not null)
+			{
+				initializer.Property("NodeNames");
+				NodeNames.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

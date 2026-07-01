@@ -27,30 +27,54 @@ public partial class NestedSortValue : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.NestedSortValue", false);
-		if (Filter is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Filter");
-			Filter.FormatCode(writer);
-		}
+			if (Filter is not null)
+			{
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+			}
 
-		if (MaxChildren is not null)
+			if (MaxChildren is not null)
+			{
+				writer.WriteFluentCall("MaxChildren", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChildren.Value); });
+			}
+
+			if (Nested is not null)
+			{
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); });
+			}
+
+			{
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("MaxChildren");
-			writer.WriteValue(MaxChildren.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.NestedSortValue", false);
+			if (Filter is not null)
+			{
+				initializer.Property("Filter");
+				Filter.FormatCode(writer);
+			}
 
-		if (Nested is not null)
-		{
-			initializer.Property("Nested");
-			Nested.FormatCode(writer);
-		}
+			if (MaxChildren is not null)
+			{
+				initializer.Property("MaxChildren");
+				writer.WriteValue(MaxChildren.Value);
+			}
 
-		{
-			initializer.Property("Path");
-			Path.FormatCode(writer);
-		}
+			if (Nested is not null)
+			{
+				initializer.Property("Nested");
+				Nested.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Path");
+				Path.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

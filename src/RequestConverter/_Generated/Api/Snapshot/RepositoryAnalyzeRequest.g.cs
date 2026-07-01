@@ -27,91 +27,171 @@ public partial class RepositoryAnalyzeRequest : RequestConverter.ICodeFormattabl
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("Name");
-			Name.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor");
+			writer.Write("(");
+			{
+				using var _oi = writer.ForceObjectInitializer();
+				Name.FormatCode(writer);
+			}
 
-		if (BlobCount is not null)
+			writer.Write(")");
+			using var _chainIndent = writer.Indent();
+			if (BlobCount is not null)
+			{
+				writer.WriteFluentCall("BlobCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BlobCount.Value); });
+			}
+
+			if (CheckOverwriteProtection is not null)
+			{
+				writer.WriteFluentCall("CheckOverwriteProtection", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CheckOverwriteProtection.Value); });
+			}
+
+			if (Concurrency is not null)
+			{
+				writer.WriteFluentCall("Concurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Concurrency.Value); });
+			}
+
+			if (Detailed is not null)
+			{
+				writer.WriteFluentCall("Detailed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Detailed.Value); });
+			}
+
+			if (EarlyReadNodeCount is not null)
+			{
+				writer.WriteFluentCall("EarlyReadNodeCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EarlyReadNodeCount.Value); });
+			}
+
+			if (MaxBlobSize is not null)
+			{
+				writer.WriteFluentCall("MaxBlobSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxBlobSize.FormatCode(w); });
+			}
+
+			if (MaxTotalDataSize is not null)
+			{
+				writer.WriteFluentCall("MaxTotalDataSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxTotalDataSize.FormatCode(w); });
+			}
+
+			if (RareActionProbability is not null)
+			{
+				writer.WriteFluentCall("RareActionProbability", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RareActionProbability.Value); w.Write("d"); });
+			}
+
+			if (RarelyAbortWrites is not null)
+			{
+				writer.WriteFluentCall("RarelyAbortWrites", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RarelyAbortWrites.Value); });
+			}
+
+			if (ReadNodeCount is not null)
+			{
+				writer.WriteFluentCall("ReadNodeCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReadNodeCount.Value); });
+			}
+
+			if (RegisterOperationCount is not null)
+			{
+				writer.WriteFluentCall("RegisterOperationCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RegisterOperationCount.Value); });
+			}
+
+			if (Seed is not null)
+			{
+				writer.WriteFluentCall("Seed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Seed.Value); });
+			}
+
+			if (Timeout is not null)
+			{
+				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("BlobCount");
-			writer.WriteValue(BlobCount.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest", false);
+			{
+				initializer.Property("Name");
+				Name.FormatCode(writer);
+			}
 
-		if (CheckOverwriteProtection is not null)
-		{
-			initializer.Property("CheckOverwriteProtection");
-			writer.WriteValue(CheckOverwriteProtection.Value);
-		}
+			if (BlobCount is not null)
+			{
+				initializer.Property("BlobCount");
+				writer.WriteValue(BlobCount.Value);
+			}
 
-		if (Concurrency is not null)
-		{
-			initializer.Property("Concurrency");
-			writer.WriteValue(Concurrency.Value);
-		}
+			if (CheckOverwriteProtection is not null)
+			{
+				initializer.Property("CheckOverwriteProtection");
+				writer.WriteValue(CheckOverwriteProtection.Value);
+			}
 
-		if (Detailed is not null)
-		{
-			initializer.Property("Detailed");
-			writer.WriteValue(Detailed.Value);
-		}
+			if (Concurrency is not null)
+			{
+				initializer.Property("Concurrency");
+				writer.WriteValue(Concurrency.Value);
+			}
 
-		if (EarlyReadNodeCount is not null)
-		{
-			initializer.Property("EarlyReadNodeCount");
-			writer.WriteValue(EarlyReadNodeCount.Value);
-		}
+			if (Detailed is not null)
+			{
+				initializer.Property("Detailed");
+				writer.WriteValue(Detailed.Value);
+			}
 
-		if (MaxBlobSize is not null)
-		{
-			initializer.Property("MaxBlobSize");
-			MaxBlobSize.FormatCode(writer);
-		}
+			if (EarlyReadNodeCount is not null)
+			{
+				initializer.Property("EarlyReadNodeCount");
+				writer.WriteValue(EarlyReadNodeCount.Value);
+			}
 
-		if (MaxTotalDataSize is not null)
-		{
-			initializer.Property("MaxTotalDataSize");
-			MaxTotalDataSize.FormatCode(writer);
-		}
+			if (MaxBlobSize is not null)
+			{
+				initializer.Property("MaxBlobSize");
+				MaxBlobSize.FormatCode(writer);
+			}
 
-		if (RareActionProbability is not null)
-		{
-			initializer.Property("RareActionProbability");
-			writer.WriteValue(RareActionProbability.Value);
-			writer.Write("d");
-		}
+			if (MaxTotalDataSize is not null)
+			{
+				initializer.Property("MaxTotalDataSize");
+				MaxTotalDataSize.FormatCode(writer);
+			}
 
-		if (RarelyAbortWrites is not null)
-		{
-			initializer.Property("RarelyAbortWrites");
-			writer.WriteValue(RarelyAbortWrites.Value);
-		}
+			if (RareActionProbability is not null)
+			{
+				initializer.Property("RareActionProbability");
+				writer.WriteValue(RareActionProbability.Value);
+				writer.Write("d");
+			}
 
-		if (ReadNodeCount is not null)
-		{
-			initializer.Property("ReadNodeCount");
-			writer.WriteValue(ReadNodeCount.Value);
-		}
+			if (RarelyAbortWrites is not null)
+			{
+				initializer.Property("RarelyAbortWrites");
+				writer.WriteValue(RarelyAbortWrites.Value);
+			}
 
-		if (RegisterOperationCount is not null)
-		{
-			initializer.Property("RegisterOperationCount");
-			writer.WriteValue(RegisterOperationCount.Value);
-		}
+			if (ReadNodeCount is not null)
+			{
+				initializer.Property("ReadNodeCount");
+				writer.WriteValue(ReadNodeCount.Value);
+			}
 
-		if (Seed is not null)
-		{
-			initializer.Property("Seed");
-			writer.WriteValue(Seed.Value);
-		}
+			if (RegisterOperationCount is not null)
+			{
+				initializer.Property("RegisterOperationCount");
+				writer.WriteValue(RegisterOperationCount.Value);
+			}
 
-		if (Timeout is not null)
-		{
-			initializer.Property("Timeout");
-			Timeout.FormatCode(writer);
-		}
+			if (Seed is not null)
+			{
+				initializer.Property("Seed");
+				writer.WriteValue(Seed.Value);
+			}
 
-		initializer.Dispose();
+			if (Timeout is not null)
+			{
+				initializer.Property("Timeout");
+				Timeout.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

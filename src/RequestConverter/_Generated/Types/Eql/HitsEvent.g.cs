@@ -38,7 +38,7 @@ public partial class HitsEvent<TEvent> : RequestConverter.ICodeFormattable
 			writer.Write(", ");
 			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyCollection<object>");
 			writer.Write(">()");
-			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteValue(item); }); w.Write(" }"); });
+			writer.WriteBlockList(Fields, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteObjectValue(item); }); w.Write(" }"); });
 		}
 
 		{
@@ -59,7 +59,7 @@ public partial class HitsEvent<TEvent> : RequestConverter.ICodeFormattable
 
 		{
 			initializer.Property("Source");
-			writer.WriteValue(Source);
+			writer.WriteDocument(Source);
 		}
 
 		initializer.Dispose();

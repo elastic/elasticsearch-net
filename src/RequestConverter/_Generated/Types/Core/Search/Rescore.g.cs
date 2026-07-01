@@ -27,31 +27,56 @@ public partial class Rescore : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Rescore", false);
-		if (WindowSize is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("WindowSize");
-			writer.WriteValue(WindowSize.Value);
-		}
+			if (WindowSize is not null)
+			{
+				writer.WriteFluentCall("WindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WindowSize.Value); });
+			}
 
-		if (LearningToRank is not null)
+			if (LearningToRank is not null)
+			{
+				writer.WriteFluentDescriptorCall("LearningToRank", (w) => { LearningToRank.FormatCode(w); });
+			}
+
+			if (Query is not null)
+			{
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+			}
+
+			if (Script is not null)
+			{
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("LearningToRank");
-			LearningToRank.FormatCode(writer);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.Rescore", false);
+			if (WindowSize is not null)
+			{
+				initializer.Property("WindowSize");
+				writer.WriteValue(WindowSize.Value);
+			}
 
-		if (Query is not null)
-		{
-			initializer.Property("Query");
-			Query.FormatCode(writer);
-		}
+			if (LearningToRank is not null)
+			{
+				initializer.Property("LearningToRank");
+				LearningToRank.FormatCode(writer);
+			}
 
-		if (Script is not null)
-		{
-			initializer.Property("Script");
-			Script.FormatCode(writer);
-		}
+			if (Query is not null)
+			{
+				initializer.Property("Query");
+				Query.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (Script is not null)
+			{
+				initializer.Property("Script");
+				Script.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

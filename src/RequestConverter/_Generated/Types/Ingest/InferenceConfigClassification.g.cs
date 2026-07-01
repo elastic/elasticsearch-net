@@ -27,37 +27,67 @@ public partial class InferenceConfigClassification : RequestConverter.ICodeForma
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification", false);
-		if (NumTopClasses is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("NumTopClasses");
-			writer.WriteValue(NumTopClasses.Value);
-		}
+			if (NumTopClasses is not null)
+			{
+				writer.WriteFluentCall("NumTopClasses", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopClasses.Value); });
+			}
 
-		if (NumTopFeatureImportanceValues is not null)
+			if (NumTopFeatureImportanceValues is not null)
+			{
+				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopFeatureImportanceValues.Value); });
+			}
+
+			if (PredictionFieldType is not null)
+			{
+				writer.WriteFluentCall("PredictionFieldType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PredictionFieldType); });
+			}
+
+			if (ResultsField is not null)
+			{
+				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); });
+			}
+
+			if (TopClassesResultsField is not null)
+			{
+				writer.WriteFluentCall("TopClassesResultsField", (w) => { TopClassesResultsField.FormatCode(w); });
+			}
+		}
+		else
 		{
-			initializer.Property("NumTopFeatureImportanceValues");
-			writer.WriteValue(NumTopFeatureImportanceValues.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification", false);
+			if (NumTopClasses is not null)
+			{
+				initializer.Property("NumTopClasses");
+				writer.WriteValue(NumTopClasses.Value);
+			}
 
-		if (PredictionFieldType is not null)
-		{
-			initializer.Property("PredictionFieldType");
-			writer.WriteString(PredictionFieldType);
-		}
+			if (NumTopFeatureImportanceValues is not null)
+			{
+				initializer.Property("NumTopFeatureImportanceValues");
+				writer.WriteValue(NumTopFeatureImportanceValues.Value);
+			}
 
-		if (ResultsField is not null)
-		{
-			initializer.Property("ResultsField");
-			ResultsField.FormatCode(writer);
-		}
+			if (PredictionFieldType is not null)
+			{
+				initializer.Property("PredictionFieldType");
+				writer.WriteString(PredictionFieldType);
+			}
 
-		if (TopClassesResultsField is not null)
-		{
-			initializer.Property("TopClassesResultsField");
-			TopClassesResultsField.FormatCode(writer);
-		}
+			if (ResultsField is not null)
+			{
+				initializer.Property("ResultsField");
+				ResultsField.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (TopClassesResultsField is not null)
+			{
+				initializer.Property("TopClassesResultsField");
+				TopClassesResultsField.FormatCode(writer);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

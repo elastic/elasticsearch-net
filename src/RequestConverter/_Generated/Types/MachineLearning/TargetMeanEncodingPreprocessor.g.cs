@@ -27,35 +27,56 @@ public partial class TargetMeanEncodingPreprocessor : RequestConverter.ICodeForm
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor", false);
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("DefaultValue");
-			writer.WriteValue(DefaultValue);
-			writer.Write("d");
-		}
+			{
+				writer.WriteFluentCall("DefaultValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DefaultValue); w.Write("d"); });
+			}
 
+			{
+				writer.WriteFluentCall("FeatureName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FeatureName); });
+			}
+
+			{
+				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Field); });
+			}
+
+			{
+				writer.WriteFluentCall("TargetMap", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("double"); w.Write(">()"); w.WriteBlockList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }); });
+			}
+		}
+		else
 		{
-			initializer.Property("FeatureName");
-			writer.WriteString(FeatureName);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor", false);
+			{
+				initializer.Property("DefaultValue");
+				writer.WriteValue(DefaultValue);
+				writer.Write("d");
+			}
 
-		{
-			initializer.Property("Field");
-			writer.WriteString(Field);
-		}
+			{
+				initializer.Property("FeatureName");
+				writer.WriteString(FeatureName);
+			}
 
-		{
-			initializer.Property("TargetMap");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("double");
-			writer.Write(">()");
-			writer.WriteBlockList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
-		}
+			{
+				initializer.Property("Field");
+				writer.WriteString(Field);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("TargetMap");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("double");
+				writer.Write(">()");
+				writer.WriteBlockList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

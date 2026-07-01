@@ -27,23 +27,45 @@ public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest", false);
-		if (EcsCompatibility is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("EcsCompatibility");
-			writer.WriteString(EcsCompatibility);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (EcsCompatibility is not null)
+			{
+				writer.WriteFluentCall("EcsCompatibility", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EcsCompatibility); });
+			}
 
+			{
+				writer.WriteFluentCall("GrokPattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(GrokPattern); });
+			}
+
+			{
+				writer.WriteFluentParams("Text", Text, (w, item) => { w.WriteString(item); });
+			}
+		}
+		else
 		{
-			initializer.Property("GrokPattern");
-			writer.WriteString(GrokPattern);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest", false);
+			if (EcsCompatibility is not null)
+			{
+				initializer.Property("EcsCompatibility");
+				writer.WriteString(EcsCompatibility);
+			}
 
-		{
-			initializer.Property("Text");
-			writer.WriteInlineList(Text, (w, item) => { w.WriteString(item); });
-		}
+			{
+				initializer.Property("GrokPattern");
+				writer.WriteString(GrokPattern);
+			}
 
-		initializer.Dispose();
+			{
+				initializer.Property("Text");
+				writer.WriteInlineList(Text, (w, item) => { w.WriteString(item); });
+			}
+
+			initializer.Dispose();
+		}
 	}
 }

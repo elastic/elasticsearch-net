@@ -27,19 +27,38 @@ public partial class DeleteVotingConfigExclusionsRequest : RequestConverter.ICod
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest", false);
-		if (MasterTimeout is not null)
+		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			initializer.Property("MasterTimeout");
-			MasterTimeout.FormatCode(writer);
-		}
+			writer.Write("new ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor");
+			writer.Write("()");
+			using var _chainIndent = writer.Indent();
+			if (MasterTimeout is not null)
+			{
+				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+			}
 
-		if (WaitForRemoval is not null)
+			if (WaitForRemoval is not null)
+			{
+				writer.WriteFluentCall("WaitForRemoval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForRemoval.Value); });
+			}
+		}
+		else
 		{
-			initializer.Property("WaitForRemoval");
-			writer.WriteValue(WaitForRemoval.Value);
-		}
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest", false);
+			if (MasterTimeout is not null)
+			{
+				initializer.Property("MasterTimeout");
+				MasterTimeout.FormatCode(writer);
+			}
 
-		initializer.Dispose();
+			if (WaitForRemoval is not null)
+			{
+				initializer.Property("WaitForRemoval");
+				writer.WriteValue(WaitForRemoval.Value);
+			}
+
+			initializer.Dispose();
+		}
 	}
 }
