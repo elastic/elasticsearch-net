@@ -107,7 +107,7 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 
 			if (FieldNames is not null)
 			{
-				writer.WriteFluentDescriptorCall("FieldNames", (w) => { FieldNames.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("FieldNames", (w) => { FieldNames.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); FieldNames.FormatCode(w); });
 			}
 
 			if (Meta is not null)
@@ -127,7 +127,7 @@ public partial class PutMappingRequest : RequestConverter.ICodeFormattable
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentDescriptorCall("Routing", (w) => { Routing.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Routing", (w) => { Routing.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Routing.FormatCode(w); });
 			}
 
 			if (Runtime is not null)

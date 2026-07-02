@@ -30,7 +30,7 @@ public partial class BucketCorrelationFunction : RequestConverter.ICodeFormattab
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("CountCorrelation", (w) => { CountCorrelation.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("CountCorrelation", (w) => { CountCorrelation.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); CountCorrelation.FormatCode(w); });
 			}
 		}
 		else

@@ -31,12 +31,12 @@ public partial class TTestAggregation : RequestConverter.ICodeFormattable
 		{
 			if (A is not null)
 			{
-				writer.WriteFluentDescriptorCall("A", (w) => { A.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("A", (w) => { A.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); A.FormatCode(w); });
 			}
 
 			if (B is not null)
 			{
-				writer.WriteFluentDescriptorCall("B", (w) => { B.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("B", (w) => { B.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); B.FormatCode(w); });
 			}
 
 			if (Type is not null)

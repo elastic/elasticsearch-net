@@ -35,7 +35,7 @@ public partial class EnrichPolicy : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("EnrichFields", (w) => { using var _oi = w.ForceObjectInitializer(); EnrichFields.FormatCode(w); });
+				writer.WriteFluentCall("EnrichFields", (w) => { EnrichFields.FormatCode(w); });
 			}
 
 			{
@@ -53,7 +53,7 @@ public partial class EnrichPolicy : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 		}
 		else

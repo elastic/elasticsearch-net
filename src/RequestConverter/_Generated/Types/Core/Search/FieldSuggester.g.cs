@@ -46,17 +46,17 @@ public partial class FieldSuggester : RequestConverter.ICodeFormattable
 
 			if (Completion is not null)
 			{
-				writer.WriteFluentDescriptorCall("Completion", (w) => { Completion.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Completion", (w) => { Completion.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Completion.FormatCode(w); });
 			}
 
 			if (Phrase is not null)
 			{
-				writer.WriteFluentDescriptorCall("Phrase", (w) => { Phrase.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Phrase", (w) => { Phrase.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Phrase.FormatCode(w); });
 			}
 
 			if (Term is not null)
 			{
-				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Term.FormatCode(w); });
 			}
 		}
 		else

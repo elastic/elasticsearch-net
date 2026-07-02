@@ -56,7 +56,7 @@ public partial class TopHitsAggregation : RequestConverter.ICodeFormattable
 
 			if (Highlight is not null)
 			{
-				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Highlight.FormatCode(w); });
 			}
 
 			if (Missing is not null)
@@ -96,7 +96,7 @@ public partial class TopHitsAggregation : RequestConverter.ICodeFormattable
 
 			if (StoredFields is not null)
 			{
-				writer.WriteFluentCall("StoredFields", (w) => { using var _oi = w.ForceObjectInitializer(); StoredFields.FormatCode(w); });
+				writer.WriteFluentCall("StoredFields", (w) => { StoredFields.FormatCode(w); });
 			}
 
 			if (TrackScores is not null)

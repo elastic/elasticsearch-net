@@ -66,7 +66,7 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 
 			if (Retention is not null)
 			{
-				writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Retention.FormatCode(w); });
 			}
 
 			if (Schedule is not null)

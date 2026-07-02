@@ -89,7 +89,7 @@ public partial class ReindexRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Dest.FormatCode(w); });
 			}
 
 			if (MaxDocs is not null)
@@ -103,7 +103,7 @@ public partial class ReindexRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
 			}
 		}
 		else

@@ -31,7 +31,7 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 		{
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
 			}
 
 			if (Name is not null)
@@ -51,7 +51,7 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 
 			if (FieldValueFactor is not null)
 			{
-				writer.WriteFluentDescriptorCall("FieldValueFactor", (w) => { FieldValueFactor.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("FieldValueFactor", (w) => { FieldValueFactor.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); FieldValueFactor.FormatCode(w); });
 			}
 
 			if (Gauss is not null)
@@ -71,7 +71,7 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 
 			if (ScriptScore is not null)
 			{
-				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ScriptScore.FormatCode(w); });
 			}
 		}
 		else

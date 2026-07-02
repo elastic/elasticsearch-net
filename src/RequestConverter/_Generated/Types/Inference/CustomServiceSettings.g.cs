@@ -50,11 +50,11 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Request.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Response", (w) => { Response.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Response", (w) => { Response.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Response.FormatCode(w); });
 			}
 
 			{

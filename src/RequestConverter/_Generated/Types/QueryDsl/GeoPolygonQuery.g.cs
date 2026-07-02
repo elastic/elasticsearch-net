@@ -44,7 +44,7 @@ public partial class GeoPolygonQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Polygon", (w) => { Polygon.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Polygon", (w) => { Polygon.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Polygon.FormatCode(w); });
 			}
 
 			if (QueryName is not null)

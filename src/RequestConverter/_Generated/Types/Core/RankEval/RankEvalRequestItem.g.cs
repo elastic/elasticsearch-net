@@ -44,7 +44,7 @@ public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 
 			if (Request is not null)
 			{
-				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Request.FormatCode(w); });
 			}
 
 			if (TemplateId is not null)

@@ -31,7 +31,7 @@ public partial class ChunkRescorer : RequestConverter.ICodeFormattable
 		{
 			if (ChunkingSettings is not null)
 			{
-				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ChunkingSettings.FormatCode(w); });
 			}
 
 			if (Size is not null)

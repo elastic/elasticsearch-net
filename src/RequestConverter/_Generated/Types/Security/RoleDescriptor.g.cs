@@ -71,7 +71,7 @@ public partial class RoleDescriptor : RequestConverter.ICodeFormattable
 
 			if (Restriction is not null)
 			{
-				writer.WriteFluentDescriptorCall("Restriction", (w) => { Restriction.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Restriction", (w) => { Restriction.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Restriction.FormatCode(w); });
 			}
 
 			if (RunAs is not null)

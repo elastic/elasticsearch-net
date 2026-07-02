@@ -81,7 +81,7 @@ public partial class PutTransformRequest : RequestConverter.ICodeFormattable
 
 			if (Latest is not null)
 			{
-				writer.WriteFluentDescriptorCall("Latest", (w) => { Latest.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Latest", (w) => { Latest.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Latest.FormatCode(w); });
 			}
 
 			if (Meta is not null)
@@ -96,7 +96,7 @@ public partial class PutTransformRequest : RequestConverter.ICodeFormattable
 
 			if (RetentionPolicy is not null)
 			{
-				writer.WriteFluentDescriptorCall("RetentionPolicy", (w) => { RetentionPolicy.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RetentionPolicy", (w) => { RetentionPolicy.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RetentionPolicy.FormatCode(w); });
 			}
 
 			if (Settings is not null)
@@ -105,12 +105,12 @@ public partial class PutTransformRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
 			}
 
 			if (Sync is not null)
 			{
-				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Sync.FormatCode(w); });
 			}
 		}
 		else

@@ -31,22 +31,22 @@ public partial class AggregateOutput : RequestConverter.ICodeFormattable
 		{
 			if (Exponent is not null)
 			{
-				writer.WriteFluentDescriptorCall("Exponent", (w) => { Exponent.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Exponent", (w) => { Exponent.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Exponent.FormatCode(w); });
 			}
 
 			if (LogisticRegression is not null)
 			{
-				writer.WriteFluentDescriptorCall("LogisticRegression", (w) => { LogisticRegression.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("LogisticRegression", (w) => { LogisticRegression.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); LogisticRegression.FormatCode(w); });
 			}
 
 			if (WeightedMode is not null)
 			{
-				writer.WriteFluentDescriptorCall("WeightedMode", (w) => { WeightedMode.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("WeightedMode", (w) => { WeightedMode.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); WeightedMode.FormatCode(w); });
 			}
 
 			if (WeightedSum is not null)
 			{
-				writer.WriteFluentDescriptorCall("WeightedSum", (w) => { WeightedSum.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("WeightedSum", (w) => { WeightedSum.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); WeightedSum.FormatCode(w); });
 			}
 		}
 		else

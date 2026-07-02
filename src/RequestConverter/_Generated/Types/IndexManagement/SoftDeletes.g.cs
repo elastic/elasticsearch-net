@@ -36,7 +36,7 @@ public partial class SoftDeletes : RequestConverter.ICodeFormattable
 
 			if (RetentionLease is not null)
 			{
-				writer.WriteFluentDescriptorCall("RetentionLease", (w) => { RetentionLease.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RetentionLease", (w) => { RetentionLease.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RetentionLease.FormatCode(w); });
 			}
 		}
 		else

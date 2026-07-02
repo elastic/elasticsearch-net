@@ -55,7 +55,7 @@ public partial class AnalysisConfig : RequestConverter.ICodeFormattable
 
 			if (Influencers is not null)
 			{
-				writer.WriteFluentCall("Influencers", (w) => { using var _oi = w.ForceObjectInitializer(); Influencers.FormatCode(w); });
+				writer.WriteFluentCall("Influencers", (w) => { Influencers.FormatCode(w); });
 			}
 
 			if (Latency is not null)

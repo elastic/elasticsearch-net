@@ -82,7 +82,7 @@ public partial class PutRoleMappingRequest : RequestConverter.ICodeFormattable
 
 			if (Rules is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rules", (w) => { Rules.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rules", (w) => { Rules.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rules.FormatCode(w); });
 			}
 
 			if (RunAs is not null)

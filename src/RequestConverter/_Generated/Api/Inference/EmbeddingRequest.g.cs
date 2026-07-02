@@ -45,7 +45,7 @@ public partial class EmbeddingRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Embedding.FormatCode(w); });
 			}
 		}
 		else

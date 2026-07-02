@@ -51,7 +51,7 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 
 			if (Policy is not null)
 			{
-				writer.WriteFluentDescriptorCall("Policy", (w) => { Policy.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Policy", (w) => { Policy.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Policy.FormatCode(w); });
 			}
 		}
 		else

@@ -36,17 +36,17 @@ public partial class Rescore : RequestConverter.ICodeFormattable
 
 			if (LearningToRank is not null)
 			{
-				writer.WriteFluentDescriptorCall("LearningToRank", (w) => { LearningToRank.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("LearningToRank", (w) => { LearningToRank.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); LearningToRank.FormatCode(w); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 
 			if (Script is not null)
 			{
-				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Script.FormatCode(w); });
 			}
 		}
 		else

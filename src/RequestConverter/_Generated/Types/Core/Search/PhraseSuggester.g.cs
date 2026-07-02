@@ -36,7 +36,7 @@ public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 
 			if (Collate is not null)
 			{
-				writer.WriteFluentDescriptorCall("Collate", (w) => { Collate.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Collate", (w) => { Collate.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Collate.FormatCode(w); });
 			}
 
 			if (Confidence is not null)
@@ -65,7 +65,7 @@ public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 
 			if (Highlight is not null)
 			{
-				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Highlight.FormatCode(w); });
 			}
 
 			if (MaxErrors is not null)
@@ -95,7 +95,7 @@ public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 
 			if (Smoothing is not null)
 			{
-				writer.WriteFluentDescriptorCall("Smoothing", (w) => { Smoothing.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Smoothing", (w) => { Smoothing.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Smoothing.FormatCode(w); });
 			}
 
 			if (TokenLimit is not null)

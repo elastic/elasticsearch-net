@@ -31,7 +31,7 @@ public partial class Sync : RequestConverter.ICodeFormattable
 		{
 			if (Time is not null)
 			{
-				writer.WriteFluentDescriptorCall("Time", (w) => { Time.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Time", (w) => { Time.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Time.FormatCode(w); });
 			}
 		}
 		else

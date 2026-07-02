@@ -31,7 +31,7 @@ public partial class PointProperty : RequestConverter.ICodeFormattable
 		{
 			if (CopyTo is not null)
 			{
-				writer.WriteFluentCall("CopyTo", (w) => { using var _oi = w.ForceObjectInitializer(); CopyTo.FormatCode(w); });
+				writer.WriteFluentCall("CopyTo", (w) => { CopyTo.FormatCode(w); });
 			}
 
 			if (DocValues is not null)

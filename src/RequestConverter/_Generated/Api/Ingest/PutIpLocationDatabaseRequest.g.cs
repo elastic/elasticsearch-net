@@ -50,7 +50,7 @@ public partial class PutIpLocationDatabaseRequest : RequestConverter.ICodeFormat
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Configuration", (w) => { Configuration.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Configuration", (w) => { Configuration.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Configuration.FormatCode(w); });
 			}
 		}
 		else

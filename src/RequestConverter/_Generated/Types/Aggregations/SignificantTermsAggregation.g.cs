@@ -31,12 +31,12 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 		{
 			if (BackgroundFilter is not null)
 			{
-				writer.WriteFluentDescriptorCall("BackgroundFilter", (w) => { BackgroundFilter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("BackgroundFilter", (w) => { BackgroundFilter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); BackgroundFilter.FormatCode(w); });
 			}
 
 			if (ChiSquare is not null)
 			{
-				writer.WriteFluentDescriptorCall("ChiSquare", (w) => { ChiSquare.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ChiSquare", (w) => { ChiSquare.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ChiSquare.FormatCode(w); });
 			}
 
 			if (Exclude is not null)
@@ -91,7 +91,7 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 
 			if (ScriptHeuristic is not null)
 			{
-				writer.WriteFluentDescriptorCall("ScriptHeuristic", (w) => { ScriptHeuristic.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ScriptHeuristic", (w) => { ScriptHeuristic.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ScriptHeuristic.FormatCode(w); });
 			}
 
 			if (ShardMinDocCount is not null)

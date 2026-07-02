@@ -50,7 +50,7 @@ public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 
 			if (Config is not null)
 			{
-				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Config.FormatCode(w); });
 			}
 		}
 		else

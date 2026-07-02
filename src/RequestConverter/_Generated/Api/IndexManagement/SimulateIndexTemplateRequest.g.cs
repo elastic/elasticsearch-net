@@ -77,7 +77,7 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 
 			if (IndexTemplate is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexTemplate", (w) => { IndexTemplate.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexTemplate", (w) => { IndexTemplate.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexTemplate.FormatCode(w); });
 			}
 		}
 		else

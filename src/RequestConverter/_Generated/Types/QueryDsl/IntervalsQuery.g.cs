@@ -45,27 +45,27 @@ public partial class IntervalsQuery : RequestConverter.ICodeFormattable
 
 			if (AllOf is not null)
 			{
-				writer.WriteFluentDescriptorCall("AllOf", (w) => { AllOf.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AllOf", (w) => { AllOf.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AllOf.FormatCode(w); });
 			}
 
 			if (AnyOf is not null)
 			{
-				writer.WriteFluentDescriptorCall("AnyOf", (w) => { AnyOf.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnyOf", (w) => { AnyOf.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnyOf.FormatCode(w); });
 			}
 
 			if (Fuzzy is not null)
 			{
-				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fuzzy.FormatCode(w); });
 			}
 
 			if (Match is not null)
 			{
-				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Match.FormatCode(w); });
 			}
 
 			if (Prefix is not null)
 			{
-				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Prefix.FormatCode(w); });
 			}
 
 			if (Range is not null)
@@ -75,12 +75,12 @@ public partial class IntervalsQuery : RequestConverter.ICodeFormattable
 
 			if (Regexp is not null)
 			{
-				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Regexp.FormatCode(w); });
 			}
 
 			if (Wildcard is not null)
 			{
-				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Wildcard.FormatCode(w); });
 			}
 		}
 		else

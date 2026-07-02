@@ -30,7 +30,7 @@ public partial class CompletionTool : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("Function", (w) => { Function.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Function", (w) => { Function.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Function.FormatCode(w); });
 			}
 
 			{

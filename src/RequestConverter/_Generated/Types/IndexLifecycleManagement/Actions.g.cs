@@ -41,12 +41,12 @@ public partial class Actions : RequestConverter.ICodeFormattable
 
 			if (Downsample is not null)
 			{
-				writer.WriteFluentDescriptorCall("Downsample", (w) => { Downsample.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Downsample", (w) => { Downsample.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Downsample.FormatCode(w); });
 			}
 
 			if (Forcemerge is not null)
 			{
-				writer.WriteFluentDescriptorCall("Forcemerge", (w) => { Forcemerge.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Forcemerge", (w) => { Forcemerge.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Forcemerge.FormatCode(w); });
 			}
 #pragma warning disable CS0618
 			if (Freeze is not null)
@@ -71,7 +71,7 @@ public partial class Actions : RequestConverter.ICodeFormattable
 
 			if (SearchableSnapshot is not null)
 			{
-				writer.WriteFluentDescriptorCall("SearchableSnapshot", (w) => { SearchableSnapshot.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SearchableSnapshot", (w) => { SearchableSnapshot.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SearchableSnapshot.FormatCode(w); });
 			}
 
 			if (SetPriority is not null)
@@ -91,7 +91,7 @@ public partial class Actions : RequestConverter.ICodeFormattable
 
 			if (WaitForSnapshot is not null)
 			{
-				writer.WriteFluentDescriptorCall("WaitForSnapshot", (w) => { WaitForSnapshot.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("WaitForSnapshot", (w) => { WaitForSnapshot.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); WaitForSnapshot.FormatCode(w); });
 			}
 		}
 		else

@@ -45,7 +45,7 @@ public partial class RankFeatureQuery : RequestConverter.ICodeFormattable
 
 			if (Log is not null)
 			{
-				writer.WriteFluentDescriptorCall("Log", (w) => { Log.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Log", (w) => { Log.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Log.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
@@ -60,7 +60,7 @@ public partial class RankFeatureQuery : RequestConverter.ICodeFormattable
 
 			if (Sigmoid is not null)
 			{
-				writer.WriteFluentDescriptorCall("Sigmoid", (w) => { Sigmoid.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Sigmoid", (w) => { Sigmoid.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Sigmoid.FormatCode(w); });
 			}
 		}
 		else

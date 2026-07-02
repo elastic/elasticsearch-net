@@ -71,7 +71,7 @@ public partial class DynamicTemplate : RequestConverter.ICodeFormattable
 
 			if (Runtime is not null)
 			{
-				writer.WriteFluentDescriptorCall("Runtime", (w) => { Runtime.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Runtime", (w) => { Runtime.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Runtime.FormatCode(w); });
 			}
 		}
 		else

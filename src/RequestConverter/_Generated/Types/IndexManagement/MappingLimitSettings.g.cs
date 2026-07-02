@@ -66,7 +66,7 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 
 			if (Source is not null)
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
 			}
 
 			if (TotalFields is not null)

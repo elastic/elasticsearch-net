@@ -35,7 +35,7 @@ public partial class BoostingQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Negative", (w) => { Negative.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Negative", (w) => { Negative.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Negative.FormatCode(w); });
 			}
 
 			{
@@ -43,7 +43,7 @@ public partial class BoostingQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Positive", (w) => { Positive.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Positive", (w) => { Positive.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Positive.FormatCode(w); });
 			}
 
 			if (QueryName is not null)

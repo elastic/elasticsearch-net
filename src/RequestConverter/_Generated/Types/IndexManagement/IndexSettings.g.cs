@@ -106,7 +106,7 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 			if (IndexingPressure is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexingPressure", (w) => { IndexingPressure.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexingPressure", (w) => { IndexingPressure.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexingPressure.FormatCode(w); });
 			}
 
 			if (IndexingSlowlog is not null)
@@ -231,7 +231,7 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 			if (QueryString is not null)
 			{
-				writer.WriteFluentDescriptorCall("QueryString", (w) => { QueryString.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QueryString", (w) => { QueryString.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QueryString.FormatCode(w); });
 			}
 
 			if (RefreshInterval is not null)
@@ -281,7 +281,7 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 			if (Store is not null)
 			{
-				writer.WriteFluentDescriptorCall("Store", (w) => { Store.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Store", (w) => { Store.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Store.FormatCode(w); });
 			}
 
 			if (TimeSeries is not null)

@@ -39,7 +39,7 @@ public partial class RuleQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Organic", (w) => { Organic.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Organic", (w) => { Organic.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Organic.FormatCode(w); });
 			}
 
 			if (QueryName is not null)

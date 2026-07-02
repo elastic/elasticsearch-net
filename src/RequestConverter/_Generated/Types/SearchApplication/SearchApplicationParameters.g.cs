@@ -40,7 +40,7 @@ public partial class SearchApplicationParameters : RequestConverter.ICodeFormatt
 
 			if (Template is not null)
 			{
-				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Template.FormatCode(w); });
 			}
 		}
 		else

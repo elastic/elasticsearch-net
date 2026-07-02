@@ -40,7 +40,7 @@ public partial class CombinedFieldsQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
 			}
 
 			if (MinimumShouldMatch is not null)

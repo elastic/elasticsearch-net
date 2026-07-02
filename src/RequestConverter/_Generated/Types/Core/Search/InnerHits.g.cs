@@ -31,7 +31,7 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 		{
 			if (Collapse is not null)
 			{
-				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Collapse.FormatCode(w); });
 			}
 
 			if (DocvalueFields is not null)
@@ -46,7 +46,7 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
 			}
 
 			if (Fields is not null)
@@ -61,7 +61,7 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 
 			if (Highlight is not null)
 			{
-				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Highlight.FormatCode(w); });
 			}
 
 			if (IgnoreUnmapped is not null)
@@ -101,7 +101,7 @@ public partial class InnerHits : RequestConverter.ICodeFormattable
 
 			if (StoredFields is not null)
 			{
-				writer.WriteFluentCall("StoredFields", (w) => { using var _oi = w.ForceObjectInitializer(); StoredFields.FormatCode(w); });
+				writer.WriteFluentCall("StoredFields", (w) => { StoredFields.FormatCode(w); });
 			}
 
 			if (TrackScores is not null)

@@ -35,7 +35,7 @@ public partial class RemoveProcessor : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
 			}
 
 			if (If is not null)
@@ -55,7 +55,7 @@ public partial class RemoveProcessor : RequestConverter.ICodeFormattable
 
 			if (Keep is not null)
 			{
-				writer.WriteFluentCall("Keep", (w) => { using var _oi = w.ForceObjectInitializer(); Keep.FormatCode(w); });
+				writer.WriteFluentCall("Keep", (w) => { Keep.FormatCode(w); });
 			}
 
 			if (OnFailure is not null)

@@ -35,7 +35,7 @@ public partial class FingerprintProcessor : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
 			}
 
 			if (If is not null)

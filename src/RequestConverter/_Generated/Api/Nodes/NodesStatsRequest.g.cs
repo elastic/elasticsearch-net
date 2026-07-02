@@ -60,17 +60,17 @@ public partial class NodesStatsRequest : RequestConverter.ICodeFormattable
 
 			if (CompletionFields is not null)
 			{
-				writer.WriteFluentCall("CompletionFields", (w) => { using var _oi = w.ForceObjectInitializer(); CompletionFields.FormatCode(w); });
+				writer.WriteFluentCall("CompletionFields", (w) => { CompletionFields.FormatCode(w); });
 			}
 
 			if (FielddataFields is not null)
 			{
-				writer.WriteFluentCall("FielddataFields", (w) => { using var _oi = w.ForceObjectInitializer(); FielddataFields.FormatCode(w); });
+				writer.WriteFluentCall("FielddataFields", (w) => { FielddataFields.FormatCode(w); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
 			}
 
 			if (Groups is not null)

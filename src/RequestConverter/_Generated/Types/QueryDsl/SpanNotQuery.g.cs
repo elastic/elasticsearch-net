@@ -40,11 +40,11 @@ public partial class SpanNotQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Exclude", (w) => { Exclude.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Exclude", (w) => { Exclude.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Exclude.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Include", (w) => { Include.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Include", (w) => { Include.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Include.FormatCode(w); });
 			}
 
 			if (Post is not null)

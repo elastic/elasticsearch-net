@@ -35,7 +35,7 @@ public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Point", (w) => { Point.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Point", (w) => { Point.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Point.FormatCode(w); });
 			}
 
 			if (Size is not null)
@@ -45,7 +45,7 @@ public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 
 			if (Sort is not null)
 			{
-				writer.WriteFluentDescriptorCall("Sort", (w) => { Sort.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Sort", (w) => { Sort.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Sort.FormatCode(w); });
 			}
 
 			if (SortOrder is not null)

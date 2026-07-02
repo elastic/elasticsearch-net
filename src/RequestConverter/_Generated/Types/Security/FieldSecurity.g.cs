@@ -31,12 +31,12 @@ public partial class FieldSecurity : RequestConverter.ICodeFormattable
 		{
 			if (Except is not null)
 			{
-				writer.WriteFluentCall("Except", (w) => { using var _oi = w.ForceObjectInitializer(); Except.FormatCode(w); });
+				writer.WriteFluentCall("Except", (w) => { Except.FormatCode(w); });
 			}
 
 			if (Grant is not null)
 			{
-				writer.WriteFluentCall("Grant", (w) => { using var _oi = w.ForceObjectInitializer(); Grant.FormatCode(w); });
+				writer.WriteFluentCall("Grant", (w) => { Grant.FormatCode(w); });
 			}
 		}
 		else

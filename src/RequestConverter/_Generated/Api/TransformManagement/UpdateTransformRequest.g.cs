@@ -97,12 +97,12 @@ public partial class UpdateTransformRequest : RequestConverter.ICodeFormattable
 
 			if (Source is not null)
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
 			}
 
 			if (Sync is not null)
 			{
-				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Sync.FormatCode(w); });
 			}
 		}
 		else

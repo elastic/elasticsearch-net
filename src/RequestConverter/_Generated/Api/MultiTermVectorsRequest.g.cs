@@ -50,7 +50,7 @@ public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
 			}
 
 			if (FieldStatistics is not null)

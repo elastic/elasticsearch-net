@@ -41,7 +41,7 @@ public partial class CompositeAggregationSource : RequestConverter.ICodeFormatta
 
 			if (Histogram is not null)
 			{
-				writer.WriteFluentDescriptorCall("Histogram", (w) => { Histogram.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Histogram", (w) => { Histogram.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Histogram.FormatCode(w); });
 			}
 
 			if (Terms is not null)

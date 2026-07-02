@@ -79,7 +79,7 @@ public partial class CsvProcessor : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("TargetFields", (w) => { using var _oi = w.ForceObjectInitializer(); TargetFields.FormatCode(w); });
+				writer.WriteFluentCall("TargetFields", (w) => { TargetFields.FormatCode(w); });
 			}
 
 			if (Trim is not null)

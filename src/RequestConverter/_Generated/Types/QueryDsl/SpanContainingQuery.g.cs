@@ -30,7 +30,7 @@ public partial class SpanContainingQuery : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("Big", (w) => { Big.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Big", (w) => { Big.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Big.FormatCode(w); });
 			}
 
 			if (Boost is not null)
@@ -39,7 +39,7 @@ public partial class SpanContainingQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Little", (w) => { Little.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Little", (w) => { Little.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Little.FormatCode(w); });
 			}
 
 			if (QueryName is not null)

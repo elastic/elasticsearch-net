@@ -61,7 +61,7 @@ public partial class DenseVectorProperty : RequestConverter.ICodeFormattable
 
 			if (IndexOptions is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexOptions", (w) => { IndexOptions.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexOptions", (w) => { IndexOptions.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexOptions.FormatCode(w); });
 			}
 
 			if (Meta is not null)

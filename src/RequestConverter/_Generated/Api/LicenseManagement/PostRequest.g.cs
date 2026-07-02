@@ -50,7 +50,7 @@ public partial class PostRequest : RequestConverter.ICodeFormattable
 
 			if (License is not null)
 			{
-				writer.WriteFluentDescriptorCall("License", (w) => { License.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("License", (w) => { License.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); License.FormatCode(w); });
 			}
 
 			if (Licenses is not null)

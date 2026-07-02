@@ -82,12 +82,12 @@ public partial class PutDatafeedRequest : RequestConverter.ICodeFormattable
 
 			if (ChunkingConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("ChunkingConfig", (w) => { ChunkingConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ChunkingConfig", (w) => { ChunkingConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ChunkingConfig.FormatCode(w); });
 			}
 
 			if (DelayedDataCheckConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("DelayedDataCheckConfig", (w) => { DelayedDataCheckConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("DelayedDataCheckConfig", (w) => { DelayedDataCheckConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); DelayedDataCheckConfig.FormatCode(w); });
 			}
 
 			if (Frequency is not null)
@@ -122,7 +122,7 @@ public partial class PutDatafeedRequest : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 
 			if (QueryDelay is not null)

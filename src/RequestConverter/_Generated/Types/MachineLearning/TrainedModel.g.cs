@@ -31,17 +31,17 @@ public partial class TrainedModel : RequestConverter.ICodeFormattable
 		{
 			if (Ensemble is not null)
 			{
-				writer.WriteFluentDescriptorCall("Ensemble", (w) => { Ensemble.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Ensemble", (w) => { Ensemble.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Ensemble.FormatCode(w); });
 			}
 
 			if (Tree is not null)
 			{
-				writer.WriteFluentDescriptorCall("Tree", (w) => { Tree.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Tree", (w) => { Tree.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tree.FormatCode(w); });
 			}
 
 			if (TreeNode is not null)
 			{
-				writer.WriteFluentDescriptorCall("TreeNode", (w) => { TreeNode.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TreeNode", (w) => { TreeNode.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TreeNode.FormatCode(w); });
 			}
 		}
 		else

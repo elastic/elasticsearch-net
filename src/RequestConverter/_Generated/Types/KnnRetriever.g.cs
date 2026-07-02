@@ -63,12 +63,12 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 
 			if (QueryVectorBuilder is not null)
 			{
-				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QueryVectorBuilder.FormatCode(w); });
 			}
 
 			if (RescoreVector is not null)
 			{
-				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RescoreVector.FormatCode(w); });
 			}
 
 			if (Similarity is not null)

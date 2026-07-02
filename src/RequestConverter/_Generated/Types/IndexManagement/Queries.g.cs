@@ -31,7 +31,7 @@ public partial class Queries : RequestConverter.ICodeFormattable
 		{
 			if (Cache is not null)
 			{
-				writer.WriteFluentDescriptorCall("Cache", (w) => { Cache.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Cache", (w) => { Cache.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Cache.FormatCode(w); });
 			}
 		}
 		else

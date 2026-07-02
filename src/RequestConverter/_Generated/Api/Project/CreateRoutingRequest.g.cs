@@ -40,7 +40,7 @@ public partial class CreateRoutingRequest : RequestConverter.ICodeFormattable
 			writer.Write(")");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorCall("Expressions", (w) => { Expressions.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Expressions", (w) => { Expressions.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Expressions.FormatCode(w); });
 			}
 		}
 		else

@@ -36,7 +36,7 @@ public partial class BooleanProperty : RequestConverter.ICodeFormattable
 
 			if (CopyTo is not null)
 			{
-				writer.WriteFluentCall("CopyTo", (w) => { using var _oi = w.ForceObjectInitializer(); CopyTo.FormatCode(w); });
+				writer.WriteFluentCall("CopyTo", (w) => { CopyTo.FormatCode(w); });
 			}
 
 			if (DocValues is not null)
@@ -51,7 +51,7 @@ public partial class BooleanProperty : RequestConverter.ICodeFormattable
 
 			if (Fielddata is not null)
 			{
-				writer.WriteFluentDescriptorCall("Fielddata", (w) => { Fielddata.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Fielddata", (w) => { Fielddata.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fielddata.FormatCode(w); });
 			}
 
 			if (Fields is not null)

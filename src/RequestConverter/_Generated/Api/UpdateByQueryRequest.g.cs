@@ -212,7 +212,7 @@ public partial class UpdateByQueryRequest : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 
 			if (Script is not null)
@@ -222,7 +222,7 @@ public partial class UpdateByQueryRequest : RequestConverter.ICodeFormattable
 
 			if (Slice is not null)
 			{
-				writer.WriteFluentDescriptorCall("Slice", (w) => { Slice.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Slice", (w) => { Slice.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Slice.FormatCode(w); });
 			}
 		}
 		else

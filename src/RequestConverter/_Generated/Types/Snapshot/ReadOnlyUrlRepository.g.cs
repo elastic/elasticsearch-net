@@ -30,7 +30,7 @@ public partial class ReadOnlyUrlRepository : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Settings.FormatCode(w); });
 			}
 
 			if (Uuid is not null)

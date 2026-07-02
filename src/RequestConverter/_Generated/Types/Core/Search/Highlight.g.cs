@@ -80,7 +80,7 @@ public partial class Highlight : RequestConverter.ICodeFormattable
 
 			if (HighlightQuery is not null)
 			{
-				writer.WriteFluentDescriptorCall("HighlightQuery", (w) => { HighlightQuery.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("HighlightQuery", (w) => { HighlightQuery.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); HighlightQuery.FormatCode(w); });
 			}
 
 			if (MaxAnalyzedOffset is not null)

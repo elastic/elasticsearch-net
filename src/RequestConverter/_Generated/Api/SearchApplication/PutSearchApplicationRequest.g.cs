@@ -45,7 +45,7 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("SearchApplication", (w) => { SearchApplication.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SearchApplication", (w) => { SearchApplication.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SearchApplication.FormatCode(w); });
 			}
 		}
 		else

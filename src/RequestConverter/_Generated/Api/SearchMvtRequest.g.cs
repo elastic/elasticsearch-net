@@ -125,7 +125,7 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
 			}
 
 			if (GridAgg is not null)
@@ -150,7 +150,7 @@ public partial class SearchMvtRequest : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 
 			if (RuntimeMappings is not null)

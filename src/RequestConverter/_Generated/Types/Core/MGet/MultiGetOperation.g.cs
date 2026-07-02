@@ -50,7 +50,7 @@ public partial class MultiGetOperation : RequestConverter.ICodeFormattable
 
 			if (StoredFields is not null)
 			{
-				writer.WriteFluentCall("StoredFields", (w) => { using var _oi = w.ForceObjectInitializer(); StoredFields.FormatCode(w); });
+				writer.WriteFluentCall("StoredFields", (w) => { StoredFields.FormatCode(w); });
 			}
 
 			if (Version is not null)

@@ -45,7 +45,7 @@ public partial class ChatCompletionUnifiedRequest : RequestConverter.ICodeFormat
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("ChatCompletionRequest", (w) => { ChatCompletionRequest.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ChatCompletionRequest", (w) => { ChatCompletionRequest.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ChatCompletionRequest.FormatCode(w); });
 			}
 		}
 		else

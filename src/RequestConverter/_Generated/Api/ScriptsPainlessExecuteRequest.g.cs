@@ -50,7 +50,7 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 
 			if (ContextSetup is not null)
 			{
-				writer.WriteFluentDescriptorCall("ContextSetup", (w) => { ContextSetup.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ContextSetup", (w) => { ContextSetup.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ContextSetup.FormatCode(w); });
 			}
 
 			if (Script is not null)

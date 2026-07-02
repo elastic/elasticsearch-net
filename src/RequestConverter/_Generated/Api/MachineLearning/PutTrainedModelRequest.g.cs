@@ -72,7 +72,7 @@ public partial class PutTrainedModelRequest : RequestConverter.ICodeFormattable
 
 			if (Definition is not null)
 			{
-				writer.WriteFluentDescriptorCall("Definition", (w) => { Definition.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Definition", (w) => { Definition.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Definition.FormatCode(w); });
 			}
 
 			if (Description is not null)
@@ -82,12 +82,12 @@ public partial class PutTrainedModelRequest : RequestConverter.ICodeFormattable
 
 			if (InferenceConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); InferenceConfig.FormatCode(w); });
 			}
 
 			if (Input is not null)
 			{
-				writer.WriteFluentDescriptorCall("Input", (w) => { Input.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Input", (w) => { Input.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Input.FormatCode(w); });
 			}
 
 			if (Metadata is not null)

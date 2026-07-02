@@ -56,7 +56,7 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 
 			if (RescoreVector is not null)
 			{
-				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RescoreVector.FormatCode(w); });
 			}
 
 			{

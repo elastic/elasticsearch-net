@@ -34,7 +34,7 @@ public partial class MigrateReindexRequest : RequestConverter.ICodeFormattable
 			writer.Write("()");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorCall("Reindex", (w) => { Reindex.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Reindex", (w) => { Reindex.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Reindex.FormatCode(w); });
 			}
 		}
 		else

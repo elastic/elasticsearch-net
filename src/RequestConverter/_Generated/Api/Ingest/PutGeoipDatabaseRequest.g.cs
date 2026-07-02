@@ -50,7 +50,7 @@ public partial class PutGeoipDatabaseRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Maxmind", (w) => { Maxmind.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Maxmind", (w) => { Maxmind.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Maxmind.FormatCode(w); });
 			}
 
 			{

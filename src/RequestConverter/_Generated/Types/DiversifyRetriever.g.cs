@@ -60,7 +60,7 @@ public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 
 			if (QueryVectorBuilder is not null)
 			{
-				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QueryVectorBuilder.FormatCode(w); });
 			}
 
 			if (RankWindowSize is not null)
@@ -69,7 +69,7 @@ public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Retriever.FormatCode(w); });
 			}
 
 			if (Size is not null)

@@ -51,7 +51,7 @@ public partial class MultiMatchQuery : RequestConverter.ICodeFormattable
 #pragma warning restore CS0618
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { using var _oi = w.ForceObjectInitializer(); Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
 			}
 
 			if (Fuzziness is not null)

@@ -61,7 +61,7 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Analysis.FormatCode(w); });
 			}
 
 			if (AnalyzedFields is not null)
@@ -75,7 +75,7 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Dest.FormatCode(w); });
 			}
 
 			if (Headers is not null)
@@ -99,7 +99,7 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
 			}
 
 			if (Version is not null)

@@ -54,7 +54,7 @@ public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ApiKey.FormatCode(w); });
 			}
 
 			{

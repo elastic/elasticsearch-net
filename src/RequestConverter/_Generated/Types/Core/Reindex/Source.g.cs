@@ -40,12 +40,12 @@ public partial class Source : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 
 			if (Remote is not null)
 			{
-				writer.WriteFluentDescriptorCall("Remote", (w) => { Remote.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Remote", (w) => { Remote.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Remote.FormatCode(w); });
 			}
 
 			if (RuntimeMappings is not null)
@@ -60,7 +60,7 @@ public partial class Source : RequestConverter.ICodeFormattable
 
 			if (Slice is not null)
 			{
-				writer.WriteFluentDescriptorCall("Slice", (w) => { Slice.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Slice", (w) => { Slice.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Slice.FormatCode(w); });
 			}
 #pragma warning disable CS0618
 			if (Sort is not null)

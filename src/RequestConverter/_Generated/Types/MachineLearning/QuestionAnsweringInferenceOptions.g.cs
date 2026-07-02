@@ -46,7 +46,7 @@ public partial class QuestionAnsweringInferenceOptions : RequestConverter.ICodeF
 
 			if (Tokenization is not null)
 			{
-				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tokenization.FormatCode(w); });
 			}
 		}
 		else

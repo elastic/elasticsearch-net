@@ -36,7 +36,7 @@ public partial class RankEvalMetric : RequestConverter.ICodeFormattable
 
 			if (ExpectedReciprocalRank is not null)
 			{
-				writer.WriteFluentDescriptorCall("ExpectedReciprocalRank", (w) => { ExpectedReciprocalRank.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ExpectedReciprocalRank", (w) => { ExpectedReciprocalRank.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ExpectedReciprocalRank.FormatCode(w); });
 			}
 
 			if (MeanReciprocalRank is not null)

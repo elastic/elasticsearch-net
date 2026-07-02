@@ -165,7 +165,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (SourceExcludes is not null)
 			{
-				writer.WriteFluentCall("SourceExcludes", (w) => { using var _oi = w.ForceObjectInitializer(); SourceExcludes.FormatCode(w); });
+				writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); });
 			}
 
 			if (SourceExcludeVectors is not null)
@@ -175,7 +175,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (SourceIncludes is not null)
 			{
-				writer.WriteFluentCall("SourceIncludes", (w) => { using var _oi = w.ForceObjectInitializer(); SourceIncludes.FormatCode(w); });
+				writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); });
 			}
 
 			if (SuggestField is not null)
@@ -210,7 +210,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (Collapse is not null)
 			{
-				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Collapse.FormatCode(w); });
 			}
 
 			if (DocvalueFields is not null)
@@ -240,7 +240,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (Highlight is not null)
 			{
-				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Highlight.FormatCode(w); });
 			}
 
 			if (IndicesBoost is not null)
@@ -260,12 +260,12 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (Pit is not null)
 			{
-				writer.WriteFluentDescriptorCall("Pit", (w) => { Pit.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Pit", (w) => { Pit.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Pit.FormatCode(w); });
 			}
 
 			if (PostFilter is not null)
 			{
-				writer.WriteFluentDescriptorCall("PostFilter", (w) => { PostFilter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("PostFilter", (w) => { PostFilter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); PostFilter.FormatCode(w); });
 			}
 
 			if (Profile is not null)
@@ -280,12 +280,12 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 
 			if (Rank is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rank", (w) => { Rank.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rank", (w) => { Rank.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rank.FormatCode(w); });
 			}
 
 			if (Rescore is not null)
@@ -295,7 +295,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (Retriever is not null)
 			{
-				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Retriever.FormatCode(w); });
 			}
 
 			if (RuntimeMappings is not null)
@@ -325,7 +325,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (Slice is not null)
 			{
-				writer.WriteFluentDescriptorCall("Slice", (w) => { Slice.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Slice", (w) => { Slice.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Slice.FormatCode(w); });
 			}
 
 			if (Sort is not null)
@@ -345,7 +345,7 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 
 			if (StoredFields is not null)
 			{
-				writer.WriteFluentCall("StoredFields", (w) => { using var _oi = w.ForceObjectInitializer(); StoredFields.FormatCode(w); });
+				writer.WriteFluentCall("StoredFields", (w) => { StoredFields.FormatCode(w); });
 			}
 
 			if (Suggest is not null)

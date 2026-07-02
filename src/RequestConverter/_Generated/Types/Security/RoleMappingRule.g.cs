@@ -41,7 +41,7 @@ public partial class RoleMappingRule : RequestConverter.ICodeFormattable
 
 			if (Except is not null)
 			{
-				writer.WriteFluentDescriptorCall("Except", (w) => { Except.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Except", (w) => { Except.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Except.FormatCode(w); });
 			}
 
 			if (Field is not null)

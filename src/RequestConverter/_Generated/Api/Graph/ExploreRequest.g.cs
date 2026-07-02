@@ -67,17 +67,17 @@ public partial class ExploreRequest : RequestConverter.ICodeFormattable
 
 			if (Connections is not null)
 			{
-				writer.WriteFluentDescriptorCall("Connections", (w) => { Connections.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Connections", (w) => { Connections.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Connections.FormatCode(w); });
 			}
 
 			if (Controls is not null)
 			{
-				writer.WriteFluentDescriptorCall("Controls", (w) => { Controls.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Controls", (w) => { Controls.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Controls.FormatCode(w); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
 			}
 
 			if (Vertices is not null)

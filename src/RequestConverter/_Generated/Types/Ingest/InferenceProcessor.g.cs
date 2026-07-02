@@ -56,7 +56,7 @@ public partial class InferenceProcessor : RequestConverter.ICodeFormattable
 
 			if (InferenceConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); InferenceConfig.FormatCode(w); });
 			}
 
 			if (InputOutput is not null)

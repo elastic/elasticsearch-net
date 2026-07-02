@@ -62,7 +62,7 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 
 			if (AnalysisLimits is not null)
 			{
-				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnalysisLimits.FormatCode(w); });
 			}
 
 			if (BackgroundPersistInterval is not null)

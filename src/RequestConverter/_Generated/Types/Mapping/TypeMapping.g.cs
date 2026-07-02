@@ -31,12 +31,12 @@ public partial class TypeMapping : RequestConverter.ICodeFormattable
 		{
 			if (AllField is not null)
 			{
-				writer.WriteFluentDescriptorCall("AllField", (w) => { AllField.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AllField", (w) => { AllField.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AllField.FormatCode(w); });
 			}
 
 			if (DataStreamTimestamp is not null)
 			{
-				writer.WriteFluentDescriptorCall("DataStreamTimestamp", (w) => { DataStreamTimestamp.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("DataStreamTimestamp", (w) => { DataStreamTimestamp.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); DataStreamTimestamp.FormatCode(w); });
 			}
 
 			if (DateDetection is not null)
@@ -66,12 +66,12 @@ public partial class TypeMapping : RequestConverter.ICodeFormattable
 
 			if (FieldNames is not null)
 			{
-				writer.WriteFluentDescriptorCall("FieldNames", (w) => { FieldNames.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("FieldNames", (w) => { FieldNames.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); FieldNames.FormatCode(w); });
 			}
 
 			if (IndexField is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexField", (w) => { IndexField.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexField", (w) => { IndexField.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexField.FormatCode(w); });
 			}
 
 			if (Meta is not null)
@@ -91,7 +91,7 @@ public partial class TypeMapping : RequestConverter.ICodeFormattable
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentDescriptorCall("Routing", (w) => { Routing.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Routing", (w) => { Routing.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Routing.FormatCode(w); });
 			}
 
 			if (Runtime is not null)
@@ -101,7 +101,7 @@ public partial class TypeMapping : RequestConverter.ICodeFormattable
 
 			if (Size is not null)
 			{
-				writer.WriteFluentDescriptorCall("Size", (w) => { Size.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Size", (w) => { Size.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Size.FormatCode(w); });
 			}
 
 			if (Source is not null)

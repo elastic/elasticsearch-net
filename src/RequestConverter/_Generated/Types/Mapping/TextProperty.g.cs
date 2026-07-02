@@ -41,7 +41,7 @@ public partial class TextProperty : RequestConverter.ICodeFormattable
 
 			if (CopyTo is not null)
 			{
-				writer.WriteFluentCall("CopyTo", (w) => { using var _oi = w.ForceObjectInitializer(); CopyTo.FormatCode(w); });
+				writer.WriteFluentCall("CopyTo", (w) => { CopyTo.FormatCode(w); });
 			}
 
 			if (Dynamic is not null)
@@ -61,7 +61,7 @@ public partial class TextProperty : RequestConverter.ICodeFormattable
 
 			if (FielddataFrequencyFilter is not null)
 			{
-				writer.WriteFluentDescriptorCall("FielddataFrequencyFilter", (w) => { FielddataFrequencyFilter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("FielddataFrequencyFilter", (w) => { FielddataFrequencyFilter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); FielddataFrequencyFilter.FormatCode(w); });
 			}
 
 			if (Fields is not null)

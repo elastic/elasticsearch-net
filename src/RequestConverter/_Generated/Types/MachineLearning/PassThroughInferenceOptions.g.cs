@@ -36,12 +36,12 @@ public partial class PassThroughInferenceOptions : RequestConverter.ICodeFormatt
 
 			if (Tokenization is not null)
 			{
-				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tokenization.FormatCode(w); });
 			}
 
 			if (Vocabulary is not null)
 			{
-				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Vocabulary.FormatCode(w); });
 			}
 		}
 		else

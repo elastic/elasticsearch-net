@@ -45,7 +45,7 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 			using var _chainIndent = writer.Indent();
 			if (AnalysisConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnalysisConfig.FormatCode(w); });
 			}
 
 			if (MaxBucketCardinality is not null)

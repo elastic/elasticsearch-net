@@ -34,7 +34,7 @@ public partial class Latest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("UniqueKey", (w) => { using var _oi = w.ForceObjectInitializer(); UniqueKey.FormatCode(w); });
+				writer.WriteFluentCall("UniqueKey", (w) => { UniqueKey.FormatCode(w); });
 			}
 		}
 		else

@@ -31,7 +31,7 @@ public partial class DataframeAnalysis : RequestConverter.ICodeFormattable
 		{
 			if (Classification is not null)
 			{
-				writer.WriteFluentDescriptorCall("Classification", (w) => { Classification.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Classification", (w) => { Classification.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Classification.FormatCode(w); });
 			}
 
 			if (OutlierDetection is not null)
@@ -41,7 +41,7 @@ public partial class DataframeAnalysis : RequestConverter.ICodeFormattable
 
 			if (Regression is not null)
 			{
-				writer.WriteFluentDescriptorCall("Regression", (w) => { Regression.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Regression", (w) => { Regression.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Regression.FormatCode(w); });
 			}
 		}
 		else

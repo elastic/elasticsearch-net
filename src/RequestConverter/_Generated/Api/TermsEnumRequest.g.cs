@@ -66,7 +66,7 @@ public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 
 			if (IndexFilter is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexFilter.FormatCode(w); });
 			}
 
 			if (SearchAfter is not null)

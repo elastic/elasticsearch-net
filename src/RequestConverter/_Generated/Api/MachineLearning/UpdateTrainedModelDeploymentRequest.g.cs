@@ -41,7 +41,7 @@ public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICod
 			using var _chainIndent = writer.Indent();
 			if (AdaptiveAllocations is not null)
 			{
-				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AdaptiveAllocations.FormatCode(w); });
 			}
 
 			if (NumberOfAllocations is not null)

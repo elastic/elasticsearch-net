@@ -31,7 +31,7 @@ public partial class GeoShapeFieldQuery : RequestConverter.ICodeFormattable
 		{
 			if (IndexedShape is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexedShape", (w) => { IndexedShape.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexedShape", (w) => { IndexedShape.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexedShape.FormatCode(w); });
 			}
 
 			if (Relation is not null)
