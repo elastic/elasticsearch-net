@@ -475,7 +475,7 @@ public partial class TokenFilters : RequestConverter.ICodeFormattable
 					continue;
 				}
 
-				throw new System.InvalidOperationException("Unexpected variant implementation in a variant-keyed dictionary.");
+				throw new System.InvalidOperationException("Unhandled variant type '" + (kvp.Value?.GetType().FullName ?? "null") + "'.");
 			}
 		}
 		else

@@ -135,6 +135,6 @@ public partial interface ITokenizer : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		throw new System.InvalidOperationException("Unexpected ITokenizer implementation.");
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }

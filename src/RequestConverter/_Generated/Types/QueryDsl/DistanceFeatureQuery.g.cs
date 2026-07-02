@@ -45,6 +45,6 @@ public partial interface IDistanceFeatureQuery : RequestConverter.ICodeFormattab
 			return;
 		}
 
-		throw new System.InvalidOperationException("Unexpected IDistanceFeatureQuery implementation.");
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }

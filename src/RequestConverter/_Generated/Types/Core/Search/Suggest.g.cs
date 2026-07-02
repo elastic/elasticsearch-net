@@ -39,6 +39,6 @@ public partial interface ISuggest : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		throw new System.InvalidOperationException("Unexpected ISuggest implementation.");
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }

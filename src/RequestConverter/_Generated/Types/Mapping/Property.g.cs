@@ -345,6 +345,6 @@ public partial interface IProperty : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		throw new System.InvalidOperationException("Unexpected IProperty implementation.");
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }

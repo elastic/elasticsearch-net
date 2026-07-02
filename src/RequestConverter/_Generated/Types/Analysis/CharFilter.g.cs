@@ -57,6 +57,6 @@ public partial interface ICharFilter : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		throw new System.InvalidOperationException("Unexpected ICharFilter implementation.");
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }

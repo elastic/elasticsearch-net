@@ -51,6 +51,6 @@ public partial interface IDecayFunction : RequestConverter.ICodeFormattable
 			return;
 		}
 
-		throw new System.InvalidOperationException("Unexpected IDecayFunction implementation.");
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }

@@ -57,6 +57,6 @@ public partial interface ISourceOnlyRepositorySettings : RequestConverter.ICodeF
 			return;
 		}
 
-		throw new System.InvalidOperationException("Unexpected ISourceOnlyRepositorySettings implementation.");
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }
