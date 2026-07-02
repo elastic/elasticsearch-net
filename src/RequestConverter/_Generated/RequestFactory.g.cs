@@ -25,11 +25,11 @@ namespace RequestConverter;
 
 internal static partial class RequestFactory
 {
-	private static readonly System.Collections.Frozen.FrozenDictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, Elastic.Clients.Elasticsearch.Requests.Request?>> Lookup = System.Collections.Frozen.FrozenDictionary.ToFrozenDictionary(new System.Collections.Generic.Dictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, Elastic.Clients.Elasticsearch.Requests.Request?>>
+	private static readonly System.Collections.Frozen.FrozenDictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, System.Collections.Generic.ICollection<string>, Elastic.Clients.Elasticsearch.Requests.Request?>> Lookup = System.Collections.Frozen.FrozenDictionary.ToFrozenDictionary(new System.Collections.Generic.Dictionary<string, System.Func<Elastic.Transport.Serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>?, System.Collections.Generic.IReadOnlyDictionary<string, string>?, string, System.Collections.Generic.ICollection<string>, Elastic.Clients.Elasticsearch.Requests.Request?>>
 	{
 		{
 			"bulk",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.BulkRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -47,7 +47,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'bulk'.");
 					}
 				}
 
@@ -186,6 +186,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -195,7 +197,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cancel_reindex",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CancelReindexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -208,7 +210,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cancel_reindex'.");
 					}
 				}
 
@@ -226,6 +228,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -235,7 +239,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"capabilities",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CapabilitiesRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -317,6 +321,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -326,7 +332,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"clear_scroll",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ClearScrollRequest>(serializer, body);
 				return request;
@@ -335,7 +341,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"close_point_in_time",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -349,7 +355,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"count",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CountRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -367,7 +373,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'count'.");
 					}
 				}
 
@@ -534,6 +540,8 @@ internal static partial class RequestFactory
 							request.TerminateAfter = long.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -543,7 +551,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"create",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -567,7 +575,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'create'.");
 					}
 				}
 
@@ -684,6 +692,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -693,7 +703,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DeleteRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -712,7 +722,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'delete'.");
 					}
 				}
 
@@ -807,6 +817,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -816,7 +828,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"delete_by_query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DeleteByQueryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -829,7 +841,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'delete_by_query'.");
 					}
 				}
 
@@ -1143,6 +1155,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1152,7 +1166,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"delete_by_query_rethrottle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1165,7 +1179,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'delete_by_query_rethrottle'.");
 					}
 				}
 
@@ -1183,6 +1197,8 @@ internal static partial class RequestFactory
 							request.RequestsPerSecond = float.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1192,7 +1208,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"delete_script",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DeleteScriptRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1205,7 +1221,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'delete_script'.");
 					}
 				}
 
@@ -1234,6 +1250,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1243,7 +1261,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"exists",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ExistsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1262,7 +1280,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'exists'.");
 					}
 				}
 
@@ -1379,6 +1397,8 @@ internal static partial class RequestFactory
 							request.VersionType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.VersionType>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1388,7 +1408,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"exists_source",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ExistsSourceRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1407,7 +1427,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'exists_source'.");
 					}
 				}
 
@@ -1513,6 +1533,8 @@ internal static partial class RequestFactory
 							request.VersionType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.VersionType>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1522,7 +1544,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"explain",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ExplainRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1541,7 +1563,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'explain'.");
 					}
 				}
 
@@ -1680,6 +1702,8 @@ internal static partial class RequestFactory
 							request.StoredFields = Elastic.Clients.Elasticsearch.Fields.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1689,7 +1713,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"field_caps",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.FieldCapsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1707,7 +1731,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'field_caps'.");
 					}
 				}
 
@@ -1806,6 +1830,8 @@ internal static partial class RequestFactory
 							request.Types = list.Select(x => x).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1815,7 +1841,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.GetRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1834,7 +1860,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'get'.");
 					}
 				}
 
@@ -1973,6 +1999,8 @@ internal static partial class RequestFactory
 							request.VersionType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.VersionType>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -1982,7 +2010,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"get_reindex",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.GetReindexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -1995,7 +2023,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'get_reindex'.");
 					}
 				}
 
@@ -2024,6 +2052,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2033,7 +2063,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"get_script",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.GetScriptRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -2046,7 +2076,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'get_script'.");
 					}
 				}
 
@@ -2064,6 +2094,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2073,7 +2105,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"get_script_context",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.GetScriptContextRequest>(serializer, body);
 				return request;
@@ -2082,7 +2114,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"get_script_languages",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest>(serializer, body);
 				return request;
@@ -2091,7 +2123,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"get_source",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.GetSourceRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -2110,7 +2142,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'get_source'.");
 					}
 				}
 
@@ -2216,6 +2248,8 @@ internal static partial class RequestFactory
 							request.VersionType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.VersionType>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2225,7 +2259,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"health_report",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.HealthReportRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -2248,7 +2282,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'health_report'.");
 					}
 				}
 
@@ -2288,6 +2322,8 @@ internal static partial class RequestFactory
 							request.Verbose = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2297,7 +2333,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"index",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -2326,7 +2362,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'index'.");
 					}
 				}
 
@@ -2476,6 +2512,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2485,7 +2523,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"info",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.InfoRequest>(serializer, body);
 				return request;
@@ -2494,7 +2532,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"list_reindex",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ListReindexRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -2511,6 +2549,8 @@ internal static partial class RequestFactory
 							request.Detailed = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2520,7 +2560,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"mget",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MultiGetRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -2538,7 +2578,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'mget'.");
 					}
 				}
 
@@ -2644,6 +2684,8 @@ internal static partial class RequestFactory
 							request.StoredFields = Elastic.Clients.Elasticsearch.Fields.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2653,7 +2695,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"msearch",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -2676,7 +2718,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'msearch'.");
 					}
 				}
 
@@ -2854,6 +2896,8 @@ internal static partial class RequestFactory
 							request.TypedKeys = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2863,7 +2907,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"msearch_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -2886,7 +2930,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'msearch_template'.");
 					}
 				}
 
@@ -2959,6 +3003,8 @@ internal static partial class RequestFactory
 							request.TypedKeys = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -2968,7 +3014,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"mtermvectors",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -2986,7 +3032,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'mtermvectors'.");
 					}
 				}
 
@@ -3114,6 +3160,8 @@ internal static partial class RequestFactory
 							request.VersionType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.VersionType>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3123,7 +3171,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"open_point_in_time",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -3136,7 +3184,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'open_point_in_time'.");
 					}
 				}
 
@@ -3225,6 +3273,8 @@ internal static partial class RequestFactory
 							request.Routing = Elastic.Clients.Elasticsearch.Routing.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3234,7 +3284,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ping",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.PingRequest>(serializer, body);
 				return request;
@@ -3243,7 +3293,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"put_script",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -3272,7 +3322,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'put_script'.");
 					}
 				}
 
@@ -3301,6 +3351,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3310,7 +3362,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rank_eval",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -3333,7 +3385,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rank_eval'.");
 					}
 				}
 
@@ -3389,6 +3441,8 @@ internal static partial class RequestFactory
 							request.SearchType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.SearchType>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3398,7 +3452,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"reindex",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -3497,6 +3551,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3506,7 +3562,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"reindex_rethrottle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -3519,7 +3575,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'reindex_rethrottle'.");
 					}
 				}
 
@@ -3548,6 +3604,8 @@ internal static partial class RequestFactory
 							request.RequestsPerSecond = float.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3557,7 +3615,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"render_search_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest>(serializer, body);
 				return request;
@@ -3566,7 +3624,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"scripts_painless_execute",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest>(serializer, body);
 				return request;
@@ -3575,7 +3633,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"scroll",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -3597,6 +3655,8 @@ internal static partial class RequestFactory
 							request.RestTotalHitsAsInt = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3606,7 +3666,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -3624,7 +3684,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search'.");
 					}
 				}
 
@@ -3978,6 +4038,8 @@ internal static partial class RequestFactory
 							request.TypedKeys = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -3987,7 +4049,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_mvt",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchMvtRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -4024,7 +4086,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_mvt'.");
 					}
 				}
 
@@ -4034,7 +4096,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_shards",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchShardsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -4052,7 +4114,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_shards'.");
 					}
 				}
 
@@ -4152,6 +4214,8 @@ internal static partial class RequestFactory
 							request.Slice = parameter.Value;
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -4161,7 +4225,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -4179,7 +4243,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_template'.");
 					}
 				}
 
@@ -4313,6 +4377,8 @@ internal static partial class RequestFactory
 							request.TypedKeys = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -4322,7 +4388,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"terms_enum",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -4340,7 +4406,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'terms_enum'.");
 					}
 				}
 
@@ -4350,7 +4416,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"termvectors",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TermVectorsRequest<System.Text.Json.JsonElement?>>(serializer, body);
 				if (pathParameters is not null)
@@ -4374,7 +4440,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'termvectors'.");
 					}
 				}
 
@@ -4403,6 +4469,8 @@ internal static partial class RequestFactory
 							request.Realtime = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -4412,7 +4480,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"update",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.UpdateRequest<System.Text.Json.JsonElement?, System.Text.Json.JsonElement?>>(serializer, body);
 				if (pathParameters is not null)
@@ -4431,7 +4499,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'update'.");
 					}
 				}
 
@@ -4570,6 +4638,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -4579,7 +4649,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"update_by_query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.UpdateByQueryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -4592,7 +4662,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'update_by_query'.");
 					}
 				}
 
@@ -4933,6 +5003,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -4942,7 +5014,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"update_by_query_rethrottle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -4955,7 +5027,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'update_by_query_rethrottle'.");
 					}
 				}
 
@@ -4973,6 +5045,8 @@ internal static partial class RequestFactory
 							request.RequestsPerSecond = float.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -4982,7 +5056,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"async_search.delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -4995,7 +5069,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'async_search.delete'.");
 					}
 				}
 
@@ -5005,7 +5079,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"async_search.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5018,7 +5092,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'async_search.get'.");
 					}
 				}
 
@@ -5069,6 +5143,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletionTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5078,7 +5154,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"async_search.status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5091,7 +5167,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'async_search.status'.");
 					}
 				}
 
@@ -5109,6 +5185,8 @@ internal static partial class RequestFactory
 							request.KeepAlive = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5118,7 +5196,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"async_search.submit",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5136,7 +5214,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'async_search.submit'.");
 					}
 				}
 
@@ -5467,6 +5545,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletionTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5476,7 +5556,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.delete_auto_follow_pattern",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5489,7 +5569,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.delete_auto_follow_pattern'.");
 					}
 				}
 
@@ -5507,6 +5587,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5516,7 +5598,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.follow",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -5534,7 +5616,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.follow'.");
 					}
 				}
 
@@ -5563,6 +5645,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5572,7 +5656,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.follow_info",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5585,7 +5669,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.follow_info'.");
 					}
 				}
 
@@ -5603,6 +5687,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5612,7 +5698,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.follow_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5625,7 +5711,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.follow_stats'.");
 					}
 				}
 
@@ -5643,6 +5729,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5652,7 +5740,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.forget_follower",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5665,7 +5753,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.forget_follower'.");
 					}
 				}
 
@@ -5683,6 +5771,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5692,7 +5782,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.get_auto_follow_pattern",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5710,7 +5800,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.get_auto_follow_pattern'.");
 					}
 				}
 
@@ -5728,6 +5818,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5737,7 +5829,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.pause_auto_follow_pattern",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseAutoFollowPatternRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5750,7 +5842,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.pause_auto_follow_pattern'.");
 					}
 				}
 
@@ -5768,6 +5860,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5777,7 +5871,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.pause_follow",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5790,7 +5884,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.pause_follow'.");
 					}
 				}
 
@@ -5808,6 +5902,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5817,7 +5913,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.put_auto_follow_pattern",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -5835,7 +5931,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.put_auto_follow_pattern'.");
 					}
 				}
 
@@ -5853,6 +5949,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5862,7 +5960,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.resume_auto_follow_pattern",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5875,7 +5973,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.resume_auto_follow_pattern'.");
 					}
 				}
 
@@ -5893,6 +5991,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5902,7 +6002,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.resume_follow",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5915,7 +6015,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.resume_follow'.");
 					}
 				}
 
@@ -5933,6 +6033,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5942,7 +6044,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -5970,6 +6072,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -5979,7 +6083,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ccr.unfollow",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CrossClusterReplication.UnfollowRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -5992,7 +6096,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ccr.unfollow'.");
 					}
 				}
 
@@ -6010,6 +6114,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6019,7 +6125,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.allocation_explain",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -6058,6 +6164,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6067,7 +6175,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.delete_component_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6080,7 +6188,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cluster.delete_component_template'.");
 					}
 				}
 
@@ -6109,6 +6217,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6118,7 +6228,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.delete_voting_config_exclusions",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -6146,6 +6256,8 @@ internal static partial class RequestFactory
 							request.WaitForRemoval = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6155,7 +6267,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.exists_component_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6168,7 +6280,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cluster.exists_component_template'.");
 					}
 				}
 
@@ -6198,6 +6310,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6207,7 +6321,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.get_component_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6225,7 +6339,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cluster.get_component_template'.");
 					}
 				}
 
@@ -6293,6 +6407,8 @@ internal static partial class RequestFactory
 							request.SettingsFilter = list.Select(x => x).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6302,7 +6418,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.get_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -6352,6 +6468,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6361,7 +6479,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.health",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.HealthRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6379,7 +6497,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cluster.health'.");
 					}
 				}
 
@@ -6512,6 +6630,8 @@ internal static partial class RequestFactory
 							request.WaitForStatus = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.HealthStatus>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6521,7 +6641,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.info",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6539,7 +6659,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cluster.info'.");
 					}
 				}
 
@@ -6549,7 +6669,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.pending_tasks",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -6577,6 +6697,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6586,7 +6708,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.post_voting_config_exclusions",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -6636,6 +6758,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6645,7 +6769,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.put_component_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -6663,7 +6787,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cluster.put_component_template'.");
 					}
 				}
 
@@ -6703,6 +6827,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6712,7 +6838,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.put_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -6751,6 +6877,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6760,7 +6888,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"cluster.stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6778,7 +6906,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'cluster.stats'.");
 					}
 				}
 
@@ -6807,6 +6935,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6816,7 +6946,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"dangling_indices.list_dangling_indices",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest>(serializer, body);
 				return request;
@@ -6825,7 +6955,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"enrich.delete_policy",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6838,7 +6968,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'enrich.delete_policy'.");
 					}
 				}
 
@@ -6856,6 +6986,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6865,7 +6997,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"enrich.execute_policy",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6878,7 +7010,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'enrich.execute_policy'.");
 					}
 				}
 
@@ -6907,6 +7039,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6916,7 +7050,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"enrich.get_policy",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6934,7 +7068,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'enrich.get_policy'.");
 					}
 				}
 
@@ -6952,6 +7086,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -6961,7 +7097,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"enrich.put_policy",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -6974,7 +7110,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'enrich.put_policy'.");
 					}
 				}
 
@@ -6992,6 +7128,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7001,7 +7139,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"enrich.stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -7018,6 +7156,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7027,7 +7167,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"eql.delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7040,7 +7180,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'eql.delete'.");
 					}
 				}
 
@@ -7050,7 +7190,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"eql.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7063,7 +7203,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'eql.get'.");
 					}
 				}
 
@@ -7092,6 +7232,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletionTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7101,7 +7243,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"eql.get_status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7114,7 +7256,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'eql.get_status'.");
 					}
 				}
 
@@ -7124,7 +7266,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"eql.search",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -7142,7 +7284,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'eql.search'.");
 					}
 				}
 
@@ -7198,6 +7340,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7207,7 +7351,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.async_query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -7262,6 +7406,8 @@ internal static partial class RequestFactory
 							request.Format = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Esql.EsqlFormat>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7271,7 +7417,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.async_query_delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7284,7 +7430,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.async_query_delete'.");
 					}
 				}
 
@@ -7294,7 +7440,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.async_query_get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7307,7 +7453,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.async_query_get'.");
 					}
 				}
 
@@ -7358,6 +7504,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletionTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7367,7 +7515,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.async_query_stop",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7380,7 +7528,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.async_query_stop'.");
 					}
 				}
 
@@ -7398,6 +7546,8 @@ internal static partial class RequestFactory
 							request.DropNullColumns = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7407,7 +7557,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.delete_view",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7420,7 +7570,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.delete_view'.");
 					}
 				}
 
@@ -7430,7 +7580,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.get_query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7443,7 +7593,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.get_query'.");
 					}
 				}
 
@@ -7453,7 +7603,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.get_view",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.GetViewRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7471,7 +7621,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.get_view'.");
 					}
 				}
 
@@ -7481,7 +7631,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.list_queries",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.ListQueriesRequest>(serializer, body);
 				return request;
@@ -7490,7 +7640,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.put_view",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -7508,7 +7658,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.put_view'.");
 					}
 				}
 
@@ -7518,7 +7668,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"esql.query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -7573,6 +7723,8 @@ internal static partial class RequestFactory
 							request.Format = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Esql.EsqlFormat>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7582,7 +7734,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"features.get_features",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -7599,6 +7751,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7608,7 +7762,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"features.reset_features",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -7625,6 +7779,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7634,7 +7790,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"graph.explore",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Graph.ExploreRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7647,7 +7803,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'graph.explore'.");
 					}
 				}
 
@@ -7676,6 +7832,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7685,7 +7843,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.delete_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7698,7 +7856,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ilm.delete_lifecycle'.");
 					}
 				}
 
@@ -7727,6 +7885,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7736,7 +7896,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.get_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7754,7 +7914,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ilm.get_lifecycle'.");
 					}
 				}
 
@@ -7783,6 +7943,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7792,7 +7954,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.get_status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest>(serializer, body);
 				return request;
@@ -7801,7 +7963,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.migrate_to_data_tiers",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -7829,6 +7991,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7838,7 +8002,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.move_to_step",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -7856,7 +8020,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ilm.move_to_step'.");
 					}
 				}
 
@@ -7866,7 +8030,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.put_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7879,7 +8043,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ilm.put_lifecycle'.");
 					}
 				}
 
@@ -7908,6 +8072,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -7917,7 +8083,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.remove_policy",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7930,7 +8096,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ilm.remove_policy'.");
 					}
 				}
 
@@ -7940,7 +8106,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.retry",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -7953,7 +8119,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ilm.retry'.");
 					}
 				}
 
@@ -7963,7 +8129,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.start",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -7991,6 +8157,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8000,7 +8168,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ilm.stop",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -8028,6 +8196,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8037,7 +8207,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.analyze",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8055,7 +8225,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.analyze'.");
 					}
 				}
 
@@ -8065,7 +8235,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.cancel_migrate_reindex",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8078,7 +8248,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.cancel_migrate_reindex'.");
 					}
 				}
 
@@ -8088,7 +8258,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.clear_cache",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8106,7 +8276,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.clear_cache'.");
 					}
 				}
 
@@ -8195,6 +8365,8 @@ internal static partial class RequestFactory
 							request.Request = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8204,7 +8376,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.clone",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8223,7 +8395,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.clone'.");
 					}
 				}
 
@@ -8263,6 +8435,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8272,7 +8446,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.close",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8285,7 +8459,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.close'.");
 					}
 				}
 
@@ -8363,6 +8537,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8372,7 +8548,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.create",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8385,7 +8561,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.create'.");
 					}
 				}
 
@@ -8425,6 +8601,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8434,7 +8612,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.create_data_stream",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8447,7 +8625,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.create_data_stream'.");
 					}
 				}
 
@@ -8476,6 +8654,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8485,7 +8665,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.create_from",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8504,7 +8684,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.create_from'.");
 					}
 				}
 
@@ -8514,7 +8694,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.data_streams_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8532,7 +8712,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.data_streams_stats'.");
 					}
 				}
 
@@ -8555,6 +8735,8 @@ internal static partial class RequestFactory
 							request.ExpandWildcards = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ExpandWildcard>.Parse(x)).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8564,7 +8746,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8577,7 +8759,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.delete'.");
 					}
 				}
 
@@ -8644,6 +8826,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8653,7 +8837,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.delete_alias",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8672,7 +8856,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.delete_alias'.");
 					}
 				}
 
@@ -8701,6 +8885,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8710,7 +8896,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.delete_data_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8723,7 +8909,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.delete_data_lifecycle'.");
 					}
 				}
 
@@ -8768,6 +8954,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8777,7 +8965,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.delete_data_stream",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8790,7 +8978,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.delete_data_stream'.");
 					}
 				}
 
@@ -8824,6 +9012,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8833,7 +9023,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.delete_data_stream_options",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8846,7 +9036,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.delete_data_stream_options'.");
 					}
 				}
 
@@ -8891,6 +9081,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8900,7 +9092,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.delete_index_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8913,7 +9105,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.delete_index_template'.");
 					}
 				}
 
@@ -8942,6 +9134,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -8951,7 +9145,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.delete_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -8964,7 +9158,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.delete_template'.");
 					}
 				}
 
@@ -8993,6 +9187,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9002,7 +9198,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.disk_usage",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9015,7 +9211,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.disk_usage'.");
 					}
 				}
 
@@ -9082,6 +9278,8 @@ internal static partial class RequestFactory
 							request.RunExpensiveTasks = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9091,7 +9289,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.downsample",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -9115,7 +9313,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.downsample'.");
 					}
 				}
 
@@ -9125,7 +9323,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.exists",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9138,7 +9336,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.exists'.");
 					}
 				}
 
@@ -9216,6 +9414,8 @@ internal static partial class RequestFactory
 							request.Local = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9225,7 +9425,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.exists_alias",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9249,7 +9449,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.exists_alias'.");
 					}
 				}
 
@@ -9305,6 +9505,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9314,7 +9516,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.exists_index_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9327,7 +9529,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.exists_index_template'.");
 					}
 				}
 
@@ -9367,6 +9569,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9376,7 +9580,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.exists_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9389,7 +9593,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.exists_template'.");
 					}
 				}
 
@@ -9430,6 +9634,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9439,7 +9645,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.explain_data_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9452,7 +9658,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.explain_data_lifecycle'.");
 					}
 				}
 
@@ -9481,6 +9687,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9490,7 +9698,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.field_usage_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9503,7 +9711,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.field_usage_stats'.");
 					}
 				}
 
@@ -9559,6 +9767,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9568,7 +9778,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.flush",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9586,7 +9796,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.flush'.");
 					}
 				}
 
@@ -9653,6 +9863,8 @@ internal static partial class RequestFactory
 							request.WaitIfOngoing = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9662,7 +9874,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.forcemerge",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9680,7 +9892,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.forcemerge'.");
 					}
 				}
 
@@ -9769,6 +9981,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9778,7 +9992,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9791,7 +10005,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get'.");
 					}
 				}
 
@@ -9896,6 +10110,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9905,7 +10121,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_alias",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -9934,7 +10150,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_alias'.");
 					}
 				}
 
@@ -9990,6 +10206,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -9999,7 +10217,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_data_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10012,7 +10230,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_data_lifecycle'.");
 					}
 				}
 
@@ -10057,6 +10275,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10066,7 +10286,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_data_lifecycle_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest>(serializer, body);
 				return request;
@@ -10075,7 +10295,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_data_stream",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10093,7 +10313,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_data_stream'.");
 					}
 				}
 
@@ -10149,6 +10369,8 @@ internal static partial class RequestFactory
 							request.Verbose = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10158,7 +10380,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_data_stream_mappings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10171,7 +10393,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_data_stream_mappings'.");
 					}
 				}
 
@@ -10189,6 +10411,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10198,7 +10422,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_data_stream_options",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10211,7 +10435,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_data_stream_options'.");
 					}
 				}
 
@@ -10245,6 +10469,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10254,7 +10480,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_data_stream_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10267,7 +10493,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_data_stream_settings'.");
 					}
 				}
 
@@ -10285,6 +10511,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10294,7 +10522,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_field_mapping",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10318,7 +10546,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_field_mapping'.");
 					}
 				}
 
@@ -10374,6 +10602,8 @@ internal static partial class RequestFactory
 							request.IncludeDefaults = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10383,7 +10613,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_index_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10401,7 +10631,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_index_template'.");
 					}
 				}
 
@@ -10453,6 +10683,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10462,7 +10694,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_mapping",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10480,7 +10712,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_mapping'.");
 					}
 				}
 
@@ -10548,6 +10780,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10557,7 +10791,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_migrate_reindex_status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10570,7 +10804,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_migrate_reindex_status'.");
 					}
 				}
 
@@ -10580,7 +10814,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10609,7 +10843,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_settings'.");
 					}
 				}
 
@@ -10699,6 +10933,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10708,7 +10944,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.get_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10726,7 +10962,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.get_template'.");
 					}
 				}
 
@@ -10767,6 +11003,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10776,7 +11014,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.migrate_reindex",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -10790,7 +11028,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.migrate_to_data_stream",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10803,7 +11041,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.migrate_to_data_stream'.");
 					}
 				}
 
@@ -10832,6 +11070,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10841,7 +11081,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.modify_data_stream",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -10855,7 +11095,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.open",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10868,7 +11108,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.open'.");
 					}
 				}
 
@@ -10946,6 +11186,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10955,7 +11197,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.promote_data_stream",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -10968,7 +11210,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.promote_data_stream'.");
 					}
 				}
 
@@ -10986,6 +11228,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -10995,7 +11239,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_alias",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11014,7 +11258,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_alias'.");
 					}
 				}
 
@@ -11043,6 +11287,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11052,7 +11298,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_data_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11065,7 +11311,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_data_lifecycle'.");
 					}
 				}
 
@@ -11110,6 +11356,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11119,7 +11367,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_data_stream_mappings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -11137,7 +11385,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_data_stream_mappings'.");
 					}
 				}
 
@@ -11177,6 +11425,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11186,7 +11436,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_data_stream_options",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11199,7 +11449,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_data_stream_options'.");
 					}
 				}
 
@@ -11244,6 +11494,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11253,7 +11505,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_data_stream_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -11271,7 +11523,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_data_stream_settings'.");
 					}
 				}
 
@@ -11311,6 +11563,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11320,7 +11574,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_index_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11333,7 +11587,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_index_template'.");
 					}
 				}
 
@@ -11373,6 +11627,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11382,7 +11638,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_mapping",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11395,7 +11651,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_mapping'.");
 					}
 				}
 
@@ -11473,6 +11729,8 @@ internal static partial class RequestFactory
 							request.WriteIndexOnly = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11482,7 +11740,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -11505,7 +11763,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_settings'.");
 					}
 				}
 
@@ -11605,6 +11863,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11614,7 +11874,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.put_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11627,7 +11887,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.put_template'.");
 					}
 				}
 
@@ -11667,6 +11927,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11676,7 +11938,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.recovery",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11694,7 +11956,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.recovery'.");
 					}
 				}
 
@@ -11761,6 +12023,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11770,7 +12034,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.refresh",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11788,7 +12052,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.refresh'.");
 					}
 				}
 
@@ -11833,6 +12097,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11842,7 +12108,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.reload_search_analyzers",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11855,7 +12121,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.reload_search_analyzers'.");
 					}
 				}
 
@@ -11911,6 +12177,8 @@ internal static partial class RequestFactory
 							request.Resource = parameter.Value;
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -11920,7 +12188,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.remove_block",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -11939,7 +12207,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.remove_block'.");
 					}
 				}
 
@@ -12006,6 +12274,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12015,7 +12285,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.resolve_cluster",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12033,7 +12303,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.resolve_cluster'.");
 					}
 				}
 
@@ -12101,6 +12371,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12110,7 +12382,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.resolve_index",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12123,7 +12395,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.resolve_index'.");
 					}
 				}
 
@@ -12184,6 +12456,8 @@ internal static partial class RequestFactory
 							request.Mode = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>.Parse(x)).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12193,7 +12467,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.rollover",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12217,7 +12491,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.rollover'.");
 					}
 				}
 
@@ -12279,6 +12553,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12288,7 +12564,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.segments",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12306,7 +12582,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.segments'.");
 					}
 				}
 
@@ -12351,6 +12627,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12360,7 +12638,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.shard_stores",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12378,7 +12656,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.shard_stores'.");
 					}
 				}
 
@@ -12439,6 +12717,8 @@ internal static partial class RequestFactory
 							request.Status = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>.Parse(x)).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12448,7 +12728,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.shrink",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12467,7 +12747,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.shrink'.");
 					}
 				}
 
@@ -12507,6 +12787,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12516,7 +12798,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.simulate_index_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12529,7 +12811,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.simulate_index_template'.");
 					}
 				}
 
@@ -12580,6 +12862,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12589,7 +12873,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.simulate_template",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12607,7 +12891,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.simulate_template'.");
 					}
 				}
 
@@ -12658,6 +12942,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12667,7 +12953,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.split",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12686,7 +12972,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.split'.");
 					}
 				}
 
@@ -12726,6 +13012,8 @@ internal static partial class RequestFactory
 							request.WaitForActiveShards = Elastic.Clients.Elasticsearch.WaitForActiveShards.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12735,7 +13023,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12769,7 +13057,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.stats'.");
 					}
 				}
 
@@ -12885,6 +13173,8 @@ internal static partial class RequestFactory
 							request.Level = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Level>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12894,7 +13184,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.update_aliases",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -12922,6 +13212,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -12931,7 +13223,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"indices.validate_query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -12949,7 +13241,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.validate_query'.");
 					}
 				}
 
@@ -13093,6 +13385,8 @@ internal static partial class RequestFactory
 							request.Rewrite = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13102,7 +13396,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.chat_completion_unified",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13120,7 +13414,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.chat_completion_unified'.");
 					}
 				}
 
@@ -13138,6 +13432,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13147,7 +13443,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.completion",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13165,7 +13461,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.completion'.");
 					}
 				}
 
@@ -13183,6 +13479,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13192,7 +13490,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -13216,7 +13514,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.delete'.");
 					}
 				}
 
@@ -13245,6 +13543,8 @@ internal static partial class RequestFactory
 							request.Force = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13254,7 +13554,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.embedding",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13272,7 +13572,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.embedding'.");
 					}
 				}
 
@@ -13290,6 +13590,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13299,7 +13601,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -13328,7 +13630,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.get'.");
 					}
 				}
 
@@ -13338,7 +13640,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.inference",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13367,7 +13669,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.inference'.");
 					}
 				}
 
@@ -13385,6 +13687,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13394,7 +13698,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13423,7 +13727,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put'.");
 					}
 				}
 
@@ -13441,6 +13745,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13450,7 +13756,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_ai21",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13474,7 +13780,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_ai21'.");
 					}
 				}
 
@@ -13492,6 +13798,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13501,7 +13809,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_alibabacloud",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13525,7 +13833,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_alibabacloud'.");
 					}
 				}
 
@@ -13543,6 +13851,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13552,7 +13862,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_amazonbedrock",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13576,7 +13886,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_amazonbedrock'.");
 					}
 				}
 
@@ -13594,6 +13904,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13603,7 +13915,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_amazonsagemaker",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13627,7 +13939,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_amazonsagemaker'.");
 					}
 				}
 
@@ -13645,6 +13957,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13654,7 +13968,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_anthropic",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13678,7 +13992,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_anthropic'.");
 					}
 				}
 
@@ -13696,6 +14010,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13705,7 +14021,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_azureaistudio",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13729,7 +14045,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_azureaistudio'.");
 					}
 				}
 
@@ -13747,6 +14063,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13756,7 +14074,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_azureopenai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13780,7 +14098,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_azureopenai'.");
 					}
 				}
 
@@ -13798,6 +14116,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13807,7 +14127,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_cohere",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13831,7 +14151,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_cohere'.");
 					}
 				}
 
@@ -13849,6 +14169,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13858,7 +14180,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_contextualai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13882,7 +14204,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_contextualai'.");
 					}
 				}
 
@@ -13900,6 +14222,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13909,7 +14233,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_custom",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13933,7 +14257,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_custom'.");
 					}
 				}
 
@@ -13943,7 +14267,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_deepseek",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -13967,7 +14291,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_deepseek'.");
 					}
 				}
 
@@ -13985,6 +14309,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -13994,7 +14320,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_elasticsearch",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14018,7 +14344,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_elasticsearch'.");
 					}
 				}
 
@@ -14036,6 +14362,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14045,7 +14373,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_elser",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14069,7 +14397,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_elser'.");
 					}
 				}
 
@@ -14087,6 +14415,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14096,7 +14426,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_fireworksai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14120,7 +14450,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_fireworksai'.");
 					}
 				}
 
@@ -14138,6 +14468,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14147,7 +14479,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_googleaistudio",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14171,7 +14503,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_googleaistudio'.");
 					}
 				}
 
@@ -14189,6 +14521,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14198,7 +14532,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_googlevertexai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14222,7 +14556,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_googlevertexai'.");
 					}
 				}
 
@@ -14240,6 +14574,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14249,7 +14585,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_groq",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14273,7 +14609,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_groq'.");
 					}
 				}
 
@@ -14291,6 +14627,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14300,7 +14638,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_hugging_face",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14324,7 +14662,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_hugging_face'.");
 					}
 				}
 
@@ -14342,6 +14680,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14351,7 +14691,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_jinaai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14375,7 +14715,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_jinaai'.");
 					}
 				}
 
@@ -14393,6 +14733,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14402,7 +14744,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_llama",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14426,7 +14768,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_llama'.");
 					}
 				}
 
@@ -14444,6 +14786,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14453,7 +14797,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_mistral",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14477,7 +14821,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_mistral'.");
 					}
 				}
 
@@ -14495,6 +14839,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14504,7 +14850,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_nvidia",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14528,7 +14874,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_nvidia'.");
 					}
 				}
 
@@ -14546,6 +14892,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14555,7 +14903,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_openai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14579,7 +14927,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_openai'.");
 					}
 				}
 
@@ -14597,6 +14945,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14606,7 +14956,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_openshift_ai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14630,7 +14980,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_openshift_ai'.");
 					}
 				}
 
@@ -14648,6 +14998,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14657,7 +15009,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_voyageai",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14681,7 +15033,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_voyageai'.");
 					}
 				}
 
@@ -14699,6 +15051,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14708,7 +15062,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.put_watsonx",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14732,7 +15086,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.put_watsonx'.");
 					}
 				}
 
@@ -14750,6 +15104,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14759,7 +15115,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.rerank",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14777,7 +15133,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.rerank'.");
 					}
 				}
 
@@ -14795,6 +15151,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14804,7 +15162,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.sparse_embedding",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14822,7 +15180,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.sparse_embedding'.");
 					}
 				}
 
@@ -14840,6 +15198,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14849,7 +15209,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.stream_completion",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14867,7 +15227,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.stream_completion'.");
 					}
 				}
 
@@ -14885,6 +15245,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14894,7 +15256,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.text_embedding",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14912,7 +15274,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.text_embedding'.");
 					}
 				}
 
@@ -14930,6 +15292,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -14939,7 +15303,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"inference.update",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -14968,7 +15332,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.update'.");
 					}
 				}
 
@@ -14978,7 +15342,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.delete_geoip_database",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -14991,7 +15355,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.delete_geoip_database'.");
 					}
 				}
 
@@ -15020,6 +15384,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15029,7 +15395,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.delete_ip_location_database",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15042,7 +15408,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.delete_ip_location_database'.");
 					}
 				}
 
@@ -15071,6 +15437,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15080,7 +15448,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.delete_pipeline",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15093,7 +15461,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.delete_pipeline'.");
 					}
 				}
 
@@ -15122,6 +15490,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15131,7 +15501,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.geo_ip_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest>(serializer, body);
 				return request;
@@ -15140,7 +15510,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.get_geoip_database",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15158,7 +15528,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.get_geoip_database'.");
 					}
 				}
 
@@ -15168,7 +15538,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.get_ip_location_database",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15186,7 +15556,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.get_ip_location_database'.");
 					}
 				}
 
@@ -15196,7 +15566,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.get_pipeline",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15214,7 +15584,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.get_pipeline'.");
 					}
 				}
 
@@ -15243,6 +15613,8 @@ internal static partial class RequestFactory
 							request.Summary = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15252,7 +15624,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.processor_grok",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest>(serializer, body);
 				return request;
@@ -15261,7 +15633,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.put_geoip_database",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -15279,7 +15651,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.put_geoip_database'.");
 					}
 				}
 
@@ -15308,6 +15680,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15317,7 +15691,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.put_ip_location_database",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -15335,7 +15709,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.put_ip_location_database'.");
 					}
 				}
 
@@ -15364,6 +15738,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15373,7 +15749,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.put_pipeline",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15386,7 +15762,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.put_pipeline'.");
 					}
 				}
 
@@ -15426,6 +15802,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15435,7 +15813,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ingest.simulate",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -15458,7 +15836,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ingest.simulate'.");
 					}
 				}
 
@@ -15476,6 +15854,8 @@ internal static partial class RequestFactory
 							request.Verbose = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15485,7 +15865,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"license.delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -15513,6 +15893,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15522,7 +15904,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"license.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -15551,6 +15933,8 @@ internal static partial class RequestFactory
 							request.Local = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15560,7 +15944,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"license.get_basic_status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest>(serializer, body);
 				return request;
@@ -15569,7 +15953,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"license.get_trial_status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest>(serializer, body);
 				return request;
@@ -15578,7 +15962,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"license.post",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -15617,6 +16001,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15626,7 +16012,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"license.post_start_basic",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -15665,6 +16051,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15674,7 +16062,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"license.post_start_trial",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -15713,6 +16101,8 @@ internal static partial class RequestFactory
 							request.Type = parameter.Value;
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15722,7 +16112,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.clear_trained_model_deployment_cache",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15735,7 +16125,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.clear_trained_model_deployment_cache'.");
 					}
 				}
 
@@ -15745,7 +16135,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.close_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15758,7 +16148,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.close_job'.");
 					}
 				}
 
@@ -15768,7 +16158,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_calendar",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15781,7 +16171,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_calendar'.");
 					}
 				}
 
@@ -15791,7 +16181,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_calendar_event",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15810,7 +16200,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_calendar_event'.");
 					}
 				}
 
@@ -15820,7 +16210,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_calendar_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15839,7 +16229,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_calendar_job'.");
 					}
 				}
 
@@ -15849,7 +16239,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15862,7 +16252,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_data_frame_analytics'.");
 					}
 				}
 
@@ -15891,6 +16281,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15900,7 +16292,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_datafeed",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15913,7 +16305,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_datafeed'.");
 					}
 				}
 
@@ -15931,6 +16323,8 @@ internal static partial class RequestFactory
 							request.Force = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -15940,7 +16334,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_expired_data",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15958,7 +16352,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_expired_data'.");
 					}
 				}
 
@@ -15968,7 +16362,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_filter",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -15981,7 +16375,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_filter'.");
 					}
 				}
 
@@ -15991,7 +16385,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_forecast",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16015,7 +16409,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_forecast'.");
 					}
 				}
 
@@ -16044,6 +16438,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16053,7 +16449,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16066,7 +16462,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_job'.");
 					}
 				}
 
@@ -16106,6 +16502,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16115,7 +16513,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_model_snapshot",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16134,7 +16532,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_model_snapshot'.");
 					}
 				}
 
@@ -16144,7 +16542,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_trained_model",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16157,7 +16555,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_trained_model'.");
 					}
 				}
 
@@ -16186,6 +16584,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16195,7 +16595,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.delete_trained_model_alias",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16214,7 +16614,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.delete_trained_model_alias'.");
 					}
 				}
 
@@ -16224,7 +16624,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.estimate_model_memory",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest>(serializer, body);
 				return request;
@@ -16233,7 +16633,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.evaluate_data_frame",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -16247,7 +16647,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.explain_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16265,7 +16665,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.explain_data_frame_analytics'.");
 					}
 				}
 
@@ -16275,7 +16675,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.flush_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16288,7 +16688,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.flush_job'.");
 					}
 				}
 
@@ -16298,7 +16698,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.forecast",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16311,7 +16711,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.forecast'.");
 					}
 				}
 
@@ -16321,7 +16721,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_buckets",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16345,7 +16745,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_buckets'.");
 					}
 				}
 
@@ -16374,6 +16774,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16383,7 +16785,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_calendar_events",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16396,7 +16798,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_calendar_events'.");
 					}
 				}
 
@@ -16458,6 +16860,8 @@ internal static partial class RequestFactory
 							request.Start = System.DateTimeOffset.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16467,7 +16871,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_calendars",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16485,7 +16889,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_calendars'.");
 					}
 				}
 
@@ -16514,6 +16918,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16523,7 +16929,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_categories",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16547,7 +16953,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_categories'.");
 					}
 				}
 
@@ -16587,6 +16993,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16596,7 +17004,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16614,7 +17022,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_data_frame_analytics'.");
 					}
 				}
 
@@ -16665,6 +17073,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16674,7 +17084,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_data_frame_analytics_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16692,7 +17102,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_data_frame_analytics_stats'.");
 					}
 				}
 
@@ -16743,6 +17153,8 @@ internal static partial class RequestFactory
 							request.Verbose = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16752,7 +17164,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_datafeed_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16770,7 +17182,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_datafeed_stats'.");
 					}
 				}
 
@@ -16788,6 +17200,8 @@ internal static partial class RequestFactory
 							request.AllowNoMatch = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16797,7 +17211,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_datafeeds",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16815,7 +17229,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_datafeeds'.");
 					}
 				}
 
@@ -16844,6 +17258,8 @@ internal static partial class RequestFactory
 							request.ExcludeGenerated = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16853,7 +17269,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_filters",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16871,7 +17287,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_filters'.");
 					}
 				}
 
@@ -16900,6 +17316,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -16909,7 +17327,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_influencers",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -16922,7 +17340,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_influencers'.");
 					}
 				}
 
@@ -17017,6 +17435,8 @@ internal static partial class RequestFactory
 							request.Start = System.DateTimeOffset.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17026,7 +17446,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_job_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17044,7 +17464,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_job_stats'.");
 					}
 				}
 
@@ -17062,6 +17482,8 @@ internal static partial class RequestFactory
 							request.AllowNoMatch = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17071,7 +17493,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_jobs",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17089,7 +17511,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_jobs'.");
 					}
 				}
 
@@ -17118,6 +17540,8 @@ internal static partial class RequestFactory
 							request.ExcludeGenerated = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17127,7 +17551,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_memory_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17145,7 +17569,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_memory_stats'.");
 					}
 				}
 
@@ -17174,6 +17598,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17183,7 +17609,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_model_snapshot_upgrade_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17202,7 +17628,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_model_snapshot_upgrade_stats'.");
 					}
 				}
 
@@ -17220,6 +17646,8 @@ internal static partial class RequestFactory
 							request.AllowNoMatch = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17229,7 +17657,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_model_snapshots",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17253,7 +17681,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_model_snapshots'.");
 					}
 				}
 
@@ -17282,6 +17710,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17291,7 +17721,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_overall_buckets",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17304,7 +17734,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_overall_buckets'.");
 					}
 				}
 
@@ -17314,7 +17744,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_records",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17327,7 +17757,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_records'.");
 					}
 				}
 
@@ -17356,6 +17786,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17365,7 +17797,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_trained_models",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17383,7 +17815,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_trained_models'.");
 					}
 				}
 
@@ -17472,6 +17904,8 @@ internal static partial class RequestFactory
 							request.Tags = list.Select(x => x).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17481,7 +17915,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.get_trained_models_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17499,7 +17933,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.get_trained_models_stats'.");
 					}
 				}
 
@@ -17539,6 +17973,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17548,7 +17984,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.infer_trained_model",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -17566,7 +18002,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.infer_trained_model'.");
 					}
 				}
 
@@ -17584,6 +18020,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17593,7 +18031,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.info",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest>(serializer, body);
 				return request;
@@ -17602,7 +18040,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.open_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17615,7 +18053,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.open_job'.");
 					}
 				}
 
@@ -17625,7 +18063,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.post_calendar_events",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -17643,7 +18081,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.post_calendar_events'.");
 					}
 				}
 
@@ -17653,7 +18091,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.preview_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17671,7 +18109,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.preview_data_frame_analytics'.");
 					}
 				}
 
@@ -17681,7 +18119,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_calendar",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17694,7 +18132,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_calendar'.");
 					}
 				}
 
@@ -17704,7 +18142,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_calendar_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17723,7 +18161,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_calendar_job'.");
 					}
 				}
 
@@ -17733,7 +18171,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -17751,7 +18189,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_data_frame_analytics'.");
 					}
 				}
 
@@ -17761,7 +18199,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_datafeed",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17774,7 +18212,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_datafeed'.");
 					}
 				}
 
@@ -17831,6 +18269,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17840,7 +18280,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_filter",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17853,7 +18293,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_filter'.");
 					}
 				}
 
@@ -17863,7 +18303,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -17881,7 +18321,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_job'.");
 					}
 				}
 
@@ -17938,6 +18378,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17947,7 +18389,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_trained_model",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -17960,7 +18402,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_trained_model'.");
 					}
 				}
 
@@ -17989,6 +18431,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -17998,7 +18442,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_trained_model_alias",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18017,7 +18461,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_trained_model_alias'.");
 					}
 				}
 
@@ -18035,6 +18479,8 @@ internal static partial class RequestFactory
 							request.Reassign = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18044,7 +18490,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_trained_model_definition_part",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -18068,7 +18514,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_trained_model_definition_part'.");
 					}
 				}
 
@@ -18078,7 +18524,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.put_trained_model_vocabulary",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -18096,7 +18542,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.put_trained_model_vocabulary'.");
 					}
 				}
 
@@ -18106,7 +18552,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.reset_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18119,7 +18565,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.reset_job'.");
 					}
 				}
 
@@ -18148,6 +18594,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18157,7 +18605,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.revert_model_snapshot",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18176,7 +18624,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.revert_model_snapshot'.");
 					}
 				}
 
@@ -18186,7 +18634,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.set_upgrade_mode",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.SetUpgradeModeRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -18214,6 +18662,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18223,7 +18673,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.start_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18236,7 +18686,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.start_data_frame_analytics'.");
 					}
 				}
 
@@ -18246,7 +18696,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.start_datafeed",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18259,7 +18709,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.start_datafeed'.");
 					}
 				}
 
@@ -18269,7 +18719,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.start_trained_model_deployment",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18282,7 +18732,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.start_trained_model_deployment'.");
 					}
 				}
 
@@ -18377,6 +18827,8 @@ internal static partial class RequestFactory
 							request.WaitFor = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18386,7 +18838,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.stop_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18399,7 +18851,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.stop_data_frame_analytics'.");
 					}
 				}
 
@@ -18409,7 +18861,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.stop_datafeed",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18422,7 +18874,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.stop_datafeed'.");
 					}
 				}
 
@@ -18432,7 +18884,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.stop_trained_model_deployment",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18445,7 +18897,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.stop_trained_model_deployment'.");
 					}
 				}
 
@@ -18455,7 +18907,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.update_data_frame_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18468,7 +18920,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.update_data_frame_analytics'.");
 					}
 				}
 
@@ -18478,7 +18930,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.update_datafeed",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18491,7 +18943,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.update_datafeed'.");
 					}
 				}
 
@@ -18548,6 +19000,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18557,7 +19011,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.update_filter",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18570,7 +19024,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.update_filter'.");
 					}
 				}
 
@@ -18580,7 +19034,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.update_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18593,7 +19047,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.update_job'.");
 					}
 				}
 
@@ -18603,7 +19057,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.update_model_snapshot",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18622,7 +19076,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.update_model_snapshot'.");
 					}
 				}
 
@@ -18632,7 +19086,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.update_trained_model_deployment",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18645,7 +19099,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.update_trained_model_deployment'.");
 					}
 				}
 
@@ -18655,7 +19109,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.upgrade_job_snapshot",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18674,7 +19128,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'ml.upgrade_job_snapshot'.");
 					}
 				}
 
@@ -18703,6 +19157,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18712,7 +19168,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.validate",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest>(serializer, body);
 				return request;
@@ -18721,7 +19177,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"ml.validate_detector",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -18735,7 +19191,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"nodes.clear_repositories_metering_archive",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18754,7 +19210,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'nodes.clear_repositories_metering_archive'.");
 					}
 				}
 
@@ -18764,7 +19220,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"nodes.get_repositories_metering_info",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18777,7 +19233,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'nodes.get_repositories_metering_info'.");
 					}
 				}
 
@@ -18787,7 +19243,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"nodes.hot_threads",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18805,7 +19261,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'nodes.hot_threads'.");
 					}
 				}
 
@@ -18889,6 +19345,8 @@ internal static partial class RequestFactory
 							request.Type = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ThreadType>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18898,7 +19356,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"nodes.info",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18932,7 +19390,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'nodes.info'.");
 					}
 				}
 
@@ -18961,6 +19419,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -18970,7 +19430,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"nodes.reload_secure_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -18988,7 +19448,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'nodes.reload_secure_settings'.");
 					}
 				}
 
@@ -19006,6 +19466,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -19015,7 +19477,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"nodes.stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19065,7 +19527,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'nodes.stats'.");
 					}
 				}
 
@@ -19176,6 +19638,8 @@ internal static partial class RequestFactory
 							request.Types = list.Select(x => x).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -19185,7 +19649,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"nodes.usage",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19219,7 +19683,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'nodes.usage'.");
 					}
 				}
 
@@ -19237,6 +19701,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -19246,7 +19712,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"project.create_many_routing",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -19260,7 +19726,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"project.create_routing",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -19278,7 +19744,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'project.create_routing'.");
 					}
 				}
 
@@ -19288,7 +19754,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"project.delete_routing",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19301,7 +19767,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'project.delete_routing'.");
 					}
 				}
 
@@ -19311,7 +19777,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"project.get_many_routing",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest>(serializer, body);
 				return request;
@@ -19320,7 +19786,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"project.get_routing",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19333,7 +19799,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'project.get_routing'.");
 					}
 				}
 
@@ -19343,7 +19809,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"project.tags",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.TagsRequest>(serializer, body);
 				return request;
@@ -19352,7 +19818,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.delete_rule",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19371,7 +19837,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'query_rules.delete_rule'.");
 					}
 				}
 
@@ -19381,7 +19847,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.delete_ruleset",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.QueryRules.DeleteRulesetRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19394,7 +19860,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'query_rules.delete_ruleset'.");
 					}
 				}
 
@@ -19404,7 +19870,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.get_rule",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19423,7 +19889,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'query_rules.get_rule'.");
 					}
 				}
 
@@ -19433,7 +19899,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.get_ruleset",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19446,7 +19912,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'query_rules.get_ruleset'.");
 					}
 				}
 
@@ -19456,7 +19922,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.list_rulesets",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -19484,6 +19950,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -19493,7 +19961,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.put_rule",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -19517,7 +19985,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'query_rules.put_rule'.");
 					}
 				}
 
@@ -19527,7 +19995,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.put_ruleset",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -19545,7 +20013,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'query_rules.put_ruleset'.");
 					}
 				}
 
@@ -19555,7 +20023,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"query_rules.test",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -19573,7 +20041,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'query_rules.test'.");
 					}
 				}
 
@@ -19583,7 +20051,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.delete_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19596,7 +20064,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.delete_job'.");
 					}
 				}
 
@@ -19606,7 +20074,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.get_jobs",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19624,7 +20092,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.get_jobs'.");
 					}
 				}
 
@@ -19634,7 +20102,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.get_rollup_caps",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19652,7 +20120,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.get_rollup_caps'.");
 					}
 				}
 
@@ -19662,7 +20130,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.get_rollup_index_caps",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19675,7 +20143,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.get_rollup_index_caps'.");
 					}
 				}
 
@@ -19685,7 +20153,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.put_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -19703,7 +20171,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.put_job'.");
 					}
 				}
 
@@ -19713,7 +20181,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.rollup_search",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19726,7 +20194,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.rollup_search'.");
 					}
 				}
 
@@ -19755,6 +20223,8 @@ internal static partial class RequestFactory
 							request.TypedKeys = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -19764,7 +20234,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.start_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Rollup.StartJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19777,7 +20247,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.start_job'.");
 					}
 				}
 
@@ -19787,7 +20257,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"rollup.stop_job",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Rollup.StopJobRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19800,7 +20270,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'rollup.stop_job'.");
 					}
 				}
 
@@ -19829,6 +20299,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -19838,7 +20310,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19851,7 +20323,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.delete'.");
 					}
 				}
 
@@ -19861,7 +20333,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.delete_behavioral_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19874,7 +20346,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.delete_behavioral_analytics'.");
 					}
 				}
 
@@ -19884,7 +20356,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19897,7 +20369,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.get'.");
 					}
 				}
 
@@ -19907,7 +20379,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.get_behavioral_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -19930,7 +20402,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.get_behavioral_analytics'.");
 					}
 				}
 
@@ -19940,7 +20412,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.list",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -19979,6 +20451,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -19988,7 +20462,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.post_behavioral_analytics_event",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20012,7 +20486,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.post_behavioral_analytics_event'.");
 					}
 				}
 
@@ -20030,6 +20504,8 @@ internal static partial class RequestFactory
 							request.Debug = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20039,7 +20515,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.put",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20057,7 +20533,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.put'.");
 					}
 				}
 
@@ -20075,6 +20551,8 @@ internal static partial class RequestFactory
 							request.Create = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20084,7 +20562,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.put_behavioral_analytics",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20097,7 +20575,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.put_behavioral_analytics'.");
 					}
 				}
 
@@ -20107,7 +20585,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.render_query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20120,7 +20598,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.render_query'.");
 					}
 				}
 
@@ -20130,7 +20608,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"search_application.search",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20143,7 +20621,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search_application.search'.");
 					}
 				}
 
@@ -20161,6 +20639,8 @@ internal static partial class RequestFactory
 							request.TypedKeys = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20170,7 +20650,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"searchable_snapshots.cache_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20188,7 +20668,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'searchable_snapshots.cache_stats'.");
 					}
 				}
 
@@ -20198,7 +20678,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"searchable_snapshots.clear_cache",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20216,7 +20696,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'searchable_snapshots.clear_cache'.");
 					}
 				}
 
@@ -20261,6 +20741,8 @@ internal static partial class RequestFactory
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20270,7 +20752,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"searchable_snapshots.mount",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20294,7 +20776,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'searchable_snapshots.mount'.");
 					}
 				}
 
@@ -20334,6 +20816,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20343,7 +20827,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"searchable_snapshots.stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20361,7 +20845,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'searchable_snapshots.stats'.");
 					}
 				}
 
@@ -20379,6 +20863,8 @@ internal static partial class RequestFactory
 							request.Level = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20388,7 +20874,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.activate_user_profile",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20402,7 +20888,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.authenticate",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest>(serializer, body);
 				return request;
@@ -20411,7 +20897,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.bulk_delete_role",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20433,6 +20919,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20442,7 +20930,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.bulk_put_role",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20464,6 +20952,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20473,7 +20963,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.bulk_update_api_keys",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20487,7 +20977,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.change_password",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20505,7 +20995,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.change_password'.");
 					}
 				}
 
@@ -20523,6 +21013,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20532,7 +21024,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.clear_api_key_cache",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20545,7 +21037,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.clear_api_key_cache'.");
 					}
 				}
 
@@ -20555,7 +21047,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.clear_cached_privileges",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20568,7 +21060,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.clear_cached_privileges'.");
 					}
 				}
 
@@ -20578,7 +21070,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.clear_cached_realms",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20591,7 +21083,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.clear_cached_realms'.");
 					}
 				}
 
@@ -20614,6 +21106,8 @@ internal static partial class RequestFactory
 							request.Usernames = list.Select(x => x).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20623,7 +21117,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.clear_cached_roles",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20636,7 +21130,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.clear_cached_roles'.");
 					}
 				}
 
@@ -20646,7 +21140,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.clear_cached_service_tokens",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20671,7 +21165,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.clear_cached_service_tokens'.");
 					}
 				}
 
@@ -20681,7 +21175,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.clone_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20703,6 +21197,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20712,7 +21208,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.create_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -20729,6 +21225,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20738,7 +21236,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.create_cross_cluster_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20752,7 +21250,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.create_service_token",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20782,7 +21280,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.create_service_token'.");
 					}
 				}
 
@@ -20800,6 +21298,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20809,7 +21309,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.delegate_pki",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -20823,7 +21323,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.delete_privileges",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20842,7 +21342,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.delete_privileges'.");
 					}
 				}
 
@@ -20860,6 +21360,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20869,7 +21371,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.delete_role",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20882,7 +21384,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.delete_role'.");
 					}
 				}
 
@@ -20900,6 +21402,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20909,7 +21413,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.delete_role_mapping",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20922,7 +21426,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.delete_role_mapping'.");
 					}
 				}
 
@@ -20940,6 +21444,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -20949,7 +21455,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.delete_service_token",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -20974,7 +21480,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.delete_service_token'.");
 					}
 				}
 
@@ -20992,6 +21498,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21001,7 +21509,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.delete_user",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21014,7 +21522,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.delete_user'.");
 					}
 				}
 
@@ -21032,6 +21540,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21041,7 +21551,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.disable_user",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DisableUserRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21054,7 +21564,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.disable_user'.");
 					}
 				}
 
@@ -21072,6 +21582,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21081,7 +21593,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.disable_user_profile",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21094,7 +21606,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.disable_user_profile'.");
 					}
 				}
 
@@ -21112,6 +21624,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21121,7 +21635,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.enable_user",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.EnableUserRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21134,7 +21648,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.enable_user'.");
 					}
 				}
 
@@ -21152,6 +21666,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21161,7 +21677,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.enable_user_profile",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21174,7 +21690,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.enable_user_profile'.");
 					}
 				}
 
@@ -21192,6 +21708,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21201,7 +21719,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.enroll_kibana",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest>(serializer, body);
 				return request;
@@ -21210,7 +21728,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.enroll_node",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest>(serializer, body);
 				return request;
@@ -21219,7 +21737,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -21313,6 +21831,8 @@ internal static partial class RequestFactory
 							request.WithProfileUid = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21322,7 +21842,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_builtin_privileges",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest>(serializer, body);
 				return request;
@@ -21331,7 +21851,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_privileges",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21360,7 +21880,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_privileges'.");
 					}
 				}
 
@@ -21370,7 +21890,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_role",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetRoleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21388,7 +21908,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_role'.");
 					}
 				}
 
@@ -21406,6 +21926,8 @@ internal static partial class RequestFactory
 							request.IncludeImplicit = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21415,7 +21937,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_role_mapping",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21433,7 +21955,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_role_mapping'.");
 					}
 				}
 
@@ -21443,7 +21965,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_service_accounts",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21472,7 +21994,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_service_accounts'.");
 					}
 				}
 
@@ -21482,7 +22004,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_service_credentials",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21501,7 +22023,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_service_credentials'.");
 					}
 				}
 
@@ -21511,7 +22033,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -21528,6 +22050,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21537,7 +22061,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetStatsRequest>(serializer, body);
 				return request;
@@ -21546,7 +22070,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_token",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetTokenRequest>(serializer, body);
 				return request;
@@ -21555,7 +22079,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_user",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetUserRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21578,7 +22102,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_user'.");
 					}
 				}
 
@@ -21596,6 +22120,8 @@ internal static partial class RequestFactory
 							request.WithProfileUid = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21605,7 +22131,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_user_privileges",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest>(serializer, body);
 				return request;
@@ -21614,7 +22140,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.get_user_profile",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21632,7 +22158,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_user_profile'.");
 					}
 				}
 
@@ -21655,6 +22181,8 @@ internal static partial class RequestFactory
 							request.Data = list.Select(x => x).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21664,7 +22192,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.grant_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -21686,6 +22214,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21695,7 +22225,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.has_privileges",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21713,7 +22243,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.has_privileges'.");
 					}
 				}
 
@@ -21723,7 +22253,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.has_privileges_user_profile",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -21737,7 +22267,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.invalidate_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest>(serializer, body);
 				return request;
@@ -21746,7 +22276,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.invalidate_token",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest>(serializer, body);
 				return request;
@@ -21755,7 +22285,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.oidc_authenticate",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -21769,7 +22299,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.oidc_logout",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -21783,7 +22313,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.oidc_prepare_authentication",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest>(serializer, body);
 				return request;
@@ -21792,7 +22322,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.put_privileges",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -21814,6 +22344,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21823,7 +22355,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.put_role",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.PutRoleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21836,7 +22368,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.put_role'.");
 					}
 				}
 
@@ -21854,6 +22386,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21863,7 +22397,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.put_role_mapping",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21876,7 +22410,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.put_role_mapping'.");
 					}
 				}
 
@@ -21894,6 +22428,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21903,7 +22439,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.put_user",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.PutUserRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -21916,7 +22452,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.put_user'.");
 					}
 				}
 
@@ -21934,6 +22470,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21943,7 +22481,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.query_api_keys",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -21982,6 +22520,8 @@ internal static partial class RequestFactory
 							request.WithProfileUid = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -21991,7 +22531,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.query_role",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest>(serializer, body);
 				return request;
@@ -22000,7 +22540,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.query_user",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.QueryUserRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -22017,6 +22557,8 @@ internal static partial class RequestFactory
 							request.WithProfileUid = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22026,7 +22568,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.saml_authenticate",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22040,7 +22582,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.saml_complete_logout",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22054,7 +22596,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.saml_invalidate",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22068,7 +22610,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.saml_logout",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22082,7 +22624,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.saml_prepare_authentication",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest>(serializer, body);
 				return request;
@@ -22091,7 +22633,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.saml_service_provider_metadata",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22104,7 +22646,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.saml_service_provider_metadata'.");
 					}
 				}
 
@@ -22114,7 +22656,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.suggest_user_profiles",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest>(serializer, body);
 				return request;
@@ -22123,7 +22665,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.update_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22136,7 +22678,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.update_api_key'.");
 					}
 				}
 
@@ -22146,7 +22688,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.update_cross_cluster_api_key",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22164,7 +22706,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.update_cross_cluster_api_key'.");
 					}
 				}
 
@@ -22174,7 +22716,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.update_settings",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -22202,6 +22744,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22211,7 +22755,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"security.update_user_profile_data",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22224,7 +22768,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.update_user_profile_data'.");
 					}
 				}
 
@@ -22264,6 +22808,8 @@ internal static partial class RequestFactory
 							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22273,7 +22819,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"simulate.ingest",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22296,7 +22842,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'simulate.ingest'.");
 					}
 				}
 
@@ -22325,6 +22871,8 @@ internal static partial class RequestFactory
 							request.Pipeline = parameter.Value;
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22334,7 +22882,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.delete_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22347,7 +22895,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'slm.delete_lifecycle'.");
 					}
 				}
 
@@ -22376,6 +22924,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22385,7 +22935,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.execute_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22398,7 +22948,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'slm.execute_lifecycle'.");
 					}
 				}
 
@@ -22427,6 +22977,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22436,7 +22988,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.execute_retention",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -22464,6 +23016,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22473,7 +23027,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.get_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22491,7 +23045,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'slm.get_lifecycle'.");
 					}
 				}
 
@@ -22520,6 +23074,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22529,7 +23085,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.get_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -22557,6 +23113,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22566,7 +23124,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.get_status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -22594,6 +23152,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22603,7 +23163,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.put_lifecycle",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22616,7 +23176,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'slm.put_lifecycle'.");
 					}
 				}
 
@@ -22645,6 +23205,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22654,7 +23216,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.start",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -22682,6 +23244,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22691,7 +23255,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"slm.stop",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -22719,6 +23283,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22728,7 +23294,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.cleanup_repository",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22741,7 +23307,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.cleanup_repository'.");
 					}
 				}
 
@@ -22770,6 +23336,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22779,7 +23347,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.clone",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22809,7 +23377,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.clone'.");
 					}
 				}
 
@@ -22827,6 +23395,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22836,7 +23406,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.create",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22855,7 +23425,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.create'.");
 					}
 				}
 
@@ -22884,6 +23454,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22893,7 +23465,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.create_repository",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -22911,7 +23483,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.create_repository'.");
 					}
 				}
 
@@ -22951,6 +23523,8 @@ internal static partial class RequestFactory
 							request.Verify = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -22960,7 +23534,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.delete",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -22979,7 +23553,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.delete'.");
 					}
 				}
 
@@ -23008,6 +23582,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23017,7 +23593,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.delete_repository",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23030,7 +23606,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.delete_repository'.");
 					}
 				}
 
@@ -23059,6 +23635,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23068,7 +23646,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23087,7 +23665,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.get'.");
 					}
 				}
 
@@ -23253,6 +23831,8 @@ internal static partial class RequestFactory
 							request.Verbose = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23262,7 +23842,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.get_repository",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23280,7 +23860,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.get_repository'.");
 					}
 				}
 
@@ -23309,6 +23889,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23318,7 +23900,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.repository_analyze",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23331,7 +23913,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.repository_analyze'.");
 					}
 				}
 
@@ -23481,6 +24063,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23490,7 +24074,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.repository_verify_integrity",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23503,7 +24087,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.repository_verify_integrity'.");
 					}
 				}
 
@@ -23598,6 +24182,8 @@ internal static partial class RequestFactory
 							request.VerifyBlobContents = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23607,7 +24193,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.restore",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23626,7 +24212,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.restore'.");
 					}
 				}
 
@@ -23655,6 +24241,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23664,7 +24252,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23693,7 +24281,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.status'.");
 					}
 				}
 
@@ -23722,6 +24310,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23731,7 +24321,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"snapshot.verify_repository",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23744,7 +24334,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'snapshot.verify_repository'.");
 					}
 				}
 
@@ -23773,6 +24363,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23782,7 +24374,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"sql.clear_cursor",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -23796,7 +24388,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"sql.delete_async",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23809,7 +24401,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'sql.delete_async'.");
 					}
 				}
 
@@ -23819,7 +24411,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"sql.get_async",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23832,7 +24424,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'sql.get_async'.");
 					}
 				}
 
@@ -23883,6 +24475,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletionTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23892,7 +24486,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"sql.get_async_status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23905,7 +24499,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'sql.get_async_status'.");
 					}
 				}
 
@@ -23915,7 +24509,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"sql.query",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Sql.QueryRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -23932,6 +24526,8 @@ internal static partial class RequestFactory
 							request.Format = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Sql.SqlFormat>.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -23941,7 +24537,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"sql.translate",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -23955,7 +24551,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"streams.logs_disable",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -23968,7 +24564,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'streams.logs_disable'.");
 					}
 				}
 
@@ -23997,6 +24593,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24006,7 +24604,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"streams.logs_enable",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -24019,7 +24617,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'streams.logs_enable'.");
 					}
 				}
 
@@ -24048,6 +24646,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24057,7 +24657,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"streams.status",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -24074,6 +24674,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24083,7 +24685,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"synonyms.delete_synonym",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -24096,7 +24698,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'synonyms.delete_synonym'.");
 					}
 				}
 
@@ -24106,7 +24708,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"synonyms.delete_synonym_rule",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -24125,7 +24727,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'synonyms.delete_synonym_rule'.");
 					}
 				}
 
@@ -24143,6 +24745,8 @@ internal static partial class RequestFactory
 							request.Refresh = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24152,7 +24756,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"synonyms.get_synonym",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -24165,7 +24769,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'synonyms.get_synonym'.");
 					}
 				}
 
@@ -24205,6 +24809,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24214,7 +24820,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"synonyms.get_synonym_rule",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -24233,7 +24839,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'synonyms.get_synonym_rule'.");
 					}
 				}
 
@@ -24243,7 +24849,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"synonyms.get_synonyms_sets",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -24271,6 +24877,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24280,7 +24888,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"synonyms.put_synonym",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -24298,7 +24906,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'synonyms.put_synonym'.");
 					}
 				}
 
@@ -24327,6 +24935,8 @@ internal static partial class RequestFactory
 							request.Refresh = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24336,7 +24946,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"synonyms.put_synonym_rule",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -24360,7 +24970,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'synonyms.put_synonym_rule'.");
 					}
 				}
 
@@ -24378,6 +24988,8 @@ internal static partial class RequestFactory
 							request.Refresh = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24387,7 +24999,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"tasks.cancel",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Tasks.CancelRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -24405,7 +25017,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'tasks.cancel'.");
 					}
 				}
 
@@ -24466,6 +25078,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24475,7 +25089,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"tasks.get",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -24488,7 +25102,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'tasks.get'.");
 					}
 				}
 
@@ -24528,6 +25142,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24537,7 +25153,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"tasks.list",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Tasks.ListRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -24625,6 +25241,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24634,7 +25252,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"text_structure.find_field_structure",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -24810,6 +25428,8 @@ internal static partial class RequestFactory
 							request.TimestampFormat = parameter.Value;
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24819,7 +25439,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"text_structure.find_message_structure",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -24967,6 +25587,8 @@ internal static partial class RequestFactory
 							request.TimestampFormat = parameter.Value;
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -24976,7 +25598,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"text_structure.test_grok_pattern",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -24998,6 +25620,8 @@ internal static partial class RequestFactory
 							request.EcsCompatibility = parameter.Value;
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25007,7 +25631,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.delete_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25020,7 +25644,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.delete_transform'.");
 					}
 				}
 
@@ -25060,6 +25684,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25069,7 +25695,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.get_node_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest>(serializer, body);
 				return request;
@@ -25078,7 +25704,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.get_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25096,7 +25722,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.get_transform'.");
 					}
 				}
 
@@ -25147,6 +25773,8 @@ internal static partial class RequestFactory
 							request.Size = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25156,7 +25784,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.get_transform_stats",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25169,7 +25797,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.get_transform_stats'.");
 					}
 				}
 
@@ -25220,6 +25848,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25229,7 +25859,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.preview_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25247,7 +25877,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.preview_transform'.");
 					}
 				}
 
@@ -25265,6 +25895,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25274,7 +25906,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.put_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				if (string.IsNullOrEmpty(body))
 				{
@@ -25292,7 +25924,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.put_transform'.");
 					}
 				}
 
@@ -25321,6 +25953,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25330,7 +25964,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.reset_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25343,7 +25977,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.reset_transform'.");
 					}
 				}
 
@@ -25372,6 +26006,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25381,7 +26017,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.schedule_now_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25394,7 +26030,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.schedule_now_transform'.");
 					}
 				}
 
@@ -25423,6 +26059,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25432,7 +26070,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.set_upgrade_mode",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -25460,6 +26098,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25469,7 +26109,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.start_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25482,7 +26122,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.start_transform'.");
 					}
 				}
 
@@ -25511,6 +26151,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25520,7 +26162,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.stop_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25533,7 +26175,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.stop_transform'.");
 					}
 				}
 
@@ -25595,6 +26237,8 @@ internal static partial class RequestFactory
 							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25604,7 +26248,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.update_transform",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest>(serializer, body);
 				if (pathParameters is not null)
@@ -25617,7 +26261,7 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						throw new System.InvalidOperationException("Encountered an unknown path parameter while materializing the request.");
+						throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'transform.update_transform'.");
 					}
 				}
 
@@ -25646,6 +26290,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25655,7 +26301,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"transform.upgrade_transforms",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -25683,6 +26329,8 @@ internal static partial class RequestFactory
 							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25692,7 +26340,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"xpack.info",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -25726,6 +26374,8 @@ internal static partial class RequestFactory
 							request.Categories = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>.Parse(x)).ToList();
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 
@@ -25735,7 +26385,7 @@ internal static partial class RequestFactory
 ,
 		{
 			"xpack.usage",
-			(serializer, pathParameters, queryParameters, body) =>
+			(serializer, pathParameters, queryParameters, body, unsupportedParameters) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest>(serializer, body);
 				if (queryParameters is not null)
@@ -25752,6 +26402,8 @@ internal static partial class RequestFactory
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
+
+						unsupportedParameters.Add(parameter.Key);
 					}
 				}
 

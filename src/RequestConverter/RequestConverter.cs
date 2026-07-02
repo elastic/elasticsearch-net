@@ -20,10 +20,15 @@ namespace RequestConverter;
 /// The namespaces the generated code references. When <see cref="FormattingOptions.TypeNameStyle"/> is
 /// <see cref="TypeNameStyle.Simplified"/>, add these as <c>using</c> directives so the short type names resolve.
 /// </param>
+/// <param name="UnsupportedParameters">
+/// Query-parameter keys the endpoint does not define. The converter drops them from the generated code, so a
+/// non-empty collection means the output is not a faithful reconstruction; hosts should warn the user.
+/// </param>
 public sealed record ConversionResult(
 	string Code,
 	Type RequestType,
-	IReadOnlyCollection<string> Namespaces);
+	IReadOnlyCollection<string> Namespaces,
+	IReadOnlyCollection<string> UnsupportedParameters);
 
 public sealed class RequestConverter
 {
@@ -59,7 +64,8 @@ public sealed class RequestConverter
 		string? body,
 		FormattingOptions? options = null)
 	{
-		var request = RequestFactory.Materialize(requestResponseSerializer, id, queryParameters, pathParameters, body ?? "{}");
+		var unsupportedParameters = new List<string>();
+		var request = RequestFactory.Materialize(requestResponseSerializer, id, queryParameters, pathParameters, body ?? "{}", unsupportedParameters);
 		if (request is null)
 		{
 			throw new NotSupportedException($"Endpoint '{id}' is not supported.");
@@ -88,6 +94,6 @@ public sealed class RequestConverter
 			writer.Write(";");
 		}
 
-		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces));
+		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces, unsupportedParameters));
 	}
 }
