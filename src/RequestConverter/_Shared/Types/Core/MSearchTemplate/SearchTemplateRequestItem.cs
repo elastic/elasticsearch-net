@@ -12,7 +12,7 @@ public sealed partial class SearchTemplateRequestItem : RequestConverter.ICodeFo
 	{
 		// SearchTemplateRequestItem has no parameterless constructor (Header/Body are init-only and set via the
 		// ctor), so emit a constructor call rather than an object initializer.
-		writer.Write("new SearchTemplateRequestItem(");
+		writer.Write("new ").WriteTypeRef("Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem").Write("(");
 		if (Header is not null)
 		{
 			Header.FormatCode(writer);
