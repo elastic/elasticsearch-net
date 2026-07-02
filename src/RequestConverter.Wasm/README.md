@@ -38,6 +38,36 @@ illustrative and generally does not compile or round-trip as-is. Both map to
 the API name and URL parameters needs the Elasticsearch schema, which the host library owns. The
 browser harness below shows the full pipeline (parse with the host, convert with this module).
 
+## Error reporting
+
+The `error` string a failed `convert` returns is the whole message the host shows the user, so it is
+kept concise and free of stack traces. Failures are classified:
+
+- **Wrong-typed values** report the underlying problem plus a location composed from the JSON path,
+  line, and column, e.g. `Unable to convert JSON string value 'abc' to 'Int32'. (at $, line 1, column 14)`.
+- **Structurally invalid bodies** (e.g. an array where an object is expected) report the token
+  mismatch with a location, e.g. `Expected JSON 'StartObject' token, but got 'StartArray'. (at $, line 1, column 2)`.
+- **Unsupported endpoints** report a converter coverage gap naming the request, e.g. `The .NET request
+  converter does not yet support the 'xpack.info' endpoint (GET /_xpack).`
+- **Bad path/query parameters** and other failures get a clear, endpoint-named message.
+- In a **batch**, the message is prefixed with the failing request's index and API.
+
+Set `options.debug` to `true` to append the full exception (type + stack trace) after a
+`--- debug ---` marker for diagnosing unexpected failures.
+
+`check` is a yes/no probe: any request that cannot be converted (unsupported endpoint, invalid body,
+...) makes it return `false` rather than an error.
+
+Notes on what does not surface as an error:
+
+- **Malformed JSON** never reaches this module: the host parses the request body before sending, so the
+  body is always well-formed JSON by the time it arrives here.
+- **Unknown properties** are ignored: the client deserializer skips unmapped members (the
+  System.Text.Json default), so a typo'd or extra property is dropped silently rather than reported.
+- **Missing required properties** are not detected during deserialization, so they surface with a
+  generic message (not the specific property name). The precise path/column location and the property
+  name would require a change to the client generator's converters, tracked separately.
+
 ## Prerequisites
 
 - .NET 10 SDK.

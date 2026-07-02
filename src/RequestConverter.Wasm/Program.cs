@@ -96,18 +96,18 @@ internal static partial class Exporter
 			var parsed = JsonSerializer.Deserialize(input, SerializerContext.Default.Input);
 			if (parsed is null)
 			{
-				return ErrorResponse("Failed to deserialize input.");
+				return ErrorResponse("Failed to deserialize the request-converter input.");
 			}
 
-			// A request set is convertible only if every request in it converts; one unsupported request
-			// (e.g. an NDJSON bulk) makes the whole set uncheckable, matching the host's all-or-nothing semantics.
+			// check is a yes/no probe: the set is convertible only if every request converts. Any failure
+			// (unsupported endpoint, malformed body, ...) means "no", so it is reported by Convert, not here.
 			foreach (var request in parsed.Requests ?? [])
 			{
 				try
 				{
 					ConvertRequest(request, parsed.Options, "request");
 				}
-				catch (NotSupportedException)
+				catch (Exception)
 				{
 					return BoolResponse(false);
 				}
@@ -125,10 +125,11 @@ internal static partial class Exporter
 			var parsed = JsonSerializer.Deserialize(input, SerializerContext.Default.Input);
 			if (parsed is null)
 			{
-				return ErrorResponse("Failed to deserialize input.");
+				return ErrorResponse("Failed to deserialize the request-converter input.");
 			}
 
 			var requests = parsed.Requests ?? [];
+			var debug = parsed.Options?.Debug ?? false;
 
 			// Each request becomes a typed variable declaration. In a batch the first variable is `request`, then
 			// `request1`, `request2`, ... so the snippets don't collide when pasted together.
@@ -138,7 +139,17 @@ internal static partial class Exporter
 			for (var i = 0; i < requests.Count; i++)
 			{
 				var variableName = i == 0 ? "request" : $"request{i}";
-				var result = ConvertRequest(requests[i], parsed.Options, variableName);
+				ConversionResult result;
+				try
+				{
+					result = ConvertRequest(requests[i], parsed.Options, variableName);
+				}
+				catch (Exception e)
+				{
+					// A single failing request fails the whole conversion; report it with its context.
+					return ErrorResponse(DescribeError(e, requests[i], i, requests.Count, debug));
+				}
+
 				declarations.Add(result.Code);
 				foreach (var ns in result.Namespaces)
 				{
@@ -229,6 +240,85 @@ internal static partial class Exporter
 		return map;
 	}
 
+	/// <summary>
+	/// Turns an exception raised while converting one request into a concise, user-facing message. The result is the
+	/// whole diagnostic the host shows (it does <c>throw new Error(response.error)</c>), so it avoids stack traces and,
+	/// for a batch, names which request failed. When <paramref name="debug"/> is set the full exception is appended.
+	/// </summary>
+	private static string DescribeError(Exception e, ParsedRequest request, int index, int total, bool debug)
+	{
+		var message = e switch
+		{
+			JsonException json => FormatJsonError(json),
+			NotSupportedException notSupported => FormatNotSupported(notSupported, request),
+			InvalidOperationException => e.Message,
+			FormatException or OverflowException or ArgumentException =>
+				$"Could not parse a path or query parameter for the '{request.Api}' request: {e.Message}",
+			_ => $"Could not convert the '{request.Api}' request. This usually means a required property is missing or a value is not valid for this endpoint."
+		};
+
+		// Only disambiguate in a batch; a single request needs no "request N" prefix.
+		if (total > 1)
+		{
+			message = $"Request {index + 1} ('{request.Api}'): {message}";
+		}
+
+		if (debug)
+		{
+			message += $"\n--- debug ---\n{e}";
+		}
+
+		return message;
+	}
+
+	/// <summary>
+	/// Builds the clearest message for a JSON problem. System.Text.Json already appends
+	/// <c>Path: ... | LineNumber: ... | BytePositionInLine: ...</c> to the message for malformed JSON and BCL type
+	/// mismatches, but not for converter-thrown messages (e.g. an unknown property). When the message lacks a path we
+	/// compose a human-readable location from the exception's properties (line/column are 0-based, shown 1-based).
+	/// </summary>
+	private static string FormatJsonError(JsonException json)
+	{
+		var message = json.Message;
+		if (json.Path is { Length: > 0 } path && !message.Contains(" Path: ", StringComparison.Ordinal))
+		{
+			var location = $" (at {path}";
+			if (json.LineNumber is { } line)
+			{
+				location += $", line {line + 1}";
+			}
+
+			if (json.BytePositionInLine is { } column)
+			{
+				location += $", column {column + 1}";
+			}
+
+			message += location + ")";
+		}
+
+		return message;
+	}
+
+	/// <summary>
+	/// Enriches the library's terse "Endpoint '{id}' is not supported." (an unregistered endpoint) into a message that
+	/// names the request line and frames it as a converter coverage gap rather than a bad request. Other
+	/// <see cref="NotSupportedException"/> messages (missing API name, not code-formattable) are already clear and pass
+	/// through. Keyed off the message prefix, falling back to the raw message if the wording ever changes.
+	/// </summary>
+	private static string FormatNotSupported(NotSupportedException notSupported, ParsedRequest request)
+	{
+		if (!notSupported.Message.StartsWith("Endpoint '", StringComparison.Ordinal))
+		{
+			return notSupported.Message;
+		}
+
+		var route = !string.IsNullOrEmpty(request.Method) && !string.IsNullOrEmpty(request.Path)
+			? $" ({request.Method} {request.Path})"
+			: string.Empty;
+
+		return $"The .NET request converter does not yet support the '{request.Api}' endpoint{route}.";
+	}
+
 	private static string Execute(Func<string> action)
 	{
 		try
@@ -237,7 +327,9 @@ internal static partial class Exporter
 		}
 		catch (Exception e)
 		{
-			return ErrorResponse($"Internal Error:\n {e}");
+			// Backstop for failures outside the per-request classification (e.g. an unreadable input envelope);
+			// per-request errors are described precisely in Convert.
+			return ErrorResponse($"The request converter failed unexpectedly: {e.Message}");
 		}
 	}
 
