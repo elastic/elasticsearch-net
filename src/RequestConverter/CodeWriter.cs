@@ -22,9 +22,21 @@ public sealed class CodeWriter
 	private int _indentLevel;
 	private bool _atLineStart = true;
 
-	// When set, the next BeginObjectInitializer emits an explicit "new T()" instead of a target-typed
-	// "new()". Set by WriteValue when dispatching to an ICodeFormattable through a loosely-typed
-	// (object/interface) context, where a target-typed new() cannot bind to the concrete type.
+	// ---- modal rendering state --------------------------------------------
+	//
+	// Four mechanisms modify how downstream writes render; they are distinct on purpose:
+	// - _forceExplicitConstructor (one-shot): set by WriteValue's ICodeFormattable dispatch, consumed by the
+	//   NEXT BeginObjectInitializer only. Cannot be a scope: it must apply to the dispatched value's own
+	//   initializer but not to initializers nested inside it, and the generated FormatCode signature offers
+	//   no parameter to thread it through.
+	// - _forceExplicitConstructorDepth (scope): every initializer in the scope renders an explicit
+	//   constructor; used for value arguments to overloaded fluent setters (CS0121).
+	// - _forceObjectInitializerDepth (scope): overrides EffectiveSyntaxMode for a subtree rendered as a
+	//   plain value inside descriptor output.
+	// - Options.ConstructorStyle (global): the caller-selected default.
+	// BeginObjectInitializer's explicit-constructor decision reads its own parameter, then the one-shot flag,
+	// then _forceExplicitConstructorDepth, then Options.ConstructorStyle; any being set forces the explicit
+	// form. _forceObjectInitializerDepth is separate: it feeds EffectiveSyntaxMode, not that decision.
 	private bool _forceExplicitConstructor;
 
 	// Every type reference is written as a placeholder rather than its final spelling, so the concrete
