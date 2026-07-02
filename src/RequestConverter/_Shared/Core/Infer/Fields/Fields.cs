@@ -8,12 +8,15 @@ public sealed partial class Fields : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		// Infer.Fields<T>(...) takes only expressions, with no per-field boost overload, so the lambda form applies only
-		// when every member maps to a member-access lambda and none carries a boost; otherwise fall back to the string array.
+		// The lambda form applies only when every member maps to a member-access lambda and none carries a boost (there is no
+		// per-field boost expression overload); otherwise fall back to the string array.
 		if (writer.Options.UseStronglyTypedDocument && TryGetLambdaBodies(out var lambdas))
 		{
-			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Infer").Write(".Fields<")
-				.Write(writer.Options.DocumentTypeName).Write(">(");
+			// Descriptor mode: the fluent setter has a `params Expression<Func<TDocument, object?>>[]` overload, so emit bare
+			// member-access lambdas directly rather than the Infer.Fields<T>(...) factory the initializer mode uses.
+			if (writer.EffectiveSyntaxMode != RequestConverter.SyntaxMode.Descriptor)
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Infer").Write(".Fields<")
+					.Write(writer.Options.DocumentTypeName).Write(">(");
 
 			for (var i = 0; i < lambdas.Count; i++)
 			{
@@ -23,7 +26,9 @@ public sealed partial class Fields : RequestConverter.ICodeFormattable
 				writer.Write(lambdas[i]);
 			}
 
-			writer.Write(")");
+			if (writer.EffectiveSyntaxMode != RequestConverter.SyntaxMode.Descriptor)
+				writer.Write(")");
+
 			return;
 		}
 
