@@ -106,40 +106,15 @@ public sealed class BulkRequestConverter : JsonConverter<BulkRequest>, INdjsonSt
 			return new BulkRequest(JsonConstructorSentinel.Instance) { Operations = _operations };
 		}
 
-		private static BulkActionHeader ReadHeader(in ReadOnlySequence<byte> value, JsonSerializerOptions options)
-		{
-			if (value.IsSingleSegment)
-				return ReadActionHeader(value.First.Span, options);
-
-			var length = (int)value.Length;
-			var rented = ArrayPool<byte>.Shared.Rent(length);
-			try
-			{
-				value.CopyTo(rented);
-				return ReadActionHeader(rented.AsSpan(0, length), options);
-			}
-			finally
-			{
-				ArrayPool<byte>.Shared.Return(rented);
-			}
-		}
+		private static BulkActionHeader ReadHeader(in ReadOnlySequence<byte> value, JsonSerializerOptions options) =>
+			NdjsonValueReader.ReadContiguous(value, span => ReadActionHeader(span, options));
 
 		private static IBulkOperation CompleteFrom(in BulkActionHeader header, in ReadOnlySequence<byte> source, JsonSerializerOptions options)
 		{
-			if (source.IsSingleSegment)
-				return CompleteOperation(in header, source.First.Span, options);
-
-			var length = (int)source.Length;
-			var rented = ArrayPool<byte>.Shared.Rent(length);
-			try
-			{
-				source.CopyTo(rented);
-				return CompleteOperation(in header, rented.AsSpan(0, length), options);
-			}
-			finally
-			{
-				ArrayPool<byte>.Shared.Return(rented);
-			}
+			// A lambda cannot capture the `in` parameter by reference, so copy the (already fully materialized) header
+			// into a local the closure can hold.
+			var capturedHeader = header;
+			return NdjsonValueReader.ReadContiguous(source, span => CompleteOperation(in capturedHeader, span, options));
 		}
 	}
 

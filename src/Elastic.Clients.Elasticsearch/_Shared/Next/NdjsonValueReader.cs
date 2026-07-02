@@ -71,16 +71,27 @@ internal static class NdjsonValueReader
 	public static T? DeserializeValue<T>(in ReadOnlySequence<byte> value, JsonSerializerOptions options)
 	{
 		var readerOptions = new JsonReaderOptions { MaxDepth = options.MaxDepth };
+		return ReadContiguous(value, span => DeserializeValue<T>(span, options, readerOptions));
+	}
 
+	internal delegate TResult SequenceSpanReader<TResult>(ReadOnlySpan<byte> span);
+
+	/// <summary>
+	/// Runs <paramref name="read"/> over the value as one contiguous span: directly for a single-segment
+	/// sequence, via a pooled copy otherwise. Centralizes the rent/return so callers cannot leak or
+	/// double-rent for the same value.
+	/// </summary>
+	internal static TResult ReadContiguous<TResult>(ReadOnlySequence<byte> value, SequenceSpanReader<TResult> read)
+	{
 		if (value.IsSingleSegment)
-			return DeserializeValue<T>(value.First.Span, options, readerOptions);
+			return read(value.First.Span);
 
-		var length = (int)value.Length;
+		var length = checked((int)value.Length);
 		var rented = ArrayPool<byte>.Shared.Rent(length);
 		try
 		{
 			value.CopyTo(rented);
-			return DeserializeValue<T>(rented.AsSpan(0, length), options, readerOptions);
+			return read(rented.AsSpan(0, length));
 		}
 		finally
 		{
