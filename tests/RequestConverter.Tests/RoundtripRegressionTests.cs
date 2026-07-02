@@ -18,6 +18,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 using RequestConverter;
+using RequestConverter.Hosting;
 
 namespace RequestConverter.Tests;
 

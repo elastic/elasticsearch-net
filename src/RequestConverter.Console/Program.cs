@@ -12,6 +12,8 @@ using System.Text.Json;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Aggregations;
 
+using RequestConverter.Hosting;
+
 namespace RequestConverter.Console;
 
 using System;
