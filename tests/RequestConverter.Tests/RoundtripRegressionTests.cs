@@ -40,7 +40,7 @@ public sealed class RoundtripRegressionTests
 	[InlineData(SyntaxMode.Descriptor, ConstructorStyle.TargetTyped)]
 	public void Converted_requests_compile_and_roundtrip(SyntaxMode syntaxMode, ConstructorStyle constructorStyle)
 	{
-		var reportPath = LocateRepoRootFile("alternatives_report.json");
+		var reportPath = LocateRepoRootFile(Path.Combine("tests", "RequestConverter.Tests", "TestData", "alternatives_report.json"));
 		using var reportStream = File.OpenRead(reportPath);
 		var examples = JsonSerializer.Deserialize<ExampleModel[]>(reportStream)
 			?? throw new InvalidOperationException("Failed to parse alternatives_report.json.");

@@ -178,9 +178,23 @@ internal class Program
 		public int B { get; set; }
 	}
 
+	private static string LocateRepoFile(string relativePath)
+	{
+		var directory = new DirectoryInfo(AppContext.BaseDirectory);
+		while (directory is not null)
+		{
+			if (File.Exists(Path.Combine(directory.FullName, "RequestConverter.sln")))
+				return Path.Combine(directory.FullName, relativePath);
+
+			directory = directory.Parent;
+		}
+
+		throw new InvalidOperationException("Repository root (RequestConverter.sln) not found above the application base directory.");
+	}
+
 	public static void Main(string[] args)
 	{
-		using var file = File.OpenRead("D:\\elastic\\elasticsearch-net\\alternatives_report.json");
+		using var file = File.OpenRead(LocateRepoFile(Path.Combine("tests", "RequestConverter.Tests", "TestData", "alternatives_report.json")));
 
 		var total = 0;
 		var valid = 0;
