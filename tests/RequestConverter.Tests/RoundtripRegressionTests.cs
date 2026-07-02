@@ -17,6 +17,8 @@ using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 using Xunit.Abstractions;
 
+using RequestConverter;
+
 namespace RequestConverter.Tests;
 
 /// <summary>
@@ -33,8 +35,10 @@ public sealed class RoundtripRegressionTests
 
 	private sealed record Case(string Digest, string Api, Type RequestType, string Code, IReadOnlyCollection<string> Namespaces, JsonElement? Body, Elastic.Clients.Elasticsearch.Requests.Request Materialized);
 
-	[Fact]
-	public void Converted_requests_compile_and_roundtrip()
+	[Theory]
+	[InlineData(SyntaxMode.ObjectInitializer, ConstructorStyle.TargetTyped)]
+	[InlineData(SyntaxMode.Descriptor, ConstructorStyle.TargetTyped)]
+	public void Converted_requests_compile_and_roundtrip(SyntaxMode syntaxMode, ConstructorStyle constructorStyle)
 	{
 		var reportPath = LocateRepoRootFile("alternatives_report.json");
 		using var reportStream = File.OpenRead(reportPath);
@@ -42,6 +46,8 @@ public sealed class RoundtripRegressionTests
 			?? throw new InvalidOperationException("Failed to parse alternatives_report.json.");
 
 		var serializer = global::RequestConverter.RequestConverter.DefaultSerializer;
+
+		var options = new FormattingOptions { SyntaxMode = syntaxMode, ConstructorStyle = constructorStyle };
 
 		// 1) Convert every valid, non-blacklisted, non-NDJSON example.
 		var cases = new List<Case>();
@@ -61,7 +67,7 @@ public sealed class RoundtripRegressionTests
 				try
 				{
 					var (request, result) = global::RequestConverter.RequestConverter.ConvertCore(
-						serializer, source.Api, source.PathParameters, source.QueryParameters, body);
+						serializer, source.Api, source.PathParameters, source.QueryParameters, body, options);
 					cases.Add(new Case(example.Digest, source.Api, result.RequestType, result.Code, result.Namespaces, source.Body, request));
 				}
 				catch (NotSupportedException)
@@ -79,7 +85,7 @@ public sealed class RoundtripRegressionTests
 		// 2) Emit one .cs per case (saved to a temp dir for inspection). Each snippet carries its own using
 		// directives built from the namespaces the converter reported, mirroring how a real caller consumes the
 		// Simplified output - and exercising the short-identifier rendering plus its collision fallback.
-		var outputDir = Path.Combine(Path.GetTempPath(), "RequestConverter.Tests", "generated");
+		var outputDir = Path.Combine(Path.GetTempPath(), "RequestConverter.Tests", $"generated_{syntaxMode}_{constructorStyle}");
 		Directory.CreateDirectory(outputDir);
 		foreach (var stale in Directory.GetFiles(outputDir, "*.cs"))
 			File.Delete(stale);
@@ -95,7 +101,7 @@ public sealed class RoundtripRegressionTests
 
 		// 3) Single Roslyn compilation of all snippets.
 		var compilation = CSharpCompilation.Create(
-			"RequestConverter.Generated",
+			$"RequestConverter.Generated.{syntaxMode}.{constructorStyle}",
 			trees,
 			ReferenceAssemblies(),
 			new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
