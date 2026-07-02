@@ -5,7 +5,9 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>annotations</Nullable>
     <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
-    <!-- The request converter intentionally references deprecated API to faithfully convert any request. -->
+    <!-- The converter faithfully reconstructs requests that use deprecated API. Generated enum FormatCode
+         files (e.g. StreamType.g.cs) switch over deprecated enum members with no per-site pragmas, so this
+         project-wide suppression is load-bearing, not redundant with the pragmas other generated files carry. -->
     <NoWarn>$(NoWarn);CS0618</NoWarn>
   </PropertyGroup>
 
