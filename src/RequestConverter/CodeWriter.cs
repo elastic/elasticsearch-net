@@ -194,7 +194,7 @@ public sealed class CodeWriter
 			case System.Collections.IEnumerable enumerable:
 				// A collection reached via runtime dispatch (e.g. a union arm); render as an array literal
 				// so a target type with an implicit array conversion accepts it.
-				return WriteImplicitArray(AsObjects(enumerable), static (w, item) => w.WriteValue(item));
+				return WriteImplicitArray(AsObjects(enumerable), static (w, item) => w.WriteValue(item), InferElementTypeExpression(enumerable));
 			default:
 				return WritePrimitive(value);
 		}
@@ -204,6 +204,25 @@ public sealed class CodeWriter
 	{
 		foreach (var item in source)
 			yield return item;
+	}
+
+	// The runtime element type of a dispatch-reached collection, so an empty collection still renders a
+	// typed Array.Empty<T>() that binds to the target's implicit array conversion. Falls back to "string"
+	// (the infer wrappers' element type) when no IEnumerable<T> is implemented. Reads only the interfaces
+	// of a live instance's type, which trimming preserves.
+	private static string InferElementTypeExpression(System.Collections.IEnumerable enumerable)
+	{
+		foreach (var iface in enumerable.GetType().GetInterfaces())
+		{
+			if (iface.IsGenericType && iface.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+			{
+				var expression = new StringBuilder();
+				AppendTypeExpression(expression, iface.GetGenericArguments()[0], null);
+				return expression.ToString();
+			}
+		}
+
+		return "string";
 	}
 
 	/// <inheritdoc cref="WriteValue(object?)"/>
@@ -865,14 +884,15 @@ public sealed class CodeWriter
 	/// Writes an array-creation expression (<c>new[] { a, b }</c>) for the "single or many" infer
 	/// wrapper types (<c>Indices</c>, <c>Fields</c>, <c>Names</c>, ...). Those types are not
 	/// collection-expression constructible but define implicit conversions from arrays, so a real
-	/// array literal assigns to them. Emits a typed empty array when there are no items so the
-	/// expression always compiles (and infers an element type).
+	/// array literal assigns to them. Emits <c>Array.Empty&lt;<paramref name="emptyElementType"/>&gt;()</c>
+	/// when there are no items so the expression always compiles with a concrete element type; the
+	/// default suits the string-based infer wrappers.
 	/// </summary>
-	public CodeWriter WriteImplicitArray<T>(IEnumerable<T> items, Action<CodeWriter, T> writeItem)
+	public CodeWriter WriteImplicitArray<T>(IEnumerable<T> items, Action<CodeWriter, T> writeItem, string emptyElementType = "string")
 	{
 		using var enumerator = items.GetEnumerator();
 		if (!enumerator.MoveNext())
-			return WriteTypeRef("System.Array").Write(".Empty<string>()");
+			return WriteTypeRef("System.Array").Write(".Empty<").WriteTypeRef(emptyElementType).Write(">()");
 
 		Write("new[] { ");
 		writeItem(this, enumerator.Current);
