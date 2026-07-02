@@ -1126,10 +1126,26 @@ public sealed class CodeWriter
 				case '\n': _builder.Append("\\n"); break;
 				case '\r': _builder.Append("\\r"); break;
 				case '\t': _builder.Append("\\t"); break;
-				default: _builder.Append(c); break;
+				default:
+					if (RequiresUnicodeEscape(c))
+						_builder.Append("\\u").Append(((int)c).ToString("X4", CultureInfo.InvariantCulture));
+					else
+						_builder.Append(c);
+					break;
 			}
 		}
 	}
+
+	// Control characters are unreadable in a literal; U+0085/U+2028/U+2029 are line terminators to the C#
+	// lexer, so a raw occurrence splits the literal and breaks compilation; the private-use area contains
+	// the type-ref placeholder sentinels (RefOpen/RefClose), which must never reach the builder as text.
+	private static bool RequiresUnicodeEscape(char c) =>
+		c < '\u0020'
+		|| c == '\u007F'
+		|| c == '\u0085'
+		|| c == '\u2028'
+		|| c == '\u2029'
+		|| (c >= '\uE000' && c <= '\uF8FF');
 
 	/// <summary>A scope that restores the previous indentation level when disposed.</summary>
 	public readonly struct IndentScope : IDisposable
