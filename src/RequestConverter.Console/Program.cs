@@ -234,6 +234,10 @@ internal class Program
 					);
 
 					Console.WriteLine(result.Code);
+					if (result.UnsupportedParameters.Count > 0)
+					{
+						Console.WriteLine($"WARN unsupported query parameters ({example.Digest}): {string.Join(", ", result.UnsupportedParameters)}");
+					}
 				}
 				catch (NotSupportedException)
 				{

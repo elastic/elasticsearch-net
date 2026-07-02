@@ -52,6 +52,7 @@ public sealed class RoundtripRegressionTests
 		// 1) Convert every valid, non-blacklisted, non-NDJSON example.
 		var cases = new List<Case>();
 		var convertFailures = new List<string>();
+		var parameterFailures = new List<string>();
 		var skippedUnsupported = 0;
 
 		foreach (var example in examples)
@@ -69,6 +70,10 @@ public sealed class RoundtripRegressionTests
 					var (request, result) = global::RequestConverter.RequestConverter.ConvertCore(
 						serializer, source.Api, source.PathParameters, source.QueryParameters, body, options);
 					cases.Add(new Case(example.Digest, source.Api, result.RequestType, result.Code, result.Namespaces, source.Body, request));
+					if (result.UnsupportedParameters.Count > 0)
+					{
+						parameterFailures.Add($"{source.Api} [{example.Digest}]: unsupported query parameters: {string.Join(", ", result.UnsupportedParameters)}");
+					}
 				}
 				catch (NotSupportedException)
 				{
@@ -115,7 +120,7 @@ public sealed class RoundtripRegressionTests
 			.Select(d => d.ToString())
 			.ToList();
 
-		_output.WriteLine($"converted={cases.Count}, skipped(unsupported)={skippedUnsupported}, convert-failures={convertFailures.Count}");
+		_output.WriteLine($"converted={cases.Count}, skipped(unsupported)={skippedUnsupported}, convert-failures={convertFailures.Count}, parameter-failures={parameterFailures.Count}");
 
 		Assert.True(emit.Success,
 			$"Generated code failed to compile ({compileErrors.Count} errors). Snippets saved under '{outputDir}'.\n" +
