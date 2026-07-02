@@ -599,6 +599,38 @@ public sealed class CodeWriter
 	}
 
 	/// <summary>
+	/// Writes a descriptor-configuration lambda <c>dN =&gt; dN&lt;body&gt;</c> with a fresh depth-allocated parameter,
+	/// the body indented one level. When the body emits nothing, the bare <c>dN =&gt; dN</c> receiver is not a
+	/// valid lambda, so the builder is rewound to <paramref name="rewindTo"/> and <c>false</c> is returned; the
+	/// caller emits its fallback. Rewinding is safe only because an empty body appended no text and therefore
+	/// no type-ref placeholders, which the assertion enforces.
+	/// </summary>
+	private bool TryWriteDescriptorLambda(int rewindTo, Action<CodeWriter> writeBody, out bool multiline)
+	{
+		var typeRefsBefore = _typeRefs.Count;
+		_descriptorDepth++;
+		var parameter = CurrentDescriptorParameter;
+		Write(parameter).Write(" => ").Write(parameter);
+		var afterReceiver = _builder.Length;
+
+		var linesBefore = _lineCount;
+		using (Indent())
+		{
+			writeBody(this);
+		}
+
+		_descriptorDepth--;
+		multiline = _lineCount > linesBefore;
+
+		if (_builder.Length != afterReceiver)
+			return true;
+
+		System.Diagnostics.Debug.Assert(_typeRefs.Count == typeRefsBefore, "An empty descriptor body must not record type refs.");
+		_builder.Length = rewindTo;
+		return false;
+	}
+
+	/// <summary>
 	/// Writes a fluent call whose arguments are a <c>params</c> list of scalar values, one per item:
 	/// <c>.<paramref name="method"/>(v1, v2, …)</c>. Used for a collection-of-scalar member whose fluent setter takes
 	/// <c>params E[]</c> (e.g. <c>.Uids("a", "b")</c>). Each value is written by <paramref name="writeItem"/>; an empty
@@ -636,26 +668,8 @@ public sealed class CodeWriter
 		WriteLine();
 		Write(".").Write(method).Write("(");
 
-		var beforeReceiver = _builder.Length;
-		_descriptorDepth++;
-		var parameter = CurrentDescriptorParameter;
-		Write(parameter).Write(" => ").Write(parameter);
-		var afterReceiver = _builder.Length;
-
-		var linesBefore = _lineCount;
-		using (Indent())
+		if (!TryWriteDescriptorLambda(_builder.Length, writeBody, out var multiline))
 		{
-			writeBody(this);
-		}
-
-		_descriptorDepth--;
-
-		// Empty body: the bare "dN => dN" receiver is not a valid lambda body. Drop it, then either emit the explicit empty
-		// argument (a setter lacking a no-arg overload) or collapse to the no-arg call - either way the call stays on one
-		// line. Safe to truncate because an empty body appends no text and therefore no type-reference placeholders.
-		if (_builder.Length == afterReceiver)
-		{
-			_builder.Length = beforeReceiver;
 			if (writeEmpty is not null)
 			{
 				// The empty fallback is a value argument to a setter that also has an Action<Descriptor>
@@ -672,7 +686,7 @@ public sealed class CodeWriter
 		// A non-empty body always starts its first call on a new line, so it spans multiple lines: close ")" on its own line
 		// at this call's indent (the body's Indent() block has exited). This cascades up the nesting for free - a wrapped
 		// descendant's line endings lie within every ancestor body's span - so parens never collapse to ")))".
-		return _lineCount > linesBefore ? WriteLine().Write(")") : Write(")");
+		return multiline ? WriteLine().Write(")") : Write(")");
 	}
 
 	/// <summary>
@@ -715,24 +729,10 @@ public sealed class CodeWriter
 
 			first = false;
 
-			var beforeReceiver = _builder.Length;
-			_descriptorDepth++;
-			var parameter = CurrentDescriptorParameter;
-			Write(parameter).Write(" => ").Write(parameter);
-			var afterReceiver = _builder.Length;
-
-			using (Indent())
-			{
-				writeItem(this, item);
-			}
-
-			_descriptorDepth--;
-
-			if (_builder.Length == afterReceiver)
+			if (!TryWriteDescriptorLambda(_builder.Length, w => writeItem(w, item), out _))
 			{
 				// Empty configuration: replace the invalid identity lambda with the item's value form, which is
 				// value-position and so must render in object-initializer mode.
-				_builder.Length = beforeReceiver;
 				using var _oi = ForceObjectInitializer();
 				writeFallback(this, item);
 			}
@@ -772,39 +772,20 @@ public sealed class CodeWriter
 
 			Write(", ");
 
-			var beforeReceiver = _builder.Length;
-			_descriptorDepth++;
-			var parameter = CurrentDescriptorParameter;
-			Write(parameter).Write(" => ").Write(parameter);
-			var afterReceiver = _builder.Length;
-
-			var linesBefore = _lineCount;
-			using (Indent())
-			{
-				writeValue(this, entry);
-			}
-
-			_descriptorDepth--;
-
-			if (_builder.Length == afterReceiver)
+			if (!TryWriteDescriptorLambda(_builder.Length, w => writeValue(w, entry), out var multiline))
 			{
 				// Empty configuration: replace the invalid identity lambda with the entry's value form, inline. The
 				// value is a setter argument that also has an Action<Descriptor> overload, so it renders as an
 				// object-initializer value with an explicit constructor (a target-typed new() would be ambiguous, CS0121).
-				_builder.Length = beforeReceiver;
 				using var _oi = ForceObjectInitializer();
 				using var _ec = ForceExplicitConstructor();
 				writeValueFallback(this, entry);
 				Write(")");
 			}
-			else if (_lineCount > linesBefore)
-			{
-				// The value lambda spanned multiple lines: close ")" on its own line at the entry call's indent.
-				WriteLine().Write(")");
-			}
 			else
 			{
-				Write(")");
+				// The value lambda spanned multiple lines: close ")" on its own line at the entry call's indent.
+				_ = multiline ? WriteLine().Write(")") : Write(")");
 			}
 		}
 
@@ -830,29 +811,16 @@ public sealed class CodeWriter
 		var beforeSeparator = _builder.Length;
 		Write(", ");
 
-		_descriptorDepth++;
-		var parameter = CurrentDescriptorParameter;
-		Write(parameter).Write(" => ").Write(parameter);
-		var afterReceiver = _builder.Length;
-
-		var linesBefore = _lineCount;
-		using (Indent())
+		if (!TryWriteDescriptorLambda(beforeSeparator, writeValue, out var multiline))
 		{
-			writeValue(this);
-		}
-
-		_descriptorDepth--;
-
-		// Empty value: drop the ", dN => dN" entirely and keep just `.Variant(key)` on one line.
-		if (_builder.Length == afterReceiver)
-		{
-			_builder.Length = beforeSeparator;
+			// Empty value: keep just `.Variant(key)`; the parameterless overload exists exactly for a
+			// variant with no required field.
 			return Write(")");
 		}
 
 		// The value lambda always starts its first call on a new line, so it spans multiple lines: close ")" on its own line.
 		// The line-count delta cascades up the nesting, so the enclosing whole-collection lambda also drops its own ")".
-		return _lineCount > linesBefore ? WriteLine().Write(")") : Write(")");
+		return multiline ? WriteLine().Write(")") : Write(")");
 	}
 
 	// ---- collections ------------------------------------------------------
