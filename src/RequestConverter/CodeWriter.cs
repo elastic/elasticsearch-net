@@ -1076,21 +1076,18 @@ public sealed class CodeWriter
 		_ => "global::" + typeRef.FullName
 	};
 
-	// The simple names that resolve unambiguously when every referenced namespace is imported: exactly one visible type
-	// (across those namespaces) carries the name. Counting all types in the imported namespaces - not just the ones the
-	// snippet references - is what makes the shortened output guaranteed to compile under those usings.
+	// The simple names that resolve unambiguously when every referenced namespace is imported: exactly one
+	// visible type (across those namespaces) carries the name. Counting all types in the imported namespaces,
+	// not just the ones the snippet references, is what makes the shortened output guaranteed to compile
+	// under those usings. A namespace missing from the generated table makes membership unknowable, so
+	// shortening is disabled entirely: fully qualified names always compile.
 	private HashSet<string> ComputeShortenableNames()
 	{
-		var importedNamespaces = _typeRefs
-			.Select(r => r.Namespace)
-			.Where(ns => ns.Length > 0)
-			.Distinct(StringComparer.Ordinal);
-
 		var counts = new Dictionary<string, int>(StringComparer.Ordinal);
-		foreach (var ns in importedNamespaces)
+		foreach (var ns in _typeRefs.Select(r => r.Namespace).Where(ns => ns.Length > 0).Distinct(StringComparer.Ordinal))
 		{
-			if (!NamespaceTypeNames.Value.TryGetValue(ns, out var names))
-				continue;
+			if (!KnownNamespaces.TypeNames.TryGetValue(ns, out var names))
+				return new HashSet<string>(StringComparer.Ordinal);
 
 			foreach (var name in names)
 				counts[name] = counts.TryGetValue(name, out var n) ? n + 1 : 1;
@@ -1104,50 +1101,6 @@ public sealed class CodeWriter
 		}
 
 		return shortenable;
-	}
-
-	// namespace -> simple type names declared in it (generic arity suffix stripped), across all loaded assemblies.
-	// Built once: the set of types visible per namespace does not change during a run.
-	private static readonly Lazy<Dictionary<string, HashSet<string>>> NamespaceTypeNames = new(BuildNamespaceTypeNames);
-
-	private static Dictionary<string, HashSet<string>> BuildNamespaceTypeNames()
-	{
-		var map = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
-
-		foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-		{
-			Type[] types;
-			try
-			{
-				types = assembly.GetExportedTypes();
-			}
-			catch (System.Reflection.ReflectionTypeLoadException ex)
-			{
-				types = ex.Types.Where(t => t is not null).ToArray()!;
-			}
-			catch
-			{
-				continue;
-			}
-
-			foreach (var type in types)
-			{
-				if (type.Namespace is not { Length: > 0 } ns)
-					continue;
-
-				var simpleName = type.Name;
-				var tick = simpleName.IndexOf('`');
-				if (tick >= 0)
-					simpleName = simpleName[..tick];
-
-				if (!map.TryGetValue(ns, out var names))
-					map[ns] = names = new HashSet<string>(StringComparer.Ordinal);
-
-				names.Add(simpleName);
-			}
-		}
-
-		return map;
 	}
 
 	private void AppendEscaped(string value)
