@@ -18,8 +18,9 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <WasmEmitSymbolMap>false</WasmEmitSymbolMap>
 
-    <!-- The converter materializes request types by runtime lookup and reflects over exported types for
-         collision-aware type-name shortening, so IL trimming would strip types it needs. Ship untrimmed. -->
+    <!-- The converter materializes request types by runtime dictionary lookup and drives System.Text.Json
+         (de)serialization over them, so IL trimming can strip types it needs at runtime. Ship untrimmed
+         until a trimmed build is verified to produce byte-identical output in the browser. -->
     <PublishTrimmed>false</PublishTrimmed>
 
     <!-- The referenced RequestConverter relies on deprecated request members to faithfully convert any request. -->
