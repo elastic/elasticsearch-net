@@ -9,7 +9,12 @@ using System.Text.Json.Serialization;
 
 using RequestConverter;
 
-// An entry point is required for an Exe; the module is driven through the JSExport methods below.
+// An entry point is required for an Exe; the module is driven through the JSExport methods below. This runs once at
+// module startup, before any JSExport conversion call, so the cap is in place for every request.
+//
+// Kibana feeds arbitrary user payloads; bound a single NDJSON value so a pathological document cannot exhaust browser
+// memory through buffer doubling.
+System.AppContext.SetData("Elastic.Clients.Elasticsearch.Serialization.NdjsonMaxValueBytes", 64L * 1024 * 1024);
 return;
 
 /// <summary>

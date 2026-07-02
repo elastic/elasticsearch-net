@@ -44,4 +44,28 @@ public class NdjsonConversionTests
 		// is never reported and a Simplified-style caller gets no using directive for it.
 		Assert.Contains("Elastic.Clients.Elasticsearch.Core.MSearch", result.Namespaces);
 	}
+
+	[Fact]
+	public void Ndjson_value_above_the_configured_cap_throws_a_clear_error()
+	{
+		System.AppContext.SetData("Elastic.Clients.Elasticsearch.Serialization.NdjsonMaxValueBytes", 128L * 1024);
+		try
+		{
+			var bigDocument = "{\"index\":{}}\n{\"blob\":\"" + new string('x', 512 * 1024) + "\"}\n";
+			var exception = Record.Exception(() => global::RequestConverter.RequestConverter.Convert(
+				global::RequestConverter.RequestConverter.DefaultSerializer,
+				"bulk",
+				pathParameters: new Dictionary<string, string> { ["index"] = "my-index" },
+				queryParameters: null,
+				body: bigDocument));
+
+			Assert.NotNull(exception);
+			Assert.Contains("NdjsonMaxValueBytes", exception.ToString());
+		}
+		finally
+		{
+			// Other tests in this process must run uncapped.
+			System.AppContext.SetData("Elastic.Clients.Elasticsearch.Serialization.NdjsonMaxValueBytes", null!);
+		}
+	}
 }

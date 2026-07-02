@@ -106,9 +106,27 @@ internal static class NdjsonValueReader
 		return reader.ReadValue<T>(options);
 	}
 
+	/// <summary>
+	/// Reads the opt-in per-value size cap. Unset (or non-positive) means unlimited. Resolved per stream, not cached
+	/// in a static, so a host or test can change it at runtime. Only hosts that feed untrusted payloads (the WASM
+	/// converter) set it; the client leaves large legitimate bulk payloads uncapped.
+	/// </summary>
+	private static long ResolveMaxValueBytes()
+	{
+#if NETFRAMEWORK
+		// AppContext.GetData is unavailable on the .NET Framework target, and no untrusted-payload host runs on it, so
+		// the cap is simply not offered there.
+		return long.MaxValue;
+#else
+		return AppContext.GetData("Elastic.Clients.Elasticsearch.Serialization.NdjsonMaxValueBytes") is long limit && limit > 0
+			? limit
+			: long.MaxValue;
+#endif
+	}
+
 	public static void DriveStream(Stream stream, JsonReaderOptions readerOptions, NdjsonValueVisitor visit)
 	{
-		var buffer = new StreamBuffer(stream, DefaultBufferSize);
+		var buffer = new StreamBuffer(stream, DefaultBufferSize, ResolveMaxValueBytes());
 		try
 		{
 			Drive(new SyncStreamBufferCursor(buffer), readerOptions, visit, default);
@@ -123,6 +141,8 @@ internal static class NdjsonValueReader
 	{
 #if NET10_0_OR_GREATER
 		// leaveOpen: the caller owns the response stream; completing the pipe must not close it.
+		// The cap does not apply here: PipeReader owns and grows its own buffers, so there is no growth site to guard;
+		// it is enforced only on the StreamBuffer-based paths (the sync path and the pre-net10 async path).
 		var pipeReader = PipeReader.Create(stream, new StreamPipeReaderOptions(leaveOpen: true));
 		try
 		{
@@ -133,7 +153,7 @@ internal static class NdjsonValueReader
 			await pipeReader.CompleteAsync().ConfigureAwait(false);
 		}
 #else
-		var buffer = new StreamBuffer(stream, DefaultBufferSize);
+		var buffer = new StreamBuffer(stream, DefaultBufferSize, ResolveMaxValueBytes());
 		try
 		{
 			await DriveAsync(new AsyncStreamCursor(buffer), readerOptions, visit, cancellationToken).ConfigureAwait(false);
@@ -354,14 +374,16 @@ internal static class NdjsonValueReader
 		private const int MinimumReadSize = 4096;
 
 		private readonly Stream _stream;
+		private readonly long _maxValueBytes;
 		private byte[] _buffer;
 		private int _filled;
 		private bool _streamCompleted;
 		private bool _disposed;
 
-		public StreamBuffer(Stream stream, int bufferSize)
+		public StreamBuffer(Stream stream, int bufferSize, long maxValueBytes)
 		{
 			_stream = stream;
+			_maxValueBytes = maxValueBytes;
 			_buffer = ArrayPool<byte>.Shared.Rent(bufferSize <= 0 ? DefaultBufferSize : bufferSize);
 		}
 
@@ -423,6 +445,9 @@ internal static class NdjsonValueReader
 
 		private void Grow()
 		{
+			if ((long)_buffer.Length * 2 > _maxValueBytes)
+				throw new JsonException($"A single NDJSON value exceeds the configured limit of {_maxValueBytes} bytes (Elastic.Clients.Elasticsearch.Serialization.NdjsonMaxValueBytes).");
+
 			var next = ArrayPool<byte>.Shared.Rent(_buffer.Length * 2);
 			System.Buffer.BlockCopy(_buffer, 0, next, 0, _filled);
 			ArrayPool<byte>.Shared.Return(_buffer);
