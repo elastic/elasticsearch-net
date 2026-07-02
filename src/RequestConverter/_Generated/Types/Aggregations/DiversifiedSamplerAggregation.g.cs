@@ -31,17 +31,17 @@ public partial class DiversifiedSamplerAggregation : RequestConverter.ICodeForma
 		{
 			if (ExecutionHint is not null)
 			{
-				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+				writer.WriteFluentCall("ExecutionHint", (w) => { Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (MaxDocsPerValue is not null)
 			{
-				writer.WriteFluentCall("MaxDocsPerValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocsPerValue.Value); });
+				writer.WriteFluentCall("MaxDocsPerValue", (w) => { w.WriteValue(MaxDocsPerValue.Value); });
 			}
 
 			if (Script is not null)
@@ -51,7 +51,7 @@ public partial class DiversifiedSamplerAggregation : RequestConverter.ICodeForma
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 		}
 		else

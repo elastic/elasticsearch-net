@@ -31,17 +31,17 @@ public partial class TTestAggregation : RequestConverter.ICodeFormattable
 		{
 			if (A is not null)
 			{
-				writer.WriteFluentDescriptorCall("A", (w) => { A.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); A.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("A", (w) => { A.FormatCode(w); }, (w) => { A.FormatCode(w); });
 			}
 
 			if (B is not null)
 			{
-				writer.WriteFluentDescriptorCall("B", (w) => { B.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); B.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("B", (w) => { B.FormatCode(w); }, (w) => { B.FormatCode(w); });
 			}
 
 			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(Type.Value, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.Aggregations.TTestTypeCodeFormatter.FormatCode(Type.Value, w); });
 			}
 		}
 		else

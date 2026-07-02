@@ -30,16 +30,16 @@ public partial class StoredScript : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); Language.FormatCode(w); });
+				writer.WriteFluentCall("Language", (w) => { Language.FormatCode(w); });
 			}
 
 			if (Options is not null)
 			{
-				writer.WriteFluentCall("Options", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Options", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Options, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			{
-				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Source); });
+				writer.WriteFluentCall("Source", (w) => { w.WriteString(Source); });
 			}
 		}
 		else

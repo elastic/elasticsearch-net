@@ -31,7 +31,7 @@ public partial class NerInferenceUpdateOptions : RequestConverter.ICodeFormattab
 		{
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+				writer.WriteFluentCall("ResultsField", (w) => { w.WriteString(ResultsField); });
 			}
 
 			if (Tokenization is not null)

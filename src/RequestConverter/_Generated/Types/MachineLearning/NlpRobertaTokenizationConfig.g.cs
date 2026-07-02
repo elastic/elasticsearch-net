@@ -31,32 +31,32 @@ public partial class NlpRobertaTokenizationConfig : RequestConverter.ICodeFormat
 		{
 			if (AddPrefixSpace is not null)
 			{
-				writer.WriteFluentCall("AddPrefixSpace", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AddPrefixSpace.Value); });
+				writer.WriteFluentCall("AddPrefixSpace", (w) => { w.WriteValue(AddPrefixSpace.Value); });
 			}
 
 			if (DoLowerCase is not null)
 			{
-				writer.WriteFluentCall("DoLowerCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DoLowerCase.Value); });
+				writer.WriteFluentCall("DoLowerCase", (w) => { w.WriteValue(DoLowerCase.Value); });
 			}
 
 			if (MaxSequenceLength is not null)
 			{
-				writer.WriteFluentCall("MaxSequenceLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxSequenceLength.Value); });
+				writer.WriteFluentCall("MaxSequenceLength", (w) => { w.WriteValue(MaxSequenceLength.Value); });
 			}
 
 			if (Span is not null)
 			{
-				writer.WriteFluentCall("Span", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Span.Value); });
+				writer.WriteFluentCall("Span", (w) => { w.WriteValue(Span.Value); });
 			}
 
 			if (Truncate is not null)
 			{
-				writer.WriteFluentCall("Truncate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, w); });
+				writer.WriteFluentCall("Truncate", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, w); });
 			}
 
 			if (WithSpecialTokens is not null)
 			{
-				writer.WriteFluentCall("WithSpecialTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithSpecialTokens.Value); });
+				writer.WriteFluentCall("WithSpecialTokens", (w) => { w.WriteValue(WithSpecialTokens.Value); });
 			}
 		}
 		else

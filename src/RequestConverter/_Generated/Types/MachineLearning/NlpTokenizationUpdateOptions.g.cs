@@ -31,12 +31,12 @@ public partial class NlpTokenizationUpdateOptions : RequestConverter.ICodeFormat
 		{
 			if (Span is not null)
 			{
-				writer.WriteFluentCall("Span", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Span.Value); });
+				writer.WriteFluentCall("Span", (w) => { w.WriteValue(Span.Value); });
 			}
 
 			if (Truncate is not null)
 			{
-				writer.WriteFluentCall("Truncate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, w); });
+				writer.WriteFluentCall("Truncate", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncateCodeFormatter.FormatCode(Truncate.Value, w); });
 			}
 		}
 		else

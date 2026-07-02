@@ -41,27 +41,27 @@ public partial class StopTransformRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AllowNoMatch is not null)
 			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 			}
 
 			if (Force is not null)
 			{
-				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (WaitForCheckpoint is not null)
 			{
-				writer.WriteFluentCall("WaitForCheckpoint", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCheckpoint.Value); });
+				writer.WriteFluentCall("WaitForCheckpoint", (w) => { w.WriteValue(WaitForCheckpoint.Value); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 		}
 		else

@@ -31,17 +31,17 @@ public partial class TokenPruningConfig : RequestConverter.ICodeFormattable
 		{
 			if (OnlyScorePrunedTokens is not null)
 			{
-				writer.WriteFluentCall("OnlyScorePrunedTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnlyScorePrunedTokens.Value); });
+				writer.WriteFluentCall("OnlyScorePrunedTokens", (w) => { w.WriteValue(OnlyScorePrunedTokens.Value); });
 			}
 
 			if (TokensFreqRatioThreshold is not null)
 			{
-				writer.WriteFluentCall("TokensFreqRatioThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TokensFreqRatioThreshold.Value); });
+				writer.WriteFluentCall("TokensFreqRatioThreshold", (w) => { w.WriteValue(TokensFreqRatioThreshold.Value); });
 			}
 
 			if (TokensWeightThreshold is not null)
 			{
-				writer.WriteFluentCall("TokensWeightThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TokensWeightThreshold.Value); w.Write("f"); });
+				writer.WriteFluentCall("TokensWeightThreshold", (w) => { w.WriteValue(TokensWeightThreshold.Value); w.Write("f"); });
 			}
 		}
 		else

@@ -30,7 +30,7 @@ public partial class RoutingField : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Required", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Required); });
+				writer.WriteFluentCall("Required", (w) => { w.WriteValue(Required); });
 			}
 		}
 		else

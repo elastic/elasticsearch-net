@@ -36,12 +36,12 @@ public partial class DetectionRule : RequestConverter.ICodeFormattable
 
 			if (Conditions is not null)
 			{
-				writer.WriteFluentDescriptorParams("Conditions", Conditions, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Conditions", Conditions, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>"); w.Write("()"); });
 			}
 
 			if (Scope is not null)
 			{
-				writer.WriteFluentDescriptorCall("Scope", (w) => { w.WriteFluentDictionaryAdds("Add", Scope, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("Scope", (w) => { w.WriteFluentDictionaryAdds("Add", Scope, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 		}
 		else

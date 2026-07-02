@@ -30,12 +30,12 @@ public partial class GeoDecayFunction : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (MultiValueMode is not null)
 			{
-				writer.WriteFluentCall("MultiValueMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(MultiValueMode.Value, w); });
+				writer.WriteFluentCall("MultiValueMode", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.MultiValueModeCodeFormatter.FormatCode(MultiValueMode.Value, w); });
 			}
 
 			{

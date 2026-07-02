@@ -30,22 +30,22 @@ public partial class RescoreQuery : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 
 			if (QueryWeight is not null)
 			{
-				writer.WriteFluentCall("QueryWeight", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(QueryWeight.Value); w.Write("d"); });
+				writer.WriteFluentCall("QueryWeight", (w) => { w.WriteValue(QueryWeight.Value); w.Write("d"); });
 			}
 
 			if (RescoreQueryWeight is not null)
 			{
-				writer.WriteFluentCall("RescoreQueryWeight", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RescoreQueryWeight.Value); w.Write("d"); });
+				writer.WriteFluentCall("RescoreQueryWeight", (w) => { w.WriteValue(RescoreQueryWeight.Value); w.Write("d"); });
 			}
 
 			if (ScoreMode is not null)
 			{
-				writer.WriteFluentCall("ScoreMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(ScoreMode.Value, w); });
+				writer.WriteFluentCall("ScoreMode", (w) => { Elastic.Clients.Elasticsearch.Core.Search.ScoreModeCodeFormatter.FormatCode(ScoreMode.Value, w); });
 			}
 		}
 		else

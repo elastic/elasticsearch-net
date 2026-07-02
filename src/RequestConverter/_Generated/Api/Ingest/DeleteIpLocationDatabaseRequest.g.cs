@@ -41,12 +41,12 @@ public partial class DeleteIpLocationDatabaseRequest : RequestConverter.ICodeFor
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

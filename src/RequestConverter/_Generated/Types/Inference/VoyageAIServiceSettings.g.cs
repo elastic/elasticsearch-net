@@ -31,16 +31,16 @@ public partial class VoyageAIServiceSettings : RequestConverter.ICodeFormattable
 		{
 			if (Dimensions is not null)
 			{
-				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+				writer.WriteFluentCall("Dimensions", (w) => { w.WriteValue(Dimensions.Value); });
 			}
 
 			if (EmbeddingType is not null)
 			{
-				writer.WriteFluentCall("EmbeddingType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EmbeddingType.Value); w.Write("f"); });
+				writer.WriteFluentCall("EmbeddingType", (w) => { w.WriteValue(EmbeddingType.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			if (RateLimit is not null)

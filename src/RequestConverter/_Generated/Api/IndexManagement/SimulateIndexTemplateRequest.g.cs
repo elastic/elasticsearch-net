@@ -57,27 +57,27 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 			using var _chainIndent = writer.Indent();
 			if (Cause is not null)
 			{
-				writer.WriteFluentCall("Cause", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Cause); });
+				writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
 			}
 
 			if (Create is not null)
 			{
-				writer.WriteFluentCall("Create", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Create.Value); });
+				writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
 			}
 
 			if (IncludeDefaults is not null)
 			{
-				writer.WriteFluentCall("IncludeDefaults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDefaults.Value); });
+				writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (IndexTemplate is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexTemplate", (w) => { IndexTemplate.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexTemplate.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexTemplate", (w) => { IndexTemplate.FormatCode(w); }, (w) => { IndexTemplate.FormatCode(w); });
 			}
 		}
 		else

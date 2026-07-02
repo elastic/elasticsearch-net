@@ -57,22 +57,22 @@ public partial class PutPolicyRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (GeoMatch is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoMatch", (w) => { GeoMatch.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoMatch.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoMatch", (w) => { GeoMatch.FormatCode(w); }, (w) => { GeoMatch.FormatCode(w); });
 			}
 
 			if (Match is not null)
 			{
-				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Match.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { Match.FormatCode(w); });
 			}
 
 			if (Range is not null)
 			{
-				writer.WriteFluentDescriptorCall("Range", (w) => { Range.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Range.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Range", (w) => { Range.FormatCode(w); }, (w) => { Range.FormatCode(w); });
 			}
 		}
 		else

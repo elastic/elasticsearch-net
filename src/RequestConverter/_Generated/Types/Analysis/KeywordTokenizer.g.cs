@@ -31,12 +31,12 @@ public partial class KeywordTokenizer : RequestConverter.ICodeFormattable
 		{
 			if (BufferSize is not null)
 			{
-				writer.WriteFluentCall("BufferSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BufferSize.Value); });
+				writer.WriteFluentCall("BufferSize", (w) => { w.WriteValue(BufferSize.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

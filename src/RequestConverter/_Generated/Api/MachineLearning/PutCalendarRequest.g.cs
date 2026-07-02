@@ -41,12 +41,12 @@ public partial class PutCalendarRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (JobIds is not null)
 			{
-				writer.WriteFluentCall("JobIds", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(JobIds, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("JobIds", (w) => { w.WriteInlineList(JobIds, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

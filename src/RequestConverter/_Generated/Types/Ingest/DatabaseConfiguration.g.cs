@@ -30,7 +30,7 @@ public partial class DatabaseConfiguration : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (Ipinfo is not null)
@@ -40,7 +40,7 @@ public partial class DatabaseConfiguration : RequestConverter.ICodeFormattable
 
 			if (Maxmind is not null)
 			{
-				writer.WriteFluentDescriptorCall("Maxmind", (w) => { Maxmind.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Maxmind.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Maxmind", (w) => { Maxmind.FormatCode(w); }, (w) => { Maxmind.FormatCode(w); });
 			}
 		}
 		else

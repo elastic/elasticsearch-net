@@ -31,12 +31,12 @@ public partial class SoftDeletes : RequestConverter.ICodeFormattable
 		{
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (RetentionLease is not null)
 			{
-				writer.WriteFluentDescriptorCall("RetentionLease", (w) => { RetentionLease.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RetentionLease.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RetentionLease", (w) => { RetentionLease.FormatCode(w); }, (w) => { RetentionLease.FormatCode(w); });
 			}
 		}
 		else

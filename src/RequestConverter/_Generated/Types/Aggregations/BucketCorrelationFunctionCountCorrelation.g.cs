@@ -30,7 +30,7 @@ public partial class BucketCorrelationFunctionCountCorrelation : RequestConverte
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("Indicator", (w) => { Indicator.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Indicator.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Indicator", (w) => { Indicator.FormatCode(w); }, (w) => { Indicator.FormatCode(w); });
 			}
 		}
 		else

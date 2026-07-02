@@ -31,16 +31,16 @@ public partial class QueryRuleCriteria : RequestConverter.ICodeFormattable
 		{
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Metadata); });
+				writer.WriteFluentCall("Metadata", (w) => { w.WriteString(Metadata); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(Type, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaTypeCodeFormatter.FormatCode(Type, w); });
 			}
 
 			if (Values is not null)
 			{
-				writer.WriteFluentCall("Values", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Values, (w, item) => { w.WriteObjectValue(item); }); });
+				writer.WriteFluentCall("Values", (w) => { w.WriteInlineList(Values, (w, item) => { w.WriteObjectValue(item); }); });
 			}
 		}
 		else

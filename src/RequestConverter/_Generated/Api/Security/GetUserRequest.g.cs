@@ -35,12 +35,12 @@ public partial class GetUserRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Username, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Username", (w) => { w.WriteInlineList(Username, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (WithProfileUid is not null)
 			{
-				writer.WriteFluentCall("WithProfileUid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithProfileUid.Value); });
+				writer.WriteFluentCall("WithProfileUid", (w) => { w.WriteValue(WithProfileUid.Value); });
 			}
 		}
 		else

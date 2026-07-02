@@ -41,17 +41,17 @@ public partial class DeleteJobRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (DeleteUserAnnotations is not null)
 			{
-				writer.WriteFluentCall("DeleteUserAnnotations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteUserAnnotations.Value); });
+				writer.WriteFluentCall("DeleteUserAnnotations", (w) => { w.WriteValue(DeleteUserAnnotations.Value); });
 			}
 
 			if (Force is not null)
 			{
-				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 		}
 		else

@@ -31,24 +31,24 @@ public partial class BoostingQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Negative", (w) => { Negative.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Negative.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Negative", (w) => { Negative.FormatCode(w); }, (w) => { Negative.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("NegativeBoost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NegativeBoost); w.Write("d"); });
+				writer.WriteFluentCall("NegativeBoost", (w) => { w.WriteValue(NegativeBoost); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Positive", (w) => { Positive.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Positive.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Positive", (w) => { Positive.FormatCode(w); }, (w) => { Positive.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 		}
 		else

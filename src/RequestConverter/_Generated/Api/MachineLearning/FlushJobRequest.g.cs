@@ -41,27 +41,27 @@ public partial class FlushJobRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AdvanceTime is not null)
 			{
-				writer.WriteFluentCall("AdvanceTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AdvanceTime.Value); });
+				writer.WriteFluentCall("AdvanceTime", (w) => { w.WriteValue(AdvanceTime.Value); });
 			}
 
 			if (CalcInterim is not null)
 			{
-				writer.WriteFluentCall("CalcInterim", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CalcInterim.Value); });
+				writer.WriteFluentCall("CalcInterim", (w) => { w.WriteValue(CalcInterim.Value); });
 			}
 
 			if (End is not null)
 			{
-				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
 			}
 
 			if (SkipTime is not null)
 			{
-				writer.WriteFluentCall("SkipTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipTime.Value); });
+				writer.WriteFluentCall("SkipTime", (w) => { w.WriteValue(SkipTime.Value); });
 			}
 
 			if (Start is not null)
 			{
-				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 			}
 		}
 		else

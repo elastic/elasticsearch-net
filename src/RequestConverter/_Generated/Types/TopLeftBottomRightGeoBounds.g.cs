@@ -30,11 +30,11 @@ public partial class TopLeftBottomRightGeoBounds : RequestConverter.ICodeFormatt
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("BottomRight", (w) => { using var _oi = w.ForceObjectInitializer(); BottomRight.FormatCode(w); });
+				writer.WriteFluentCall("BottomRight", (w) => { BottomRight.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("TopLeft", (w) => { using var _oi = w.ForceObjectInitializer(); TopLeft.FormatCode(w); });
+				writer.WriteFluentCall("TopLeft", (w) => { TopLeft.FormatCode(w); });
 			}
 		}
 		else

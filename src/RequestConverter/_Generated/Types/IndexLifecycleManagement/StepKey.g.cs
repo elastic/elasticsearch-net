@@ -31,16 +31,16 @@ public partial class StepKey : RequestConverter.ICodeFormattable
 		{
 			if (Action is not null)
 			{
-				writer.WriteFluentCall("Action", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Action); });
+				writer.WriteFluentCall("Action", (w) => { w.WriteString(Action); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
 			{
-				writer.WriteFluentCall("Phase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Phase); });
+				writer.WriteFluentCall("Phase", (w) => { w.WriteString(Phase); });
 			}
 		}
 		else

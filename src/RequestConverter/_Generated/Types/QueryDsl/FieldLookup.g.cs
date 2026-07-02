@@ -30,22 +30,22 @@ public partial class FieldLookup : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Path is not null)
 			{
-				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); }, false);
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
 			}
 		}
 		else

@@ -30,11 +30,11 @@ public partial class AlibabaCloudServiceSettings : RequestConverter.ICodeFormatt
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			{
-				writer.WriteFluentCall("Host", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Host); });
+				writer.WriteFluentCall("Host", (w) => { w.WriteString(Host); });
 			}
 
 			if (RateLimit is not null)
@@ -43,11 +43,11 @@ public partial class AlibabaCloudServiceSettings : RequestConverter.ICodeFormatt
 			}
 
 			{
-				writer.WriteFluentCall("ServiceId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ServiceId); });
+				writer.WriteFluentCall("ServiceId", (w) => { w.WriteString(ServiceId); });
 			}
 
 			{
-				writer.WriteFluentCall("Workspace", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Workspace); });
+				writer.WriteFluentCall("Workspace", (w) => { w.WriteString(Workspace); });
 			}
 		}
 		else

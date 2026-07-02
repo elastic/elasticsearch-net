@@ -31,52 +31,52 @@ public partial class Detector : RequestConverter.ICodeFormattable
 		{
 			if (ByFieldName is not null)
 			{
-				writer.WriteFluentCall("ByFieldName", (w) => { ByFieldName.FormatCode(w); });
+				writer.WriteFluentCall("ByFieldName", (w) => { ByFieldName.FormatCode(w); }, false);
 			}
 
 			if (CustomRules is not null)
 			{
-				writer.WriteFluentDescriptorParams("CustomRules", CustomRules, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("CustomRules", CustomRules, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>"); w.Write("()"); });
 			}
 
 			if (DetectorDescription is not null)
 			{
-				writer.WriteFluentCall("DetectorDescription", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DetectorDescription); });
+				writer.WriteFluentCall("DetectorDescription", (w) => { w.WriteString(DetectorDescription); });
 			}
 
 			if (DetectorIndex is not null)
 			{
-				writer.WriteFluentCall("DetectorIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DetectorIndex.Value); });
+				writer.WriteFluentCall("DetectorIndex", (w) => { w.WriteValue(DetectorIndex.Value); });
 			}
 
 			if (ExcludeFrequent is not null)
 			{
-				writer.WriteFluentCall("ExcludeFrequent", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(ExcludeFrequent.Value, w); });
+				writer.WriteFluentCall("ExcludeFrequent", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequentCodeFormatter.FormatCode(ExcludeFrequent.Value, w); });
 			}
 
 			if (FieldName is not null)
 			{
-				writer.WriteFluentCall("FieldName", (w) => { FieldName.FormatCode(w); });
+				writer.WriteFluentCall("FieldName", (w) => { FieldName.FormatCode(w); }, false);
 			}
 
 			if (Function is not null)
 			{
-				writer.WriteFluentCall("Function", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Function); });
+				writer.WriteFluentCall("Function", (w) => { w.WriteString(Function); });
 			}
 
 			if (OverFieldName is not null)
 			{
-				writer.WriteFluentCall("OverFieldName", (w) => { OverFieldName.FormatCode(w); });
+				writer.WriteFluentCall("OverFieldName", (w) => { OverFieldName.FormatCode(w); }, false);
 			}
 
 			if (PartitionFieldName is not null)
 			{
-				writer.WriteFluentCall("PartitionFieldName", (w) => { PartitionFieldName.FormatCode(w); });
+				writer.WriteFluentCall("PartitionFieldName", (w) => { PartitionFieldName.FormatCode(w); }, false);
 			}
 
 			if (UseNull is not null)
 			{
-				writer.WriteFluentCall("UseNull", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UseNull.Value); });
+				writer.WriteFluentCall("UseNull", (w) => { w.WriteValue(UseNull.Value); });
 			}
 		}
 		else

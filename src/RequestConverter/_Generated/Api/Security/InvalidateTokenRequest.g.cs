@@ -35,22 +35,22 @@ public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (RealmName is not null)
 			{
-				writer.WriteFluentCall("RealmName", (w) => { using var _oi = w.ForceObjectInitializer(); RealmName.FormatCode(w); });
+				writer.WriteFluentCall("RealmName", (w) => { RealmName.FormatCode(w); });
 			}
 
 			if (RefreshToken is not null)
 			{
-				writer.WriteFluentCall("RefreshToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RefreshToken); });
+				writer.WriteFluentCall("RefreshToken", (w) => { w.WriteString(RefreshToken); });
 			}
 
 			if (Token is not null)
 			{
-				writer.WriteFluentCall("Token", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Token); });
+				writer.WriteFluentCall("Token", (w) => { w.WriteString(Token); });
 			}
 
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 			}
 		}
 		else

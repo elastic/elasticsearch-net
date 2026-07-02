@@ -31,16 +31,16 @@ public partial class SpanOrQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Clauses", Clauses, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Clauses", Clauses, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>"); w.Write("()"); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 		}
 		else

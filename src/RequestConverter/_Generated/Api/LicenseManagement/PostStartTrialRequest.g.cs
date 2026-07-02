@@ -35,17 +35,17 @@ public partial class PostStartTrialRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Acknowledge is not null)
 			{
-				writer.WriteFluentCall("Acknowledge", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Acknowledge.Value); });
+				writer.WriteFluentCall("Acknowledge", (w) => { w.WriteValue(Acknowledge.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+				writer.WriteFluentCall("Type", (w) => { w.WriteString(Type); });
 			}
 		}
 		else

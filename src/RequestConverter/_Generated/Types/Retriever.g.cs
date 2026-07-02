@@ -31,12 +31,12 @@ public partial class Retriever : RequestConverter.ICodeFormattable
 		{
 			if (Diversify is not null)
 			{
-				writer.WriteFluentDescriptorCall("Diversify", (w) => { Diversify.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Diversify.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Diversify", (w) => { Diversify.FormatCode(w); }, (w) => { Diversify.FormatCode(w); });
 			}
 
 			if (Knn is not null)
 			{
-				writer.WriteFluentDescriptorCall("Knn", (w) => { Knn.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Knn.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Knn", (w) => { Knn.FormatCode(w); }, (w) => { Knn.FormatCode(w); });
 			}
 
 			if (Linear is not null)
@@ -46,22 +46,22 @@ public partial class Retriever : RequestConverter.ICodeFormattable
 
 			if (Pinned is not null)
 			{
-				writer.WriteFluentDescriptorCall("Pinned", (w) => { Pinned.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Pinned.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Pinned", (w) => { Pinned.FormatCode(w); }, (w) => { Pinned.FormatCode(w); });
 			}
 
 			if (Rescorer is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rescorer", (w) => { Rescorer.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rescorer.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rescorer", (w) => { Rescorer.FormatCode(w); }, (w) => { Rescorer.FormatCode(w); });
 			}
 
 			if (Rrf is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rrf", (w) => { Rrf.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rrf.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rrf", (w) => { Rrf.FormatCode(w); }, (w) => { Rrf.FormatCode(w); });
 			}
 
 			if (Rule is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rule", (w) => { Rule.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rule.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rule", (w) => { Rule.FormatCode(w); }, (w) => { Rule.FormatCode(w); });
 			}
 
 			if (Standard is not null)
@@ -71,7 +71,7 @@ public partial class Retriever : RequestConverter.ICodeFormattable
 
 			if (TextSimilarityReranker is not null)
 			{
-				writer.WriteFluentDescriptorCall("TextSimilarityReranker", (w) => { TextSimilarityReranker.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TextSimilarityReranker.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TextSimilarityReranker", (w) => { TextSimilarityReranker.FormatCode(w); }, (w) => { TextSimilarityReranker.FormatCode(w); });
 			}
 		}
 		else

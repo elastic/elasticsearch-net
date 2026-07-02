@@ -30,17 +30,17 @@ public partial class SourceOnlyRepositorySettingsForSharedFileSystem : RequestCo
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Location); });
+				writer.WriteFluentCall("Location", (w) => { w.WriteString(Location); });
 			}
 
 			if (MaxNumberOfSnapshots is not null)
 			{
-				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfSnapshots.Value); });
+				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { w.WriteValue(MaxNumberOfSnapshots.Value); });
 			}
 
 			if (Readonly is not null)
 			{
-				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+				writer.WriteFluentCall("Readonly", (w) => { w.WriteValue(Readonly.Value); });
 			}
 		}
 		else

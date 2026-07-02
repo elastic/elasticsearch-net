@@ -30,27 +30,27 @@ public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Field); });
+				writer.WriteFluentCall("Field", (w) => { w.WriteString(Field); });
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
 			}
 
 			if (Lambda is not null)
 			{
-				writer.WriteFluentCall("Lambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lambda.Value); w.Write("f"); });
+				writer.WriteFluentCall("Lambda", (w) => { w.WriteValue(Lambda.Value); w.Write("f"); });
 			}
 
 			if (MinScore is not null)
 			{
-				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+				writer.WriteFluentCall("MinScore", (w) => { w.WriteValue(MinScore.Value); w.Write("f"); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
 			if (QueryVector is not null)
@@ -60,25 +60,25 @@ public partial class DiversifyRetriever : RequestConverter.ICodeFormattable
 
 			if (QueryVectorBuilder is not null)
 			{
-				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QueryVectorBuilder.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { QueryVectorBuilder.FormatCode(w); });
 			}
 
 			if (RankWindowSize is not null)
 			{
-				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); });
+				writer.WriteFluentCall("RankWindowSize", (w) => { w.WriteValue(RankWindowSize.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Retriever.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); }, (w) => { Retriever.FormatCode(w); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.DiversifyRetrieverTypesCodeFormatter.FormatCode(Type, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.DiversifyRetrieverTypesCodeFormatter.FormatCode(Type, w); });
 			}
 		}
 		else

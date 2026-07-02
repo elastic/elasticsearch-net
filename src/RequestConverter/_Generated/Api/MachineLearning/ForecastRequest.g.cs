@@ -41,17 +41,17 @@ public partial class ForecastRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Duration is not null)
 			{
-				writer.WriteFluentCall("Duration", (w) => { using var _oi = w.ForceObjectInitializer(); Duration.FormatCode(w); });
+				writer.WriteFluentCall("Duration", (w) => { Duration.FormatCode(w); });
 			}
 
 			if (ExpiresIn is not null)
 			{
-				writer.WriteFluentCall("ExpiresIn", (w) => { using var _oi = w.ForceObjectInitializer(); ExpiresIn.FormatCode(w); });
+				writer.WriteFluentCall("ExpiresIn", (w) => { ExpiresIn.FormatCode(w); });
 			}
 
 			if (MaxModelMemory is not null)
 			{
-				writer.WriteFluentCall("MaxModelMemory", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MaxModelMemory); });
+				writer.WriteFluentCall("MaxModelMemory", (w) => { w.WriteString(MaxModelMemory); });
 			}
 		}
 		else

@@ -41,42 +41,42 @@ public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFo
 			using var _chainIndent = writer.Indent();
 			if (BlobThreadPoolConcurrency is not null)
 			{
-				writer.WriteFluentCall("BlobThreadPoolConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BlobThreadPoolConcurrency.Value); });
+				writer.WriteFluentCall("BlobThreadPoolConcurrency", (w) => { w.WriteValue(BlobThreadPoolConcurrency.Value); });
 			}
 
 			if (IndexSnapshotVerificationConcurrency is not null)
 			{
-				writer.WriteFluentCall("IndexSnapshotVerificationConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexSnapshotVerificationConcurrency.Value); });
+				writer.WriteFluentCall("IndexSnapshotVerificationConcurrency", (w) => { w.WriteValue(IndexSnapshotVerificationConcurrency.Value); });
 			}
 
 			if (IndexVerificationConcurrency is not null)
 			{
-				writer.WriteFluentCall("IndexVerificationConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexVerificationConcurrency.Value); });
+				writer.WriteFluentCall("IndexVerificationConcurrency", (w) => { w.WriteValue(IndexVerificationConcurrency.Value); });
 			}
 
 			if (MaxBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MaxBytesPerSec); });
+				writer.WriteFluentCall("MaxBytesPerSec", (w) => { w.WriteString(MaxBytesPerSec); });
 			}
 
 			if (MaxFailedShardSnapshots is not null)
 			{
-				writer.WriteFluentCall("MaxFailedShardSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxFailedShardSnapshots.Value); });
+				writer.WriteFluentCall("MaxFailedShardSnapshots", (w) => { w.WriteValue(MaxFailedShardSnapshots.Value); });
 			}
 
 			if (MetaThreadPoolConcurrency is not null)
 			{
-				writer.WriteFluentCall("MetaThreadPoolConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MetaThreadPoolConcurrency.Value); });
+				writer.WriteFluentCall("MetaThreadPoolConcurrency", (w) => { w.WriteValue(MetaThreadPoolConcurrency.Value); });
 			}
 
 			if (SnapshotVerificationConcurrency is not null)
 			{
-				writer.WriteFluentCall("SnapshotVerificationConcurrency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SnapshotVerificationConcurrency.Value); });
+				writer.WriteFluentCall("SnapshotVerificationConcurrency", (w) => { w.WriteValue(SnapshotVerificationConcurrency.Value); });
 			}
 
 			if (VerifyBlobContents is not null)
 			{
-				writer.WriteFluentCall("VerifyBlobContents", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(VerifyBlobContents.Value); });
+				writer.WriteFluentCall("VerifyBlobContents", (w) => { w.WriteValue(VerifyBlobContents.Value); });
 			}
 		}
 		else

@@ -35,17 +35,17 @@ public partial class GetPipelineRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Summary is not null)
 			{
-				writer.WriteFluentCall("Summary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Summary.Value); });
+				writer.WriteFluentCall("Summary", (w) => { w.WriteValue(Summary.Value); });
 			}
 		}
 		else

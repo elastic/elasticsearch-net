@@ -35,12 +35,12 @@ public partial class GetPrivilegesRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Application is not null)
 			{
-				writer.WriteFluentCall("Application", (w) => { using var _oi = w.ForceObjectInitializer(); Application.FormatCode(w); });
+				writer.WriteFluentCall("Application", (w) => { Application.FormatCode(w); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 		}
 		else

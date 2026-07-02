@@ -30,7 +30,7 @@ public partial class DataframeEvaluationRegression : RequestConverter.ICodeForma
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); });
+				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); }, false);
 			}
 
 			if (Metrics is not null)
@@ -39,7 +39,7 @@ public partial class DataframeEvaluationRegression : RequestConverter.ICodeForma
 			}
 
 			{
-				writer.WriteFluentCall("PredictedField", (w) => { PredictedField.FormatCode(w); });
+				writer.WriteFluentCall("PredictedField", (w) => { PredictedField.FormatCode(w); }, false);
 			}
 		}
 		else

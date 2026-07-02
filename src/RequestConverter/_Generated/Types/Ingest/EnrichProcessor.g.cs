@@ -31,11 +31,11 @@ public partial class EnrichProcessor : RequestConverter.ICodeFormattable
 		{
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (If is not null)
@@ -45,45 +45,45 @@ public partial class EnrichProcessor : RequestConverter.ICodeFormattable
 
 			if (IgnoreFailure is not null)
 			{
-				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+				writer.WriteFluentCall("IgnoreFailure", (w) => { w.WriteValue(IgnoreFailure.Value); });
 			}
 
 			if (IgnoreMissing is not null)
 			{
-				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+				writer.WriteFluentCall("IgnoreMissing", (w) => { w.WriteValue(IgnoreMissing.Value); });
 			}
 
 			if (MaxMatches is not null)
 			{
-				writer.WriteFluentCall("MaxMatches", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMatches.Value); });
+				writer.WriteFluentCall("MaxMatches", (w) => { w.WriteValue(MaxMatches.Value); });
 			}
 
 			if (OnFailure is not null)
 			{
-				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
 			}
 
 			if (Override is not null)
 			{
-				writer.WriteFluentCall("Override", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Override.Value); });
+				writer.WriteFluentCall("Override", (w) => { w.WriteValue(Override.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("PolicyName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PolicyName); });
+				writer.WriteFluentCall("PolicyName", (w) => { w.WriteString(PolicyName); });
 			}
 
 			if (ShapeRelation is not null)
 			{
-				writer.WriteFluentCall("ShapeRelation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(ShapeRelation.Value, w); });
+				writer.WriteFluentCall("ShapeRelation", (w) => { Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(ShapeRelation.Value, w); });
 			}
 
 			if (Tag is not null)
 			{
-				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+				writer.WriteFluentCall("Tag", (w) => { w.WriteString(Tag); });
 			}
 
 			{
-				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); }, false);
 			}
 		}
 		else

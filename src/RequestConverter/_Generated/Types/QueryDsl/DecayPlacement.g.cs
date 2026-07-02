@@ -31,22 +31,22 @@ public partial class DecayPlacement<TOrigin, TScale> : RequestConverter.ICodeFor
 		{
 			if (Decay is not null)
 			{
-				writer.WriteFluentCall("Decay", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Decay.Value); w.Write("d"); });
+				writer.WriteFluentCall("Decay", (w) => { w.WriteValue(Decay.Value); w.Write("d"); });
 			}
 
 			if (Offset is not null)
 			{
-				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offset); });
+				writer.WriteFluentCall("Offset", (w) => { w.WriteValue(Offset); });
 			}
 
 			if (Origin is not null)
 			{
-				writer.WriteFluentCall("Origin", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Origin); });
+				writer.WriteFluentCall("Origin", (w) => { w.WriteValue(Origin); });
 			}
 
 			if (Scale is not null)
 			{
-				writer.WriteFluentCall("Scale", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Scale); });
+				writer.WriteFluentCall("Scale", (w) => { w.WriteValue(Scale); });
 			}
 		}
 		else

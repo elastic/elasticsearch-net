@@ -30,7 +30,7 @@ public partial class RemoteClusterPrivileges : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Clusters", (w) => { using var _oi = w.ForceObjectInitializer(); Clusters.FormatCode(w); });
+				writer.WriteFluentCall("Clusters", (w) => { Clusters.FormatCode(w); });
 			}
 
 			{

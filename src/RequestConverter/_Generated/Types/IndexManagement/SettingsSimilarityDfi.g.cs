@@ -30,7 +30,7 @@ public partial class SettingsSimilarityDfi : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("IndependenceMeasure", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, w); });
+				writer.WriteFluentCall("IndependenceMeasure", (w) => { Elastic.Clients.Elasticsearch.DFIIndependenceMeasureCodeFormatter.FormatCode(IndependenceMeasure, w); });
 			}
 		}
 		else

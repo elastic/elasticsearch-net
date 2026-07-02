@@ -35,11 +35,11 @@ public partial class ElserServiceSettings : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("NumAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumAllocations); });
+				writer.WriteFluentCall("NumAllocations", (w) => { w.WriteValue(NumAllocations); });
 			}
 
 			{
-				writer.WriteFluentCall("NumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumThreads); });
+				writer.WriteFluentCall("NumThreads", (w) => { w.WriteValue(NumThreads); });
 			}
 		}
 		else

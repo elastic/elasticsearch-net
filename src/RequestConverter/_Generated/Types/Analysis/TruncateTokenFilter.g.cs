@@ -31,12 +31,12 @@ public partial class TruncateTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Length is not null)
 			{
-				writer.WriteFluentCall("Length", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Length.Value); });
+				writer.WriteFluentCall("Length", (w) => { w.WriteValue(Length.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

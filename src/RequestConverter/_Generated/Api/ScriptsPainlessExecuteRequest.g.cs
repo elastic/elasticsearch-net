@@ -45,12 +45,12 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 			using var _chainIndent = writer.Indent();
 			if (Context is not null)
 			{
-				writer.WriteFluentCall("Context", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, w); });
+				writer.WriteFluentCall("Context", (w) => { Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, w); });
 			}
 
 			if (ContextSetup is not null)
 			{
-				writer.WriteFluentDescriptorCall("ContextSetup", (w) => { ContextSetup.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ContextSetup.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ContextSetup", (w) => { ContextSetup.FormatCode(w); }, (w) => { ContextSetup.FormatCode(w); });
 			}
 
 			if (Script is not null)

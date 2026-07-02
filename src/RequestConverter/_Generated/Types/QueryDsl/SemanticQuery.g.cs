@@ -31,20 +31,20 @@ public partial class SemanticQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Field); });
+				writer.WriteFluentCall("Field", (w) => { w.WriteString(Field); });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 		}
 		else

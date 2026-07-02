@@ -35,22 +35,22 @@ public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattab
 			using var _chainIndent = writer.Indent();
 			if (DryRun is not null)
 			{
-				writer.WriteFluentCall("DryRun", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DryRun.Value); });
+				writer.WriteFluentCall("DryRun", (w) => { w.WriteValue(DryRun.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (LegacyTemplateToDelete is not null)
 			{
-				writer.WriteFluentCall("LegacyTemplateToDelete", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LegacyTemplateToDelete); });
+				writer.WriteFluentCall("LegacyTemplateToDelete", (w) => { w.WriteString(LegacyTemplateToDelete); });
 			}
 
 			if (NodeAttribute is not null)
 			{
-				writer.WriteFluentCall("NodeAttribute", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(NodeAttribute); });
+				writer.WriteFluentCall("NodeAttribute", (w) => { w.WriteString(NodeAttribute); });
 			}
 		}
 		else

@@ -30,7 +30,7 @@ public partial class SourceIndex : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 		}
 		else

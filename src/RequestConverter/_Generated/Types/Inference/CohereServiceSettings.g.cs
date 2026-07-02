@@ -30,16 +30,16 @@ public partial class CohereServiceSettings : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			if (EmbeddingType is not null)
 			{
-				writer.WriteFluentCall("EmbeddingType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingTypeCodeFormatter.FormatCode(EmbeddingType.Value, w); });
+				writer.WriteFluentCall("EmbeddingType", (w) => { Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingTypeCodeFormatter.FormatCode(EmbeddingType.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			if (RateLimit is not null)
@@ -49,7 +49,7 @@ public partial class CohereServiceSettings : RequestConverter.ICodeFormattable
 
 			if (Similarity is not null)
 			{
-				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.CohereSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+				writer.WriteFluentCall("Similarity", (w) => { Elastic.Clients.Elasticsearch.Inference.CohereSimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
 			}
 		}
 		else

@@ -31,12 +31,12 @@ public partial class StringStatsAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Script is not null)
@@ -46,7 +46,7 @@ public partial class StringStatsAggregation : RequestConverter.ICodeFormattable
 
 			if (ShowDistribution is not null)
 			{
-				writer.WriteFluentCall("ShowDistribution", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShowDistribution.Value); });
+				writer.WriteFluentCall("ShowDistribution", (w) => { w.WriteValue(ShowDistribution.Value); });
 			}
 		}
 		else

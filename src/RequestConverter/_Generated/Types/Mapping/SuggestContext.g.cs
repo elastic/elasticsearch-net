@@ -30,21 +30,21 @@ public partial class SuggestContext : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (Path is not null)
 			{
-				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); }, false);
 			}
 
 			if (Precision is not null)
 			{
-				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); if (Precision.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Precision.Value1); } else { w.WriteString(Precision.Value2); } });
+				writer.WriteFluentCall("Precision", (w) => { if (Precision.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Precision.Value1); } else { w.WriteString(Precision.Value2); } });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+				writer.WriteFluentCall("Type", (w) => { w.WriteString(Type); });
 			}
 		}
 		else

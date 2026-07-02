@@ -41,7 +41,7 @@ public partial class ResolveIndexRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -51,7 +51,7 @@ public partial class ResolveIndexRequest : RequestConverter.ICodeFormattable
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (Mode is not null)
@@ -61,7 +61,7 @@ public partial class ResolveIndexRequest : RequestConverter.ICodeFormattable
 
 			if (ProjectRouting is not null)
 			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
 			}
 		}
 		else

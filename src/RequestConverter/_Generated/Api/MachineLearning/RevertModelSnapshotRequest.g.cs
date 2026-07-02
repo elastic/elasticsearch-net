@@ -47,7 +47,7 @@ public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormatta
 			using var _chainIndent = writer.Indent();
 			if (DeleteInterveningResults is not null)
 			{
-				writer.WriteFluentCall("DeleteInterveningResults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteInterveningResults.Value); });
+				writer.WriteFluentCall("DeleteInterveningResults", (w) => { w.WriteValue(DeleteInterveningResults.Value); });
 			}
 		}
 		else

@@ -31,27 +31,27 @@ public partial class ParentIdQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (IgnoreUnmapped is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { w.WriteValue(IgnoreUnmapped.Value); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+				writer.WriteFluentCall("Type", (w) => { w.WriteString(Type); });
 			}
 		}
 		else

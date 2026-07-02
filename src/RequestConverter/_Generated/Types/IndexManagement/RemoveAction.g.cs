@@ -31,27 +31,27 @@ public partial class RemoveAction : RequestConverter.ICodeFormattable
 		{
 			if (Alias is not null)
 			{
-				writer.WriteFluentCall("Alias", (w) => { using var _oi = w.ForceObjectInitializer(); Alias.FormatCode(w); });
+				writer.WriteFluentCall("Alias", (w) => { Alias.FormatCode(w); });
 			}
 
 			if (Aliases is not null)
 			{
-				writer.WriteFluentCall("Aliases", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Aliases", (w) => { w.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (MustExist is not null)
 			{
-				writer.WriteFluentCall("MustExist", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MustExist.Value); });
+				writer.WriteFluentCall("MustExist", (w) => { w.WriteValue(MustExist.Value); });
 			}
 		}
 		else

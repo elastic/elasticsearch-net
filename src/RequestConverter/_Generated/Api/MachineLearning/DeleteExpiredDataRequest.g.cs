@@ -35,17 +35,17 @@ public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (JobId is not null)
 			{
-				writer.WriteFluentCall("JobId", (w) => { using var _oi = w.ForceObjectInitializer(); JobId.FormatCode(w); });
+				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
 			}
 
 			if (RequestsPerSecond is not null)
 			{
-				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

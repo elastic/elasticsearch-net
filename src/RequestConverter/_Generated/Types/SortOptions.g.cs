@@ -36,12 +36,12 @@ public partial class SortOptions : RequestConverter.ICodeFormattable
 
 			if (Field is not null)
 			{
-				writer.WriteFluentDescriptorCall("Field", (w) => { Field.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Field.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Field", (w) => { Field.FormatCode(w); }, (w) => { Field.FormatCode(w); });
 			}
 
 			if (GeoDistance is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoDistance", (w) => { GeoDistance.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoDistance.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoDistance", (w) => { GeoDistance.FormatCode(w); }, (w) => { GeoDistance.FormatCode(w); });
 			}
 
 			if (Score is not null)
@@ -51,7 +51,7 @@ public partial class SortOptions : RequestConverter.ICodeFormattable
 
 			if (Script is not null)
 			{
-				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Script.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); }, (w) => { Script.FormatCode(w); });
 			}
 		}
 		else

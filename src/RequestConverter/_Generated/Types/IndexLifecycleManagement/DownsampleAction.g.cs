@@ -30,12 +30,12 @@ public partial class DownsampleAction : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+				writer.WriteFluentCall("FixedInterval", (w) => { w.WriteString(FixedInterval); });
 			}
 
 			if (WaitTimeout is not null)
 			{
-				writer.WriteFluentCall("WaitTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); WaitTimeout.FormatCode(w); });
+				writer.WriteFluentCall("WaitTimeout", (w) => { WaitTimeout.FormatCode(w); });
 			}
 		}
 		else

@@ -45,17 +45,17 @@ public partial class GetIndicesSettingsRequest : RequestConverter.ICodeFormattab
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -65,27 +65,27 @@ public partial class GetIndicesSettingsRequest : RequestConverter.ICodeFormattab
 
 			if (FlatSettings is not null)
 			{
-				writer.WriteFluentCall("FlatSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatSettings.Value); });
+				writer.WriteFluentCall("FlatSettings", (w) => { w.WriteValue(FlatSettings.Value); });
 			}
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (IncludeDefaults is not null)
 			{
-				writer.WriteFluentCall("IncludeDefaults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDefaults.Value); });
+				writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
 			}
 #pragma warning disable CS0618
 			if (Local is not null)
 			{
-				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+				writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
 			}
 #pragma warning restore CS0618
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 		}
 		else

@@ -31,16 +31,16 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 		{
 			if (MaxCompletionTokens is not null)
 			{
-				writer.WriteFluentCall("MaxCompletionTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxCompletionTokens.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxCompletionTokens", (w) => { w.WriteValue(MaxCompletionTokens.Value); w.Write("L"); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Messages", Messages, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.Message>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Messages", Messages, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.Message>"); w.Write("()"); });
 			}
 
 			if (Model is not null)
 			{
-				writer.WriteFluentCall("Model", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Model); });
+				writer.WriteFluentCall("Model", (w) => { w.WriteString(Model); });
 			}
 
 			if (Reasoning is not null)
@@ -55,22 +55,22 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 
 			if (Temperature is not null)
 			{
-				writer.WriteFluentCall("Temperature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Temperature.Value); w.Write("f"); });
+				writer.WriteFluentCall("Temperature", (w) => { w.WriteValue(Temperature.Value); w.Write("f"); });
 			}
 
 			if (ToolChoice is not null)
 			{
-				writer.WriteFluentCall("ToolChoice", (w) => { using var _oi = w.ForceObjectInitializer(); if (ToolChoice.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(ToolChoice.Value1); } else { ToolChoice.Value2.FormatCode(w); } });
+				writer.WriteFluentCall("ToolChoice", (w) => { if (ToolChoice.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(ToolChoice.Value1); } else { ToolChoice.Value2.FormatCode(w); } });
 			}
 
 			if (Tools is not null)
 			{
-				writer.WriteFluentDescriptorParams("Tools", Tools, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.CompletionTool>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Tools", Tools, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.CompletionTool>"); w.Write("()"); });
 			}
 
 			if (TopP is not null)
 			{
-				writer.WriteFluentCall("TopP", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopP.Value); w.Write("f"); });
+				writer.WriteFluentCall("TopP", (w) => { w.WriteValue(TopP.Value); w.Write("f"); });
 			}
 		}
 		else

@@ -31,7 +31,7 @@ public partial class SparseVectorIndexOptions : RequestConverter.ICodeFormattabl
 		{
 			if (Prune is not null)
 			{
-				writer.WriteFluentCall("Prune", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Prune.Value); });
+				writer.WriteFluentCall("Prune", (w) => { w.WriteValue(Prune.Value); });
 			}
 
 			if (PruningConfig is not null)

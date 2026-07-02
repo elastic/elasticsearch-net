@@ -35,12 +35,12 @@ public partial class UpgradeTransformsRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (DryRun is not null)
 			{
-				writer.WriteFluentCall("DryRun", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DryRun.Value); });
+				writer.WriteFluentCall("DryRun", (w) => { w.WriteValue(DryRun.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

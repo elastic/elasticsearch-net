@@ -45,56 +45,56 @@ public partial class ReindexRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+				writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
 			}
 
 			if (RequestsPerSecond is not null)
 			{
-				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
 			}
 
 			if (RequireAlias is not null)
 			{
-				writer.WriteFluentCall("RequireAlias", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequireAlias.Value); });
+				writer.WriteFluentCall("RequireAlias", (w) => { w.WriteValue(RequireAlias.Value); });
 			}
 
 			if (Scroll is not null)
 			{
-				writer.WriteFluentCall("Scroll", (w) => { using var _oi = w.ForceObjectInitializer(); Scroll.FormatCode(w); });
+				writer.WriteFluentCall("Scroll", (w) => { Scroll.FormatCode(w); });
 			}
 
 			if (Slices is not null)
 			{
-				writer.WriteFluentCall("Slices", (w) => { using var _oi = w.ForceObjectInitializer(); Slices.FormatCode(w); });
+				writer.WriteFluentCall("Slices", (w) => { Slices.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (WaitForActiveShards is not null)
 			{
-				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 
 			if (Conflicts is not null)
 			{
-				writer.WriteFluentCall("Conflicts", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, w); });
+				writer.WriteFluentCall("Conflicts", (w) => { Elastic.Clients.Elasticsearch.ConflictsCodeFormatter.FormatCode(Conflicts.Value, w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Dest.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { Dest.FormatCode(w); });
 			}
 
 			if (MaxDocs is not null)
 			{
-				writer.WriteFluentCall("MaxDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocs.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxDocs", (w) => { w.WriteValue(MaxDocs.Value); w.Write("L"); });
 			}
 
 			if (Script is not null)
@@ -103,7 +103,7 @@ public partial class ReindexRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { Source.FormatCode(w); });
 			}
 		}
 		else

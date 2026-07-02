@@ -30,11 +30,11 @@ public partial class LatLonGeoLocation : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Lat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lat); w.Write("d"); });
+				writer.WriteFluentCall("Lat", (w) => { w.WriteValue(Lat); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("Lon", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lon); w.Write("d"); });
+				writer.WriteFluentCall("Lon", (w) => { w.WriteValue(Lon); w.Write("d"); });
 			}
 		}
 		else

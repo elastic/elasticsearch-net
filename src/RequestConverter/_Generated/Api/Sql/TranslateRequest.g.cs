@@ -45,21 +45,21 @@ public partial class TranslateRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (FetchSize is not null)
 			{
-				writer.WriteFluentCall("FetchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FetchSize.Value); });
+				writer.WriteFluentCall("FetchSize", (w) => { w.WriteValue(FetchSize.Value); });
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (TimeZone is not null)
 			{
-				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
 			}
 		}
 		else

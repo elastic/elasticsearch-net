@@ -31,12 +31,12 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 		{
 			if (Aggregations is not null)
 			{
-				writer.WriteFluentDescriptorCall("Aggregations", (w) => { w.WriteFluentDictionaryAdds("Add", Aggregations, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("Aggregations", (w) => { w.WriteFluentDictionaryAdds("Add", Aggregations, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 
 			if (Meta is not null)
 			{
-				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (AdjacencyMatrix is not null)
@@ -66,7 +66,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (BucketCorrelation is not null)
 			{
-				writer.WriteFluentDescriptorCall("BucketCorrelation", (w) => { BucketCorrelation.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); BucketCorrelation.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("BucketCorrelation", (w) => { BucketCorrelation.FormatCode(w); }, (w) => { BucketCorrelation.FormatCode(w); });
 			}
 
 			if (BucketCountKsTest is not null)
@@ -106,7 +106,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (CategorizeText is not null)
 			{
-				writer.WriteFluentDescriptorCall("CategorizeText", (w) => { CategorizeText.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); CategorizeText.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("CategorizeText", (w) => { CategorizeText.FormatCode(w); }, (w) => { CategorizeText.FormatCode(w); });
 			}
 
 			if (ChangePoint is not null)
@@ -166,7 +166,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			if (Filters is not null)
@@ -176,7 +176,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (FrequentItemSets is not null)
 			{
-				writer.WriteFluentDescriptorCall("FrequentItemSets", (w) => { FrequentItemSets.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); FrequentItemSets.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("FrequentItemSets", (w) => { FrequentItemSets.FormatCode(w); }, (w) => { FrequentItemSets.FormatCode(w); });
 			}
 
 			if (GeoBounds is not null)
@@ -201,12 +201,12 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (GeohexGrid is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeohexGrid", (w) => { GeohexGrid.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeohexGrid.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeohexGrid", (w) => { GeohexGrid.FormatCode(w); }, (w) => { GeohexGrid.FormatCode(w); });
 			}
 
 			if (GeoLine is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoLine", (w) => { GeoLine.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoLine.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoLine", (w) => { GeoLine.FormatCode(w); }, (w) => { GeoLine.FormatCode(w); });
 			}
 
 			if (GeotileGrid is not null)
@@ -226,12 +226,12 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (Inference is not null)
 			{
-				writer.WriteFluentDescriptorCall("Inference", (w) => { Inference.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Inference.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Inference", (w) => { Inference.FormatCode(w); }, (w) => { Inference.FormatCode(w); });
 			}
 
 			if (IpPrefix is not null)
 			{
-				writer.WriteFluentDescriptorCall("IpPrefix", (w) => { IpPrefix.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IpPrefix.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IpPrefix", (w) => { IpPrefix.FormatCode(w); }, (w) => { IpPrefix.FormatCode(w); });
 			}
 
 			if (IpRange is not null)
@@ -241,7 +241,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (Line is not null)
 			{
-				writer.WriteFluentDescriptorCall("Line", (w) => { Line.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Line.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Line", (w) => { Line.FormatCode(w); }, (w) => { Line.FormatCode(w); });
 			}
 
 			if (MatrixStats is not null)
@@ -291,7 +291,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (MultiTerms is not null)
 			{
-				writer.WriteFluentDescriptorCall("MultiTerms", (w) => { MultiTerms.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); MultiTerms.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("MultiTerms", (w) => { MultiTerms.FormatCode(w); }, (w) => { MultiTerms.FormatCode(w); });
 			}
 
 			if (Nested is not null)
@@ -326,7 +326,7 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 
 			if (RandomSampler is not null)
 			{
-				writer.WriteFluentDescriptorCall("RandomSampler", (w) => { RandomSampler.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RandomSampler.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RandomSampler", (w) => { RandomSampler.FormatCode(w); }, (w) => { RandomSampler.FormatCode(w); });
 			}
 
 			if (Range is not null)

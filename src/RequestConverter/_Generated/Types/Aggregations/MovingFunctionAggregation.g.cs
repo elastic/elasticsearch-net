@@ -31,32 +31,32 @@ public partial class MovingFunctionAggregation : RequestConverter.ICodeFormattab
 		{
 			if (BucketsPath is not null)
 			{
-				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+				writer.WriteFluentCall("BucketsPath", (w) => { BucketsPath.FormatCode(w); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (GapPolicy is not null)
 			{
-				writer.WriteFluentCall("GapPolicy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
+				writer.WriteFluentCall("GapPolicy", (w) => { Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
 			}
 
 			if (Script is not null)
 			{
-				writer.WriteFluentCall("Script", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Script); });
+				writer.WriteFluentCall("Script", (w) => { w.WriteString(Script); });
 			}
 
 			if (Shift is not null)
 			{
-				writer.WriteFluentCall("Shift", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Shift.Value); });
+				writer.WriteFluentCall("Shift", (w) => { w.WriteValue(Shift.Value); });
 			}
 
 			if (Window is not null)
 			{
-				writer.WriteFluentCall("Window", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Window.Value); });
+				writer.WriteFluentCall("Window", (w) => { w.WriteValue(Window.Value); });
 			}
 		}
 		else

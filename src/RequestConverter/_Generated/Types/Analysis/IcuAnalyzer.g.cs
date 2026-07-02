@@ -30,11 +30,11 @@ public partial class IcuAnalyzer : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Method", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, w); });
+				writer.WriteFluentCall("Method", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Method, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode, w); });
 			}
 		}
 		else

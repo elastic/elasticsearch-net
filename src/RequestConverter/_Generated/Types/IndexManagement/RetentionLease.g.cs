@@ -30,7 +30,7 @@ public partial class RetentionLease : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Period", (w) => { using var _oi = w.ForceObjectInitializer(); Period.FormatCode(w); });
+				writer.WriteFluentCall("Period", (w) => { Period.FormatCode(w); });
 			}
 		}
 		else

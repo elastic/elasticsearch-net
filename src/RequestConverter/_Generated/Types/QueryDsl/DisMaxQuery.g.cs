@@ -31,21 +31,21 @@ public partial class DisMaxQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Queries", Queries, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Queries", Queries, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (TieBreaker is not null)
 			{
-				writer.WriteFluentCall("TieBreaker", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TieBreaker.Value); w.Write("d"); });
+				writer.WriteFluentCall("TieBreaker", (w) => { w.WriteValue(TieBreaker.Value); w.Write("d"); });
 			}
 		}
 		else

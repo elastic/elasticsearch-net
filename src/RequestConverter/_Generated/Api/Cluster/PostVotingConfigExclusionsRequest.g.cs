@@ -35,22 +35,22 @@ public partial class PostVotingConfigExclusionsRequest : RequestConverter.ICodeF
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (NodeIds is not null)
 			{
-				writer.WriteFluentCall("NodeIds", (w) => { using var _oi = w.ForceObjectInitializer(); NodeIds.FormatCode(w); });
+				writer.WriteFluentCall("NodeIds", (w) => { NodeIds.FormatCode(w); });
 			}
 
 			if (NodeNames is not null)
 			{
-				writer.WriteFluentCall("NodeNames", (w) => { using var _oi = w.ForceObjectInitializer(); NodeNames.FormatCode(w); });
+				writer.WriteFluentCall("NodeNames", (w) => { NodeNames.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

@@ -45,12 +45,12 @@ public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormatta
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); w.Write("L"); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); w.Write("L"); });
 			}
 		}
 		else

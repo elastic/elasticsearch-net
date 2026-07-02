@@ -30,12 +30,12 @@ public partial class DownsampleConfig : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+				writer.WriteFluentCall("FixedInterval", (w) => { w.WriteString(FixedInterval); });
 			}
 
 			if (SamplingMethod is not null)
 			{
-				writer.WriteFluentCall("SamplingMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(SamplingMethod.Value, w); });
+				writer.WriteFluentCall("SamplingMethod", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(SamplingMethod.Value, w); });
 			}
 		}
 		else

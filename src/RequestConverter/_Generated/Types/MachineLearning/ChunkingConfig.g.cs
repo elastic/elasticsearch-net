@@ -30,12 +30,12 @@ public partial class ChunkingConfig : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.ChunkingModeCodeFormatter.FormatCode(Mode, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.ChunkingModeCodeFormatter.FormatCode(Mode, w); });
 			}
 
 			if (TimeSpan is not null)
 			{
-				writer.WriteFluentCall("TimeSpan", (w) => { using var _oi = w.ForceObjectInitializer(); TimeSpan.FormatCode(w); });
+				writer.WriteFluentCall("TimeSpan", (w) => { TimeSpan.FormatCode(w); });
 			}
 		}
 		else

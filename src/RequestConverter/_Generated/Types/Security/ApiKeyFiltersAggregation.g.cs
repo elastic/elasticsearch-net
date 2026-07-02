@@ -31,17 +31,17 @@ public partial class ApiKeyFiltersAggregation : RequestConverter.ICodeFormattabl
 		{
 			if (Filters is not null)
 			{
-				writer.WriteFluentCall("Filters", (w) => { using var _oi = w.ForceObjectInitializer(); Filters.FormatCode(w); });
+				writer.WriteFluentCall("Filters", (w) => { Filters.FormatCode(w); });
 			}
 
 			if (OtherBucket is not null)
 			{
-				writer.WriteFluentCall("OtherBucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OtherBucket.Value); });
+				writer.WriteFluentCall("OtherBucket", (w) => { w.WriteValue(OtherBucket.Value); });
 			}
 
 			if (OtherBucketKey is not null)
 			{
-				writer.WriteFluentCall("OtherBucketKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(OtherBucketKey); });
+				writer.WriteFluentCall("OtherBucketKey", (w) => { w.WriteString(OtherBucketKey); });
 			}
 		}
 		else

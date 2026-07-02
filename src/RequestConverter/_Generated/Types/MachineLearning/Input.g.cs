@@ -30,7 +30,7 @@ public partial class Input : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("FieldNames", (w) => { using var _oi = w.ForceObjectInitializer(); FieldNames.FormatCode(w); });
+				writer.WriteFluentCall("FieldNames", (w) => { FieldNames.FormatCode(w); });
 			}
 		}
 		else

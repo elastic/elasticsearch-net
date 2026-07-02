@@ -31,7 +31,7 @@ public partial class ScriptField : RequestConverter.ICodeFormattable
 		{
 			if (IgnoreFailure is not null)
 			{
-				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+				writer.WriteFluentCall("IgnoreFailure", (w) => { w.WriteValue(IgnoreFailure.Value); });
 			}
 
 			{

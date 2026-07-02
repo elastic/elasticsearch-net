@@ -31,17 +31,17 @@ public partial class FingerprintTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (MaxOutputSize is not null)
 			{
-				writer.WriteFluentCall("MaxOutputSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxOutputSize.Value); });
+				writer.WriteFluentCall("MaxOutputSize", (w) => { w.WriteValue(MaxOutputSize.Value); });
 			}
 
 			if (Separator is not null)
 			{
-				writer.WriteFluentCall("Separator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Separator); });
+				writer.WriteFluentCall("Separator", (w) => { w.WriteString(Separator); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

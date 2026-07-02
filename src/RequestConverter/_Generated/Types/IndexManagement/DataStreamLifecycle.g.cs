@@ -31,37 +31,37 @@ public partial class DataStreamLifecycle : RequestConverter.ICodeFormattable
 		{
 			if (DataRetention is not null)
 			{
-				writer.WriteFluentCall("DataRetention", (w) => { using var _oi = w.ForceObjectInitializer(); DataRetention.FormatCode(w); });
+				writer.WriteFluentCall("DataRetention", (w) => { DataRetention.FormatCode(w); });
 			}
 
 			if (Downsampling is not null)
 			{
-				writer.WriteFluentDescriptorParams("Downsampling", Downsampling, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Downsampling", Downsampling, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>"); w.Write("()"); });
 			}
 
 			if (DownsamplingMethod is not null)
 			{
-				writer.WriteFluentCall("DownsamplingMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, w); });
+				writer.WriteFluentCall("DownsamplingMethod", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethodCodeFormatter.FormatCode(DownsamplingMethod.Value, w); });
 			}
 
 			if (EffectiveRetention is not null)
 			{
-				writer.WriteFluentCall("EffectiveRetention", (w) => { using var _oi = w.ForceObjectInitializer(); EffectiveRetention.FormatCode(w); });
+				writer.WriteFluentCall("EffectiveRetention", (w) => { EffectiveRetention.FormatCode(w); });
 			}
 
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (FrozenAfter is not null)
 			{
-				writer.WriteFluentCall("FrozenAfter", (w) => { using var _oi = w.ForceObjectInitializer(); FrozenAfter.FormatCode(w); });
+				writer.WriteFluentCall("FrozenAfter", (w) => { FrozenAfter.FormatCode(w); });
 			}
 
 			if (RetentionDeterminedBy is not null)
 			{
-				writer.WriteFluentCall("RetentionDeterminedBy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.RetentionSourceCodeFormatter.FormatCode(RetentionDeterminedBy.Value, w); });
+				writer.WriteFluentCall("RetentionDeterminedBy", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.RetentionSourceCodeFormatter.FormatCode(RetentionDeterminedBy.Value, w); });
 			}
 		}
 		else

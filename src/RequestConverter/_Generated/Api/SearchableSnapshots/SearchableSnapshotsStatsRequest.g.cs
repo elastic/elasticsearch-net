@@ -45,12 +45,12 @@ public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFor
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (Level is not null)
 			{
-				writer.WriteFluentCall("Level", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, w); });
+				writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, w); });
 			}
 		}
 		else

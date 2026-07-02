@@ -31,101 +31,101 @@ public partial class DataframeAnalysisRegression : RequestConverter.ICodeFormatt
 		{
 			if (Alpha is not null)
 			{
-				writer.WriteFluentCall("Alpha", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Alpha.Value); w.Write("d"); });
+				writer.WriteFluentCall("Alpha", (w) => { w.WriteValue(Alpha.Value); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("DependentVariable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DependentVariable); });
+				writer.WriteFluentCall("DependentVariable", (w) => { w.WriteString(DependentVariable); });
 			}
 
 			if (DownsampleFactor is not null)
 			{
-				writer.WriteFluentCall("DownsampleFactor", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DownsampleFactor.Value); w.Write("d"); });
+				writer.WriteFluentCall("DownsampleFactor", (w) => { w.WriteValue(DownsampleFactor.Value); w.Write("d"); });
 			}
 
 			if (EarlyStoppingEnabled is not null)
 			{
-				writer.WriteFluentCall("EarlyStoppingEnabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EarlyStoppingEnabled.Value); });
+				writer.WriteFluentCall("EarlyStoppingEnabled", (w) => { w.WriteValue(EarlyStoppingEnabled.Value); });
 			}
 
 			if (Eta is not null)
 			{
-				writer.WriteFluentCall("Eta", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Eta.Value); w.Write("d"); });
+				writer.WriteFluentCall("Eta", (w) => { w.WriteValue(Eta.Value); w.Write("d"); });
 			}
 
 			if (EtaGrowthRatePerTree is not null)
 			{
-				writer.WriteFluentCall("EtaGrowthRatePerTree", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EtaGrowthRatePerTree.Value); w.Write("d"); });
+				writer.WriteFluentCall("EtaGrowthRatePerTree", (w) => { w.WriteValue(EtaGrowthRatePerTree.Value); w.Write("d"); });
 			}
 
 			if (FeatureBagFraction is not null)
 			{
-				writer.WriteFluentCall("FeatureBagFraction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FeatureBagFraction.Value); w.Write("d"); });
+				writer.WriteFluentCall("FeatureBagFraction", (w) => { w.WriteValue(FeatureBagFraction.Value); w.Write("d"); });
 			}
 
 			if (FeatureProcessors is not null)
 			{
-				writer.WriteFluentDescriptorParams("FeatureProcessors", FeatureProcessors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("FeatureProcessors", FeatureProcessors, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>"); w.Write("()"); });
 			}
 
 			if (Gamma is not null)
 			{
-				writer.WriteFluentCall("Gamma", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Gamma.Value); w.Write("d"); });
+				writer.WriteFluentCall("Gamma", (w) => { w.WriteValue(Gamma.Value); w.Write("d"); });
 			}
 
 			if (Lambda is not null)
 			{
-				writer.WriteFluentCall("Lambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lambda.Value); w.Write("d"); });
+				writer.WriteFluentCall("Lambda", (w) => { w.WriteValue(Lambda.Value); w.Write("d"); });
 			}
 
 			if (LossFunction is not null)
 			{
-				writer.WriteFluentCall("LossFunction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LossFunction); });
+				writer.WriteFluentCall("LossFunction", (w) => { w.WriteString(LossFunction); });
 			}
 
 			if (LossFunctionParameter is not null)
 			{
-				writer.WriteFluentCall("LossFunctionParameter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LossFunctionParameter.Value); w.Write("d"); });
+				writer.WriteFluentCall("LossFunctionParameter", (w) => { w.WriteValue(LossFunctionParameter.Value); w.Write("d"); });
 			}
 
 			if (MaxOptimizationRoundsPerHyperparameter is not null)
 			{
-				writer.WriteFluentCall("MaxOptimizationRoundsPerHyperparameter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxOptimizationRoundsPerHyperparameter.Value); });
+				writer.WriteFluentCall("MaxOptimizationRoundsPerHyperparameter", (w) => { w.WriteValue(MaxOptimizationRoundsPerHyperparameter.Value); });
 			}
 
 			if (MaxTrees is not null)
 			{
-				writer.WriteFluentCall("MaxTrees", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTrees.Value); });
+				writer.WriteFluentCall("MaxTrees", (w) => { w.WriteValue(MaxTrees.Value); });
 			}
 
 			if (NumTopFeatureImportanceValues is not null)
 			{
-				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopFeatureImportanceValues.Value); });
+				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { w.WriteValue(NumTopFeatureImportanceValues.Value); });
 			}
 
 			if (PredictionFieldName is not null)
 			{
-				writer.WriteFluentCall("PredictionFieldName", (w) => { PredictionFieldName.FormatCode(w); });
+				writer.WriteFluentCall("PredictionFieldName", (w) => { PredictionFieldName.FormatCode(w); }, false);
 			}
 
 			if (RandomizeSeed is not null)
 			{
-				writer.WriteFluentCall("RandomizeSeed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RandomizeSeed.Value); w.Write("d"); });
+				writer.WriteFluentCall("RandomizeSeed", (w) => { w.WriteValue(RandomizeSeed.Value); w.Write("d"); });
 			}
 
 			if (SoftTreeDepthLimit is not null)
 			{
-				writer.WriteFluentCall("SoftTreeDepthLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SoftTreeDepthLimit.Value); });
+				writer.WriteFluentCall("SoftTreeDepthLimit", (w) => { w.WriteValue(SoftTreeDepthLimit.Value); });
 			}
 
 			if (SoftTreeDepthTolerance is not null)
 			{
-				writer.WriteFluentCall("SoftTreeDepthTolerance", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SoftTreeDepthTolerance.Value); w.Write("d"); });
+				writer.WriteFluentCall("SoftTreeDepthTolerance", (w) => { w.WriteValue(SoftTreeDepthTolerance.Value); w.Write("d"); });
 			}
 
 			if (TrainingPercent is not null)
 			{
-				writer.WriteFluentCall("TrainingPercent", (w) => { using var _oi = w.ForceObjectInitializer(); TrainingPercent.FormatCode(w); });
+				writer.WriteFluentCall("TrainingPercent", (w) => { TrainingPercent.FormatCode(w); });
 			}
 		}
 		else

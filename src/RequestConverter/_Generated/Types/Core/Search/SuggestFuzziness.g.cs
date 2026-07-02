@@ -31,27 +31,27 @@ public partial class SuggestFuzziness : RequestConverter.ICodeFormattable
 		{
 			if (Fuzziness is not null)
 			{
-				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+				writer.WriteFluentCall("Fuzziness", (w) => { Fuzziness.FormatCode(w); });
 			}
 
 			if (MinLength is not null)
 			{
-				writer.WriteFluentCall("MinLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinLength.Value); });
+				writer.WriteFluentCall("MinLength", (w) => { w.WriteValue(MinLength.Value); });
 			}
 
 			if (PrefixLength is not null)
 			{
-				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+				writer.WriteFluentCall("PrefixLength", (w) => { w.WriteValue(PrefixLength.Value); });
 			}
 
 			if (Transpositions is not null)
 			{
-				writer.WriteFluentCall("Transpositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Transpositions.Value); });
+				writer.WriteFluentCall("Transpositions", (w) => { w.WriteValue(Transpositions.Value); });
 			}
 
 			if (UnicodeAware is not null)
 			{
-				writer.WriteFluentCall("UnicodeAware", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UnicodeAware.Value); });
+				writer.WriteFluentCall("UnicodeAware", (w) => { w.WriteValue(UnicodeAware.Value); });
 			}
 		}
 		else

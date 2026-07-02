@@ -31,16 +31,16 @@ public partial class IcuTransformTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Dir is not null)
 			{
-				writer.WriteFluentCall("Dir", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionCodeFormatter.FormatCode(Dir.Value, w); });
+				writer.WriteFluentCall("Dir", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirectionCodeFormatter.FormatCode(Dir.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+				writer.WriteFluentCall("Id", (w) => { w.WriteString(Id); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -31,12 +31,12 @@ public partial class AdjacencyMatrixAggregation : RequestConverter.ICodeFormatta
 		{
 			if (Filters is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filters", (w) => { w.WriteFluentDictionaryAdds("Add", Filters, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("Filters", (w) => { w.WriteFluentDictionaryAdds("Add", Filters, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 
 			if (Separator is not null)
 			{
-				writer.WriteFluentCall("Separator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Separator); });
+				writer.WriteFluentCall("Separator", (w) => { w.WriteString(Separator); });
 			}
 		}
 		else

@@ -34,20 +34,20 @@ public partial class QueryRule : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Criteria", Criteria, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Criteria", Criteria, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>"); w.Write("()"); });
 			}
 
 			if (Priority is not null)
 			{
-				writer.WriteFluentCall("Priority", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Priority.Value); });
+				writer.WriteFluentCall("Priority", (w) => { w.WriteValue(Priority.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("RuleId", (w) => { using var _oi = w.ForceObjectInitializer(); RuleId.FormatCode(w); });
+				writer.WriteFluentCall("RuleId", (w) => { RuleId.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(Type, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.QueryRules.QueryRuleTypeCodeFormatter.FormatCode(Type, w); });
 			}
 		}
 		else

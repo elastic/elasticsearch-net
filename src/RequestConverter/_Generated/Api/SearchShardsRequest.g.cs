@@ -45,12 +45,12 @@ public partial class SearchShardsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -60,32 +60,32 @@ public partial class SearchShardsRequest : RequestConverter.ICodeFormattable
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (Local is not null)
 			{
-				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+				writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Preference is not null)
 			{
-				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (Slice is not null)
 			{
-				writer.WriteFluentCall("Slice", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Slice); });
+				writer.WriteFluentCall("Slice", (w) => { w.WriteString(Slice); });
 			}
 		}
 		else

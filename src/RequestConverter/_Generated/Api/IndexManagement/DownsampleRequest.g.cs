@@ -68,7 +68,7 @@ public partial class DownsampleRequest : RequestConverter.ICodeFormattable
 
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Config.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); }, (w) => { Config.FormatCode(w); });
 			}
 		}
 		else

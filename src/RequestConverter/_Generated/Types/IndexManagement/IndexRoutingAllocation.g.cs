@@ -36,7 +36,7 @@ public partial class IndexRoutingAllocation : RequestConverter.ICodeFormattable
 
 			if (Enable is not null)
 			{
-				writer.WriteFluentCall("Enable", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(Enable.Value, w); });
+				writer.WriteFluentCall("Enable", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsCodeFormatter.FormatCode(Enable.Value, w); });
 			}
 
 			if (Include is not null)

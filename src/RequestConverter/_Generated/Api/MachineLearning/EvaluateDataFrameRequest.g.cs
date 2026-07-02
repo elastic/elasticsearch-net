@@ -44,16 +44,16 @@ public partial class EvaluateDataFrameRequest : RequestConverter.ICodeFormattabl
 
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorCall("Evaluation", (w) => { Evaluation.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Evaluation.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Evaluation", (w) => { Evaluation.FormatCode(w); }, (w) => { Evaluation.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 		}
 		else

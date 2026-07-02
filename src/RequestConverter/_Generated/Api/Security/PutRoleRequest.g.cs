@@ -57,12 +57,12 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (Applications is not null)
 			{
-				writer.WriteFluentDescriptorParams("Applications", Applications, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Applications", Applications, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>"); w.Write("()"); });
 			}
 
 			if (Cluster is not null)
@@ -72,32 +72,32 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (Global is not null)
 			{
-				writer.WriteFluentCall("Global", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Global, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Global", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Global, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Indices is not null)
 			{
-				writer.WriteFluentDescriptorParams("Indices", Indices, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Indices", Indices, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>"); w.Write("()"); });
 			}
 
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (RemoteCluster is not null)
 			{
-				writer.WriteFluentDescriptorParams("RemoteCluster", RemoteCluster, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("RemoteCluster", RemoteCluster, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>"); w.Write("()"); });
 			}
 
 			if (RemoteIndices is not null)
 			{
-				writer.WriteFluentDescriptorParams("RemoteIndices", RemoteIndices, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("RemoteIndices", RemoteIndices, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>"); w.Write("()"); });
 			}
 
 			if (RunAs is not null)
@@ -107,7 +107,7 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 
 			if (TransientMetadata is not null)
 			{
-				writer.WriteFluentCall("TransientMetadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("TransientMetadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 		}
 		else

@@ -45,12 +45,12 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -60,7 +60,7 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 		}
 		else

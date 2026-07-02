@@ -31,27 +31,27 @@ public partial class IndexSettingBlocks : RequestConverter.ICodeFormattable
 		{
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Metadata.Value); });
+				writer.WriteFluentCall("Metadata", (w) => { w.WriteValue(Metadata.Value); });
 			}
 
 			if (Read is not null)
 			{
-				writer.WriteFluentCall("Read", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Read.Value); });
+				writer.WriteFluentCall("Read", (w) => { w.WriteValue(Read.Value); });
 			}
 
 			if (ReadOnly is not null)
 			{
-				writer.WriteFluentCall("ReadOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReadOnly.Value); });
+				writer.WriteFluentCall("ReadOnly", (w) => { w.WriteValue(ReadOnly.Value); });
 			}
 
 			if (ReadOnlyAllowDelete is not null)
 			{
-				writer.WriteFluentCall("ReadOnlyAllowDelete", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReadOnlyAllowDelete.Value); });
+				writer.WriteFluentCall("ReadOnlyAllowDelete", (w) => { w.WriteValue(ReadOnlyAllowDelete.Value); });
 			}
 
 			if (Write is not null)
 			{
-				writer.WriteFluentCall("Write", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Write.Value); });
+				writer.WriteFluentCall("Write", (w) => { w.WriteValue(Write.Value); });
 			}
 		}
 		else

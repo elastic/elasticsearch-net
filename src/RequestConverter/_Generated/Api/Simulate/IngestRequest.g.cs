@@ -45,31 +45,31 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (MergeType is not null)
 			{
-				writer.WriteFluentCall("MergeType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(MergeType.Value, w); });
+				writer.WriteFluentCall("MergeType", (w) => { Elastic.Clients.Elasticsearch.Simulate.MergeTypeCodeFormatter.FormatCode(MergeType.Value, w); });
 			}
 
 			if (Pipeline is not null)
 			{
-				writer.WriteFluentCall("Pipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pipeline); });
+				writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
 			}
 
 			if (ComponentTemplateSubstitutions is not null)
 			{
-				writer.WriteFluentDescriptorCall("ComponentTemplateSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", ComponentTemplateSubstitutions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("ComponentTemplateSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", ComponentTemplateSubstitutions, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>"); w.Write("()"); });
 			}
 
 			if (IndexTemplateSubstitutions is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexTemplateSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", IndexTemplateSubstitutions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("IndexTemplateSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", IndexTemplateSubstitutions, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 
 			if (MappingAddition is not null)
@@ -79,7 +79,7 @@ public partial class IngestRequest : RequestConverter.ICodeFormattable
 
 			if (PipelineSubstitutions is not null)
 			{
-				writer.WriteFluentDescriptorCall("PipelineSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", PipelineSubstitutions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("PipelineSubstitutions", (w) => { w.WriteFluentDictionaryAdds("Add", PipelineSubstitutions, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 		}
 		else

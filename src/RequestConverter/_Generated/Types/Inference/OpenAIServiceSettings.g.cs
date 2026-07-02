@@ -30,21 +30,21 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			if (Dimensions is not null)
 			{
-				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+				writer.WriteFluentCall("Dimensions", (w) => { w.WriteValue(Dimensions.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			if (OrganizationId is not null)
 			{
-				writer.WriteFluentCall("OrganizationId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(OrganizationId); });
+				writer.WriteFluentCall("OrganizationId", (w) => { w.WriteString(OrganizationId); });
 			}
 
 			if (RateLimit is not null)
@@ -54,12 +54,12 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 
 			if (Similarity is not null)
 			{
-				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+				writer.WriteFluentCall("Similarity", (w) => { Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
 			}
 
 			if (Url is not null)
 			{
-				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+				writer.WriteFluentCall("Url", (w) => { w.WriteString(Url); });
 			}
 		}
 		else

@@ -41,22 +41,22 @@ public partial class GetAsyncSearchRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (KeepAlive is not null)
 			{
-				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
 			}
 
 			if (ReturnIntermediateResults is not null)
 			{
-				writer.WriteFluentCall("ReturnIntermediateResults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnIntermediateResults.Value); });
+				writer.WriteFluentCall("ReturnIntermediateResults", (w) => { w.WriteValue(ReturnIntermediateResults.Value); });
 			}
 
 			if (TypedKeys is not null)
 			{
-				writer.WriteFluentCall("TypedKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TypedKeys.Value); });
+				writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
 			}
 
 			if (WaitForCompletionTimeout is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForCompletionTimeout.FormatCode(w); });
+				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
 			}
 		}
 		else

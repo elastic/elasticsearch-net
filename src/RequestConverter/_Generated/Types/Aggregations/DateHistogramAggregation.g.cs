@@ -31,7 +31,7 @@ public partial class DateHistogramAggregation : RequestConverter.ICodeFormattabl
 		{
 			if (CalendarInterval is not null)
 			{
-				writer.WriteFluentCall("CalendarInterval", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(CalendarInterval.Value, w); });
+				writer.WriteFluentCall("CalendarInterval", (w) => { Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(CalendarInterval.Value, w); });
 			}
 
 			if (ExtendedBounds is not null)
@@ -41,17 +41,17 @@ public partial class DateHistogramAggregation : RequestConverter.ICodeFormattabl
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (FixedInterval is not null)
 			{
-				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); FixedInterval.FormatCode(w); });
+				writer.WriteFluentCall("FixedInterval", (w) => { FixedInterval.FormatCode(w); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (HardBounds is not null)
@@ -61,32 +61,32 @@ public partial class DateHistogramAggregation : RequestConverter.ICodeFormattabl
 #pragma warning disable CS0618
 			if (Interval is not null)
 			{
-				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); Interval.FormatCode(w); });
+				writer.WriteFluentCall("Interval", (w) => { Interval.FormatCode(w); });
 			}
 #pragma warning restore CS0618
 			if (MinDocCount is not null)
 			{
-				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); });
+				writer.WriteFluentCall("MinDocCount", (w) => { w.WriteValue(MinDocCount.Value); });
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteValue(Missing.Value); });
 			}
 
 			if (Offset is not null)
 			{
-				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); Offset.FormatCode(w); });
+				writer.WriteFluentCall("Offset", (w) => { Offset.FormatCode(w); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); }); });
+				writer.WriteFluentCall("Order", (w) => { w.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); }); });
 			}
 
 			if (Params is not null)
 			{
-				writer.WriteFluentCall("Params", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Params", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Script is not null)
@@ -96,7 +96,7 @@ public partial class DateHistogramAggregation : RequestConverter.ICodeFormattabl
 
 			if (TimeZone is not null)
 			{
-				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
 			}
 		}
 		else

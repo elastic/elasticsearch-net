@@ -31,17 +31,17 @@ public partial class QueryVectorBuilder : RequestConverter.ICodeFormattable
 		{
 			if (Embedding is not null)
 			{
-				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Embedding.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); }, (w) => { Embedding.FormatCode(w); });
 			}
 
 			if (Lookup is not null)
 			{
-				writer.WriteFluentDescriptorCall("Lookup", (w) => { Lookup.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Lookup.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Lookup", (w) => { Lookup.FormatCode(w); }, (w) => { Lookup.FormatCode(w); });
 			}
 
 			if (TextEmbedding is not null)
 			{
-				writer.WriteFluentDescriptorCall("TextEmbedding", (w) => { TextEmbedding.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TextEmbedding.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TextEmbedding", (w) => { TextEmbedding.FormatCode(w); }, (w) => { TextEmbedding.FormatCode(w); });
 			}
 		}
 		else

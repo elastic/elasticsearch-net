@@ -31,42 +31,42 @@ public partial class CompositeDateHistogramAggregation : RequestConverter.ICodeF
 		{
 			if (CalendarInterval is not null)
 			{
-				writer.WriteFluentCall("CalendarInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CalendarInterval); });
+				writer.WriteFluentCall("CalendarInterval", (w) => { w.WriteString(CalendarInterval); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (FixedInterval is not null)
 			{
-				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+				writer.WriteFluentCall("FixedInterval", (w) => { w.WriteString(FixedInterval); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (MissingBucket is not null)
 			{
-				writer.WriteFluentCall("MissingBucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MissingBucket.Value); });
+				writer.WriteFluentCall("MissingBucket", (w) => { w.WriteValue(MissingBucket.Value); });
 			}
 
 			if (MissingOrder is not null)
 			{
-				writer.WriteFluentCall("MissingOrder", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, w); });
+				writer.WriteFluentCall("MissingOrder", (w) => { Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, w); });
 			}
 
 			if (Offset is not null)
 			{
-				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); Offset.FormatCode(w); });
+				writer.WriteFluentCall("Offset", (w) => { Offset.FormatCode(w); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+				writer.WriteFluentCall("Order", (w) => { Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
 			}
 
 			if (Script is not null)
@@ -76,12 +76,12 @@ public partial class CompositeDateHistogramAggregation : RequestConverter.ICodeF
 
 			if (TimeZone is not null)
 			{
-				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
 			}
 
 			if (ValueType is not null)
 			{
-				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
+				writer.WriteFluentCall("ValueType", (w) => { Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
 			}
 		}
 		else

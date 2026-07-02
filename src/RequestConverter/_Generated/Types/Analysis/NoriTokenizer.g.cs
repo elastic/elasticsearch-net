@@ -31,17 +31,17 @@ public partial class NoriTokenizer : RequestConverter.ICodeFormattable
 		{
 			if (DecompoundMode is not null)
 			{
-				writer.WriteFluentCall("DecompoundMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, w); });
+				writer.WriteFluentCall("DecompoundMode", (w) => { Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, w); });
 			}
 
 			if (DiscardPunctuation is not null)
 			{
-				writer.WriteFluentCall("DiscardPunctuation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscardPunctuation.Value); });
+				writer.WriteFluentCall("DiscardPunctuation", (w) => { w.WriteValue(DiscardPunctuation.Value); });
 			}
 
 			if (UserDictionary is not null)
 			{
-				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+				writer.WriteFluentCall("UserDictionary", (w) => { w.WriteString(UserDictionary); });
 			}
 
 			if (UserDictionaryRules is not null)
@@ -51,7 +51,7 @@ public partial class NoriTokenizer : RequestConverter.ICodeFormattable
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

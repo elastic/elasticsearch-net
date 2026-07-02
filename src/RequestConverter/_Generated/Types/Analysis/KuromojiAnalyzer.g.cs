@@ -31,12 +31,12 @@ public partial class KuromojiAnalyzer : RequestConverter.ICodeFormattable
 		{
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 
 			if (UserDictionary is not null)
 			{
-				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+				writer.WriteFluentCall("UserDictionary", (w) => { w.WriteString(UserDictionary); });
 			}
 		}
 		else

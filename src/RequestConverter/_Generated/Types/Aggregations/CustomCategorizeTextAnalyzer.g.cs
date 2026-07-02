@@ -41,7 +41,7 @@ public partial class CustomCategorizeTextAnalyzer : RequestConverter.ICodeFormat
 
 			if (Tokenizer is not null)
 			{
-				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tokenizer); });
+				writer.WriteFluentCall("Tokenizer", (w) => { w.WriteString(Tokenizer); });
 			}
 		}
 		else

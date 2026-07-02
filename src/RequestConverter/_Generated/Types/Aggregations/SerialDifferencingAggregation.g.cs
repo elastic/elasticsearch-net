@@ -31,22 +31,22 @@ public partial class SerialDifferencingAggregation : RequestConverter.ICodeForma
 		{
 			if (BucketsPath is not null)
 			{
-				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+				writer.WriteFluentCall("BucketsPath", (w) => { BucketsPath.FormatCode(w); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (GapPolicy is not null)
 			{
-				writer.WriteFluentCall("GapPolicy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
+				writer.WriteFluentCall("GapPolicy", (w) => { Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
 			}
 
 			if (Lag is not null)
 			{
-				writer.WriteFluentCall("Lag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lag.Value); });
+				writer.WriteFluentCall("Lag", (w) => { w.WriteValue(Lag.Value); });
 			}
 		}
 		else

@@ -31,12 +31,12 @@ public partial class GoogleVertexAITaskSettings : RequestConverter.ICodeFormatta
 		{
 			if (AutoTruncate is not null)
 			{
-				writer.WriteFluentCall("AutoTruncate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoTruncate.Value); });
+				writer.WriteFluentCall("AutoTruncate", (w) => { w.WriteValue(AutoTruncate.Value); });
 			}
 
 			if (MaxTokens is not null)
 			{
-				writer.WriteFluentCall("MaxTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokens.Value); });
+				writer.WriteFluentCall("MaxTokens", (w) => { w.WriteValue(MaxTokens.Value); });
 			}
 
 			if (ThinkingConfig is not null)
@@ -46,7 +46,7 @@ public partial class GoogleVertexAITaskSettings : RequestConverter.ICodeFormatta
 
 			if (TopN is not null)
 			{
-				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 			}
 		}
 		else

@@ -31,37 +31,37 @@ public partial class RareTermsAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Exclude is not null)
 			{
-				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); Exclude.FormatCode(w); });
+				writer.WriteFluentCall("Exclude", (w) => { Exclude.FormatCode(w); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Include is not null)
 			{
-				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); Include.FormatCode(w); });
+				writer.WriteFluentCall("Include", (w) => { Include.FormatCode(w); });
 			}
 
 			if (MaxDocCount is not null)
 			{
-				writer.WriteFluentCall("MaxDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocCount.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxDocCount", (w) => { w.WriteValue(MaxDocCount.Value); w.Write("L"); });
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Precision is not null)
 			{
-				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Precision.Value); w.Write("d"); });
+				writer.WriteFluentCall("Precision", (w) => { w.WriteValue(Precision.Value); w.Write("d"); });
 			}
 
 			if (ValueType is not null)
 			{
-				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ValueType); });
+				writer.WriteFluentCall("ValueType", (w) => { w.WriteString(ValueType); });
 			}
 		}
 		else

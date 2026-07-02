@@ -57,7 +57,7 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -67,21 +67,21 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 #pragma warning disable CS0618
 			if (IgnoreThrottled is not null)
 			{
-				writer.WriteFluentCall("IgnoreThrottled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreThrottled.Value); });
+				writer.WriteFluentCall("IgnoreThrottled", (w) => { w.WriteValue(IgnoreThrottled.Value); });
 			}
 #pragma warning restore CS0618
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (AllowLazyOpen is not null)
 			{
-				writer.WriteFluentCall("AllowLazyOpen", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLazyOpen.Value); });
+				writer.WriteFluentCall("AllowLazyOpen", (w) => { w.WriteValue(AllowLazyOpen.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnalysisConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { AnalysisConfig.FormatCode(w); });
 			}
 
 			if (AnalysisLimits is not null)
@@ -91,17 +91,17 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 
 			if (BackgroundPersistInterval is not null)
 			{
-				writer.WriteFluentCall("BackgroundPersistInterval", (w) => { using var _oi = w.ForceObjectInitializer(); BackgroundPersistInterval.FormatCode(w); });
+				writer.WriteFluentCall("BackgroundPersistInterval", (w) => { BackgroundPersistInterval.FormatCode(w); });
 			}
 
 			if (CustomSettings is not null)
 			{
-				writer.WriteFluentCall("CustomSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(CustomSettings); });
+				writer.WriteFluentCall("CustomSettings", (w) => { w.WriteObjectValue(CustomSettings); });
 			}
 
 			if (DailyModelSnapshotRetentionAfterDays is not null)
 			{
-				writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
 			}
 
 			{
@@ -115,7 +115,7 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (Groups is not null)
@@ -130,22 +130,22 @@ public partial class PutJobRequest : RequestConverter.ICodeFormattable
 
 			if (ModelSnapshotRetentionDays is not null)
 			{
-				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
 			}
 
 			if (RenormalizationWindowDays is not null)
 			{
-				writer.WriteFluentCall("RenormalizationWindowDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("RenormalizationWindowDays", (w) => { w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
 			}
 
 			if (ResultsIndexName is not null)
 			{
-				writer.WriteFluentCall("ResultsIndexName", (w) => { using var _oi = w.ForceObjectInitializer(); ResultsIndexName.FormatCode(w); });
+				writer.WriteFluentCall("ResultsIndexName", (w) => { ResultsIndexName.FormatCode(w); });
 			}
 
 			if (ResultsRetentionDays is not null)
 			{
-				writer.WriteFluentCall("ResultsRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("ResultsRetentionDays", (w) => { w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
 			}
 		}
 		else

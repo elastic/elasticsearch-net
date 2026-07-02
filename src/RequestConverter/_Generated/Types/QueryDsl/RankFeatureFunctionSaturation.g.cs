@@ -31,7 +31,7 @@ public partial class RankFeatureFunctionSaturation : RequestConverter.ICodeForma
 		{
 			if (Pivot is not null)
 			{
-				writer.WriteFluentCall("Pivot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Pivot.Value); w.Write("f"); });
+				writer.WriteFluentCall("Pivot", (w) => { w.WriteValue(Pivot.Value); w.Write("f"); });
 			}
 		}
 		else

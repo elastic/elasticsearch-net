@@ -31,21 +31,21 @@ public partial class ExploreControls : RequestConverter.ICodeFormattable
 		{
 			if (SampleDiversity is not null)
 			{
-				writer.WriteFluentDescriptorCall("SampleDiversity", (w) => { SampleDiversity.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SampleDiversity.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SampleDiversity", (w) => { SampleDiversity.FormatCode(w); }, (w) => { SampleDiversity.FormatCode(w); });
 			}
 
 			if (SampleSize is not null)
 			{
-				writer.WriteFluentCall("SampleSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SampleSize.Value); });
+				writer.WriteFluentCall("SampleSize", (w) => { w.WriteValue(SampleSize.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("UseSignificance", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UseSignificance); });
+				writer.WriteFluentCall("UseSignificance", (w) => { w.WriteValue(UseSignificance); });
 			}
 		}
 		else

@@ -31,37 +31,37 @@ public partial class AutoDateHistogramAggregation : RequestConverter.ICodeFormat
 		{
 			if (Buckets is not null)
 			{
-				writer.WriteFluentCall("Buckets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Buckets.Value); });
+				writer.WriteFluentCall("Buckets", (w) => { w.WriteValue(Buckets.Value); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (MinimumInterval is not null)
 			{
-				writer.WriteFluentCall("MinimumInterval", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(MinimumInterval.Value, w); });
+				writer.WriteFluentCall("MinimumInterval", (w) => { Elastic.Clients.Elasticsearch.Aggregations.MinimumIntervalCodeFormatter.FormatCode(MinimumInterval.Value, w); });
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteValue(Missing.Value); });
 			}
 
 			if (Offset is not null)
 			{
-				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Offset); });
+				writer.WriteFluentCall("Offset", (w) => { w.WriteString(Offset); });
 			}
 
 			if (Params is not null)
 			{
-				writer.WriteFluentCall("Params", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Params", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Script is not null)
@@ -71,7 +71,7 @@ public partial class AutoDateHistogramAggregation : RequestConverter.ICodeFormat
 
 			if (TimeZone is not null)
 			{
-				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
 			}
 		}
 		else

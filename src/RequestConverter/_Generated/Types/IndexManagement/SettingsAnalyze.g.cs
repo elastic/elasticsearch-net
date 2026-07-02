@@ -31,7 +31,7 @@ public partial class SettingsAnalyze : RequestConverter.ICodeFormattable
 		{
 			if (MaxTokenCount is not null)
 			{
-				writer.WriteFluentCall("MaxTokenCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokenCount.Value); });
+				writer.WriteFluentCall("MaxTokenCount", (w) => { w.WriteValue(MaxTokenCount.Value); });
 			}
 		}
 		else

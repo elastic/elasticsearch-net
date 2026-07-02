@@ -31,7 +31,7 @@ public partial class SemanticTextIndexOptions : RequestConverter.ICodeFormattabl
 		{
 			if (DenseVector is not null)
 			{
-				writer.WriteFluentDescriptorCall("DenseVector", (w) => { DenseVector.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); DenseVector.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("DenseVector", (w) => { DenseVector.FormatCode(w); }, (w) => { DenseVector.FormatCode(w); });
 			}
 
 			if (SparseVector is not null)

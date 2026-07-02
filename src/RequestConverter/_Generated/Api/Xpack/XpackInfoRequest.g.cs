@@ -36,7 +36,7 @@ public partial class XpackInfoRequest : RequestConverter.ICodeFormattable
 #pragma warning disable CS0618
 			if (AcceptEnterprise is not null)
 			{
-				writer.WriteFluentCall("AcceptEnterprise", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AcceptEnterprise.Value); });
+				writer.WriteFluentCall("AcceptEnterprise", (w) => { w.WriteValue(AcceptEnterprise.Value); });
 			}
 #pragma warning restore CS0618
 			if (Categories is not null)

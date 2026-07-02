@@ -31,11 +31,11 @@ public partial class ForceMergeAction : RequestConverter.ICodeFormattable
 		{
 			if (IndexCodec is not null)
 			{
-				writer.WriteFluentCall("IndexCodec", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexCodec); });
+				writer.WriteFluentCall("IndexCodec", (w) => { w.WriteString(IndexCodec); });
 			}
 
 			{
-				writer.WriteFluentCall("MaxNumSegments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumSegments); });
+				writer.WriteFluentCall("MaxNumSegments", (w) => { w.WriteValue(MaxNumSegments); });
 			}
 		}
 		else

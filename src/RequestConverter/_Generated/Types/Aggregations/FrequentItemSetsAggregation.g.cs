@@ -30,27 +30,27 @@ public partial class FrequentItemSetsAggregation : RequestConverter.ICodeFormatt
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorParams("Fields", Fields, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Fields", Fields, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>"); w.Write("()"); });
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			if (MinimumSetSize is not null)
 			{
-				writer.WriteFluentCall("MinimumSetSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinimumSetSize.Value); });
+				writer.WriteFluentCall("MinimumSetSize", (w) => { w.WriteValue(MinimumSetSize.Value); });
 			}
 
 			if (MinimumSupport is not null)
 			{
-				writer.WriteFluentCall("MinimumSupport", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinimumSupport.Value); w.Write("d"); });
+				writer.WriteFluentCall("MinimumSupport", (w) => { w.WriteValue(MinimumSupport.Value); w.Write("d"); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 		}
 		else

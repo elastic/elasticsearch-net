@@ -30,12 +30,12 @@ public partial class FilterRef : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("FilterId", (w) => { using var _oi = w.ForceObjectInitializer(); FilterId.FormatCode(w); });
+				writer.WriteFluentCall("FilterId", (w) => { FilterId.FormatCode(w); });
 			}
 
 			if (FilterType is not null)
 			{
-				writer.WriteFluentCall("FilterType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(FilterType.Value, w); });
+				writer.WriteFluentCall("FilterType", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.FilterTypeCodeFormatter.FormatCode(FilterType.Value, w); });
 			}
 		}
 		else

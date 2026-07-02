@@ -31,12 +31,12 @@ public partial class Suggester : RequestConverter.ICodeFormattable
 		{
 			if (Suggesters is not null)
 			{
-				writer.WriteFluentDescriptorCall("Suggesters", (w) => { w.WriteFluentDictionaryAdds("Add", Suggesters, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("Suggesters", (w) => { w.WriteFluentDictionaryAdds("Add", Suggesters, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 
 			if (Text is not null)
 			{
-				writer.WriteFluentCall("Text", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Text); });
+				writer.WriteFluentCall("Text", (w) => { w.WriteString(Text); });
 			}
 		}
 		else

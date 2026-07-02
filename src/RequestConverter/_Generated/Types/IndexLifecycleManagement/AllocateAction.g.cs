@@ -31,27 +31,27 @@ public partial class AllocateAction : RequestConverter.ICodeFormattable
 		{
 			if (Exclude is not null)
 			{
-				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Exclude, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Exclude", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Exclude, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Include is not null)
 			{
-				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Include, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Include", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Include, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (NumberOfReplicas is not null)
 			{
-				writer.WriteFluentCall("NumberOfReplicas", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfReplicas.Value); });
+				writer.WriteFluentCall("NumberOfReplicas", (w) => { w.WriteValue(NumberOfReplicas.Value); });
 			}
 
 			if (Require is not null)
 			{
-				writer.WriteFluentCall("Require", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Require, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Require", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Require, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (TotalShardsPerNode is not null)
 			{
-				writer.WriteFluentCall("TotalShardsPerNode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TotalShardsPerNode.Value); });
+				writer.WriteFluentCall("TotalShardsPerNode", (w) => { w.WriteValue(TotalShardsPerNode.Value); });
 			}
 		}
 		else

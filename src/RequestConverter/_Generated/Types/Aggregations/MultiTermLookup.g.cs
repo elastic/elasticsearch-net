@@ -31,12 +31,12 @@ public partial class MultiTermLookup : RequestConverter.ICodeFormattable
 		{
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Script is not null)

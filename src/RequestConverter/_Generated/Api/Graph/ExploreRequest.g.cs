@@ -57,32 +57,32 @@ public partial class ExploreRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Connections is not null)
 			{
-				writer.WriteFluentDescriptorCall("Connections", (w) => { Connections.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Connections.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Connections", (w) => { Connections.FormatCode(w); }, (w) => { Connections.FormatCode(w); });
 			}
 
 			if (Controls is not null)
 			{
-				writer.WriteFluentDescriptorCall("Controls", (w) => { Controls.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Controls.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Controls", (w) => { Controls.FormatCode(w); }, (w) => { Controls.FormatCode(w); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 
 			if (Vertices is not null)
 			{
-				writer.WriteFluentDescriptorParams("Vertices", Vertices, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Vertices", Vertices, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>"); w.Write("()"); });
 			}
 		}
 		else

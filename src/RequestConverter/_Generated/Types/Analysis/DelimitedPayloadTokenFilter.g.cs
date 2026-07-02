@@ -31,17 +31,17 @@ public partial class DelimitedPayloadTokenFilter : RequestConverter.ICodeFormatt
 		{
 			if (Delimiter is not null)
 			{
-				writer.WriteFluentCall("Delimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Delimiter); });
+				writer.WriteFluentCall("Delimiter", (w) => { w.WriteString(Delimiter); });
 			}
 
 			if (Encoding is not null)
 			{
-				writer.WriteFluentCall("Encoding", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(Encoding.Value, w); });
+				writer.WriteFluentCall("Encoding", (w) => { Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncodingCodeFormatter.FormatCode(Encoding.Value, w); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

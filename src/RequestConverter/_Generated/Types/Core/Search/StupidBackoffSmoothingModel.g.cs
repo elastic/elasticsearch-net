@@ -30,7 +30,7 @@ public partial class StupidBackoffSmoothingModel : RequestConverter.ICodeFormatt
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Discount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Discount); w.Write("d"); });
+				writer.WriteFluentCall("Discount", (w) => { w.WriteValue(Discount); w.Write("d"); });
 			}
 		}
 		else

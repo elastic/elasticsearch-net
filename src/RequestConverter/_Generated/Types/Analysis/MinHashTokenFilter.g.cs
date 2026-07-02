@@ -31,27 +31,27 @@ public partial class MinHashTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (BucketCount is not null)
 			{
-				writer.WriteFluentCall("BucketCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BucketCount.Value); });
+				writer.WriteFluentCall("BucketCount", (w) => { w.WriteValue(BucketCount.Value); });
 			}
 
 			if (HashCount is not null)
 			{
-				writer.WriteFluentCall("HashCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HashCount.Value); });
+				writer.WriteFluentCall("HashCount", (w) => { w.WriteValue(HashCount.Value); });
 			}
 
 			if (HashSetSize is not null)
 			{
-				writer.WriteFluentCall("HashSetSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HashSetSize.Value); });
+				writer.WriteFluentCall("HashSetSize", (w) => { w.WriteValue(HashSetSize.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 
 			if (WithRotation is not null)
 			{
-				writer.WriteFluentCall("WithRotation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithRotation.Value); });
+				writer.WriteFluentCall("WithRotation", (w) => { w.WriteValue(WithRotation.Value); });
 			}
 		}
 		else

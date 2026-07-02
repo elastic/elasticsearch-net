@@ -34,16 +34,16 @@ public partial class SamlAuthenticateRequest : RequestConverter.ICodeFormattable
 			writer.Write("()");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Content); });
+				writer.WriteFluentCall("Content", (w) => { w.WriteString(Content); });
 			}
 
 			{
-				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); Ids.FormatCode(w); });
+				writer.WriteFluentCall("Ids", (w) => { Ids.FormatCode(w); });
 			}
 
 			if (Realm is not null)
 			{
-				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
 			}
 		}
 		else

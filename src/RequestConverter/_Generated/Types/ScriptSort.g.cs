@@ -31,17 +31,17 @@ public partial class ScriptSort : RequestConverter.ICodeFormattable
 		{
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 
 			if (Nested is not null)
 			{
-				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Nested.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { Nested.FormatCode(w); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+				writer.WriteFluentCall("Order", (w) => { Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
 			}
 
 			{
@@ -50,7 +50,7 @@ public partial class ScriptSort : RequestConverter.ICodeFormattable
 
 			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(Type.Value, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.ScriptSortTypeCodeFormatter.FormatCode(Type.Value, w); });
 			}
 		}
 		else

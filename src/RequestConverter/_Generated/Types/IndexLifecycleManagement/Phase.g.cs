@@ -36,7 +36,7 @@ public partial class Phase : RequestConverter.ICodeFormattable
 
 			if (MinAge is not null)
 			{
-				writer.WriteFluentCall("MinAge", (w) => { using var _oi = w.ForceObjectInitializer(); MinAge.FormatCode(w); });
+				writer.WriteFluentCall("MinAge", (w) => { MinAge.FormatCode(w); });
 			}
 		}
 		else

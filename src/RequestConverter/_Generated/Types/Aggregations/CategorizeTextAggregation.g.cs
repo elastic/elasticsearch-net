@@ -31,7 +31,7 @@ public partial class CategorizeTextAggregation : RequestConverter.ICodeFormattab
 		{
 			if (CategorizationAnalyzer is not null)
 			{
-				writer.WriteFluentCall("CategorizationAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); CategorizationAnalyzer.FormatCode(w); });
+				writer.WriteFluentCall("CategorizationAnalyzer", (w) => { CategorizationAnalyzer.FormatCode(w); });
 			}
 
 			if (CategorizationFilters is not null)
@@ -40,42 +40,42 @@ public partial class CategorizeTextAggregation : RequestConverter.ICodeFormattab
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (MaxMatchedTokens is not null)
 			{
-				writer.WriteFluentCall("MaxMatchedTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMatchedTokens.Value); });
+				writer.WriteFluentCall("MaxMatchedTokens", (w) => { w.WriteValue(MaxMatchedTokens.Value); });
 			}
 
 			if (MaxUniqueTokens is not null)
 			{
-				writer.WriteFluentCall("MaxUniqueTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxUniqueTokens.Value); });
+				writer.WriteFluentCall("MaxUniqueTokens", (w) => { w.WriteValue(MaxUniqueTokens.Value); });
 			}
 
 			if (MinDocCount is not null)
 			{
-				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); });
+				writer.WriteFluentCall("MinDocCount", (w) => { w.WriteValue(MinDocCount.Value); });
 			}
 
 			if (ShardMinDocCount is not null)
 			{
-				writer.WriteFluentCall("ShardMinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardMinDocCount.Value); });
+				writer.WriteFluentCall("ShardMinDocCount", (w) => { w.WriteValue(ShardMinDocCount.Value); });
 			}
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 
 			if (SimilarityThreshold is not null)
 			{
-				writer.WriteFluentCall("SimilarityThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SimilarityThreshold.Value); });
+				writer.WriteFluentCall("SimilarityThreshold", (w) => { w.WriteValue(SimilarityThreshold.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 		}
 		else

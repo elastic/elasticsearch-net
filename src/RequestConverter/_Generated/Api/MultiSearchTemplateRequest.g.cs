@@ -45,41 +45,41 @@ public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormatta
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (CcsMinimizeRoundtrips is not null)
 			{
-				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CcsMinimizeRoundtrips.Value); });
+				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { w.WriteValue(CcsMinimizeRoundtrips.Value); });
 			}
 
 			if (MaxConcurrentSearches is not null)
 			{
-				writer.WriteFluentCall("MaxConcurrentSearches", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentSearches.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxConcurrentSearches", (w) => { w.WriteValue(MaxConcurrentSearches.Value); w.Write("L"); });
 			}
 
 			if (ProjectRouting is not null)
 			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
 			}
 
 			if (RestTotalHitsAsInt is not null)
 			{
-				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RestTotalHitsAsInt.Value); });
+				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
 			}
 
 			if (SearchType is not null)
 			{
-				writer.WriteFluentCall("SearchType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
+				writer.WriteFluentCall("SearchType", (w) => { Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
 			}
 
 			if (TypedKeys is not null)
 			{
-				writer.WriteFluentCall("TypedKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TypedKeys.Value); });
+				writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("SearchTemplates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("SearchTemplates", (w) => { w.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

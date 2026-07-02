@@ -31,17 +31,17 @@ public partial class TextExpansionInferenceOptions : RequestConverter.ICodeForma
 		{
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+				writer.WriteFluentCall("ResultsField", (w) => { w.WriteString(ResultsField); });
 			}
 
 			if (Tokenization is not null)
 			{
-				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tokenization.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { Tokenization.FormatCode(w); });
 			}
 
 			if (Vocabulary is not null)
 			{
-				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Vocabulary.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); }, (w) => { Vocabulary.FormatCode(w); });
 			}
 		}
 		else

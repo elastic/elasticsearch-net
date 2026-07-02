@@ -30,11 +30,11 @@ public partial class ToolCallFunction : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Arguments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Arguments); });
+				writer.WriteFluentCall("Arguments", (w) => { w.WriteString(Arguments); });
 			}
 
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 		}
 		else

@@ -35,32 +35,32 @@ public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (Ids is not null)
 			{
-				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Ids", (w) => { w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (Owner is not null)
 			{
-				writer.WriteFluentCall("Owner", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Owner.Value); });
+				writer.WriteFluentCall("Owner", (w) => { w.WriteValue(Owner.Value); });
 			}
 
 			if (RealmName is not null)
 			{
-				writer.WriteFluentCall("RealmName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RealmName); });
+				writer.WriteFluentCall("RealmName", (w) => { w.WriteString(RealmName); });
 			}
 
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 			}
 		}
 		else

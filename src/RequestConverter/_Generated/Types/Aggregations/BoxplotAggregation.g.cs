@@ -31,22 +31,22 @@ public partial class BoxplotAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Compression is not null)
 			{
-				writer.WriteFluentCall("Compression", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compression.Value); w.Write("d"); });
+				writer.WriteFluentCall("Compression", (w) => { w.WriteValue(Compression.Value); w.Write("d"); });
 			}
 
 			if (ExecutionHint is not null)
 			{
-				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+				writer.WriteFluentCall("ExecutionHint", (w) => { Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Script is not null)

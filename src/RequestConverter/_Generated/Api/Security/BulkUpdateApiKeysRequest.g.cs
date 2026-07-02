@@ -45,7 +45,7 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (Expiration is not null)
 			{
-				writer.WriteFluentCall("Expiration", (w) => { using var _oi = w.ForceObjectInitializer(); Expiration.FormatCode(w); });
+				writer.WriteFluentCall("Expiration", (w) => { Expiration.FormatCode(w); });
 			}
 
 			{
@@ -54,12 +54,12 @@ public partial class BulkUpdateApiKeysRequest : RequestConverter.ICodeFormattabl
 
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (RoleDescriptors is not null)
 			{
-				writer.WriteFluentDescriptorCall("RoleDescriptors", (w) => { w.WriteFluentDictionaryAdds("Add", RoleDescriptors, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("RoleDescriptors", (w) => { w.WriteFluentDictionaryAdds("Add", RoleDescriptors, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 		}
 		else

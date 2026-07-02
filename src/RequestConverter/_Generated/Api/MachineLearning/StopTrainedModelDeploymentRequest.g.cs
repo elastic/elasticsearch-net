@@ -41,17 +41,17 @@ public partial class StopTrainedModelDeploymentRequest : RequestConverter.ICodeF
 			using var _chainIndent = writer.Indent();
 			if (AllowNoMatch is not null)
 			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 			}
 
 			if (Force is not null)
 			{
-				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
 			}
 
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 		}
 		else

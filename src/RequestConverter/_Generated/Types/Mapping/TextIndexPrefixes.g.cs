@@ -30,11 +30,11 @@ public partial class TextIndexPrefixes : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("MaxChars", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChars); });
+				writer.WriteFluentCall("MaxChars", (w) => { w.WriteValue(MaxChars); });
 			}
 
 			{
-				writer.WriteFluentCall("MinChars", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinChars); });
+				writer.WriteFluentCall("MinChars", (w) => { w.WriteValue(MinChars); });
 			}
 		}
 		else

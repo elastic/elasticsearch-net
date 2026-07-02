@@ -35,7 +35,7 @@ public partial class GetGeoipDatabaseRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 		}
 		else

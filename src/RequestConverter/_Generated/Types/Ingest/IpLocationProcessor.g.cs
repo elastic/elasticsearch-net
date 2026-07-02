@@ -31,26 +31,26 @@ public partial class IpLocationProcessor : RequestConverter.ICodeFormattable
 		{
 			if (DatabaseFile is not null)
 			{
-				writer.WriteFluentCall("DatabaseFile", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DatabaseFile); });
+				writer.WriteFluentCall("DatabaseFile", (w) => { w.WriteString(DatabaseFile); });
 			}
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (DownloadDatabaseOnPipelineCreation is not null)
 			{
-				writer.WriteFluentCall("DownloadDatabaseOnPipelineCreation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DownloadDatabaseOnPipelineCreation.Value); });
+				writer.WriteFluentCall("DownloadDatabaseOnPipelineCreation", (w) => { w.WriteValue(DownloadDatabaseOnPipelineCreation.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (FirstOnly is not null)
 			{
-				writer.WriteFluentCall("FirstOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FirstOnly.Value); });
+				writer.WriteFluentCall("FirstOnly", (w) => { w.WriteValue(FirstOnly.Value); });
 			}
 
 			if (If is not null)
@@ -60,17 +60,17 @@ public partial class IpLocationProcessor : RequestConverter.ICodeFormattable
 
 			if (IgnoreFailure is not null)
 			{
-				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+				writer.WriteFluentCall("IgnoreFailure", (w) => { w.WriteValue(IgnoreFailure.Value); });
 			}
 
 			if (IgnoreMissing is not null)
 			{
-				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+				writer.WriteFluentCall("IgnoreMissing", (w) => { w.WriteValue(IgnoreMissing.Value); });
 			}
 
 			if (OnFailure is not null)
 			{
-				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
 			}
 
 			if (Properties is not null)
@@ -80,12 +80,12 @@ public partial class IpLocationProcessor : RequestConverter.ICodeFormattable
 
 			if (Tag is not null)
 			{
-				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+				writer.WriteFluentCall("Tag", (w) => { w.WriteString(Tag); });
 			}
 
 			if (TargetField is not null)
 			{
-				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); }, false);
 			}
 		}
 		else

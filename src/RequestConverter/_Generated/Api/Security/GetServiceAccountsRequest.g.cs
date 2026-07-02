@@ -35,12 +35,12 @@ public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattab
 			using var _chainIndent = writer.Indent();
 			if (Namespace is not null)
 			{
-				writer.WriteFluentCall("Namespace", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Namespace); });
+				writer.WriteFluentCall("Namespace", (w) => { w.WriteString(Namespace); });
 			}
 
 			if (Service is not null)
 			{
-				writer.WriteFluentCall("Service", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Service); });
+				writer.WriteFluentCall("Service", (w) => { w.WriteString(Service); });
 			}
 		}
 		else

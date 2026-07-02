@@ -31,21 +31,21 @@ public partial class IntervalsAllOf : RequestConverter.ICodeFormattable
 		{
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Intervals", Intervals, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Intervals", Intervals, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>"); w.Write("()"); });
 			}
 
 			if (MaxGaps is not null)
 			{
-				writer.WriteFluentCall("MaxGaps", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGaps.Value); });
+				writer.WriteFluentCall("MaxGaps", (w) => { w.WriteValue(MaxGaps.Value); });
 			}
 
 			if (Ordered is not null)
 			{
-				writer.WriteFluentCall("Ordered", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Ordered.Value); });
+				writer.WriteFluentCall("Ordered", (w) => { w.WriteValue(Ordered.Value); });
 			}
 		}
 		else

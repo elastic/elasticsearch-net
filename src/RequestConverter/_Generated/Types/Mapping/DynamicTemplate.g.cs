@@ -41,7 +41,7 @@ public partial class DynamicTemplate : RequestConverter.ICodeFormattable
 
 			if (MatchPattern is not null)
 			{
-				writer.WriteFluentCall("MatchPattern", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(MatchPattern.Value, w); });
+				writer.WriteFluentCall("MatchPattern", (w) => { Elastic.Clients.Elasticsearch.Mapping.MatchTypeCodeFormatter.FormatCode(MatchPattern.Value, w); });
 			}
 
 			if (PathMatch is not null)
@@ -66,12 +66,12 @@ public partial class DynamicTemplate : RequestConverter.ICodeFormattable
 
 			if (Mapping is not null)
 			{
-				writer.WriteFluentCall("Mapping", (w) => { using var _oi = w.ForceObjectInitializer(); Mapping.FormatCode(w); });
+				writer.WriteFluentCall("Mapping", (w) => { Mapping.FormatCode(w); });
 			}
 
 			if (Runtime is not null)
 			{
-				writer.WriteFluentDescriptorCall("Runtime", (w) => { Runtime.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Runtime.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Runtime", (w) => { Runtime.FormatCode(w); }, (w) => { Runtime.FormatCode(w); });
 			}
 		}
 		else

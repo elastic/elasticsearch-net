@@ -35,27 +35,27 @@ public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFo
 			using var _chainIndent = writer.Indent();
 			if (Iss is not null)
 			{
-				writer.WriteFluentCall("Iss", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Iss); });
+				writer.WriteFluentCall("Iss", (w) => { w.WriteString(Iss); });
 			}
 
 			if (LoginHint is not null)
 			{
-				writer.WriteFluentCall("LoginHint", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LoginHint); });
+				writer.WriteFluentCall("LoginHint", (w) => { w.WriteString(LoginHint); });
 			}
 
 			if (Nonce is not null)
 			{
-				writer.WriteFluentCall("Nonce", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Nonce); });
+				writer.WriteFluentCall("Nonce", (w) => { w.WriteString(Nonce); });
 			}
 
 			if (Realm is not null)
 			{
-				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
 			}
 
 			if (State is not null)
 			{
-				writer.WriteFluentCall("State", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(State); });
+				writer.WriteFluentCall("State", (w) => { w.WriteString(State); });
 			}
 		}
 		else

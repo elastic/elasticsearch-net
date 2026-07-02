@@ -36,7 +36,7 @@ public partial class RoleQuery : RequestConverter.ICodeFormattable
 
 			if (Exists is not null)
 			{
-				writer.WriteFluentDescriptorCall("Exists", (w) => { Exists.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Exists.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Exists", (w) => { Exists.FormatCode(w); }, (w) => { Exists.FormatCode(w); });
 			}
 
 			if (Ids is not null)
@@ -46,7 +46,7 @@ public partial class RoleQuery : RequestConverter.ICodeFormattable
 
 			if (Match is not null)
 			{
-				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Match.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { Match.FormatCode(w); });
 			}
 
 			if (MatchAll is not null)
@@ -56,32 +56,32 @@ public partial class RoleQuery : RequestConverter.ICodeFormattable
 
 			if (Prefix is not null)
 			{
-				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Prefix.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); }, (w) => { Prefix.FormatCode(w); });
 			}
 
 			if (Range is not null)
 			{
-				writer.WriteFluentCall("Range", (w) => { using var _oi = w.ForceObjectInitializer(); Range.FormatCode(w); });
+				writer.WriteFluentCall("Range", (w) => { Range.FormatCode(w); });
 			}
 
 			if (SimpleQueryString is not null)
 			{
-				writer.WriteFluentDescriptorCall("SimpleQueryString", (w) => { SimpleQueryString.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SimpleQueryString.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SimpleQueryString", (w) => { SimpleQueryString.FormatCode(w); }, (w) => { SimpleQueryString.FormatCode(w); });
 			}
 
 			if (Term is not null)
 			{
-				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Term.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); }, (w) => { Term.FormatCode(w); });
 			}
 
 			if (Terms is not null)
 			{
-				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Terms.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); }, (w) => { Terms.FormatCode(w); });
 			}
 
 			if (Wildcard is not null)
 			{
-				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Wildcard.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); }, (w) => { Wildcard.FormatCode(w); });
 			}
 		}
 		else

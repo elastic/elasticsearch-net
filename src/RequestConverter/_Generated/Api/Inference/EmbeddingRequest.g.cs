@@ -41,11 +41,11 @@ public partial class EmbeddingRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Embedding.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); }, (w) => { Embedding.FormatCode(w); });
 			}
 		}
 		else

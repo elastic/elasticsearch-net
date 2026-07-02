@@ -45,12 +45,12 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -60,27 +60,27 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 
 			if (Fielddata is not null)
 			{
-				writer.WriteFluentCall("Fielddata", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Fielddata.Value); });
+				writer.WriteFluentCall("Fielddata", (w) => { w.WriteValue(Fielddata.Value); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Query.Value); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteValue(Query.Value); });
 			}
 
 			if (Request is not null)
 			{
-				writer.WriteFluentCall("Request", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Request.Value); });
+				writer.WriteFluentCall("Request", (w) => { w.WriteValue(Request.Value); });
 			}
 		}
 		else

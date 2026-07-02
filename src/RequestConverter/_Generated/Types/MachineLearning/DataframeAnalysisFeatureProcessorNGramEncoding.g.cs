@@ -31,21 +31,21 @@ public partial class DataframeAnalysisFeatureProcessorNGramEncoding : RequestCon
 		{
 			if (Custom is not null)
 			{
-				writer.WriteFluentCall("Custom", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Custom.Value); });
+				writer.WriteFluentCall("Custom", (w) => { w.WriteValue(Custom.Value); });
 			}
 
 			if (FeaturePrefix is not null)
 			{
-				writer.WriteFluentCall("FeaturePrefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FeaturePrefix); });
+				writer.WriteFluentCall("FeaturePrefix", (w) => { w.WriteString(FeaturePrefix); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Length is not null)
 			{
-				writer.WriteFluentCall("Length", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Length.Value); });
+				writer.WriteFluentCall("Length", (w) => { w.WriteValue(Length.Value); });
 			}
 
 			{
@@ -54,7 +54,7 @@ public partial class DataframeAnalysisFeatureProcessorNGramEncoding : RequestCon
 
 			if (Start is not null)
 			{
-				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 			}
 		}
 		else

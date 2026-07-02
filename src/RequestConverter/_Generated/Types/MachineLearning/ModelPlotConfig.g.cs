@@ -31,17 +31,17 @@ public partial class ModelPlotConfig : RequestConverter.ICodeFormattable
 		{
 			if (AnnotationsEnabled is not null)
 			{
-				writer.WriteFluentCall("AnnotationsEnabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AnnotationsEnabled.Value); });
+				writer.WriteFluentCall("AnnotationsEnabled", (w) => { w.WriteValue(AnnotationsEnabled.Value); });
 			}
 
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (Terms is not null)
 			{
-				writer.WriteFluentCall("Terms", (w) => { Terms.FormatCode(w); });
+				writer.WriteFluentCall("Terms", (w) => { Terms.FormatCode(w); }, false);
 			}
 		}
 		else

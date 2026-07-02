@@ -31,32 +31,32 @@ public partial class CompositeGeoTileGridAggregation : RequestConverter.ICodeFor
 		{
 			if (Bounds is not null)
 			{
-				writer.WriteFluentCall("Bounds", (w) => { using var _oi = w.ForceObjectInitializer(); Bounds.FormatCode(w); });
+				writer.WriteFluentCall("Bounds", (w) => { Bounds.FormatCode(w); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (MissingBucket is not null)
 			{
-				writer.WriteFluentCall("MissingBucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MissingBucket.Value); });
+				writer.WriteFluentCall("MissingBucket", (w) => { w.WriteValue(MissingBucket.Value); });
 			}
 
 			if (MissingOrder is not null)
 			{
-				writer.WriteFluentCall("MissingOrder", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, w); });
+				writer.WriteFluentCall("MissingOrder", (w) => { Elastic.Clients.Elasticsearch.Aggregations.MissingOrderCodeFormatter.FormatCode(MissingOrder.Value, w); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+				writer.WriteFluentCall("Order", (w) => { Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
 			}
 
 			if (Precision is not null)
 			{
-				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Precision.Value); });
+				writer.WriteFluentCall("Precision", (w) => { w.WriteValue(Precision.Value); });
 			}
 
 			if (Script is not null)
@@ -66,7 +66,7 @@ public partial class CompositeGeoTileGridAggregation : RequestConverter.ICodeFor
 
 			if (ValueType is not null)
 			{
-				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
+				writer.WriteFluentCall("ValueType", (w) => { Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
 			}
 		}
 		else

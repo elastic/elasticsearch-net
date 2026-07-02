@@ -31,7 +31,7 @@ public partial class HdrMethod : RequestConverter.ICodeFormattable
 		{
 			if (NumberOfSignificantValueDigits is not null)
 			{
-				writer.WriteFluentCall("NumberOfSignificantValueDigits", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfSignificantValueDigits.Value); });
+				writer.WriteFluentCall("NumberOfSignificantValueDigits", (w) => { w.WriteValue(NumberOfSignificantValueDigits.Value); });
 			}
 		}
 		else

@@ -31,12 +31,12 @@ public partial class RandomScoreFunction : RequestConverter.ICodeFormattable
 		{
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Seed is not null)
 			{
-				writer.WriteFluentCall("Seed", (w) => { using var _oi = w.ForceObjectInitializer(); if (Seed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Seed.Value1); w.Write("L"); } else { w.WriteString(Seed.Value2); } });
+				writer.WriteFluentCall("Seed", (w) => { if (Seed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Seed.Value1); w.Write("L"); } else { w.WriteString(Seed.Value2); } });
 			}
 		}
 		else

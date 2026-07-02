@@ -36,17 +36,17 @@ public partial class KeepWordsTokenFilter : RequestConverter.ICodeFormattable
 
 			if (KeepWordsCase is not null)
 			{
-				writer.WriteFluentCall("KeepWordsCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(KeepWordsCase.Value); });
+				writer.WriteFluentCall("KeepWordsCase", (w) => { w.WriteValue(KeepWordsCase.Value); });
 			}
 
 			if (KeepWordsPath is not null)
 			{
-				writer.WriteFluentCall("KeepWordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KeepWordsPath); });
+				writer.WriteFluentCall("KeepWordsPath", (w) => { w.WriteString(KeepWordsPath); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

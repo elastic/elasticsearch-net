@@ -31,36 +31,36 @@ public partial class RemoteSource : RequestConverter.ICodeFormattable
 		{
 			if (ApiKey is not null)
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			if (ConnectTimeout is not null)
 			{
-				writer.WriteFluentCall("ConnectTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); ConnectTimeout.FormatCode(w); });
+				writer.WriteFluentCall("ConnectTimeout", (w) => { ConnectTimeout.FormatCode(w); });
 			}
 
 			if (Headers is not null)
 			{
-				writer.WriteFluentCall("Headers", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Headers", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			{
-				writer.WriteFluentCall("Host", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Host); });
+				writer.WriteFluentCall("Host", (w) => { w.WriteString(Host); });
 			}
 
 			if (Password is not null)
 			{
-				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
 			}
 
 			if (SocketTimeout is not null)
 			{
-				writer.WriteFluentCall("SocketTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); SocketTimeout.FormatCode(w); });
+				writer.WriteFluentCall("SocketTimeout", (w) => { SocketTimeout.FormatCode(w); });
 			}
 
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 			}
 		}
 		else

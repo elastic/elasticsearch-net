@@ -31,42 +31,42 @@ public partial class WordDelimiterGraphTokenFilter : RequestConverter.ICodeForma
 		{
 			if (AdjustOffsets is not null)
 			{
-				writer.WriteFluentCall("AdjustOffsets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AdjustOffsets.Value); });
+				writer.WriteFluentCall("AdjustOffsets", (w) => { w.WriteValue(AdjustOffsets.Value); });
 			}
 
 			if (CatenateAll is not null)
 			{
-				writer.WriteFluentCall("CatenateAll", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CatenateAll.Value); });
+				writer.WriteFluentCall("CatenateAll", (w) => { w.WriteValue(CatenateAll.Value); });
 			}
 
 			if (CatenateNumbers is not null)
 			{
-				writer.WriteFluentCall("CatenateNumbers", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CatenateNumbers.Value); });
+				writer.WriteFluentCall("CatenateNumbers", (w) => { w.WriteValue(CatenateNumbers.Value); });
 			}
 
 			if (CatenateWords is not null)
 			{
-				writer.WriteFluentCall("CatenateWords", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CatenateWords.Value); });
+				writer.WriteFluentCall("CatenateWords", (w) => { w.WriteValue(CatenateWords.Value); });
 			}
 
 			if (GenerateNumberParts is not null)
 			{
-				writer.WriteFluentCall("GenerateNumberParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(GenerateNumberParts.Value); });
+				writer.WriteFluentCall("GenerateNumberParts", (w) => { w.WriteValue(GenerateNumberParts.Value); });
 			}
 
 			if (GenerateWordParts is not null)
 			{
-				writer.WriteFluentCall("GenerateWordParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(GenerateWordParts.Value); });
+				writer.WriteFluentCall("GenerateWordParts", (w) => { w.WriteValue(GenerateWordParts.Value); });
 			}
 
 			if (IgnoreKeywords is not null)
 			{
-				writer.WriteFluentCall("IgnoreKeywords", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreKeywords.Value); });
+				writer.WriteFluentCall("IgnoreKeywords", (w) => { w.WriteValue(IgnoreKeywords.Value); });
 			}
 
 			if (PreserveOriginal is not null)
 			{
-				writer.WriteFluentCall("PreserveOriginal", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveOriginal.Value); });
+				writer.WriteFluentCall("PreserveOriginal", (w) => { w.WriteValue(PreserveOriginal.Value); });
 			}
 
 			if (ProtectedWords is not null)
@@ -76,22 +76,22 @@ public partial class WordDelimiterGraphTokenFilter : RequestConverter.ICodeForma
 
 			if (ProtectedWordsPath is not null)
 			{
-				writer.WriteFluentCall("ProtectedWordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProtectedWordsPath); });
+				writer.WriteFluentCall("ProtectedWordsPath", (w) => { w.WriteString(ProtectedWordsPath); });
 			}
 
 			if (SplitOnCaseChange is not null)
 			{
-				writer.WriteFluentCall("SplitOnCaseChange", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitOnCaseChange.Value); });
+				writer.WriteFluentCall("SplitOnCaseChange", (w) => { w.WriteValue(SplitOnCaseChange.Value); });
 			}
 
 			if (SplitOnNumerics is not null)
 			{
-				writer.WriteFluentCall("SplitOnNumerics", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitOnNumerics.Value); });
+				writer.WriteFluentCall("SplitOnNumerics", (w) => { w.WriteValue(SplitOnNumerics.Value); });
 			}
 
 			if (StemEnglishPossessive is not null)
 			{
-				writer.WriteFluentCall("StemEnglishPossessive", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StemEnglishPossessive.Value); });
+				writer.WriteFluentCall("StemEnglishPossessive", (w) => { w.WriteValue(StemEnglishPossessive.Value); });
 			}
 
 			if (TypeTable is not null)
@@ -101,12 +101,12 @@ public partial class WordDelimiterGraphTokenFilter : RequestConverter.ICodeForma
 
 			if (TypeTablePath is not null)
 			{
-				writer.WriteFluentCall("TypeTablePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TypeTablePath); });
+				writer.WriteFluentCall("TypeTablePath", (w) => { w.WriteString(TypeTablePath); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

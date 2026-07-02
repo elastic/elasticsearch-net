@@ -31,27 +31,27 @@ public partial class TextReasoningDetail : RequestConverter.ICodeFormattable
 		{
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+				writer.WriteFluentCall("Id", (w) => { w.WriteString(Id); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Index.Value); });
+				writer.WriteFluentCall("Index", (w) => { w.WriteValue(Index.Value); });
 			}
 
 			if (Signature is not null)
 			{
-				writer.WriteFluentCall("Signature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Signature); });
+				writer.WriteFluentCall("Signature", (w) => { w.WriteString(Signature); });
 			}
 
 			if (Text is not null)
 			{
-				writer.WriteFluentCall("Text", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Text); });
+				writer.WriteFluentCall("Text", (w) => { w.WriteString(Text); });
 			}
 		}
 		else

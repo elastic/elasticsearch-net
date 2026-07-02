@@ -31,17 +31,17 @@ public partial class ShapeFieldQuery : RequestConverter.ICodeFormattable
 		{
 			if (IndexedShape is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexedShape", (w) => { IndexedShape.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexedShape.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexedShape", (w) => { IndexedShape.FormatCode(w); }, (w) => { IndexedShape.FormatCode(w); });
 			}
 
 			if (Relation is not null)
 			{
-				writer.WriteFluentCall("Relation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(Relation.Value, w); });
+				writer.WriteFluentCall("Relation", (w) => { Elastic.Clients.Elasticsearch.GeoShapeRelationCodeFormatter.FormatCode(Relation.Value, w); });
 			}
 
 			if (Shape is not null)
 			{
-				writer.WriteFluentCall("Shape", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Shape); });
+				writer.WriteFluentCall("Shape", (w) => { w.WriteObjectValue(Shape); });
 			}
 		}
 		else

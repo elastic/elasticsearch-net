@@ -45,17 +45,17 @@ public partial class ExplainDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 			using var _chainIndent = writer.Indent();
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (AllowLazyStart is not null)
 			{
-				writer.WriteFluentCall("AllowLazyStart", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLazyStart.Value); });
+				writer.WriteFluentCall("AllowLazyStart", (w) => { w.WriteValue(AllowLazyStart.Value); });
 			}
 
 			if (Analysis is not null)
 			{
-				writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Analysis.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); }, (w) => { Analysis.FormatCode(w); });
 			}
 
 			if (AnalyzedFields is not null)
@@ -65,27 +65,27 @@ public partial class ExplainDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (Dest is not null)
 			{
-				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Dest.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { Dest.FormatCode(w); });
 			}
 
 			if (MaxNumThreads is not null)
 			{
-				writer.WriteFluentCall("MaxNumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumThreads.Value); });
+				writer.WriteFluentCall("MaxNumThreads", (w) => { w.WriteValue(MaxNumThreads.Value); });
 			}
 
 			if (ModelMemoryLimit is not null)
 			{
-				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelMemoryLimit); });
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { w.WriteString(ModelMemoryLimit); });
 			}
 
 			if (Source is not null)
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { Source.FormatCode(w); });
 			}
 		}
 		else

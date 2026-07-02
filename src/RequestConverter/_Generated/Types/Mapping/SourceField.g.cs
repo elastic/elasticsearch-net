@@ -31,17 +31,17 @@ public partial class SourceField : RequestConverter.ICodeFormattable
 		{
 			if (Compress is not null)
 			{
-				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+				writer.WriteFluentCall("Compress", (w) => { w.WriteValue(Compress.Value); });
 			}
 
 			if (CompressThreshold is not null)
 			{
-				writer.WriteFluentCall("CompressThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CompressThreshold); });
+				writer.WriteFluentCall("CompressThreshold", (w) => { w.WriteString(CompressThreshold); });
 			}
 
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (Excludes is not null)
@@ -56,7 +56,7 @@ public partial class SourceField : RequestConverter.ICodeFormattable
 
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.Mapping.SourceFieldModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 		}
 		else

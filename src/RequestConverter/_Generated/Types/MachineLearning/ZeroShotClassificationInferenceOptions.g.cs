@@ -35,7 +35,7 @@ public partial class ZeroShotClassificationInferenceOptions : RequestConverter.I
 
 			if (HypothesisTemplate is not null)
 			{
-				writer.WriteFluentCall("HypothesisTemplate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(HypothesisTemplate); });
+				writer.WriteFluentCall("HypothesisTemplate", (w) => { w.WriteString(HypothesisTemplate); });
 			}
 
 			if (Labels is not null)
@@ -45,17 +45,17 @@ public partial class ZeroShotClassificationInferenceOptions : RequestConverter.I
 
 			if (MultiLabel is not null)
 			{
-				writer.WriteFluentCall("MultiLabel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultiLabel.Value); });
+				writer.WriteFluentCall("MultiLabel", (w) => { w.WriteValue(MultiLabel.Value); });
 			}
 
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+				writer.WriteFluentCall("ResultsField", (w) => { w.WriteString(ResultsField); });
 			}
 
 			if (Tokenization is not null)
 			{
-				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tokenization.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { Tokenization.FormatCode(w); });
 			}
 		}
 		else

@@ -57,42 +57,42 @@ public partial class GetInfluencersRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Desc is not null)
 			{
-				writer.WriteFluentCall("Desc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Desc.Value); });
+				writer.WriteFluentCall("Desc", (w) => { w.WriteValue(Desc.Value); });
 			}
 
 			if (End is not null)
 			{
-				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
 			}
 
 			if (ExcludeInterim is not null)
 			{
-				writer.WriteFluentCall("ExcludeInterim", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeInterim.Value); });
+				writer.WriteFluentCall("ExcludeInterim", (w) => { w.WriteValue(ExcludeInterim.Value); });
 			}
 
 			if (From is not null)
 			{
-				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
 			}
 
 			if (InfluencerScore is not null)
 			{
-				writer.WriteFluentCall("InfluencerScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(InfluencerScore.Value); w.Write("d"); });
+				writer.WriteFluentCall("InfluencerScore", (w) => { w.WriteValue(InfluencerScore.Value); w.Write("d"); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			if (Sort is not null)
 			{
-				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); });
+				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); }, false);
 			}
 
 			if (Start is not null)
 			{
-				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 			}
 
 			if (Page is not null)

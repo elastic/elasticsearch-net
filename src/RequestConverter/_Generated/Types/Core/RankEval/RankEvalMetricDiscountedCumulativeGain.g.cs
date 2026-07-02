@@ -31,12 +31,12 @@ public partial class RankEvalMetricDiscountedCumulativeGain : RequestConverter.I
 		{
 			if (K is not null)
 			{
-				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K.Value); });
+				writer.WriteFluentCall("K", (w) => { w.WriteValue(K.Value); });
 			}
 
 			if (Normalize is not null)
 			{
-				writer.WriteFluentCall("Normalize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Normalize.Value); });
+				writer.WriteFluentCall("Normalize", (w) => { w.WriteValue(Normalize.Value); });
 			}
 		}
 		else

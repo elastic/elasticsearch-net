@@ -31,12 +31,12 @@ public partial class StemmerTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Language is not null)
 			{
-				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Language); });
+				writer.WriteFluentCall("Language", (w) => { w.WriteString(Language); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

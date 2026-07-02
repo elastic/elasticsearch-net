@@ -31,22 +31,22 @@ public partial class RateAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.RateModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.Aggregations.RateModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 
 			if (Script is not null)
@@ -56,7 +56,7 @@ public partial class RateAggregation : RequestConverter.ICodeFormattable
 
 			if (Unit is not null)
 			{
-				writer.WriteFluentCall("Unit", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(Unit.Value, w); });
+				writer.WriteFluentCall("Unit", (w) => { Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalCodeFormatter.FormatCode(Unit.Value, w); });
 			}
 		}
 		else

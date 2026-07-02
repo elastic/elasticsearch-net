@@ -41,11 +41,11 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 			using var _chainIndent = writer.Indent();
 			if (Create is not null)
 			{
-				writer.WriteFluentCall("Create", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Create.Value); });
+				writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("SearchApplication", (w) => { SearchApplication.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SearchApplication.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SearchApplication", (w) => { SearchApplication.FormatCode(w); }, (w) => { SearchApplication.FormatCode(w); });
 			}
 		}
 		else

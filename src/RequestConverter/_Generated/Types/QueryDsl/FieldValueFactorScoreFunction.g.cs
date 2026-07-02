@@ -31,21 +31,21 @@ public partial class FieldValueFactorScoreFunction : RequestConverter.ICodeForma
 		{
 			if (Factor is not null)
 			{
-				writer.WriteFluentCall("Factor", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Factor.Value); w.Write("d"); });
+				writer.WriteFluentCall("Factor", (w) => { w.WriteValue(Factor.Value); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); w.Write("d"); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteValue(Missing.Value); w.Write("d"); });
 			}
 
 			if (Modifier is not null)
 			{
-				writer.WriteFluentCall("Modifier", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(Modifier.Value, w); });
+				writer.WriteFluentCall("Modifier", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifierCodeFormatter.FormatCode(Modifier.Value, w); });
 			}
 		}
 		else

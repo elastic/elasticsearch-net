@@ -31,11 +31,11 @@ public partial class GroqServiceSettings : RequestConverter.ICodeFormattable
 		{
 			if (ApiKey is not null)
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			if (RateLimit is not null)

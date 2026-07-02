@@ -30,11 +30,11 @@ public partial class HistogramGrouping : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Interval); w.Write("L"); });
+				writer.WriteFluentCall("Interval", (w) => { w.WriteValue(Interval); w.Write("L"); });
 			}
 		}
 		else

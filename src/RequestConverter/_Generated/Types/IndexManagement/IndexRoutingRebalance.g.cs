@@ -30,7 +30,7 @@ public partial class IndexRoutingRebalance : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Enable", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, w); });
+				writer.WriteFluentCall("Enable", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsCodeFormatter.FormatCode(Enable, w); });
 			}
 		}
 		else

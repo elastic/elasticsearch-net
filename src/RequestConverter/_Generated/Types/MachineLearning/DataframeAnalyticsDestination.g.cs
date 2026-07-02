@@ -30,12 +30,12 @@ public partial class DataframeAnalyticsDestination : RequestConverter.ICodeForma
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); });
+				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); }, false);
 			}
 		}
 		else

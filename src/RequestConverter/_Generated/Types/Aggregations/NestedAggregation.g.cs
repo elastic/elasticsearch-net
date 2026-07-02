@@ -31,7 +31,7 @@ public partial class NestedAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Path is not null)
 			{
-				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); }, false);
 			}
 		}
 		else

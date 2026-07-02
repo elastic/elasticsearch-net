@@ -41,7 +41,7 @@ public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (DropNullColumns is not null)
 			{
-				writer.WriteFluentCall("DropNullColumns", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DropNullColumns.Value); });
+				writer.WriteFluentCall("DropNullColumns", (w) => { w.WriteValue(DropNullColumns.Value); });
 			}
 		}
 		else

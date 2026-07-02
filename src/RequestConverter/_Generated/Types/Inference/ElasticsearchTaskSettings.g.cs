@@ -31,7 +31,7 @@ public partial class ElasticsearchTaskSettings : RequestConverter.ICodeFormattab
 		{
 			if (ReturnDocuments is not null)
 			{
-				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+				writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
 			}
 		}
 		else

@@ -35,17 +35,17 @@ public partial class GetJobsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (JobId is not null)
 			{
-				writer.WriteFluentCall("JobId", (w) => { using var _oi = w.ForceObjectInitializer(); JobId.FormatCode(w); });
+				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
 			}
 
 			if (AllowNoMatch is not null)
 			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 			}
 
 			if (ExcludeGenerated is not null)
 			{
-				writer.WriteFluentCall("ExcludeGenerated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeGenerated.Value); });
+				writer.WriteFluentCall("ExcludeGenerated", (w) => { w.WriteValue(ExcludeGenerated.Value); });
 			}
 		}
 		else

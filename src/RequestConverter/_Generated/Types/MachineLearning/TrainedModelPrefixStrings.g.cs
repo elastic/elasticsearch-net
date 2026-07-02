@@ -31,12 +31,12 @@ public partial class TrainedModelPrefixStrings : RequestConverter.ICodeFormattab
 		{
 			if (Ingest is not null)
 			{
-				writer.WriteFluentCall("Ingest", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Ingest); });
+				writer.WriteFluentCall("Ingest", (w) => { w.WriteString(Ingest); });
 			}
 
 			if (Search is not null)
 			{
-				writer.WriteFluentCall("Search", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Search); });
+				writer.WriteFluentCall("Search", (w) => { w.WriteString(Search); });
 			}
 		}
 		else

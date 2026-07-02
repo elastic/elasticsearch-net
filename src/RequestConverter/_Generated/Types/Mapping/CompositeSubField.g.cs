@@ -30,7 +30,7 @@ public partial class CompositeSubField : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, w); });
 			}
 		}
 		else

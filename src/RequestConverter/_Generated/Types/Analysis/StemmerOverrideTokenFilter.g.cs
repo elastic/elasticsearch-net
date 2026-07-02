@@ -36,12 +36,12 @@ public partial class StemmerOverrideTokenFilter : RequestConverter.ICodeFormatta
 
 			if (RulesPath is not null)
 			{
-				writer.WriteFluentCall("RulesPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RulesPath); });
+				writer.WriteFluentCall("RulesPath", (w) => { w.WriteString(RulesPath); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -31,11 +31,11 @@ public partial class WeightedTokensQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (PruningConfig is not null)
@@ -45,11 +45,11 @@ public partial class WeightedTokensQuery : RequestConverter.ICodeFormattable
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			{
-				writer.WriteFluentCall("Tokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Tokens, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); }); });
+				writer.WriteFluentCall("Tokens", (w) => { w.WriteInlineList(Tokens, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); }); });
 			}
 		}
 		else

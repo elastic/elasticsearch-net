@@ -34,7 +34,7 @@ public partial class ClearCursorRequest : RequestConverter.ICodeFormattable
 			writer.Write("()");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentCall("Cursor", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Cursor); });
+				writer.WriteFluentCall("Cursor", (w) => { w.WriteString(Cursor); });
 			}
 		}
 		else

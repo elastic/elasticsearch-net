@@ -31,17 +31,17 @@ public partial class SmoothingModel : RequestConverter.ICodeFormattable
 		{
 			if (Laplace is not null)
 			{
-				writer.WriteFluentDescriptorCall("Laplace", (w) => { Laplace.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Laplace.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Laplace", (w) => { Laplace.FormatCode(w); }, (w) => { Laplace.FormatCode(w); });
 			}
 
 			if (LinearInterpolation is not null)
 			{
-				writer.WriteFluentDescriptorCall("LinearInterpolation", (w) => { LinearInterpolation.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); LinearInterpolation.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("LinearInterpolation", (w) => { LinearInterpolation.FormatCode(w); }, (w) => { LinearInterpolation.FormatCode(w); });
 			}
 
 			if (StupidBackoff is not null)
 			{
-				writer.WriteFluentDescriptorCall("StupidBackoff", (w) => { StupidBackoff.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); StupidBackoff.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("StupidBackoff", (w) => { StupidBackoff.FormatCode(w); }, (w) => { StupidBackoff.FormatCode(w); });
 			}
 		}
 		else

@@ -31,7 +31,7 @@ public partial class ChildrenAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+				writer.WriteFluentCall("Type", (w) => { w.WriteString(Type); });
 			}
 		}
 		else

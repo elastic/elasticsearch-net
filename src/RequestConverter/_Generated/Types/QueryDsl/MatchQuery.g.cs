@@ -31,80 +31,80 @@ public partial class MatchQuery : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (AutoGenerateSynonymsPhraseQuery is not null)
 			{
-				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
+				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
 			}
 
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 #pragma warning disable CS0618
 			if (CutoffFrequency is not null)
 			{
-				writer.WriteFluentCall("CutoffFrequency", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CutoffFrequency.Value); w.Write("d"); });
+				writer.WriteFluentCall("CutoffFrequency", (w) => { w.WriteValue(CutoffFrequency.Value); w.Write("d"); });
 			}
 #pragma warning restore CS0618
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Fuzziness is not null)
 			{
-				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+				writer.WriteFluentCall("Fuzziness", (w) => { Fuzziness.FormatCode(w); });
 			}
 
 			if (FuzzyRewrite is not null)
 			{
-				writer.WriteFluentCall("FuzzyRewrite", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FuzzyRewrite); });
+				writer.WriteFluentCall("FuzzyRewrite", (w) => { w.WriteString(FuzzyRewrite); });
 			}
 
 			if (FuzzyTranspositions is not null)
 			{
-				writer.WriteFluentCall("FuzzyTranspositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyTranspositions.Value); });
+				writer.WriteFluentCall("FuzzyTranspositions", (w) => { w.WriteValue(FuzzyTranspositions.Value); });
 			}
 
 			if (Lenient is not null)
 			{
-				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+				writer.WriteFluentCall("Lenient", (w) => { w.WriteValue(Lenient.Value); });
 			}
 
 			if (MaxExpansions is not null)
 			{
-				writer.WriteFluentCall("MaxExpansions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxExpansions.Value); });
+				writer.WriteFluentCall("MaxExpansions", (w) => { w.WriteValue(MaxExpansions.Value); });
 			}
 
 			if (MinimumShouldMatch is not null)
 			{
-				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { MinimumShouldMatch.FormatCode(w); });
 			}
 
 			if (Operator is not null)
 			{
-				writer.WriteFluentCall("Operator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(Operator.Value, w); });
+				writer.WriteFluentCall("Operator", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(Operator.Value, w); });
 			}
 
 			if (PrefixLength is not null)
 			{
-				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+				writer.WriteFluentCall("PrefixLength", (w) => { w.WriteValue(PrefixLength.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteObjectValue(Query); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (ZeroTermsQuery is not null)
 			{
-				writer.WriteFluentCall("ZeroTermsQuery", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, w); });
+				writer.WriteFluentCall("ZeroTermsQuery", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, w); });
 			}
 		}
 		else

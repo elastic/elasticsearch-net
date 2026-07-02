@@ -47,11 +47,11 @@ public partial class PutSynonymRuleRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+				writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Synonyms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Synonyms); });
+				writer.WriteFluentCall("Synonyms", (w) => { w.WriteString(Synonyms); });
 			}
 		}
 		else

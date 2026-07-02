@@ -30,7 +30,7 @@ public partial class Maxmind : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("AccountId", (w) => { using var _oi = w.ForceObjectInitializer(); AccountId.FormatCode(w); });
+				writer.WriteFluentCall("AccountId", (w) => { AccountId.FormatCode(w); });
 			}
 		}
 		else

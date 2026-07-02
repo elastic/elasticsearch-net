@@ -31,17 +31,17 @@ public partial class RankEvalMetricPrecision : RequestConverter.ICodeFormattable
 		{
 			if (IgnoreUnlabeled is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnlabeled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnlabeled.Value); });
+				writer.WriteFluentCall("IgnoreUnlabeled", (w) => { w.WriteValue(IgnoreUnlabeled.Value); });
 			}
 
 			if (K is not null)
 			{
-				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K.Value); });
+				writer.WriteFluentCall("K", (w) => { w.WriteValue(K.Value); });
 			}
 
 			if (RelevantRatingThreshold is not null)
 			{
-				writer.WriteFluentCall("RelevantRatingThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RelevantRatingThreshold.Value); });
+				writer.WriteFluentCall("RelevantRatingThreshold", (w) => { w.WriteValue(RelevantRatingThreshold.Value); });
 			}
 		}
 		else

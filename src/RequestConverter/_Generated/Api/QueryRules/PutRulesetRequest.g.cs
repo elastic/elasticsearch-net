@@ -40,7 +40,7 @@ public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
 			writer.Write(")");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorParams("Rules", Rules, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Rules", Rules, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>"); w.Write("()"); });
 			}
 		}
 		else

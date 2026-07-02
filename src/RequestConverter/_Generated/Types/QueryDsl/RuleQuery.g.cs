@@ -31,30 +31,30 @@ public partial class RuleQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("MatchCriteria", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(MatchCriteria); });
+				writer.WriteFluentCall("MatchCriteria", (w) => { w.WriteObjectValue(MatchCriteria); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Organic", (w) => { Organic.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Organic.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Organic", (w) => { Organic.FormatCode(w); }, (w) => { Organic.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (RulesetId is not null)
 			{
-				writer.WriteFluentCall("RulesetId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RulesetId); });
+				writer.WriteFluentCall("RulesetId", (w) => { w.WriteString(RulesetId); });
 			}
 
 			if (RulesetIds is not null)
 			{
-				writer.WriteFluentCall("RulesetIds", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("RulesetIds", (w) => { w.WriteInlineList(RulesetIds, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

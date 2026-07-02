@@ -35,11 +35,11 @@ public partial class PutPrivilegesRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Privileges", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.IDictionary<string,Elastic.Clients.Elasticsearch.Security.PrivilegeActions>"); w.Write(">()"); w.WriteBlockList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); w.Write(" }"); }); });
+				writer.WriteFluentCall("Privileges", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.IDictionary<string,Elastic.Clients.Elasticsearch.Security.PrivilegeActions>"); w.Write(">()"); w.WriteBlockList(Privileges, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PrivilegeActions"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); w.Write(" }"); }); });
 			}
 		}
 		else

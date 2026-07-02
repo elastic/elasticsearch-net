@@ -31,12 +31,12 @@ public partial class IndexSettingsTimeSeries : RequestConverter.ICodeFormattable
 		{
 			if (EndTime is not null)
 			{
-				writer.WriteFluentCall("EndTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EndTime.Value); });
+				writer.WriteFluentCall("EndTime", (w) => { w.WriteValue(EndTime.Value); });
 			}
 
 			if (StartTime is not null)
 			{
-				writer.WriteFluentCall("StartTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StartTime.Value); });
+				writer.WriteFluentCall("StartTime", (w) => { w.WriteValue(StartTime.Value); });
 			}
 		}
 		else

@@ -35,12 +35,12 @@ public partial class DeleteVotingConfigExclusionsRequest : RequestConverter.ICod
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (WaitForRemoval is not null)
 			{
-				writer.WriteFluentCall("WaitForRemoval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForRemoval.Value); });
+				writer.WriteFluentCall("WaitForRemoval", (w) => { w.WriteValue(WaitForRemoval.Value); });
 			}
 		}
 		else

@@ -31,41 +31,41 @@ public partial class ReadOnlyUrlRepositorySettings : RequestConverter.ICodeForma
 		{
 			if (ChunkSize is not null)
 			{
-				writer.WriteFluentCall("ChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); ChunkSize.FormatCode(w); });
+				writer.WriteFluentCall("ChunkSize", (w) => { ChunkSize.FormatCode(w); });
 			}
 
 			if (Compress is not null)
 			{
-				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+				writer.WriteFluentCall("Compress", (w) => { w.WriteValue(Compress.Value); });
 			}
 
 			if (HttpMaxRetries is not null)
 			{
-				writer.WriteFluentCall("HttpMaxRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HttpMaxRetries.Value); });
+				writer.WriteFluentCall("HttpMaxRetries", (w) => { w.WriteValue(HttpMaxRetries.Value); });
 			}
 
 			if (HttpSocketTimeout is not null)
 			{
-				writer.WriteFluentCall("HttpSocketTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); HttpSocketTimeout.FormatCode(w); });
+				writer.WriteFluentCall("HttpSocketTimeout", (w) => { HttpSocketTimeout.FormatCode(w); });
 			}
 
 			if (MaxNumberOfSnapshots is not null)
 			{
-				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfSnapshots.Value); });
+				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { w.WriteValue(MaxNumberOfSnapshots.Value); });
 			}
 
 			if (MaxRestoreBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRestoreBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { MaxRestoreBytesPerSec.FormatCode(w); });
 			}
 
 			if (MaxSnapshotBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSnapshotBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { MaxSnapshotBytesPerSec.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+				writer.WriteFluentCall("Url", (w) => { w.WriteString(Url); });
 			}
 		}
 		else

@@ -31,26 +31,26 @@ public partial class HunspellTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Dedup is not null)
 			{
-				writer.WriteFluentCall("Dedup", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dedup.Value); });
+				writer.WriteFluentCall("Dedup", (w) => { w.WriteValue(Dedup.Value); });
 			}
 
 			if (Dictionary is not null)
 			{
-				writer.WriteFluentCall("Dictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Dictionary); });
+				writer.WriteFluentCall("Dictionary", (w) => { w.WriteString(Dictionary); });
 			}
 
 			{
-				writer.WriteFluentCall("Locale", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Locale); });
+				writer.WriteFluentCall("Locale", (w) => { w.WriteString(Locale); });
 			}
 
 			if (LongestOnly is not null)
 			{
-				writer.WriteFluentCall("LongestOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LongestOnly.Value); });
+				writer.WriteFluentCall("LongestOnly", (w) => { w.WriteValue(LongestOnly.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -41,17 +41,17 @@ public partial class StartDatafeedRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (End is not null)
 			{
-				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
 			}
 
 			if (Start is not null)
 			{
-				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

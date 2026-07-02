@@ -30,57 +30,57 @@ public partial class DirectGenerator : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (MaxEdits is not null)
 			{
-				writer.WriteFluentCall("MaxEdits", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxEdits.Value); });
+				writer.WriteFluentCall("MaxEdits", (w) => { w.WriteValue(MaxEdits.Value); });
 			}
 
 			if (MaxInspections is not null)
 			{
-				writer.WriteFluentCall("MaxInspections", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInspections.Value); w.Write("f"); });
+				writer.WriteFluentCall("MaxInspections", (w) => { w.WriteValue(MaxInspections.Value); w.Write("f"); });
 			}
 
 			if (MaxTermFreq is not null)
 			{
-				writer.WriteFluentCall("MaxTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTermFreq.Value); w.Write("f"); });
+				writer.WriteFluentCall("MaxTermFreq", (w) => { w.WriteValue(MaxTermFreq.Value); w.Write("f"); });
 			}
 
 			if (MinDocFreq is not null)
 			{
-				writer.WriteFluentCall("MinDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocFreq.Value); w.Write("f"); });
+				writer.WriteFluentCall("MinDocFreq", (w) => { w.WriteValue(MinDocFreq.Value); w.Write("f"); });
 			}
 
 			if (MinWordLength is not null)
 			{
-				writer.WriteFluentCall("MinWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinWordLength.Value); });
+				writer.WriteFluentCall("MinWordLength", (w) => { w.WriteValue(MinWordLength.Value); });
 			}
 
 			if (PostFilter is not null)
 			{
-				writer.WriteFluentCall("PostFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PostFilter); });
+				writer.WriteFluentCall("PostFilter", (w) => { w.WriteString(PostFilter); });
 			}
 
 			if (PreFilter is not null)
 			{
-				writer.WriteFluentCall("PreFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PreFilter); });
+				writer.WriteFluentCall("PreFilter", (w) => { w.WriteString(PreFilter); });
 			}
 
 			if (PrefixLength is not null)
 			{
-				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+				writer.WriteFluentCall("PrefixLength", (w) => { w.WriteValue(PrefixLength.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			if (SuggestMode is not null)
 			{
-				writer.WriteFluentCall("SuggestMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, w); });
+				writer.WriteFluentCall("SuggestMode", (w) => { Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, w); });
 			}
 		}
 		else

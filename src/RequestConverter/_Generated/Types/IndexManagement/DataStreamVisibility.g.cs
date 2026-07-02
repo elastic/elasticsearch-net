@@ -31,17 +31,17 @@ public partial class DataStreamVisibility : RequestConverter.ICodeFormattable
 		{
 			if (AllowCustomRouting is not null)
 			{
-				writer.WriteFluentCall("AllowCustomRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowCustomRouting.Value); });
+				writer.WriteFluentCall("AllowCustomRouting", (w) => { w.WriteValue(AllowCustomRouting.Value); });
 			}
 
 			if (FailureStore is not null)
 			{
-				writer.WriteFluentCall("FailureStore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FailureStore.Value); });
+				writer.WriteFluentCall("FailureStore", (w) => { w.WriteValue(FailureStore.Value); });
 			}
 
 			if (Hidden is not null)
 			{
-				writer.WriteFluentCall("Hidden", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Hidden.Value); });
+				writer.WriteFluentCall("Hidden", (w) => { w.WriteValue(Hidden.Value); });
 			}
 		}
 		else

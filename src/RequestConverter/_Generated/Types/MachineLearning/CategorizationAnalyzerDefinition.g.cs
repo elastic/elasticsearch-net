@@ -31,17 +31,17 @@ public partial class CategorizationAnalyzerDefinition : RequestConverter.ICodeFo
 		{
 			if (CharFilter is not null)
 			{
-				writer.WriteFluentCall("CharFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("CharFilter", (w) => { w.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentCall("Filter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Filter", (w) => { w.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Tokenizer is not null)
 			{
-				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); Tokenizer.FormatCode(w); });
+				writer.WriteFluentCall("Tokenizer", (w) => { Tokenizer.FormatCode(w); });
 			}
 		}
 		else

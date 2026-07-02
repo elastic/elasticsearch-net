@@ -31,22 +31,22 @@ public partial class DataDescription : RequestConverter.ICodeFormattable
 		{
 			if (FieldDelimiter is not null)
 			{
-				writer.WriteFluentCall("FieldDelimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FieldDelimiter); });
+				writer.WriteFluentCall("FieldDelimiter", (w) => { w.WriteString(FieldDelimiter); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (TimeField is not null)
 			{
-				writer.WriteFluentCall("TimeField", (w) => { TimeField.FormatCode(w); });
+				writer.WriteFluentCall("TimeField", (w) => { TimeField.FormatCode(w); }, false);
 			}
 
 			if (TimeFormat is not null)
 			{
-				writer.WriteFluentCall("TimeFormat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeFormat); });
+				writer.WriteFluentCall("TimeFormat", (w) => { w.WriteString(TimeFormat); });
 			}
 		}
 		else

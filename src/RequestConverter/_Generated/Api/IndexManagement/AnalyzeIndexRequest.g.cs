@@ -45,12 +45,12 @@ public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Attributes is not null)
@@ -60,27 +60,27 @@ public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 
 			if (CharFilter is not null)
 			{
-				writer.WriteFluentCall("CharFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("CharFilter", (w) => { w.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Explain is not null)
 			{
-				writer.WriteFluentCall("Explain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Explain.Value); });
+				writer.WriteFluentCall("Explain", (w) => { w.WriteValue(Explain.Value); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentCall("Filter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Filter", (w) => { w.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Normalizer is not null)
 			{
-				writer.WriteFluentCall("Normalizer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Normalizer); });
+				writer.WriteFluentCall("Normalizer", (w) => { w.WriteString(Normalizer); });
 			}
 
 			if (Text is not null)
@@ -90,7 +90,7 @@ public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 
 			if (Tokenizer is not null)
 			{
-				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); Tokenizer.FormatCode(w); });
+				writer.WriteFluentCall("Tokenizer", (w) => { Tokenizer.FormatCode(w); });
 			}
 		}
 		else

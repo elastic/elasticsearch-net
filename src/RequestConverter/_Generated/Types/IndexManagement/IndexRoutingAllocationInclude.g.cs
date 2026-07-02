@@ -31,12 +31,12 @@ public partial class IndexRoutingAllocationInclude : RequestConverter.ICodeForma
 		{
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (TierPreference is not null)
 			{
-				writer.WriteFluentCall("TierPreference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TierPreference); });
+				writer.WriteFluentCall("TierPreference", (w) => { w.WriteString(TierPreference); });
 			}
 		}
 		else

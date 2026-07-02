@@ -30,11 +30,11 @@ public partial class RankFeatureFunctionSigmoid : RequestConverter.ICodeFormatta
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Exponent", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Exponent); w.Write("f"); });
+				writer.WriteFluentCall("Exponent", (w) => { w.WriteValue(Exponent); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Pivot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Pivot); w.Write("f"); });
+				writer.WriteFluentCall("Pivot", (w) => { w.WriteValue(Pivot); w.Write("f"); });
 			}
 		}
 		else

@@ -45,32 +45,32 @@ public partial class CountRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (AnalyzeWildcard is not null)
 			{
-				writer.WriteFluentCall("AnalyzeWildcard", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AnalyzeWildcard.Value); });
+				writer.WriteFluentCall("AnalyzeWildcard", (w) => { w.WriteValue(AnalyzeWildcard.Value); });
 			}
 
 			if (DefaultOperator is not null)
 			{
-				writer.WriteFluentCall("DefaultOperator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, w); });
+				writer.WriteFluentCall("DefaultOperator", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, w); });
 			}
 
 			if (Df is not null)
 			{
-				writer.WriteFluentCall("Df", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Df); });
+				writer.WriteFluentCall("Df", (w) => { w.WriteString(Df); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -80,52 +80,52 @@ public partial class CountRequest : RequestConverter.ICodeFormattable
 #pragma warning disable CS0618
 			if (IgnoreThrottled is not null)
 			{
-				writer.WriteFluentCall("IgnoreThrottled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreThrottled.Value); });
+				writer.WriteFluentCall("IgnoreThrottled", (w) => { w.WriteValue(IgnoreThrottled.Value); });
 			}
 #pragma warning restore CS0618
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (Lenient is not null)
 			{
-				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+				writer.WriteFluentCall("Lenient", (w) => { w.WriteValue(Lenient.Value); });
 			}
 
 			if (MinScore is not null)
 			{
-				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("d"); });
+				writer.WriteFluentCall("MinScore", (w) => { w.WriteValue(MinScore.Value); w.Write("d"); });
 			}
 
 			if (Preference is not null)
 			{
-				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
 			}
 
 			if (QueryLuceneSyntax is not null)
 			{
-				writer.WriteFluentCall("QueryLuceneSyntax", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryLuceneSyntax); });
+				writer.WriteFluentCall("QueryLuceneSyntax", (w) => { w.WriteString(QueryLuceneSyntax); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (TerminateAfter is not null)
 			{
-				writer.WriteFluentCall("TerminateAfter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TerminateAfter.Value); w.Write("L"); });
+				writer.WriteFluentCall("TerminateAfter", (w) => { w.WriteValue(TerminateAfter.Value); w.Write("L"); });
 			}
 
 			if (ProjectRouting is not null)
 			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 		}
 		else

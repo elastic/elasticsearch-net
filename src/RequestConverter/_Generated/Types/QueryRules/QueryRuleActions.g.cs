@@ -31,12 +31,12 @@ public partial class QueryRuleActions : RequestConverter.ICodeFormattable
 		{
 			if (Docs is not null)
 			{
-				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>"); w.Write("()"); });
 			}
 
 			if (Ids is not null)
 			{
-				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Ids", (w) => { w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

@@ -40,7 +40,7 @@ public partial class PutViewRequest : RequestConverter.ICodeFormattable
 			writer.Write(")");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 		}
 		else

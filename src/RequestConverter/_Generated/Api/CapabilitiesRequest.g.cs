@@ -40,12 +40,12 @@ public partial class CapabilitiesRequest : RequestConverter.ICodeFormattable
 
 			if (LocalOnly is not null)
 			{
-				writer.WriteFluentCall("LocalOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LocalOnly.Value); });
+				writer.WriteFluentCall("LocalOnly", (w) => { w.WriteValue(LocalOnly.Value); });
 			}
 
 			if (Method is not null)
 			{
-				writer.WriteFluentCall("Method", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(Method.Value, w); });
+				writer.WriteFluentCall("Method", (w) => { Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethodCodeFormatter.FormatCode(Method.Value, w); });
 			}
 
 			if (Parameters is not null)
@@ -55,12 +55,12 @@ public partial class CapabilitiesRequest : RequestConverter.ICodeFormattable
 
 			if (Path is not null)
 			{
-				writer.WriteFluentCall("Path", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Path); });
+				writer.WriteFluentCall("Path", (w) => { w.WriteString(Path); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

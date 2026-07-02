@@ -31,12 +31,12 @@ public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormatt
 		{
 			if (AddBackingIndex is not null)
 			{
-				writer.WriteFluentDescriptorCall("AddBackingIndex", (w) => { AddBackingIndex.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AddBackingIndex.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AddBackingIndex", (w) => { AddBackingIndex.FormatCode(w); }, (w) => { AddBackingIndex.FormatCode(w); });
 			}
 
 			if (RemoveBackingIndex is not null)
 			{
-				writer.WriteFluentDescriptorCall("RemoveBackingIndex", (w) => { RemoveBackingIndex.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RemoveBackingIndex.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RemoveBackingIndex", (w) => { RemoveBackingIndex.FormatCode(w); }, (w) => { RemoveBackingIndex.FormatCode(w); });
 			}
 		}
 		else

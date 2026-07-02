@@ -41,17 +41,17 @@ public partial class GetSynonymRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (From is not null)
 			{
-				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
 			}
 
 			if (SearchAfter is not null)
 			{
-				writer.WriteFluentCall("SearchAfter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchAfter); });
+				writer.WriteFluentCall("SearchAfter", (w) => { w.WriteString(SearchAfter); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 		}
 		else

@@ -31,37 +31,37 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 		{
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
 			if (Weight is not null)
 			{
-				writer.WriteFluentCall("Weight", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Weight.Value); w.Write("d"); });
+				writer.WriteFluentCall("Weight", (w) => { w.WriteValue(Weight.Value); w.Write("d"); });
 			}
 
 			if (Exp is not null)
 			{
-				writer.WriteFluentCall("Exp", (w) => { using var _oi = w.ForceObjectInitializer(); Exp.FormatCode(w); });
+				writer.WriteFluentCall("Exp", (w) => { Exp.FormatCode(w); });
 			}
 
 			if (FieldValueFactor is not null)
 			{
-				writer.WriteFluentDescriptorCall("FieldValueFactor", (w) => { FieldValueFactor.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); FieldValueFactor.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("FieldValueFactor", (w) => { FieldValueFactor.FormatCode(w); }, (w) => { FieldValueFactor.FormatCode(w); });
 			}
 
 			if (Gauss is not null)
 			{
-				writer.WriteFluentCall("Gauss", (w) => { using var _oi = w.ForceObjectInitializer(); Gauss.FormatCode(w); });
+				writer.WriteFluentCall("Gauss", (w) => { Gauss.FormatCode(w); });
 			}
 
 			if (Linear is not null)
 			{
-				writer.WriteFluentCall("Linear", (w) => { using var _oi = w.ForceObjectInitializer(); Linear.FormatCode(w); });
+				writer.WriteFluentCall("Linear", (w) => { Linear.FormatCode(w); });
 			}
 
 			if (RandomScore is not null)
@@ -71,7 +71,7 @@ public partial class FunctionScore : RequestConverter.ICodeFormattable
 
 			if (ScriptScore is not null)
 			{
-				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ScriptScore.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); }, (w) => { ScriptScore.FormatCode(w); });
 			}
 		}
 		else

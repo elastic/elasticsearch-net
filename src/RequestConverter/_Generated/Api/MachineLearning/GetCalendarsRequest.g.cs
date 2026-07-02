@@ -35,17 +35,17 @@ public partial class GetCalendarsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (CalendarId is not null)
 			{
-				writer.WriteFluentCall("CalendarId", (w) => { using var _oi = w.ForceObjectInitializer(); CalendarId.FormatCode(w); });
+				writer.WriteFluentCall("CalendarId", (w) => { CalendarId.FormatCode(w); });
 			}
 
 			if (From is not null)
 			{
-				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); });
+				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			if (Page is not null)

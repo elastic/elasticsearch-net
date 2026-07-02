@@ -30,22 +30,22 @@ public partial class AnthropicTaskSettings : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("MaxTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokens); });
+				writer.WriteFluentCall("MaxTokens", (w) => { w.WriteValue(MaxTokens); });
 			}
 
 			if (Temperature is not null)
 			{
-				writer.WriteFluentCall("Temperature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Temperature.Value); w.Write("f"); });
+				writer.WriteFluentCall("Temperature", (w) => { w.WriteValue(Temperature.Value); w.Write("f"); });
 			}
 
 			if (TopK is not null)
 			{
-				writer.WriteFluentCall("TopK", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopK.Value); });
+				writer.WriteFluentCall("TopK", (w) => { w.WriteValue(TopK.Value); });
 			}
 
 			if (TopP is not null)
 			{
-				writer.WriteFluentCall("TopP", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopP.Value); w.Write("f"); });
+				writer.WriteFluentCall("TopP", (w) => { w.WriteValue(TopP.Value); w.Write("f"); });
 			}
 		}
 		else

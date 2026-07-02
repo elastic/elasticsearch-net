@@ -31,17 +31,17 @@ public partial class SettingsSimilarityBm25 : RequestConverter.ICodeFormattable
 		{
 			if (B is not null)
 			{
-				writer.WriteFluentCall("B", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(B.Value); w.Write("d"); });
+				writer.WriteFluentCall("B", (w) => { w.WriteValue(B.Value); w.Write("d"); });
 			}
 
 			if (DiscountOverlaps is not null)
 			{
-				writer.WriteFluentCall("DiscountOverlaps", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscountOverlaps.Value); });
+				writer.WriteFluentCall("DiscountOverlaps", (w) => { w.WriteValue(DiscountOverlaps.Value); });
 			}
 
 			if (K1 is not null)
 			{
-				writer.WriteFluentCall("K1", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K1.Value); w.Write("d"); });
+				writer.WriteFluentCall("K1", (w) => { w.WriteValue(K1.Value); w.Write("d"); });
 			}
 		}
 		else

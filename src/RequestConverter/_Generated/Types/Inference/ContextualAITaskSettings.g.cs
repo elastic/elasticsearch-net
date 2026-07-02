@@ -31,12 +31,12 @@ public partial class ContextualAITaskSettings : RequestConverter.ICodeFormattabl
 		{
 			if (Instruction is not null)
 			{
-				writer.WriteFluentCall("Instruction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Instruction); });
+				writer.WriteFluentCall("Instruction", (w) => { w.WriteString(Instruction); });
 			}
 
 			if (TopK is not null)
 			{
-				writer.WriteFluentCall("TopK", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopK.Value); });
+				writer.WriteFluentCall("TopK", (w) => { w.WriteValue(TopK.Value); });
 			}
 		}
 		else

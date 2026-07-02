@@ -30,15 +30,15 @@ public partial class Retention : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ExpireAfter", (w) => { using var _oi = w.ForceObjectInitializer(); ExpireAfter.FormatCode(w); });
+				writer.WriteFluentCall("ExpireAfter", (w) => { ExpireAfter.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("MaxCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxCount); });
+				writer.WriteFluentCall("MaxCount", (w) => { w.WriteValue(MaxCount); });
 			}
 
 			{
-				writer.WriteFluentCall("MinCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinCount); });
+				writer.WriteFluentCall("MinCount", (w) => { w.WriteValue(MinCount); });
 			}
 		}
 		else

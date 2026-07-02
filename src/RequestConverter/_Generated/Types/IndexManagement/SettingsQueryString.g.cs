@@ -30,7 +30,7 @@ public partial class SettingsQueryString : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient); });
+				writer.WriteFluentCall("Lenient", (w) => { w.WriteValue(Lenient); });
 			}
 		}
 		else

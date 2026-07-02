@@ -41,21 +41,21 @@ public partial class CreateRepositoryRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Verify is not null)
 			{
-				writer.WriteFluentCall("Verify", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Verify.Value); });
+				writer.WriteFluentCall("Verify", (w) => { w.WriteValue(Verify.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Repository", (w) => { using var _oi = w.ForceObjectInitializer(); Repository.FormatCode(w); });
+				writer.WriteFluentCall("Repository", (w) => { Repository.FormatCode(w); });
 			}
 		}
 		else

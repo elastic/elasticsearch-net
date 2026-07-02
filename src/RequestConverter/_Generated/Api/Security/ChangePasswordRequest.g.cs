@@ -35,22 +35,22 @@ public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 			}
 
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (Password is not null)
 			{
-				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
 			}
 
 			if (PasswordHash is not null)
 			{
-				writer.WriteFluentCall("PasswordHash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PasswordHash); });
+				writer.WriteFluentCall("PasswordHash", (w) => { w.WriteString(PasswordHash); });
 			}
 		}
 		else

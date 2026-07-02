@@ -30,12 +30,12 @@ public partial class KuromojiReadingFormTokenFilter : RequestConverter.ICodeForm
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("UseRomaji", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UseRomaji); });
+				writer.WriteFluentCall("UseRomaji", (w) => { w.WriteValue(UseRomaji); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -31,22 +31,22 @@ public partial class IcuNormalizationCharFilter : RequestConverter.ICodeFormatta
 		{
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name.Value, w); });
+				writer.WriteFluentCall("Name", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTypeCodeFormatter.FormatCode(Name.Value, w); });
 			}
 
 			if (UnicodeSetFilter is not null)
 			{
-				writer.WriteFluentCall("UnicodeSetFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UnicodeSetFilter); });
+				writer.WriteFluentCall("UnicodeSetFilter", (w) => { w.WriteString(UnicodeSetFilter); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -30,19 +30,19 @@ public partial class WatsonxServiceSettings : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			{
-				writer.WriteFluentCall("ApiVersion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiVersion); });
+				writer.WriteFluentCall("ApiVersion", (w) => { w.WriteString(ApiVersion); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			{
-				writer.WriteFluentCall("ProjectId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectId); });
+				writer.WriteFluentCall("ProjectId", (w) => { w.WriteString(ProjectId); });
 			}
 
 			if (RateLimit is not null)
@@ -51,7 +51,7 @@ public partial class WatsonxServiceSettings : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+				writer.WriteFluentCall("Url", (w) => { w.WriteString(Url); });
 			}
 		}
 		else

@@ -31,32 +31,32 @@ public partial class FieldSuggester : RequestConverter.ICodeFormattable
 		{
 			if (Prefix is not null)
 			{
-				writer.WriteFluentCall("Prefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Prefix); });
+				writer.WriteFluentCall("Prefix", (w) => { w.WriteString(Prefix); });
 			}
 
 			if (Regex is not null)
 			{
-				writer.WriteFluentCall("Regex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Regex); });
+				writer.WriteFluentCall("Regex", (w) => { w.WriteString(Regex); });
 			}
 
 			if (Text is not null)
 			{
-				writer.WriteFluentCall("Text", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Text); });
+				writer.WriteFluentCall("Text", (w) => { w.WriteString(Text); });
 			}
 
 			if (Completion is not null)
 			{
-				writer.WriteFluentDescriptorCall("Completion", (w) => { Completion.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Completion.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Completion", (w) => { Completion.FormatCode(w); }, (w) => { Completion.FormatCode(w); });
 			}
 
 			if (Phrase is not null)
 			{
-				writer.WriteFluentDescriptorCall("Phrase", (w) => { Phrase.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Phrase.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Phrase", (w) => { Phrase.FormatCode(w); }, (w) => { Phrase.FormatCode(w); });
 			}
 
 			if (Term is not null)
 			{
-				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Term.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); }, (w) => { Term.FormatCode(w); });
 			}
 		}
 		else

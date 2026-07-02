@@ -31,42 +31,42 @@ public partial class IntervalsFilter : RequestConverter.ICodeFormattable
 		{
 			if (After is not null)
 			{
-				writer.WriteFluentDescriptorCall("After", (w) => { After.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); After.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("After", (w) => { After.FormatCode(w); }, (w) => { After.FormatCode(w); });
 			}
 
 			if (Before is not null)
 			{
-				writer.WriteFluentDescriptorCall("Before", (w) => { Before.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Before.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Before", (w) => { Before.FormatCode(w); }, (w) => { Before.FormatCode(w); });
 			}
 
 			if (ContainedBy is not null)
 			{
-				writer.WriteFluentDescriptorCall("ContainedBy", (w) => { ContainedBy.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ContainedBy.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ContainedBy", (w) => { ContainedBy.FormatCode(w); }, (w) => { ContainedBy.FormatCode(w); });
 			}
 
 			if (Containing is not null)
 			{
-				writer.WriteFluentDescriptorCall("Containing", (w) => { Containing.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Containing.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Containing", (w) => { Containing.FormatCode(w); }, (w) => { Containing.FormatCode(w); });
 			}
 
 			if (NotContainedBy is not null)
 			{
-				writer.WriteFluentDescriptorCall("NotContainedBy", (w) => { NotContainedBy.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); NotContainedBy.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("NotContainedBy", (w) => { NotContainedBy.FormatCode(w); }, (w) => { NotContainedBy.FormatCode(w); });
 			}
 
 			if (NotContaining is not null)
 			{
-				writer.WriteFluentDescriptorCall("NotContaining", (w) => { NotContaining.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); NotContaining.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("NotContaining", (w) => { NotContaining.FormatCode(w); }, (w) => { NotContaining.FormatCode(w); });
 			}
 
 			if (NotOverlapping is not null)
 			{
-				writer.WriteFluentDescriptorCall("NotOverlapping", (w) => { NotOverlapping.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); NotOverlapping.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("NotOverlapping", (w) => { NotOverlapping.FormatCode(w); }, (w) => { NotOverlapping.FormatCode(w); });
 			}
 
 			if (Overlapping is not null)
 			{
-				writer.WriteFluentDescriptorCall("Overlapping", (w) => { Overlapping.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Overlapping.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Overlapping", (w) => { Overlapping.FormatCode(w); }, (w) => { Overlapping.FormatCode(w); });
 			}
 
 			if (Script is not null)

@@ -31,96 +31,96 @@ public partial class S3RepositorySettings : RequestConverter.ICodeFormattable
 		{
 			if (BasePath is not null)
 			{
-				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+				writer.WriteFluentCall("BasePath", (w) => { w.WriteString(BasePath); });
 			}
 
 			{
-				writer.WriteFluentCall("Bucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Bucket); });
+				writer.WriteFluentCall("Bucket", (w) => { w.WriteString(Bucket); });
 			}
 
 			if (BufferSize is not null)
 			{
-				writer.WriteFluentCall("BufferSize", (w) => { using var _oi = w.ForceObjectInitializer(); BufferSize.FormatCode(w); });
+				writer.WriteFluentCall("BufferSize", (w) => { BufferSize.FormatCode(w); });
 			}
 
 			if (CannedAcl is not null)
 			{
-				writer.WriteFluentCall("CannedAcl", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CannedAcl); });
+				writer.WriteFluentCall("CannedAcl", (w) => { w.WriteString(CannedAcl); });
 			}
 
 			if (ChunkSize is not null)
 			{
-				writer.WriteFluentCall("ChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); ChunkSize.FormatCode(w); });
+				writer.WriteFluentCall("ChunkSize", (w) => { ChunkSize.FormatCode(w); });
 			}
 
 			if (Client is not null)
 			{
-				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+				writer.WriteFluentCall("Client", (w) => { w.WriteString(Client); });
 			}
 
 			if (Compress is not null)
 			{
-				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+				writer.WriteFluentCall("Compress", (w) => { w.WriteValue(Compress.Value); });
 			}
 
 			if (DeleteObjectsMaxSize is not null)
 			{
-				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteObjectsMaxSize.Value); });
+				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { w.WriteValue(DeleteObjectsMaxSize.Value); });
 			}
 
 			if (GetRegisterRetryDelay is not null)
 			{
-				writer.WriteFluentCall("GetRegisterRetryDelay", (w) => { using var _oi = w.ForceObjectInitializer(); GetRegisterRetryDelay.FormatCode(w); });
+				writer.WriteFluentCall("GetRegisterRetryDelay", (w) => { GetRegisterRetryDelay.FormatCode(w); });
 			}
 
 			if (MaxMultipartParts is not null)
 			{
-				writer.WriteFluentCall("MaxMultipartParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMultipartParts.Value); });
+				writer.WriteFluentCall("MaxMultipartParts", (w) => { w.WriteValue(MaxMultipartParts.Value); });
 			}
 
 			if (MaxMultipartUploadCleanupSize is not null)
 			{
-				writer.WriteFluentCall("MaxMultipartUploadCleanupSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMultipartUploadCleanupSize.Value); });
+				writer.WriteFluentCall("MaxMultipartUploadCleanupSize", (w) => { w.WriteValue(MaxMultipartUploadCleanupSize.Value); });
 			}
 
 			if (MaxRestoreBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRestoreBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { MaxRestoreBytesPerSec.FormatCode(w); });
 			}
 
 			if (MaxSnapshotBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSnapshotBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { MaxSnapshotBytesPerSec.FormatCode(w); });
 			}
 
 			if (Readonly is not null)
 			{
-				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+				writer.WriteFluentCall("Readonly", (w) => { w.WriteValue(Readonly.Value); });
 			}
 
 			if (ServerSideEncryption is not null)
 			{
-				writer.WriteFluentCall("ServerSideEncryption", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ServerSideEncryption.Value); });
+				writer.WriteFluentCall("ServerSideEncryption", (w) => { w.WriteValue(ServerSideEncryption.Value); });
 			}
 
 			if (StorageClass is not null)
 			{
-				writer.WriteFluentCall("StorageClass", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StorageClass); });
+				writer.WriteFluentCall("StorageClass", (w) => { w.WriteString(StorageClass); });
 			}
 
 			if (ThrottledDeleteRetryDelayIncrement is not null)
 			{
-				writer.WriteFluentCall("ThrottledDeleteRetryDelayIncrement", (w) => { using var _oi = w.ForceObjectInitializer(); ThrottledDeleteRetryDelayIncrement.FormatCode(w); });
+				writer.WriteFluentCall("ThrottledDeleteRetryDelayIncrement", (w) => { ThrottledDeleteRetryDelayIncrement.FormatCode(w); });
 			}
 
 			if (ThrottledDeleteRetryMaximumDelay is not null)
 			{
-				writer.WriteFluentCall("ThrottledDeleteRetryMaximumDelay", (w) => { using var _oi = w.ForceObjectInitializer(); ThrottledDeleteRetryMaximumDelay.FormatCode(w); });
+				writer.WriteFluentCall("ThrottledDeleteRetryMaximumDelay", (w) => { ThrottledDeleteRetryMaximumDelay.FormatCode(w); });
 			}
 
 			if (ThrottledDeleteRetryMaximumNumberOfRetries is not null)
 			{
-				writer.WriteFluentCall("ThrottledDeleteRetryMaximumNumberOfRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ThrottledDeleteRetryMaximumNumberOfRetries.Value); });
+				writer.WriteFluentCall("ThrottledDeleteRetryMaximumNumberOfRetries", (w) => { w.WriteValue(ThrottledDeleteRetryMaximumNumberOfRetries.Value); });
 			}
 		}
 		else

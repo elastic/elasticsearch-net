@@ -30,11 +30,11 @@ public partial class SampleDiversity : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("MaxDocsPerValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocsPerValue); });
+				writer.WriteFluentCall("MaxDocsPerValue", (w) => { w.WriteValue(MaxDocsPerValue); });
 			}
 		}
 		else

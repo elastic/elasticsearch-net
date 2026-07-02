@@ -31,12 +31,12 @@ public partial class RankEvalMetricMeanReciprocalRank : RequestConverter.ICodeFo
 		{
 			if (K is not null)
 			{
-				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K.Value); });
+				writer.WriteFluentCall("K", (w) => { w.WriteValue(K.Value); });
 			}
 
 			if (RelevantRatingThreshold is not null)
 			{
-				writer.WriteFluentCall("RelevantRatingThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RelevantRatingThreshold.Value); });
+				writer.WriteFluentCall("RelevantRatingThreshold", (w) => { w.WriteValue(RelevantRatingThreshold.Value); });
 			}
 		}
 		else

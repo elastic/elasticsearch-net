@@ -69,12 +69,12 @@ public partial class RestoreRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 
 			if (FeatureStates is not null)
@@ -89,17 +89,17 @@ public partial class RestoreRequest : RequestConverter.ICodeFormattable
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (IncludeAliases is not null)
 			{
-				writer.WriteFluentCall("IncludeAliases", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeAliases.Value); });
+				writer.WriteFluentCall("IncludeAliases", (w) => { w.WriteValue(IncludeAliases.Value); });
 			}
 
 			if (IncludeGlobalState is not null)
 			{
-				writer.WriteFluentCall("IncludeGlobalState", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeGlobalState.Value); });
+				writer.WriteFluentCall("IncludeGlobalState", (w) => { w.WriteValue(IncludeGlobalState.Value); });
 			}
 
 			if (IndexSettings is not null)
@@ -109,22 +109,22 @@ public partial class RestoreRequest : RequestConverter.ICodeFormattable
 
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (Partial is not null)
 			{
-				writer.WriteFluentCall("Partial", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Partial.Value); });
+				writer.WriteFluentCall("Partial", (w) => { w.WriteValue(Partial.Value); });
 			}
 
 			if (RenamePattern is not null)
 			{
-				writer.WriteFluentCall("RenamePattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RenamePattern); });
+				writer.WriteFluentCall("RenamePattern", (w) => { w.WriteString(RenamePattern); });
 			}
 
 			if (RenameReplacement is not null)
 			{
-				writer.WriteFluentCall("RenameReplacement", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RenameReplacement); });
+				writer.WriteFluentCall("RenameReplacement", (w) => { w.WriteString(RenameReplacement); });
 			}
 		}
 		else

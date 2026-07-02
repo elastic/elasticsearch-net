@@ -31,7 +31,7 @@ public partial class SetPriorityAction : RequestConverter.ICodeFormattable
 		{
 			if (Priority is not null)
 			{
-				writer.WriteFluentCall("Priority", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Priority.Value); });
+				writer.WriteFluentCall("Priority", (w) => { w.WriteValue(Priority.Value); });
 			}
 		}
 		else

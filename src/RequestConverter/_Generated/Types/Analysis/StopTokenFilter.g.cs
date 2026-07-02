@@ -31,27 +31,27 @@ public partial class StopTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (IgnoreCase is not null)
 			{
-				writer.WriteFluentCall("IgnoreCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreCase.Value); });
+				writer.WriteFluentCall("IgnoreCase", (w) => { w.WriteValue(IgnoreCase.Value); });
 			}
 
 			if (RemoveTrailing is not null)
 			{
-				writer.WriteFluentCall("RemoveTrailing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RemoveTrailing.Value); });
+				writer.WriteFluentCall("RemoveTrailing", (w) => { w.WriteValue(RemoveTrailing.Value); });
 			}
 
 			if (Stopwords is not null)
 			{
-				writer.WriteFluentCall("Stopwords", (w) => { using var _oi = w.ForceObjectInitializer(); if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("Stopwords", (w) => { if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
 			}
 
 			if (StopwordsPath is not null)
 			{
-				writer.WriteFluentCall("StopwordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StopwordsPath); });
+				writer.WriteFluentCall("StopwordsPath", (w) => { w.WriteString(StopwordsPath); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

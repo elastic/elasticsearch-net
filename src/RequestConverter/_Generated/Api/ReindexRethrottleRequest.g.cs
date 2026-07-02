@@ -41,12 +41,12 @@ public partial class ReindexRethrottleRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (GroupBy is not null)
 			{
-				writer.WriteFluentCall("GroupBy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, w); });
+				writer.WriteFluentCall("GroupBy", (w) => { Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, w); });
 			}
 
 			if (RequestsPerSecond is not null)
 			{
-				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
 			}
 		}
 		else

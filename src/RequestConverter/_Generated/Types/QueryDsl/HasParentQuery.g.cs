@@ -31,12 +31,12 @@ public partial class HasParentQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			if (IgnoreUnmapped is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { w.WriteValue(IgnoreUnmapped.Value); });
 			}
 
 			if (InnerHits is not null)
@@ -45,21 +45,21 @@ public partial class HasParentQuery : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("ParentType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ParentType); });
+				writer.WriteFluentCall("ParentType", (w) => { w.WriteString(ParentType); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Score is not null)
 			{
-				writer.WriteFluentCall("Score", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Score.Value); });
+				writer.WriteFluentCall("Score", (w) => { w.WriteValue(Score.Value); });
 			}
 		}
 		else

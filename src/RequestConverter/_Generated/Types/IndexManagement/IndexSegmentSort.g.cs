@@ -31,7 +31,7 @@ public partial class IndexSegmentSort : RequestConverter.ICodeFormattable
 		{
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Missing is not null)

@@ -57,17 +57,17 @@ public partial class PutRoleMappingRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Roles is not null)
@@ -77,12 +77,12 @@ public partial class PutRoleMappingRequest : RequestConverter.ICodeFormattable
 
 			if (RoleTemplates is not null)
 			{
-				writer.WriteFluentDescriptorParams("RoleTemplates", RoleTemplates, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleTemplate>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("RoleTemplates", RoleTemplates, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleTemplate>"); w.Write("()"); });
 			}
 
 			if (Rules is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rules", (w) => { Rules.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rules.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rules", (w) => { Rules.FormatCode(w); }, (w) => { Rules.FormatCode(w); });
 			}
 
 			if (RunAs is not null)

@@ -55,47 +55,47 @@ public partial class NodesStatsRequest : RequestConverter.ICodeFormattable
 
 			if (NodeId is not null)
 			{
-				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
 			}
 
 			if (CompletionFields is not null)
 			{
-				writer.WriteFluentCall("CompletionFields", (w) => { CompletionFields.FormatCode(w); });
+				writer.WriteFluentCall("CompletionFields", (w) => { CompletionFields.FormatCode(w); }, false);
 			}
 
 			if (FielddataFields is not null)
 			{
-				writer.WriteFluentCall("FielddataFields", (w) => { FielddataFields.FormatCode(w); });
+				writer.WriteFluentCall("FielddataFields", (w) => { FielddataFields.FormatCode(w); }, false);
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (Groups is not null)
 			{
-				writer.WriteFluentCall("Groups", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Groups.Value); });
+				writer.WriteFluentCall("Groups", (w) => { w.WriteValue(Groups.Value); });
 			}
 
 			if (IncludeSegmentFileSizes is not null)
 			{
-				writer.WriteFluentCall("IncludeSegmentFileSizes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeSegmentFileSizes.Value); });
+				writer.WriteFluentCall("IncludeSegmentFileSizes", (w) => { w.WriteValue(IncludeSegmentFileSizes.Value); });
 			}
 
 			if (IncludeUnloadedSegments is not null)
 			{
-				writer.WriteFluentCall("IncludeUnloadedSegments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeUnloadedSegments.Value); });
+				writer.WriteFluentCall("IncludeUnloadedSegments", (w) => { w.WriteValue(IncludeUnloadedSegments.Value); });
 			}
 
 			if (Level is not null)
 			{
-				writer.WriteFluentCall("Level", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.NodeStatsLevelCodeFormatter.FormatCode(Level.Value, w); });
+				writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.NodeStatsLevelCodeFormatter.FormatCode(Level.Value, w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Types is not null)

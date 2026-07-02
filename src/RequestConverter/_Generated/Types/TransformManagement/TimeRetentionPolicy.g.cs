@@ -30,11 +30,11 @@ public partial class TimeRetentionPolicy : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("MaxAge", (w) => { using var _oi = w.ForceObjectInitializer(); MaxAge.FormatCode(w); });
+				writer.WriteFluentCall("MaxAge", (w) => { MaxAge.FormatCode(w); });
 			}
 		}
 		else

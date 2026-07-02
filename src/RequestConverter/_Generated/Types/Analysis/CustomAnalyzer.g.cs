@@ -41,16 +41,16 @@ public partial class CustomAnalyzer : RequestConverter.ICodeFormattable
 
 			if (PositionIncrementGap is not null)
 			{
-				writer.WriteFluentCall("PositionIncrementGap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PositionIncrementGap.Value); });
+				writer.WriteFluentCall("PositionIncrementGap", (w) => { w.WriteValue(PositionIncrementGap.Value); });
 			}
 
 			if (PositionOffsetGap is not null)
 			{
-				writer.WriteFluentCall("PositionOffsetGap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PositionOffsetGap.Value); });
+				writer.WriteFluentCall("PositionOffsetGap", (w) => { w.WriteValue(PositionOffsetGap.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tokenizer); });
+				writer.WriteFluentCall("Tokenizer", (w) => { w.WriteString(Tokenizer); });
 			}
 		}
 		else

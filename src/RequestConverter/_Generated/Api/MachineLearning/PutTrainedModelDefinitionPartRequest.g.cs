@@ -46,15 +46,15 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICo
 			writer.Write(")");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentCall("Definition", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Definition); });
+				writer.WriteFluentCall("Definition", (w) => { w.WriteString(Definition); });
 			}
 
 			{
-				writer.WriteFluentCall("TotalDefinitionLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TotalDefinitionLength); w.Write("L"); });
+				writer.WriteFluentCall("TotalDefinitionLength", (w) => { w.WriteValue(TotalDefinitionLength); w.Write("L"); });
 			}
 
 			{
-				writer.WriteFluentCall("TotalParts", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TotalParts); });
+				writer.WriteFluentCall("TotalParts", (w) => { w.WriteValue(TotalParts); });
 			}
 		}
 		else

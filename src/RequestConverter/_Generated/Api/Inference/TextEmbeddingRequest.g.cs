@@ -41,7 +41,7 @@ public partial class TextEmbeddingRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			{
@@ -50,12 +50,12 @@ public partial class TextEmbeddingRequest : RequestConverter.ICodeFormattable
 
 			if (InputType is not null)
 			{
-				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+				writer.WriteFluentCall("InputType", (w) => { w.WriteString(InputType); });
 			}
 
 			if (TaskSettings is not null)
 			{
-				writer.WriteFluentCall("TaskSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(TaskSettings); });
+				writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
 			}
 		}
 		else

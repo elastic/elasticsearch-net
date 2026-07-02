@@ -30,15 +30,15 @@ public partial class InnerRetriever : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Normalizer", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer, w); });
+				writer.WriteFluentCall("Normalizer", (w) => { Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer, w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Retriever.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); }, (w) => { Retriever.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Weight", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Weight); w.Write("f"); });
+				writer.WriteFluentCall("Weight", (w) => { w.WriteValue(Weight); w.Write("f"); });
 			}
 		}
 		else

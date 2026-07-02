@@ -31,11 +31,11 @@ public partial class RemoteIndicesPrivileges : RequestConverter.ICodeFormattable
 		{
 			if (AllowRestrictedIndices is not null)
 			{
-				writer.WriteFluentCall("AllowRestrictedIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowRestrictedIndices.Value); });
+				writer.WriteFluentCall("AllowRestrictedIndices", (w) => { w.WriteValue(AllowRestrictedIndices.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Clusters", (w) => { using var _oi = w.ForceObjectInitializer(); Clusters.FormatCode(w); });
+				writer.WriteFluentCall("Clusters", (w) => { Clusters.FormatCode(w); });
 			}
 
 			if (FieldSecurity is not null)
@@ -44,7 +44,7 @@ public partial class RemoteIndicesPrivileges : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Names", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Names, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Names", (w) => { w.WriteInlineList(Names, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			{
@@ -53,7 +53,7 @@ public partial class RemoteIndicesPrivileges : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteObjectValue(Query); });
 			}
 		}
 		else

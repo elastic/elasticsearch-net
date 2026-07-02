@@ -31,12 +31,12 @@ public partial class NvidiaTaskSettings : RequestConverter.ICodeFormattable
 		{
 			if (InputType is not null)
 			{
-				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(InputType.Value, w); });
+				writer.WriteFluentCall("InputType", (w) => { Elastic.Clients.Elasticsearch.Inference.NvidiaInputTypeCodeFormatter.FormatCode(InputType.Value, w); });
 			}
 
 			if (Truncate is not null)
 			{
-				writer.WriteFluentCall("Truncate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, w); });
+				writer.WriteFluentCall("Truncate", (w) => { Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeCodeFormatter.FormatCode(Truncate.Value, w); });
 			}
 		}
 		else

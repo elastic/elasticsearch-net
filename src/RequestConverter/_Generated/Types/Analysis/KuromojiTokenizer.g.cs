@@ -31,31 +31,31 @@ public partial class KuromojiTokenizer : RequestConverter.ICodeFormattable
 		{
 			if (DiscardCompoundToken is not null)
 			{
-				writer.WriteFluentCall("DiscardCompoundToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscardCompoundToken.Value); });
+				writer.WriteFluentCall("DiscardCompoundToken", (w) => { w.WriteValue(DiscardCompoundToken.Value); });
 			}
 
 			if (DiscardPunctuation is not null)
 			{
-				writer.WriteFluentCall("DiscardPunctuation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DiscardPunctuation.Value); });
+				writer.WriteFluentCall("DiscardPunctuation", (w) => { w.WriteValue(DiscardPunctuation.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeCodeFormatter.FormatCode(Mode, w); });
 			}
 
 			if (NbestCost is not null)
 			{
-				writer.WriteFluentCall("NbestCost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NbestCost.Value); });
+				writer.WriteFluentCall("NbestCost", (w) => { w.WriteValue(NbestCost.Value); });
 			}
 
 			if (NbestExamples is not null)
 			{
-				writer.WriteFluentCall("NbestExamples", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(NbestExamples); });
+				writer.WriteFluentCall("NbestExamples", (w) => { w.WriteString(NbestExamples); });
 			}
 
 			if (UserDictionary is not null)
 			{
-				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+				writer.WriteFluentCall("UserDictionary", (w) => { w.WriteString(UserDictionary); });
 			}
 
 			if (UserDictionaryRules is not null)
@@ -65,7 +65,7 @@ public partial class KuromojiTokenizer : RequestConverter.ICodeFormattable
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

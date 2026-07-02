@@ -31,12 +31,12 @@ public partial class TDigest : RequestConverter.ICodeFormattable
 		{
 			if (Compression is not null)
 			{
-				writer.WriteFluentCall("Compression", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compression.Value); });
+				writer.WriteFluentCall("Compression", (w) => { w.WriteValue(Compression.Value); });
 			}
 
 			if (ExecutionHint is not null)
 			{
-				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+				writer.WriteFluentCall("ExecutionHint", (w) => { Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
 			}
 		}
 		else

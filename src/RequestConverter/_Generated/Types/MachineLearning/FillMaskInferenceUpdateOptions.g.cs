@@ -31,12 +31,12 @@ public partial class FillMaskInferenceUpdateOptions : RequestConverter.ICodeForm
 		{
 			if (NumTopClasses is not null)
 			{
-				writer.WriteFluentCall("NumTopClasses", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopClasses.Value); });
+				writer.WriteFluentCall("NumTopClasses", (w) => { w.WriteValue(NumTopClasses.Value); });
 			}
 
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+				writer.WriteFluentCall("ResultsField", (w) => { w.WriteString(ResultsField); });
 			}
 
 			if (Tokenization is not null)

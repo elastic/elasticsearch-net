@@ -35,17 +35,17 @@ public partial class SamlPrepareAuthenticationRequest : RequestConverter.ICodeFo
 			using var _chainIndent = writer.Indent();
 			if (Acs is not null)
 			{
-				writer.WriteFluentCall("Acs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Acs); });
+				writer.WriteFluentCall("Acs", (w) => { w.WriteString(Acs); });
 			}
 
 			if (Realm is not null)
 			{
-				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
 			}
 
 			if (RelayState is not null)
 			{
-				writer.WriteFluentCall("RelayState", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RelayState); });
+				writer.WriteFluentCall("RelayState", (w) => { w.WriteString(RelayState); });
 			}
 		}
 		else

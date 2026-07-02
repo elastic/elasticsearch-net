@@ -30,7 +30,7 @@ public partial class Weights : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("WeightsValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WeightsValue); w.Write("d"); });
+				writer.WriteFluentCall("WeightsValue", (w) => { w.WriteValue(WeightsValue); w.Write("d"); });
 			}
 		}
 		else

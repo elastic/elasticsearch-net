@@ -31,17 +31,17 @@ public partial class DateRangeExpression : RequestConverter.ICodeFormattable
 		{
 			if (From is not null)
 			{
-				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); From.FormatCode(w); });
+				writer.WriteFluentCall("From", (w) => { From.FormatCode(w); });
 			}
 
 			if (Key is not null)
 			{
-				writer.WriteFluentCall("Key", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Key); });
+				writer.WriteFluentCall("Key", (w) => { w.WriteString(Key); });
 			}
 
 			if (To is not null)
 			{
-				writer.WriteFluentCall("To", (w) => { using var _oi = w.ForceObjectInitializer(); To.FormatCode(w); });
+				writer.WriteFluentCall("To", (w) => { To.FormatCode(w); });
 			}
 		}
 		else

@@ -31,12 +31,12 @@ public partial class UaxEmailUrlTokenizer : RequestConverter.ICodeFormattable
 		{
 			if (MaxTokenLength is not null)
 			{
-				writer.WriteFluentCall("MaxTokenLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokenLength.Value); });
+				writer.WriteFluentCall("MaxTokenLength", (w) => { w.WriteValue(MaxTokenLength.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

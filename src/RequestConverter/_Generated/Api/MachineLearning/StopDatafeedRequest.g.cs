@@ -41,22 +41,22 @@ public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AllowNoMatch is not null)
 			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 			}
 
 			if (CloseJob is not null)
 			{
-				writer.WriteFluentCall("CloseJob", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CloseJob.Value); });
+				writer.WriteFluentCall("CloseJob", (w) => { w.WriteValue(CloseJob.Value); });
 			}
 
 			if (Force is not null)
 			{
-				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

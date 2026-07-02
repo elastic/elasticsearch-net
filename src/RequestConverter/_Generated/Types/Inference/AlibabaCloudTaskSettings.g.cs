@@ -31,12 +31,12 @@ public partial class AlibabaCloudTaskSettings : RequestConverter.ICodeFormattabl
 		{
 			if (InputType is not null)
 			{
-				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+				writer.WriteFluentCall("InputType", (w) => { w.WriteString(InputType); });
 			}
 
 			if (ReturnToken is not null)
 			{
-				writer.WriteFluentCall("ReturnToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnToken.Value); });
+				writer.WriteFluentCall("ReturnToken", (w) => { w.WriteValue(ReturnToken.Value); });
 			}
 		}
 		else

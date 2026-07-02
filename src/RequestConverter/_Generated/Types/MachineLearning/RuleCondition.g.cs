@@ -30,15 +30,15 @@ public partial class RuleCondition : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("AppliesTo", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.AppliesToCodeFormatter.FormatCode(AppliesTo, w); });
+				writer.WriteFluentCall("AppliesTo", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.AppliesToCodeFormatter.FormatCode(AppliesTo, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Operator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperatorCodeFormatter.FormatCode(Operator, w); });
+				writer.WriteFluentCall("Operator", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperatorCodeFormatter.FormatCode(Operator, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Value", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Value); w.Write("d"); });
+				writer.WriteFluentCall("Value", (w) => { w.WriteValue(Value); w.Write("d"); });
 			}
 		}
 		else

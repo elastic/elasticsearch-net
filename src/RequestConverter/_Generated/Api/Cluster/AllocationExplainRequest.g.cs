@@ -35,37 +35,37 @@ public partial class AllocationExplainRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (IncludeDiskInfo is not null)
 			{
-				writer.WriteFluentCall("IncludeDiskInfo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDiskInfo.Value); });
+				writer.WriteFluentCall("IncludeDiskInfo", (w) => { w.WriteValue(IncludeDiskInfo.Value); });
 			}
 
 			if (IncludeYesDecisions is not null)
 			{
-				writer.WriteFluentCall("IncludeYesDecisions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeYesDecisions.Value); });
+				writer.WriteFluentCall("IncludeYesDecisions", (w) => { w.WriteValue(IncludeYesDecisions.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (CurrentNode is not null)
 			{
-				writer.WriteFluentCall("CurrentNode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CurrentNode); });
+				writer.WriteFluentCall("CurrentNode", (w) => { w.WriteString(CurrentNode); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Primary is not null)
 			{
-				writer.WriteFluentCall("Primary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Primary.Value); });
+				writer.WriteFluentCall("Primary", (w) => { w.WriteValue(Primary.Value); });
 			}
 
 			if (Shard is not null)
 			{
-				writer.WriteFluentCall("Shard", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Shard.Value); });
+				writer.WriteFluentCall("Shard", (w) => { w.WriteValue(Shard.Value); });
 			}
 		}
 		else

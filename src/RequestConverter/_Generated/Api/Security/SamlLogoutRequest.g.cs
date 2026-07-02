@@ -35,11 +35,11 @@ public partial class SamlLogoutRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (RefreshToken is not null)
 			{
-				writer.WriteFluentCall("RefreshToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RefreshToken); });
+				writer.WriteFluentCall("RefreshToken", (w) => { w.WriteString(RefreshToken); });
 			}
 
 			{
-				writer.WriteFluentCall("Token", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Token); });
+				writer.WriteFluentCall("Token", (w) => { w.WriteString(Token); });
 			}
 		}
 		else

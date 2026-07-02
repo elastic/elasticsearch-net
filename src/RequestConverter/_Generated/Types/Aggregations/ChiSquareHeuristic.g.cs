@@ -30,11 +30,11 @@ public partial class ChiSquareHeuristic : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset); });
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { w.WriteValue(BackgroundIsSuperset); });
 			}
 
 			{
-				writer.WriteFluentCall("IncludeNegatives", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeNegatives); });
+				writer.WriteFluentCall("IncludeNegatives", (w) => { w.WriteValue(IncludeNegatives); });
 			}
 		}
 		else

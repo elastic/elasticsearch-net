@@ -31,12 +31,12 @@ public partial class TranslogRetention : RequestConverter.ICodeFormattable
 		{
 			if (Age is not null)
 			{
-				writer.WriteFluentCall("Age", (w) => { using var _oi = w.ForceObjectInitializer(); Age.FormatCode(w); });
+				writer.WriteFluentCall("Age", (w) => { Age.FormatCode(w); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); Size.FormatCode(w); });
+				writer.WriteFluentCall("Size", (w) => { Size.FormatCode(w); });
 			}
 		}
 		else

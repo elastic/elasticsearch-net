@@ -31,12 +31,12 @@ public partial class RegexOptions : RequestConverter.ICodeFormattable
 		{
 			if (Flags is not null)
 			{
-				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); if (Flags.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Flags.Value1); } else { w.WriteString(Flags.Value2); } });
+				writer.WriteFluentCall("Flags", (w) => { if (Flags.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(Flags.Value1); } else { w.WriteString(Flags.Value2); } });
 			}
 
 			if (MaxDeterminizedStates is not null)
 			{
-				writer.WriteFluentCall("MaxDeterminizedStates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDeterminizedStates.Value); });
+				writer.WriteFluentCall("MaxDeterminizedStates", (w) => { w.WriteValue(MaxDeterminizedStates.Value); });
 			}
 		}
 		else

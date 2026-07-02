@@ -31,12 +31,12 @@ public partial class FailureStoreLifecycle : RequestConverter.ICodeFormattable
 		{
 			if (DataRetention is not null)
 			{
-				writer.WriteFluentCall("DataRetention", (w) => { using var _oi = w.ForceObjectInitializer(); DataRetention.FormatCode(w); });
+				writer.WriteFluentCall("DataRetention", (w) => { DataRetention.FormatCode(w); });
 			}
 
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 		}
 		else

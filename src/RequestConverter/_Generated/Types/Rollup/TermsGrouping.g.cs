@@ -30,7 +30,7 @@ public partial class TermsGrouping : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 		}
 		else

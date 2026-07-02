@@ -30,16 +30,16 @@ public partial class KuromojiIterationMarkCharFilter : RequestConverter.ICodeFor
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("NormalizeKana", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NormalizeKana); });
+				writer.WriteFluentCall("NormalizeKana", (w) => { w.WriteValue(NormalizeKana); });
 			}
 
 			{
-				writer.WriteFluentCall("NormalizeKanji", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NormalizeKanji); });
+				writer.WriteFluentCall("NormalizeKanji", (w) => { w.WriteValue(NormalizeKanji); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

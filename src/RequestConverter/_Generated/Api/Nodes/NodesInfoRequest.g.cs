@@ -40,17 +40,17 @@ public partial class NodesInfoRequest : RequestConverter.ICodeFormattable
 
 			if (NodeId is not null)
 			{
-				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
 			}
 
 			if (FlatSettings is not null)
 			{
-				writer.WriteFluentCall("FlatSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatSettings.Value); });
+				writer.WriteFluentCall("FlatSettings", (w) => { w.WriteValue(FlatSettings.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

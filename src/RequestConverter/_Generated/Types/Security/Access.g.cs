@@ -31,12 +31,12 @@ public partial class Access : RequestConverter.ICodeFormattable
 		{
 			if (Replication is not null)
 			{
-				writer.WriteFluentDescriptorParams("Replication", Replication, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Replication", Replication, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>"); w.Write("()"); });
 			}
 
 			if (Search is not null)
 			{
-				writer.WriteFluentDescriptorParams("Search", Search, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Search", Search, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>"); w.Write("()"); });
 			}
 		}
 		else

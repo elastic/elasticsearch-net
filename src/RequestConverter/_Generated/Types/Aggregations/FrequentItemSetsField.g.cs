@@ -31,16 +31,16 @@ public partial class FrequentItemSetsField : RequestConverter.ICodeFormattable
 		{
 			if (Exclude is not null)
 			{
-				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); Exclude.FormatCode(w); });
+				writer.WriteFluentCall("Exclude", (w) => { Exclude.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Include is not null)
 			{
-				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); Include.FormatCode(w); });
+				writer.WriteFluentCall("Include", (w) => { Include.FormatCode(w); });
 			}
 		}
 		else

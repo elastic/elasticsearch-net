@@ -47,17 +47,17 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Storage is not null)
 			{
-				writer.WriteFluentCall("Storage", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, w); });
+				writer.WriteFluentCall("Storage", (w) => { Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, w); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 
 			if (IgnoreIndexSettings is not null)
@@ -66,17 +66,17 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (IndexSettings is not null)
 			{
-				writer.WriteFluentCall("IndexSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("IndexSettings", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (RenamedIndex is not null)
 			{
-				writer.WriteFluentCall("RenamedIndex", (w) => { using var _oi = w.ForceObjectInitializer(); RenamedIndex.FormatCode(w); });
+				writer.WriteFluentCall("RenamedIndex", (w) => { RenamedIndex.FormatCode(w); });
 			}
 		}
 		else

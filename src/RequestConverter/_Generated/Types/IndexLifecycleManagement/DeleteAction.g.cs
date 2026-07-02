@@ -31,7 +31,7 @@ public partial class DeleteAction : RequestConverter.ICodeFormattable
 		{
 			if (DeleteSearchableSnapshot is not null)
 			{
-				writer.WriteFluentCall("DeleteSearchableSnapshot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteSearchableSnapshot.Value); });
+				writer.WriteFluentCall("DeleteSearchableSnapshot", (w) => { w.WriteValue(DeleteSearchableSnapshot.Value); });
 			}
 		}
 		else

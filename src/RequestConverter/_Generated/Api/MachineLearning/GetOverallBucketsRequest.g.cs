@@ -41,37 +41,37 @@ public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (AllowNoMatch is not null)
 			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 			}
 
 			if (BucketSpan is not null)
 			{
-				writer.WriteFluentCall("BucketSpan", (w) => { using var _oi = w.ForceObjectInitializer(); BucketSpan.FormatCode(w); });
+				writer.WriteFluentCall("BucketSpan", (w) => { BucketSpan.FormatCode(w); });
 			}
 
 			if (End is not null)
 			{
-				writer.WriteFluentCall("End", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(End.Value); });
+				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
 			}
 
 			if (ExcludeInterim is not null)
 			{
-				writer.WriteFluentCall("ExcludeInterim", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeInterim.Value); });
+				writer.WriteFluentCall("ExcludeInterim", (w) => { w.WriteValue(ExcludeInterim.Value); });
 			}
 
 			if (OverallScore is not null)
 			{
-				writer.WriteFluentCall("OverallScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OverallScore.Value); w.Write("d"); });
+				writer.WriteFluentCall("OverallScore", (w) => { w.WriteValue(OverallScore.Value); w.Write("d"); });
 			}
 
 			if (Start is not null)
 			{
-				writer.WriteFluentCall("Start", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Start.Value); });
+				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 			}
 
 			if (TopN is not null)
 			{
-				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 			}
 		}
 		else

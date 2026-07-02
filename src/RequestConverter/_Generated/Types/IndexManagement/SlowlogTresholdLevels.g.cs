@@ -31,22 +31,22 @@ public partial class SlowlogTresholdLevels : RequestConverter.ICodeFormattable
 		{
 			if (Debug is not null)
 			{
-				writer.WriteFluentCall("Debug", (w) => { using var _oi = w.ForceObjectInitializer(); Debug.FormatCode(w); });
+				writer.WriteFluentCall("Debug", (w) => { Debug.FormatCode(w); });
 			}
 
 			if (Info is not null)
 			{
-				writer.WriteFluentCall("Info", (w) => { using var _oi = w.ForceObjectInitializer(); Info.FormatCode(w); });
+				writer.WriteFluentCall("Info", (w) => { Info.FormatCode(w); });
 			}
 
 			if (Trace is not null)
 			{
-				writer.WriteFluentCall("Trace", (w) => { using var _oi = w.ForceObjectInitializer(); Trace.FormatCode(w); });
+				writer.WriteFluentCall("Trace", (w) => { Trace.FormatCode(w); });
 			}
 
 			if (Warn is not null)
 			{
-				writer.WriteFluentCall("Warn", (w) => { using var _oi = w.ForceObjectInitializer(); Warn.FormatCode(w); });
+				writer.WriteFluentCall("Warn", (w) => { Warn.FormatCode(w); });
 			}
 		}
 		else

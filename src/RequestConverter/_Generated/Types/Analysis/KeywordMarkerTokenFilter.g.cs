@@ -31,7 +31,7 @@ public partial class KeywordMarkerTokenFilter : RequestConverter.ICodeFormattabl
 		{
 			if (IgnoreCase is not null)
 			{
-				writer.WriteFluentCall("IgnoreCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreCase.Value); });
+				writer.WriteFluentCall("IgnoreCase", (w) => { w.WriteValue(IgnoreCase.Value); });
 			}
 
 			if (Keywords is not null)
@@ -41,17 +41,17 @@ public partial class KeywordMarkerTokenFilter : RequestConverter.ICodeFormattabl
 
 			if (KeywordsPath is not null)
 			{
-				writer.WriteFluentCall("KeywordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KeywordsPath); });
+				writer.WriteFluentCall("KeywordsPath", (w) => { w.WriteString(KeywordsPath); });
 			}
 
 			if (KeywordsPattern is not null)
 			{
-				writer.WriteFluentCall("KeywordsPattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KeywordsPattern); });
+				writer.WriteFluentCall("KeywordsPattern", (w) => { w.WriteString(KeywordsPattern); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

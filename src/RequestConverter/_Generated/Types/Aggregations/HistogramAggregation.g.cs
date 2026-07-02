@@ -36,12 +36,12 @@ public partial class HistogramAggregation : RequestConverter.ICodeFormattable
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (HardBounds is not null)
@@ -51,27 +51,27 @@ public partial class HistogramAggregation : RequestConverter.ICodeFormattable
 
 			if (Interval is not null)
 			{
-				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Interval.Value); w.Write("d"); });
+				writer.WriteFluentCall("Interval", (w) => { w.WriteValue(Interval.Value); w.Write("d"); });
 			}
 
 			if (MinDocCount is not null)
 			{
-				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); });
+				writer.WriteFluentCall("MinDocCount", (w) => { w.WriteValue(MinDocCount.Value); });
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Missing.Value); w.Write("d"); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteValue(Missing.Value); w.Write("d"); });
 			}
 
 			if (Offset is not null)
 			{
-				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offset.Value); w.Write("d"); });
+				writer.WriteFluentCall("Offset", (w) => { w.WriteValue(Offset.Value); w.Write("d"); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); }); });
+				writer.WriteFluentCall("Order", (w) => { w.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); }); });
 			}
 
 			if (Script is not null)

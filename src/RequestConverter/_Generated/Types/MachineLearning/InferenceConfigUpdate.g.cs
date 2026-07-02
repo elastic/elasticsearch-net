@@ -51,7 +51,7 @@ public partial class InferenceConfigUpdate : RequestConverter.ICodeFormattable
 
 			if (QuestionAnswering is not null)
 			{
-				writer.WriteFluentDescriptorCall("QuestionAnswering", (w) => { QuestionAnswering.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QuestionAnswering.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QuestionAnswering", (w) => { QuestionAnswering.FormatCode(w); }, (w) => { QuestionAnswering.FormatCode(w); });
 			}
 
 			if (Regression is not null)
@@ -76,7 +76,7 @@ public partial class InferenceConfigUpdate : RequestConverter.ICodeFormattable
 
 			if (ZeroShotClassification is not null)
 			{
-				writer.WriteFluentDescriptorCall("ZeroShotClassification", (w) => { ZeroShotClassification.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ZeroShotClassification.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ZeroShotClassification", (w) => { ZeroShotClassification.FormatCode(w); }, (w) => { ZeroShotClassification.FormatCode(w); });
 			}
 		}
 		else

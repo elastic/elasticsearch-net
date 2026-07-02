@@ -35,17 +35,17 @@ public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormatt
 			using var _chainIndent = writer.Indent();
 			if (NodeId is not null)
 			{
-				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (SecureSettingsPassword is not null)
 			{
-				writer.WriteFluentCall("SecureSettingsPassword", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SecureSettingsPassword); });
+				writer.WriteFluentCall("SecureSettingsPassword", (w) => { w.WriteString(SecureSettingsPassword); });
 			}
 		}
 		else

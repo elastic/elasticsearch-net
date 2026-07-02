@@ -31,16 +31,16 @@ public partial class CompletionSuggester : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Contexts is not null)
 			{
-				writer.WriteFluentCall("Contexts", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>"); w.Write(">()"); w.WriteBlockList(Contexts, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }); });
+				writer.WriteFluentCall("Contexts", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>"); w.Write(">()"); w.WriteBlockList(Contexts, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { item.FormatCode(w); }); w.Write(" }"); }); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Fuzzy is not null)
@@ -55,12 +55,12 @@ public partial class CompletionSuggester : RequestConverter.ICodeFormattable
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			if (SkipDuplicates is not null)
 			{
-				writer.WriteFluentCall("SkipDuplicates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipDuplicates.Value); });
+				writer.WriteFluentCall("SkipDuplicates", (w) => { w.WriteValue(SkipDuplicates.Value); });
 			}
 		}
 		else

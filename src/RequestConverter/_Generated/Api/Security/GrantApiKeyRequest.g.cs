@@ -45,35 +45,35 @@ public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (AccessToken is not null)
 			{
-				writer.WriteFluentCall("AccessToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AccessToken); });
+				writer.WriteFluentCall("AccessToken", (w) => { w.WriteString(AccessToken); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ApiKey.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); }, (w) => { ApiKey.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("GrantType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, w); });
+				writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, w); });
 			}
 
 			if (Password is not null)
 			{
-				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
 			}
 
 			if (RunAs is not null)
 			{
-				writer.WriteFluentCall("RunAs", (w) => { using var _oi = w.ForceObjectInitializer(); RunAs.FormatCode(w); });
+				writer.WriteFluentCall("RunAs", (w) => { RunAs.FormatCode(w); });
 			}
 
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 			}
 		}
 		else

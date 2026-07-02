@@ -41,12 +41,12 @@ public partial class StartTransformRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (From is not null)
 			{
-				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(From); });
+				writer.WriteFluentCall("From", (w) => { w.WriteString(From); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

@@ -31,7 +31,7 @@ public partial class DataframeEvaluationRegressionMetricsMsle : RequestConverter
 		{
 			if (Offset is not null)
 			{
-				writer.WriteFluentCall("Offset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offset.Value); w.Write("d"); });
+				writer.WriteFluentCall("Offset", (w) => { w.WriteValue(Offset.Value); w.Write("d"); });
 			}
 		}
 		else

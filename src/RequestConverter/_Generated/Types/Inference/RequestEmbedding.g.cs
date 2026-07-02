@@ -30,17 +30,17 @@ public partial class RequestEmbedding : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Input", (w) => { using var _oi = w.ForceObjectInitializer(); if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("Input", (w) => { if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
 			}
 
 			if (InputType is not null)
 			{
-				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+				writer.WriteFluentCall("InputType", (w) => { w.WriteString(InputType); });
 			}
 
 			if (TaskSettings is not null)
 			{
-				writer.WriteFluentCall("TaskSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(TaskSettings); });
+				writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
 			}
 		}
 		else

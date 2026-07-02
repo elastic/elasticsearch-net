@@ -31,11 +31,11 @@ public partial class RankFeatureQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Linear is not null)
@@ -45,12 +45,12 @@ public partial class RankFeatureQuery : RequestConverter.ICodeFormattable
 
 			if (Log is not null)
 			{
-				writer.WriteFluentDescriptorCall("Log", (w) => { Log.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Log.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Log", (w) => { Log.FormatCode(w); }, (w) => { Log.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Saturation is not null)
@@ -60,7 +60,7 @@ public partial class RankFeatureQuery : RequestConverter.ICodeFormattable
 
 			if (Sigmoid is not null)
 			{
-				writer.WriteFluentDescriptorCall("Sigmoid", (w) => { Sigmoid.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Sigmoid.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Sigmoid", (w) => { Sigmoid.FormatCode(w); }, (w) => { Sigmoid.FormatCode(w); });
 			}
 		}
 		else

@@ -31,25 +31,25 @@ public partial class IpPrefixAggregation : RequestConverter.ICodeFormattable
 		{
 			if (AppendPrefixLength is not null)
 			{
-				writer.WriteFluentCall("AppendPrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AppendPrefixLength.Value); });
+				writer.WriteFluentCall("AppendPrefixLength", (w) => { w.WriteValue(AppendPrefixLength.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (IsIpv6 is not null)
 			{
-				writer.WriteFluentCall("IsIpv6", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsIpv6.Value); });
+				writer.WriteFluentCall("IsIpv6", (w) => { w.WriteValue(IsIpv6.Value); });
 			}
 
 			if (MinDocCount is not null)
 			{
-				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); w.Write("L"); });
+				writer.WriteFluentCall("MinDocCount", (w) => { w.WriteValue(MinDocCount.Value); w.Write("L"); });
 			}
 
 			{
-				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength); });
+				writer.WriteFluentCall("PrefixLength", (w) => { w.WriteValue(PrefixLength); });
 			}
 		}
 		else

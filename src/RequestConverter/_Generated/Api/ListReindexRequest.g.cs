@@ -35,7 +35,7 @@ public partial class ListReindexRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Detailed is not null)
 			{
-				writer.WriteFluentCall("Detailed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Detailed.Value); });
+				writer.WriteFluentCall("Detailed", (w) => { w.WriteValue(Detailed.Value); });
 			}
 		}
 		else

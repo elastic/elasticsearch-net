@@ -31,76 +31,76 @@ public partial class PhraseSuggester : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Collate is not null)
 			{
-				writer.WriteFluentDescriptorCall("Collate", (w) => { Collate.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Collate.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Collate", (w) => { Collate.FormatCode(w); }, (w) => { Collate.FormatCode(w); });
 			}
 
 			if (Confidence is not null)
 			{
-				writer.WriteFluentCall("Confidence", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Confidence.Value); w.Write("d"); });
+				writer.WriteFluentCall("Confidence", (w) => { w.WriteValue(Confidence.Value); w.Write("d"); });
 			}
 
 			if (DirectGenerator is not null)
 			{
-				writer.WriteFluentDescriptorParams("DirectGenerator", DirectGenerator, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("DirectGenerator", DirectGenerator, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>"); w.Write("()"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (ForceUnigrams is not null)
 			{
-				writer.WriteFluentCall("ForceUnigrams", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ForceUnigrams.Value); });
+				writer.WriteFluentCall("ForceUnigrams", (w) => { w.WriteValue(ForceUnigrams.Value); });
 			}
 
 			if (GramSize is not null)
 			{
-				writer.WriteFluentCall("GramSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(GramSize.Value); });
+				writer.WriteFluentCall("GramSize", (w) => { w.WriteValue(GramSize.Value); });
 			}
 
 			if (Highlight is not null)
 			{
-				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Highlight.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Highlight", (w) => { Highlight.FormatCode(w); }, (w) => { Highlight.FormatCode(w); });
 			}
 
 			if (MaxErrors is not null)
 			{
-				writer.WriteFluentCall("MaxErrors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxErrors.Value); w.Write("d"); });
+				writer.WriteFluentCall("MaxErrors", (w) => { w.WriteValue(MaxErrors.Value); w.Write("d"); });
 			}
 
 			if (RealWordErrorLikelihood is not null)
 			{
-				writer.WriteFluentCall("RealWordErrorLikelihood", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RealWordErrorLikelihood.Value); w.Write("d"); });
+				writer.WriteFluentCall("RealWordErrorLikelihood", (w) => { w.WriteValue(RealWordErrorLikelihood.Value); w.Write("d"); });
 			}
 
 			if (Separator is not null)
 			{
-				writer.WriteFluentCall("Separator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Separator); });
+				writer.WriteFluentCall("Separator", (w) => { w.WriteString(Separator); });
 			}
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			if (Smoothing is not null)
 			{
-				writer.WriteFluentDescriptorCall("Smoothing", (w) => { Smoothing.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Smoothing.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Smoothing", (w) => { Smoothing.FormatCode(w); }, (w) => { Smoothing.FormatCode(w); });
 			}
 
 			if (TokenLimit is not null)
 			{
-				writer.WriteFluentCall("TokenLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TokenLimit.Value); });
+				writer.WriteFluentCall("TokenLimit", (w) => { w.WriteValue(TokenLimit.Value); });
 			}
 		}
 		else

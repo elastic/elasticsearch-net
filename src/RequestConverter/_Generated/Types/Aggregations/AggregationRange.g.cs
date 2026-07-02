@@ -31,17 +31,17 @@ public partial class AggregationRange : RequestConverter.ICodeFormattable
 		{
 			if (From is not null)
 			{
-				writer.WriteFluentCall("From", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(From.Value); w.Write("d"); });
+				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); w.Write("d"); });
 			}
 
 			if (Key is not null)
 			{
-				writer.WriteFluentCall("Key", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Key); });
+				writer.WriteFluentCall("Key", (w) => { w.WriteString(Key); });
 			}
 
 			if (To is not null)
 			{
-				writer.WriteFluentCall("To", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(To.Value); w.Write("d"); });
+				writer.WriteFluentCall("To", (w) => { w.WriteValue(To.Value); w.Write("d"); });
 			}
 		}
 		else

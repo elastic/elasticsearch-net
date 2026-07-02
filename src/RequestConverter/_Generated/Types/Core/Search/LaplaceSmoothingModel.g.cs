@@ -30,7 +30,7 @@ public partial class LaplaceSmoothingModel : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Alpha", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Alpha); w.Write("d"); });
+				writer.WriteFluentCall("Alpha", (w) => { w.WriteValue(Alpha); w.Write("d"); });
 			}
 		}
 		else

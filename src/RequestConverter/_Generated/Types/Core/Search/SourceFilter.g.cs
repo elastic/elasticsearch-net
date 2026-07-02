@@ -31,17 +31,17 @@ public partial class SourceFilter : RequestConverter.ICodeFormattable
 		{
 			if (Excludes is not null)
 			{
-				writer.WriteFluentCall("Excludes", (w) => { Excludes.FormatCode(w); });
+				writer.WriteFluentCall("Excludes", (w) => { Excludes.FormatCode(w); }, false);
 			}
 
 			if (ExcludeVectors is not null)
 			{
-				writer.WriteFluentCall("ExcludeVectors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExcludeVectors.Value); });
+				writer.WriteFluentCall("ExcludeVectors", (w) => { w.WriteValue(ExcludeVectors.Value); });
 			}
 
 			if (Includes is not null)
 			{
-				writer.WriteFluentCall("Includes", (w) => { Includes.FormatCode(w); });
+				writer.WriteFluentCall("Includes", (w) => { Includes.FormatCode(w); }, false);
 			}
 		}
 		else

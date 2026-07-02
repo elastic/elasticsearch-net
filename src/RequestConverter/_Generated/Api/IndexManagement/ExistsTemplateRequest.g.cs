@@ -41,17 +41,17 @@ public partial class ExistsTemplateRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (FlatSettings is not null)
 			{
-				writer.WriteFluentCall("FlatSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatSettings.Value); });
+				writer.WriteFluentCall("FlatSettings", (w) => { w.WriteValue(FlatSettings.Value); });
 			}
 #pragma warning disable CS0618
 			if (Local is not null)
 			{
-				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+				writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
 			}
 #pragma warning restore CS0618
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 		}
 		else

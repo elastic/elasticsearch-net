@@ -31,22 +31,22 @@ public partial class Reasoning : RequestConverter.ICodeFormattable
 		{
 			if (Effort is not null)
 			{
-				writer.WriteFluentCall("Effort", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.ReasoningEffortCodeFormatter.FormatCode(Effort.Value, w); });
+				writer.WriteFluentCall("Effort", (w) => { Elastic.Clients.Elasticsearch.Inference.ReasoningEffortCodeFormatter.FormatCode(Effort.Value, w); });
 			}
 
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (Exclude is not null)
 			{
-				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Exclude.Value); });
+				writer.WriteFluentCall("Exclude", (w) => { w.WriteValue(Exclude.Value); });
 			}
 
 			if (Summary is not null)
 			{
-				writer.WriteFluentCall("Summary", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.ReasoningSummaryCodeFormatter.FormatCode(Summary.Value, w); });
+				writer.WriteFluentCall("Summary", (w) => { Elastic.Clients.Elasticsearch.Inference.ReasoningSummaryCodeFormatter.FormatCode(Summary.Value, w); });
 			}
 		}
 		else

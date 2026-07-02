@@ -61,17 +61,17 @@ public partial class UpdateCrossClusterApiKeyRequest : RequestConverter.ICodeFor
 
 			if (CertificateIdentity is not null)
 			{
-				writer.WriteFluentCall("CertificateIdentity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CertificateIdentity); });
+				writer.WriteFluentCall("CertificateIdentity", (w) => { w.WriteString(CertificateIdentity); });
 			}
 
 			if (Expiration is not null)
 			{
-				writer.WriteFluentCall("Expiration", (w) => { using var _oi = w.ForceObjectInitializer(); Expiration.FormatCode(w); });
+				writer.WriteFluentCall("Expiration", (w) => { Expiration.FormatCode(w); });
 			}
 
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 		}
 		else

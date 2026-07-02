@@ -41,7 +41,7 @@ public partial class InferenceConfigCreate : RequestConverter.ICodeFormattable
 
 			if (LearningToRank is not null)
 			{
-				writer.WriteFluentDescriptorCall("LearningToRank", (w) => { LearningToRank.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); LearningToRank.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("LearningToRank", (w) => { LearningToRank.FormatCode(w); }, (w) => { LearningToRank.FormatCode(w); });
 			}
 
 			if (Ner is not null)
@@ -81,7 +81,7 @@ public partial class InferenceConfigCreate : RequestConverter.ICodeFormattable
 
 			if (ZeroShotClassification is not null)
 			{
-				writer.WriteFluentDescriptorCall("ZeroShotClassification", (w) => { ZeroShotClassification.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ZeroShotClassification.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ZeroShotClassification", (w) => { ZeroShotClassification.FormatCode(w); }, (w) => { ZeroShotClassification.FormatCode(w); });
 			}
 		}
 		else

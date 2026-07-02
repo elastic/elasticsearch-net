@@ -31,32 +31,32 @@ public partial class AliasDefinition : RequestConverter.ICodeFormattable
 		{
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			if (IndexRouting is not null)
 			{
-				writer.WriteFluentCall("IndexRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexRouting); });
+				writer.WriteFluentCall("IndexRouting", (w) => { w.WriteString(IndexRouting); });
 			}
 
 			if (IsHidden is not null)
 			{
-				writer.WriteFluentCall("IsHidden", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsHidden.Value); });
+				writer.WriteFluentCall("IsHidden", (w) => { w.WriteValue(IsHidden.Value); });
 			}
 
 			if (IsWriteIndex is not null)
 			{
-				writer.WriteFluentCall("IsWriteIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsWriteIndex.Value); });
+				writer.WriteFluentCall("IsWriteIndex", (w) => { w.WriteValue(IsWriteIndex.Value); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
 			}
 
 			if (SearchRouting is not null)
 			{
-				writer.WriteFluentCall("SearchRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchRouting); });
+				writer.WriteFluentCall("SearchRouting", (w) => { w.WriteString(SearchRouting); });
 			}
 		}
 		else

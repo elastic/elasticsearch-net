@@ -31,77 +31,77 @@ public partial class RolloverConditions : RequestConverter.ICodeFormattable
 		{
 			if (MaxAge is not null)
 			{
-				writer.WriteFluentCall("MaxAge", (w) => { using var _oi = w.ForceObjectInitializer(); MaxAge.FormatCode(w); });
+				writer.WriteFluentCall("MaxAge", (w) => { MaxAge.FormatCode(w); });
 			}
 
 			if (MaxAgeMillis is not null)
 			{
-				writer.WriteFluentCall("MaxAgeMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxAgeMillis.Value); });
+				writer.WriteFluentCall("MaxAgeMillis", (w) => { w.WriteValue(MaxAgeMillis.Value); });
 			}
 
 			if (MaxDocs is not null)
 			{
-				writer.WriteFluentCall("MaxDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocs.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxDocs", (w) => { w.WriteValue(MaxDocs.Value); w.Write("L"); });
 			}
 
 			if (MaxPrimaryShardDocs is not null)
 			{
-				writer.WriteFluentCall("MaxPrimaryShardDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxPrimaryShardDocs.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxPrimaryShardDocs", (w) => { w.WriteValue(MaxPrimaryShardDocs.Value); w.Write("L"); });
 			}
 
 			if (MaxPrimaryShardSize is not null)
 			{
-				writer.WriteFluentCall("MaxPrimaryShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxPrimaryShardSize.FormatCode(w); });
+				writer.WriteFluentCall("MaxPrimaryShardSize", (w) => { MaxPrimaryShardSize.FormatCode(w); });
 			}
 
 			if (MaxPrimaryShardSizeBytes is not null)
 			{
-				writer.WriteFluentCall("MaxPrimaryShardSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxPrimaryShardSizeBytes.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxPrimaryShardSizeBytes", (w) => { w.WriteValue(MaxPrimaryShardSizeBytes.Value); w.Write("L"); });
 			}
 #pragma warning disable CS0618
 			if (MaxSize is not null)
 			{
-				writer.WriteFluentCall("MaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSize.FormatCode(w); });
+				writer.WriteFluentCall("MaxSize", (w) => { MaxSize.FormatCode(w); });
 			}
 #pragma warning restore CS0618
 			if (MaxSizeBytes is not null)
 			{
-				writer.WriteFluentCall("MaxSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxSizeBytes.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxSizeBytes", (w) => { w.WriteValue(MaxSizeBytes.Value); w.Write("L"); });
 			}
 
 			if (MinAge is not null)
 			{
-				writer.WriteFluentCall("MinAge", (w) => { using var _oi = w.ForceObjectInitializer(); MinAge.FormatCode(w); });
+				writer.WriteFluentCall("MinAge", (w) => { MinAge.FormatCode(w); });
 			}
 
 			if (MinDocs is not null)
 			{
-				writer.WriteFluentCall("MinDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocs.Value); w.Write("L"); });
+				writer.WriteFluentCall("MinDocs", (w) => { w.WriteValue(MinDocs.Value); w.Write("L"); });
 			}
 
 			if (MinPrimaryShardDocs is not null)
 			{
-				writer.WriteFluentCall("MinPrimaryShardDocs", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinPrimaryShardDocs.Value); w.Write("L"); });
+				writer.WriteFluentCall("MinPrimaryShardDocs", (w) => { w.WriteValue(MinPrimaryShardDocs.Value); w.Write("L"); });
 			}
 
 			if (MinPrimaryShardSize is not null)
 			{
-				writer.WriteFluentCall("MinPrimaryShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); MinPrimaryShardSize.FormatCode(w); });
+				writer.WriteFluentCall("MinPrimaryShardSize", (w) => { MinPrimaryShardSize.FormatCode(w); });
 			}
 
 			if (MinPrimaryShardSizeBytes is not null)
 			{
-				writer.WriteFluentCall("MinPrimaryShardSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinPrimaryShardSizeBytes.Value); w.Write("L"); });
+				writer.WriteFluentCall("MinPrimaryShardSizeBytes", (w) => { w.WriteValue(MinPrimaryShardSizeBytes.Value); w.Write("L"); });
 			}
 
 			if (MinSize is not null)
 			{
-				writer.WriteFluentCall("MinSize", (w) => { using var _oi = w.ForceObjectInitializer(); MinSize.FormatCode(w); });
+				writer.WriteFluentCall("MinSize", (w) => { MinSize.FormatCode(w); });
 			}
 
 			if (MinSizeBytes is not null)
 			{
-				writer.WriteFluentCall("MinSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinSizeBytes.Value); w.Write("L"); });
+				writer.WriteFluentCall("MinSizeBytes", (w) => { w.WriteValue(MinSizeBytes.Value); w.Write("L"); });
 			}
 		}
 		else

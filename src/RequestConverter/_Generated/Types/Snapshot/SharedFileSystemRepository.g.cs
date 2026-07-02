@@ -30,12 +30,12 @@ public partial class SharedFileSystemRepository : RequestConverter.ICodeFormatta
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Settings.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); }, (w) => { Settings.FormatCode(w); });
 			}
 
 			if (Uuid is not null)
 			{
-				writer.WriteFluentCall("Uuid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Uuid); });
+				writer.WriteFluentCall("Uuid", (w) => { w.WriteString(Uuid); });
 			}
 		}
 		else

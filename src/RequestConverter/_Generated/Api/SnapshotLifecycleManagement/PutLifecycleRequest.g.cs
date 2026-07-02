@@ -41,12 +41,12 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Config is not null)
@@ -56,22 +56,22 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (Repository is not null)
 			{
-				writer.WriteFluentCall("Repository", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Repository); });
+				writer.WriteFluentCall("Repository", (w) => { w.WriteString(Repository); });
 			}
 
 			if (Retention is not null)
 			{
-				writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Retention.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); }, (w) => { Retention.FormatCode(w); });
 			}
 
 			if (Schedule is not null)
 			{
-				writer.WriteFluentCall("Schedule", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Schedule); });
+				writer.WriteFluentCall("Schedule", (w) => { w.WriteString(Schedule); });
 			}
 		}
 		else

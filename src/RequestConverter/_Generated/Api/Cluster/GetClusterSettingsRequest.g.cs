@@ -35,22 +35,22 @@ public partial class GetClusterSettingsRequest : RequestConverter.ICodeFormattab
 			using var _chainIndent = writer.Indent();
 			if (FlatSettings is not null)
 			{
-				writer.WriteFluentCall("FlatSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatSettings.Value); });
+				writer.WriteFluentCall("FlatSettings", (w) => { w.WriteValue(FlatSettings.Value); });
 			}
 
 			if (IncludeDefaults is not null)
 			{
-				writer.WriteFluentCall("IncludeDefaults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDefaults.Value); });
+				writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

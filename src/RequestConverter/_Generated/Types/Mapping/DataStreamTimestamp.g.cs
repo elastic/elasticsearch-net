@@ -30,7 +30,7 @@ public partial class DataStreamTimestamp : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled); });
 			}
 		}
 		else

@@ -69,42 +69,42 @@ public partial class DeleteRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (IfPrimaryTerm is not null)
 			{
-				writer.WriteFluentCall("IfPrimaryTerm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+				writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
 			}
 
 			if (IfSeqNo is not null)
 			{
-				writer.WriteFluentCall("IfSeqNo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+				writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
 			}
 
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 			}
 
 			if (VersionType is not null)
 			{
-				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 			}
 
 			if (WaitForActiveShards is not null)
 			{
-				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
 			}
 		}
 		else

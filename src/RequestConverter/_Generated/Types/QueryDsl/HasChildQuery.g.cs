@@ -31,12 +31,12 @@ public partial class HasChildQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			if (IgnoreUnmapped is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { w.WriteValue(IgnoreUnmapped.Value); });
 			}
 
 			if (InnerHits is not null)
@@ -46,30 +46,30 @@ public partial class HasChildQuery : RequestConverter.ICodeFormattable
 
 			if (MaxChildren is not null)
 			{
-				writer.WriteFluentCall("MaxChildren", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChildren.Value); });
+				writer.WriteFluentCall("MaxChildren", (w) => { w.WriteValue(MaxChildren.Value); });
 			}
 
 			if (MinChildren is not null)
 			{
-				writer.WriteFluentCall("MinChildren", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinChildren.Value); });
+				writer.WriteFluentCall("MinChildren", (w) => { w.WriteValue(MinChildren.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (ScoreMode is not null)
 			{
-				writer.WriteFluentCall("ScoreMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, w); });
+				writer.WriteFluentCall("ScoreMode", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreModeCodeFormatter.FormatCode(ScoreMode.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Type); });
+				writer.WriteFluentCall("Type", (w) => { w.WriteString(Type); });
 			}
 		}
 		else

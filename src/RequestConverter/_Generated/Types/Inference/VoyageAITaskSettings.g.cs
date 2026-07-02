@@ -31,22 +31,22 @@ public partial class VoyageAITaskSettings : RequestConverter.ICodeFormattable
 		{
 			if (InputType is not null)
 			{
-				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputType); });
+				writer.WriteFluentCall("InputType", (w) => { w.WriteString(InputType); });
 			}
 
 			if (ReturnDocuments is not null)
 			{
-				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+				writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
 			}
 
 			if (TopK is not null)
 			{
-				writer.WriteFluentCall("TopK", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopK.Value); });
+				writer.WriteFluentCall("TopK", (w) => { w.WriteValue(TopK.Value); });
 			}
 
 			if (Truncation is not null)
 			{
-				writer.WriteFluentCall("Truncation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Truncation.Value); });
+				writer.WriteFluentCall("Truncation", (w) => { w.WriteValue(Truncation.Value); });
 			}
 		}
 		else

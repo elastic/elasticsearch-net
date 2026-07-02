@@ -35,20 +35,20 @@ public partial class SamlCompleteLogoutRequest : RequestConverter.ICodeFormattab
 			using var _chainIndent = writer.Indent();
 			if (Content is not null)
 			{
-				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Content); });
+				writer.WriteFluentCall("Content", (w) => { w.WriteString(Content); });
 			}
 
 			{
-				writer.WriteFluentCall("Ids", (w) => { using var _oi = w.ForceObjectInitializer(); Ids.FormatCode(w); });
+				writer.WriteFluentCall("Ids", (w) => { Ids.FormatCode(w); });
 			}
 
 			if (QueryString is not null)
 			{
-				writer.WriteFluentCall("QueryString", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryString); });
+				writer.WriteFluentCall("QueryString", (w) => { w.WriteString(QueryString); });
 			}
 
 			{
-				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
 			}
 		}
 		else

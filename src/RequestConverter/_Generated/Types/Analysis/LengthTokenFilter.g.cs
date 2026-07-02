@@ -31,17 +31,17 @@ public partial class LengthTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Max is not null)
 			{
-				writer.WriteFluentCall("Max", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Max.Value); });
+				writer.WriteFluentCall("Max", (w) => { w.WriteValue(Max.Value); });
 			}
 
 			if (Min is not null)
 			{
-				writer.WriteFluentCall("Min", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Min.Value); });
+				writer.WriteFluentCall("Min", (w) => { w.WriteValue(Min.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

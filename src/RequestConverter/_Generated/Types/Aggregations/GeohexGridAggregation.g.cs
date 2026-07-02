@@ -31,26 +31,26 @@ public partial class GeohexGridAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Bounds is not null)
 			{
-				writer.WriteFluentCall("Bounds", (w) => { using var _oi = w.ForceObjectInitializer(); Bounds.FormatCode(w); });
+				writer.WriteFluentCall("Bounds", (w) => { Bounds.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Precision is not null)
 			{
-				writer.WriteFluentCall("Precision", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Precision.Value); });
+				writer.WriteFluentCall("Precision", (w) => { w.WriteValue(Precision.Value); });
 			}
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 		}
 		else

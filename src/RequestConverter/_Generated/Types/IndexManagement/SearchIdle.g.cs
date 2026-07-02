@@ -31,7 +31,7 @@ public partial class SearchIdle : RequestConverter.ICodeFormattable
 		{
 			if (After is not null)
 			{
-				writer.WriteFluentCall("After", (w) => { using var _oi = w.ForceObjectInitializer(); After.FormatCode(w); });
+				writer.WriteFluentCall("After", (w) => { After.FormatCode(w); });
 			}
 		}
 		else

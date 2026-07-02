@@ -31,7 +31,7 @@ public partial class SettingsHighlight : RequestConverter.ICodeFormattable
 		{
 			if (MaxAnalyzedOffset is not null)
 			{
-				writer.WriteFluentCall("MaxAnalyzedOffset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxAnalyzedOffset.Value); });
+				writer.WriteFluentCall("MaxAnalyzedOffset", (w) => { w.WriteValue(MaxAnalyzedOffset.Value); });
 			}
 		}
 		else

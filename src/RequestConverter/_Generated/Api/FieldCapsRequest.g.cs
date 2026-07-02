@@ -45,12 +45,12 @@ public partial class FieldCapsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -65,17 +65,17 @@ public partial class FieldCapsRequest : RequestConverter.ICodeFormattable
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (IncludeEmptyFields is not null)
 			{
-				writer.WriteFluentCall("IncludeEmptyFields", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeEmptyFields.Value); });
+				writer.WriteFluentCall("IncludeEmptyFields", (w) => { w.WriteValue(IncludeEmptyFields.Value); });
 			}
 
 			if (IncludeUnmapped is not null)
 			{
-				writer.WriteFluentCall("IncludeUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeUnmapped.Value); });
+				writer.WriteFluentCall("IncludeUnmapped", (w) => { w.WriteValue(IncludeUnmapped.Value); });
 			}
 
 			if (Types is not null)
@@ -85,22 +85,22 @@ public partial class FieldCapsRequest : RequestConverter.ICodeFormattable
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (IndexFilter is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexFilter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); }, (w) => { IndexFilter.FormatCode(w); });
 			}
 
 			if (ProjectRouting is not null)
 			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
 			}
 
 			if (RuntimeMappings is not null)
 			{
-				writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 		}
 		else

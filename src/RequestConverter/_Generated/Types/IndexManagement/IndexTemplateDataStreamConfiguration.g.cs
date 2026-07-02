@@ -31,12 +31,12 @@ public partial class IndexTemplateDataStreamConfiguration : RequestConverter.ICo
 		{
 			if (AllowCustomRouting is not null)
 			{
-				writer.WriteFluentCall("AllowCustomRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowCustomRouting.Value); });
+				writer.WriteFluentCall("AllowCustomRouting", (w) => { w.WriteValue(AllowCustomRouting.Value); });
 			}
 
 			if (Hidden is not null)
 			{
-				writer.WriteFluentCall("Hidden", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Hidden.Value); });
+				writer.WriteFluentCall("Hidden", (w) => { w.WriteValue(Hidden.Value); });
 			}
 		}
 		else

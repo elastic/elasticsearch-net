@@ -30,26 +30,26 @@ public partial class JinaAIServiceSettings : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			if (Dimensions is not null)
 			{
-				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+				writer.WriteFluentCall("Dimensions", (w) => { w.WriteValue(Dimensions.Value); });
 			}
 
 			if (EmbeddingType is not null)
 			{
-				writer.WriteFluentCall("EmbeddingType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.JinaAIElementTypeCodeFormatter.FormatCode(EmbeddingType.Value, w); });
+				writer.WriteFluentCall("EmbeddingType", (w) => { Elastic.Clients.Elasticsearch.Inference.JinaAIElementTypeCodeFormatter.FormatCode(EmbeddingType.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			if (MultimodalModel is not null)
 			{
-				writer.WriteFluentCall("MultimodalModel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultimodalModel.Value); });
+				writer.WriteFluentCall("MultimodalModel", (w) => { w.WriteValue(MultimodalModel.Value); });
 			}
 
 			if (RateLimit is not null)
@@ -59,7 +59,7 @@ public partial class JinaAIServiceSettings : RequestConverter.ICodeFormattable
 
 			if (Similarity is not null)
 			{
-				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+				writer.WriteFluentCall("Similarity", (w) => { Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
 			}
 		}
 		else

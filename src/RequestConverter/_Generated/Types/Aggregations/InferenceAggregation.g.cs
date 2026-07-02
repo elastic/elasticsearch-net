@@ -31,26 +31,26 @@ public partial class InferenceAggregation : RequestConverter.ICodeFormattable
 		{
 			if (BucketsPath is not null)
 			{
-				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+				writer.WriteFluentCall("BucketsPath", (w) => { BucketsPath.FormatCode(w); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (GapPolicy is not null)
 			{
-				writer.WriteFluentCall("GapPolicy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
+				writer.WriteFluentCall("GapPolicy", (w) => { Elastic.Clients.Elasticsearch.Aggregations.GapPolicyCodeFormatter.FormatCode(GapPolicy.Value, w); });
 			}
 
 			if (InferenceConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); InferenceConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); }, (w) => { InferenceConfig.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); ModelId.FormatCode(w); });
+				writer.WriteFluentCall("ModelId", (w) => { ModelId.FormatCode(w); });
 			}
 		}
 		else

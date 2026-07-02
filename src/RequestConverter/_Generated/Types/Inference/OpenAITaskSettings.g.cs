@@ -31,12 +31,12 @@ public partial class OpenAITaskSettings : RequestConverter.ICodeFormattable
 		{
 			if (Headers is not null)
 			{
-				writer.WriteFluentCall("Headers", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Headers", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (User is not null)
 			{
-				writer.WriteFluentCall("User", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(User); });
+				writer.WriteFluentCall("User", (w) => { w.WriteString(User); });
 			}
 		}
 		else

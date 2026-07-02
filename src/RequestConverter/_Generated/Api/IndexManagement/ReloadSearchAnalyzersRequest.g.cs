@@ -57,7 +57,7 @@ public partial class ReloadSearchAnalyzersRequest : RequestConverter.ICodeFormat
 			using var _chainIndent = writer.Indent();
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -67,12 +67,12 @@ public partial class ReloadSearchAnalyzersRequest : RequestConverter.ICodeFormat
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (Resource is not null)
 			{
-				writer.WriteFluentCall("Resource", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Resource); });
+				writer.WriteFluentCall("Resource", (w) => { w.WriteString(Resource); });
 			}
 		}
 		else

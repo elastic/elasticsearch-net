@@ -30,58 +30,58 @@ public partial class AmazonSageMakerServiceSettings : RequestConverter.ICodeForm
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("AccessKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AccessKey); });
+				writer.WriteFluentCall("AccessKey", (w) => { w.WriteString(AccessKey); });
 			}
 
 			{
-				writer.WriteFluentCall("Api", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApiCodeFormatter.FormatCode(Api, w); });
+				writer.WriteFluentCall("Api", (w) => { Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApiCodeFormatter.FormatCode(Api, w); });
 			}
 
 			if (BatchSize is not null)
 			{
-				writer.WriteFluentCall("BatchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BatchSize.Value); });
+				writer.WriteFluentCall("BatchSize", (w) => { w.WriteValue(BatchSize.Value); });
 			}
 
 			if (Dimensions is not null)
 			{
-				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+				writer.WriteFluentCall("Dimensions", (w) => { w.WriteValue(Dimensions.Value); });
 			}
 
 			if (ElementType is not null)
 			{
-				writer.WriteFluentCall("ElementType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementTypeCodeFormatter.FormatCode(ElementType.Value, w); });
+				writer.WriteFluentCall("ElementType", (w) => { Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementTypeCodeFormatter.FormatCode(ElementType.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("EndpointName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EndpointName); });
+				writer.WriteFluentCall("EndpointName", (w) => { w.WriteString(EndpointName); });
 			}
 
 			if (InferenceComponentName is not null)
 			{
-				writer.WriteFluentCall("InferenceComponentName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InferenceComponentName); });
+				writer.WriteFluentCall("InferenceComponentName", (w) => { w.WriteString(InferenceComponentName); });
 			}
 
 			{
-				writer.WriteFluentCall("Region", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Region); });
+				writer.WriteFluentCall("Region", (w) => { w.WriteString(Region); });
 			}
 
 			{
-				writer.WriteFluentCall("SecretKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SecretKey); });
+				writer.WriteFluentCall("SecretKey", (w) => { w.WriteString(SecretKey); });
 			}
 
 			if (Similarity is not null)
 			{
-				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarityCodeFormatter.FormatCode(Similarity.Value, w); });
+				writer.WriteFluentCall("Similarity", (w) => { Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarityCodeFormatter.FormatCode(Similarity.Value, w); });
 			}
 
 			if (TargetContainerHostname is not null)
 			{
-				writer.WriteFluentCall("TargetContainerHostname", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetContainerHostname); });
+				writer.WriteFluentCall("TargetContainerHostname", (w) => { w.WriteString(TargetContainerHostname); });
 			}
 
 			if (TargetModel is not null)
 			{
-				writer.WriteFluentCall("TargetModel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetModel); });
+				writer.WriteFluentCall("TargetModel", (w) => { w.WriteString(TargetModel); });
 			}
 		}
 		else

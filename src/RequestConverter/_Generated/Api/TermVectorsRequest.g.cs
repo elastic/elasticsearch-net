@@ -55,27 +55,27 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 			using var _chainIndent = writer.Indent();
 			if (Preference is not null)
 			{
-				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
 			}
 
 			if (Realtime is not null)
 			{
-				writer.WriteFluentCall("Realtime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Realtime.Value); });
+				writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
 			}
 
 			if (Doc is not null)
 			{
-				writer.WriteFluentCall("Doc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteDocument(Doc); });
+				writer.WriteFluentCall("Doc", (w) => { w.WriteDocument(Doc); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (FieldStatistics is not null)
 			{
-				writer.WriteFluentCall("FieldStatistics", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FieldStatistics.Value); });
+				writer.WriteFluentCall("FieldStatistics", (w) => { w.WriteValue(FieldStatistics.Value); });
 			}
 
 			if (Filter is not null)
@@ -85,42 +85,42 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 
 			if (Offsets is not null)
 			{
-				writer.WriteFluentCall("Offsets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offsets.Value); });
+				writer.WriteFluentCall("Offsets", (w) => { w.WriteValue(Offsets.Value); });
 			}
 
 			if (Payloads is not null)
 			{
-				writer.WriteFluentCall("Payloads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Payloads.Value); });
+				writer.WriteFluentCall("Payloads", (w) => { w.WriteValue(Payloads.Value); });
 			}
 
 			if (PerFieldAnalyzer is not null)
 			{
-				writer.WriteFluentCall("PerFieldAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(PerFieldAnalyzer, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("PerFieldAnalyzer", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(PerFieldAnalyzer, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Positions is not null)
 			{
-				writer.WriteFluentCall("Positions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Positions.Value); });
+				writer.WriteFluentCall("Positions", (w) => { w.WriteValue(Positions.Value); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (TermStatistics is not null)
 			{
-				writer.WriteFluentCall("TermStatistics", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TermStatistics.Value); });
+				writer.WriteFluentCall("TermStatistics", (w) => { w.WriteValue(TermStatistics.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 			}
 
 			if (VersionType is not null)
 			{
-				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 			}
 		}
 		else

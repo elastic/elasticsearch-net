@@ -31,7 +31,7 @@ public partial class DataframeEvaluationRegressionMetricsHuber : RequestConverte
 		{
 			if (Delta is not null)
 			{
-				writer.WriteFluentCall("Delta", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Delta.Value); w.Write("d"); });
+				writer.WriteFluentCall("Delta", (w) => { w.WriteValue(Delta.Value); w.Write("d"); });
 			}
 		}
 		else

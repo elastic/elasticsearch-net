@@ -31,7 +31,7 @@ public partial class SamplerAggregation : RequestConverter.ICodeFormattable
 		{
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 		}
 		else

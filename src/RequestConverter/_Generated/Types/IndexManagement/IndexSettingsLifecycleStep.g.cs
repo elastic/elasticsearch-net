@@ -31,7 +31,7 @@ public partial class IndexSettingsLifecycleStep : RequestConverter.ICodeFormatta
 		{
 			if (WaitTimeThreshold is not null)
 			{
-				writer.WriteFluentCall("WaitTimeThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); WaitTimeThreshold.FormatCode(w); });
+				writer.WriteFluentCall("WaitTimeThreshold", (w) => { WaitTimeThreshold.FormatCode(w); });
 			}
 		}
 		else

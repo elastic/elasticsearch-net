@@ -31,32 +31,32 @@ public partial class ComponentTemplateNode : RequestConverter.ICodeFormattable
 		{
 			if (CreatedDate is not null)
 			{
-				writer.WriteFluentCall("CreatedDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreatedDate.Value); });
+				writer.WriteFluentCall("CreatedDate", (w) => { w.WriteValue(CreatedDate.Value); });
 			}
 
 			if (CreatedDateMillis is not null)
 			{
-				writer.WriteFluentCall("CreatedDateMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CreatedDateMillis.Value); });
+				writer.WriteFluentCall("CreatedDateMillis", (w) => { w.WriteValue(CreatedDateMillis.Value); });
 			}
 
 			if (Deprecated is not null)
 			{
-				writer.WriteFluentCall("Deprecated", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Deprecated.Value); });
+				writer.WriteFluentCall("Deprecated", (w) => { w.WriteValue(Deprecated.Value); });
 			}
 
 			if (Meta is not null)
 			{
-				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (ModifiedDate is not null)
 			{
-				writer.WriteFluentCall("ModifiedDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModifiedDate.Value); });
+				writer.WriteFluentCall("ModifiedDate", (w) => { w.WriteValue(ModifiedDate.Value); });
 			}
 
 			if (ModifiedDateMillis is not null)
 			{
-				writer.WriteFluentCall("ModifiedDateMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModifiedDateMillis.Value); });
+				writer.WriteFluentCall("ModifiedDateMillis", (w) => { w.WriteValue(ModifiedDateMillis.Value); });
 			}
 
 			{
@@ -65,7 +65,7 @@ public partial class ComponentTemplateNode : RequestConverter.ICodeFormattable
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 			}
 		}
 		else

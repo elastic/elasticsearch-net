@@ -31,17 +31,17 @@ public partial class Groupings : RequestConverter.ICodeFormattable
 		{
 			if (DateHistogram is not null)
 			{
-				writer.WriteFluentDescriptorCall("DateHistogram", (w) => { DateHistogram.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); DateHistogram.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("DateHistogram", (w) => { DateHistogram.FormatCode(w); }, (w) => { DateHistogram.FormatCode(w); });
 			}
 
 			if (Histogram is not null)
 			{
-				writer.WriteFluentDescriptorCall("Histogram", (w) => { Histogram.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Histogram.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Histogram", (w) => { Histogram.FormatCode(w); }, (w) => { Histogram.FormatCode(w); });
 			}
 
 			if (Terms is not null)
 			{
-				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Terms.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); }, (w) => { Terms.FormatCode(w); });
 			}
 		}
 		else

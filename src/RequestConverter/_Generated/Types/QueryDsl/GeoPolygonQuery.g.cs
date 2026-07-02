@@ -31,30 +31,30 @@ public partial class GeoPolygonQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (IgnoreUnmapped is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { w.WriteValue(IgnoreUnmapped.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Polygon", (w) => { Polygon.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Polygon.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Polygon", (w) => { Polygon.FormatCode(w); }, (w) => { Polygon.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (ValidationMethod is not null)
 			{
-				writer.WriteFluentCall("ValidationMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, w); });
+				writer.WriteFluentCall("ValidationMethod", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, w); });
 			}
 		}
 		else

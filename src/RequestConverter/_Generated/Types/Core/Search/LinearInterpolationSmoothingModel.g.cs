@@ -30,15 +30,15 @@ public partial class LinearInterpolationSmoothingModel : RequestConverter.ICodeF
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("BigramLambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BigramLambda); w.Write("d"); });
+				writer.WriteFluentCall("BigramLambda", (w) => { w.WriteValue(BigramLambda); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("TrigramLambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TrigramLambda); w.Write("d"); });
+				writer.WriteFluentCall("TrigramLambda", (w) => { w.WriteValue(TrigramLambda); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("UnigramLambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UnigramLambda); w.Write("d"); });
+				writer.WriteFluentCall("UnigramLambda", (w) => { w.WriteValue(UnigramLambda); w.Write("d"); });
 			}
 		}
 		else

@@ -35,7 +35,7 @@ public partial class CacheStatsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (NodeId is not null)
 			{
-				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
 			}
 		}
 		else

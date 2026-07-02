@@ -30,12 +30,12 @@ public partial class SourceOnlyRepository : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Settings", (w) => { using var _oi = w.ForceObjectInitializer(); Settings.FormatCode(w); });
+				writer.WriteFluentCall("Settings", (w) => { Settings.FormatCode(w); });
 			}
 
 			if (Uuid is not null)
 			{
-				writer.WriteFluentCall("Uuid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Uuid); });
+				writer.WriteFluentCall("Uuid", (w) => { w.WriteString(Uuid); });
 			}
 		}
 		else

@@ -47,11 +47,11 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICod
 			using var _chainIndent = writer.Indent();
 			if (Debug is not null)
 			{
-				writer.WriteFluentCall("Debug", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Debug.Value); });
+				writer.WriteFluentCall("Debug", (w) => { w.WriteValue(Debug.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Payload", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Payload); });
+				writer.WriteFluentCall("Payload", (w) => { w.WriteObjectValue(Payload); });
 			}
 		}
 		else

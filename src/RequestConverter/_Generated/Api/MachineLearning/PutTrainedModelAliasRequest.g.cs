@@ -47,7 +47,7 @@ public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormatt
 			using var _chainIndent = writer.Indent();
 			if (Reassign is not null)
 			{
-				writer.WriteFluentCall("Reassign", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Reassign.Value); });
+				writer.WriteFluentCall("Reassign", (w) => { w.WriteValue(Reassign.Value); });
 			}
 		}
 		else

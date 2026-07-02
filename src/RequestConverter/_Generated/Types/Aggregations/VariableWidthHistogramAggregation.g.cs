@@ -31,17 +31,17 @@ public partial class VariableWidthHistogramAggregation : RequestConverter.ICodeF
 		{
 			if (Buckets is not null)
 			{
-				writer.WriteFluentCall("Buckets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Buckets.Value); });
+				writer.WriteFluentCall("Buckets", (w) => { w.WriteValue(Buckets.Value); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (InitialBuffer is not null)
 			{
-				writer.WriteFluentCall("InitialBuffer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(InitialBuffer.Value); });
+				writer.WriteFluentCall("InitialBuffer", (w) => { w.WriteValue(InitialBuffer.Value); });
 			}
 
 			if (Script is not null)
@@ -51,7 +51,7 @@ public partial class VariableWidthHistogramAggregation : RequestConverter.ICodeF
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 		}
 		else

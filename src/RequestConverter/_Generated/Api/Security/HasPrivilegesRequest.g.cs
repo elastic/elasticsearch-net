@@ -35,12 +35,12 @@ public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (User is not null)
 			{
-				writer.WriteFluentCall("User", (w) => { using var _oi = w.ForceObjectInitializer(); User.FormatCode(w); });
+				writer.WriteFluentCall("User", (w) => { User.FormatCode(w); });
 			}
 
 			if (Application is not null)
 			{
-				writer.WriteFluentDescriptorParams("Application", Application, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Application", Application, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>"); w.Write("()"); });
 			}
 
 			if (Cluster is not null)
@@ -50,7 +50,7 @@ public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
 
 			if (Index is not null)
 			{
-				writer.WriteFluentDescriptorParams("Index", Index, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Index", Index, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>"); w.Write("()"); });
 			}
 		}
 		else

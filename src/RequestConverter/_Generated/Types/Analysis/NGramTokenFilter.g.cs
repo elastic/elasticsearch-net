@@ -31,22 +31,22 @@ public partial class NGramTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (MaxGram is not null)
 			{
-				writer.WriteFluentCall("MaxGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGram.Value); });
+				writer.WriteFluentCall("MaxGram", (w) => { w.WriteValue(MaxGram.Value); });
 			}
 
 			if (MinGram is not null)
 			{
-				writer.WriteFluentCall("MinGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinGram.Value); });
+				writer.WriteFluentCall("MinGram", (w) => { w.WriteValue(MinGram.Value); });
 			}
 
 			if (PreserveOriginal is not null)
 			{
-				writer.WriteFluentCall("PreserveOriginal", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveOriginal.Value); });
+				writer.WriteFluentCall("PreserveOriginal", (w) => { w.WriteValue(PreserveOriginal.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -57,7 +57,7 @@ public partial class OpenPointInTimeRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AllowPartialSearchResults is not null)
 			{
-				writer.WriteFluentCall("AllowPartialSearchResults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowPartialSearchResults.Value); });
+				writer.WriteFluentCall("AllowPartialSearchResults", (w) => { w.WriteValue(AllowPartialSearchResults.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -67,37 +67,37 @@ public partial class OpenPointInTimeRequest : RequestConverter.ICodeFormattable
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (KeepAlive is not null)
 			{
-				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
 			}
 
 			if (MaxConcurrentShardRequests is not null)
 			{
-				writer.WriteFluentCall("MaxConcurrentShardRequests", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentShardRequests.Value); });
+				writer.WriteFluentCall("MaxConcurrentShardRequests", (w) => { w.WriteValue(MaxConcurrentShardRequests.Value); });
 			}
 
 			if (Preference is not null)
 			{
-				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (IndexFilter is not null)
 			{
-				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); IndexFilter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); }, (w) => { IndexFilter.FormatCode(w); });
 			}
 
 			if (ProjectRouting is not null)
 			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
 			}
 		}
 		else

@@ -30,22 +30,22 @@ public partial class EncryptedReasoningDetail : RequestConverter.ICodeFormattabl
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Data", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Data); });
+				writer.WriteFluentCall("Data", (w) => { w.WriteString(Data); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+				writer.WriteFluentCall("Id", (w) => { w.WriteString(Id); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Index.Value); });
+				writer.WriteFluentCall("Index", (w) => { w.WriteValue(Index.Value); });
 			}
 		}
 		else

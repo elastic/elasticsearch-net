@@ -36,17 +36,17 @@ public partial class ElisionTokenFilter : RequestConverter.ICodeFormattable
 
 			if (ArticlesCase is not null)
 			{
-				writer.WriteFluentCall("ArticlesCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ArticlesCase.Value); });
+				writer.WriteFluentCall("ArticlesCase", (w) => { w.WriteValue(ArticlesCase.Value); });
 			}
 
 			if (ArticlesPath is not null)
 			{
-				writer.WriteFluentCall("ArticlesPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ArticlesPath); });
+				writer.WriteFluentCall("ArticlesPath", (w) => { w.WriteString(ArticlesPath); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

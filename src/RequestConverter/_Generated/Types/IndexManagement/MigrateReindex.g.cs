@@ -30,11 +30,11 @@ public partial class MigrateReindex : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumCodeFormatter.FormatCode(Mode, w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { Source.FormatCode(w); });
 			}
 		}
 		else

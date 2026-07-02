@@ -52,77 +52,77 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 			using var _chainIndent = writer.Indent();
 			if (IfPrimaryTerm is not null)
 			{
-				writer.WriteFluentCall("IfPrimaryTerm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+				writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
 			}
 
 			if (IfSeqNo is not null)
 			{
-				writer.WriteFluentCall("IfSeqNo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+				writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
 			}
 
 			if (IncludeSourceOnError is not null)
 			{
-				writer.WriteFluentCall("IncludeSourceOnError", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeSourceOnError.Value); });
+				writer.WriteFluentCall("IncludeSourceOnError", (w) => { w.WriteValue(IncludeSourceOnError.Value); });
 			}
 
 			if (Lang is not null)
 			{
-				writer.WriteFluentCall("Lang", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lang); });
+				writer.WriteFluentCall("Lang", (w) => { w.WriteString(Lang); });
 			}
 
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (RequireAlias is not null)
 			{
-				writer.WriteFluentCall("RequireAlias", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequireAlias.Value); });
+				writer.WriteFluentCall("RequireAlias", (w) => { w.WriteValue(RequireAlias.Value); });
 			}
 
 			if (RetryOnConflict is not null)
 			{
-				writer.WriteFluentCall("RetryOnConflict", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RetryOnConflict.Value); });
+				writer.WriteFluentCall("RetryOnConflict", (w) => { w.WriteValue(RetryOnConflict.Value); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (SourceExcludes is not null)
 			{
-				writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); });
+				writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); }, false);
 			}
 
 			if (SourceIncludes is not null)
 			{
-				writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); });
+				writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); }, false);
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (WaitForActiveShards is not null)
 			{
-				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
 			}
 
 			if (DetectNoop is not null)
 			{
-				writer.WriteFluentCall("DetectNoop", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DetectNoop.Value); });
+				writer.WriteFluentCall("DetectNoop", (w) => { w.WriteValue(DetectNoop.Value); });
 			}
 
 			if (Doc is not null)
 			{
-				writer.WriteFluentCall("Doc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteDocument(Doc); });
+				writer.WriteFluentCall("Doc", (w) => { w.WriteDocument(Doc); });
 			}
 
 			if (DocAsUpsert is not null)
 			{
-				writer.WriteFluentCall("DocAsUpsert", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocAsUpsert.Value); });
+				writer.WriteFluentCall("DocAsUpsert", (w) => { w.WriteValue(DocAsUpsert.Value); });
 			}
 
 			if (Script is not null)
@@ -132,17 +132,17 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 
 			if (ScriptedUpsert is not null)
 			{
-				writer.WriteFluentCall("ScriptedUpsert", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ScriptedUpsert.Value); });
+				writer.WriteFluentCall("ScriptedUpsert", (w) => { w.WriteValue(ScriptedUpsert.Value); });
 			}
 
 			if (Source is not null)
 			{
-				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); Source.FormatCode(w); });
+				writer.WriteFluentCall("Source", (w) => { Source.FormatCode(w); });
 			}
 
 			if (Upsert is not null)
 			{
-				writer.WriteFluentCall("Upsert", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteDocument(Upsert); });
+				writer.WriteFluentCall("Upsert", (w) => { w.WriteDocument(Upsert); });
 			}
 		}
 		else

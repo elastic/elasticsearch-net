@@ -36,7 +36,7 @@ public partial class SemanticTextProperty : RequestConverter.ICodeFormattable
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fields.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { Fields.FormatCode(w); });
 			}
 
 			if (IndexOptions is not null)
@@ -46,17 +46,17 @@ public partial class SemanticTextProperty : RequestConverter.ICodeFormattable
 
 			if (InferenceId is not null)
 			{
-				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); InferenceId.FormatCode(w); });
+				writer.WriteFluentCall("InferenceId", (w) => { InferenceId.FormatCode(w); });
 			}
 
 			if (Meta is not null)
 			{
-				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (SearchInferenceId is not null)
 			{
-				writer.WriteFluentCall("SearchInferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); SearchInferenceId.FormatCode(w); });
+				writer.WriteFluentCall("SearchInferenceId", (w) => { SearchInferenceId.FormatCode(w); });
 			}
 		}
 		else

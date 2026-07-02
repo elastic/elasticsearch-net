@@ -41,47 +41,47 @@ public partial class StartTrainedModelDeploymentRequest : RequestConverter.ICode
 			using var _chainIndent = writer.Indent();
 			if (CacheSize is not null)
 			{
-				writer.WriteFluentCall("CacheSize", (w) => { using var _oi = w.ForceObjectInitializer(); CacheSize.FormatCode(w); });
+				writer.WriteFluentCall("CacheSize", (w) => { CacheSize.FormatCode(w); });
 			}
 
 			if (DeploymentId is not null)
 			{
-				writer.WriteFluentCall("DeploymentId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DeploymentId); });
+				writer.WriteFluentCall("DeploymentId", (w) => { w.WriteString(DeploymentId); });
 			}
 
 			if (NumberOfAllocations is not null)
 			{
-				writer.WriteFluentCall("NumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfAllocations.Value); });
+				writer.WriteFluentCall("NumberOfAllocations", (w) => { w.WriteValue(NumberOfAllocations.Value); });
 			}
 
 			if (Priority is not null)
 			{
-				writer.WriteFluentCall("Priority", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority.Value, w); });
+				writer.WriteFluentCall("Priority", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority.Value, w); });
 			}
 
 			if (QueueCapacity is not null)
 			{
-				writer.WriteFluentCall("QueueCapacity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(QueueCapacity.Value); });
+				writer.WriteFluentCall("QueueCapacity", (w) => { w.WriteValue(QueueCapacity.Value); });
 			}
 
 			if (ThreadsPerAllocation is not null)
 			{
-				writer.WriteFluentCall("ThreadsPerAllocation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ThreadsPerAllocation.Value); });
+				writer.WriteFluentCall("ThreadsPerAllocation", (w) => { w.WriteValue(ThreadsPerAllocation.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (WaitFor is not null)
 			{
-				writer.WriteFluentCall("WaitFor", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(WaitFor.Value, w); });
+				writer.WriteFluentCall("WaitFor", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(WaitFor.Value, w); });
 			}
 
 			if (AdaptiveAllocations is not null)
 			{
-				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AdaptiveAllocations.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); }, (w) => { AdaptiveAllocations.FormatCode(w); });
 			}
 		}
 		else

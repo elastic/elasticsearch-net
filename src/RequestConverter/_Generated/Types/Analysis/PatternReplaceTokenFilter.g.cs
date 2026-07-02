@@ -31,26 +31,26 @@ public partial class PatternReplaceTokenFilter : RequestConverter.ICodeFormattab
 		{
 			if (All is not null)
 			{
-				writer.WriteFluentCall("All", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(All.Value); });
+				writer.WriteFluentCall("All", (w) => { w.WriteValue(All.Value); });
 			}
 
 			if (Flags is not null)
 			{
-				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Flags); });
+				writer.WriteFluentCall("Flags", (w) => { w.WriteString(Flags); });
 			}
 
 			{
-				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+				writer.WriteFluentCall("Pattern", (w) => { w.WriteString(Pattern); });
 			}
 
 			if (Replacement is not null)
 			{
-				writer.WriteFluentCall("Replacement", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Replacement); });
+				writer.WriteFluentCall("Replacement", (w) => { w.WriteString(Replacement); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -40,12 +40,12 @@ public partial class NodesUsageRequest : RequestConverter.ICodeFormattable
 
 			if (NodeId is not null)
 			{
-				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

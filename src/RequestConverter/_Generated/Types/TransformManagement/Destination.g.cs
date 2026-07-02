@@ -31,12 +31,12 @@ public partial class Destination : RequestConverter.ICodeFormattable
 		{
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Pipeline is not null)
 			{
-				writer.WriteFluentCall("Pipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pipeline); });
+				writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
 			}
 		}
 		else

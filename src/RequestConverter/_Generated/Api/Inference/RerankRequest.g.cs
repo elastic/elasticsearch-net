@@ -41,7 +41,7 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			{
@@ -49,22 +49,22 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (ReturnDocuments is not null)
 			{
-				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+				writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
 			}
 
 			if (TaskSettings is not null)
 			{
-				writer.WriteFluentCall("TaskSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(TaskSettings); });
+				writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
 			}
 
 			if (TopN is not null)
 			{
-				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 			}
 		}
 		else

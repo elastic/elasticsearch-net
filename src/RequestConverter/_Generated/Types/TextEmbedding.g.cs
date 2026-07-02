@@ -31,11 +31,11 @@ public partial class TextEmbedding : RequestConverter.ICodeFormattable
 		{
 			if (ModelId is not null)
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelText", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelText); });
+				writer.WriteFluentCall("ModelText", (w) => { w.WriteString(ModelText); });
 			}
 		}
 		else

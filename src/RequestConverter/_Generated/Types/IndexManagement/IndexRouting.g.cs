@@ -36,7 +36,7 @@ public partial class IndexRouting : RequestConverter.ICodeFormattable
 
 			if (Rebalance is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rebalance", (w) => { Rebalance.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rebalance.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rebalance", (w) => { Rebalance.FormatCode(w); }, (w) => { Rebalance.FormatCode(w); });
 			}
 		}
 		else

@@ -57,7 +57,7 @@ public partial class DiskUsageRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -67,17 +67,17 @@ public partial class DiskUsageRequest : RequestConverter.ICodeFormattable
 
 			if (Flush is not null)
 			{
-				writer.WriteFluentCall("Flush", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Flush.Value); });
+				writer.WriteFluentCall("Flush", (w) => { w.WriteValue(Flush.Value); });
 			}
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (RunExpensiveTasks is not null)
 			{
-				writer.WriteFluentCall("RunExpensiveTasks", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RunExpensiveTasks.Value); });
+				writer.WriteFluentCall("RunExpensiveTasks", (w) => { w.WriteValue(RunExpensiveTasks.Value); });
 			}
 		}
 		else

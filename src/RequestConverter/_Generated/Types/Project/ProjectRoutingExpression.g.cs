@@ -30,7 +30,7 @@ public partial class ProjectRoutingExpression : RequestConverter.ICodeFormattabl
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Expression", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Expression); });
+				writer.WriteFluentCall("Expression", (w) => { w.WriteString(Expression); });
 			}
 		}
 		else

@@ -31,27 +31,27 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 		{
 			if (BackgroundFilter is not null)
 			{
-				writer.WriteFluentDescriptorCall("BackgroundFilter", (w) => { BackgroundFilter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); BackgroundFilter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("BackgroundFilter", (w) => { BackgroundFilter.FormatCode(w); }, (w) => { BackgroundFilter.FormatCode(w); });
 			}
 
 			if (ChiSquare is not null)
 			{
-				writer.WriteFluentDescriptorCall("ChiSquare", (w) => { ChiSquare.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ChiSquare.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ChiSquare", (w) => { ChiSquare.FormatCode(w); }, (w) => { ChiSquare.FormatCode(w); });
 			}
 
 			if (Exclude is not null)
 			{
-				writer.WriteFluentCall("Exclude", (w) => { using var _oi = w.ForceObjectInitializer(); Exclude.FormatCode(w); });
+				writer.WriteFluentCall("Exclude", (w) => { Exclude.FormatCode(w); });
 			}
 
 			if (ExecutionHint is not null)
 			{
-				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+				writer.WriteFluentCall("ExecutionHint", (w) => { Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHintCodeFormatter.FormatCode(ExecutionHint.Value, w); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Gnd is not null)
@@ -61,7 +61,7 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 
 			if (Include is not null)
 			{
-				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); Include.FormatCode(w); });
+				writer.WriteFluentCall("Include", (w) => { Include.FormatCode(w); });
 			}
 
 			if (Jlh is not null)
@@ -71,7 +71,7 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 
 			if (MinDocCount is not null)
 			{
-				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); w.Write("L"); });
+				writer.WriteFluentCall("MinDocCount", (w) => { w.WriteValue(MinDocCount.Value); w.Write("L"); });
 			}
 
 			if (MutualInformation is not null)
@@ -91,22 +91,22 @@ public partial class SignificantTermsAggregation : RequestConverter.ICodeFormatt
 
 			if (ScriptHeuristic is not null)
 			{
-				writer.WriteFluentDescriptorCall("ScriptHeuristic", (w) => { ScriptHeuristic.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ScriptHeuristic.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ScriptHeuristic", (w) => { ScriptHeuristic.FormatCode(w); }, (w) => { ScriptHeuristic.FormatCode(w); });
 			}
 
 			if (ShardMinDocCount is not null)
 			{
-				writer.WriteFluentCall("ShardMinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardMinDocCount.Value); w.Write("L"); });
+				writer.WriteFluentCall("ShardMinDocCount", (w) => { w.WriteValue(ShardMinDocCount.Value); w.Write("L"); });
 			}
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 		}
 		else

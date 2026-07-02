@@ -31,22 +31,22 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 		{
 			if (FetchFields is not null)
 			{
-				writer.WriteFluentDescriptorParams("FetchFields", FetchFields, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("FetchFields", FetchFields, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>"); w.Write("()"); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentDescriptorCall("Fields", (w) => { w.WriteFluentDictionaryAdds("Add", Fields, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("Fields", (w) => { w.WriteFluentDictionaryAdds("Add", Fields, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (InputField is not null)
 			{
-				writer.WriteFluentCall("InputField", (w) => { InputField.FormatCode(w); });
+				writer.WriteFluentCall("InputField", (w) => { InputField.FormatCode(w); }, false);
 			}
 
 			if (Script is not null)
@@ -56,16 +56,16 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 
 			if (TargetField is not null)
 			{
-				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); }, false);
 			}
 
 			if (TargetIndex is not null)
 			{
-				writer.WriteFluentCall("TargetIndex", (w) => { using var _oi = w.ForceObjectInitializer(); TargetIndex.FormatCode(w); });
+				writer.WriteFluentCall("TargetIndex", (w) => { TargetIndex.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldTypeCodeFormatter.FormatCode(Type, w); });
 			}
 		}
 		else

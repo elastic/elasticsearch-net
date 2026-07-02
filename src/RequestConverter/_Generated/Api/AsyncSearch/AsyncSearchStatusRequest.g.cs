@@ -41,7 +41,7 @@ public partial class AsyncSearchStatusRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (KeepAlive is not null)
 			{
-				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
 			}
 		}
 		else

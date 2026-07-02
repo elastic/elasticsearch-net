@@ -30,43 +30,43 @@ public partial class AllField : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled); });
 			}
 
 			{
-				writer.WriteFluentCall("OmitNorms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OmitNorms); });
+				writer.WriteFluentCall("OmitNorms", (w) => { w.WriteValue(OmitNorms); });
 			}
 
 			{
-				writer.WriteFluentCall("SearchAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchAnalyzer); });
+				writer.WriteFluentCall("SearchAnalyzer", (w) => { w.WriteString(SearchAnalyzer); });
 			}
 
 			{
-				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Similarity); });
+				writer.WriteFluentCall("Similarity", (w) => { w.WriteString(Similarity); });
 			}
 
 			{
-				writer.WriteFluentCall("Store", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Store); });
+				writer.WriteFluentCall("Store", (w) => { w.WriteValue(Store); });
 			}
 
 			{
-				writer.WriteFluentCall("StoreTermVectorOffsets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectorOffsets); });
+				writer.WriteFluentCall("StoreTermVectorOffsets", (w) => { w.WriteValue(StoreTermVectorOffsets); });
 			}
 
 			{
-				writer.WriteFluentCall("StoreTermVectorPayloads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectorPayloads); });
+				writer.WriteFluentCall("StoreTermVectorPayloads", (w) => { w.WriteValue(StoreTermVectorPayloads); });
 			}
 
 			{
-				writer.WriteFluentCall("StoreTermVectorPositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectorPositions); });
+				writer.WriteFluentCall("StoreTermVectorPositions", (w) => { w.WriteValue(StoreTermVectorPositions); });
 			}
 
 			{
-				writer.WriteFluentCall("StoreTermVectors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StoreTermVectors); });
+				writer.WriteFluentCall("StoreTermVectors", (w) => { w.WriteValue(StoreTermVectors); });
 			}
 		}
 		else

@@ -31,40 +31,40 @@ public partial class CombinedFieldsQuery : RequestConverter.ICodeFormattable
 		{
 			if (AutoGenerateSynonymsPhraseQuery is not null)
 			{
-				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
+				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
 			}
 
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (MinimumShouldMatch is not null)
 			{
-				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { MinimumShouldMatch.FormatCode(w); });
 			}
 
 			if (Operator is not null)
 			{
-				writer.WriteFluentCall("Operator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperatorCodeFormatter.FormatCode(Operator.Value, w); });
+				writer.WriteFluentCall("Operator", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperatorCodeFormatter.FormatCode(Operator.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (ZeroTermsQuery is not null)
 			{
-				writer.WriteFluentCall("ZeroTermsQuery", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTermsCodeFormatter.FormatCode(ZeroTermsQuery.Value, w); });
+				writer.WriteFluentCall("ZeroTermsQuery", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTermsCodeFormatter.FormatCode(ZeroTermsQuery.Value, w); });
 			}
 		}
 		else

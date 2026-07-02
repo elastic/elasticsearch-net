@@ -31,11 +31,11 @@ public partial class TimeSync : RequestConverter.ICodeFormattable
 		{
 			if (Delay is not null)
 			{
-				writer.WriteFluentCall("Delay", (w) => { using var _oi = w.ForceObjectInitializer(); Delay.FormatCode(w); });
+				writer.WriteFluentCall("Delay", (w) => { Delay.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 		}
 		else

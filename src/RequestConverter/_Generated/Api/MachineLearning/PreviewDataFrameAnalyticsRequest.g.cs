@@ -45,12 +45,12 @@ public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 			using var _chainIndent = writer.Indent();
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (Config is not null)
 			{
-				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Config.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); }, (w) => { Config.FormatCode(w); });
 			}
 		}
 		else

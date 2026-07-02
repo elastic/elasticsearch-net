@@ -31,12 +31,12 @@ public partial class Translog : RequestConverter.ICodeFormattable
 		{
 			if (Durability is not null)
 			{
-				writer.WriteFluentCall("Durability", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(Durability.Value, w); });
+				writer.WriteFluentCall("Durability", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityCodeFormatter.FormatCode(Durability.Value, w); });
 			}
 
 			if (FlushThresholdSize is not null)
 			{
-				writer.WriteFluentCall("FlushThresholdSize", (w) => { using var _oi = w.ForceObjectInitializer(); FlushThresholdSize.FormatCode(w); });
+				writer.WriteFluentCall("FlushThresholdSize", (w) => { FlushThresholdSize.FormatCode(w); });
 			}
 
 			if (Retention is not null)
@@ -46,7 +46,7 @@ public partial class Translog : RequestConverter.ICodeFormattable
 
 			if (SyncInterval is not null)
 			{
-				writer.WriteFluentCall("SyncInterval", (w) => { using var _oi = w.ForceObjectInitializer(); SyncInterval.FormatCode(w); });
+				writer.WriteFluentCall("SyncInterval", (w) => { SyncInterval.FormatCode(w); });
 			}
 		}
 		else

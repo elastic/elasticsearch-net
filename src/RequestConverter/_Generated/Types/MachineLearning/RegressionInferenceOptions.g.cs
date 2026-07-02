@@ -31,12 +31,12 @@ public partial class RegressionInferenceOptions : RequestConverter.ICodeFormatta
 		{
 			if (NumTopFeatureImportanceValues is not null)
 			{
-				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopFeatureImportanceValues.Value); });
+				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { w.WriteValue(NumTopFeatureImportanceValues.Value); });
 			}
 
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); });
+				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); }, false);
 			}
 		}
 		else

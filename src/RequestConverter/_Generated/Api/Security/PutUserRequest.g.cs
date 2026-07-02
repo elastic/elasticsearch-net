@@ -41,37 +41,37 @@ public partial class PutUserRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (Email is not null)
 			{
-				writer.WriteFluentCall("Email", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Email); });
+				writer.WriteFluentCall("Email", (w) => { w.WriteString(Email); });
 			}
 
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (FullName is not null)
 			{
-				writer.WriteFluentCall("FullName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FullName); });
+				writer.WriteFluentCall("FullName", (w) => { w.WriteString(FullName); });
 			}
 
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Password is not null)
 			{
-				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
 			}
 
 			if (PasswordHash is not null)
 			{
-				writer.WriteFluentCall("PasswordHash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PasswordHash); });
+				writer.WriteFluentCall("PasswordHash", (w) => { w.WriteString(PasswordHash); });
 			}
 
 			if (Roles is not null)

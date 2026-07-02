@@ -30,7 +30,7 @@ public partial class RankFeatureFunctionLogarithm : RequestConverter.ICodeFormat
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ScalingFactor", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ScalingFactor); w.Write("f"); });
+				writer.WriteFluentCall("ScalingFactor", (w) => { w.WriteValue(ScalingFactor); w.Write("f"); });
 			}
 		}
 		else

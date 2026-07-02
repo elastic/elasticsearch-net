@@ -31,36 +31,36 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 		{
 			if (ConfidenceInterval is not null)
 			{
-				writer.WriteFluentCall("ConfidenceInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ConfidenceInterval.Value); w.Write("f"); });
+				writer.WriteFluentCall("ConfidenceInterval", (w) => { w.WriteValue(ConfidenceInterval.Value); w.Write("f"); });
 			}
 
 			if (EfConstruction is not null)
 			{
-				writer.WriteFluentCall("EfConstruction", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EfConstruction.Value); });
+				writer.WriteFluentCall("EfConstruction", (w) => { w.WriteValue(EfConstruction.Value); });
 			}
 
 			if (FlatIndexThreshold is not null)
 			{
-				writer.WriteFluentCall("FlatIndexThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FlatIndexThreshold.Value); });
+				writer.WriteFluentCall("FlatIndexThreshold", (w) => { w.WriteValue(FlatIndexThreshold.Value); });
 			}
 
 			if (M is not null)
 			{
-				writer.WriteFluentCall("M", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(M.Value); });
+				writer.WriteFluentCall("M", (w) => { w.WriteValue(M.Value); });
 			}
 
 			if (OnDiskRescore is not null)
 			{
-				writer.WriteFluentCall("OnDiskRescore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnDiskRescore.Value); });
+				writer.WriteFluentCall("OnDiskRescore", (w) => { w.WriteValue(OnDiskRescore.Value); });
 			}
 
 			if (RescoreVector is not null)
 			{
-				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RescoreVector.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { RescoreVector.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(Type, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsTypeCodeFormatter.FormatCode(Type, w); });
 			}
 		}
 		else

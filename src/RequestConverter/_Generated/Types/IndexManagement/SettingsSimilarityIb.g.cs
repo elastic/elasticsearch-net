@@ -30,15 +30,15 @@ public partial class SettingsSimilarityIb : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Distribution", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, w); });
+				writer.WriteFluentCall("Distribution", (w) => { Elastic.Clients.Elasticsearch.IBDistributionCodeFormatter.FormatCode(Distribution, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Lambda", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(Lambda, w); });
+				writer.WriteFluentCall("Lambda", (w) => { Elastic.Clients.Elasticsearch.IBLambdaCodeFormatter.FormatCode(Lambda, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Normalization", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, w); });
+				writer.WriteFluentCall("Normalization", (w) => { Elastic.Clients.Elasticsearch.NormalizationCodeFormatter.FormatCode(Normalization, w); });
 			}
 		}
 		else

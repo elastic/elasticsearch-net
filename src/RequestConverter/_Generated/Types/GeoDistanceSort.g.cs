@@ -31,40 +31,40 @@ public partial class GeoDistanceSort : RequestConverter.ICodeFormattable
 		{
 			if (DistanceType is not null)
 			{
-				writer.WriteFluentCall("DistanceType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, w); });
+				writer.WriteFluentCall("DistanceType", (w) => { Elastic.Clients.Elasticsearch.GeoDistanceTypeCodeFormatter.FormatCode(DistanceType.Value, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (IgnoreUnmapped is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { w.WriteValue(IgnoreUnmapped.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Location, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Location", (w) => { w.WriteInlineList(Location, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 
 			if (Nested is not null)
 			{
-				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Nested.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { Nested.FormatCode(w); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+				writer.WriteFluentCall("Order", (w) => { Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
 			}
 
 			if (Unit is not null)
 			{
-				writer.WriteFluentCall("Unit", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, w); });
+				writer.WriteFluentCall("Unit", (w) => { Elastic.Clients.Elasticsearch.DistanceUnitCodeFormatter.FormatCode(Unit.Value, w); });
 			}
 		}
 		else

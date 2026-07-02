@@ -31,17 +31,17 @@ public partial class RemoveIndexAction : RequestConverter.ICodeFormattable
 		{
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (MustExist is not null)
 			{
-				writer.WriteFluentCall("MustExist", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MustExist.Value); });
+				writer.WriteFluentCall("MustExist", (w) => { w.WriteValue(MustExist.Value); });
 			}
 		}
 		else

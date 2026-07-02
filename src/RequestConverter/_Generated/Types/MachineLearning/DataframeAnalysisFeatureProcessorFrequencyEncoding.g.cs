@@ -30,15 +30,15 @@ public partial class DataframeAnalysisFeatureProcessorFrequencyEncoding : Reques
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("FeatureName", (w) => { using var _oi = w.ForceObjectInitializer(); FeatureName.FormatCode(w); });
+				writer.WriteFluentCall("FeatureName", (w) => { FeatureName.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("FrequencyMap", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("double"); w.Write(">()"); w.WriteBlockList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }); });
+				writer.WriteFluentCall("FrequencyMap", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("double"); w.Write(">()"); w.WriteBlockList(FrequencyMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("d"); w.Write(" }"); }); });
 			}
 		}
 		else

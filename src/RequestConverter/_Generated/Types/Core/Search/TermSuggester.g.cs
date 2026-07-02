@@ -31,71 +31,71 @@ public partial class TermSuggester : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (LowercaseTerms is not null)
 			{
-				writer.WriteFluentCall("LowercaseTerms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LowercaseTerms.Value); });
+				writer.WriteFluentCall("LowercaseTerms", (w) => { w.WriteValue(LowercaseTerms.Value); });
 			}
 
 			if (MaxEdits is not null)
 			{
-				writer.WriteFluentCall("MaxEdits", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxEdits.Value); });
+				writer.WriteFluentCall("MaxEdits", (w) => { w.WriteValue(MaxEdits.Value); });
 			}
 
 			if (MaxInspections is not null)
 			{
-				writer.WriteFluentCall("MaxInspections", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInspections.Value); });
+				writer.WriteFluentCall("MaxInspections", (w) => { w.WriteValue(MaxInspections.Value); });
 			}
 
 			if (MaxTermFreq is not null)
 			{
-				writer.WriteFluentCall("MaxTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTermFreq.Value); w.Write("f"); });
+				writer.WriteFluentCall("MaxTermFreq", (w) => { w.WriteValue(MaxTermFreq.Value); w.Write("f"); });
 			}
 
 			if (MinDocFreq is not null)
 			{
-				writer.WriteFluentCall("MinDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocFreq.Value); w.Write("f"); });
+				writer.WriteFluentCall("MinDocFreq", (w) => { w.WriteValue(MinDocFreq.Value); w.Write("f"); });
 			}
 
 			if (MinWordLength is not null)
 			{
-				writer.WriteFluentCall("MinWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinWordLength.Value); });
+				writer.WriteFluentCall("MinWordLength", (w) => { w.WriteValue(MinWordLength.Value); });
 			}
 
 			if (PrefixLength is not null)
 			{
-				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+				writer.WriteFluentCall("PrefixLength", (w) => { w.WriteValue(PrefixLength.Value); });
 			}
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			if (Sort is not null)
 			{
-				writer.WriteFluentCall("Sort", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(Sort.Value, w); });
+				writer.WriteFluentCall("Sort", (w) => { Elastic.Clients.Elasticsearch.Core.Search.SuggestSortCodeFormatter.FormatCode(Sort.Value, w); });
 			}
 
 			if (StringDistance is not null)
 			{
-				writer.WriteFluentCall("StringDistance", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(StringDistance.Value, w); });
+				writer.WriteFluentCall("StringDistance", (w) => { Elastic.Clients.Elasticsearch.Core.Search.StringDistanceCodeFormatter.FormatCode(StringDistance.Value, w); });
 			}
 
 			if (SuggestMode is not null)
 			{
-				writer.WriteFluentCall("SuggestMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, w); });
+				writer.WriteFluentCall("SuggestMode", (w) => { Elastic.Clients.Elasticsearch.SuggestModeCodeFormatter.FormatCode(SuggestMode.Value, w); });
 			}
 		}
 		else

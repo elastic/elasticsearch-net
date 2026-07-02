@@ -31,7 +31,7 @@ public partial class RoleTemplate : RequestConverter.ICodeFormattable
 		{
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(Format.Value, w); });
+				writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.Security.TemplateFormatCodeFormatter.FormatCode(Format.Value, w); });
 			}
 
 			{

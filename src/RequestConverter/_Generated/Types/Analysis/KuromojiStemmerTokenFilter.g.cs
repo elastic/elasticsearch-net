@@ -30,12 +30,12 @@ public partial class KuromojiStemmerTokenFilter : RequestConverter.ICodeFormatta
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("MinimumLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinimumLength); });
+				writer.WriteFluentCall("MinimumLength", (w) => { w.WriteValue(MinimumLength); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

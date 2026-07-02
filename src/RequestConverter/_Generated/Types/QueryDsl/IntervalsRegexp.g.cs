@@ -31,16 +31,16 @@ public partial class IntervalsRegexp : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			{
-				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+				writer.WriteFluentCall("Pattern", (w) => { w.WriteString(Pattern); });
 			}
 
 			if (UseField is not null)
 			{
-				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); }, false);
 			}
 		}
 		else

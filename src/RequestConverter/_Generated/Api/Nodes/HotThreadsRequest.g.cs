@@ -35,42 +35,42 @@ public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (NodeId is not null)
 			{
-				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
 			}
 
 			if (IgnoreIdleThreads is not null)
 			{
-				writer.WriteFluentCall("IgnoreIdleThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreIdleThreads.Value); });
+				writer.WriteFluentCall("IgnoreIdleThreads", (w) => { w.WriteValue(IgnoreIdleThreads.Value); });
 			}
 
 			if (Interval is not null)
 			{
-				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); Interval.FormatCode(w); });
+				writer.WriteFluentCall("Interval", (w) => { Interval.FormatCode(w); });
 			}
 
 			if (Snapshots is not null)
 			{
-				writer.WriteFluentCall("Snapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Snapshots.Value); w.Write("L"); });
+				writer.WriteFluentCall("Snapshots", (w) => { w.WriteValue(Snapshots.Value); w.Write("L"); });
 			}
 
 			if (Sort is not null)
 			{
-				writer.WriteFluentCall("Sort", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, w); });
+				writer.WriteFluentCall("Sort", (w) => { Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, w); });
 			}
 
 			if (Threads is not null)
 			{
-				writer.WriteFluentCall("Threads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Threads.Value); w.Write("L"); });
+				writer.WriteFluentCall("Threads", (w) => { w.WriteValue(Threads.Value); w.Write("L"); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, w); });
 			}
 		}
 		else

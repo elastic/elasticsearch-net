@@ -31,25 +31,25 @@ public partial class TermQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			if (CaseInsensitive is not null)
 			{
-				writer.WriteFluentCall("CaseInsensitive", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CaseInsensitive.Value); });
+				writer.WriteFluentCall("CaseInsensitive", (w) => { w.WriteValue(CaseInsensitive.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			{
-				writer.WriteFluentCall("Value", (w) => { using var _oi = w.ForceObjectInitializer(); Value.FormatCode(w); });
+				writer.WriteFluentCall("Value", (w) => { Value.FormatCode(w); });
 			}
 		}
 		else

@@ -35,11 +35,11 @@ public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (EcsCompatibility is not null)
 			{
-				writer.WriteFluentCall("EcsCompatibility", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EcsCompatibility); });
+				writer.WriteFluentCall("EcsCompatibility", (w) => { w.WriteString(EcsCompatibility); });
 			}
 
 			{
-				writer.WriteFluentCall("GrokPattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(GrokPattern); });
+				writer.WriteFluentCall("GrokPattern", (w) => { w.WriteString(GrokPattern); });
 			}
 
 			{

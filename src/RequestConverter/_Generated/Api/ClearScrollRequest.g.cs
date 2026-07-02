@@ -35,7 +35,7 @@ public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (ScrollId is not null)
 			{
-				writer.WriteFluentCall("ScrollId", (w) => { using var _oi = w.ForceObjectInitializer(); ScrollId.FormatCode(w); });
+				writer.WriteFluentCall("ScrollId", (w) => { ScrollId.FormatCode(w); });
 			}
 		}
 		else

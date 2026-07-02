@@ -31,32 +31,32 @@ public partial class CommunityIDProcessor : RequestConverter.ICodeFormattable
 		{
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (DestinationIp is not null)
 			{
-				writer.WriteFluentCall("DestinationIp", (w) => { DestinationIp.FormatCode(w); });
+				writer.WriteFluentCall("DestinationIp", (w) => { DestinationIp.FormatCode(w); }, false);
 			}
 
 			if (DestinationPort is not null)
 			{
-				writer.WriteFluentCall("DestinationPort", (w) => { DestinationPort.FormatCode(w); });
+				writer.WriteFluentCall("DestinationPort", (w) => { DestinationPort.FormatCode(w); }, false);
 			}
 
 			if (IanaNumber is not null)
 			{
-				writer.WriteFluentCall("IanaNumber", (w) => { IanaNumber.FormatCode(w); });
+				writer.WriteFluentCall("IanaNumber", (w) => { IanaNumber.FormatCode(w); }, false);
 			}
 
 			if (IcmpCode is not null)
 			{
-				writer.WriteFluentCall("IcmpCode", (w) => { IcmpCode.FormatCode(w); });
+				writer.WriteFluentCall("IcmpCode", (w) => { IcmpCode.FormatCode(w); }, false);
 			}
 
 			if (IcmpType is not null)
 			{
-				writer.WriteFluentCall("IcmpType", (w) => { IcmpType.FormatCode(w); });
+				writer.WriteFluentCall("IcmpType", (w) => { IcmpType.FormatCode(w); }, false);
 			}
 
 			if (If is not null)
@@ -66,47 +66,47 @@ public partial class CommunityIDProcessor : RequestConverter.ICodeFormattable
 
 			if (IgnoreFailure is not null)
 			{
-				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+				writer.WriteFluentCall("IgnoreFailure", (w) => { w.WriteValue(IgnoreFailure.Value); });
 			}
 
 			if (IgnoreMissing is not null)
 			{
-				writer.WriteFluentCall("IgnoreMissing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMissing.Value); });
+				writer.WriteFluentCall("IgnoreMissing", (w) => { w.WriteValue(IgnoreMissing.Value); });
 			}
 
 			if (OnFailure is not null)
 			{
-				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
 			}
 
 			if (Seed is not null)
 			{
-				writer.WriteFluentCall("Seed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Seed.Value); });
+				writer.WriteFluentCall("Seed", (w) => { w.WriteValue(Seed.Value); });
 			}
 
 			if (SourceIp is not null)
 			{
-				writer.WriteFluentCall("SourceIp", (w) => { SourceIp.FormatCode(w); });
+				writer.WriteFluentCall("SourceIp", (w) => { SourceIp.FormatCode(w); }, false);
 			}
 
 			if (SourcePort is not null)
 			{
-				writer.WriteFluentCall("SourcePort", (w) => { SourcePort.FormatCode(w); });
+				writer.WriteFluentCall("SourcePort", (w) => { SourcePort.FormatCode(w); }, false);
 			}
 
 			if (Tag is not null)
 			{
-				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+				writer.WriteFluentCall("Tag", (w) => { w.WriteString(Tag); });
 			}
 
 			if (TargetField is not null)
 			{
-				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); }, false);
 			}
 
 			if (Transport is not null)
 			{
-				writer.WriteFluentCall("Transport", (w) => { Transport.FormatCode(w); });
+				writer.WriteFluentCall("Transport", (w) => { Transport.FormatCode(w); }, false);
 			}
 		}
 		else

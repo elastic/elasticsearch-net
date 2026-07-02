@@ -31,12 +31,12 @@ public partial class SnowballTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Language is not null)
 			{
-				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(Language.Value, w); });
+				writer.WriteFluentCall("Language", (w) => { Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageCodeFormatter.FormatCode(Language.Value, w); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

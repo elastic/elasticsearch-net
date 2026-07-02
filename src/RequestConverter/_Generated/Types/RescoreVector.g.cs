@@ -30,7 +30,7 @@ public partial class RescoreVector : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Oversample", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Oversample); w.Write("f"); });
+				writer.WriteFluentCall("Oversample", (w) => { w.WriteValue(Oversample); w.Write("f"); });
 			}
 		}
 		else

@@ -31,27 +31,27 @@ public partial class InferenceConfigClassification : RequestConverter.ICodeForma
 		{
 			if (NumTopClasses is not null)
 			{
-				writer.WriteFluentCall("NumTopClasses", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopClasses.Value); });
+				writer.WriteFluentCall("NumTopClasses", (w) => { w.WriteValue(NumTopClasses.Value); });
 			}
 
 			if (NumTopFeatureImportanceValues is not null)
 			{
-				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopFeatureImportanceValues.Value); });
+				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { w.WriteValue(NumTopFeatureImportanceValues.Value); });
 			}
 
 			if (PredictionFieldType is not null)
 			{
-				writer.WriteFluentCall("PredictionFieldType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PredictionFieldType); });
+				writer.WriteFluentCall("PredictionFieldType", (w) => { w.WriteString(PredictionFieldType); });
 			}
 
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); });
+				writer.WriteFluentCall("ResultsField", (w) => { ResultsField.FormatCode(w); }, false);
 			}
 
 			if (TopClassesResultsField is not null)
 			{
-				writer.WriteFluentCall("TopClassesResultsField", (w) => { TopClassesResultsField.FormatCode(w); });
+				writer.WriteFluentCall("TopClassesResultsField", (w) => { TopClassesResultsField.FormatCode(w); }, false);
 			}
 		}
 		else

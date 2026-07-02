@@ -31,7 +31,7 @@ public partial class KeepTypesTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.Analysis.KeepTypesModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 
 			{
@@ -40,7 +40,7 @@ public partial class KeepTypesTokenFilter : RequestConverter.ICodeFormattable
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

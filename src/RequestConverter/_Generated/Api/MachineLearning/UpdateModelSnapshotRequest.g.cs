@@ -47,12 +47,12 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormatta
 			using var _chainIndent = writer.Indent();
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (Retain is not null)
 			{
-				writer.WriteFluentCall("Retain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Retain.Value); });
+				writer.WriteFluentCall("Retain", (w) => { w.WriteValue(Retain.Value); });
 			}
 		}
 		else

@@ -31,16 +31,16 @@ public partial class IntervalsPrefix : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			{
-				writer.WriteFluentCall("Prefix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Prefix); });
+				writer.WriteFluentCall("Prefix", (w) => { w.WriteString(Prefix); });
 			}
 
 			if (UseField is not null)
 			{
-				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); }, false);
 			}
 		}
 		else

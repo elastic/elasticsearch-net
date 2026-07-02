@@ -35,7 +35,7 @@ public partial class TagsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (ProjectRouting is not null)
 			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectRouting); });
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
 			}
 		}
 		else

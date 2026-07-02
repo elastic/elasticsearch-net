@@ -31,29 +31,29 @@ public partial class EnrichPolicy : RequestConverter.ICodeFormattable
 		{
 			if (ElasticsearchVersion is not null)
 			{
-				writer.WriteFluentCall("ElasticsearchVersion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ElasticsearchVersion); });
+				writer.WriteFluentCall("ElasticsearchVersion", (w) => { w.WriteString(ElasticsearchVersion); });
 			}
 
 			{
-				writer.WriteFluentCall("EnrichFields", (w) => { EnrichFields.FormatCode(w); });
+				writer.WriteFluentCall("EnrichFields", (w) => { EnrichFields.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("MatchField", (w) => { MatchField.FormatCode(w); });
+				writer.WriteFluentCall("MatchField", (w) => { MatchField.FormatCode(w); }, false);
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 		}
 		else

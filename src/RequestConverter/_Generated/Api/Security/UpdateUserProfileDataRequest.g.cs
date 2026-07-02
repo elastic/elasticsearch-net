@@ -41,27 +41,27 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 			using var _chainIndent = writer.Indent();
 			if (IfPrimaryTerm is not null)
 			{
-				writer.WriteFluentCall("IfPrimaryTerm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+				writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
 			}
 
 			if (IfSeqNo is not null)
 			{
-				writer.WriteFluentCall("IfSeqNo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+				writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
 			}
 
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (Data is not null)
 			{
-				writer.WriteFluentCall("Data", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Data", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Labels is not null)
 			{
-				writer.WriteFluentCall("Labels", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Labels", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 		}
 		else

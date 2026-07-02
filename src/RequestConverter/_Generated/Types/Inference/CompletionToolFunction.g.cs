@@ -31,21 +31,21 @@ public partial class CompletionToolFunction : RequestConverter.ICodeFormattable
 		{
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
 			if (Parameters is not null)
 			{
-				writer.WriteFluentCall("Parameters", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Parameters); });
+				writer.WriteFluentCall("Parameters", (w) => { w.WriteObjectValue(Parameters); });
 			}
 
 			if (Strict is not null)
 			{
-				writer.WriteFluentCall("Strict", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Strict.Value); });
+				writer.WriteFluentCall("Strict", (w) => { w.WriteValue(Strict.Value); });
 			}
 		}
 		else

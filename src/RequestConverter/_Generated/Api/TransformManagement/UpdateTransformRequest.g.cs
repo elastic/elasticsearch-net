@@ -57,17 +57,17 @@ public partial class UpdateTransformRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (DeferValidation is not null)
 			{
-				writer.WriteFluentCall("DeferValidation", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeferValidation.Value); });
+				writer.WriteFluentCall("DeferValidation", (w) => { w.WriteValue(DeferValidation.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (Dest is not null)
@@ -77,12 +77,12 @@ public partial class UpdateTransformRequest : RequestConverter.ICodeFormattable
 
 			if (Frequency is not null)
 			{
-				writer.WriteFluentCall("Frequency", (w) => { using var _oi = w.ForceObjectInitializer(); Frequency.FormatCode(w); });
+				writer.WriteFluentCall("Frequency", (w) => { Frequency.FormatCode(w); });
 			}
 
 			if (Meta is not null)
 			{
-				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (RetentionPolicy is not null)
@@ -97,12 +97,12 @@ public partial class UpdateTransformRequest : RequestConverter.ICodeFormattable
 
 			if (Source is not null)
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { Source.FormatCode(w); });
 			}
 
 			if (Sync is not null)
 			{
-				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Sync.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Sync", (w) => { Sync.FormatCode(w); }, (w) => { Sync.FormatCode(w); });
 			}
 		}
 		else

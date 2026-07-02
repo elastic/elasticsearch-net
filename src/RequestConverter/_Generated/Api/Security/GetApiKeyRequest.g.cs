@@ -35,42 +35,42 @@ public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (ActiveOnly is not null)
 			{
-				writer.WriteFluentCall("ActiveOnly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ActiveOnly.Value); });
+				writer.WriteFluentCall("ActiveOnly", (w) => { w.WriteValue(ActiveOnly.Value); });
 			}
 
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (Owner is not null)
 			{
-				writer.WriteFluentCall("Owner", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Owner.Value); });
+				writer.WriteFluentCall("Owner", (w) => { w.WriteValue(Owner.Value); });
 			}
 
 			if (RealmName is not null)
 			{
-				writer.WriteFluentCall("RealmName", (w) => { using var _oi = w.ForceObjectInitializer(); RealmName.FormatCode(w); });
+				writer.WriteFluentCall("RealmName", (w) => { RealmName.FormatCode(w); });
 			}
 
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 			}
 
 			if (WithLimitedBy is not null)
 			{
-				writer.WriteFluentCall("WithLimitedBy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithLimitedBy.Value); });
+				writer.WriteFluentCall("WithLimitedBy", (w) => { w.WriteValue(WithLimitedBy.Value); });
 			}
 
 			if (WithProfileUid is not null)
 			{
-				writer.WriteFluentCall("WithProfileUid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WithProfileUid.Value); });
+				writer.WriteFluentCall("WithProfileUid", (w) => { w.WriteValue(WithProfileUid.Value); });
 			}
 		}
 		else

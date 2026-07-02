@@ -31,26 +31,26 @@ public partial class JsonProcessor : RequestConverter.ICodeFormattable
 		{
 			if (AddToRoot is not null)
 			{
-				writer.WriteFluentCall("AddToRoot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AddToRoot.Value); });
+				writer.WriteFluentCall("AddToRoot", (w) => { w.WriteValue(AddToRoot.Value); });
 			}
 
 			if (AddToRootConflictStrategy is not null)
 			{
-				writer.WriteFluentCall("AddToRootConflictStrategy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategyCodeFormatter.FormatCode(AddToRootConflictStrategy.Value, w); });
+				writer.WriteFluentCall("AddToRootConflictStrategy", (w) => { Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategyCodeFormatter.FormatCode(AddToRootConflictStrategy.Value, w); });
 			}
 
 			if (AllowDuplicateKeys is not null)
 			{
-				writer.WriteFluentCall("AllowDuplicateKeys", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowDuplicateKeys.Value); });
+				writer.WriteFluentCall("AllowDuplicateKeys", (w) => { w.WriteValue(AllowDuplicateKeys.Value); });
 			}
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (If is not null)
@@ -60,22 +60,22 @@ public partial class JsonProcessor : RequestConverter.ICodeFormattable
 
 			if (IgnoreFailure is not null)
 			{
-				writer.WriteFluentCall("IgnoreFailure", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreFailure.Value); });
+				writer.WriteFluentCall("IgnoreFailure", (w) => { w.WriteValue(IgnoreFailure.Value); });
 			}
 
 			if (OnFailure is not null)
 			{
-				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
 			}
 
 			if (Tag is not null)
 			{
-				writer.WriteFluentCall("Tag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tag); });
+				writer.WriteFluentCall("Tag", (w) => { w.WriteString(Tag); });
 			}
 
 			if (TargetField is not null)
 			{
-				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); });
+				writer.WriteFluentCall("TargetField", (w) => { TargetField.FormatCode(w); }, false);
 			}
 		}
 		else

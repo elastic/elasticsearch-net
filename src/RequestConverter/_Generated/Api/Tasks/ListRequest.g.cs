@@ -40,32 +40,32 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 
 			if (Detailed is not null)
 			{
-				writer.WriteFluentCall("Detailed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Detailed.Value); });
+				writer.WriteFluentCall("Detailed", (w) => { w.WriteValue(Detailed.Value); });
 			}
 
 			if (GroupBy is not null)
 			{
-				writer.WriteFluentCall("GroupBy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, w); });
+				writer.WriteFluentCall("GroupBy", (w) => { Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, w); });
 			}
 
 			if (Nodes is not null)
 			{
-				writer.WriteFluentCall("Nodes", (w) => { using var _oi = w.ForceObjectInitializer(); Nodes.FormatCode(w); });
+				writer.WriteFluentCall("Nodes", (w) => { Nodes.FormatCode(w); });
 			}
 
 			if (ParentTaskId is not null)
 			{
-				writer.WriteFluentCall("ParentTaskId", (w) => { using var _oi = w.ForceObjectInitializer(); ParentTaskId.FormatCode(w); });
+				writer.WriteFluentCall("ParentTaskId", (w) => { ParentTaskId.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 		}
 		else

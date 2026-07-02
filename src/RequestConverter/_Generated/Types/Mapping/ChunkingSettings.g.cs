@@ -30,22 +30,22 @@ public partial class ChunkingSettings : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("MaxChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChunkSize); });
+				writer.WriteFluentCall("MaxChunkSize", (w) => { w.WriteValue(MaxChunkSize); });
 			}
 
 			if (Overlap is not null)
 			{
-				writer.WriteFluentCall("Overlap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Overlap.Value); });
+				writer.WriteFluentCall("Overlap", (w) => { w.WriteValue(Overlap.Value); });
 			}
 
 			if (SentenceOverlap is not null)
 			{
-				writer.WriteFluentCall("SentenceOverlap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SentenceOverlap.Value); });
+				writer.WriteFluentCall("SentenceOverlap", (w) => { w.WriteValue(SentenceOverlap.Value); });
 			}
 
 			if (SeparatorGroup is not null)
 			{
-				writer.WriteFluentCall("SeparatorGroup", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SeparatorGroup); });
+				writer.WriteFluentCall("SeparatorGroup", (w) => { w.WriteString(SeparatorGroup); });
 			}
 
 			if (Separators is not null)
@@ -54,7 +54,7 @@ public partial class ChunkingSettings : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Strategy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Strategy); });
+				writer.WriteFluentCall("Strategy", (w) => { w.WriteString(Strategy); });
 			}
 		}
 		else

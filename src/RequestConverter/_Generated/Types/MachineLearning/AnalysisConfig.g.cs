@@ -31,17 +31,17 @@ public partial class AnalysisConfig : RequestConverter.ICodeFormattable
 		{
 			if (BucketSpan is not null)
 			{
-				writer.WriteFluentCall("BucketSpan", (w) => { using var _oi = w.ForceObjectInitializer(); BucketSpan.FormatCode(w); });
+				writer.WriteFluentCall("BucketSpan", (w) => { BucketSpan.FormatCode(w); });
 			}
 
 			if (CategorizationAnalyzer is not null)
 			{
-				writer.WriteFluentCall("CategorizationAnalyzer", (w) => { using var _oi = w.ForceObjectInitializer(); CategorizationAnalyzer.FormatCode(w); });
+				writer.WriteFluentCall("CategorizationAnalyzer", (w) => { CategorizationAnalyzer.FormatCode(w); });
 			}
 
 			if (CategorizationFieldName is not null)
 			{
-				writer.WriteFluentCall("CategorizationFieldName", (w) => { CategorizationFieldName.FormatCode(w); });
+				writer.WriteFluentCall("CategorizationFieldName", (w) => { CategorizationFieldName.FormatCode(w); }, false);
 			}
 
 			if (CategorizationFilters is not null)
@@ -50,27 +50,27 @@ public partial class AnalysisConfig : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Detector>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Detector>"); w.Write("()"); });
 			}
 
 			if (Influencers is not null)
 			{
-				writer.WriteFluentCall("Influencers", (w) => { Influencers.FormatCode(w); });
+				writer.WriteFluentCall("Influencers", (w) => { Influencers.FormatCode(w); }, false);
 			}
 
 			if (Latency is not null)
 			{
-				writer.WriteFluentCall("Latency", (w) => { using var _oi = w.ForceObjectInitializer(); Latency.FormatCode(w); });
+				writer.WriteFluentCall("Latency", (w) => { Latency.FormatCode(w); });
 			}
 
 			if (ModelPruneWindow is not null)
 			{
-				writer.WriteFluentCall("ModelPruneWindow", (w) => { using var _oi = w.ForceObjectInitializer(); ModelPruneWindow.FormatCode(w); });
+				writer.WriteFluentCall("ModelPruneWindow", (w) => { ModelPruneWindow.FormatCode(w); });
 			}
 
 			if (MultivariateByFields is not null)
 			{
-				writer.WriteFluentCall("MultivariateByFields", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultivariateByFields.Value); });
+				writer.WriteFluentCall("MultivariateByFields", (w) => { w.WriteValue(MultivariateByFields.Value); });
 			}
 
 			if (PerPartitionCategorization is not null)
@@ -80,7 +80,7 @@ public partial class AnalysisConfig : RequestConverter.ICodeFormattable
 
 			if (SummaryCountFieldName is not null)
 			{
-				writer.WriteFluentCall("SummaryCountFieldName", (w) => { SummaryCountFieldName.FormatCode(w); });
+				writer.WriteFluentCall("SummaryCountFieldName", (w) => { SummaryCountFieldName.FormatCode(w); }, false);
 			}
 		}
 		else

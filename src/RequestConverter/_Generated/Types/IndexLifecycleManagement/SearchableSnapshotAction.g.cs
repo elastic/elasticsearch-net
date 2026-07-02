@@ -31,11 +31,11 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 		{
 			if (ForceMergeIndex is not null)
 			{
-				writer.WriteFluentCall("ForceMergeIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ForceMergeIndex.Value); });
+				writer.WriteFluentCall("ForceMergeIndex", (w) => { w.WriteValue(ForceMergeIndex.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("SnapshotRepository", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SnapshotRepository); });
+				writer.WriteFluentCall("SnapshotRepository", (w) => { w.WriteString(SnapshotRepository); });
 			}
 		}
 		else

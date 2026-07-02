@@ -35,32 +35,32 @@ public partial class GetTokenRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (GrantType is not null)
 			{
-				writer.WriteFluentCall("GrantType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(GrantType.Value, w); });
+				writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.AccessTokenGrantTypeCodeFormatter.FormatCode(GrantType.Value, w); });
 			}
 
 			if (KerberosTicket is not null)
 			{
-				writer.WriteFluentCall("KerberosTicket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(KerberosTicket); });
+				writer.WriteFluentCall("KerberosTicket", (w) => { w.WriteString(KerberosTicket); });
 			}
 
 			if (Password is not null)
 			{
-				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
 			}
 
 			if (RefreshToken is not null)
 			{
-				writer.WriteFluentCall("RefreshToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RefreshToken); });
+				writer.WriteFluentCall("RefreshToken", (w) => { w.WriteString(RefreshToken); });
 			}
 
 			if (Scope is not null)
 			{
-				writer.WriteFluentCall("Scope", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Scope); });
+				writer.WriteFluentCall("Scope", (w) => { w.WriteString(Scope); });
 			}
 
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); Username.FormatCode(w); });
+				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 			}
 		}
 		else

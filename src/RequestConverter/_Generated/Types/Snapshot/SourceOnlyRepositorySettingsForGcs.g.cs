@@ -32,26 +32,26 @@ public partial class SourceOnlyRepositorySettingsForGcs : RequestConverter.ICode
 #pragma warning disable CS0618
 			if (ApplicationName is not null)
 			{
-				writer.WriteFluentCall("ApplicationName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApplicationName); });
+				writer.WriteFluentCall("ApplicationName", (w) => { w.WriteString(ApplicationName); });
 			}
 #pragma warning restore CS0618
 			if (BasePath is not null)
 			{
-				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+				writer.WriteFluentCall("BasePath", (w) => { w.WriteString(BasePath); });
 			}
 
 			{
-				writer.WriteFluentCall("Bucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Bucket); });
+				writer.WriteFluentCall("Bucket", (w) => { w.WriteString(Bucket); });
 			}
 
 			if (Client is not null)
 			{
-				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+				writer.WriteFluentCall("Client", (w) => { w.WriteString(Client); });
 			}
 
 			if (Readonly is not null)
 			{
-				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+				writer.WriteFluentCall("Readonly", (w) => { w.WriteValue(Readonly.Value); });
 			}
 		}
 		else

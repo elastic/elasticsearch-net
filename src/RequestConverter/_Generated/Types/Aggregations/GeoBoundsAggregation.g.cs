@@ -31,12 +31,12 @@ public partial class GeoBoundsAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Script is not null)
@@ -46,7 +46,7 @@ public partial class GeoBoundsAggregation : RequestConverter.ICodeFormattable
 
 			if (WrapLongitude is not null)
 			{
-				writer.WriteFluentCall("WrapLongitude", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WrapLongitude.Value); });
+				writer.WriteFluentCall("WrapLongitude", (w) => { w.WriteValue(WrapLongitude.Value); });
 			}
 		}
 		else

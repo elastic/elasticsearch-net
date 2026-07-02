@@ -30,7 +30,7 @@ public partial class AnalysisMemoryLimit : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelMemoryLimit); });
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { w.WriteString(ModelMemoryLimit); });
 			}
 		}
 		else

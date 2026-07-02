@@ -31,12 +31,12 @@ public partial class MergeScheduler : RequestConverter.ICodeFormattable
 		{
 			if (MaxMergeCount is not null)
 			{
-				writer.WriteFluentCall("MaxMergeCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxMergeCount.Value); });
+				writer.WriteFluentCall("MaxMergeCount", (w) => { w.WriteValue(MaxMergeCount.Value); });
 			}
 
 			if (MaxThreadCount is not null)
 			{
-				writer.WriteFluentCall("MaxThreadCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxThreadCount.Value); });
+				writer.WriteFluentCall("MaxThreadCount", (w) => { w.WriteValue(MaxThreadCount.Value); });
 			}
 		}
 		else

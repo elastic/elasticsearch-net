@@ -30,17 +30,17 @@ public partial class FieldAndFormat : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (IncludeUnmapped is not null)
 			{
-				writer.WriteFluentCall("IncludeUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeUnmapped.Value); });
+				writer.WriteFluentCall("IncludeUnmapped", (w) => { w.WriteValue(IncludeUnmapped.Value); });
 			}
 		}
 		else

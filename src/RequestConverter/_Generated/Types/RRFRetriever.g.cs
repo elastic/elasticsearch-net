@@ -36,36 +36,36 @@ public partial class RRFRetriever : RequestConverter.ICodeFormattable
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
 			}
 
 			if (MinScore is not null)
 			{
-				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+				writer.WriteFluentCall("MinScore", (w) => { w.WriteValue(MinScore.Value); w.Write("f"); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
 			if (Query is not null)
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (RankConstant is not null)
 			{
-				writer.WriteFluentCall("RankConstant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankConstant.Value); });
+				writer.WriteFluentCall("RankConstant", (w) => { w.WriteValue(RankConstant.Value); });
 			}
 
 			if (RankWindowSize is not null)
 			{
-				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); });
+				writer.WriteFluentCall("RankWindowSize", (w) => { w.WriteValue(RankWindowSize.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Retrievers", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Retrievers, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } }); });
+				writer.WriteFluentCall("Retrievers", (w) => { w.WriteInlineList(Retrievers, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } }); });
 			}
 		}
 		else

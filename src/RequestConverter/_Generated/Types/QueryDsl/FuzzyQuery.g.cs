@@ -31,45 +31,45 @@ public partial class FuzzyQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Fuzziness is not null)
 			{
-				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+				writer.WriteFluentCall("Fuzziness", (w) => { Fuzziness.FormatCode(w); });
 			}
 
 			if (MaxExpansions is not null)
 			{
-				writer.WriteFluentCall("MaxExpansions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxExpansions.Value); });
+				writer.WriteFluentCall("MaxExpansions", (w) => { w.WriteValue(MaxExpansions.Value); });
 			}
 
 			if (PrefixLength is not null)
 			{
-				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+				writer.WriteFluentCall("PrefixLength", (w) => { w.WriteValue(PrefixLength.Value); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Rewrite is not null)
 			{
-				writer.WriteFluentCall("Rewrite", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Rewrite); });
+				writer.WriteFluentCall("Rewrite", (w) => { w.WriteString(Rewrite); });
 			}
 
 			if (Transpositions is not null)
 			{
-				writer.WriteFluentCall("Transpositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Transpositions.Value); });
+				writer.WriteFluentCall("Transpositions", (w) => { w.WriteValue(Transpositions.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Value", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Value); });
+				writer.WriteFluentCall("Value", (w) => { w.WriteObjectValue(Value); });
 			}
 		}
 		else

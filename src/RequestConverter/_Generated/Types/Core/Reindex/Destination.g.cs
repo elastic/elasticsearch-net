@@ -30,27 +30,27 @@ public partial class Destination : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (OpType is not null)
 			{
-				writer.WriteFluentCall("OpType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, w); });
+				writer.WriteFluentCall("OpType", (w) => { Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, w); });
 			}
 
 			if (Pipeline is not null)
 			{
-				writer.WriteFluentCall("Pipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pipeline); });
+				writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
 			}
 
 			if (VersionType is not null)
 			{
-				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 			}
 		}
 		else

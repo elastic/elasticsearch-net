@@ -30,7 +30,7 @@ public partial class ApplicationPrivileges : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Application", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Application); });
+				writer.WriteFluentCall("Application", (w) => { w.WriteString(Application); });
 			}
 
 			{

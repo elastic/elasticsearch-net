@@ -31,39 +31,39 @@ public partial class CustomServiceSettings : RequestConverter.ICodeFormattable
 		{
 			if (BatchSize is not null)
 			{
-				writer.WriteFluentCall("BatchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BatchSize.Value); });
+				writer.WriteFluentCall("BatchSize", (w) => { w.WriteValue(BatchSize.Value); });
 			}
 
 			if (Headers is not null)
 			{
-				writer.WriteFluentCall("Headers", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Headers", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (InputType is not null)
 			{
-				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(InputType, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Inference.CustomServiceInputTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("InputType", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(InputType, (w, kvp) => { w.Write("{ "); Elastic.Clients.Elasticsearch.Inference.CustomServiceInputTypeCodeFormatter.FormatCode(kvp.Key, w); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (QueryParameters is not null)
 			{
-				writer.WriteFluentCall("QueryParameters", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(QueryParameters, (w, item) => { w.WriteInlineList(item, (w, item) => { w.WriteString(item); }); }); });
+				writer.WriteFluentCall("QueryParameters", (w) => { w.WriteInlineList(QueryParameters, (w, item) => { w.WriteInlineList(item, (w, item) => { w.WriteString(item); }); }); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Request.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); }, (w) => { Request.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Response", (w) => { Response.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Response.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Response", (w) => { Response.FormatCode(w); }, (w) => { Response.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("SecretParameters", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(SecretParameters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("SecretParameters", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(SecretParameters, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Url is not null)
 			{
-				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+				writer.WriteFluentCall("Url", (w) => { w.WriteString(Url); });
 			}
 		}
 		else

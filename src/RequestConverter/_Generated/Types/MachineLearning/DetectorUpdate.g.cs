@@ -31,16 +31,16 @@ public partial class DetectorUpdate : RequestConverter.ICodeFormattable
 		{
 			if (CustomRules is not null)
 			{
-				writer.WriteFluentDescriptorParams("CustomRules", CustomRules, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("CustomRules", CustomRules, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>"); w.Write("()"); });
 			}
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			{
-				writer.WriteFluentCall("DetectorIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DetectorIndex); });
+				writer.WriteFluentCall("DetectorIndex", (w) => { w.WriteValue(DetectorIndex); });
 			}
 		}
 		else

@@ -31,22 +31,22 @@ public partial class GeoCentroidAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Count is not null)
 			{
-				writer.WriteFluentCall("Count", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Count.Value); w.Write("L"); });
+				writer.WriteFluentCall("Count", (w) => { w.WriteValue(Count.Value); w.Write("L"); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Location is not null)
 			{
-				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); Location.FormatCode(w); });
+				writer.WriteFluentCall("Location", (w) => { Location.FormatCode(w); });
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Script is not null)

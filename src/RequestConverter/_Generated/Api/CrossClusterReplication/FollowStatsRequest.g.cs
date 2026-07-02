@@ -57,7 +57,7 @@ public partial class FollowStatsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

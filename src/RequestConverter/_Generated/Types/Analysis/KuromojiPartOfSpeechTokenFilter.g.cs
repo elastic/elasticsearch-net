@@ -35,7 +35,7 @@ public partial class KuromojiPartOfSpeechTokenFilter : RequestConverter.ICodeFor
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

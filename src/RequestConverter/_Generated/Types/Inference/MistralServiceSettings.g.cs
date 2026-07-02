@@ -30,16 +30,16 @@ public partial class MistralServiceSettings : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			if (MaxInputTokens is not null)
 			{
-				writer.WriteFluentCall("MaxInputTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxInputTokens.Value); });
+				writer.WriteFluentCall("MaxInputTokens", (w) => { w.WriteValue(MaxInputTokens.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Model", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Model); });
+				writer.WriteFluentCall("Model", (w) => { w.WriteString(Model); });
 			}
 
 			if (RateLimit is not null)

@@ -31,11 +31,11 @@ public partial class SynonymRule : RequestConverter.ICodeFormattable
 		{
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Synonyms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Synonyms); });
+				writer.WriteFluentCall("Synonyms", (w) => { w.WriteString(Synonyms); });
 			}
 		}
 		else

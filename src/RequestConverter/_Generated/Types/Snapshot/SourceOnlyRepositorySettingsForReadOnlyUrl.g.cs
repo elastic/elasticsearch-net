@@ -31,21 +31,21 @@ public partial class SourceOnlyRepositorySettingsForReadOnlyUrl : RequestConvert
 		{
 			if (HttpMaxRetries is not null)
 			{
-				writer.WriteFluentCall("HttpMaxRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HttpMaxRetries.Value); });
+				writer.WriteFluentCall("HttpMaxRetries", (w) => { w.WriteValue(HttpMaxRetries.Value); });
 			}
 
 			if (HttpSocketTimeout is not null)
 			{
-				writer.WriteFluentCall("HttpSocketTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); HttpSocketTimeout.FormatCode(w); });
+				writer.WriteFluentCall("HttpSocketTimeout", (w) => { HttpSocketTimeout.FormatCode(w); });
 			}
 
 			if (MaxNumberOfSnapshots is not null)
 			{
-				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfSnapshots.Value); });
+				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { w.WriteValue(MaxNumberOfSnapshots.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+				writer.WriteFluentCall("Url", (w) => { w.WriteString(Url); });
 			}
 		}
 		else

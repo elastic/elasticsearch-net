@@ -35,27 +35,27 @@ public partial class PostRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Acknowledge is not null)
 			{
-				writer.WriteFluentCall("Acknowledge", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Acknowledge.Value); });
+				writer.WriteFluentCall("Acknowledge", (w) => { w.WriteValue(Acknowledge.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (License is not null)
 			{
-				writer.WriteFluentDescriptorCall("License", (w) => { License.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); License.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("License", (w) => { License.FormatCode(w); }, (w) => { License.FormatCode(w); });
 			}
 
 			if (Licenses is not null)
 			{
-				writer.WriteFluentDescriptorParams("Licenses", Licenses, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.LicenseManagement.License>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Licenses", Licenses, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.LicenseManagement.License>"); w.Write("()"); });
 			}
 		}
 		else

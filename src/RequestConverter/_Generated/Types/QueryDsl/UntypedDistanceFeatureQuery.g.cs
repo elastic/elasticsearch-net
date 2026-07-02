@@ -31,24 +31,24 @@ public partial class UntypedDistanceFeatureQuery : RequestConverter.ICodeFormatt
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("Origin", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Origin); });
+				writer.WriteFluentCall("Origin", (w) => { w.WriteObjectValue(Origin); });
 			}
 
 			{
-				writer.WriteFluentCall("Pivot", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Pivot); });
+				writer.WriteFluentCall("Pivot", (w) => { w.WriteObjectValue(Pivot); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 		}
 		else

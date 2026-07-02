@@ -47,7 +47,7 @@ public partial class GetModelSnapshotUpgradeStatsRequest : RequestConverter.ICod
 			using var _chainIndent = writer.Indent();
 			if (AllowNoMatch is not null)
 			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoMatch.Value); });
+				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 			}
 		}
 		else

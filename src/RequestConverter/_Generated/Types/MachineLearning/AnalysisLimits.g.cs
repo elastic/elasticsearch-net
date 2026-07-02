@@ -31,12 +31,12 @@ public partial class AnalysisLimits : RequestConverter.ICodeFormattable
 		{
 			if (CategorizationExamplesLimit is not null)
 			{
-				writer.WriteFluentCall("CategorizationExamplesLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CategorizationExamplesLimit.Value); w.Write("L"); });
+				writer.WriteFluentCall("CategorizationExamplesLimit", (w) => { w.WriteValue(CategorizationExamplesLimit.Value); w.Write("L"); });
 			}
 
 			if (ModelMemoryLimit is not null)
 			{
-				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); ModelMemoryLimit.FormatCode(w); });
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { ModelMemoryLimit.FormatCode(w); });
 			}
 		}
 		else

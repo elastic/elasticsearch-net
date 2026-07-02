@@ -36,30 +36,30 @@ public partial class ElasticsearchServiceSettings : RequestConverter.ICodeFormat
 
 			if (DeploymentId is not null)
 			{
-				writer.WriteFluentCall("DeploymentId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DeploymentId); });
+				writer.WriteFluentCall("DeploymentId", (w) => { w.WriteString(DeploymentId); });
 			}
 
 			if (LongDocumentStrategy is not null)
 			{
-				writer.WriteFluentCall("LongDocumentStrategy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LongDocumentStrategy); });
+				writer.WriteFluentCall("LongDocumentStrategy", (w) => { w.WriteString(LongDocumentStrategy); });
 			}
 
 			if (MaxChunksPerDoc is not null)
 			{
-				writer.WriteFluentCall("MaxChunksPerDoc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChunksPerDoc.Value); });
+				writer.WriteFluentCall("MaxChunksPerDoc", (w) => { w.WriteValue(MaxChunksPerDoc.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			if (NumAllocations is not null)
 			{
-				writer.WriteFluentCall("NumAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumAllocations.Value); });
+				writer.WriteFluentCall("NumAllocations", (w) => { w.WriteValue(NumAllocations.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("NumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumThreads); });
+				writer.WriteFluentCall("NumThreads", (w) => { w.WriteValue(NumThreads); });
 			}
 		}
 		else

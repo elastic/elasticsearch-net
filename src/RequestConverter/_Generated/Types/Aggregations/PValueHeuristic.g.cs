@@ -31,12 +31,12 @@ public partial class PValueHeuristic : RequestConverter.ICodeFormattable
 		{
 			if (BackgroundIsSuperset is not null)
 			{
-				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset.Value); });
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { w.WriteValue(BackgroundIsSuperset.Value); });
 			}
 
 			if (NormalizeAbove is not null)
 			{
-				writer.WriteFluentCall("NormalizeAbove", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NormalizeAbove.Value); w.Write("L"); });
+				writer.WriteFluentCall("NormalizeAbove", (w) => { w.WriteValue(NormalizeAbove.Value); w.Write("L"); });
 			}
 		}
 		else

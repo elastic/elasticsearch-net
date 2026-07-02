@@ -31,22 +31,22 @@ public partial class PatternTokenizer : RequestConverter.ICodeFormattable
 		{
 			if (Flags is not null)
 			{
-				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Flags); });
+				writer.WriteFluentCall("Flags", (w) => { w.WriteString(Flags); });
 			}
 
 			if (Group is not null)
 			{
-				writer.WriteFluentCall("Group", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Group.Value); });
+				writer.WriteFluentCall("Group", (w) => { w.WriteValue(Group.Value); });
 			}
 
 			if (Pattern is not null)
 			{
-				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+				writer.WriteFluentCall("Pattern", (w) => { w.WriteString(Pattern); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

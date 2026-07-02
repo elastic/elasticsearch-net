@@ -30,30 +30,30 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Field); });
+				writer.WriteFluentCall("Field", (w) => { w.WriteString(Field); });
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
 			}
 
 			{
-				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K); });
+				writer.WriteFluentCall("K", (w) => { w.WriteValue(K); });
 			}
 
 			if (MinScore is not null)
 			{
-				writer.WriteFluentCall("MinScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinScore.Value); w.Write("f"); });
+				writer.WriteFluentCall("MinScore", (w) => { w.WriteValue(MinScore.Value); w.Write("f"); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Name); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
 			{
-				writer.WriteFluentCall("NumCandidates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumCandidates); });
+				writer.WriteFluentCall("NumCandidates", (w) => { w.WriteValue(NumCandidates); });
 			}
 
 			if (QueryVector is not null)
@@ -63,22 +63,22 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 
 			if (QueryVectorBuilder is not null)
 			{
-				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QueryVectorBuilder.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { QueryVectorBuilder.FormatCode(w); });
 			}
 
 			if (RescoreVector is not null)
 			{
-				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RescoreVector.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { RescoreVector.FormatCode(w); });
 			}
 
 			if (Similarity is not null)
 			{
-				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Similarity.Value); w.Write("f"); });
+				writer.WriteFluentCall("Similarity", (w) => { w.WriteValue(Similarity.Value); w.Write("f"); });
 			}
 
 			if (VisitPercentage is not null)
 			{
-				writer.WriteFluentCall("VisitPercentage", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(VisitPercentage.Value); w.Write("f"); });
+				writer.WriteFluentCall("VisitPercentage", (w) => { w.WriteValue(VisitPercentage.Value); w.Write("f"); });
 			}
 		}
 		else

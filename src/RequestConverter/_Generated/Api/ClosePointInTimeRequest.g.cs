@@ -34,7 +34,7 @@ public partial class ClosePointInTimeRequest : RequestConverter.ICodeFormattable
 			writer.Write("()");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 		}
 		else

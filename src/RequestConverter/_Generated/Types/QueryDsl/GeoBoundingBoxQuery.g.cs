@@ -31,35 +31,35 @@ public partial class GeoBoundingBoxQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("BoundingBox", (w) => { using var _oi = w.ForceObjectInitializer(); BoundingBox.FormatCode(w); });
+				writer.WriteFluentCall("BoundingBox", (w) => { BoundingBox.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (IgnoreUnmapped is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnmapped", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnmapped.Value); });
+				writer.WriteFluentCall("IgnoreUnmapped", (w) => { w.WriteValue(IgnoreUnmapped.Value); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 #pragma warning disable CS0618
 			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionCodeFormatter.FormatCode(Type.Value, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.GeoExecutionCodeFormatter.FormatCode(Type.Value, w); });
 			}
 #pragma warning restore CS0618
 			if (ValidationMethod is not null)
 			{
-				writer.WriteFluentCall("ValidationMethod", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, w); });
+				writer.WriteFluentCall("ValidationMethod", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethodCodeFormatter.FormatCode(ValidationMethod.Value, w); });
 			}
 		}
 		else

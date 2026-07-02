@@ -35,16 +35,16 @@ public partial class ScrollRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (RestTotalHitsAsInt is not null)
 			{
-				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RestTotalHitsAsInt.Value); });
+				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
 			}
 
 			if (Scroll is not null)
 			{
-				writer.WriteFluentCall("Scroll", (w) => { using var _oi = w.ForceObjectInitializer(); Scroll.FormatCode(w); });
+				writer.WriteFluentCall("Scroll", (w) => { Scroll.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("ScrollId", (w) => { using var _oi = w.ForceObjectInitializer(); ScrollId.FormatCode(w); });
+				writer.WriteFluentCall("ScrollId", (w) => { ScrollId.FormatCode(w); });
 			}
 		}
 		else

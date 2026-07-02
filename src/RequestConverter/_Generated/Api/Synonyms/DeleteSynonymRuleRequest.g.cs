@@ -47,7 +47,7 @@ public partial class DeleteSynonymRuleRequest : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+				writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
 			}
 		}
 		else

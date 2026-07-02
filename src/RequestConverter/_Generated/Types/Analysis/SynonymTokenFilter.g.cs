@@ -31,17 +31,17 @@ public partial class SynonymTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Expand is not null)
 			{
-				writer.WriteFluentCall("Expand", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Expand.Value); });
+				writer.WriteFluentCall("Expand", (w) => { w.WriteValue(Expand.Value); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(Format.Value, w); });
+				writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.Analysis.SynonymFormatCodeFormatter.FormatCode(Format.Value, w); });
 			}
 
 			if (Lenient is not null)
 			{
-				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+				writer.WriteFluentCall("Lenient", (w) => { w.WriteValue(Lenient.Value); });
 			}
 
 			if (Synonyms is not null)
@@ -51,7 +51,7 @@ public partial class SynonymTokenFilter : RequestConverter.ICodeFormattable
 
 			if (SynonymsPath is not null)
 			{
-				writer.WriteFluentCall("SynonymsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SynonymsPath); });
+				writer.WriteFluentCall("SynonymsPath", (w) => { w.WriteString(SynonymsPath); });
 			}
 
 			if (SynonymsSet is not null)
@@ -61,17 +61,17 @@ public partial class SynonymTokenFilter : RequestConverter.ICodeFormattable
 
 			if (Tokenizer is not null)
 			{
-				writer.WriteFluentCall("Tokenizer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Tokenizer); });
+				writer.WriteFluentCall("Tokenizer", (w) => { w.WriteString(Tokenizer); });
 			}
 
 			if (Updateable is not null)
 			{
-				writer.WriteFluentCall("Updateable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Updateable.Value); });
+				writer.WriteFluentCall("Updateable", (w) => { w.WriteValue(Updateable.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -41,12 +41,12 @@ public partial class ResetJobRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (DeleteUserAnnotations is not null)
 			{
-				writer.WriteFluentCall("DeleteUserAnnotations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteUserAnnotations.Value); });
+				writer.WriteFluentCall("DeleteUserAnnotations", (w) => { w.WriteValue(DeleteUserAnnotations.Value); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 		}
 		else

@@ -31,16 +31,16 @@ public partial class KnnSearch : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
 			}
 
 			if (InnerHits is not null)
@@ -50,17 +50,17 @@ public partial class KnnSearch : RequestConverter.ICodeFormattable
 
 			if (K is not null)
 			{
-				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K.Value); });
+				writer.WriteFluentCall("K", (w) => { w.WriteValue(K.Value); });
 			}
 
 			if (NumCandidates is not null)
 			{
-				writer.WriteFluentCall("NumCandidates", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumCandidates.Value); });
+				writer.WriteFluentCall("NumCandidates", (w) => { w.WriteValue(NumCandidates.Value); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (QueryVector is not null)
@@ -70,22 +70,22 @@ public partial class KnnSearch : RequestConverter.ICodeFormattable
 
 			if (QueryVectorBuilder is not null)
 			{
-				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QueryVectorBuilder.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QueryVectorBuilder", (w) => { QueryVectorBuilder.FormatCode(w); }, (w) => { QueryVectorBuilder.FormatCode(w); });
 			}
 
 			if (RescoreVector is not null)
 			{
-				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RescoreVector.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { RescoreVector.FormatCode(w); });
 			}
 
 			if (Similarity is not null)
 			{
-				writer.WriteFluentCall("Similarity", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Similarity.Value); w.Write("f"); });
+				writer.WriteFluentCall("Similarity", (w) => { w.WriteValue(Similarity.Value); w.Write("f"); });
 			}
 
 			if (VisitPercentage is not null)
 			{
-				writer.WriteFluentCall("VisitPercentage", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(VisitPercentage.Value); w.Write("f"); });
+				writer.WriteFluentCall("VisitPercentage", (w) => { w.WriteValue(VisitPercentage.Value); w.Write("f"); });
 			}
 		}
 		else

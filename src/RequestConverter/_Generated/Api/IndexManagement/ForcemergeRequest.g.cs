@@ -45,12 +45,12 @@ public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (AllowNoIndices is not null)
 			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowNoIndices.Value); });
+				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -60,27 +60,27 @@ public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
 
 			if (Flush is not null)
 			{
-				writer.WriteFluentCall("Flush", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Flush.Value); });
+				writer.WriteFluentCall("Flush", (w) => { w.WriteValue(Flush.Value); });
 			}
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (MaxNumSegments is not null)
 			{
-				writer.WriteFluentCall("MaxNumSegments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumSegments.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxNumSegments", (w) => { w.WriteValue(MaxNumSegments.Value); w.Write("L"); });
 			}
 
 			if (OnlyExpungeDeletes is not null)
 			{
-				writer.WriteFluentCall("OnlyExpungeDeletes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnlyExpungeDeletes.Value); });
+				writer.WriteFluentCall("OnlyExpungeDeletes", (w) => { w.WriteValue(OnlyExpungeDeletes.Value); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 		}
 		else

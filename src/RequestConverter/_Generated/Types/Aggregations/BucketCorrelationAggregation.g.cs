@@ -31,11 +31,11 @@ public partial class BucketCorrelationAggregation : RequestConverter.ICodeFormat
 		{
 			if (BucketsPath is not null)
 			{
-				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+				writer.WriteFluentCall("BucketsPath", (w) => { BucketsPath.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Function", (w) => { Function.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Function.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Function", (w) => { Function.FormatCode(w); }, (w) => { Function.FormatCode(w); });
 			}
 		}
 		else

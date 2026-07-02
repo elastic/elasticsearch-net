@@ -57,57 +57,57 @@ public partial class PutTrainedModelRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (DeferDefinitionDecompression is not null)
 			{
-				writer.WriteFluentCall("DeferDefinitionDecompression", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeferDefinitionDecompression.Value); });
+				writer.WriteFluentCall("DeferDefinitionDecompression", (w) => { w.WriteValue(DeferDefinitionDecompression.Value); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 
 			if (CompressedDefinition is not null)
 			{
-				writer.WriteFluentCall("CompressedDefinition", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CompressedDefinition); });
+				writer.WriteFluentCall("CompressedDefinition", (w) => { w.WriteString(CompressedDefinition); });
 			}
 
 			if (Definition is not null)
 			{
-				writer.WriteFluentDescriptorCall("Definition", (w) => { Definition.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Definition.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Definition", (w) => { Definition.FormatCode(w); }, (w) => { Definition.FormatCode(w); });
 			}
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (InferenceConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); InferenceConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("InferenceConfig", (w) => { InferenceConfig.FormatCode(w); }, (w) => { InferenceConfig.FormatCode(w); });
 			}
 
 			if (Input is not null)
 			{
-				writer.WriteFluentDescriptorCall("Input", (w) => { Input.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Input.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Input", (w) => { Input.FormatCode(w); }, (w) => { Input.FormatCode(w); });
 			}
 
 			if (Metadata is not null)
 			{
-				writer.WriteFluentCall("Metadata", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Metadata); });
+				writer.WriteFluentCall("Metadata", (w) => { w.WriteObjectValue(Metadata); });
 			}
 
 			if (ModelSizeBytes is not null)
 			{
-				writer.WriteFluentCall("ModelSizeBytes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModelSizeBytes.Value); w.Write("L"); });
+				writer.WriteFluentCall("ModelSizeBytes", (w) => { w.WriteValue(ModelSizeBytes.Value); w.Write("L"); });
 			}
 
 			if (ModelType is not null)
 			{
-				writer.WriteFluentCall("ModelType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(ModelType.Value, w); });
+				writer.WriteFluentCall("ModelType", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTypeCodeFormatter.FormatCode(ModelType.Value, w); });
 			}
 
 			if (PlatformArchitecture is not null)
 			{
-				writer.WriteFluentCall("PlatformArchitecture", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PlatformArchitecture); });
+				writer.WriteFluentCall("PlatformArchitecture", (w) => { w.WriteString(PlatformArchitecture); });
 			}
 
 			if (PrefixStrings is not null)

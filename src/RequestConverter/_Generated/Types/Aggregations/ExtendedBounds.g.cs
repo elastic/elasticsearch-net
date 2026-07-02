@@ -31,12 +31,12 @@ public partial class ExtendedBounds<T> : RequestConverter.ICodeFormattable
 		{
 			if (Max is not null)
 			{
-				writer.WriteFluentCall("Max", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Max); });
+				writer.WriteFluentCall("Max", (w) => { w.WriteValue(Max); });
 			}
 
 			if (Min is not null)
 			{
-				writer.WriteFluentCall("Min", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Min); });
+				writer.WriteFluentCall("Min", (w) => { w.WriteValue(Min); });
 			}
 		}
 		else

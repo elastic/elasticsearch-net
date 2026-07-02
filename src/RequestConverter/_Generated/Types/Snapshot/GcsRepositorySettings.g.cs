@@ -32,46 +32,46 @@ public partial class GcsRepositorySettings : RequestConverter.ICodeFormattable
 #pragma warning disable CS0618
 			if (ApplicationName is not null)
 			{
-				writer.WriteFluentCall("ApplicationName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApplicationName); });
+				writer.WriteFluentCall("ApplicationName", (w) => { w.WriteString(ApplicationName); });
 			}
 #pragma warning restore CS0618
 			if (BasePath is not null)
 			{
-				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+				writer.WriteFluentCall("BasePath", (w) => { w.WriteString(BasePath); });
 			}
 
 			{
-				writer.WriteFluentCall("Bucket", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Bucket); });
+				writer.WriteFluentCall("Bucket", (w) => { w.WriteString(Bucket); });
 			}
 
 			if (ChunkSize is not null)
 			{
-				writer.WriteFluentCall("ChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); ChunkSize.FormatCode(w); });
+				writer.WriteFluentCall("ChunkSize", (w) => { ChunkSize.FormatCode(w); });
 			}
 
 			if (Client is not null)
 			{
-				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+				writer.WriteFluentCall("Client", (w) => { w.WriteString(Client); });
 			}
 
 			if (Compress is not null)
 			{
-				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+				writer.WriteFluentCall("Compress", (w) => { w.WriteValue(Compress.Value); });
 			}
 
 			if (MaxRestoreBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRestoreBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { MaxRestoreBytesPerSec.FormatCode(w); });
 			}
 
 			if (MaxSnapshotBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSnapshotBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { MaxSnapshotBytesPerSec.FormatCode(w); });
 			}
 
 			if (Readonly is not null)
 			{
-				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+				writer.WriteFluentCall("Readonly", (w) => { w.WriteValue(Readonly.Value); });
 			}
 		}
 		else

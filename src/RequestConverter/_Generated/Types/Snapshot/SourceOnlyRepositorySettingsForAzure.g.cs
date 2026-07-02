@@ -31,37 +31,37 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 		{
 			if (BasePath is not null)
 			{
-				writer.WriteFluentCall("BasePath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(BasePath); });
+				writer.WriteFluentCall("BasePath", (w) => { w.WriteString(BasePath); });
 			}
 
 			if (Client is not null)
 			{
-				writer.WriteFluentCall("Client", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Client); });
+				writer.WriteFluentCall("Client", (w) => { w.WriteString(Client); });
 			}
 
 			if (Container is not null)
 			{
-				writer.WriteFluentCall("Container", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Container); });
+				writer.WriteFluentCall("Container", (w) => { w.WriteString(Container); });
 			}
 
 			if (DeleteObjectsMaxSize is not null)
 			{
-				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteObjectsMaxSize.Value); });
+				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { w.WriteValue(DeleteObjectsMaxSize.Value); });
 			}
 
 			if (LocationMode is not null)
 			{
-				writer.WriteFluentCall("LocationMode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LocationMode); });
+				writer.WriteFluentCall("LocationMode", (w) => { w.WriteString(LocationMode); });
 			}
 
 			if (MaxConcurrentBatchDeletes is not null)
 			{
-				writer.WriteFluentCall("MaxConcurrentBatchDeletes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentBatchDeletes.Value); });
+				writer.WriteFluentCall("MaxConcurrentBatchDeletes", (w) => { w.WriteValue(MaxConcurrentBatchDeletes.Value); });
 			}
 
 			if (Readonly is not null)
 			{
-				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+				writer.WriteFluentCall("Readonly", (w) => { w.WriteValue(Readonly.Value); });
 			}
 		}
 		else

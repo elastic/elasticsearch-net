@@ -45,17 +45,17 @@ public partial class EstimateModelMemoryRequest : RequestConverter.ICodeFormatta
 			using var _chainIndent = writer.Indent();
 			if (AnalysisConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnalysisConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { AnalysisConfig.FormatCode(w); });
 			}
 
 			if (MaxBucketCardinality is not null)
 			{
-				writer.WriteFluentCall("MaxBucketCardinality", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); });
+				writer.WriteFluentCall("MaxBucketCardinality", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(MaxBucketCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); });
 			}
 
 			if (OverallCardinality is not null)
 			{
-				writer.WriteFluentCall("OverallCardinality", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); });
+				writer.WriteFluentCall("OverallCardinality", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Field"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(OverallCardinality, (w, kvp) => { w.Write("{ "); kvp.Key.FormatCode(w); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); });
 			}
 		}
 		else

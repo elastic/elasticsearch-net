@@ -31,39 +31,39 @@ public partial class CalendarEvent : RequestConverter.ICodeFormattable
 		{
 			if (CalendarId is not null)
 			{
-				writer.WriteFluentCall("CalendarId", (w) => { using var _oi = w.ForceObjectInitializer(); CalendarId.FormatCode(w); });
+				writer.WriteFluentCall("CalendarId", (w) => { CalendarId.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			{
-				writer.WriteFluentCall("EndTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(EndTime); });
+				writer.WriteFluentCall("EndTime", (w) => { w.WriteValue(EndTime); });
 			}
 
 			if (EventId is not null)
 			{
-				writer.WriteFluentCall("EventId", (w) => { using var _oi = w.ForceObjectInitializer(); EventId.FormatCode(w); });
+				writer.WriteFluentCall("EventId", (w) => { EventId.FormatCode(w); });
 			}
 
 			if (ForceTimeShift is not null)
 			{
-				writer.WriteFluentCall("ForceTimeShift", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ForceTimeShift.Value); });
+				writer.WriteFluentCall("ForceTimeShift", (w) => { w.WriteValue(ForceTimeShift.Value); });
 			}
 
 			if (SkipModelUpdate is not null)
 			{
-				writer.WriteFluentCall("SkipModelUpdate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipModelUpdate.Value); });
+				writer.WriteFluentCall("SkipModelUpdate", (w) => { w.WriteValue(SkipModelUpdate.Value); });
 			}
 
 			if (SkipResult is not null)
 			{
-				writer.WriteFluentCall("SkipResult", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SkipResult.Value); });
+				writer.WriteFluentCall("SkipResult", (w) => { w.WriteValue(SkipResult.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("StartTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StartTime); });
+				writer.WriteFluentCall("StartTime", (w) => { w.WriteValue(StartTime); });
 			}
 		}
 		else

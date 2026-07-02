@@ -30,11 +30,11 @@ public partial class DataframeAnalysisFeatureProcessorOneHotEncoding : RequestCo
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("HotMap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(HotMap); });
+				writer.WriteFluentCall("HotMap", (w) => { w.WriteString(HotMap); });
 			}
 		}
 		else

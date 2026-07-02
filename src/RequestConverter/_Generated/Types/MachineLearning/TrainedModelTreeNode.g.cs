@@ -31,46 +31,46 @@ public partial class TrainedModelTreeNode : RequestConverter.ICodeFormattable
 		{
 			if (DecisionType is not null)
 			{
-				writer.WriteFluentCall("DecisionType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DecisionType); });
+				writer.WriteFluentCall("DecisionType", (w) => { w.WriteString(DecisionType); });
 			}
 
 			if (DefaultLeft is not null)
 			{
-				writer.WriteFluentCall("DefaultLeft", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DefaultLeft.Value); });
+				writer.WriteFluentCall("DefaultLeft", (w) => { w.WriteValue(DefaultLeft.Value); });
 			}
 
 			if (LeafValue is not null)
 			{
-				writer.WriteFluentCall("LeafValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LeafValue.Value); w.Write("d"); });
+				writer.WriteFluentCall("LeafValue", (w) => { w.WriteValue(LeafValue.Value); w.Write("d"); });
 			}
 
 			if (LeftChild is not null)
 			{
-				writer.WriteFluentCall("LeftChild", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LeftChild.Value); });
+				writer.WriteFluentCall("LeftChild", (w) => { w.WriteValue(LeftChild.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("NodeIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NodeIndex); });
+				writer.WriteFluentCall("NodeIndex", (w) => { w.WriteValue(NodeIndex); });
 			}
 
 			if (RightChild is not null)
 			{
-				writer.WriteFluentCall("RightChild", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RightChild.Value); });
+				writer.WriteFluentCall("RightChild", (w) => { w.WriteValue(RightChild.Value); });
 			}
 
 			if (SplitFeature is not null)
 			{
-				writer.WriteFluentCall("SplitFeature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitFeature.Value); });
+				writer.WriteFluentCall("SplitFeature", (w) => { w.WriteValue(SplitFeature.Value); });
 			}
 
 			if (SplitGain is not null)
 			{
-				writer.WriteFluentCall("SplitGain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(SplitGain.Value); });
+				writer.WriteFluentCall("SplitGain", (w) => { w.WriteValue(SplitGain.Value); });
 			}
 
 			if (Threshold is not null)
 			{
-				writer.WriteFluentCall("Threshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Threshold.Value); w.Write("d"); });
+				writer.WriteFluentCall("Threshold", (w) => { w.WriteValue(Threshold.Value); w.Write("d"); });
 			}
 		}
 		else

@@ -31,11 +31,11 @@ public partial class DelayedDataCheckConfig : RequestConverter.ICodeFormattable
 		{
 			if (CheckWindow is not null)
 			{
-				writer.WriteFluentCall("CheckWindow", (w) => { using var _oi = w.ForceObjectInitializer(); CheckWindow.FormatCode(w); });
+				writer.WriteFluentCall("CheckWindow", (w) => { CheckWindow.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled); });
 			}
 		}
 		else

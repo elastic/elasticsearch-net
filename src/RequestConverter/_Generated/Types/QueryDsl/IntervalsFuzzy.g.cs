@@ -31,31 +31,31 @@ public partial class IntervalsFuzzy : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Fuzziness is not null)
 			{
-				writer.WriteFluentCall("Fuzziness", (w) => { using var _oi = w.ForceObjectInitializer(); Fuzziness.FormatCode(w); });
+				writer.WriteFluentCall("Fuzziness", (w) => { Fuzziness.FormatCode(w); });
 			}
 
 			if (PrefixLength is not null)
 			{
-				writer.WriteFluentCall("PrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrefixLength.Value); });
+				writer.WriteFluentCall("PrefixLength", (w) => { w.WriteValue(PrefixLength.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Term", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Term); });
+				writer.WriteFluentCall("Term", (w) => { w.WriteString(Term); });
 			}
 
 			if (Transpositions is not null)
 			{
-				writer.WriteFluentCall("Transpositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Transpositions.Value); });
+				writer.WriteFluentCall("Transpositions", (w) => { w.WriteValue(Transpositions.Value); });
 			}
 
 			if (UseField is not null)
 			{
-				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); }, false);
 			}
 		}
 		else

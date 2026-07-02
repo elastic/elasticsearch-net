@@ -30,7 +30,7 @@ public partial class WktGeoBounds : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Wkt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Wkt); });
+				writer.WriteFluentCall("Wkt", (w) => { w.WriteString(Wkt); });
 			}
 		}
 		else

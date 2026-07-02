@@ -31,17 +31,17 @@ public partial class DataframeEvaluation : RequestConverter.ICodeFormattable
 		{
 			if (Classification is not null)
 			{
-				writer.WriteFluentDescriptorCall("Classification", (w) => { Classification.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Classification.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Classification", (w) => { Classification.FormatCode(w); }, (w) => { Classification.FormatCode(w); });
 			}
 
 			if (OutlierDetection is not null)
 			{
-				writer.WriteFluentDescriptorCall("OutlierDetection", (w) => { OutlierDetection.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); OutlierDetection.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("OutlierDetection", (w) => { OutlierDetection.FormatCode(w); }, (w) => { OutlierDetection.FormatCode(w); });
 			}
 
 			if (Regression is not null)
 			{
-				writer.WriteFluentDescriptorCall("Regression", (w) => { Regression.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Regression.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Regression", (w) => { Regression.FormatCode(w); }, (w) => { Regression.FormatCode(w); });
 			}
 		}
 		else

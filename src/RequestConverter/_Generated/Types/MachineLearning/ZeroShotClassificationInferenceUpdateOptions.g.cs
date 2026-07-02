@@ -35,12 +35,12 @@ public partial class ZeroShotClassificationInferenceUpdateOptions : RequestConve
 
 			if (MultiLabel is not null)
 			{
-				writer.WriteFluentCall("MultiLabel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MultiLabel.Value); });
+				writer.WriteFluentCall("MultiLabel", (w) => { w.WriteValue(MultiLabel.Value); });
 			}
 
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+				writer.WriteFluentCall("ResultsField", (w) => { w.WriteString(ResultsField); });
 			}
 
 			if (Tokenization is not null)

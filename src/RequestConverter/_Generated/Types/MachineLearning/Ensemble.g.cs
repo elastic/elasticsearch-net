@@ -46,11 +46,11 @@ public partial class Ensemble : RequestConverter.ICodeFormattable
 
 			if (TargetType is not null)
 			{
-				writer.WriteFluentCall("TargetType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetType); });
+				writer.WriteFluentCall("TargetType", (w) => { w.WriteString(TargetType); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("TrainedModels", TrainedModels, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("TrainedModels", TrainedModels, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel>"); w.Write("()"); });
 			}
 		}
 		else

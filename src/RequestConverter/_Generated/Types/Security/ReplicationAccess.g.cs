@@ -31,11 +31,11 @@ public partial class ReplicationAccess : RequestConverter.ICodeFormattable
 		{
 			if (AllowRestrictedIndices is not null)
 			{
-				writer.WriteFluentCall("AllowRestrictedIndices", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowRestrictedIndices.Value); });
+				writer.WriteFluentCall("AllowRestrictedIndices", (w) => { w.WriteValue(AllowRestrictedIndices.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Names", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Names, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Names", (w) => { w.WriteInlineList(Names, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

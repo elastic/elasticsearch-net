@@ -31,22 +31,22 @@ public partial class RoleMappingRule : RequestConverter.ICodeFormattable
 		{
 			if (All is not null)
 			{
-				writer.WriteFluentDescriptorParams("All", All, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("All", All, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>"); w.Write("()"); });
 			}
 
 			if (Any is not null)
 			{
-				writer.WriteFluentDescriptorParams("Any", Any, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Any", Any, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>"); w.Write("()"); });
 			}
 
 			if (Except is not null)
 			{
-				writer.WriteFluentDescriptorCall("Except", (w) => { Except.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Except.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Except", (w) => { Except.FormatCode(w); }, (w) => { Except.FormatCode(w); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>"); Field.Value.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(Field.Value.Value, (w, item) => { item.FormatCode(w); }); w.Write(")"); });
+				writer.WriteFluentCall("Field", (w) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>"); Field.Value.Key.FormatCode(w); w.Write(", "); w.WriteInlineList(Field.Value.Value, (w, item) => { item.FormatCode(w); }); w.Write(")"); });
 			}
 		}
 		else

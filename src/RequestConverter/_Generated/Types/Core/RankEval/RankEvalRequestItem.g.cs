@@ -30,26 +30,26 @@ public partial class RankEvalRequestItem : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (Params is not null)
 			{
-				writer.WriteFluentCall("Params", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Params", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Ratings", Ratings, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Ratings", Ratings, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>"); w.Write("()"); });
 			}
 
 			if (Request is not null)
 			{
-				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Request.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Request", (w) => { Request.FormatCode(w); }, (w) => { Request.FormatCode(w); });
 			}
 
 			if (TemplateId is not null)
 			{
-				writer.WriteFluentCall("TemplateId", (w) => { using var _oi = w.ForceObjectInitializer(); TemplateId.FormatCode(w); });
+				writer.WriteFluentCall("TemplateId", (w) => { TemplateId.FormatCode(w); });
 			}
 		}
 		else

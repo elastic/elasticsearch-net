@@ -31,17 +31,17 @@ public partial class EdgeNGramTokenizer : RequestConverter.ICodeFormattable
 		{
 			if (CustomTokenChars is not null)
 			{
-				writer.WriteFluentCall("CustomTokenChars", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CustomTokenChars); });
+				writer.WriteFluentCall("CustomTokenChars", (w) => { w.WriteString(CustomTokenChars); });
 			}
 
 			if (MaxGram is not null)
 			{
-				writer.WriteFluentCall("MaxGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGram.Value); });
+				writer.WriteFluentCall("MaxGram", (w) => { w.WriteValue(MaxGram.Value); });
 			}
 
 			if (MinGram is not null)
 			{
-				writer.WriteFluentCall("MinGram", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinGram.Value); });
+				writer.WriteFluentCall("MinGram", (w) => { w.WriteValue(MinGram.Value); });
 			}
 
 			if (TokenChars is not null)
@@ -51,7 +51,7 @@ public partial class EdgeNGramTokenizer : RequestConverter.ICodeFormattable
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

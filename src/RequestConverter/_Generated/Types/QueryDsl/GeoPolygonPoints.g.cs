@@ -30,7 +30,7 @@ public partial class GeoPolygonPoints : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Points", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Points, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Points", (w) => { w.WriteInlineList(Points, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

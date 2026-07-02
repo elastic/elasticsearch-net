@@ -31,17 +31,17 @@ public partial class IndexingSlowlogSettings : RequestConverter.ICodeFormattable
 		{
 			if (Level is not null)
 			{
-				writer.WriteFluentCall("Level", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Level); });
+				writer.WriteFluentCall("Level", (w) => { w.WriteString(Level); });
 			}
 
 			if (Reformat is not null)
 			{
-				writer.WriteFluentCall("Reformat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Reformat.Value); });
+				writer.WriteFluentCall("Reformat", (w) => { w.WriteValue(Reformat.Value); });
 			}
 
 			if (Source is not null)
 			{
-				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Source.Value); });
+				writer.WriteFluentCall("Source", (w) => { w.WriteValue(Source.Value); });
 			}
 
 			if (Threshold is not null)

@@ -31,31 +31,31 @@ public partial class Message : RequestConverter.ICodeFormattable
 		{
 			if (Content is not null)
 			{
-				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Content.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject"); w.Write("[] "); w.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("Content", (w) => { if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Content.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject"); w.Write("[] "); w.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
 			}
 
 			if (Reasoning is not null)
 			{
-				writer.WriteFluentCall("Reasoning", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Reasoning); });
+				writer.WriteFluentCall("Reasoning", (w) => { w.WriteString(Reasoning); });
 			}
 
 			if (ReasoningDetails is not null)
 			{
-				writer.WriteFluentCall("ReasoningDetails", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(ReasoningDetails, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("ReasoningDetails", (w) => { w.WriteInlineList(ReasoningDetails, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			{
-				writer.WriteFluentCall("Role", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Role); });
+				writer.WriteFluentCall("Role", (w) => { w.WriteString(Role); });
 			}
 
 			if (ToolCallId is not null)
 			{
-				writer.WriteFluentCall("ToolCallId", (w) => { using var _oi = w.ForceObjectInitializer(); ToolCallId.FormatCode(w); });
+				writer.WriteFluentCall("ToolCallId", (w) => { ToolCallId.FormatCode(w); });
 			}
 
 			if (ToolCalls is not null)
 			{
-				writer.WriteFluentDescriptorParams("ToolCalls", ToolCalls, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.ToolCall>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("ToolCalls", ToolCalls, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.ToolCall>"); w.Write("()"); });
 			}
 		}
 		else

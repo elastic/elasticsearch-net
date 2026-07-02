@@ -41,22 +41,22 @@ public partial class AsyncQueryGetRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (DropNullColumns is not null)
 			{
-				writer.WriteFluentCall("DropNullColumns", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DropNullColumns.Value); });
+				writer.WriteFluentCall("DropNullColumns", (w) => { w.WriteValue(DropNullColumns.Value); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(Format.Value, w); });
+				writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.Esql.EsqlFormatCodeFormatter.FormatCode(Format.Value, w); });
 			}
 
 			if (KeepAlive is not null)
 			{
-				writer.WriteFluentCall("KeepAlive", (w) => { using var _oi = w.ForceObjectInitializer(); KeepAlive.FormatCode(w); });
+				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
 			}
 
 			if (WaitForCompletionTimeout is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForCompletionTimeout.FormatCode(w); });
+				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
 			}
 		}
 		else

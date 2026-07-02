@@ -45,7 +45,7 @@ public partial class DataStreamsStatsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (ExpandWildcards is not null)

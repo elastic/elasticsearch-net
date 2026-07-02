@@ -31,17 +31,17 @@ public partial class StandardAnalyzer : RequestConverter.ICodeFormattable
 		{
 			if (MaxTokenLength is not null)
 			{
-				writer.WriteFluentCall("MaxTokenLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokenLength.Value); });
+				writer.WriteFluentCall("MaxTokenLength", (w) => { w.WriteValue(MaxTokenLength.Value); });
 			}
 
 			if (Stopwords is not null)
 			{
-				writer.WriteFluentCall("Stopwords", (w) => { using var _oi = w.ForceObjectInitializer(); if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("Stopwords", (w) => { if (Stopwords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(Stopwords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Stopwords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
 			}
 
 			if (StopwordsPath is not null)
 			{
-				writer.WriteFluentCall("StopwordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StopwordsPath); });
+				writer.WriteFluentCall("StopwordsPath", (w) => { w.WriteString(StopwordsPath); });
 			}
 		}
 		else

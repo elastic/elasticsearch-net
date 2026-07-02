@@ -31,16 +31,16 @@ public partial class LearningToRankConfig : RequestConverter.ICodeFormattable
 		{
 			if (DefaultParams is not null)
 			{
-				writer.WriteFluentCall("DefaultParams", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(DefaultParams, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("DefaultParams", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(DefaultParams, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (FeatureExtractors is not null)
 			{
-				writer.WriteFluentCall("FeatureExtractors", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(FeatureExtractors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); }); });
+				writer.WriteFluentCall("FeatureExtractors", (w) => { w.WriteInlineList(FeatureExtractors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); }); });
 			}
 
 			{
-				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopFeatureImportanceValues); });
+				writer.WriteFluentCall("NumTopFeatureImportanceValues", (w) => { w.WriteValue(NumTopFeatureImportanceValues); });
 			}
 		}
 		else

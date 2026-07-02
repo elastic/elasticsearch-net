@@ -41,17 +41,17 @@ public partial class GetTasksRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (FollowRelocations is not null)
 			{
-				writer.WriteFluentCall("FollowRelocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FollowRelocations.Value); });
+				writer.WriteFluentCall("FollowRelocations", (w) => { w.WriteValue(FollowRelocations.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 		}
 		else

@@ -30,16 +30,16 @@ public partial class AmazonBedrockServiceSettings : RequestConverter.ICodeFormat
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("AccessKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AccessKey); });
+				writer.WriteFluentCall("AccessKey", (w) => { w.WriteString(AccessKey); });
 			}
 
 			{
-				writer.WriteFluentCall("Model", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Model); });
+				writer.WriteFluentCall("Model", (w) => { w.WriteString(Model); });
 			}
 
 			if (Provider is not null)
 			{
-				writer.WriteFluentCall("Provider", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Provider); });
+				writer.WriteFluentCall("Provider", (w) => { w.WriteString(Provider); });
 			}
 
 			if (RateLimit is not null)
@@ -48,11 +48,11 @@ public partial class AmazonBedrockServiceSettings : RequestConverter.ICodeFormat
 			}
 
 			{
-				writer.WriteFluentCall("Region", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Region); });
+				writer.WriteFluentCall("Region", (w) => { w.WriteString(Region); });
 			}
 
 			{
-				writer.WriteFluentCall("SecretKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SecretKey); });
+				writer.WriteFluentCall("SecretKey", (w) => { w.WriteString(SecretKey); });
 			}
 		}
 		else

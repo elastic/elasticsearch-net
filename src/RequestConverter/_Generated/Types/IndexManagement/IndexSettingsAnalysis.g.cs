@@ -31,27 +31,27 @@ public partial class IndexSettingsAnalysis : RequestConverter.ICodeFormattable
 		{
 			if (Analyzers is not null)
 			{
-				writer.WriteFluentDescriptorCall("Analyzers", (w) => { Analyzers.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Analyzers.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Analyzers", (w) => { Analyzers.FormatCode(w); }, (w) => { Analyzers.FormatCode(w); });
 			}
 
 			if (CharFilters is not null)
 			{
-				writer.WriteFluentDescriptorCall("CharFilters", (w) => { CharFilters.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); CharFilters.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("CharFilters", (w) => { CharFilters.FormatCode(w); }, (w) => { CharFilters.FormatCode(w); });
 			}
 
 			if (Normalizers is not null)
 			{
-				writer.WriteFluentDescriptorCall("Normalizers", (w) => { Normalizers.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Normalizers.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Normalizers", (w) => { Normalizers.FormatCode(w); }, (w) => { Normalizers.FormatCode(w); });
 			}
 
 			if (TokenFilters is not null)
 			{
-				writer.WriteFluentDescriptorCall("TokenFilters", (w) => { TokenFilters.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TokenFilters.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TokenFilters", (w) => { TokenFilters.FormatCode(w); }, (w) => { TokenFilters.FormatCode(w); });
 			}
 
 			if (Tokenizers is not null)
 			{
-				writer.WriteFluentDescriptorCall("Tokenizers", (w) => { Tokenizers.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tokenizers.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Tokenizers", (w) => { Tokenizers.FormatCode(w); }, (w) => { Tokenizers.FormatCode(w); });
 			}
 		}
 		else

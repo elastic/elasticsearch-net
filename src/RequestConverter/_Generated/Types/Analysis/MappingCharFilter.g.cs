@@ -36,12 +36,12 @@ public partial class MappingCharFilter : RequestConverter.ICodeFormattable
 
 			if (MappingsPath is not null)
 			{
-				writer.WriteFluentCall("MappingsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MappingsPath); });
+				writer.WriteFluentCall("MappingsPath", (w) => { w.WriteString(MappingsPath); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

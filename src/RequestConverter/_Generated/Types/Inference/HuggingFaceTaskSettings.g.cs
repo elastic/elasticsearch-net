@@ -31,12 +31,12 @@ public partial class HuggingFaceTaskSettings : RequestConverter.ICodeFormattable
 		{
 			if (ReturnDocuments is not null)
 			{
-				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+				writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
 			}
 
 			if (TopN is not null)
 			{
-				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 			}
 		}
 		else

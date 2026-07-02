@@ -36,22 +36,22 @@ public partial class CommonGramsTokenFilter : RequestConverter.ICodeFormattable
 
 			if (CommonWordsPath is not null)
 			{
-				writer.WriteFluentCall("CommonWordsPath", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CommonWordsPath); });
+				writer.WriteFluentCall("CommonWordsPath", (w) => { w.WriteString(CommonWordsPath); });
 			}
 
 			if (IgnoreCase is not null)
 			{
-				writer.WriteFluentCall("IgnoreCase", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreCase.Value); });
+				writer.WriteFluentCall("IgnoreCase", (w) => { w.WriteValue(IgnoreCase.Value); });
 			}
 
 			if (QueryMode is not null)
 			{
-				writer.WriteFluentCall("QueryMode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(QueryMode.Value); });
+				writer.WriteFluentCall("QueryMode", (w) => { w.WriteValue(QueryMode.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

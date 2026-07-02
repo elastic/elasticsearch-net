@@ -34,20 +34,20 @@ public partial class OidcAuthenticateRequest : RequestConverter.ICodeFormattable
 			writer.Write("()");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentCall("Nonce", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Nonce); });
+				writer.WriteFluentCall("Nonce", (w) => { w.WriteString(Nonce); });
 			}
 
 			if (Realm is not null)
 			{
-				writer.WriteFluentCall("Realm", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Realm); });
+				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
 			}
 
 			{
-				writer.WriteFluentCall("RedirectUri", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RedirectUri); });
+				writer.WriteFluentCall("RedirectUri", (w) => { w.WriteString(RedirectUri); });
 			}
 
 			{
-				writer.WriteFluentCall("State", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(State); });
+				writer.WriteFluentCall("State", (w) => { w.WriteString(State); });
 			}
 		}
 		else

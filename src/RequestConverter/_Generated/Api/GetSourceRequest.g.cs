@@ -69,47 +69,47 @@ public partial class GetSourceRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Preference is not null)
 			{
-				writer.WriteFluentCall("Preference", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Preference); });
+				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
 			}
 
 			if (Realtime is not null)
 			{
-				writer.WriteFluentCall("Realtime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Realtime.Value); });
+				writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
 			}
 
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+				writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (Source is not null)
 			{
-				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); Source.FormatCode(w); });
+				writer.WriteFluentCall("Source", (w) => { Source.FormatCode(w); });
 			}
 
 			if (SourceExcludes is not null)
 			{
-				writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); });
+				writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); }, false);
 			}
 
 			if (SourceIncludes is not null)
 			{
-				writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); });
+				writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); }, false);
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 			}
 
 			if (VersionType is not null)
 			{
-				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 			}
 		}
 		else

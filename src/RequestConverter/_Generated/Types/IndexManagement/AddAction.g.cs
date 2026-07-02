@@ -31,57 +31,57 @@ public partial class AddAction : RequestConverter.ICodeFormattable
 		{
 			if (Alias is not null)
 			{
-				writer.WriteFluentCall("Alias", (w) => { using var _oi = w.ForceObjectInitializer(); Alias.FormatCode(w); });
+				writer.WriteFluentCall("Alias", (w) => { Alias.FormatCode(w); });
 			}
 
 			if (Aliases is not null)
 			{
-				writer.WriteFluentCall("Aliases", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Aliases", (w) => { w.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (IndexRouting is not null)
 			{
-				writer.WriteFluentCall("IndexRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IndexRouting); });
+				writer.WriteFluentCall("IndexRouting", (w) => { w.WriteString(IndexRouting); });
 			}
 
 			if (Indices is not null)
 			{
-				writer.WriteFluentCall("Indices", (w) => { using var _oi = w.ForceObjectInitializer(); Indices.FormatCode(w); });
+				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 			}
 
 			if (IsHidden is not null)
 			{
-				writer.WriteFluentCall("IsHidden", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsHidden.Value); });
+				writer.WriteFluentCall("IsHidden", (w) => { w.WriteValue(IsHidden.Value); });
 			}
 
 			if (IsWriteIndex is not null)
 			{
-				writer.WriteFluentCall("IsWriteIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IsWriteIndex.Value); });
+				writer.WriteFluentCall("IsWriteIndex", (w) => { w.WriteValue(IsWriteIndex.Value); });
 			}
 
 			if (MustExist is not null)
 			{
-				writer.WriteFluentCall("MustExist", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MustExist.Value); });
+				writer.WriteFluentCall("MustExist", (w) => { w.WriteValue(MustExist.Value); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
 			}
 
 			if (SearchRouting is not null)
 			{
-				writer.WriteFluentCall("SearchRouting", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SearchRouting); });
+				writer.WriteFluentCall("SearchRouting", (w) => { w.WriteString(SearchRouting); });
 			}
 		}
 		else

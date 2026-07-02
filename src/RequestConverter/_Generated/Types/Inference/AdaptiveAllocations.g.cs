@@ -31,17 +31,17 @@ public partial class AdaptiveAllocations : RequestConverter.ICodeFormattable
 		{
 			if (Enabled is not null)
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled.Value); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
 			if (MaxNumberOfAllocations is not null)
 			{
-				writer.WriteFluentCall("MaxNumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfAllocations.Value); });
+				writer.WriteFluentCall("MaxNumberOfAllocations", (w) => { w.WriteValue(MaxNumberOfAllocations.Value); });
 			}
 
 			if (MinNumberOfAllocations is not null)
 			{
-				writer.WriteFluentCall("MinNumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinNumberOfAllocations.Value); });
+				writer.WriteFluentCall("MinNumberOfAllocations", (w) => { w.WriteValue(MinNumberOfAllocations.Value); });
 			}
 		}
 		else

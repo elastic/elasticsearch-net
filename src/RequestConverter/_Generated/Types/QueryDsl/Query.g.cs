@@ -36,37 +36,37 @@ public partial class Query : RequestConverter.ICodeFormattable
 
 			if (Boosting is not null)
 			{
-				writer.WriteFluentDescriptorCall("Boosting", (w) => { Boosting.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Boosting.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Boosting", (w) => { Boosting.FormatCode(w); }, (w) => { Boosting.FormatCode(w); });
 			}
 
 			if (CombinedFields is not null)
 			{
-				writer.WriteFluentDescriptorCall("CombinedFields", (w) => { CombinedFields.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); CombinedFields.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("CombinedFields", (w) => { CombinedFields.FormatCode(w); }, (w) => { CombinedFields.FormatCode(w); });
 			}
 #pragma warning disable CS0618
 			if (Common is not null)
 			{
-				writer.WriteFluentDescriptorCall("Common", (w) => { Common.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Common.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Common", (w) => { Common.FormatCode(w); }, (w) => { Common.FormatCode(w); });
 			}
 #pragma warning restore CS0618
 			if (ConstantScore is not null)
 			{
-				writer.WriteFluentDescriptorCall("ConstantScore", (w) => { ConstantScore.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ConstantScore.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ConstantScore", (w) => { ConstantScore.FormatCode(w); }, (w) => { ConstantScore.FormatCode(w); });
 			}
 
 			if (DisMax is not null)
 			{
-				writer.WriteFluentDescriptorCall("DisMax", (w) => { DisMax.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); DisMax.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("DisMax", (w) => { DisMax.FormatCode(w); }, (w) => { DisMax.FormatCode(w); });
 			}
 
 			if (DistanceFeature is not null)
 			{
-				writer.WriteFluentCall("DistanceFeature", (w) => { using var _oi = w.ForceObjectInitializer(); DistanceFeature.FormatCode(w); });
+				writer.WriteFluentCall("DistanceFeature", (w) => { DistanceFeature.FormatCode(w); });
 			}
 
 			if (Exists is not null)
 			{
-				writer.WriteFluentDescriptorCall("Exists", (w) => { Exists.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Exists.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Exists", (w) => { Exists.FormatCode(w); }, (w) => { Exists.FormatCode(w); });
 			}
 
 			if (FunctionScore is not null)
@@ -76,42 +76,42 @@ public partial class Query : RequestConverter.ICodeFormattable
 
 			if (Fuzzy is not null)
 			{
-				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fuzzy.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); }, (w) => { Fuzzy.FormatCode(w); });
 			}
 
 			if (GeoBoundingBox is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoBoundingBox", (w) => { GeoBoundingBox.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoBoundingBox.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoBoundingBox", (w) => { GeoBoundingBox.FormatCode(w); }, (w) => { GeoBoundingBox.FormatCode(w); });
 			}
 
 			if (GeoDistance is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoDistance", (w) => { GeoDistance.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoDistance.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoDistance", (w) => { GeoDistance.FormatCode(w); }, (w) => { GeoDistance.FormatCode(w); });
 			}
 
 			if (GeoGrid is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoGrid", (w) => { GeoGrid.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoGrid.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoGrid", (w) => { GeoGrid.FormatCode(w); }, (w) => { GeoGrid.FormatCode(w); });
 			}
 #pragma warning disable CS0618
 			if (GeoPolygon is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoPolygon", (w) => { GeoPolygon.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoPolygon.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoPolygon", (w) => { GeoPolygon.FormatCode(w); }, (w) => { GeoPolygon.FormatCode(w); });
 			}
 #pragma warning restore CS0618
 			if (GeoShape is not null)
 			{
-				writer.WriteFluentDescriptorCall("GeoShape", (w) => { GeoShape.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); GeoShape.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("GeoShape", (w) => { GeoShape.FormatCode(w); }, (w) => { GeoShape.FormatCode(w); });
 			}
 
 			if (HasChild is not null)
 			{
-				writer.WriteFluentDescriptorCall("HasChild", (w) => { HasChild.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); HasChild.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("HasChild", (w) => { HasChild.FormatCode(w); }, (w) => { HasChild.FormatCode(w); });
 			}
 
 			if (HasParent is not null)
 			{
-				writer.WriteFluentDescriptorCall("HasParent", (w) => { HasParent.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); HasParent.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("HasParent", (w) => { HasParent.FormatCode(w); }, (w) => { HasParent.FormatCode(w); });
 			}
 
 			if (Ids is not null)
@@ -121,17 +121,17 @@ public partial class Query : RequestConverter.ICodeFormattable
 
 			if (Intervals is not null)
 			{
-				writer.WriteFluentDescriptorCall("Intervals", (w) => { Intervals.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Intervals.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Intervals", (w) => { Intervals.FormatCode(w); }, (w) => { Intervals.FormatCode(w); });
 			}
 
 			if (Knn is not null)
 			{
-				writer.WriteFluentDescriptorCall("Knn", (w) => { Knn.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Knn.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Knn", (w) => { Knn.FormatCode(w); }, (w) => { Knn.FormatCode(w); });
 			}
 
 			if (Match is not null)
 			{
-				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Match.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { Match.FormatCode(w); });
 			}
 
 			if (MatchAll is not null)
@@ -141,7 +141,7 @@ public partial class Query : RequestConverter.ICodeFormattable
 
 			if (MatchBoolPrefix is not null)
 			{
-				writer.WriteFluentDescriptorCall("MatchBoolPrefix", (w) => { MatchBoolPrefix.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); MatchBoolPrefix.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("MatchBoolPrefix", (w) => { MatchBoolPrefix.FormatCode(w); }, (w) => { MatchBoolPrefix.FormatCode(w); });
 			}
 
 			if (MatchNone is not null)
@@ -151,27 +151,27 @@ public partial class Query : RequestConverter.ICodeFormattable
 
 			if (MatchPhrase is not null)
 			{
-				writer.WriteFluentDescriptorCall("MatchPhrase", (w) => { MatchPhrase.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); MatchPhrase.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("MatchPhrase", (w) => { MatchPhrase.FormatCode(w); }, (w) => { MatchPhrase.FormatCode(w); });
 			}
 
 			if (MatchPhrasePrefix is not null)
 			{
-				writer.WriteFluentDescriptorCall("MatchPhrasePrefix", (w) => { MatchPhrasePrefix.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); MatchPhrasePrefix.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("MatchPhrasePrefix", (w) => { MatchPhrasePrefix.FormatCode(w); }, (w) => { MatchPhrasePrefix.FormatCode(w); });
 			}
 
 			if (MoreLikeThis is not null)
 			{
-				writer.WriteFluentDescriptorCall("MoreLikeThis", (w) => { MoreLikeThis.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); MoreLikeThis.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("MoreLikeThis", (w) => { MoreLikeThis.FormatCode(w); }, (w) => { MoreLikeThis.FormatCode(w); });
 			}
 
 			if (MultiMatch is not null)
 			{
-				writer.WriteFluentDescriptorCall("MultiMatch", (w) => { MultiMatch.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); MultiMatch.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("MultiMatch", (w) => { MultiMatch.FormatCode(w); }, (w) => { MultiMatch.FormatCode(w); });
 			}
 
 			if (Nested is not null)
 			{
-				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Nested.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { Nested.FormatCode(w); });
 			}
 
 			if (ParentId is not null)
@@ -181,159 +181,159 @@ public partial class Query : RequestConverter.ICodeFormattable
 
 			if (Percolate is not null)
 			{
-				writer.WriteFluentDescriptorCall("Percolate", (w) => { Percolate.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Percolate.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Percolate", (w) => { Percolate.FormatCode(w); }, (w) => { Percolate.FormatCode(w); });
 			}
 
 			if (Pinned is not null)
 			{
-				writer.WriteFluentDescriptorCall("Pinned", (w) => { Pinned.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Pinned.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Pinned", (w) => { Pinned.FormatCode(w); }, (w) => { Pinned.FormatCode(w); });
 			}
 
 			if (Prefix is not null)
 			{
-				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Prefix.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); }, (w) => { Prefix.FormatCode(w); });
 			}
 
 			if (QueryString is not null)
 			{
-				writer.WriteFluentDescriptorCall("QueryString", (w) => { QueryString.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); QueryString.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("QueryString", (w) => { QueryString.FormatCode(w); }, (w) => { QueryString.FormatCode(w); });
 			}
 
 			if (Range is not null)
 			{
-				writer.WriteFluentCall("Range", (w) => { using var _oi = w.ForceObjectInitializer(); Range.FormatCode(w); });
+				writer.WriteFluentCall("Range", (w) => { Range.FormatCode(w); });
 			}
 
 			if (RankFeature is not null)
 			{
-				writer.WriteFluentDescriptorCall("RankFeature", (w) => { RankFeature.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); RankFeature.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("RankFeature", (w) => { RankFeature.FormatCode(w); }, (w) => { RankFeature.FormatCode(w); });
 			}
 
 			if (Regexp is not null)
 			{
-				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Regexp.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); }, (w) => { Regexp.FormatCode(w); });
 			}
 
 			if (Rule is not null)
 			{
-				writer.WriteFluentDescriptorCall("Rule", (w) => { Rule.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Rule.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Rule", (w) => { Rule.FormatCode(w); }, (w) => { Rule.FormatCode(w); });
 			}
 
 			if (Script is not null)
 			{
-				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Script.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); }, (w) => { Script.FormatCode(w); });
 			}
 
 			if (ScriptScore is not null)
 			{
-				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ScriptScore.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ScriptScore", (w) => { ScriptScore.FormatCode(w); }, (w) => { ScriptScore.FormatCode(w); });
 			}
 
 			if (Semantic is not null)
 			{
-				writer.WriteFluentDescriptorCall("Semantic", (w) => { Semantic.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Semantic.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Semantic", (w) => { Semantic.FormatCode(w); }, (w) => { Semantic.FormatCode(w); });
 			}
 
 			if (Shape is not null)
 			{
-				writer.WriteFluentDescriptorCall("Shape", (w) => { Shape.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Shape.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Shape", (w) => { Shape.FormatCode(w); }, (w) => { Shape.FormatCode(w); });
 			}
 
 			if (SimpleQueryString is not null)
 			{
-				writer.WriteFluentDescriptorCall("SimpleQueryString", (w) => { SimpleQueryString.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SimpleQueryString.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SimpleQueryString", (w) => { SimpleQueryString.FormatCode(w); }, (w) => { SimpleQueryString.FormatCode(w); });
 			}
 
 			if (SpanContaining is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanContaining", (w) => { SpanContaining.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanContaining.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanContaining", (w) => { SpanContaining.FormatCode(w); }, (w) => { SpanContaining.FormatCode(w); });
 			}
 
 			if (SpanFieldMasking is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanFieldMasking", (w) => { SpanFieldMasking.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanFieldMasking.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanFieldMasking", (w) => { SpanFieldMasking.FormatCode(w); }, (w) => { SpanFieldMasking.FormatCode(w); });
 			}
 
 			if (SpanFirst is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanFirst", (w) => { SpanFirst.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanFirst.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanFirst", (w) => { SpanFirst.FormatCode(w); }, (w) => { SpanFirst.FormatCode(w); });
 			}
 
 			if (SpanMulti is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanMulti", (w) => { SpanMulti.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanMulti.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanMulti", (w) => { SpanMulti.FormatCode(w); }, (w) => { SpanMulti.FormatCode(w); });
 			}
 
 			if (SpanNear is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanNear", (w) => { SpanNear.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanNear.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanNear", (w) => { SpanNear.FormatCode(w); }, (w) => { SpanNear.FormatCode(w); });
 			}
 
 			if (SpanNot is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanNot", (w) => { SpanNot.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanNot.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanNot", (w) => { SpanNot.FormatCode(w); }, (w) => { SpanNot.FormatCode(w); });
 			}
 
 			if (SpanOr is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanOr", (w) => { SpanOr.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanOr.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanOr", (w) => { SpanOr.FormatCode(w); }, (w) => { SpanOr.FormatCode(w); });
 			}
 
 			if (SpanTerm is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanTerm", (w) => { SpanTerm.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanTerm.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanTerm", (w) => { SpanTerm.FormatCode(w); }, (w) => { SpanTerm.FormatCode(w); });
 			}
 
 			if (SpanWithin is not null)
 			{
-				writer.WriteFluentDescriptorCall("SpanWithin", (w) => { SpanWithin.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SpanWithin.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SpanWithin", (w) => { SpanWithin.FormatCode(w); }, (w) => { SpanWithin.FormatCode(w); });
 			}
 
 			if (SparseVector is not null)
 			{
-				writer.WriteFluentDescriptorCall("SparseVector", (w) => { SparseVector.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); SparseVector.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("SparseVector", (w) => { SparseVector.FormatCode(w); }, (w) => { SparseVector.FormatCode(w); });
 			}
 
 			if (Term is not null)
 			{
-				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Term.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Term", (w) => { Term.FormatCode(w); }, (w) => { Term.FormatCode(w); });
 			}
 
 			if (Terms is not null)
 			{
-				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Terms.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Terms", (w) => { Terms.FormatCode(w); }, (w) => { Terms.FormatCode(w); });
 			}
 
 			if (TermsSet is not null)
 			{
-				writer.WriteFluentDescriptorCall("TermsSet", (w) => { TermsSet.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TermsSet.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TermsSet", (w) => { TermsSet.FormatCode(w); }, (w) => { TermsSet.FormatCode(w); });
 			}
 #pragma warning disable CS0618
 			if (TextExpansion is not null)
 			{
-				writer.WriteFluentDescriptorCall("TextExpansion", (w) => { TextExpansion.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TextExpansion.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TextExpansion", (w) => { TextExpansion.FormatCode(w); }, (w) => { TextExpansion.FormatCode(w); });
 			}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
 			if (Type is not null)
 			{
-				writer.WriteFluentDescriptorCall("Type", (w) => { Type.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Type.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Type", (w) => { Type.FormatCode(w); }, (w) => { Type.FormatCode(w); });
 			}
 #pragma warning restore CS0618
 #pragma warning disable CS0618
 			if (WeightedTokens is not null)
 			{
-				writer.WriteFluentDescriptorCall("WeightedTokens", (w) => { WeightedTokens.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); WeightedTokens.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("WeightedTokens", (w) => { WeightedTokens.FormatCode(w); }, (w) => { WeightedTokens.FormatCode(w); });
 			}
 #pragma warning restore CS0618
 			if (Wildcard is not null)
 			{
-				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Wildcard.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); }, (w) => { Wildcard.FormatCode(w); });
 			}
 
 			if (Wrapper is not null)
 			{
-				writer.WriteFluentDescriptorCall("Wrapper", (w) => { Wrapper.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Wrapper.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Wrapper", (w) => { Wrapper.FormatCode(w); }, (w) => { Wrapper.FormatCode(w); });
 			}
 		}
 		else

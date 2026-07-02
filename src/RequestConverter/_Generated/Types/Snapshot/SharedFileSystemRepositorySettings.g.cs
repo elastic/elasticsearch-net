@@ -31,36 +31,36 @@ public partial class SharedFileSystemRepositorySettings : RequestConverter.ICode
 		{
 			if (ChunkSize is not null)
 			{
-				writer.WriteFluentCall("ChunkSize", (w) => { using var _oi = w.ForceObjectInitializer(); ChunkSize.FormatCode(w); });
+				writer.WriteFluentCall("ChunkSize", (w) => { ChunkSize.FormatCode(w); });
 			}
 
 			if (Compress is not null)
 			{
-				writer.WriteFluentCall("Compress", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Compress.Value); });
+				writer.WriteFluentCall("Compress", (w) => { w.WriteValue(Compress.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Location); });
+				writer.WriteFluentCall("Location", (w) => { w.WriteString(Location); });
 			}
 
 			if (MaxNumberOfSnapshots is not null)
 			{
-				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfSnapshots.Value); });
+				writer.WriteFluentCall("MaxNumberOfSnapshots", (w) => { w.WriteValue(MaxNumberOfSnapshots.Value); });
 			}
 
 			if (MaxRestoreBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxRestoreBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxRestoreBytesPerSec", (w) => { MaxRestoreBytesPerSec.FormatCode(w); });
 			}
 
 			if (MaxSnapshotBytesPerSec is not null)
 			{
-				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { using var _oi = w.ForceObjectInitializer(); MaxSnapshotBytesPerSec.FormatCode(w); });
+				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { MaxSnapshotBytesPerSec.FormatCode(w); });
 			}
 
 			if (Readonly is not null)
 			{
-				writer.WriteFluentCall("Readonly", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Readonly.Value); });
+				writer.WriteFluentCall("Readonly", (w) => { w.WriteValue(Readonly.Value); });
 			}
 		}
 		else

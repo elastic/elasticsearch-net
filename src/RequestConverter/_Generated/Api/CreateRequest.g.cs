@@ -56,52 +56,52 @@ public partial class CreateRequest<TDocument> : RequestConverter.ICodeFormattabl
 			using var _chainIndent = writer.Indent();
 			if (IncludeSourceOnError is not null)
 			{
-				writer.WriteFluentCall("IncludeSourceOnError", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeSourceOnError.Value); });
+				writer.WriteFluentCall("IncludeSourceOnError", (w) => { w.WriteValue(IncludeSourceOnError.Value); });
 			}
 
 			if (Pipeline is not null)
 			{
-				writer.WriteFluentCall("Pipeline", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pipeline); });
+				writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
 			}
 
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 			}
 
 			if (RequireAlias is not null)
 			{
-				writer.WriteFluentCall("RequireAlias", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequireAlias.Value); });
+				writer.WriteFluentCall("RequireAlias", (w) => { w.WriteValue(RequireAlias.Value); });
 			}
 
 			if (RequireDataStream is not null)
 			{
-				writer.WriteFluentCall("RequireDataStream", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequireDataStream.Value); });
+				writer.WriteFluentCall("RequireDataStream", (w) => { w.WriteValue(RequireDataStream.Value); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 			}
 
 			if (VersionType is not null)
 			{
-				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 			}
 
 			if (WaitForActiveShards is not null)
 			{
-				writer.WriteFluentCall("WaitForActiveShards", (w) => { using var _oi = w.ForceObjectInitializer(); WaitForActiveShards.FormatCode(w); });
+				writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
 			}
 		}
 		else

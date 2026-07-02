@@ -30,15 +30,15 @@ public partial class AzureAiStudioServiceSettings : RequestConverter.ICodeFormat
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			{
-				writer.WriteFluentCall("EndpointType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EndpointType); });
+				writer.WriteFluentCall("EndpointType", (w) => { w.WriteString(EndpointType); });
 			}
 
 			{
-				writer.WriteFluentCall("Provider", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Provider); });
+				writer.WriteFluentCall("Provider", (w) => { w.WriteString(Provider); });
 			}
 
 			if (RateLimit is not null)
@@ -47,7 +47,7 @@ public partial class AzureAiStudioServiceSettings : RequestConverter.ICodeFormat
 			}
 
 			{
-				writer.WriteFluentCall("Target", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Target); });
+				writer.WriteFluentCall("Target", (w) => { w.WriteString(Target); });
 			}
 		}
 		else

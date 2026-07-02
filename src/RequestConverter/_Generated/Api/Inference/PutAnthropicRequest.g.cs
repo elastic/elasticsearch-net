@@ -47,16 +47,16 @@ public partial class PutAnthropicRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ServiceSettings.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { ServiceSettings.FormatCode(w); });
 			}
 
 			if (TaskSettings is not null)
 			{
-				writer.WriteFluentDescriptorCall("TaskSettings", (w) => { TaskSettings.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TaskSettings.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TaskSettings", (w) => { TaskSettings.FormatCode(w); }, (w) => { TaskSettings.FormatCode(w); });
 			}
 		}
 		else

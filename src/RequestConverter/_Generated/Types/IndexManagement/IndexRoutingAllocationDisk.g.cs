@@ -31,7 +31,7 @@ public partial class IndexRoutingAllocationDisk : RequestConverter.ICodeFormatta
 		{
 			if (ThresholdEnabled is not null)
 			{
-				writer.WriteFluentCall("ThresholdEnabled", (w) => { using var _oi = w.ForceObjectInitializer(); if (ThresholdEnabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(ThresholdEnabled.Value1); } else { w.WriteString(ThresholdEnabled.Value2); } });
+				writer.WriteFluentCall("ThresholdEnabled", (w) => { if (ThresholdEnabled.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(ThresholdEnabled.Value1); } else { w.WriteString(ThresholdEnabled.Value2); } });
 			}
 		}
 		else

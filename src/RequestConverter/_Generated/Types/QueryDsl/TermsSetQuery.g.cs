@@ -31,21 +31,21 @@ public partial class TermsSetQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (MinimumShouldMatch is not null)
 			{
-				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { MinimumShouldMatch.FormatCode(w); });
 			}
 
 			if (MinimumShouldMatchField is not null)
 			{
-				writer.WriteFluentCall("MinimumShouldMatchField", (w) => { MinimumShouldMatchField.FormatCode(w); });
+				writer.WriteFluentCall("MinimumShouldMatchField", (w) => { MinimumShouldMatchField.FormatCode(w); }, false);
 			}
 
 			if (MinimumShouldMatchScript is not null)
@@ -55,11 +55,11 @@ public partial class TermsSetQuery : RequestConverter.ICodeFormattable
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			{
-				writer.WriteFluentCall("Terms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Terms, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Terms", (w) => { w.WriteInlineList(Terms, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

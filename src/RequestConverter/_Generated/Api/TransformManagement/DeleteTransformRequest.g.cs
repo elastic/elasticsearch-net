@@ -41,17 +41,17 @@ public partial class DeleteTransformRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (DeleteDestIndex is not null)
 			{
-				writer.WriteFluentCall("DeleteDestIndex", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeleteDestIndex.Value); });
+				writer.WriteFluentCall("DeleteDestIndex", (w) => { w.WriteValue(DeleteDestIndex.Value); });
 			}
 
 			if (Force is not null)
 			{
-				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

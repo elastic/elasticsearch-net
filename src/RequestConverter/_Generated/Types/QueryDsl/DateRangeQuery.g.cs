@@ -31,51 +31,51 @@ public partial class DateRangeQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (Gt is not null)
 			{
-				writer.WriteFluentCall("Gt", (w) => { using var _oi = w.ForceObjectInitializer(); Gt.FormatCode(w); });
+				writer.WriteFluentCall("Gt", (w) => { Gt.FormatCode(w); });
 			}
 
 			if (Gte is not null)
 			{
-				writer.WriteFluentCall("Gte", (w) => { using var _oi = w.ForceObjectInitializer(); Gte.FormatCode(w); });
+				writer.WriteFluentCall("Gte", (w) => { Gte.FormatCode(w); });
 			}
 
 			if (Lt is not null)
 			{
-				writer.WriteFluentCall("Lt", (w) => { using var _oi = w.ForceObjectInitializer(); Lt.FormatCode(w); });
+				writer.WriteFluentCall("Lt", (w) => { Lt.FormatCode(w); });
 			}
 
 			if (Lte is not null)
 			{
-				writer.WriteFluentCall("Lte", (w) => { using var _oi = w.ForceObjectInitializer(); Lte.FormatCode(w); });
+				writer.WriteFluentCall("Lte", (w) => { Lte.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Relation is not null)
 			{
-				writer.WriteFluentCall("Relation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, w); });
+				writer.WriteFluentCall("Relation", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, w); });
 			}
 
 			if (TimeZone is not null)
 			{
-				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
 			}
 		}
 		else

@@ -31,11 +31,11 @@ public partial class VertexInclude : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("d"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("Term", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Term); });
+				writer.WriteFluentCall("Term", (w) => { w.WriteString(Term); });
 			}
 		}
 		else

@@ -31,21 +31,21 @@ public partial class FieldCollapse : RequestConverter.ICodeFormattable
 		{
 			if (Collapse is not null)
 			{
-				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Collapse.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); }, (w) => { Collapse.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (InnerHits is not null)
 			{
-				writer.WriteFluentDescriptorParams("InnerHits", InnerHits, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("InnerHits", InnerHits, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>"); w.Write("()"); });
 			}
 
 			if (MaxConcurrentGroupSearches is not null)
 			{
-				writer.WriteFluentCall("MaxConcurrentGroupSearches", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxConcurrentGroupSearches.Value); });
+				writer.WriteFluentCall("MaxConcurrentGroupSearches", (w) => { w.WriteValue(MaxConcurrentGroupSearches.Value); });
 			}
 		}
 		else

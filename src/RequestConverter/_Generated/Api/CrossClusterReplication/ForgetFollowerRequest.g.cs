@@ -57,27 +57,27 @@ public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (FollowerCluster is not null)
 			{
-				writer.WriteFluentCall("FollowerCluster", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FollowerCluster); });
+				writer.WriteFluentCall("FollowerCluster", (w) => { w.WriteString(FollowerCluster); });
 			}
 
 			if (FollowerIndex is not null)
 			{
-				writer.WriteFluentCall("FollowerIndex", (w) => { using var _oi = w.ForceObjectInitializer(); FollowerIndex.FormatCode(w); });
+				writer.WriteFluentCall("FollowerIndex", (w) => { FollowerIndex.FormatCode(w); });
 			}
 
 			if (FollowerIndexUuid is not null)
 			{
-				writer.WriteFluentCall("FollowerIndexUuid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FollowerIndexUuid); });
+				writer.WriteFluentCall("FollowerIndexUuid", (w) => { w.WriteString(FollowerIndexUuid); });
 			}
 
 			if (LeaderRemoteCluster is not null)
 			{
-				writer.WriteFluentCall("LeaderRemoteCluster", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(LeaderRemoteCluster); });
+				writer.WriteFluentCall("LeaderRemoteCluster", (w) => { w.WriteString(LeaderRemoteCluster); });
 			}
 		}
 		else

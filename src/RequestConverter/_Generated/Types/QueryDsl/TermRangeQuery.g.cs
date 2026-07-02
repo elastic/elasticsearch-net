@@ -31,41 +31,41 @@ public partial class TermRangeQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Gt is not null)
 			{
-				writer.WriteFluentCall("Gt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gt); });
+				writer.WriteFluentCall("Gt", (w) => { w.WriteString(Gt); });
 			}
 
 			if (Gte is not null)
 			{
-				writer.WriteFluentCall("Gte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gte); });
+				writer.WriteFluentCall("Gte", (w) => { w.WriteString(Gte); });
 			}
 
 			if (Lt is not null)
 			{
-				writer.WriteFluentCall("Lt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lt); });
+				writer.WriteFluentCall("Lt", (w) => { w.WriteString(Lt); });
 			}
 
 			if (Lte is not null)
 			{
-				writer.WriteFluentCall("Lte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lte); });
+				writer.WriteFluentCall("Lte", (w) => { w.WriteString(Lte); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Relation is not null)
 			{
-				writer.WriteFluentCall("Relation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, w); });
+				writer.WriteFluentCall("Relation", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.RangeRelationCodeFormatter.FormatCode(Relation.Value, w); });
 			}
 		}
 		else

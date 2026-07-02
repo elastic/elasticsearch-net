@@ -35,7 +35,7 @@ public partial class CancelRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (TaskId is not null)
 			{
-				writer.WriteFluentCall("TaskId", (w) => { using var _oi = w.ForceObjectInitializer(); TaskId.FormatCode(w); });
+				writer.WriteFluentCall("TaskId", (w) => { TaskId.FormatCode(w); });
 			}
 
 			if (Actions is not null)
@@ -50,12 +50,12 @@ public partial class CancelRequest : RequestConverter.ICodeFormattable
 
 			if (ParentTaskId is not null)
 			{
-				writer.WriteFluentCall("ParentTaskId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ParentTaskId); });
+				writer.WriteFluentCall("ParentTaskId", (w) => { w.WriteString(ParentTaskId); });
 			}
 
 			if (WaitForCompletion is not null)
 			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(WaitForCompletion.Value); });
+				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 			}
 		}
 		else

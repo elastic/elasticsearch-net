@@ -31,40 +31,40 @@ public partial class MatchPhrasePrefixQuery : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (MaxExpansions is not null)
 			{
-				writer.WriteFluentCall("MaxExpansions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxExpansions.Value); });
+				writer.WriteFluentCall("MaxExpansions", (w) => { w.WriteValue(MaxExpansions.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Slop is not null)
 			{
-				writer.WriteFluentCall("Slop", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Slop.Value); });
+				writer.WriteFluentCall("Slop", (w) => { w.WriteValue(Slop.Value); });
 			}
 
 			if (ZeroTermsQuery is not null)
 			{
-				writer.WriteFluentCall("ZeroTermsQuery", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, w); });
+				writer.WriteFluentCall("ZeroTermsQuery", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQueryCodeFormatter.FormatCode(ZeroTermsQuery.Value, w); });
 			}
 		}
 		else

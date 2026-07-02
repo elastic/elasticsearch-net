@@ -31,32 +31,32 @@ public partial class PathHierarchyTokenizer : RequestConverter.ICodeFormattable
 		{
 			if (BufferSize is not null)
 			{
-				writer.WriteFluentCall("BufferSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BufferSize.Value); });
+				writer.WriteFluentCall("BufferSize", (w) => { w.WriteValue(BufferSize.Value); });
 			}
 
 			if (Delimiter is not null)
 			{
-				writer.WriteFluentCall("Delimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Delimiter); });
+				writer.WriteFluentCall("Delimiter", (w) => { w.WriteString(Delimiter); });
 			}
 
 			if (Replacement is not null)
 			{
-				writer.WriteFluentCall("Replacement", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Replacement); });
+				writer.WriteFluentCall("Replacement", (w) => { w.WriteString(Replacement); });
 			}
 
 			if (Reverse is not null)
 			{
-				writer.WriteFluentCall("Reverse", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Reverse.Value); });
+				writer.WriteFluentCall("Reverse", (w) => { w.WriteValue(Reverse.Value); });
 			}
 
 			if (Skip is not null)
 			{
-				writer.WriteFluentCall("Skip", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Skip.Value); });
+				writer.WriteFluentCall("Skip", (w) => { w.WriteValue(Skip.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -31,16 +31,16 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Prune is not null)
 			{
-				writer.WriteFluentCall("Prune", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Prune.Value); });
+				writer.WriteFluentCall("Prune", (w) => { w.WriteValue(Prune.Value); });
 			}
 
 			if (PruningConfig is not null)
@@ -50,22 +50,22 @@ public partial class SparseVectorQuery : RequestConverter.ICodeFormattable
 
 			if (Query is not null)
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (InferenceId is not null)
 			{
-				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); InferenceId.FormatCode(w); });
+				writer.WriteFluentCall("InferenceId", (w) => { InferenceId.FormatCode(w); });
 			}
 
 			if (QueryVector is not null)
 			{
-				writer.WriteFluentCall("QueryVector", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); });
+				writer.WriteFluentCall("QueryVector", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("float"); w.Write(">()"); w.WriteBlockList(QueryVector, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("f"); w.Write(" }"); }); });
 			}
 		}
 		else

@@ -31,22 +31,22 @@ public partial class JinaAITaskSettings : RequestConverter.ICodeFormattable
 		{
 			if (InputType is not null)
 			{
-				writer.WriteFluentCall("InputType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(InputType.Value, w); });
+				writer.WriteFluentCall("InputType", (w) => { Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskCodeFormatter.FormatCode(InputType.Value, w); });
 			}
 
 			if (LateChunking is not null)
 			{
-				writer.WriteFluentCall("LateChunking", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(LateChunking.Value); });
+				writer.WriteFluentCall("LateChunking", (w) => { w.WriteValue(LateChunking.Value); });
 			}
 
 			if (ReturnDocuments is not null)
 			{
-				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+				writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
 			}
 
 			if (TopN is not null)
 			{
-				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 			}
 		}
 		else

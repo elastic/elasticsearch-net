@@ -35,7 +35,7 @@ public partial class GetDataStreamRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (ExpandWildcards is not null)
@@ -45,17 +45,17 @@ public partial class GetDataStreamRequest : RequestConverter.ICodeFormattable
 
 			if (IncludeDefaults is not null)
 			{
-				writer.WriteFluentCall("IncludeDefaults", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeDefaults.Value); });
+				writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 
 			if (Verbose is not null)
 			{
-				writer.WriteFluentCall("Verbose", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Verbose.Value); });
+				writer.WriteFluentCall("Verbose", (w) => { w.WriteValue(Verbose.Value); });
 			}
 		}
 		else

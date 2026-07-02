@@ -30,7 +30,7 @@ public partial class CustomRequestParams : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Content", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Content); });
+				writer.WriteFluentCall("Content", (w) => { w.WriteString(Content); });
 			}
 		}
 		else

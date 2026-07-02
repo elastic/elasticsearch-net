@@ -30,19 +30,19 @@ public partial class CoordsGeoBounds : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Bottom", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Bottom); w.Write("d"); });
+				writer.WriteFluentCall("Bottom", (w) => { w.WriteValue(Bottom); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("Left", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Left); w.Write("d"); });
+				writer.WriteFluentCall("Left", (w) => { w.WriteValue(Left); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("Right", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Right); w.Write("d"); });
+				writer.WriteFluentCall("Right", (w) => { w.WriteValue(Right); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("Top", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Top); w.Write("d"); });
+				writer.WriteFluentCall("Top", (w) => { w.WriteValue(Top); w.Write("d"); });
 			}
 		}
 		else

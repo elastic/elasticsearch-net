@@ -31,12 +31,12 @@ public partial class PhraseSuggestCollateQuery : RequestConverter.ICodeFormattab
 		{
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (Source is not null)
 			{
-				writer.WriteFluentCall("Source", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Source); });
+				writer.WriteFluentCall("Source", (w) => { w.WriteString(Source); });
 			}
 		}
 		else

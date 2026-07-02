@@ -41,7 +41,7 @@ public partial class PutFilterRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (Items is not null)

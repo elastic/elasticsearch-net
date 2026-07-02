@@ -36,12 +36,12 @@ public partial class CjkBigramTokenFilter : RequestConverter.ICodeFormattable
 
 			if (OutputUnigrams is not null)
 			{
-				writer.WriteFluentCall("OutputUnigrams", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OutputUnigrams.Value); });
+				writer.WriteFluentCall("OutputUnigrams", (w) => { w.WriteValue(OutputUnigrams.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

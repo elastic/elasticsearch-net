@@ -57,17 +57,17 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AllowLazyOpen is not null)
 			{
-				writer.WriteFluentCall("AllowLazyOpen", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLazyOpen.Value); });
+				writer.WriteFluentCall("AllowLazyOpen", (w) => { w.WriteValue(AllowLazyOpen.Value); });
 			}
 
 			if (AnalysisLimits is not null)
 			{
-				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnalysisLimits.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); }, (w) => { AnalysisLimits.FormatCode(w); });
 			}
 
 			if (BackgroundPersistInterval is not null)
 			{
-				writer.WriteFluentCall("BackgroundPersistInterval", (w) => { using var _oi = w.ForceObjectInitializer(); BackgroundPersistInterval.FormatCode(w); });
+				writer.WriteFluentCall("BackgroundPersistInterval", (w) => { BackgroundPersistInterval.FormatCode(w); });
 			}
 
 			if (CategorizationFilters is not null)
@@ -77,22 +77,22 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 
 			if (CustomSettings is not null)
 			{
-				writer.WriteFluentCall("CustomSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("CustomSettings", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (DailyModelSnapshotRetentionAfterDays is not null)
 			{
-				writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
 			}
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (Detectors is not null)
 			{
-				writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>"); w.Write("()"); });
 			}
 
 			if (Groups is not null)
@@ -107,12 +107,12 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 
 			if (ModelPruneWindow is not null)
 			{
-				writer.WriteFluentCall("ModelPruneWindow", (w) => { using var _oi = w.ForceObjectInitializer(); ModelPruneWindow.FormatCode(w); });
+				writer.WriteFluentCall("ModelPruneWindow", (w) => { ModelPruneWindow.FormatCode(w); });
 			}
 
 			if (ModelSnapshotRetentionDays is not null)
 			{
-				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
 			}
 
 			if (PerPartitionCategorization is not null)
@@ -122,12 +122,12 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 
 			if (RenormalizationWindowDays is not null)
 			{
-				writer.WriteFluentCall("RenormalizationWindowDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("RenormalizationWindowDays", (w) => { w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
 			}
 
 			if (ResultsRetentionDays is not null)
 			{
-				writer.WriteFluentCall("ResultsRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("ResultsRetentionDays", (w) => { w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
 			}
 		}
 		else

@@ -31,30 +31,30 @@ public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormatta
 		{
 			if (ApiKey is not null)
 			{
-				writer.WriteFluentCall("ApiKey", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiKey); });
+				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
 			}
 
 			{
-				writer.WriteFluentCall("ApiVersion", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ApiVersion); });
+				writer.WriteFluentCall("ApiVersion", (w) => { w.WriteString(ApiVersion); });
 			}
 
 			if (ClientId is not null)
 			{
-				writer.WriteFluentCall("ClientId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ClientId); });
+				writer.WriteFluentCall("ClientId", (w) => { w.WriteString(ClientId); });
 			}
 
 			if (ClientSecret is not null)
 			{
-				writer.WriteFluentCall("ClientSecret", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ClientSecret); });
+				writer.WriteFluentCall("ClientSecret", (w) => { w.WriteString(ClientSecret); });
 			}
 
 			{
-				writer.WriteFluentCall("DeploymentId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(DeploymentId); });
+				writer.WriteFluentCall("DeploymentId", (w) => { w.WriteString(DeploymentId); });
 			}
 
 			if (EntraId is not null)
 			{
-				writer.WriteFluentCall("EntraId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EntraId); });
+				writer.WriteFluentCall("EntraId", (w) => { w.WriteString(EntraId); });
 			}
 
 			if (RateLimit is not null)
@@ -63,7 +63,7 @@ public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormatta
 			}
 
 			{
-				writer.WriteFluentCall("ResourceName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResourceName); });
+				writer.WriteFluentCall("ResourceName", (w) => { w.WriteString(ResourceName); });
 			}
 
 			if (Scopes is not null)
@@ -73,7 +73,7 @@ public partial class AzureOpenAIServiceSettings : RequestConverter.ICodeFormatta
 
 			if (TenantId is not null)
 			{
-				writer.WriteFluentCall("TenantId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TenantId); });
+				writer.WriteFluentCall("TenantId", (w) => { w.WriteString(TenantId); });
 			}
 		}
 		else

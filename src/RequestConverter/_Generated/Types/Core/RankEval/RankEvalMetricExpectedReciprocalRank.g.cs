@@ -31,11 +31,11 @@ public partial class RankEvalMetricExpectedReciprocalRank : RequestConverter.ICo
 		{
 			if (K is not null)
 			{
-				writer.WriteFluentCall("K", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(K.Value); });
+				writer.WriteFluentCall("K", (w) => { w.WriteValue(K.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("MaximumRelevance", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaximumRelevance); });
+				writer.WriteFluentCall("MaximumRelevance", (w) => { w.WriteValue(MaximumRelevance); });
 			}
 		}
 		else

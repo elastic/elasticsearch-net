@@ -31,17 +31,17 @@ public partial class MultiTermVectorsOperation : RequestConverter.ICodeFormattab
 		{
 			if (Doc is not null)
 			{
-				writer.WriteFluentCall("Doc", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Doc); });
+				writer.WriteFluentCall("Doc", (w) => { w.WriteObjectValue(Doc); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (FieldStatistics is not null)
 			{
-				writer.WriteFluentCall("FieldStatistics", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FieldStatistics.Value); });
+				writer.WriteFluentCall("FieldStatistics", (w) => { w.WriteValue(FieldStatistics.Value); });
 			}
 
 			if (Filter is not null)
@@ -51,47 +51,47 @@ public partial class MultiTermVectorsOperation : RequestConverter.ICodeFormattab
 
 			if (Id is not null)
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); Id.FormatCode(w); });
+				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Offsets is not null)
 			{
-				writer.WriteFluentCall("Offsets", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Offsets.Value); });
+				writer.WriteFluentCall("Offsets", (w) => { w.WriteValue(Offsets.Value); });
 			}
 
 			if (Payloads is not null)
 			{
-				writer.WriteFluentCall("Payloads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Payloads.Value); });
+				writer.WriteFluentCall("Payloads", (w) => { w.WriteValue(Payloads.Value); });
 			}
 
 			if (Positions is not null)
 			{
-				writer.WriteFluentCall("Positions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Positions.Value); });
+				writer.WriteFluentCall("Positions", (w) => { w.WriteValue(Positions.Value); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); Routing.FormatCode(w); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (TermStatistics is not null)
 			{
-				writer.WriteFluentCall("TermStatistics", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TermStatistics.Value); });
+				writer.WriteFluentCall("TermStatistics", (w) => { w.WriteValue(TermStatistics.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 			}
 
 			if (VersionType is not null)
 			{
-				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 			}
 		}
 		else

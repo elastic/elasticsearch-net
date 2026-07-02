@@ -30,12 +30,12 @@ public partial class IcuFoldingTokenFilter : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("UnicodeSetFilter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UnicodeSetFilter); });
+				writer.WriteFluentCall("UnicodeSetFilter", (w) => { w.WriteString(UnicodeSetFilter); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

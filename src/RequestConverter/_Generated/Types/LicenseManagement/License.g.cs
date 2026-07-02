@@ -30,46 +30,46 @@ public partial class License : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ExpiryDateInMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ExpiryDateInMillis); });
+				writer.WriteFluentCall("ExpiryDateInMillis", (w) => { w.WriteValue(ExpiryDateInMillis); });
 			}
 
 			{
-				writer.WriteFluentCall("IssueDateInMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IssueDateInMillis); });
+				writer.WriteFluentCall("IssueDateInMillis", (w) => { w.WriteValue(IssueDateInMillis); });
 			}
 
 			{
-				writer.WriteFluentCall("IssuedTo", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(IssuedTo); });
+				writer.WriteFluentCall("IssuedTo", (w) => { w.WriteString(IssuedTo); });
 			}
 
 			{
-				writer.WriteFluentCall("Issuer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Issuer); });
+				writer.WriteFluentCall("Issuer", (w) => { w.WriteString(Issuer); });
 			}
 
 			if (MaxNodes is not null)
 			{
-				writer.WriteFluentCall("MaxNodes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNodes.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxNodes", (w) => { w.WriteValue(MaxNodes.Value); w.Write("L"); });
 			}
 
 			if (MaxResourceUnits is not null)
 			{
-				writer.WriteFluentCall("MaxResourceUnits", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxResourceUnits.Value); w.Write("L"); });
+				writer.WriteFluentCall("MaxResourceUnits", (w) => { w.WriteValue(MaxResourceUnits.Value); w.Write("L"); });
 			}
 
 			{
-				writer.WriteFluentCall("Signature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Signature); });
+				writer.WriteFluentCall("Signature", (w) => { w.WriteString(Signature); });
 			}
 
 			if (StartDateInMillis is not null)
 			{
-				writer.WriteFluentCall("StartDateInMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(StartDateInMillis.Value); });
+				writer.WriteFluentCall("StartDateInMillis", (w) => { w.WriteValue(StartDateInMillis.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, w); });
+				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.LicenseManagement.LicenseTypeCodeFormatter.FormatCode(Type, w); });
 			}
 
 			{
-				writer.WriteFluentCall("Uid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Uid); });
+				writer.WriteFluentCall("Uid", (w) => { w.WriteString(Uid); });
 			}
 		}
 		else

@@ -31,101 +31,101 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			if (BoostTerms is not null)
 			{
-				writer.WriteFluentCall("BoostTerms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BoostTerms.Value); w.Write("d"); });
+				writer.WriteFluentCall("BoostTerms", (w) => { w.WriteValue(BoostTerms.Value); w.Write("d"); });
 			}
 
 			if (FailOnUnsupportedField is not null)
 			{
-				writer.WriteFluentCall("FailOnUnsupportedField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FailOnUnsupportedField.Value); });
+				writer.WriteFluentCall("FailOnUnsupportedField", (w) => { w.WriteValue(FailOnUnsupportedField.Value); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (Include is not null)
 			{
-				writer.WriteFluentCall("Include", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Include.Value); });
+				writer.WriteFluentCall("Include", (w) => { w.WriteValue(Include.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Like", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Like, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Like", (w) => { w.WriteInlineList(Like, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (MaxDocFreq is not null)
 			{
-				writer.WriteFluentCall("MaxDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocFreq.Value); });
+				writer.WriteFluentCall("MaxDocFreq", (w) => { w.WriteValue(MaxDocFreq.Value); });
 			}
 
 			if (MaxQueryTerms is not null)
 			{
-				writer.WriteFluentCall("MaxQueryTerms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxQueryTerms.Value); });
+				writer.WriteFluentCall("MaxQueryTerms", (w) => { w.WriteValue(MaxQueryTerms.Value); });
 			}
 
 			if (MaxWordLength is not null)
 			{
-				writer.WriteFluentCall("MaxWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxWordLength.Value); });
+				writer.WriteFluentCall("MaxWordLength", (w) => { w.WriteValue(MaxWordLength.Value); });
 			}
 
 			if (MinDocFreq is not null)
 			{
-				writer.WriteFluentCall("MinDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocFreq.Value); });
+				writer.WriteFluentCall("MinDocFreq", (w) => { w.WriteValue(MinDocFreq.Value); });
 			}
 
 			if (MinimumShouldMatch is not null)
 			{
-				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { MinimumShouldMatch.FormatCode(w); });
 			}
 
 			if (MinTermFreq is not null)
 			{
-				writer.WriteFluentCall("MinTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinTermFreq.Value); });
+				writer.WriteFluentCall("MinTermFreq", (w) => { w.WriteValue(MinTermFreq.Value); });
 			}
 
 			if (MinWordLength is not null)
 			{
-				writer.WriteFluentCall("MinWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinWordLength.Value); });
+				writer.WriteFluentCall("MinWordLength", (w) => { w.WriteValue(MinWordLength.Value); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
 			}
 
 			if (StopWords is not null)
 			{
-				writer.WriteFluentCall("StopWords", (w) => { using var _oi = w.ForceObjectInitializer(); if (StopWords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(StopWords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(StopWords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("StopWords", (w) => { if (StopWords.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageCodeFormatter.FormatCode(StopWords.Value1, w); } else { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(StopWords.Value2, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } });
 			}
 
 			if (Unlike is not null)
 			{
-				writer.WriteFluentCall("Unlike", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Unlike, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Unlike", (w) => { w.WriteInlineList(Unlike, (w, item) => { item.FormatCode(w); }); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Version.Value); w.Write("L"); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 			}
 
 			if (VersionType is not null)
 			{
-				writer.WriteFluentCall("VersionType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 			}
 		}
 		else

@@ -31,37 +31,37 @@ public partial class AzureAiStudioTaskSettings : RequestConverter.ICodeFormattab
 		{
 			if (DoSample is not null)
 			{
-				writer.WriteFluentCall("DoSample", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DoSample.Value); w.Write("f"); });
+				writer.WriteFluentCall("DoSample", (w) => { w.WriteValue(DoSample.Value); w.Write("f"); });
 			}
 
 			if (MaxNewTokens is not null)
 			{
-				writer.WriteFluentCall("MaxNewTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNewTokens.Value); });
+				writer.WriteFluentCall("MaxNewTokens", (w) => { w.WriteValue(MaxNewTokens.Value); });
 			}
 
 			if (ReturnDocuments is not null)
 			{
-				writer.WriteFluentCall("ReturnDocuments", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ReturnDocuments.Value); });
+				writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
 			}
 
 			if (Temperature is not null)
 			{
-				writer.WriteFluentCall("Temperature", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Temperature.Value); w.Write("f"); });
+				writer.WriteFluentCall("Temperature", (w) => { w.WriteValue(Temperature.Value); w.Write("f"); });
 			}
 
 			if (TopN is not null)
 			{
-				writer.WriteFluentCall("TopN", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopN.Value); });
+				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 			}
 
 			if (TopP is not null)
 			{
-				writer.WriteFluentCall("TopP", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(TopP.Value); w.Write("f"); });
+				writer.WriteFluentCall("TopP", (w) => { w.WriteValue(TopP.Value); w.Write("f"); });
 			}
 
 			if (User is not null)
 			{
-				writer.WriteFluentCall("User", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(User); });
+				writer.WriteFluentCall("User", (w) => { w.WriteString(User); });
 			}
 		}
 		else

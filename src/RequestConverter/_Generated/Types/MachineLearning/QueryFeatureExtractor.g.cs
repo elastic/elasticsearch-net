@@ -31,15 +31,15 @@ public partial class QueryFeatureExtractor : RequestConverter.ICodeFormattable
 		{
 			if (DefaultScore is not null)
 			{
-				writer.WriteFluentCall("DefaultScore", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DefaultScore.Value); w.Write("f"); });
+				writer.WriteFluentCall("DefaultScore", (w) => { w.WriteValue(DefaultScore.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("FeatureName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FeatureName); });
+				writer.WriteFluentCall("FeatureName", (w) => { w.WriteString(FeatureName); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Query.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
 			}
 		}
 		else

@@ -30,7 +30,7 @@ public partial class ApplicationGlobalUserPrivileges : RequestConverter.ICodeFor
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentDescriptorCall("Manage", (w) => { Manage.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Manage.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Manage", (w) => { Manage.FormatCode(w); }, (w) => { Manage.FormatCode(w); });
 			}
 		}
 		else

@@ -56,11 +56,11 @@ public partial class MoveToStepRequest : RequestConverter.ICodeFormattable
 
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorCall("CurrentStep", (w) => { CurrentStep.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); CurrentStep.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("CurrentStep", (w) => { CurrentStep.FormatCode(w); }, (w) => { CurrentStep.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("NextStep", (w) => { NextStep.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); NextStep.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("NextStep", (w) => { NextStep.FormatCode(w); }, (w) => { NextStep.FormatCode(w); });
 			}
 		}
 		else

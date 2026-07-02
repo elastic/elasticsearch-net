@@ -42,12 +42,12 @@ public partial class ExistsComponentTemplateRequest : RequestConverter.ICodeForm
 #pragma warning disable CS0618
 			if (Local is not null)
 			{
-				writer.WriteFluentCall("Local", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Local.Value); });
+				writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
 			}
 #pragma warning restore CS0618
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 		}
 		else

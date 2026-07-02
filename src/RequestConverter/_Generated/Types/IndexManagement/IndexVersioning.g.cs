@@ -31,12 +31,12 @@ public partial class IndexVersioning : RequestConverter.ICodeFormattable
 		{
 			if (Created is not null)
 			{
-				writer.WriteFluentCall("Created", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Created); });
+				writer.WriteFluentCall("Created", (w) => { w.WriteString(Created); });
 			}
 
 			if (CreatedString is not null)
 			{
-				writer.WriteFluentCall("CreatedString", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CreatedString); });
+				writer.WriteFluentCall("CreatedString", (w) => { w.WriteString(CreatedString); });
 			}
 		}
 		else

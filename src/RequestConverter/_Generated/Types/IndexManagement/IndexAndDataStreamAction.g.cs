@@ -30,11 +30,11 @@ public partial class IndexAndDataStreamAction : RequestConverter.ICodeFormattabl
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("DataStream", (w) => { using var _oi = w.ForceObjectInitializer(); DataStream.FormatCode(w); });
+				writer.WriteFluentCall("DataStream", (w) => { DataStream.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 		}
 		else

@@ -30,17 +30,17 @@ public partial class AdaptiveAllocationsSettings : RequestConverter.ICodeFormatt
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Enabled", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Enabled); });
+				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled); });
 			}
 
 			if (MaxNumberOfAllocations is not null)
 			{
-				writer.WriteFluentCall("MaxNumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumberOfAllocations.Value); });
+				writer.WriteFluentCall("MaxNumberOfAllocations", (w) => { w.WriteValue(MaxNumberOfAllocations.Value); });
 			}
 
 			if (MinNumberOfAllocations is not null)
 			{
-				writer.WriteFluentCall("MinNumberOfAllocations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinNumberOfAllocations.Value); });
+				writer.WriteFluentCall("MinNumberOfAllocations", (w) => { w.WriteValue(MinNumberOfAllocations.Value); });
 			}
 		}
 		else

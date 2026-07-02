@@ -36,7 +36,7 @@ public partial class AzureRepository : RequestConverter.ICodeFormattable
 
 			if (Uuid is not null)
 			{
-				writer.WriteFluentCall("Uuid", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Uuid); });
+				writer.WriteFluentCall("Uuid", (w) => { w.WriteString(Uuid); });
 			}
 		}
 		else

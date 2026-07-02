@@ -35,12 +35,12 @@ public partial class PatternCaptureTokenFilter : RequestConverter.ICodeFormattab
 
 			if (PreserveOriginal is not null)
 			{
-				writer.WriteFluentCall("PreserveOriginal", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PreserveOriginal.Value); });
+				writer.WriteFluentCall("PreserveOriginal", (w) => { w.WriteValue(PreserveOriginal.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

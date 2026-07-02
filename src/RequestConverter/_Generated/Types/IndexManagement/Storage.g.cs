@@ -31,16 +31,16 @@ public partial class Storage : RequestConverter.ICodeFormattable
 		{
 			if (AllowMmap is not null)
 			{
-				writer.WriteFluentCall("AllowMmap", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowMmap.Value); });
+				writer.WriteFluentCall("AllowMmap", (w) => { w.WriteValue(AllowMmap.Value); });
 			}
 
 			if (StatsRefreshInterval is not null)
 			{
-				writer.WriteFluentCall("StatsRefreshInterval", (w) => { using var _oi = w.ForceObjectInitializer(); StatsRefreshInterval.FormatCode(w); });
+				writer.WriteFluentCall("StatsRefreshInterval", (w) => { StatsRefreshInterval.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Type", (w) => { using var _oi = w.ForceObjectInitializer(); Type.FormatCode(w); });
+				writer.WriteFluentCall("Type", (w) => { Type.FormatCode(w); });
 			}
 		}
 		else

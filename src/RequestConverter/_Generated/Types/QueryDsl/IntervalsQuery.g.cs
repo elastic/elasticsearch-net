@@ -31,41 +31,41 @@ public partial class IntervalsQuery : RequestConverter.ICodeFormattable
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (AllOf is not null)
 			{
-				writer.WriteFluentDescriptorCall("AllOf", (w) => { AllOf.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AllOf.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AllOf", (w) => { AllOf.FormatCode(w); }, (w) => { AllOf.FormatCode(w); });
 			}
 
 			if (AnyOf is not null)
 			{
-				writer.WriteFluentDescriptorCall("AnyOf", (w) => { AnyOf.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnyOf.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnyOf", (w) => { AnyOf.FormatCode(w); }, (w) => { AnyOf.FormatCode(w); });
 			}
 
 			if (Fuzzy is not null)
 			{
-				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fuzzy.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Fuzzy", (w) => { Fuzzy.FormatCode(w); }, (w) => { Fuzzy.FormatCode(w); });
 			}
 
 			if (Match is not null)
 			{
-				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Match.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { Match.FormatCode(w); });
 			}
 
 			if (Prefix is not null)
 			{
-				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Prefix.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Prefix", (w) => { Prefix.FormatCode(w); }, (w) => { Prefix.FormatCode(w); });
 			}
 
 			if (Range is not null)
@@ -75,12 +75,12 @@ public partial class IntervalsQuery : RequestConverter.ICodeFormattable
 
 			if (Regexp is not null)
 			{
-				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Regexp.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Regexp", (w) => { Regexp.FormatCode(w); }, (w) => { Regexp.FormatCode(w); });
 			}
 
 			if (Wildcard is not null)
 			{
-				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Wildcard.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Wildcard", (w) => { Wildcard.FormatCode(w); }, (w) => { Wildcard.FormatCode(w); });
 			}
 		}
 		else

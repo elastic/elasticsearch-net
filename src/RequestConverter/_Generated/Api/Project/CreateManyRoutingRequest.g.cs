@@ -34,7 +34,7 @@ public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattabl
 			writer.Write("()");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorCall("Expressions", (w) => { w.WriteFluentDictionaryAdds("Add", Expressions, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); kvp.Value.FormatCode(w); }); });
+				writer.WriteFluentDescriptorCall("Expressions", (w) => { w.WriteFluentDictionaryAdds("Add", Expressions, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 			}
 		}
 		else

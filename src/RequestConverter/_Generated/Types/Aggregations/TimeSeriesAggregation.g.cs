@@ -31,12 +31,12 @@ public partial class TimeSeriesAggregation : RequestConverter.ICodeFormattable
 		{
 			if (Keyed is not null)
 			{
-				writer.WriteFluentCall("Keyed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Keyed.Value); });
+				writer.WriteFluentCall("Keyed", (w) => { w.WriteValue(Keyed.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 		}
 		else

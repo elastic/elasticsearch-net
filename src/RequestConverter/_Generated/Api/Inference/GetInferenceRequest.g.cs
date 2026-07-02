@@ -35,12 +35,12 @@ public partial class GetInferenceRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (InferenceId is not null)
 			{
-				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); InferenceId.FormatCode(w); });
+				writer.WriteFluentCall("InferenceId", (w) => { InferenceId.FormatCode(w); });
 			}
 
 			if (TaskType is not null)
 			{
-				writer.WriteFluentCall("TaskType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, w); });
+				writer.WriteFluentCall("TaskType", (w) => { Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, w); });
 			}
 		}
 		else

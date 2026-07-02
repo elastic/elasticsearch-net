@@ -41,7 +41,7 @@ public partial class DeleteByQueryRethrottleRequest : RequestConverter.ICodeForm
 			using var _chainIndent = writer.Indent();
 			if (RequestsPerSecond is not null)
 			{
-				writer.WriteFluentCall("RequestsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+				writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
 			}
 		}
 		else

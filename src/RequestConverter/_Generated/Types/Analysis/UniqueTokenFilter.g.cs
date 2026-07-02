@@ -31,12 +31,12 @@ public partial class UniqueTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (OnlyOnSamePosition is not null)
 			{
-				writer.WriteFluentCall("OnlyOnSamePosition", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OnlyOnSamePosition.Value); });
+				writer.WriteFluentCall("OnlyOnSamePosition", (w) => { w.WriteValue(OnlyOnSamePosition.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

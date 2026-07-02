@@ -30,19 +30,19 @@ public partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding : Reque
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("DefaultValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DefaultValue); });
+				writer.WriteFluentCall("DefaultValue", (w) => { w.WriteValue(DefaultValue); });
 			}
 
 			{
-				writer.WriteFluentCall("FeatureName", (w) => { using var _oi = w.ForceObjectInitializer(); FeatureName.FormatCode(w); });
+				writer.WriteFluentCall("FeatureName", (w) => { FeatureName.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("TargetMap", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("TargetMap", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(TargetMap, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 			}
 		}
 		else

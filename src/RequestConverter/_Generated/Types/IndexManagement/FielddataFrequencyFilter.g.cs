@@ -30,15 +30,15 @@ public partial class FielddataFrequencyFilter : RequestConverter.ICodeFormattabl
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Max", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Max); w.Write("d"); });
+				writer.WriteFluentCall("Max", (w) => { w.WriteValue(Max); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("Min", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Min); w.Write("d"); });
+				writer.WriteFluentCall("Min", (w) => { w.WriteValue(Min); w.Write("d"); });
 			}
 
 			{
-				writer.WriteFluentCall("MinSegmentSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinSegmentSize); });
+				writer.WriteFluentCall("MinSegmentSize", (w) => { w.WriteValue(MinSegmentSize); });
 			}
 		}
 		else

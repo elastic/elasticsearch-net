@@ -31,32 +31,32 @@ public partial class IndexSettingsLifecycle : RequestConverter.ICodeFormattable
 		{
 			if (IndexingComplete is not null)
 			{
-				writer.WriteFluentCall("IndexingComplete", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IndexingComplete.Value); });
+				writer.WriteFluentCall("IndexingComplete", (w) => { w.WriteValue(IndexingComplete.Value); });
 			}
 
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); Name.FormatCode(w); });
+				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 			}
 
 			if (OriginationDate is not null)
 			{
-				writer.WriteFluentCall("OriginationDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OriginationDate.Value); w.Write("L"); });
+				writer.WriteFluentCall("OriginationDate", (w) => { w.WriteValue(OriginationDate.Value); w.Write("L"); });
 			}
 
 			if (ParseOriginationDate is not null)
 			{
-				writer.WriteFluentCall("ParseOriginationDate", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ParseOriginationDate.Value); });
+				writer.WriteFluentCall("ParseOriginationDate", (w) => { w.WriteValue(ParseOriginationDate.Value); });
 			}
 
 			if (PreferIlm is not null)
 			{
-				writer.WriteFluentCall("PreferIlm", (w) => { using var _oi = w.ForceObjectInitializer(); if (PreferIlm.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(PreferIlm.Value1); } else { w.WriteString(PreferIlm.Value2); } });
+				writer.WriteFluentCall("PreferIlm", (w) => { if (PreferIlm.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(PreferIlm.Value1); } else { w.WriteString(PreferIlm.Value2); } });
 			}
 
 			if (RolloverAlias is not null)
 			{
-				writer.WriteFluentCall("RolloverAlias", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RolloverAlias); });
+				writer.WriteFluentCall("RolloverAlias", (w) => { w.WriteString(RolloverAlias); });
 			}
 
 			if (Step is not null)

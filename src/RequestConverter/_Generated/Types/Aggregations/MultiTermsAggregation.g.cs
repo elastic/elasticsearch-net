@@ -31,41 +31,41 @@ public partial class MultiTermsAggregation : RequestConverter.ICodeFormattable
 		{
 			if (CollectMode is not null)
 			{
-				writer.WriteFluentCall("CollectMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectModeCodeFormatter.FormatCode(CollectMode.Value, w); });
+				writer.WriteFluentCall("CollectMode", (w) => { Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectModeCodeFormatter.FormatCode(CollectMode.Value, w); });
 			}
 
 			if (MinDocCount is not null)
 			{
-				writer.WriteFluentCall("MinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocCount.Value); w.Write("L"); });
+				writer.WriteFluentCall("MinDocCount", (w) => { w.WriteValue(MinDocCount.Value); w.Write("L"); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); }); });
+				writer.WriteFluentCall("Order", (w) => { w.WriteInlineList(Order, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder>"); item.Key.FormatCode(w); w.Write(", "); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(item.Value, w); w.Write(")"); }); });
 			}
 
 			if (ShardMinDocCount is not null)
 			{
-				writer.WriteFluentCall("ShardMinDocCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardMinDocCount.Value); w.Write("L"); });
+				writer.WriteFluentCall("ShardMinDocCount", (w) => { w.WriteValue(ShardMinDocCount.Value); w.Write("L"); });
 			}
 
 			if (ShardSize is not null)
 			{
-				writer.WriteFluentCall("ShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSize.Value); });
+				writer.WriteFluentCall("ShardSize", (w) => { w.WriteValue(ShardSize.Value); });
 			}
 
 			if (ShowTermDocCountError is not null)
 			{
-				writer.WriteFluentCall("ShowTermDocCountError", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShowTermDocCountError.Value); });
+				writer.WriteFluentCall("ShowTermDocCountError", (w) => { w.WriteValue(ShowTermDocCountError.Value); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("Terms", Terms, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Terms", Terms, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>"); w.Write("()"); });
 			}
 		}
 		else

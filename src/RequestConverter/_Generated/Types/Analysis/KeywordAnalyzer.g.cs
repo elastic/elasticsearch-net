@@ -32,7 +32,7 @@ public partial class KeywordAnalyzer : RequestConverter.ICodeFormattable
 #pragma warning disable CS0618
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 #pragma warning restore CS0618
 		}

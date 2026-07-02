@@ -30,11 +30,11 @@ public partial class DownsamplingRound : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("After", (w) => { using var _oi = w.ForceObjectInitializer(); After.FormatCode(w); });
+				writer.WriteFluentCall("After", (w) => { After.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FixedInterval); });
+				writer.WriteFluentCall("FixedInterval", (w) => { w.WriteString(FixedInterval); });
 			}
 		}
 		else

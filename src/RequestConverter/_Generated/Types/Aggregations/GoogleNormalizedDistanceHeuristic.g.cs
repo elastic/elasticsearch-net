@@ -31,7 +31,7 @@ public partial class GoogleNormalizedDistanceHeuristic : RequestConverter.ICodeF
 		{
 			if (BackgroundIsSuperset is not null)
 			{
-				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset.Value); });
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { w.WriteValue(BackgroundIsSuperset.Value); });
 			}
 		}
 		else

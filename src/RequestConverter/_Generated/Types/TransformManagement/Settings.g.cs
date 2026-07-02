@@ -31,42 +31,42 @@ public partial class Settings : RequestConverter.ICodeFormattable
 		{
 			if (AlignCheckpoints is not null)
 			{
-				writer.WriteFluentCall("AlignCheckpoints", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AlignCheckpoints.Value); });
+				writer.WriteFluentCall("AlignCheckpoints", (w) => { w.WriteValue(AlignCheckpoints.Value); });
 			}
 
 			if (DatesAsEpochMillis is not null)
 			{
-				writer.WriteFluentCall("DatesAsEpochMillis", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DatesAsEpochMillis.Value); });
+				writer.WriteFluentCall("DatesAsEpochMillis", (w) => { w.WriteValue(DatesAsEpochMillis.Value); });
 			}
 
 			if (DeduceMappings is not null)
 			{
-				writer.WriteFluentCall("DeduceMappings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DeduceMappings.Value); });
+				writer.WriteFluentCall("DeduceMappings", (w) => { w.WriteValue(DeduceMappings.Value); });
 			}
 
 			if (DocsPerSecond is not null)
 			{
-				writer.WriteFluentCall("DocsPerSecond", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocsPerSecond.Value); w.Write("f"); });
+				writer.WriteFluentCall("DocsPerSecond", (w) => { w.WriteValue(DocsPerSecond.Value); w.Write("f"); });
 			}
 
 			if (MaxPageSearchSize is not null)
 			{
-				writer.WriteFluentCall("MaxPageSearchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxPageSearchSize.Value); });
+				writer.WriteFluentCall("MaxPageSearchSize", (w) => { w.WriteValue(MaxPageSearchSize.Value); });
 			}
 
 			if (NumFailureRetries is not null)
 			{
-				writer.WriteFluentCall("NumFailureRetries", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumFailureRetries.Value); });
+				writer.WriteFluentCall("NumFailureRetries", (w) => { w.WriteValue(NumFailureRetries.Value); });
 			}
 
 			if (Unattended is not null)
 			{
-				writer.WriteFluentCall("Unattended", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Unattended.Value); });
+				writer.WriteFluentCall("Unattended", (w) => { w.WriteValue(Unattended.Value); });
 			}
 
 			if (UsePointInTime is not null)
 			{
-				writer.WriteFluentCall("UsePointInTime", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(UsePointInTime.Value); });
+				writer.WriteFluentCall("UsePointInTime", (w) => { w.WriteValue(UsePointInTime.Value); });
 			}
 		}
 		else

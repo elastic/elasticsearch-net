@@ -30,7 +30,7 @@ public partial class NumericFielddata : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormatCodeFormatter.FormatCode(Format, w); });
+				writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormatCodeFormatter.FormatCode(Format, w); });
 			}
 		}
 		else

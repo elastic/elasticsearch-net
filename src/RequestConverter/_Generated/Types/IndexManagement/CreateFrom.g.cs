@@ -36,7 +36,7 @@ public partial class CreateFrom : RequestConverter.ICodeFormattable
 
 			if (RemoveIndexBlocks is not null)
 			{
-				writer.WriteFluentCall("RemoveIndexBlocks", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RemoveIndexBlocks.Value); });
+				writer.WriteFluentCall("RemoveIndexBlocks", (w) => { w.WriteValue(RemoveIndexBlocks.Value); });
 			}
 
 			if (SettingsOverride is not null)

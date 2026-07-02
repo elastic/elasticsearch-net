@@ -31,27 +31,27 @@ public partial class CardinalityAggregation : RequestConverter.ICodeFormattable
 		{
 			if (ExecutionHint is not null)
 			{
-				writer.WriteFluentCall("ExecutionHint", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionModeCodeFormatter.FormatCode(ExecutionHint.Value, w); });
+				writer.WriteFluentCall("ExecutionHint", (w) => { Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionModeCodeFormatter.FormatCode(ExecutionHint.Value, w); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (PrecisionThreshold is not null)
 			{
-				writer.WriteFluentCall("PrecisionThreshold", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(PrecisionThreshold.Value); });
+				writer.WriteFluentCall("PrecisionThreshold", (w) => { w.WriteValue(PrecisionThreshold.Value); });
 			}
 
 			if (Rehash is not null)
 			{
-				writer.WriteFluentCall("Rehash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Rehash.Value); });
+				writer.WriteFluentCall("Rehash", (w) => { w.WriteValue(Rehash.Value); });
 			}
 
 			if (Script is not null)

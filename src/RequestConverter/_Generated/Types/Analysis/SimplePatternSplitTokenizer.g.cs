@@ -31,12 +31,12 @@ public partial class SimplePatternSplitTokenizer : RequestConverter.ICodeFormatt
 		{
 			if (Pattern is not null)
 			{
-				writer.WriteFluentCall("Pattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Pattern); });
+				writer.WriteFluentCall("Pattern", (w) => { w.WriteString(Pattern); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

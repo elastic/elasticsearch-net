@@ -41,16 +41,16 @@ public partial class PutSynonymRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Append is not null)
 			{
-				writer.WriteFluentCall("Append", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Append.Value); });
+				writer.WriteFluentCall("Append", (w) => { w.WriteValue(Append.Value); });
 			}
 
 			if (Refresh is not null)
 			{
-				writer.WriteFluentCall("Refresh", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Refresh.Value); });
+				writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("SynonymsSet", SynonymsSet, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("SynonymsSet", SynonymsSet, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>"); w.Write("()"); });
 			}
 		}
 		else

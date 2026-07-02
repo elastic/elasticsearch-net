@@ -31,36 +31,36 @@ public partial class DateHistogramGrouping : RequestConverter.ICodeFormattable
 		{
 			if (CalendarInterval is not null)
 			{
-				writer.WriteFluentCall("CalendarInterval", (w) => { using var _oi = w.ForceObjectInitializer(); CalendarInterval.FormatCode(w); });
+				writer.WriteFluentCall("CalendarInterval", (w) => { CalendarInterval.FormatCode(w); });
 			}
 
 			if (Delay is not null)
 			{
-				writer.WriteFluentCall("Delay", (w) => { using var _oi = w.ForceObjectInitializer(); Delay.FormatCode(w); });
+				writer.WriteFluentCall("Delay", (w) => { Delay.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (FixedInterval is not null)
 			{
-				writer.WriteFluentCall("FixedInterval", (w) => { using var _oi = w.ForceObjectInitializer(); FixedInterval.FormatCode(w); });
+				writer.WriteFluentCall("FixedInterval", (w) => { FixedInterval.FormatCode(w); });
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (Interval is not null)
 			{
-				writer.WriteFluentCall("Interval", (w) => { using var _oi = w.ForceObjectInitializer(); Interval.FormatCode(w); });
+				writer.WriteFluentCall("Interval", (w) => { Interval.FormatCode(w); });
 			}
 
 			if (TimeZone is not null)
 			{
-				writer.WriteFluentCall("TimeZone", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimeZone); });
+				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
 			}
 		}
 		else

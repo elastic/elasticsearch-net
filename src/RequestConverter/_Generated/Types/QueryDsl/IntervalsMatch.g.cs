@@ -31,31 +31,31 @@ public partial class IntervalsMatch : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			if (MaxGaps is not null)
 			{
-				writer.WriteFluentCall("MaxGaps", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxGaps.Value); });
+				writer.WriteFluentCall("MaxGaps", (w) => { w.WriteValue(MaxGaps.Value); });
 			}
 
 			if (Ordered is not null)
 			{
-				writer.WriteFluentCall("Ordered", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Ordered.Value); });
+				writer.WriteFluentCall("Ordered", (w) => { w.WriteValue(Ordered.Value); });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (UseField is not null)
 			{
-				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); }, false);
 			}
 		}
 		else

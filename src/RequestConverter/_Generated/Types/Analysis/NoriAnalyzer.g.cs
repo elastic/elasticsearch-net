@@ -31,7 +31,7 @@ public partial class NoriAnalyzer : RequestConverter.ICodeFormattable
 		{
 			if (DecompoundMode is not null)
 			{
-				writer.WriteFluentCall("DecompoundMode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, w); });
+				writer.WriteFluentCall("DecompoundMode", (w) => { Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundModeCodeFormatter.FormatCode(DecompoundMode.Value, w); });
 			}
 
 			if (Stoptags is not null)
@@ -41,12 +41,12 @@ public partial class NoriAnalyzer : RequestConverter.ICodeFormattable
 
 			if (UserDictionary is not null)
 			{
-				writer.WriteFluentCall("UserDictionary", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(UserDictionary); });
+				writer.WriteFluentCall("UserDictionary", (w) => { w.WriteString(UserDictionary); });
 			}
 #pragma warning disable CS0618
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 #pragma warning restore CS0618
 		}

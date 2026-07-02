@@ -41,22 +41,22 @@ public partial class UpdateDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 			using var _chainIndent = writer.Indent();
 			if (AllowLazyStart is not null)
 			{
-				writer.WriteFluentCall("AllowLazyStart", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowLazyStart.Value); });
+				writer.WriteFluentCall("AllowLazyStart", (w) => { w.WriteValue(AllowLazyStart.Value); });
 			}
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (MaxNumThreads is not null)
 			{
-				writer.WriteFluentCall("MaxNumThreads", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumThreads.Value); });
+				writer.WriteFluentCall("MaxNumThreads", (w) => { w.WriteValue(MaxNumThreads.Value); });
 			}
 
 			if (ModelMemoryLimit is not null)
 			{
-				writer.WriteFluentCall("ModelMemoryLimit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelMemoryLimit); });
+				writer.WriteFluentCall("ModelMemoryLimit", (w) => { w.WriteString(ModelMemoryLimit); });
 			}
 		}
 		else

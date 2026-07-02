@@ -41,11 +41,11 @@ public partial class ChatCompletionUnifiedRequest : RequestConverter.ICodeFormat
 			using var _chainIndent = writer.Indent();
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("ChatCompletionRequest", (w) => { ChatCompletionRequest.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ChatCompletionRequest.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ChatCompletionRequest", (w) => { ChatCompletionRequest.FormatCode(w); }, (w) => { ChatCompletionRequest.FormatCode(w); });
 			}
 		}
 		else

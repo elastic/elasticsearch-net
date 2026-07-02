@@ -31,7 +31,7 @@ public partial class ThinkingConfig : RequestConverter.ICodeFormattable
 		{
 			if (ThinkingBudget is not null)
 			{
-				writer.WriteFluentCall("ThinkingBudget", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ThinkingBudget.Value); });
+				writer.WriteFluentCall("ThinkingBudget", (w) => { w.WriteValue(ThinkingBudget.Value); });
 			}
 		}
 		else

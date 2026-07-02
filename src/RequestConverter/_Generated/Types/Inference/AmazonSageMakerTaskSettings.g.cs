@@ -31,27 +31,27 @@ public partial class AmazonSageMakerTaskSettings : RequestConverter.ICodeFormatt
 		{
 			if (CustomAttributes is not null)
 			{
-				writer.WriteFluentCall("CustomAttributes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(CustomAttributes); });
+				writer.WriteFluentCall("CustomAttributes", (w) => { w.WriteString(CustomAttributes); });
 			}
 
 			if (EnableExplanations is not null)
 			{
-				writer.WriteFluentCall("EnableExplanations", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(EnableExplanations); });
+				writer.WriteFluentCall("EnableExplanations", (w) => { w.WriteString(EnableExplanations); });
 			}
 
 			if (InferenceId is not null)
 			{
-				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InferenceId); });
+				writer.WriteFluentCall("InferenceId", (w) => { w.WriteString(InferenceId); });
 			}
 
 			if (SessionId is not null)
 			{
-				writer.WriteFluentCall("SessionId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SessionId); });
+				writer.WriteFluentCall("SessionId", (w) => { w.WriteString(SessionId); });
 			}
 
 			if (TargetVariant is not null)
 			{
-				writer.WriteFluentCall("TargetVariant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetVariant); });
+				writer.WriteFluentCall("TargetVariant", (w) => { w.WriteString(TargetVariant); });
 			}
 		}
 		else

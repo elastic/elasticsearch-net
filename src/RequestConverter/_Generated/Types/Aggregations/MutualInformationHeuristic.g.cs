@@ -31,12 +31,12 @@ public partial class MutualInformationHeuristic : RequestConverter.ICodeFormatta
 		{
 			if (BackgroundIsSuperset is not null)
 			{
-				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(BackgroundIsSuperset.Value); });
+				writer.WriteFluentCall("BackgroundIsSuperset", (w) => { w.WriteValue(BackgroundIsSuperset.Value); });
 			}
 
 			if (IncludeNegatives is not null)
 			{
-				writer.WriteFluentCall("IncludeNegatives", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeNegatives.Value); });
+				writer.WriteFluentCall("IncludeNegatives", (w) => { w.WriteValue(IncludeNegatives.Value); });
 			}
 		}
 		else

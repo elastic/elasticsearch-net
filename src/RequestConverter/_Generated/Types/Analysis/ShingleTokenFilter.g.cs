@@ -31,37 +31,37 @@ public partial class ShingleTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (FillerToken is not null)
 			{
-				writer.WriteFluentCall("FillerToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(FillerToken); });
+				writer.WriteFluentCall("FillerToken", (w) => { w.WriteString(FillerToken); });
 			}
 
 			if (MaxShingleSize is not null)
 			{
-				writer.WriteFluentCall("MaxShingleSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxShingleSize.Value); });
+				writer.WriteFluentCall("MaxShingleSize", (w) => { w.WriteValue(MaxShingleSize.Value); });
 			}
 
 			if (MinShingleSize is not null)
 			{
-				writer.WriteFluentCall("MinShingleSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinShingleSize.Value); });
+				writer.WriteFluentCall("MinShingleSize", (w) => { w.WriteValue(MinShingleSize.Value); });
 			}
 
 			if (OutputUnigrams is not null)
 			{
-				writer.WriteFluentCall("OutputUnigrams", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OutputUnigrams.Value); });
+				writer.WriteFluentCall("OutputUnigrams", (w) => { w.WriteValue(OutputUnigrams.Value); });
 			}
 
 			if (OutputUnigramsIfNoShingles is not null)
 			{
-				writer.WriteFluentCall("OutputUnigramsIfNoShingles", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(OutputUnigramsIfNoShingles.Value); });
+				writer.WriteFluentCall("OutputUnigramsIfNoShingles", (w) => { w.WriteValue(OutputUnigramsIfNoShingles.Value); });
 			}
 
 			if (TokenSeparator is not null)
 			{
-				writer.WriteFluentCall("TokenSeparator", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TokenSeparator); });
+				writer.WriteFluentCall("TokenSeparator", (w) => { w.WriteString(TokenSeparator); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

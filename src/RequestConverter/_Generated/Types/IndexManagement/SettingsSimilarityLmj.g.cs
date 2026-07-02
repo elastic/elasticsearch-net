@@ -31,7 +31,7 @@ public partial class SettingsSimilarityLmj : RequestConverter.ICodeFormattable
 		{
 			if (Lambda is not null)
 			{
-				writer.WriteFluentCall("Lambda", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lambda.Value); w.Write("d"); });
+				writer.WriteFluentCall("Lambda", (w) => { w.WriteValue(Lambda.Value); w.Write("d"); });
 			}
 		}
 		else

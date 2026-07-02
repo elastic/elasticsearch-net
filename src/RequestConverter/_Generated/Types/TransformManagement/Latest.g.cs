@@ -30,11 +30,11 @@ public partial class Latest : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); });
+				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("UniqueKey", (w) => { UniqueKey.FormatCode(w); });
+				writer.WriteFluentCall("UniqueKey", (w) => { UniqueKey.FormatCode(w); }, false);
 			}
 		}
 		else

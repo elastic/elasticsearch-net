@@ -31,7 +31,7 @@ public partial class MappingLimitSettingsNestedFields : RequestConverter.ICodeFo
 		{
 			if (Limit is not null)
 			{
-				writer.WriteFluentCall("Limit", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Limit.Value); w.Write("L"); });
+				writer.WriteFluentCall("Limit", (w) => { w.WriteValue(Limit.Value); w.Write("L"); });
 			}
 		}
 		else

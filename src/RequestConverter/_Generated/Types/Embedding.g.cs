@@ -31,16 +31,16 @@ public partial class Embedding : RequestConverter.ICodeFormattable
 		{
 			if (InferenceId is not null)
 			{
-				writer.WriteFluentCall("InferenceId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InferenceId); });
+				writer.WriteFluentCall("InferenceId", (w) => { w.WriteString(InferenceId); });
 			}
 
 			{
-				writer.WriteFluentCall("Input", (w) => { using var _oi = w.ForceObjectInitializer(); if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Input.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.InferenceString"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("Input", (w) => { if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Input.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.InferenceString"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

@@ -41,12 +41,12 @@ public partial class ScheduleNowTransformRequest : RequestConverter.ICodeFormatt
 			using var _chainIndent = writer.Indent();
 			if (Defer is not null)
 			{
-				writer.WriteFluentCall("Defer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Defer.Value); });
+				writer.WriteFluentCall("Defer", (w) => { w.WriteValue(Defer.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

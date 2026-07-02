@@ -45,7 +45,7 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (AnalysisConfig is not null)
 			{
-				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); AnalysisConfig.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { AnalysisConfig.FormatCode(w); });
 			}
 
 			if (AnalysisLimits is not null)
@@ -60,12 +60,12 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (JobId is not null)
 			{
-				writer.WriteFluentCall("JobId", (w) => { using var _oi = w.ForceObjectInitializer(); JobId.FormatCode(w); });
+				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
 			}
 
 			if (ModelPlot is not null)
@@ -75,17 +75,17 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 
 			if (ModelSnapshotId is not null)
 			{
-				writer.WriteFluentCall("ModelSnapshotId", (w) => { using var _oi = w.ForceObjectInitializer(); ModelSnapshotId.FormatCode(w); });
+				writer.WriteFluentCall("ModelSnapshotId", (w) => { ModelSnapshotId.FormatCode(w); });
 			}
 
 			if (ModelSnapshotRetentionDays is not null)
 			{
-				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
+				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
 			}
 
 			if (ResultsIndexName is not null)
 			{
-				writer.WriteFluentCall("ResultsIndexName", (w) => { using var _oi = w.ForceObjectInitializer(); ResultsIndexName.FormatCode(w); });
+				writer.WriteFluentCall("ResultsIndexName", (w) => { ResultsIndexName.FormatCode(w); });
 			}
 		}
 		else

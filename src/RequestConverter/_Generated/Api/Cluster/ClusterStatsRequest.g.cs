@@ -35,17 +35,17 @@ public partial class ClusterStatsRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (NodeId is not null)
 			{
-				writer.WriteFluentCall("NodeId", (w) => { using var _oi = w.ForceObjectInitializer(); NodeId.FormatCode(w); });
+				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
 			}
 
 			if (IncludeRemotes is not null)
 			{
-				writer.WriteFluentCall("IncludeRemotes", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeRemotes.Value); });
+				writer.WriteFluentCall("IncludeRemotes", (w) => { w.WriteValue(IncludeRemotes.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 		}
 		else

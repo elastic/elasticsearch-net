@@ -30,20 +30,20 @@ public partial class LookupQueryVectorBuilder : RequestConverter.ICodeFormattabl
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Id", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Id); });
+				writer.WriteFluentCall("Id", (w) => { w.WriteString(Id); });
 			}
 
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Index); });
+				writer.WriteFluentCall("Index", (w) => { w.WriteString(Index); });
 			}
 
 			{
-				writer.WriteFluentCall("Path", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Path); });
+				writer.WriteFluentCall("Path", (w) => { w.WriteString(Path); });
 			}
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
 			}
 		}
 		else

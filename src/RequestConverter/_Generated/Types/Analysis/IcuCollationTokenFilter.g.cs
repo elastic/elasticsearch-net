@@ -31,67 +31,67 @@ public partial class IcuCollationTokenFilter : RequestConverter.ICodeFormattable
 		{
 			if (Alternate is not null)
 			{
-				writer.WriteFluentCall("Alternate", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(Alternate.Value, w); });
+				writer.WriteFluentCall("Alternate", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternateCodeFormatter.FormatCode(Alternate.Value, w); });
 			}
 
 			if (CaseFirst is not null)
 			{
-				writer.WriteFluentCall("CaseFirst", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(CaseFirst.Value, w); });
+				writer.WriteFluentCall("CaseFirst", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirstCodeFormatter.FormatCode(CaseFirst.Value, w); });
 			}
 
 			if (CaseLevel is not null)
 			{
-				writer.WriteFluentCall("CaseLevel", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(CaseLevel.Value); });
+				writer.WriteFluentCall("CaseLevel", (w) => { w.WriteValue(CaseLevel.Value); });
 			}
 
 			if (Country is not null)
 			{
-				writer.WriteFluentCall("Country", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Country); });
+				writer.WriteFluentCall("Country", (w) => { w.WriteString(Country); });
 			}
 
 			if (Decomposition is not null)
 			{
-				writer.WriteFluentCall("Decomposition", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(Decomposition.Value, w); });
+				writer.WriteFluentCall("Decomposition", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecompositionCodeFormatter.FormatCode(Decomposition.Value, w); });
 			}
 
 			if (HiraganaQuaternaryMode is not null)
 			{
-				writer.WriteFluentCall("HiraganaQuaternaryMode", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(HiraganaQuaternaryMode.Value); });
+				writer.WriteFluentCall("HiraganaQuaternaryMode", (w) => { w.WriteValue(HiraganaQuaternaryMode.Value); });
 			}
 
 			if (Language is not null)
 			{
-				writer.WriteFluentCall("Language", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Language); });
+				writer.WriteFluentCall("Language", (w) => { w.WriteString(Language); });
 			}
 
 			if (Numeric is not null)
 			{
-				writer.WriteFluentCall("Numeric", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Numeric.Value); });
+				writer.WriteFluentCall("Numeric", (w) => { w.WriteValue(Numeric.Value); });
 			}
 
 			if (Rules is not null)
 			{
-				writer.WriteFluentCall("Rules", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Rules); });
+				writer.WriteFluentCall("Rules", (w) => { w.WriteString(Rules); });
 			}
 
 			if (Strength is not null)
 			{
-				writer.WriteFluentCall("Strength", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(Strength.Value, w); });
+				writer.WriteFluentCall("Strength", (w) => { Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrengthCodeFormatter.FormatCode(Strength.Value, w); });
 			}
 
 			if (VariableTop is not null)
 			{
-				writer.WriteFluentCall("VariableTop", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(VariableTop); });
+				writer.WriteFluentCall("VariableTop", (w) => { w.WriteString(VariableTop); });
 			}
 
 			if (Variant is not null)
 			{
-				writer.WriteFluentCall("Variant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Variant); });
+				writer.WriteFluentCall("Variant", (w) => { w.WriteString(Variant); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

@@ -31,32 +31,32 @@ public partial class IntervalsRange : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (Gt is not null)
 			{
-				writer.WriteFluentCall("Gt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gt); });
+				writer.WriteFluentCall("Gt", (w) => { w.WriteString(Gt); });
 			}
 
 			if (Gte is not null)
 			{
-				writer.WriteFluentCall("Gte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Gte); });
+				writer.WriteFluentCall("Gte", (w) => { w.WriteString(Gte); });
 			}
 
 			if (Lt is not null)
 			{
-				writer.WriteFluentCall("Lt", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lt); });
+				writer.WriteFluentCall("Lt", (w) => { w.WriteString(Lt); });
 			}
 
 			if (Lte is not null)
 			{
-				writer.WriteFluentCall("Lte", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Lte); });
+				writer.WriteFluentCall("Lte", (w) => { w.WriteString(Lte); });
 			}
 
 			if (UseField is not null)
 			{
-				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); });
+				writer.WriteFluentCall("UseField", (w) => { UseField.FormatCode(w); }, false);
 			}
 		}
 		else

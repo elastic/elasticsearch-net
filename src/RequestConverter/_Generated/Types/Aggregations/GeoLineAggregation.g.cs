@@ -31,26 +31,26 @@ public partial class GeoLineAggregation : RequestConverter.ICodeFormattable
 		{
 			if (IncludeSort is not null)
 			{
-				writer.WriteFluentCall("IncludeSort", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeSort.Value); });
+				writer.WriteFluentCall("IncludeSort", (w) => { w.WriteValue(IncludeSort.Value); });
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("Point", (w) => { Point.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Point.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Point", (w) => { Point.FormatCode(w); }, (w) => { Point.FormatCode(w); });
 			}
 
 			if (Size is not null)
 			{
-				writer.WriteFluentCall("Size", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Size.Value); });
+				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 			}
 
 			if (Sort is not null)
 			{
-				writer.WriteFluentDescriptorCall("Sort", (w) => { Sort.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Sort.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Sort", (w) => { Sort.FormatCode(w); }, (w) => { Sort.FormatCode(w); });
 			}
 
 			if (SortOrder is not null)
 			{
-				writer.WriteFluentCall("SortOrder", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(SortOrder.Value, w); });
+				writer.WriteFluentCall("SortOrder", (w) => { Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(SortOrder.Value, w); });
 			}
 		}
 		else

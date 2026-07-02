@@ -31,32 +31,32 @@ public partial class GoogleVertexAIServiceSettings : RequestConverter.ICodeForma
 		{
 			if (Dimensions is not null)
 			{
-				writer.WriteFluentCall("Dimensions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Dimensions.Value); });
+				writer.WriteFluentCall("Dimensions", (w) => { w.WriteValue(Dimensions.Value); });
 			}
 
 			if (Location is not null)
 			{
-				writer.WriteFluentCall("Location", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Location); });
+				writer.WriteFluentCall("Location", (w) => { w.WriteString(Location); });
 			}
 
 			if (MaxBatchSize is not null)
 			{
-				writer.WriteFluentCall("MaxBatchSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxBatchSize.Value); });
+				writer.WriteFluentCall("MaxBatchSize", (w) => { w.WriteValue(MaxBatchSize.Value); });
 			}
 
 			if (ModelId is not null)
 			{
-				writer.WriteFluentCall("ModelId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ModelId); });
+				writer.WriteFluentCall("ModelId", (w) => { w.WriteString(ModelId); });
 			}
 
 			if (ProjectId is not null)
 			{
-				writer.WriteFluentCall("ProjectId", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ProjectId); });
+				writer.WriteFluentCall("ProjectId", (w) => { w.WriteString(ProjectId); });
 			}
 
 			if (Provider is not null)
 			{
-				writer.WriteFluentCall("Provider", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(Provider.Value, w); });
+				writer.WriteFluentCall("Provider", (w) => { Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProviderCodeFormatter.FormatCode(Provider.Value, w); });
 			}
 
 			if (RateLimit is not null)
@@ -65,17 +65,17 @@ public partial class GoogleVertexAIServiceSettings : RequestConverter.ICodeForma
 			}
 
 			{
-				writer.WriteFluentCall("ServiceAccountJson", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ServiceAccountJson); });
+				writer.WriteFluentCall("ServiceAccountJson", (w) => { w.WriteString(ServiceAccountJson); });
 			}
 
 			if (StreamingUrl is not null)
 			{
-				writer.WriteFluentCall("StreamingUrl", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(StreamingUrl); });
+				writer.WriteFluentCall("StreamingUrl", (w) => { w.WriteString(StreamingUrl); });
 			}
 
 			if (Url is not null)
 			{
-				writer.WriteFluentCall("Url", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Url); });
+				writer.WriteFluentCall("Url", (w) => { w.WriteString(Url); });
 			}
 		}
 		else

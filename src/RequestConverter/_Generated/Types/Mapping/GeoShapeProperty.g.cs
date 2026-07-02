@@ -31,77 +31,77 @@ public partial class GeoShapeProperty : RequestConverter.ICodeFormattable
 		{
 			if (Coerce is not null)
 			{
-				writer.WriteFluentCall("Coerce", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Coerce.Value); });
+				writer.WriteFluentCall("Coerce", (w) => { w.WriteValue(Coerce.Value); });
 			}
 
 			if (CopyTo is not null)
 			{
-				writer.WriteFluentCall("CopyTo", (w) => { CopyTo.FormatCode(w); });
+				writer.WriteFluentCall("CopyTo", (w) => { CopyTo.FormatCode(w); }, false);
 			}
 
 			if (DocValues is not null)
 			{
-				writer.WriteFluentCall("DocValues", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocValues.Value); });
+				writer.WriteFluentCall("DocValues", (w) => { w.WriteValue(DocValues.Value); });
 			}
 
 			if (Dynamic is not null)
 			{
-				writer.WriteFluentCall("Dynamic", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, w); });
+				writer.WriteFluentCall("Dynamic", (w) => { Elastic.Clients.Elasticsearch.Mapping.DynamicMappingCodeFormatter.FormatCode(Dynamic.Value, w); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Fields.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { Fields.FormatCode(w); });
 			}
 
 			if (IgnoreAbove is not null)
 			{
-				writer.WriteFluentCall("IgnoreAbove", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreAbove.Value); });
+				writer.WriteFluentCall("IgnoreAbove", (w) => { w.WriteValue(IgnoreAbove.Value); });
 			}
 
 			if (IgnoreMalformed is not null)
 			{
-				writer.WriteFluentCall("IgnoreMalformed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreMalformed.Value); });
+				writer.WriteFluentCall("IgnoreMalformed", (w) => { w.WriteValue(IgnoreMalformed.Value); });
 			}
 
 			if (IgnoreZValue is not null)
 			{
-				writer.WriteFluentCall("IgnoreZValue", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreZValue.Value); });
+				writer.WriteFluentCall("IgnoreZValue", (w) => { w.WriteValue(IgnoreZValue.Value); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Index.Value); });
+				writer.WriteFluentCall("Index", (w) => { w.WriteValue(Index.Value); });
 			}
 
 			if (Meta is not null)
 			{
-				writer.WriteFluentCall("Meta", (w) => { using var _oi = w.ForceObjectInitializer(); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
+				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("string"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); }); });
 			}
 
 			if (Orientation is not null)
 			{
-				writer.WriteFluentCall("Orientation", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.GeoOrientationCodeFormatter.FormatCode(Orientation.Value, w); });
+				writer.WriteFluentCall("Orientation", (w) => { Elastic.Clients.Elasticsearch.Mapping.GeoOrientationCodeFormatter.FormatCode(Orientation.Value, w); });
 			}
 
 			if (Properties is not null)
 			{
-				writer.WriteFluentDescriptorCall("Properties", (w) => { Properties.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Properties.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Properties", (w) => { Properties.FormatCode(w); }, (w) => { Properties.FormatCode(w); });
 			}
 
 			if (Store is not null)
 			{
-				writer.WriteFluentCall("Store", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Store.Value); });
+				writer.WriteFluentCall("Store", (w) => { w.WriteValue(Store.Value); });
 			}
 
 			if (Strategy is not null)
 			{
-				writer.WriteFluentCall("Strategy", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.GeoStrategyCodeFormatter.FormatCode(Strategy.Value, w); });
+				writer.WriteFluentCall("Strategy", (w) => { Elastic.Clients.Elasticsearch.Mapping.GeoStrategyCodeFormatter.FormatCode(Strategy.Value, w); });
 			}
 
 			if (SyntheticSourceKeep is not null)
 			{
-				writer.WriteFluentCall("SyntheticSourceKeep", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, w); });
+				writer.WriteFluentCall("SyntheticSourceKeep", (w) => { Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnumCodeFormatter.FormatCode(SyntheticSourceKeep.Value, w); });
 			}
 		}
 		else

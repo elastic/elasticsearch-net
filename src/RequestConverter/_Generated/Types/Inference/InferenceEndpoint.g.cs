@@ -35,16 +35,16 @@ public partial class InferenceEndpoint : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentCall("Service", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Service); });
+				writer.WriteFluentCall("Service", (w) => { w.WriteString(Service); });
 			}
 
 			{
-				writer.WriteFluentCall("ServiceSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(ServiceSettings); });
+				writer.WriteFluentCall("ServiceSettings", (w) => { w.WriteObjectValue(ServiceSettings); });
 			}
 
 			if (TaskSettings is not null)
 			{
-				writer.WriteFluentCall("TaskSettings", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(TaskSettings); });
+				writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
 			}
 		}
 		else

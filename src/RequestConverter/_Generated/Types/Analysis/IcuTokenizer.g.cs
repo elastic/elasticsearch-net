@@ -30,12 +30,12 @@ public partial class IcuTokenizer : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("RuleFiles", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(RuleFiles); });
+				writer.WriteFluentCall("RuleFiles", (w) => { w.WriteString(RuleFiles); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

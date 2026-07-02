@@ -36,7 +36,7 @@ public partial class BucketKsAggregation : RequestConverter.ICodeFormattable
 
 			if (BucketsPath is not null)
 			{
-				writer.WriteFluentCall("BucketsPath", (w) => { using var _oi = w.ForceObjectInitializer(); BucketsPath.FormatCode(w); });
+				writer.WriteFluentCall("BucketsPath", (w) => { BucketsPath.FormatCode(w); });
 			}
 
 			if (Fractions is not null)
@@ -46,7 +46,7 @@ public partial class BucketKsAggregation : RequestConverter.ICodeFormattable
 
 			if (SamplingMethod is not null)
 			{
-				writer.WriteFluentCall("SamplingMethod", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(SamplingMethod); });
+				writer.WriteFluentCall("SamplingMethod", (w) => { w.WriteString(SamplingMethod); });
 			}
 		}
 		else

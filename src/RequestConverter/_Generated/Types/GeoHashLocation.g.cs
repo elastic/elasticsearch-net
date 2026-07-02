@@ -30,7 +30,7 @@ public partial class GeoHashLocation : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Geohash", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Geohash); });
+				writer.WriteFluentCall("Geohash", (w) => { w.WriteString(Geohash); });
 			}
 		}
 		else

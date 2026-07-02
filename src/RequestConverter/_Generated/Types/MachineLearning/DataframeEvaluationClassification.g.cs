@@ -30,7 +30,7 @@ public partial class DataframeEvaluationClassification : RequestConverter.ICodeF
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); });
+				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); }, false);
 			}
 
 			if (Metrics is not null)
@@ -40,12 +40,12 @@ public partial class DataframeEvaluationClassification : RequestConverter.ICodeF
 
 			if (PredictedField is not null)
 			{
-				writer.WriteFluentCall("PredictedField", (w) => { PredictedField.FormatCode(w); });
+				writer.WriteFluentCall("PredictedField", (w) => { PredictedField.FormatCode(w); }, false);
 			}
 
 			if (TopClassesField is not null)
 			{
-				writer.WriteFluentCall("TopClassesField", (w) => { TopClassesField.FormatCode(w); });
+				writer.WriteFluentCall("TopClassesField", (w) => { TopClassesField.FormatCode(w); }, false);
 			}
 		}
 		else

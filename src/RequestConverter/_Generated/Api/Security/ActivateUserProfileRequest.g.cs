@@ -35,21 +35,21 @@ public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormatta
 			using var _chainIndent = writer.Indent();
 			if (AccessToken is not null)
 			{
-				writer.WriteFluentCall("AccessToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(AccessToken); });
+				writer.WriteFluentCall("AccessToken", (w) => { w.WriteString(AccessToken); });
 			}
 
 			{
-				writer.WriteFluentCall("GrantType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, w); });
+				writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, w); });
 			}
 
 			if (Password is not null)
 			{
-				writer.WriteFluentCall("Password", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Password); });
+				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
 			}
 
 			if (Username is not null)
 			{
-				writer.WriteFluentCall("Username", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Username); });
+				writer.WriteFluentCall("Username", (w) => { w.WriteString(Username); });
 			}
 		}
 		else

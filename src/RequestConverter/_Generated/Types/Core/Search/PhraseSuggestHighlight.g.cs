@@ -30,11 +30,11 @@ public partial class PhraseSuggestHighlight : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("PostTag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PostTag); });
+				writer.WriteFluentCall("PostTag", (w) => { w.WriteString(PostTag); });
 			}
 
 			{
-				writer.WriteFluentCall("PreTag", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(PreTag); });
+				writer.WriteFluentCall("PreTag", (w) => { w.WriteString(PreTag); });
 			}
 		}
 		else

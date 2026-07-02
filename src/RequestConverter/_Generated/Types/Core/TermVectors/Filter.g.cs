@@ -31,37 +31,37 @@ public partial class Filter : RequestConverter.ICodeFormattable
 		{
 			if (MaxDocFreq is not null)
 			{
-				writer.WriteFluentCall("MaxDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxDocFreq.Value); });
+				writer.WriteFluentCall("MaxDocFreq", (w) => { w.WriteValue(MaxDocFreq.Value); });
 			}
 
 			if (MaxNumTerms is not null)
 			{
-				writer.WriteFluentCall("MaxNumTerms", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxNumTerms.Value); });
+				writer.WriteFluentCall("MaxNumTerms", (w) => { w.WriteValue(MaxNumTerms.Value); });
 			}
 
 			if (MaxTermFreq is not null)
 			{
-				writer.WriteFluentCall("MaxTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTermFreq.Value); });
+				writer.WriteFluentCall("MaxTermFreq", (w) => { w.WriteValue(MaxTermFreq.Value); });
 			}
 
 			if (MaxWordLength is not null)
 			{
-				writer.WriteFluentCall("MaxWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxWordLength.Value); });
+				writer.WriteFluentCall("MaxWordLength", (w) => { w.WriteValue(MaxWordLength.Value); });
 			}
 
 			if (MinDocFreq is not null)
 			{
-				writer.WriteFluentCall("MinDocFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinDocFreq.Value); });
+				writer.WriteFluentCall("MinDocFreq", (w) => { w.WriteValue(MinDocFreq.Value); });
 			}
 
 			if (MinTermFreq is not null)
 			{
-				writer.WriteFluentCall("MinTermFreq", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinTermFreq.Value); });
+				writer.WriteFluentCall("MinTermFreq", (w) => { w.WriteValue(MinTermFreq.Value); });
 			}
 
 			if (MinWordLength is not null)
 			{
-				writer.WriteFluentCall("MinWordLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MinWordLength.Value); });
+				writer.WriteFluentCall("MinWordLength", (w) => { w.WriteValue(MinWordLength.Value); });
 			}
 		}
 		else

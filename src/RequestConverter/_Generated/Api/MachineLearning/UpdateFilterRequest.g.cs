@@ -46,7 +46,7 @@ public partial class UpdateFilterRequest : RequestConverter.ICodeFormattable
 
 			if (Description is not null)
 			{
-				writer.WriteFluentCall("Description", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Description); });
+				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 			}
 
 			if (RemoveItems is not null)

@@ -31,12 +31,12 @@ public partial class DataframeEvaluationClassificationMetricsAucRoc : RequestCon
 		{
 			if (ClassName is not null)
 			{
-				writer.WriteFluentCall("ClassName", (w) => { using var _oi = w.ForceObjectInitializer(); ClassName.FormatCode(w); });
+				writer.WriteFluentCall("ClassName", (w) => { ClassName.FormatCode(w); });
 			}
 
 			if (IncludeCurve is not null)
 			{
-				writer.WriteFluentCall("IncludeCurve", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IncludeCurve.Value); });
+				writer.WriteFluentCall("IncludeCurve", (w) => { w.WriteValue(IncludeCurve.Value); });
 			}
 		}
 		else

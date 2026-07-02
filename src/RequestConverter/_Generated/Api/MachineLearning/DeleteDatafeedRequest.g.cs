@@ -41,7 +41,7 @@ public partial class DeleteDatafeedRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Force is not null)
 			{
-				writer.WriteFluentCall("Force", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Force.Value); });
+				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
 			}
 		}
 		else

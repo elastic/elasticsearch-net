@@ -31,17 +31,17 @@ public partial class ShrinkAction : RequestConverter.ICodeFormattable
 		{
 			if (AllowWriteAfterShrink is not null)
 			{
-				writer.WriteFluentCall("AllowWriteAfterShrink", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AllowWriteAfterShrink.Value); });
+				writer.WriteFluentCall("AllowWriteAfterShrink", (w) => { w.WriteValue(AllowWriteAfterShrink.Value); });
 			}
 
 			if (MaxPrimaryShardSize is not null)
 			{
-				writer.WriteFluentCall("MaxPrimaryShardSize", (w) => { using var _oi = w.ForceObjectInitializer(); MaxPrimaryShardSize.FormatCode(w); });
+				writer.WriteFluentCall("MaxPrimaryShardSize", (w) => { MaxPrimaryShardSize.FormatCode(w); });
 			}
 
 			if (NumberOfShards is not null)
 			{
-				writer.WriteFluentCall("NumberOfShards", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumberOfShards.Value); });
+				writer.WriteFluentCall("NumberOfShards", (w) => { w.WriteValue(NumberOfShards.Value); });
 			}
 		}
 		else

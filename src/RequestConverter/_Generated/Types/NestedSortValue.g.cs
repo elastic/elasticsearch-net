@@ -31,21 +31,21 @@ public partial class NestedSortValue : RequestConverter.ICodeFormattable
 		{
 			if (Filter is not null)
 			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Filter.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
 			}
 
 			if (MaxChildren is not null)
 			{
-				writer.WriteFluentCall("MaxChildren", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxChildren.Value); });
+				writer.WriteFluentCall("MaxChildren", (w) => { w.WriteValue(MaxChildren.Value); });
 			}
 
 			if (Nested is not null)
 			{
-				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Nested.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { Nested.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); });
+				writer.WriteFluentCall("Path", (w) => { Path.FormatCode(w); }, false);
 			}
 		}
 		else

@@ -31,12 +31,12 @@ public partial class RrfRank : RequestConverter.ICodeFormattable
 		{
 			if (RankConstant is not null)
 			{
-				writer.WriteFluentCall("RankConstant", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankConstant.Value); w.Write("L"); });
+				writer.WriteFluentCall("RankConstant", (w) => { w.WriteValue(RankConstant.Value); w.Write("L"); });
 			}
 
 			if (RankWindowSize is not null)
 			{
-				writer.WriteFluentCall("RankWindowSize", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RankWindowSize.Value); w.Write("L"); });
+				writer.WriteFluentCall("RankWindowSize", (w) => { w.WriteValue(RankWindowSize.Value); w.Write("L"); });
 			}
 		}
 		else

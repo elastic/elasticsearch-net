@@ -51,7 +51,7 @@ public partial class PutCustomRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); ServiceSettings.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { ServiceSettings.FormatCode(w); });
 			}
 
 			if (TaskSettings is not null)

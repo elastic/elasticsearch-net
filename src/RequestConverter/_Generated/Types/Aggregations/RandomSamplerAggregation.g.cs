@@ -30,17 +30,17 @@ public partial class RandomSamplerAggregation : RequestConverter.ICodeFormattabl
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Probability", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Probability); w.Write("d"); });
+				writer.WriteFluentCall("Probability", (w) => { w.WriteValue(Probability); w.Write("d"); });
 			}
 
 			if (Seed is not null)
 			{
-				writer.WriteFluentCall("Seed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Seed.Value); });
+				writer.WriteFluentCall("Seed", (w) => { w.WriteValue(Seed.Value); });
 			}
 
 			if (ShardSeed is not null)
 			{
-				writer.WriteFluentCall("ShardSeed", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShardSeed.Value); });
+				writer.WriteFluentCall("ShardSeed", (w) => { w.WriteValue(ShardSeed.Value); });
 			}
 		}
 		else

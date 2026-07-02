@@ -40,11 +40,11 @@ public partial class TrainedModelTree : RequestConverter.ICodeFormattable
 
 			if (TargetType is not null)
 			{
-				writer.WriteFluentCall("TargetType", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TargetType); });
+				writer.WriteFluentCall("TargetType", (w) => { w.WriteString(TargetType); });
 			}
 
 			{
-				writer.WriteFluentDescriptorParams("TreeStructure", TreeStructure, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("TreeStructure", TreeStructure, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode>"); w.Write("()"); });
 			}
 		}
 		else

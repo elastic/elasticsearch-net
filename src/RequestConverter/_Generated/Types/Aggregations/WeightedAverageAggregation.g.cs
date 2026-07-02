@@ -31,7 +31,7 @@ public partial class WeightedAverageAggregation : RequestConverter.ICodeFormatta
 		{
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (Value is not null)
@@ -41,7 +41,7 @@ public partial class WeightedAverageAggregation : RequestConverter.ICodeFormatta
 
 			if (ValueType is not null)
 			{
-				writer.WriteFluentCall("ValueType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
+				writer.WriteFluentCall("ValueType", (w) => { Elastic.Clients.Elasticsearch.Aggregations.ValueTypeCodeFormatter.FormatCode(ValueType.Value, w); });
 			}
 
 			if (Weight is not null)

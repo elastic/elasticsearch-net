@@ -30,11 +30,11 @@ public partial class InputConfig : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("InputField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(InputField); });
+				writer.WriteFluentCall("InputField", (w) => { w.WriteString(InputField); });
 			}
 
 			{
-				writer.WriteFluentCall("OutputField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(OutputField); });
+				writer.WriteFluentCall("OutputField", (w) => { w.WriteString(OutputField); });
 			}
 		}
 		else

@@ -30,42 +30,42 @@ public partial class FieldSort : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Format); });
+				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
 			if (Missing is not null)
 			{
-				writer.WriteFluentCall("Missing", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteObjectValue(Missing); });
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
 			}
 
 			if (Mode is not null)
 			{
-				writer.WriteFluentCall("Mode", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
+				writer.WriteFluentCall("Mode", (w) => { Elastic.Clients.Elasticsearch.SortModeCodeFormatter.FormatCode(Mode.Value, w); });
 			}
 
 			if (Nested is not null)
 			{
-				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Nested.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Nested", (w) => { Nested.FormatCode(w); }, (w) => { Nested.FormatCode(w); });
 			}
 
 			if (NumericType is not null)
 			{
-				writer.WriteFluentCall("NumericType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.FieldSortNumericTypeCodeFormatter.FormatCode(NumericType.Value, w); });
+				writer.WriteFluentCall("NumericType", (w) => { Elastic.Clients.Elasticsearch.FieldSortNumericTypeCodeFormatter.FormatCode(NumericType.Value, w); });
 			}
 
 			if (Order is not null)
 			{
-				writer.WriteFluentCall("Order", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
+				writer.WriteFluentCall("Order", (w) => { Elastic.Clients.Elasticsearch.SortOrderCodeFormatter.FormatCode(Order.Value, w); });
 			}
 
 			if (UnmappedType is not null)
 			{
-				writer.WriteFluentCall("UnmappedType", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.Mapping.FieldTypeCodeFormatter.FormatCode(UnmappedType.Value, w); });
+				writer.WriteFluentCall("UnmappedType", (w) => { Elastic.Clients.Elasticsearch.Mapping.FieldTypeCodeFormatter.FormatCode(UnmappedType.Value, w); });
 			}
 		}
 		else

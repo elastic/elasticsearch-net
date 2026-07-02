@@ -35,7 +35,7 @@ public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeForma
 			using var _chainIndent = writer.Indent();
 			if (Name is not null)
 			{
-				writer.WriteFluentCall("Name", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteInlineList(Name, (w, item) => { item.FormatCode(w); }); });
+				writer.WriteFluentCall("Name", (w) => { w.WriteInlineList(Name, (w, item) => { item.FormatCode(w); }); });
 			}
 		}
 		else

@@ -31,76 +31,76 @@ public partial class SimpleQueryStringQuery : RequestConverter.ICodeFormattable
 		{
 			if (Analyzer is not null)
 			{
-				writer.WriteFluentCall("Analyzer", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Analyzer); });
+				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
 			}
 
 			if (AnalyzeWildcard is not null)
 			{
-				writer.WriteFluentCall("AnalyzeWildcard", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AnalyzeWildcard.Value); });
+				writer.WriteFluentCall("AnalyzeWildcard", (w) => { w.WriteValue(AnalyzeWildcard.Value); });
 			}
 
 			if (AutoGenerateSynonymsPhraseQuery is not null)
 			{
-				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
+				writer.WriteFluentCall("AutoGenerateSynonymsPhraseQuery", (w) => { w.WriteValue(AutoGenerateSynonymsPhraseQuery.Value); });
 			}
 
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			if (DefaultOperator is not null)
 			{
-				writer.WriteFluentCall("DefaultOperator", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, w); });
+				writer.WriteFluentCall("DefaultOperator", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.OperatorCodeFormatter.FormatCode(DefaultOperator.Value, w); });
 			}
 
 			if (Fields is not null)
 			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); });
+				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
 			}
 
 			if (Flags is not null)
 			{
-				writer.WriteFluentCall("Flags", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlagsCodeFormatter.FormatCode(Flags.Value, w); });
+				writer.WriteFluentCall("Flags", (w) => { Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlagsCodeFormatter.FormatCode(Flags.Value, w); });
 			}
 
 			if (FuzzyMaxExpansions is not null)
 			{
-				writer.WriteFluentCall("FuzzyMaxExpansions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyMaxExpansions.Value); });
+				writer.WriteFluentCall("FuzzyMaxExpansions", (w) => { w.WriteValue(FuzzyMaxExpansions.Value); });
 			}
 
 			if (FuzzyPrefixLength is not null)
 			{
-				writer.WriteFluentCall("FuzzyPrefixLength", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyPrefixLength.Value); });
+				writer.WriteFluentCall("FuzzyPrefixLength", (w) => { w.WriteValue(FuzzyPrefixLength.Value); });
 			}
 
 			if (FuzzyTranspositions is not null)
 			{
-				writer.WriteFluentCall("FuzzyTranspositions", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(FuzzyTranspositions.Value); });
+				writer.WriteFluentCall("FuzzyTranspositions", (w) => { w.WriteValue(FuzzyTranspositions.Value); });
 			}
 
 			if (Lenient is not null)
 			{
-				writer.WriteFluentCall("Lenient", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Lenient.Value); });
+				writer.WriteFluentCall("Lenient", (w) => { w.WriteValue(Lenient.Value); });
 			}
 
 			if (MinimumShouldMatch is not null)
 			{
-				writer.WriteFluentCall("MinimumShouldMatch", (w) => { using var _oi = w.ForceObjectInitializer(); MinimumShouldMatch.FormatCode(w); });
+				writer.WriteFluentCall("MinimumShouldMatch", (w) => { MinimumShouldMatch.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 
 			if (QuoteFieldSuffix is not null)
 			{
-				writer.WriteFluentCall("QuoteFieldSuffix", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QuoteFieldSuffix); });
+				writer.WriteFluentCall("QuoteFieldSuffix", (w) => { w.WriteString(QuoteFieldSuffix); });
 			}
 		}
 		else

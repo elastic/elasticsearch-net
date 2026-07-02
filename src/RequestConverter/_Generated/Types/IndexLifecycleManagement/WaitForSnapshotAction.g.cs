@@ -30,7 +30,7 @@ public partial class WaitForSnapshotAction : RequestConverter.ICodeFormattable
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("Policy", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Policy); });
+				writer.WriteFluentCall("Policy", (w) => { w.WriteString(Policy); });
 			}
 		}
 		else

@@ -31,24 +31,24 @@ public partial class DateDistanceFeatureQuery : RequestConverter.ICodeFormattabl
 		{
 			if (Boost is not null)
 			{
-				writer.WriteFluentCall("Boost", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Boost.Value); w.Write("f"); });
+				writer.WriteFluentCall("Boost", (w) => { w.WriteValue(Boost.Value); w.Write("f"); });
 			}
 
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			{
-				writer.WriteFluentCall("Origin", (w) => { using var _oi = w.ForceObjectInitializer(); Origin.FormatCode(w); });
+				writer.WriteFluentCall("Origin", (w) => { Origin.FormatCode(w); });
 			}
 
 			{
-				writer.WriteFluentCall("Pivot", (w) => { using var _oi = w.ForceObjectInitializer(); Pivot.FormatCode(w); });
+				writer.WriteFluentCall("Pivot", (w) => { Pivot.FormatCode(w); });
 			}
 
 			if (QueryName is not null)
 			{
-				writer.WriteFluentCall("QueryName", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(QueryName); });
+				writer.WriteFluentCall("QueryName", (w) => { w.WriteString(QueryName); });
 			}
 		}
 		else

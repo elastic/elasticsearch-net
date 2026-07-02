@@ -31,27 +31,27 @@ public partial class FillMaskInferenceOptions : RequestConverter.ICodeFormattabl
 		{
 			if (MaskToken is not null)
 			{
-				writer.WriteFluentCall("MaskToken", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(MaskToken); });
+				writer.WriteFluentCall("MaskToken", (w) => { w.WriteString(MaskToken); });
 			}
 
 			if (NumTopClasses is not null)
 			{
-				writer.WriteFluentCall("NumTopClasses", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(NumTopClasses.Value); });
+				writer.WriteFluentCall("NumTopClasses", (w) => { w.WriteValue(NumTopClasses.Value); });
 			}
 
 			if (ResultsField is not null)
 			{
-				writer.WriteFluentCall("ResultsField", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(ResultsField); });
+				writer.WriteFluentCall("ResultsField", (w) => { w.WriteString(ResultsField); });
 			}
 
 			if (Tokenization is not null)
 			{
-				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Tokenization.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Tokenization", (w) => { Tokenization.FormatCode(w); }, (w) => { Tokenization.FormatCode(w); });
 			}
 
 			if (Vocabulary is not null)
 			{
-				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Vocabulary.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Vocabulary", (w) => { Vocabulary.FormatCode(w); }, (w) => { Vocabulary.FormatCode(w); });
 			}
 		}
 		else

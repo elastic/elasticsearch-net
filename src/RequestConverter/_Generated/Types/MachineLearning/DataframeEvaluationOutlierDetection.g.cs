@@ -30,7 +30,7 @@ public partial class DataframeEvaluationOutlierDetection : RequestConverter.ICod
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
 			{
-				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); });
+				writer.WriteFluentCall("ActualField", (w) => { ActualField.FormatCode(w); }, false);
 			}
 
 			if (Metrics is not null)
@@ -39,7 +39,7 @@ public partial class DataframeEvaluationOutlierDetection : RequestConverter.ICod
 			}
 
 			{
-				writer.WriteFluentCall("PredictedProbabilityField", (w) => { PredictedProbabilityField.FormatCode(w); });
+				writer.WriteFluentCall("PredictedProbabilityField", (w) => { PredictedProbabilityField.FormatCode(w); }, false);
 			}
 		}
 		else

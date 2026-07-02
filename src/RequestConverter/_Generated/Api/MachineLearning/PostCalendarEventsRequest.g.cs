@@ -40,7 +40,7 @@ public partial class PostCalendarEventsRequest : RequestConverter.ICodeFormattab
 			writer.Write(")");
 			using var _chainIndent = writer.Indent();
 			{
-				writer.WriteFluentDescriptorParams("Events", Events, (w, item) => { item.FormatCode(w); }, (w, item) => { using var _oi = w.ForceObjectInitializer(); item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent>"); w.Write("()"); });
+				writer.WriteFluentDescriptorParams("Events", Events, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent>"); w.Write("()"); });
 			}
 		}
 		else

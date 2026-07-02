@@ -31,17 +31,17 @@ public partial class LimitTokenCountTokenFilter : RequestConverter.ICodeFormatta
 		{
 			if (ConsumeAllTokens is not null)
 			{
-				writer.WriteFluentCall("ConsumeAllTokens", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ConsumeAllTokens.Value); });
+				writer.WriteFluentCall("ConsumeAllTokens", (w) => { w.WriteValue(ConsumeAllTokens.Value); });
 			}
 
 			if (MaxTokenCount is not null)
 			{
-				writer.WriteFluentCall("MaxTokenCount", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(MaxTokenCount.Value); });
+				writer.WriteFluentCall("MaxTokenCount", (w) => { w.WriteValue(MaxTokenCount.Value); });
 			}
 
 			if (Version is not null)
 			{
-				writer.WriteFluentCall("Version", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Version); });
+				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 			}
 		}
 		else

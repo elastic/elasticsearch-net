@@ -31,17 +31,17 @@ public partial class Preprocessor : RequestConverter.ICodeFormattable
 		{
 			if (FrequencyEncoding is not null)
 			{
-				writer.WriteFluentDescriptorCall("FrequencyEncoding", (w) => { FrequencyEncoding.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); FrequencyEncoding.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("FrequencyEncoding", (w) => { FrequencyEncoding.FormatCode(w); }, (w) => { FrequencyEncoding.FormatCode(w); });
 			}
 
 			if (OneHotEncoding is not null)
 			{
-				writer.WriteFluentDescriptorCall("OneHotEncoding", (w) => { OneHotEncoding.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); OneHotEncoding.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("OneHotEncoding", (w) => { OneHotEncoding.FormatCode(w); }, (w) => { OneHotEncoding.FormatCode(w); });
 			}
 
 			if (TargetMeanEncoding is not null)
 			{
-				writer.WriteFluentDescriptorCall("TargetMeanEncoding", (w) => { TargetMeanEncoding.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); TargetMeanEncoding.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("TargetMeanEncoding", (w) => { TargetMeanEncoding.FormatCode(w); }, (w) => { TargetMeanEncoding.FormatCode(w); });
 			}
 		}
 		else

@@ -31,7 +31,7 @@ public partial class RateLimitSetting : RequestConverter.ICodeFormattable
 		{
 			if (RequestsPerMinute is not null)
 			{
-				writer.WriteFluentCall("RequestsPerMinute", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(RequestsPerMinute.Value); });
+				writer.WriteFluentCall("RequestsPerMinute", (w) => { w.WriteValue(RequestsPerMinute.Value); });
 			}
 		}
 		else

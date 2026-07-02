@@ -50,72 +50,72 @@ public partial class FindFieldStructureRequest : RequestConverter.ICodeFormattab
 
 			if (Delimiter is not null)
 			{
-				writer.WriteFluentCall("Delimiter", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Delimiter); });
+				writer.WriteFluentCall("Delimiter", (w) => { w.WriteString(Delimiter); });
 			}
 
 			if (DocumentsToSample is not null)
 			{
-				writer.WriteFluentCall("DocumentsToSample", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(DocumentsToSample.Value); });
+				writer.WriteFluentCall("DocumentsToSample", (w) => { w.WriteValue(DocumentsToSample.Value); });
 			}
 
 			if (EcsCompatibility is not null)
 			{
-				writer.WriteFluentCall("EcsCompatibility", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, w); });
+				writer.WriteFluentCall("EcsCompatibility", (w) => { Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, w); });
 			}
 
 			if (Explain is not null)
 			{
-				writer.WriteFluentCall("Explain", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Explain.Value); });
+				writer.WriteFluentCall("Explain", (w) => { w.WriteValue(Explain.Value); });
 			}
 
 			if (Field is not null)
 			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); });
+				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
 
 			if (Format is not null)
 			{
-				writer.WriteFluentCall("Format", (w) => { using var _oi = w.ForceObjectInitializer(); Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, w); });
+				writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, w); });
 			}
 
 			if (GrokPattern is not null)
 			{
-				writer.WriteFluentCall("GrokPattern", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(GrokPattern); });
+				writer.WriteFluentCall("GrokPattern", (w) => { w.WriteString(GrokPattern); });
 			}
 
 			if (Index is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { using var _oi = w.ForceObjectInitializer(); Index.FormatCode(w); });
+				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
 			if (Quote is not null)
 			{
-				writer.WriteFluentCall("Quote", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(Quote); });
+				writer.WriteFluentCall("Quote", (w) => { w.WriteString(Quote); });
 			}
 
 			if (ShouldParseRecursively is not null)
 			{
-				writer.WriteFluentCall("ShouldParseRecursively", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShouldParseRecursively.Value); });
+				writer.WriteFluentCall("ShouldParseRecursively", (w) => { w.WriteValue(ShouldParseRecursively.Value); });
 			}
 
 			if (ShouldTrimFields is not null)
 			{
-				writer.WriteFluentCall("ShouldTrimFields", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(ShouldTrimFields.Value); });
+				writer.WriteFluentCall("ShouldTrimFields", (w) => { w.WriteValue(ShouldTrimFields.Value); });
 			}
 
 			if (Timeout is not null)
 			{
-				writer.WriteFluentCall("Timeout", (w) => { using var _oi = w.ForceObjectInitializer(); Timeout.FormatCode(w); });
+				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 			}
 
 			if (TimestampField is not null)
 			{
-				writer.WriteFluentCall("TimestampField", (w) => { TimestampField.FormatCode(w); });
+				writer.WriteFluentCall("TimestampField", (w) => { TimestampField.FormatCode(w); }, false);
 			}
 
 			if (TimestampFormat is not null)
 			{
-				writer.WriteFluentCall("TimestampFormat", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteString(TimestampFormat); });
+				writer.WriteFluentCall("TimestampFormat", (w) => { w.WriteString(TimestampFormat); });
 			}
 		}
 		else

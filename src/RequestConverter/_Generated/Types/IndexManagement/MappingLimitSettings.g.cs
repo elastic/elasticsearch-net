@@ -31,7 +31,7 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 		{
 			if (Coerce is not null)
 			{
-				writer.WriteFluentCall("Coerce", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(Coerce.Value); });
+				writer.WriteFluentCall("Coerce", (w) => { w.WriteValue(Coerce.Value); });
 			}
 
 			if (Depth is not null)
@@ -51,7 +51,7 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 
 			if (IgnoreMalformed is not null)
 			{
-				writer.WriteFluentCall("IgnoreMalformed", (w) => { using var _oi = w.ForceObjectInitializer(); if (IgnoreMalformed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(IgnoreMalformed.Value1); } else { w.WriteString(IgnoreMalformed.Value2); } });
+				writer.WriteFluentCall("IgnoreMalformed", (w) => { if (IgnoreMalformed.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(IgnoreMalformed.Value1); } else { w.WriteString(IgnoreMalformed.Value2); } });
 			}
 
 			if (NestedFields is not null)
@@ -66,7 +66,7 @@ public partial class MappingLimitSettings : RequestConverter.ICodeFormattable
 
 			if (Source is not null)
 			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { using var _oi = w.ForceObjectInitializer(); using var _ec = w.ForceExplicitConstructor(); Source.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { Source.FormatCode(w); });
 			}
 
 			if (TotalFields is not null)

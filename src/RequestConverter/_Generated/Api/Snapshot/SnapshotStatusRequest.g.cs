@@ -35,22 +35,22 @@ public partial class SnapshotStatusRequest : RequestConverter.ICodeFormattable
 			using var _chainIndent = writer.Indent();
 			if (Repository is not null)
 			{
-				writer.WriteFluentCall("Repository", (w) => { using var _oi = w.ForceObjectInitializer(); Repository.FormatCode(w); });
+				writer.WriteFluentCall("Repository", (w) => { Repository.FormatCode(w); });
 			}
 
 			if (Snapshot is not null)
 			{
-				writer.WriteFluentCall("Snapshot", (w) => { using var _oi = w.ForceObjectInitializer(); Snapshot.FormatCode(w); });
+				writer.WriteFluentCall("Snapshot", (w) => { Snapshot.FormatCode(w); });
 			}
 
 			if (IgnoreUnavailable is not null)
 			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { using var _oi = w.ForceObjectInitializer(); w.WriteValue(IgnoreUnavailable.Value); });
+				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
 			}
 
 			if (MasterTimeout is not null)
 			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { using var _oi = w.ForceObjectInitializer(); MasterTimeout.FormatCode(w); });
+				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 			}
 		}
 		else
