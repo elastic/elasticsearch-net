@@ -573,13 +573,28 @@ public sealed class CodeWriter
 
 	/// <summary>
 	/// Writes one fluent call <c>.<paramref name="method"/>(args)</c> on its own line at the current indent, so a chain
-	/// reads one call per line. <paramref name="writeArgs"/> emits the argument list (omit for a no-arg call).
+	/// reads one call per line. <paramref name="writeArgs"/> emits the argument list (omit for a no-arg call). Arguments
+	/// are value-position, so they render in object-initializer mode by default; pass
+	/// <paramref name="forceObjectInitializerArgs"/> <c>false</c> for the setters whose argument must observe descriptor
+	/// mode itself (<c>Field</c>/<c>PropertyName</c>/<c>Fields</c>, which emit bare expression lambdas there).
 	/// </summary>
-	public CodeWriter WriteFluentCall(string method, Action<CodeWriter>? writeArgs = null)
+	public CodeWriter WriteFluentCall(string method, Action<CodeWriter>? writeArgs = null, bool forceObjectInitializerArgs = true)
 	{
 		WriteLine();
 		Write(".").Write(method).Write("(");
-		writeArgs?.Invoke(this);
+		if (writeArgs is not null)
+		{
+			if (forceObjectInitializerArgs)
+			{
+				using var _ = ForceObjectInitializer();
+				writeArgs(this);
+			}
+			else
+			{
+				writeArgs(this);
+			}
+		}
+
 		return Write(")");
 	}
 
@@ -641,7 +656,16 @@ public sealed class CodeWriter
 		if (_builder.Length == afterReceiver)
 		{
 			_builder.Length = beforeReceiver;
-			writeEmpty?.Invoke(this);
+			if (writeEmpty is not null)
+			{
+				// The empty fallback is a value argument to a setter that also has an Action<Descriptor>
+				// overload, so it must render as an object-initializer value with an explicit constructor
+				// (a target-typed new() would be ambiguous, CS0121).
+				using var _oi = ForceObjectInitializer();
+				using var _ec = ForceExplicitConstructor();
+				writeEmpty(this);
+			}
+
 			return Write(")");
 		}
 
@@ -706,8 +730,10 @@ public sealed class CodeWriter
 
 			if (_builder.Length == afterReceiver)
 			{
-				// Empty configuration: replace the invalid identity lambda with the item's value form.
+				// Empty configuration: replace the invalid identity lambda with the item's value form, which is
+				// value-position and so must render in object-initializer mode.
 				_builder.Length = beforeReceiver;
+				using var _oi = ForceObjectInitializer();
 				writeFallback(this, item);
 			}
 		}
@@ -738,7 +764,12 @@ public sealed class CodeWriter
 		{
 			WriteLine();
 			Write(".").Write(method).Write("(");
-			writeKey(this, entry);
+			// The key is a value argument, so it renders in object-initializer mode.
+			using (ForceObjectInitializer())
+			{
+				writeKey(this, entry);
+			}
+
 			Write(", ");
 
 			var beforeReceiver = _builder.Length;
@@ -757,8 +788,12 @@ public sealed class CodeWriter
 
 			if (_builder.Length == afterReceiver)
 			{
-				// Empty configuration: replace the invalid identity lambda with the entry's value form, inline.
+				// Empty configuration: replace the invalid identity lambda with the entry's value form, inline. The
+				// value is a setter argument that also has an Action<Descriptor> overload, so it renders as an
+				// object-initializer value with an explicit constructor (a target-typed new() would be ambiguous, CS0121).
 				_builder.Length = beforeReceiver;
+				using var _oi = ForceObjectInitializer();
+				using var _ec = ForceExplicitConstructor();
 				writeValueFallback(this, entry);
 				Write(")");
 			}
