@@ -5,11 +5,11 @@
 namespace RequestConverter;
 
 /// <summary>
-/// Implemented (in the request-converter compilation only) by client types that can emit the C#
-/// source code which reconstructs them. The member is <c>internal</c> so it never surfaces on the
-/// shipped client package.
+/// Implemented by client types that can emit the C# source code which reconstructs them. The interface
+/// exists only in the request-converter compilation (this project compile-links the client sources), so
+/// nothing converter-related surfaces on the shipped client package.
 /// </summary>
 public interface ICodeFormattable
 {
-	internal void FormatCode(CodeWriter writer);
+	void FormatCode(CodeWriter writer);
 }
