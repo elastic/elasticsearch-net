@@ -9,7 +9,8 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public readonly struct WaitForActiveShards :
+[Codegen(ShouldGenerate = false)]
+public readonly partial struct WaitForActiveShards :
 	IStringable
 #if NET7_0_OR_GREATER
 	, IParsable<WaitForActiveShards>

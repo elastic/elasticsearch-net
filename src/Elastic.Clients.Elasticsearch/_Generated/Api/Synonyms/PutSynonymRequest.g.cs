@@ -27,6 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.put_synonym.Request']/*"/>
 public sealed partial class PutSynonymRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#append']/*"/>
+	public bool? Append { get => Q<bool?>("append"); set => Q("append", value); }
+
 	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
@@ -69,6 +72,9 @@ public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Re
 	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#append']/*"/>
+	public bool? Append { get => Q<bool?>("append"); set => Q("append", value); }
+
 	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
@@ -108,6 +114,13 @@ public readonly partial struct PutSynonymRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
+		return this;
+	}
+
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#append']/*"/>
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor Append(bool? value = true)
+	{
+		Instance.Append = value;
 		return this;
 	}
 

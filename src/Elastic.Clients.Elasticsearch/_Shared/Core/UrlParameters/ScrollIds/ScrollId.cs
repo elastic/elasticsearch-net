@@ -13,7 +13,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.ScrollIdConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class ScrollId :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class ScrollId :
 	IEquatable<ScrollId>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

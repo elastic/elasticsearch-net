@@ -13,7 +13,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(Json.UsernameConverter))]
-public class Username :
+[Codegen(ShouldGenerate = false)]
+public partial class Username :
 	IEquatable<Username>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

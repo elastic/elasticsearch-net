@@ -4,12 +4,17 @@
 Get a synonym set.
 </para></summary></member>
   <member key="synonyms.get_synonym.Request#from"><summary><para>
-The starting offset for query rules to retrieve.
+The starting offset for synonym rules to retrieve.
 </para></summary></member>
   <member key="synonyms.get_synonym.Request#id"><summary><para>
 The synonyms set identifier to retrieve.
 </para></summary></member>
+  <member key="synonyms.get_synonym.Request#search_after"><summary><para>
+The synonym rule ID to use as a cursor for pagination.
+The next page of results will start after this rule ID.
+This parameter cannot be used with <c>from</c>.
+</para></summary></member>
   <member key="synonyms.get_synonym.Request#size"><summary><para>
-The max number of query rules to retrieve.
+The max number of synonym rules to retrieve.
 </para></summary></member>
 </doc>

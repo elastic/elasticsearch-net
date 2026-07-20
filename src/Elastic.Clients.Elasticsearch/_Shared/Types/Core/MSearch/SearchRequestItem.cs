@@ -14,7 +14,8 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 // POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
 
 [JsonConverter(typeof(JsonIncompatibleConverter))]
-public sealed class SearchRequestItem :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class SearchRequestItem :
 	IStreamSerializable
 {
 	public SearchRequestItem(MultisearchBody body) => Body = body;

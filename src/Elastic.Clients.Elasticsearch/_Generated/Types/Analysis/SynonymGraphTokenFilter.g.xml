@@ -16,7 +16,7 @@ Used to define inline synonyms.
 Used to provide a synonym file. This path must be absolute or relative to the <c>config</c> location.
 </para></summary></member>
   <member key="_types.analysis.SynonymGraphTokenFilter#synonyms_set"><summary><para>
-Provide a synonym set created via Synonyms Management APIs.
+Provide one or more synonym sets created through the Synonyms Management APIs. Maximum 100 sets per filter.
 </para></summary></member>
   <member key="_types.analysis.SynonymGraphTokenFilter#tokenizer"><summary><para>
 Controls the tokenizers that will be used to tokenize the synonym, this parameter is for backwards compatibility for indices that created before 6.0.

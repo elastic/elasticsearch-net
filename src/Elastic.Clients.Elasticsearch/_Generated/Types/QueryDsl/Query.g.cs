@@ -196,6 +196,17 @@ public partial class Query
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariantValue<T>(string type) where T : struct
+	{
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
+		{
+			return result;
+		}
+
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private void SetVariant<T>(string type, T? value)
 	{
 		VariantType = type;

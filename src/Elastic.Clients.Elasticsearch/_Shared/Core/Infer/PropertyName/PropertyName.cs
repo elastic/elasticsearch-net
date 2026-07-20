@@ -14,7 +14,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
 [JsonConverter(typeof(Json.PropertyNameConverter))]
-public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter
+[Codegen(ShouldGenerate = false)]
+public sealed partial class PropertyName : IEquatable<PropertyName>, IUrlParameter
 {
 	private readonly object _comparisonValue;
 	private readonly Type _type;
