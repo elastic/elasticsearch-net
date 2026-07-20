@@ -16,7 +16,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.DataStreamNamesConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class DataStreamNames :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class DataStreamNames :
 	IUrlParameter,
 	IEnumerable<DataStreamName>,
 	IEquatable<DataStreamNames>

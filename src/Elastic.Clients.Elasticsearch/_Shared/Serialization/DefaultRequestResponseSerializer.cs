@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
@@ -63,7 +64,7 @@ internal sealed class DefaultRequestResponseSerializer :
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
 		{
-			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
+			return (T)DeserializeStreamSerializable(typeof(T), stream)!;
 		}
 
 		return base.Deserialize<T>(stream);
@@ -73,30 +74,75 @@ internal sealed class DefaultRequestResponseSerializer :
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(type))
 		{
-			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
+			return DeserializeStreamSerializable(type, stream);
 		}
 
 		return base.Deserialize(type, stream);
 	}
 
-	public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
+	public override async ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
 		{
-			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
+			return (T)(await DeserializeStreamSerializableAsync(typeof(T), stream, cancellationToken).ConfigureAwait(false))!;
 		}
 
-		return base.DeserializeAsync<T>(stream, cancellationToken);
+		return await base.DeserializeAsync<T>(stream, cancellationToken).ConfigureAwait(false);
 	}
 
-	public override ValueTask<object?> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
+	public override async ValueTask<object?> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(type))
 		{
-			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
+			return await DeserializeStreamSerializableAsync(type, stream, cancellationToken).ConfigureAwait(false);
 		}
 
-		return base.DeserializeAsync(type, stream, cancellationToken);
+		return await base.DeserializeAsync(type, stream, cancellationToken).ConfigureAwait(false);
+	}
+
+	// NDJSON read path. IStreamSerializable request types (bulk/msearch/msearch_template) are written as
+	// newline-delimited JSON (mirror of the Serialize special-case above). A type whose JsonConverter implements
+	// INdjsonStreamReadable streams the body one top-level value at a time, so the whole serialized body is never held
+	// alongside the materialized request; the capability is discovered through the registered converter rather than a
+	// hard-coded type list. Anything else falls back to the whole-body read.
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without runtime code generation.")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without trimmed reflection.")]
+	private object? DeserializeStreamSerializable(Type type, Stream stream)
+	{
+		if (!this.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("Could not resolve the JsonSerializerOptions required for NDJSON deserialization.");
+		}
+
+		if (options.GetConverter(type) is INdjsonStreamReadable streamable)
+			return streamable.Read(stream, options);
+
+		return DeserializeStreamSerializableBuffered(type, stream, options);
+	}
+
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without runtime code generation.")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "The NDJSON request types declare concrete converters via [JsonConverter] and the serializer always uses an explicit TypeInfoResolver, so GetConverter resolves without trimmed reflection.")]
+	private async ValueTask<object?> DeserializeStreamSerializableAsync(Type type, Stream stream, CancellationToken cancellationToken)
+	{
+		if (!this.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("Could not resolve the JsonSerializerOptions required for NDJSON deserialization.");
+		}
+
+		if (options.GetConverter(type) is INdjsonStreamReadable streamable)
+			return await streamable.ReadAsync(stream, options, cancellationToken).ConfigureAwait(false);
+
+		return DeserializeStreamSerializableBuffered(type, stream, options);
+	}
+
+	private static object? DeserializeStreamSerializableBuffered(Type type, Stream stream, JsonSerializerOptions options)
+	{
+		using var buffer = new MemoryStream();
+		stream.CopyTo(buffer);
+
+		var readerOptions = new JsonReaderOptions { AllowMultipleValues = true, MaxDepth = options.MaxDepth };
+		var reader = new Utf8JsonReader(buffer.GetBuffer().AsSpan(0, (int)buffer.Length), readerOptions);
+		return JsonSerializer.Deserialize(ref reader, options.GetTypeInfo(type));
 	}
 
 	protected override bool SupportsFastPath(Type type) => !typeof(IStreamSerializable).IsAssignableFrom(type);
