@@ -15,7 +15,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(Json.IdsConverter))]
-public class Ids :
+[Codegen(ShouldGenerate = false)]
+public partial class Ids :
 	IUrlParameter,
 	IEquatable<Ids>
 #if NET7_0_OR_GREATER
