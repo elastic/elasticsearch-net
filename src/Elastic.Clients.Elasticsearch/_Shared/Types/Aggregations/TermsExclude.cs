@@ -14,7 +14,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// Filters which terms to exclude from the response.
 /// </summary>
 [JsonConverter(typeof(Json.TermsExcludeConverter))]
-public sealed class TermsExclude
+[Codegen(ShouldGenerate = false)]
+public sealed partial class TermsExclude
 {
 	/// <summary>
 	/// Creates an instance of <see cref="TermsExclude" /> that uses a regular expression pattern

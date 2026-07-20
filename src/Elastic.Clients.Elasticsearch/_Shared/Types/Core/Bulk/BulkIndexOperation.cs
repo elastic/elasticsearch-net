@@ -135,8 +135,3 @@ public sealed class BulkIndexOperation<T> : BulkOperation
 		}
 	}
 }
-
-public class TestA
-{
-	public string X { get; set; }
-}

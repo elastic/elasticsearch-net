@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 public sealed partial class StatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Stats>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveSelection = System.Text.Json.JsonEncodedText.Encode("adaptive_selection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAllocations = System.Text.Json.JsonEncodedText.Encode("allocations"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropBreakers = System.Text.Json.JsonEncodedText.Encode("breakers"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery"u8);
@@ -52,6 +53,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>?> propAdaptiveSelection = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Allocations?> propAllocations = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propAttributes = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>?> propBreakers = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Discovery?> propDiscovery = default;
@@ -76,6 +78,11 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAdaptiveSelection.TryReadProperty(ref reader, options, PropAdaptiveSelection, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propAllocations.TryReadProperty(ref reader, options, PropAllocations, null))
 			{
 				continue;
 			}
@@ -198,6 +205,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 		return new Elastic.Clients.Elasticsearch.Nodes.Stats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			AdaptiveSelection = propAdaptiveSelection.Value,
+			Allocations = propAllocations.Value,
 			Attributes = propAttributes.Value,
 			Breakers = propBreakers.Value,
 			Discovery = propDiscovery.Value,
@@ -226,6 +234,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAdaptiveSelection, value.AdaptiveSelection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, v, null, null));
+		writer.WriteProperty(options, PropAllocations, value.Allocations, null, null);
 		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropBreakers, value.Breakers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>(o, v, null, null));
 		writer.WriteProperty(options, PropDiscovery, value.Discovery, null, null);

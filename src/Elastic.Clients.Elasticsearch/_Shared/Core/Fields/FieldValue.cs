@@ -15,7 +15,8 @@ namespace Elastic.Clients.Elasticsearch;
 /// therefore cannot be specifically typed.
 /// </summary>
 [JsonConverter(typeof(Json.FieldValueConverter))]
-public readonly struct FieldValue :
+[Codegen(ShouldGenerate = false)]
+public readonly partial struct FieldValue :
 	IEquatable<FieldValue>
 {
 	internal FieldValue(ValueKind kind, object? value)
