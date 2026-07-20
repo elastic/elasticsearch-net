@@ -3,6 +3,9 @@
   <member key="nodes._types.Stats#adaptive_selection"><summary><para>
 Statistics about adaptive replica selection.
 </para></summary></member>
+  <member key="nodes._types.Stats#allocations"><summary><para>
+Statistics about shard allocations on the node.
+</para></summary></member>
   <member key="nodes._types.Stats#attributes"><summary><para>
 Contains a list of attributes for the node.
 </para></summary></member>

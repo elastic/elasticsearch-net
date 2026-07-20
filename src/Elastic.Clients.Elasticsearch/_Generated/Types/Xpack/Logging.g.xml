@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.Logging"><summary><para>
+Usage statistics about logging configuration reported by <c>_xpack/usage</c>.
+</para></summary></member>
+  <member key="xpack.usage.Logging#esql"><summary><para>
+ES|QL query log configuration.
+</para></summary></member>
+  <member key="xpack.usage.Logging#querylog"><summary><para>
+Search query log configuration.
+</para></summary></member>
+</doc>

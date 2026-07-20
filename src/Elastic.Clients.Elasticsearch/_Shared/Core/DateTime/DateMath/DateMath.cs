@@ -12,7 +12,8 @@ using System.Text.RegularExpressions;
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.DateMathConverter))]
-public abstract class DateMath
+[Codegen(ShouldGenerate = false)]
+public abstract partial class DateMath
 {
 	private static readonly Regex DateMathRegex =
 		new(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");

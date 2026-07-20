@@ -52,6 +52,7 @@ public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elas
 	public required Elastic.Clients.Elasticsearch.Xpack.Base Graph { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.HealthStatistics? HealthApi { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Ilm Ilm { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Logging? Logging { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Base Logstash { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.MachineLearning Ml { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Monitoring Monitoring { get; set; }

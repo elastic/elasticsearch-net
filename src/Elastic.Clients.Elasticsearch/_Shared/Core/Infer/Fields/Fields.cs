@@ -18,7 +18,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.FieldsConverter))]
 [DebuggerDisplay($"{{{nameof(DebuggerDisplay)},nq}}")]
-public sealed class Fields :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class Fields :
 	IEquatable<Fields>,
 	IEnumerable<Field>,
 	IUrlParameter

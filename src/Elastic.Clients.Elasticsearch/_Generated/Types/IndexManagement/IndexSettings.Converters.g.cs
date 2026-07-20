@@ -78,6 +78,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropTimeSeries = System.Text.Json.JsonEncodedText.Encode("time_series"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTopMetricsMaxSize = System.Text.Json.JsonEncodedText.Encode("top_metrics_max_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTranslog = System.Text.Json.JsonEncodedText.Encode("translog"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassigned = System.Text.Json.JsonEncodedText.Encode("unassigned"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVerifiedBeforeClose = System.Text.Json.JsonEncodedText.Encode("verified_before_close"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
@@ -139,6 +140,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries?> propTimeSeries = default;
 		LocalJsonValue<int?> propTopMetricsMaxSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Translog?> propTranslog = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassigned?> propUnassigned = default;
 		LocalJsonValue<string?> propUuid = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, string>?> propVerifiedBeforeClose = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning?> propVersion = default;
@@ -409,6 +411,11 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 				continue;
 			}
 
+			if (propUnassigned.TryReadProperty(ref reader, options, PropUnassigned, null))
+			{
+				continue;
+			}
+
 			if (propUuid.TryReadProperty(ref reader, options, PropUuid, null))
 			{
 				continue;
@@ -486,6 +493,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 			TimeSeries = propTimeSeries.Value,
 			TopMetricsMaxSize = propTopMetricsMaxSize.Value,
 			Translog = propTranslog.Value,
+			Unassigned = propUnassigned.Value,
 			Uuid = propUuid.Value,
 			VerifiedBeforeClose = propVerifiedBeforeClose.Value,
 			Version = propVersion.Value
@@ -548,6 +556,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropTimeSeries, value.TimeSeries, null, null);
 		writer.WriteProperty(options, PropTopMetricsMaxSize, value.TopMetricsMaxSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTranslog, value.Translog, null, null);
+		writer.WriteProperty(options, PropUnassigned, value.Unassigned, null, null);
 		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
 		writer.WriteProperty(options, PropVerifiedBeforeClose, value.VerifiedBeforeClose, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
