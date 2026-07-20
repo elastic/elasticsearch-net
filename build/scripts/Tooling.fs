@@ -12,7 +12,9 @@ module Tooling =
 
     type ExecResult = { ExitCode: int; Output: LineOut seq;}
     
-    let private defaultTimeout = TimeSpan.FromMinutes(5.)
+    // CI build steps (notably full-build across every TFM, a dependency of the integration target) can take
+    // longer than 5 minutes on the hosted runners, tripping this default and failing the integration job.
+    let private defaultTimeout = TimeSpan.FromMinutes(10.)
     
     type NoopWriter () =
         interface IConsoleOutWriter with

@@ -20,7 +20,7 @@ public partial class MultiSearchResponse<TDocument>
 	public int TotalResponses => Responses.Count > 0 ? Responses.Count : 0;
 }
 
-[JsonConverter(typeof(JsonIncompatibleConverter))]
+[JsonConverter(typeof(MultiSearchRequestConverter))]
 public partial class MultiSearchRequest :
 	IStreamSerializable
 {
