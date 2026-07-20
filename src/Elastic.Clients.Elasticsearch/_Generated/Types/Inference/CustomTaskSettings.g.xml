@@ -11,5 +11,9 @@ For example:
     "return_token":true
   }
 }
-</code></summary></member>
+</code>
+<para>
+warn
+The <c>task_settings.parameters</c> cannot contain the same keys as <c>secret_parameters</c>. If they do, an error will be returned. This applies to PUT requests and POST requests.
+</para></summary></member>
 </doc>

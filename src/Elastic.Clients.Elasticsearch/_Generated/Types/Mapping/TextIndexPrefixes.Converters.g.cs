@@ -31,16 +31,16 @@ public sealed partial class TextIndexPrefixesConverter : System.Text.Json.Serial
 	public override Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propMaxChars = default;
-		LocalJsonValue<int> propMinChars = default;
+		LocalJsonValue<int?> propMaxChars = default;
+		LocalJsonValue<int?> propMinChars = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxChars.TryReadProperty(ref reader, options, PropMaxChars, null))
+			if (propMaxChars.TryReadProperty(ref reader, options, PropMaxChars, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinChars.TryReadProperty(ref reader, options, PropMinChars, null))
+			if (propMinChars.TryReadProperty(ref reader, options, PropMinChars, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ public sealed partial class TextIndexPrefixesConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxChars, value.MaxChars, null, null);
-		writer.WriteProperty(options, PropMinChars, value.MinChars, null, null);
+		writer.WriteProperty(options, PropMaxChars, value.MaxChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinChars, value.MinChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

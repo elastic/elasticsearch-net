@@ -27,13 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.TextIndexPrefixesConverter))]
 public sealed partial class TextIndexPrefixes
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TextIndexPrefixes(int maxChars, int minChars)
-	{
-		MaxChars = maxChars;
-		MinChars = minChars;
-	}
-
 	public TextIndexPrefixes()
 	{
 	}
@@ -44,8 +37,8 @@ public sealed partial class TextIndexPrefixes
 		_ = sentinel;
 	}
 
-	public required int MaxChars { get; set; }
-	public required int MinChars { get; set; }
+	public int? MaxChars { get; set; }
+	public int? MinChars { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.TextIndexPrefixes']/*"/>
@@ -68,13 +61,13 @@ public readonly partial struct TextIndexPrefixesDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes instance) => new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor MaxChars(int value)
+	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor MaxChars(int? value)
 	{
 		Instance.MaxChars = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor MinChars(int value)
+	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor MinChars(int? value)
 	{
 		Instance.MinChars = value;
 		return this;

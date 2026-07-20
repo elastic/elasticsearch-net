@@ -12,7 +12,7 @@ For a <c>text_embedding</c> task, the number of dimensions the resulting output 
 By default, the model's standard output dimension is used.
 Refer to the Jina documentation for more information.
 </para></summary></member>
-  <member key="inference._types.JinaAIServiceSettings#element_type"><summary><para>
+  <member key="inference._types.JinaAIServiceSettings#embedding_type"><summary><para>
 For a <c>text_embedding</c> task, the data type returned by the model.
 Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
 Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>bit</c>).
