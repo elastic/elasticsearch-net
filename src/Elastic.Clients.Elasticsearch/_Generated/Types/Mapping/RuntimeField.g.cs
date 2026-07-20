@@ -54,6 +54,7 @@ public sealed partial class RuntimeField
 
 	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#input_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? InputField { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
 
 	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
@@ -168,6 +169,12 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> InputField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.InputField = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
+	{
+		Instance.OnScriptError = value;
 		return this;
 	}
 
@@ -342,6 +349,12 @@ public readonly partial struct RuntimeFieldDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor InputField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.InputField = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
+	{
+		Instance.OnScriptError = value;
 		return this;
 	}
 

@@ -6,7 +6,7 @@ The batch size is the maximum number of inputs in a single request to the upstre
 The chunk within the batch are controlled by the selected chunking strategy for the semantic_text field.
 </para></summary></member>
   <member key="inference._types.CustomServiceSettings#headers"><summary><para>
-Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
+Specifies the HTTP header parameters – such as <c>Authorization</c> or <c>Content-Type</c> – that are required to access the custom service.
 For example:
 </para>
 <code>

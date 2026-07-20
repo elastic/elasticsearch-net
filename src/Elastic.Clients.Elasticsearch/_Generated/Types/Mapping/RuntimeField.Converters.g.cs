@@ -29,6 +29,7 @@ public sealed partial class RuntimeFieldConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropInputField = System.Text.Json.JsonEncodedText.Encode("input_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOnScriptError = System.Text.Json.JsonEncodedText.Encode("on_script_error"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTargetIndex = System.Text.Json.JsonEncodedText.Encode("target_index"u8);
@@ -41,6 +42,7 @@ public sealed partial class RuntimeFieldConverter : System.Text.Json.Serializati
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>?> propFields = default;
 		LocalJsonValue<string?> propFormat = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propInputField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.OnScriptError?> propOnScriptError = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propTargetIndex = default;
@@ -63,6 +65,11 @@ public sealed partial class RuntimeFieldConverter : System.Text.Json.Serializati
 			}
 
 			if (propInputField.TryReadProperty(ref reader, options, PropInputField, null))
+			{
+				continue;
+			}
+
+			if (propOnScriptError.TryReadProperty(ref reader, options, PropOnScriptError, static Elastic.Clients.Elasticsearch.Mapping.OnScriptError? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.OnScriptError>(o)))
 			{
 				continue;
 			}
@@ -103,6 +110,7 @@ public sealed partial class RuntimeFieldConverter : System.Text.Json.Serializati
 			Fields = propFields.Value,
 			Format = propFormat.Value,
 			InputField = propInputField.Value,
+			OnScriptError = propOnScriptError.Value,
 			Script = propScript.Value,
 			TargetField = propTargetField.Value,
 			TargetIndex = propTargetIndex.Value,
@@ -117,6 +125,7 @@ public sealed partial class RuntimeFieldConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>(o, v, null, null));
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropInputField, value.InputField, null, null);
+		writer.WriteProperty(options, PropOnScriptError, value.OnScriptError, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.OnScriptError? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.OnScriptError>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
 		writer.WriteProperty(options, PropTargetIndex, value.TargetIndex, null, null);

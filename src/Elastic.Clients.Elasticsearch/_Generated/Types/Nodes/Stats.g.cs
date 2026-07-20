@@ -40,6 +40,9 @@ public sealed partial class Stats
 	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#adaptive_selection']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? AdaptiveSelection { get; set; }
 
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#allocations']/*"/>
+	public Elastic.Clients.Elasticsearch.Nodes.Allocations? Allocations { get; set; }
+
 	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#attributes']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Attributes { get; set; }
 

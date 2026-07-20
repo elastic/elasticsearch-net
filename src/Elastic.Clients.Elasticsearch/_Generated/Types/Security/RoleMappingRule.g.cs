@@ -42,12 +42,23 @@ public sealed partial class RoleMappingRule
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? All { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>>("all"); set => SetVariant("all", value); }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? Any { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>>("any"); set => SetVariant("any", value); }
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRule? Except { get => GetVariant<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>("except"); set => SetVariant("except", value); }
-	public System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? Field { get => GetVariant<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>("field"); set => SetVariant("field", value); }
+	public System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? Field { get => GetVariantValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>("field"); set => SetVariant("field", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleMappingRule(System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> value) => new Elastic.Clients.Elasticsearch.Security.RoleMappingRule { Field = value };
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private T? GetVariant<T>(string type)
+	{
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
+		{
+			return result;
+		}
+
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariantValue<T>(string type) where T : struct
 	{
 		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{

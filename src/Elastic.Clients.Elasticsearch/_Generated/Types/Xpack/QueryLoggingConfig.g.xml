@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.QueryLoggingConfig#enabled"><summary><para>
+Whether query logging is enabled.
+</para></summary></member>
+  <member key="xpack.usage.QueryLoggingConfig#system"><summary><para>
+Whether system queries are included in the query log.
+</para></summary></member>
+  <member key="xpack.usage.QueryLoggingConfig#threshold"><summary><para>
+The configured logging threshold, if any.
+</para></summary></member>
+  <member key="xpack.usage.QueryLoggingConfig#user"><summary><para>
+Whether user information is included in the query log.
+</para></summary></member>
+</doc>

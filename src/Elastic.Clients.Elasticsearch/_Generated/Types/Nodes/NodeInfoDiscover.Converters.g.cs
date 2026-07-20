@@ -33,7 +33,7 @@ public sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seriali
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propSeedHosts = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propSeedProviders = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propSeedProviders = default;
 		System.Collections.Generic.Dictionary<string, object>? propSettings = default;
 		LocalJsonValue<string?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -43,7 +43,7 @@ public sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propSeedProviders.TryReadProperty(ref reader, options, PropSeedProviders, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			if (propSeedProviders.TryReadProperty(ref reader, options, PropSeedProviders, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ public sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seriali
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropSeedHosts, value.SeedHosts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropSeedProviders, value.SeedProviders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSeedProviders, value.SeedProviders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		if (value.Settings is not null)
 		{

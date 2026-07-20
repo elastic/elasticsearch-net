@@ -40,6 +40,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropHealthApi = System.Text.Json.JsonEncodedText.Encode("health_api"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogging = System.Text.Json.JsonEncodedText.Encode("logging"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLogstash = System.Text.Json.JsonEncodedText.Encode("logstash"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMonitoring = System.Text.Json.JsonEncodedText.Encode("monitoring"u8);
@@ -73,6 +74,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propGraph = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.HealthStatistics?> propHealthApi = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ilm> propIlm = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Logging?> propLogging = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propLogstash = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MachineLearning> propMl = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Monitoring> propMonitoring = default;
@@ -160,6 +162,11 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			}
 
 			if (propIlm.TryReadProperty(ref reader, options, PropIlm, null))
+			{
+				continue;
+			}
+
+			if (propLogging.TryReadProperty(ref reader, options, PropLogging, null))
 			{
 				continue;
 			}
@@ -261,6 +268,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			Graph = propGraph.Value,
 			HealthApi = propHealthApi.Value,
 			Ilm = propIlm.Value,
+			Logging = propLogging.Value,
 			Logstash = propLogstash.Value,
 			Ml = propMl.Value,
 			Monitoring = propMonitoring.Value,
@@ -296,6 +304,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
 		writer.WriteProperty(options, PropHealthApi, value.HealthApi, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
+		writer.WriteProperty(options, PropLogging, value.Logging, null, null);
 		writer.WriteProperty(options, PropLogstash, value.Logstash, null, null);
 		writer.WriteProperty(options, PropMl, value.Ml, null, null);
 		writer.WriteProperty(options, PropMonitoring, value.Monitoring, null, null);

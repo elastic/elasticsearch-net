@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexSettingsUnassignedNodeLeft#delayed_timeout"><summary><para>
+The amount of time to wait for a node that has left before assuming its
+shards are permanently missing and starting to allocate replacement replicas.
+</para></summary></member>
+</doc>
