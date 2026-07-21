@@ -1,0 +1,9 @@
+{
+  my-field: {
+    boost: 1.1,
+    format: dd/MM/yyyy||yyyy,
+    gte: now-1y/M,
+    lt: now,
+    _name: named_query
+  }
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.enable_user_profile.Request"><summary><para>
+Enable a user profile.
+</para>
+<para>
+Enable user profiles to make them visible in user profile searches.
+</para>
+<para>
+NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+Individual users and external applications should not call this API directly.
+Elastic reserves the right to change or remove this feature in future releases without prior notice.
+</para>
+<para>
+When you activate a user profile, it's automatically enabled and visible in user profile searches.
+If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
+</para></summary></member>
+  <member key="security.enable_user_profile.Request#refresh"><summary><para>
+If 'true', Elasticsearch refreshes the affected shards to make this operation
+visible to search.
+If 'wait_for', it waits for a refresh to make this operation visible to search.
+If 'false', nothing is done with refreshes.
+</para></summary></member>
+  <member key="security.enable_user_profile.Request#uid"><summary><para>
+A unique identifier for the user profile.
+</para></summary></member>
+</doc>

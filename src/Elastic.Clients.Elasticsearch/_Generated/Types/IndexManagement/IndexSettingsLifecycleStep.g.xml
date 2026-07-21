@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexSettingsLifecycleStep#wait_time_threshold"><summary><para>
+Time to wait for the cluster to resolve allocation issues during an ILM shrink action. Must be greater than 1h (1 hour).
+See Shard allocation for shrink.
+</para></summary></member>
+</doc>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelType#lang_ident"><summary><para>
+A special type reserved for language identification models.
+</para></summary></member>
+  <member key="ml._types.TrainedModelType#pytorch"><summary><para>
+The stored definition is a PyTorch (specifically a TorchScript) model.
+Currently only NLP models are supported.
+</para></summary></member>
+  <member key="ml._types.TrainedModelType#tree_ensemble"><summary><para>
+The model definition is an ensemble model of decision trees.
+</para></summary></member>
+</doc>

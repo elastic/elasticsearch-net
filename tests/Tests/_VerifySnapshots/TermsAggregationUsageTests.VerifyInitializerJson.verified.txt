@@ -1,0 +1,36 @@
+{
+  aggregations: {
+    states: {
+      meta: {
+        foo: bar
+      },
+      terms: {
+        execution_hint: map,
+        field: state,
+        min_doc_count: 2,
+        missing: n/a,
+        order: [
+          {
+            _key: asc
+          },
+          {
+            _count: desc
+          }
+        ],
+        script: {
+          source: 'State of Being: '+_value
+        },
+        shard_size: 100,
+        size: 5
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}

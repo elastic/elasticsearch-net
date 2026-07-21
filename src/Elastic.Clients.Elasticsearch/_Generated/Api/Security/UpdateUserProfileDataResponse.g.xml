@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.update_user_profile_data.Response#acknowledged"><summary><para>
+For a successful response, this value is always true. On failure, an exception is returned instead.
+</para></summary></member>
+</doc>

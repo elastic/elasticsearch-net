@@ -1,0 +1,11 @@
+<RunSettings>
+	<RunConfiguration>
+		<CollectSourceInformation>true</CollectSourceInformation>
+	</RunConfiguration>
+	<LoggerRunSettings>
+		<Loggers>
+			<Logger friendlyName="Console" enabled="True"/>
+			<Logger friendlyName="pretty" enabled="False"/>
+		</Loggers>
+	</LoggerRunSettings>
+</RunSettings>

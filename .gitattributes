@@ -1,0 +1,93 @@
+### Header #########################################################################################
+
+# Author: Florian Bernd
+# Source: https://github.com/zysharp/templates
+
+### Git Line Endings ###############################################################################
+
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Documents
+*.md       text diff=markdown
+*.mdx      text diff=markdown
+
+# Serialization
+*.json     text
+*.toml     text
+*.xml      text
+*.yaml     text
+*.yml      text
+
+# Graphics
+*.eps      binary
+*.gif      binary
+*.ico      binary
+*.jpg      binary
+*.jpeg     binary
+*.png      binary
+*.tif      binary
+*.tiff     binary
+
+# Force batch scripts to always use CRLF line endings
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+*.ps1      text eol=crlf
+
+# Force bash scripts to always use LF line endings
+*.bash     text eol=lf
+*.fish     text eol=lf
+*.sh       text eol=lf
+*.zsh      text eol=lf
+
+# Text files where line endings should be preserved
+*.patch    -text
+
+### .NET ###########################################################################################
+
+*.sln      text
+
+### C# #############################################################################################
+
+*.cs       text diff=csharp
+*.csx      text diff=csharp
+*.cshtml   text diff=html
+*.csproj   text
+
+### F# #############################################################################################
+
+*.fs       text diff=fsharp
+*.fsx      text diff=fsharp
+*.fsproj   text
+
+### Exclude files from exporting ###################################################################
+
+.gitattributes export-ignore
+.gitignore     export-ignore
+.gitkeep       export-ignore
+
+### License ########################################################################################
+
+# The MIT License (MIT)
+#
+# Copyright (c) 2023 Florian Bernd
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+####################################################################################################

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterProcess#cpu"><summary><para>
+Contains statistics about CPU used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterProcess#open_file_descriptors"><summary><para>
+Contains statistics about open file descriptors in selected nodes.
+</para></summary></member>
+</doc>

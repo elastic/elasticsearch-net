@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.geo_ip_stats.GeoIpNodeDatabaseName#name"><summary><para>
+Name of the database.
+</para></summary></member>
+</doc>

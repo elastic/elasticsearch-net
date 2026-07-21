@@ -1,0 +1,16 @@
+<Reports>
+	<Report Name="name" Date="2017-01-01T09:00:00.000z" Commit="33a26c1745fe0775a57291e9549058eb2563f9c7">
+		<Info>
+			<Snapshot IndexFile="C:\snapshot1.dtp" Executable="C:\Temp\ConsoleAppTest.exe" CommandLine="C:\Temp\ConsoleAppTest.exe" />
+		</Info>
+		<Function Id="id" FQN="Tests.Method1" TotalTime="500" OwnTime="100" Calls="1" Instances="2" />
+		<Function Id="id" FQN="Tests.Method2" TotalTime="400" OwnTime="200" Calls="10" Instances="2" />
+	</Report>
+	<Report Name="name" Date="2017-01-01T09:00:00.000z" Commit="33a26c1745fe0775a57291e9549058eb2563f9c7">
+		<Info>
+			<Snapshot IndexFile="C:\snapshot1.dtp" Executable="C:\Temp\ConsoleAppTest.exe" CommandLine="C:\Temp\ConsoleAppTest.exe" />
+		</Info>
+		<Function Id="id" FQN="Tests.Method1" TotalTime="500" OwnTime="100" Calls="1" Instances="2" />
+		<Function Id="id" FQN="Tests.Method2" TotalTime="400" OwnTime="200" Calls="10" Instances="2" />
+	</Report>
+</Reports>

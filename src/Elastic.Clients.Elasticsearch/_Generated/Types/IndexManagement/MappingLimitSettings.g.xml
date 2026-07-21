@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.MappingLimitSettings"><summary><para>
+Mapping Limit Settings
+</para><para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/mapping-limit">Learn more about this API in the Elasticsearch documentation.</see></para></summary></member>
+</doc>

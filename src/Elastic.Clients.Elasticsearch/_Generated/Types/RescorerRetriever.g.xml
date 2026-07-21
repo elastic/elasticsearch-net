@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.RescorerRetriever#_name"><summary><para>
+Retriever name.
+</para></summary></member>
+  <member key="_types.RescorerRetriever#filter"><summary><para>
+Query to filter the documents that can match.
+</para></summary></member>
+  <member key="_types.RescorerRetriever#min_score"><summary><para>
+Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+</para></summary></member>
+  <member key="_types.RescorerRetriever#retriever"><summary><para>
+Inner retriever.
+</para></summary></member>
+</doc>

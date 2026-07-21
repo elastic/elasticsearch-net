@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.Retries#bulk"><summary><para>
+The number of bulk actions retried.
+</para></summary></member>
+  <member key="_types.Retries#search"><summary><para>
+The number of search actions retried.
+</para></summary></member>
+</doc>

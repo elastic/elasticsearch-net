@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.NormalizeMethod#mean"><summary><para>
+This method normalizes such that each value is normalized by how much it differs from the average.
+</para></summary></member>
+  <member key="_types.aggregations.NormalizeMethod#percent_of_sum"><summary><para>
+This method normalizes each value so that it represents a percentage of the total sum it attributes to.
+</para></summary></member>
+  <member key="_types.aggregations.NormalizeMethod#rescale_0_1"><summary><para>
+This method rescales the data such that the minimum number is 0, and the maximum number is 1, with the rest normalized linearly in-between.
+</para></summary></member>
+  <member key="_types.aggregations.NormalizeMethod#rescale_0_100"><summary><para>
+This method rescales the data such that the minimum number is 0, and the maximum number is 100, with the rest normalized linearly in-between.
+</para></summary></member>
+  <member key="_types.aggregations.NormalizeMethod#softmax"><summary><para>
+This method normalizes such that each value is exponentiated and relative to the sum of the exponents of the original values.
+</para></summary></member>
+  <member key="_types.aggregations.NormalizeMethod#z-score"><summary><para>
+This method normalizes such that each value represents how far it is from the mean relative to the standard deviation.
+</para></summary></member>
+</doc>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.delete_ruleset.Request"><summary><para>
+Delete a query ruleset.
+</para>
+<para>
+Remove a query ruleset and its associated data.
+This is a destructive action that is not recoverable.
+</para></summary></member>
+  <member key="query_rules.delete_ruleset.Request#ruleset_id"><summary><para>
+The unique identifier of the query ruleset to delete
+</para></summary></member>
+</doc>

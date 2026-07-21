@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.TextQueryType#best_fields"><summary><para>
+Finds documents that match any field, but uses the <c>_score</c> from the best field.
+</para></summary></member>
+  <member key="_types.query_dsl.TextQueryType#bool_prefix"><summary><para>
+Creates a <c>match_bool_prefix</c> query on each field and combines the <c>_score</c> from each field.
+</para></summary></member>
+  <member key="_types.query_dsl.TextQueryType#cross_fields"><summary><para>
+Treats fields with the same analyzer as though they were one big field.
+Looks for each word in any field.
+</para></summary></member>
+  <member key="_types.query_dsl.TextQueryType#most_fields"><summary><para>
+Finds documents that match any field and combines the <c>_score</c> from each field.
+</para></summary></member>
+  <member key="_types.query_dsl.TextQueryType#phrase"><summary><para>
+Runs a <c>match_phrase</c> query on each field and uses the <c>_score</c> from the best field.
+</para></summary></member>
+  <member key="_types.query_dsl.TextQueryType#phrase_prefix"><summary><para>
+Runs a <c>match_phrase_prefix</c> query on each field and uses the <c>_score</c> from the best field.
+</para></summary></member>
+</doc>

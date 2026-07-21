@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.SuggestFuzziness#fuzziness"><summary><para>
+The fuzziness factor.
+</para></summary></member>
+  <member key="_global.search._types.SuggestFuzziness#min_length"><summary><para>
+Minimum length of the input before fuzzy suggestions are returned.
+</para></summary></member>
+  <member key="_global.search._types.SuggestFuzziness#prefix_length"><summary><para>
+Minimum length of the input, which is not checked for fuzzy alternatives.
+</para></summary></member>
+  <member key="_global.search._types.SuggestFuzziness#transpositions"><summary><para>
+If set to <c>true</c>, transpositions are counted as one change instead of two.
+</para></summary></member>
+  <member key="_global.search._types.SuggestFuzziness#unicode_aware"><summary><para>
+If <c>true</c>, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes.
+This is slightly slower than raw bytes.
+</para></summary></member>
+</doc>

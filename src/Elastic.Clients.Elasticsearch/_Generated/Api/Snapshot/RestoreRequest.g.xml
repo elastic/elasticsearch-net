@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.restore.Request"><summary><para>
+Restore a snapshot.
+</para>
+<para>
+Restore a snapshot of a cluster or data streams and indices.
+</para>
+<para>
+You can restore a snapshot only to a running cluster with an elected master node.
+The snapshot repository must be registered and available to the cluster.
+The snapshot and cluster versions must be compatible.
+</para>
+<para>
+To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+</para>
+<para>
+Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+</para>
+<code>
+GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream
+</code>
+<para>
+If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+</para>
+<para>
+If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
+</para></summary></member>
+  <member key="snapshot.restore.Request#feature_states"><summary><para>
+The feature states to restore.
+If <c>include_global_state</c> is <c>true</c>, the request restores all feature states in the snapshot by default.
+If <c>include_global_state</c> is <c>false</c>, the request restores no feature states by default.
+Note that specifying an empty array will result in the default behavior.
+To restore no feature states, regardless of the <c>include_global_state</c> value, specify an array containing only the value <c>none</c> (<c>["none"]</c>).
+</para></summary></member>
+  <member key="snapshot.restore.Request#ignore_index_settings"><summary><para>
+The index settings to not restore from the snapshot.
+You can't use this option to ignore <c>index.number_of_shards</c>.
+</para>
+<para>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</para></summary></member>
+  <member key="snapshot.restore.Request#ignore_unavailable"><summary><para>
+If <c>true</c>, the request ignores any index or data stream in indices that's missing from the snapshot.
+If <c>false</c>, the request returns an error for any missing index or data stream.
+</para></summary></member>
+  <member key="snapshot.restore.Request#include_aliases"><summary><para>
+If <c>true</c>, the request restores aliases for any restored data streams and indices.
+If <c>false</c>, the request doesn’t restore aliases.
+</para></summary></member>
+  <member key="snapshot.restore.Request#include_global_state"><summary><para>
+If <c>true</c>, restore the cluster state. The cluster state includes:
+</para>
+<list type="bullet">
+<item>
+<para>
+Persistent cluster settings
+</para>
+</item>
+<item>
+<para>
+Index templates
+</para>
+</item>
+<item>
+<para>
+Legacy index templates
+</para>
+</item>
+<item>
+<para>
+Ingest pipelines
+</para>
+</item>
+<item>
+<para>
+Index lifecycle management (ILM) policies
+</para>
+</item>
+<item>
+<para>
+Stored scripts
+</para>
+</item>
+<item>
+<para>
+For snapshots taken after 7.12.0, feature states
+</para>
+</item>
+</list>
+<para>
+If <c>include_global_state</c> is <c>true</c>, the restore operation merges the legacy index templates in your cluster with the templates contained in the snapshot, replacing any existing ones whose name matches one in the snapshot.
+It completely removes all persistent settings, non-legacy index templates, ingest pipelines, and ILM lifecycle policies that exist in your cluster and replaces them with the corresponding items from the snapshot.
+</para>
+<para>
+Use the <c>feature_states</c> parameter to configure how feature states are restored.
+</para>
+<para>
+If <c>include_global_state</c> is <c>true</c> and a snapshot was created without a global state then the restore request will fail.
+</para></summary></member>
+  <member key="snapshot.restore.Request#index_settings"><summary><para>
+Index settings to add or change in restored indices, including backing indices.
+You can't use this option to change <c>index.number_of_shards</c>.
+</para>
+<para>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</para></summary></member>
+  <member key="snapshot.restore.Request#indices"><summary><para>
+A comma-separated list of indices and data streams to restore.
+It supports a multi-target syntax.
+The default behavior is all regular indices and regular data streams in the snapshot.
+</para>
+<para>
+You can't use this parameter to restore system indices or system data streams.
+Use <c>feature_states</c> instead.
+</para></summary></member>
+  <member key="snapshot.restore.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="snapshot.restore.Request#partial"><summary><para>
+If <c>false</c>, the entire restore operation will fail if one or more indices included in the snapshot do not have all primary shards available.
+</para>
+<para>
+If true, it allows restoring a partial snapshot of indices with unavailable shards.
+Only shards that were successfully included in the snapshot will be restored.
+All missing shards will be recreated as empty.
+</para></summary></member>
+  <member key="snapshot.restore.Request#rename_pattern"><summary><para>
+A rename pattern to apply to restored data streams and indices.
+Data streams and indices matching the rename pattern will be renamed according to <c>rename_replacement</c>.
+</para>
+<para>
+The rename pattern is applied as defined by the regular expression that supports referencing the original text, according to the <c>appendReplacement</c> logic.
+</para></summary></member>
+  <member key="snapshot.restore.Request#rename_replacement"><summary><para>
+The rename replacement string that is used with the <c>rename_pattern</c>.
+</para></summary></member>
+  <member key="snapshot.restore.Request#repository"><summary><para>
+The name of the repository to restore a snapshot from.
+</para></summary></member>
+  <member key="snapshot.restore.Request#snapshot"><summary><para>
+The name of the snapshot to restore.
+</para></summary></member>
+  <member key="snapshot.restore.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request returns a response when the restore operation completes.
+The operation is complete when it finishes all attempts to recover primary shards for restored indices.
+This applies even if one or more of the recovery attempts fail.
+</para>
+<para>
+If <c>false</c>, the request returns a response when the restore operation initializes.
+</para></summary></member>
+</doc>

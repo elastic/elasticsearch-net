@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.delete_repository.Request"><summary><para>
+Delete snapshot repositories.
+</para>
+<para>
+When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
+The snapshots themselves are left untouched and in place.
+</para></summary></member>
+  <member key="snapshot.delete_repository.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="snapshot.delete_repository.Request#repository"><summary><para>
+The ame of the snapshot repositories to unregister.
+Wildcard (<c>*</c>) patterns are supported.
+</para></summary></member>
+  <member key="snapshot.delete_repository.Request#timeout"><summary><para>
+The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
+If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+</doc>

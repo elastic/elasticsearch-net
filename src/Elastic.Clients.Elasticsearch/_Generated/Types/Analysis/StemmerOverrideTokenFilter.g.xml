@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.StemmerOverrideTokenFilter#rules"><summary><para>
+A list of mapping rules to use.
+</para></summary></member>
+  <member key="_types.analysis.StemmerOverrideTokenFilter#rules_path"><summary><para>
+A path (either relative to <c>config</c> location, or absolute) to a list of mappings.
+</para></summary></member>
+</doc>

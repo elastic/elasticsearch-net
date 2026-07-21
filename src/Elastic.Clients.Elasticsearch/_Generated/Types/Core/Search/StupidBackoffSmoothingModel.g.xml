@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.StupidBackoffSmoothingModel#discount"><summary><para>
+A constant factor that the lower order n-gram model is discounted by.
+</para></summary></member>
+</doc>

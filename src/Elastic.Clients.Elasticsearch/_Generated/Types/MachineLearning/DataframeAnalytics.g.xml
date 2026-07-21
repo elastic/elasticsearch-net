@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalytics#assignment_explanation"><summary><para>
+For running jobs only, contains messages relating to the selection of a node to run the job.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalytics#data_counts"><summary><para>
+An object that provides counts for the quantity of documents skipped, used in training, or available for testing.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalytics#id"><summary><para>
+The unique identifier of the data frame analytics job.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalytics#memory_usage"><summary><para>
+An object describing memory usage of the analytics. It is present only after the job is started and memory usage is reported.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalytics#node"><summary><para>
+Contains properties for the node that runs the job. This information is available only for running jobs.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalytics#progress"><summary><para>
+The progress report of the data frame analytics job by phase.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalytics#state"><summary><para>
+The status of the data frame analytics job, which can be one of the following values: failed, started, starting, stopping, stopped.
+</para></summary></member>
+</doc>

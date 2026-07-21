@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.GarbageCollector#collectors"><summary><para>
+Contains statistics about JVM garbage collectors for the node.
+</para></summary></member>
+</doc>

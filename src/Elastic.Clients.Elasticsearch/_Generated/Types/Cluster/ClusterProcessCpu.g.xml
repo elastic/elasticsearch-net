@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterProcessCpu#percent"><summary><para>
+Percentage of CPU used across all selected nodes.
+Returns <c>-1</c> if not supported.
+</para></summary></member>
+</doc>

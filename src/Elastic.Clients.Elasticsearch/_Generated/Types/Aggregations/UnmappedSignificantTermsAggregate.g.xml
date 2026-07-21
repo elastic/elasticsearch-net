@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.UnmappedSignificantTermsAggregate"><summary><para>
+Result of the <c>significant_terms</c> aggregation on an unmapped field. <c>buckets</c> is always empty.
+</para></summary></member>
+</doc>

@@ -1,0 +1,83 @@
+### Header #########################################################################################
+
+# Author: Florian Bernd
+
+### Common Settings ################################################################################
+
+# Documentation:
+# http://docs.editorconfig.org/en/master/editorconfig-format.html
+
+# This file is the top-most EditorConfig file
+root = false
+
+### All Files --------------------------------------------------------------------------------------
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+### File Extension Settings ------------------------------------------------------------------------
+
+# XML Configuration Files
+[*.{xml,config}]
+indent_size = 2
+
+# JSON Files
+[*.{json,json5,webmanifest}]
+indent_size = 2
+
+# YAML Files
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdown Files
+[*.{md,mdx}]
+indent_size = 2
+trim_trailing_whitespace = false
+
+# Web Files
+[*.{htm,html,js,jsm,jsx,ts,tsx,cjs,cts,ctsx,mjs,mts,mtsx,css,sass,scss,less,pcss,svg,vue}]
+indent_size = 2
+
+# Batch Scripts
+[*.{bat,cmd,ps1}]
+end_of_line = crlf
+
+# Bash Scripts
+[*.{bash,fish,sh,zsh}]
+end_of_line = lf
+
+# Makefiles
+[Makefile]
+indent_style = tab
+
+### ------------------------------------------------------------------------------------------------
+
+### License ########################################################################################
+
+# The MIT License (MIT)
+#
+# Copyright (c) 2024 Florian Bernd
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+####################################################################################################

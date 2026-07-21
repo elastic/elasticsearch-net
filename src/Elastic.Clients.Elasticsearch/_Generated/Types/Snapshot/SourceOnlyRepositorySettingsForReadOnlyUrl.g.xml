@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#http_max_retries"><summary><para>
+The maximum number of retries for HTTP and HTTPS URLs.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#http_socket_timeout"><summary><para>
+The maximum wait time for data transfers over a connection.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#max_number_of_snapshots"><summary><para>
+The maximum number of snapshots the repository can contain.
+The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#url"><summary><para>
+The URL location of the root of the shared filesystem repository.
+The following protocols are supported:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>file</c>
+</para>
+</item>
+<item>
+<para>
+<c>ftp</c>
+</para>
+</item>
+<item>
+<para>
+<c>http</c>
+</para>
+</item>
+<item>
+<para>
+<c>https</c>
+</para>
+</item>
+<item>
+<para>
+<c>jar</c>
+</para>
+</item>
+</list>
+<para>
+URLs using the HTTP, HTTPS, or FTP protocols must be explicitly allowed with the <c>repositories.url.allowed_urls</c> cluster setting.
+This setting supports wildcards in the place of a host, path, query, or fragment in the URL.
+</para>
+<para>
+URLs using the file protocol must point to the location of a shared filesystem accessible to all master and data nodes in the cluster.
+This location must be registered in the <c>path.repo</c> setting.
+You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
+</para></summary></member>
+</doc>

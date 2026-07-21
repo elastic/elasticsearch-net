@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.bulk_delete_role.Response#deleted"><summary><para>
+Array of deleted roles
+</para></summary></member>
+  <member key="security.bulk_delete_role.Response#errors"><summary><para>
+Present if any deletes resulted in errors
+</para></summary></member>
+  <member key="security.bulk_delete_role.Response#not_found"><summary><para>
+Array of roles that could not be found
+</para></summary></member>
+</doc>

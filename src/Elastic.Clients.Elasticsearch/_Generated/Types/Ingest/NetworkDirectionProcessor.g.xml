@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.NetworkDirectionProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#destination_ip"><summary><para>
+Field containing the destination IP address.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#ignore_missing"><summary><para>
+If true and any required fields are missing, the processor quietly exits
+without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#internal_networks"><summary><para>
+List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
+CIDR notation. Also supports the named ranges listed below. These may be
+constructed with template snippets. Must specify only one of
+internal_networks or internal_networks_field.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#internal_networks_field"><summary><para>
+A field on the given document to read the internal_networks configuration
+from.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#source_ip"><summary><para>
+Field containing the source IP address.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.NetworkDirectionProcessor#target_field"><summary><para>
+Output field for the network direction.
+</para></summary></member>
+</doc>

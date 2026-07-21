@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.SuggestMode#always"><summary><para>
+Suggest any matching suggestions based on terms in the suggest text.
+</para></summary></member>
+  <member key="_types.SuggestMode#missing"><summary><para>
+Only generate suggestions for terms that are not in the shard.
+</para></summary></member>
+  <member key="_types.SuggestMode#popular"><summary><para>
+Only suggest terms that occur in more docs on the shard than the original term.
+</para></summary></member>
+</doc>

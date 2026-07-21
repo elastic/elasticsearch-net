@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.cleanup_repository.Request"><summary><para>
+Clean up the snapshot repository.
+</para>
+<para>
+Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
+</para></summary></member>
+  <member key="snapshot.cleanup_repository.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>
+</para></summary></member>
+  <member key="snapshot.cleanup_repository.Request#repository"><summary><para>
+The name of the snapshot repository to clean up.
+</para></summary></member>
+  <member key="snapshot.cleanup_repository.Request#timeout"><summary><para>
+The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
+If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+</doc>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.LearningToRank#model_id"><summary><para>
+The unique identifier of the trained model uploaded to Elasticsearch
+</para></summary></member>
+  <member key="_global.search._types.LearningToRank#params"><summary><para>
+Named parameters to be passed to the query templates used for feature
+</para></summary></member>
+</doc>

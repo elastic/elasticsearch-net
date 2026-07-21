@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.get_behavioral_analytics.Request"><summary><para>
+Get behavioral analytics collections.
+</para></summary></member>
+  <member key="search_application.get_behavioral_analytics.Request#name"><summary><para>
+A list of analytics collections to limit the returned information
+</para></summary></member>
+</doc>

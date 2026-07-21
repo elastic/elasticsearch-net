@@ -1,0 +1,10 @@
+{
+  bottom_left: {
+    lat: 30,
+    lon: 40
+  },
+  top_right: {
+    lat: 10,
+    lon: 20
+  }
+}

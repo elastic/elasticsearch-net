@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.info.NodeOperatingSystemInfo#allocated_processors"><summary><para>
+The number of processors actually used to calculate thread pool size. This number can be set with the node.processors setting of a node and defaults to the number of processors reported by the OS.
+</para></summary></member>
+  <member key="nodes.info.NodeOperatingSystemInfo#arch"><summary><para>
+Name of the JVM architecture (ex: amd64, x86)
+</para></summary></member>
+  <member key="nodes.info.NodeOperatingSystemInfo#available_processors"><summary><para>
+Number of processors available to the Java virtual machine
+</para></summary></member>
+  <member key="nodes.info.NodeOperatingSystemInfo#name"><summary><para>
+Name of the operating system (ex: Linux, Windows, Mac OS X)
+</para></summary></member>
+  <member key="nodes.info.NodeOperatingSystemInfo#refresh_interval_in_millis"><summary><para>
+Refresh interval for the OS statistics
+</para></summary></member>
+  <member key="nodes.info.NodeOperatingSystemInfo#version"><summary><para>
+Version of the operating system
+</para></summary></member>
+</doc>

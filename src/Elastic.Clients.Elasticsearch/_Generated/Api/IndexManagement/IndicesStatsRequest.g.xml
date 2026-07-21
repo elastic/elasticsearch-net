@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.stats.Request"><summary><para>
+Get index statistics.
+</para>
+<para>
+For data streams, the API retrieves statistics for the stream's backing indices.
+</para>
+<para>
+By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
+<c>primaries</c> are the values for only the primary shards.
+<c>total</c> are the accumulated values for both primary and replica shards.
+</para>
+<para>
+To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
+</para>
+<para>
+NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
+</para></summary></member>
+  <member key="indices.stats.Request#completion_fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+</para></summary></member>
+  <member key="indices.stats.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument
+determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.stats.Request#fielddata_fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+</para></summary></member>
+  <member key="indices.stats.Request#fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in the statistics.
+</para></summary></member>
+  <member key="indices.stats.Request#forbid_closed_indices"><summary><para>
+If true, statistics are not collected from closed indices.
+</para></summary></member>
+  <member key="indices.stats.Request#groups"><summary><para>
+Comma-separated list of search groups to include in the search statistics.
+</para></summary></member>
+  <member key="indices.stats.Request#include_segment_file_sizes"><summary><para>
+If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+</para></summary></member>
+  <member key="indices.stats.Request#include_unloaded_segments"><summary><para>
+If true, the response includes information from segments that are not loaded into memory.
+</para></summary></member>
+  <member key="indices.stats.Request#index"><summary><para>
+A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
+</para></summary></member>
+  <member key="indices.stats.Request#level"><summary><para>
+Indicates whether statistics are aggregated at the cluster, indices, or shards level.
+</para></summary></member>
+  <member key="indices.stats.Request#metric"><summary><para>
+Comma-separated list of metrics used to limit the request.
+</para></summary></member>
+</doc>

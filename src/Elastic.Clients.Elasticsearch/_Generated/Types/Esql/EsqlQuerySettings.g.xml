@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.EsqlQuerySettings"><summary><para>
+Per-query settings supplied through the request body.
+This is the request-body equivalent of the in-query <c>SET</c> command.
+Only settings that are exposed as request-body parameters can be set here; other <c>SET</c>-only
+settings (such as <c>unmapped_fields</c>) must be supplied in the query itself.
+</para></summary></member>
+  <member key="esql._types.EsqlQuerySettings#approximation"><summary><para>
+Enables query approximation if possible for the query.
+<c>false</c> (the default) disables query approximation and <c>true</c> enables it with default settings.
+A map value enables query approximation with custom settings.
+</para></summary></member>
+  <member key="esql._types.EsqlQuerySettings#column_metadata"><summary><para>
+When enabled, column metadata is added to the query response as additional <c>_meta</c> properties.
+Currently, only <c>_meta.bucket</c> is added for columns corresponding to the <c>BUCKET</c> function, containing the bucket interval and unit for queries where it can be determined.
+</para></summary></member>
+  <member key="esql._types.EsqlQuerySettings#project_routing"><summary><para>
+Limits the scope of a cross-project search (CPS) to specific projects before query execution, based on a Lucene query expression evaluated against project tags.
+Excluded projects are not queried, which can reduce cost and latency.
+</para></summary></member>
+  <member key="esql._types.EsqlQuerySettings#time_zone"><summary><para>
+The default timezone to be used in the query.
+It defaults to UTC and overrides the <c>time_zone</c> request parameter.
+</para></summary></member>
+</doc>

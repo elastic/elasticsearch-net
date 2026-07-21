@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.DateDecayFunction#multi_value_mode"><summary><para>
+Determines how the distance is calculated when a field used for computing the decay contains multiple values.
+</para></summary></member>
+</doc>

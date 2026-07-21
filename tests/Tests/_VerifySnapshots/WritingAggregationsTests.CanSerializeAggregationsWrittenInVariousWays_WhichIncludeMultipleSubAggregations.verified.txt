@@ -1,0 +1,24 @@
+{
+  name_of_child_agg: {
+    aggregations: {
+      average_per_child: {
+        avg: {
+          field: confidenceFactor
+        }
+      },
+      max_per_child: {
+        max: {
+          field: confidenceFactor
+        }
+      },
+      min_per_child: {
+        min: {
+          field: confidenceFactor
+        }
+      }
+    },
+    children: {
+      type: commits
+    }
+  }
+}

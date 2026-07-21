@@ -1,0 +1,21 @@
+{
+  aggregations: {
+    ipv4-subnets: {
+      ip_prefix: {
+        field: leadDeveloper.ipAddress,
+        prefix_length: 24
+      },
+      meta: {
+        foo: bar
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}

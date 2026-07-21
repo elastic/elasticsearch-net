@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#base_path"><summary><para>
+The path to the repository data within the container.
+It defaults to the root directory.
+</para>
+<para>
+NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
+Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#client"><summary><para>
+The name of the Azure repository client to use.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#container"><summary><para>
+The Azure container.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#delete_objects_max_size"><summary><para>
+The maxmimum batch size, between 1 and 256, used for <c>BlobBatch</c> requests.
+Defaults to 256 which is the maximum number supported by the Azure blob batch API.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#location_mode"><summary><para>
+Either <c>primary_only</c> or <c>secondary_only</c>.
+Note that if you set it to <c>secondary_only</c>, it will force <c>readonly</c> to <c>true</c>.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#max_concurrent_batch_deletes"><summary><para>
+The maximum number of concurrent batch delete requests that will be submitted for any individual bulk delete with <c>BlobBatch</c>.
+Note that the effective number of concurrent deletes is further limited by the Azure client connection and event loop thread limits.
+Defaults to 10, minimum is 1, maximum is 100.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#readonly"><summary><para>
+If <c>true</c>, the repository is read-only.
+The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
+</para>
+<para>
+Only a cluster with write access can create snapshots in the repository.
+All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
+If <c>false</c>, the cluster can write to the repository and create snapshots in it.
+</para>
+<para>
+IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
+Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
+</para></summary></member>
+</doc>

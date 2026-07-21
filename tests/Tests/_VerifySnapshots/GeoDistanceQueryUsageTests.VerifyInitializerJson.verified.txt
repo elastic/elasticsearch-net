@@ -1,0 +1,15 @@
+{
+  query: {
+    geo_distance: {
+      boost: 1.1,
+      distance: 200m,
+      distance_type: arc,
+      locationPoint: {
+        lat: 34,
+        lon: 34
+      },
+      validation_method: ignore_malformed,
+      _name: named_query
+    }
+  }
+}

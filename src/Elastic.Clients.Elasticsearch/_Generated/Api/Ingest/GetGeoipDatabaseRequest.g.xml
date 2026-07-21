@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.get_geoip_database.Request"><summary><para>
+Get GeoIP database configurations.
+</para>
+<para>
+Get information about one or more IP geolocation database configurations.
+</para></summary></member>
+  <member key="ingest.get_geoip_database.Request#id"><summary><para>
+A comma-separated list of database configuration IDs to retrieve.
+Wildcard (<c>*</c>) expressions are supported.
+To get all database configurations, omit this parameter or use <c>*</c>.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="graph._types.Hop#connections"><summary><para>
+Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
+</para></summary></member>
+  <member key="graph._types.Hop#query"><summary><para>
+An optional guiding query that constrains the Graph API as it explores connected terms.
+</para></summary></member>
+  <member key="graph._types.Hop#vertices"><summary><para>
+Contains the fields you are interested in.
+</para></summary></member>
+</doc>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelDeploymentStats#allocation_status"><summary><para>
+The detailed allocation status for the deployment.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#deployment_id"><summary><para>
+The unique identifier for the trained model deployment.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#error_count"><summary><para>
+The sum of <c>error_count</c> for all nodes in the deployment.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#inference_count"><summary><para>
+The sum of <c>inference_count</c> for all nodes in the deployment.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#model_id"><summary><para>
+The unique identifier for the trained model.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#nodes"><summary><para>
+The deployment stats for each node that currently has the model allocated.
+In serverless, stats are reported for a single unnamed virtual node.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#number_of_allocations"><summary><para>
+The number of allocations requested.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#queue_capacity"><summary><para>
+The number of inference requests that can be queued before new requests are rejected.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#reason"><summary><para>
+The reason for the current deployment state. Usually only populated when
+the model is not deployed to a node.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#rejected_execution_count"><summary><para>
+The sum of <c>rejected_execution_count</c> for all nodes in the deployment.
+Individual nodes reject an inference request if the inference queue is full.
+The queue size is controlled by the <c>queue_capacity</c> setting in the start
+trained model deployment API.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#start_time"><summary><para>
+The epoch timestamp when the deployment started.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#state"><summary><para>
+The overall state of the deployment.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#threads_per_allocation"><summary><para>
+The number of threads used be each allocation during inference.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentStats#timeout_count"><summary><para>
+The sum of <c>timeout_count</c> for all nodes in the deployment.
+</para></summary></member>
+</doc>

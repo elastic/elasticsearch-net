@@ -1,0 +1,13 @@
+{
+  analysis: {
+    analyzer: {
+      whitespace_lowercase: {
+        filter: [
+          lowercase
+        ],
+        tokenizer: whitespace,
+        type: custom
+      }
+    }
+  }
+}

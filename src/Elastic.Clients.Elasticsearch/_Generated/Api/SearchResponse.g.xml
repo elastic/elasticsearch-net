@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search.Response#_scroll_id"><summary><para>
+The identifier for the search and its search context.
+You can use this scroll ID with the scroll API to retrieve the next batch of search results for the request.
+This property is returned only if the <c>scroll</c> query parameter is specified in the request.
+</para></summary></member>
+  <member key="_global.search.Response#_shards"><summary><para>
+A count of shards used for the request.
+</para></summary></member>
+  <member key="_global.search.Response#hits"><summary><para>
+The returned documents and metadata.
+</para></summary></member>
+  <member key="_global.search.Response#timed_out"><summary><para>
+If <c>true</c>, the request timed out before completion; returned results may be partial or empty.
+</para></summary></member>
+  <member key="_global.search.Response#took"><summary><para>
+The number of milliseconds it took Elasticsearch to run the request.
+This value is calculated by measuring the time elapsed between receipt of a request on the coordinating node and the time at which the coordinating node is ready to send the response.
+It includes:
+</para>
+<list type="bullet">
+<item>
+<para>
+Communication time between the coordinating node and data nodes
+</para>
+</item>
+<item>
+<para>
+Time the request spends in the search thread pool, queued for execution
+</para>
+</item>
+<item>
+<para>
+Actual run time
+</para>
+</item>
+</list>
+<para>
+It does not include:
+</para>
+<list type="bullet">
+<item>
+<para>
+Time needed to send the request to Elasticsearch
+</para>
+</item>
+<item>
+<para>
+Time needed to serialize the JSON response
+</para>
+</item>
+<item>
+<para>
+Time needed to send the response to a client
+</para>
+</item>
+</list></summary></member>
+</doc>

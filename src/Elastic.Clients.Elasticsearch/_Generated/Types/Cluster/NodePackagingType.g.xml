@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.NodePackagingType#count"><summary><para>
+Number of selected nodes using the distribution flavor and file type.
+</para></summary></member>
+  <member key="cluster.stats.NodePackagingType#flavor"><summary><para>
+Type of Elasticsearch distribution. This is always <c>default</c>.
+</para></summary></member>
+  <member key="cluster.stats.NodePackagingType#type"><summary><para>
+File type (such as <c>tar</c> or <c>zip</c>) used for the distribution package.
+</para></summary></member>
+</doc>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_data_lifecycle.Request"><summary><para>
+Get data stream lifecycles.
+</para>
+<para>
+Get the data stream lifecycle configuration of one or more data streams.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle.Request#expand_wildcards"><summary><para>
+Type of data stream that wildcard patterns can match.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle.Request#include_defaults"><summary><para>
+If <c>true</c>, return all default settings in the response.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle.Request#name"><summary><para>
+Comma-separated list of data streams to limit the request.
+Supports wildcards (<c>*</c>).
+To target all data streams, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+</doc>

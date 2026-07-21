@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.LimitTokenCountTokenFilter#consume_all_tokens"><summary><para>
+If <c>true</c>, the limit filter exhausts the token stream, even if the <c>max_token_count</c> has already been reached. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.LimitTokenCountTokenFilter#max_token_count"><summary><para>
+Maximum number of tokens to keep. Once this limit is reached, any remaining tokens are excluded from the output. Defaults to <c>1</c>.
+</para></summary></member>
+</doc>

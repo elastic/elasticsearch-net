@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Breaker#estimated_size"><summary><para>
+Estimated memory used for the operation.
+</para></summary></member>
+  <member key="nodes._types.Breaker#estimated_size_in_bytes"><summary><para>
+Estimated memory used, in bytes, for the operation.
+</para></summary></member>
+  <member key="nodes._types.Breaker#limit_size"><summary><para>
+Memory limit for the circuit breaker.
+</para></summary></member>
+  <member key="nodes._types.Breaker#limit_size_in_bytes"><summary><para>
+Memory limit, in bytes, for the circuit breaker.
+</para></summary></member>
+  <member key="nodes._types.Breaker#overhead"><summary><para>
+A constant that all estimates for the circuit breaker are multiplied with to calculate a final estimate.
+</para></summary></member>
+  <member key="nodes._types.Breaker#tripped"><summary><para>
+Total number of times the circuit breaker has been triggered and prevented an out of memory error.
+</para></summary></member>
+</doc>

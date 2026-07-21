@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_data_lifecycle_stats.Response#data_stream_count"><summary><para>
+The count of data streams currently being managed by the data stream lifecycle.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle_stats.Response#data_streams"><summary><para>
+Information about the data streams that are managed by the data stream lifecycle.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle_stats.Response#last_run_duration_in_millis"><summary><para>
+The duration of the last data stream lifecycle execution.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle_stats.Response#time_between_starts_in_millis"><summary><para>
+The time that passed between the start of the last two data stream lifecycle executions.
+This value should amount approximately to <c>data_streams.lifecycle.poll_interval</c>.
+</para></summary></member>
+</doc>

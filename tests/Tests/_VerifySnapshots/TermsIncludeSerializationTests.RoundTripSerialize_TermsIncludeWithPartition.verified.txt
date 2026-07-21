@@ -1,0 +1,6 @@
+{
+  include: {
+    num_partitions: 100,
+    partition: 10
+  }
+}

@@ -1,0 +1,20 @@
+{
+  query: {
+    geo_bounding_box: {
+      boost: 1.1,
+      ignore_unmapped: true,
+      locationPoint: {
+        bottom_right: {
+          lat: -34,
+          lon: 34
+        },
+        top_left: {
+          lat: 34,
+          lon: -34
+        }
+      },
+      validation_method: strict,
+      _name: named_query
+    }
+  }
+}

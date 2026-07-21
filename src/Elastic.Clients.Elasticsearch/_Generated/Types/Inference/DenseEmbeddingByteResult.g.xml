@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.DenseEmbeddingByteResult"><summary><para>
+The dense embedding result object for byte representation
+</para></summary></member>
+</doc>

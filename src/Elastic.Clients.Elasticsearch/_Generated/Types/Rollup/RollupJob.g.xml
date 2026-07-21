@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup.get_jobs.RollupJob#config"><summary><para>
+The rollup job configuration.
+</para></summary></member>
+  <member key="rollup.get_jobs.RollupJob#stats"><summary><para>
+Transient statistics about the rollup job, such as how many documents have been processed and how many rollup summary docs have been indexed.
+These stats are not persisted.
+If a node is restarted, these stats are reset.
+</para></summary></member>
+  <member key="rollup.get_jobs.RollupJob#status"><summary><para>
+The current status of the indexer for the rollup job.
+</para></summary></member>
+</doc>

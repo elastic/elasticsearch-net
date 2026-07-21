@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.CompletionStats#size"><summary><para>
+Total amount of memory used for completion across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.CompletionStats#size_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for completion across all shards assigned to selected nodes.
+</para></summary></member>
+</doc>

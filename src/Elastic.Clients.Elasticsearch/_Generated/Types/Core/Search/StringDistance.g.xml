@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.StringDistance#damerau_levenshtein"><summary><para>
+String distance algorithm based on Damerau-Levenshtein algorithm.
+</para></summary></member>
+  <member key="_global.search._types.StringDistance#internal"><summary><para>
+Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.
+</para></summary></member>
+  <member key="_global.search._types.StringDistance#jaro_winkler"><summary><para>
+String distance algorithm based on Jaro-Winkler algorithm.
+</para></summary></member>
+  <member key="_global.search._types.StringDistance#levenshtein"><summary><para>
+String distance algorithm based on the Levenshtein edit distance algorithm.
+</para></summary></member>
+  <member key="_global.search._types.StringDistance#ngram"><summary><para>
+String distance algorithm based on character n-grams.
+</para></summary></member>
+</doc>

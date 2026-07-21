@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_settings.Response#security"><summary><para>
+Settings for the index used for most security configuration, including native realm users and roles configured with the API.
+</para></summary></member>
+  <member key="security.get_settings.Response#security-profile"><summary><para>
+Settings for the index used to store profile information.
+</para></summary></member>
+  <member key="security.get_settings.Response#security-tokens"><summary><para>
+Settings for the index used to store tokens.
+</para></summary></member>
+</doc>

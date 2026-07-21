@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TermsPartition#num_partitions"><summary><para>
+The number of partitions.
+</para></summary></member>
+  <member key="_types.aggregations.TermsPartition#partition"><summary><para>
+The partition number for this request.
+</para></summary></member>
+</doc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Http#clients"><summary><para>
+Information on current and recently-closed HTTP client connections.
+Clients that have been closed longer than the <c>http.client_stats.closed_channels.max_age</c> setting will not be represented here.
+</para></summary></member>
+  <member key="nodes._types.Http#current_open"><summary><para>
+Current number of open HTTP connections for the node.
+</para></summary></member>
+  <member key="nodes._types.Http#routes"><summary><para>
+Detailed HTTP stats broken down by route
+</para></summary></member>
+  <member key="nodes._types.Http#total_opened"><summary><para>
+Total number of HTTP connections opened for the node.
+</para></summary></member>
+</doc>

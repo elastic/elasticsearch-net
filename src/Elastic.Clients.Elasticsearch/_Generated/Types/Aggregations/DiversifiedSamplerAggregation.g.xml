@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.DiversifiedSamplerAggregation#execution_hint"><summary><para>
+The type of value used for de-duplication.
+</para></summary></member>
+  <member key="_types.aggregations.DiversifiedSamplerAggregation#field"><summary><para>
+The field used to provide values used for de-duplication.
+</para></summary></member>
+  <member key="_types.aggregations.DiversifiedSamplerAggregation#max_docs_per_value"><summary><para>
+Limits how many documents are permitted per choice of de-duplicating value.
+</para></summary></member>
+  <member key="_types.aggregations.DiversifiedSamplerAggregation#shard_size"><summary><para>
+Limits how many top-scoring documents are collected in the sample processed on each shard.
+</para></summary></member>
+</doc>

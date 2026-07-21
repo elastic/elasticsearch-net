@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.DataStreamOptions"><summary><para>
+Data stream options contain the configuration of data stream level features for a given data stream, for example,
+the failure store configuration.
+</para></summary></member>
+  <member key="indices._types.DataStreamOptions#failure_store"><summary><para>
+If defined, it specifies configuration for the failure store of this data stream.
+</para></summary></member>
+</doc>

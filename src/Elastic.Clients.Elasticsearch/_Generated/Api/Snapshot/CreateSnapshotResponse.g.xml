@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.create.Response#accepted"><summary><para>
+Equals <c>true</c> if the snapshot was accepted. Present when the request had <c>wait_for_completion</c> set to <c>false</c>
+</para></summary></member>
+  <member key="snapshot.create.Response#snapshot"><summary><para>
+Snapshot information. Present when the request had <c>wait_for_completion</c> set to <c>true</c>
+</para></summary></member>
+</doc>

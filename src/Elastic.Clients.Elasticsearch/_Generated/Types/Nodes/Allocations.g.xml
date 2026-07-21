@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Allocations#current_disk_usage"><summary><para>
+Current disk usage for the node.
+</para></summary></member>
+  <member key="nodes._types.Allocations#current_disk_usage_in_bytes"><summary><para>
+Current disk usage, in bytes, for the node.
+</para></summary></member>
+  <member key="nodes._types.Allocations#forecasted_disk_usage"><summary><para>
+Forecasted disk usage for the node.
+</para></summary></member>
+  <member key="nodes._types.Allocations#forecasted_disk_usage_in_bytes"><summary><para>
+Forecasted disk usage, in bytes, for the node.
+</para></summary></member>
+  <member key="nodes._types.Allocations#forecasted_ingest_load"><summary><para>
+Forecasted ingest load for the node.
+</para></summary></member>
+  <member key="nodes._types.Allocations#shards"><summary><para>
+Number of shards allocated to the node.
+</para></summary></member>
+  <member key="nodes._types.Allocations#undesired_shards"><summary><para>
+Number of shards allocated to the node that are currently undesired.
+</para></summary></member>
+</doc>

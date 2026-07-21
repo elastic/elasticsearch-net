@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.AutoDateHistogramAggregation#buckets"><summary><para>
+The target number of buckets.
+</para></summary></member>
+  <member key="_types.aggregations.AutoDateHistogramAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.AutoDateHistogramAggregation#format"><summary><para>
+The date format used to format <c>key_as_string</c> in the response.
+If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+</para></summary></member>
+  <member key="_types.aggregations.AutoDateHistogramAggregation#minimum_interval"><summary><para>
+The minimum rounding interval.
+This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
+</para></summary></member>
+  <member key="_types.aggregations.AutoDateHistogramAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.AutoDateHistogramAggregation#offset"><summary><para>
+Time zone specified as a ISO 8601 UTC offset.
+</para></summary></member>
+  <member key="_types.aggregations.AutoDateHistogramAggregation#time_zone"><summary><para>
+Time zone ID.
+</para></summary></member>
+</doc>

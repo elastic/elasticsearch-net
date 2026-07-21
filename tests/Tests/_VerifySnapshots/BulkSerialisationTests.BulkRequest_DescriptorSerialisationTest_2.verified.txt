@@ -1,0 +1,15 @@
+{
+  join: project,
+  lastActivity: Date_MinValue,
+  leadDeveloper: {
+    firstName: Steve,
+    gender: Male,
+    id: 0,
+    lastName: Gordon
+  },
+  numberOfContributors: 0,
+  startedOn: Date_MinValue,
+  state: BellyUp,
+  type: project,
+  visibility: Public
+}

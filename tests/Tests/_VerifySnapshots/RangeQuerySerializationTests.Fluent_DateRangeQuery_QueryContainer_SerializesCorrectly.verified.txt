@@ -1,0 +1,10 @@
+{
+  range: {
+    my-field: {
+      boost: 1.1,
+      gte: now-1y/M,
+      lt: now,
+      _name: named_query
+    }
+  }
+}

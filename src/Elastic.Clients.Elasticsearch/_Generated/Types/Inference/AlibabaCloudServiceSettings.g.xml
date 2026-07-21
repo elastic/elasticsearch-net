@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.AlibabaCloudServiceSettings#api_key"><summary><para>
+A valid API key for the AlibabaCloud AI Search API.
+</para></summary></member>
+  <member key="inference._types.AlibabaCloudServiceSettings#host"><summary><para>
+The name of the host address used for the inference task.
+You can find the host address in the API keys section of the documentation.
+</para></summary></member>
+  <member key="inference._types.AlibabaCloudServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from AlibabaCloud AI Search.
+By default, the <c>alibabacloud-ai-search</c> service sets the number of requests allowed per minute to <c>1000</c>.
+</para></summary></member>
+  <member key="inference._types.AlibabaCloudServiceSettings#service_id"><summary><para>
+The name of the model service to use for the inference task.
+The following service IDs are available for the <c>completion</c> task:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>ops-qwen-turbo</c>
+</para>
+</item>
+<item>
+<para>
+<c>qwen-turbo</c>
+</para>
+</item>
+<item>
+<para>
+<c>qwen-plus</c>
+</para>
+</item>
+<item>
+<para>
+<c>qwen-max ÷ qwen-max-longcontext</c>
+</para>
+</item>
+</list>
+<para>
+The following service ID is available for the <c>rerank</c> task:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>ops-bge-reranker-larger</c>
+</para>
+</item>
+</list>
+<para>
+The following service ID is available for the <c>sparse_embedding</c> task:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>ops-text-sparse-embedding-001</c>
+</para>
+</item>
+</list>
+<para>
+The following service IDs are available for the <c>text_embedding</c> task:
+</para>
+<para>
+<c>ops-text-embedding-001</c>
+<c>ops-text-embedding-zh-001</c>
+<c>ops-text-embedding-en-001</c>
+<c>ops-text-embedding-002</c>
+</para></summary></member>
+  <member key="inference._types.AlibabaCloudServiceSettings#workspace"><summary><para>
+The name of the workspace used for the inference task.
+</para></summary></member>
+</doc>

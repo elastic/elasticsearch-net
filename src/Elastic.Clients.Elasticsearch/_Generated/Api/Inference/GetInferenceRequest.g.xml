@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.get.Request"><summary><para>
+Get an inference endpoint.
+</para>
+<para>
+This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege).
+</para></summary></member>
+  <member key="inference.get.Request#inference_id"><summary><para>
+The inference Id of the endpoint to return. Using <c>_all</c> or <c>*</c> will return all endpoints with the specified
+<c>task_type</c> if one is specified, or all endpoints for all task types if no <c>task_type</c> is specified
+</para></summary></member>
+  <member key="inference.get.Request#task_type"><summary><para>
+The task type of the endpoint to return
+</para></summary></member>
+</doc>

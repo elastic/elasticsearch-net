@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.IntervalsPrefix#analyzer"><summary><para>
+Analyzer used to analyze the <c>prefix</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsPrefix#prefix"><summary><para>
+Beginning characters of terms you wish to find in the top-level field.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsPrefix#use_field"><summary><para>
+If specified, match intervals from this field rather than the top-level field.
+The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+</para></summary></member>
+</doc>

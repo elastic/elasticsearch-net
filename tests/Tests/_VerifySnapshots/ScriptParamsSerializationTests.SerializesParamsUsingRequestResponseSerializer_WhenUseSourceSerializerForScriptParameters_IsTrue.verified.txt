@@ -1,0 +1,6 @@
+{
+  params: {
+    fromSourceSerializer: true
+  },
+  source: source
+}

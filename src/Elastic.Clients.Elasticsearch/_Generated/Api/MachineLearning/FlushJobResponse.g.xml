@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.flush_job.Response#last_finalized_bucket_end"><summary><para>
+Provides the timestamp (in milliseconds since the epoch) of the end of
+the last bucket that was processed.
+</para></summary></member>
+</doc>

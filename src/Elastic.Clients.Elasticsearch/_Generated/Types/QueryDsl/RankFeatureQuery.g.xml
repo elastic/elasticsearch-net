@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.RankFeatureQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.query_dsl.RankFeatureQuery#field"><summary><para>
+<c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
+</para></summary></member>
+  <member key="_types.query_dsl.RankFeatureQuery#linear"><summary><para>
+Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.RankFeatureQuery#log"><summary><para>
+Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.RankFeatureQuery#saturation"><summary><para>
+Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.RankFeatureQuery#sigmoid"><summary><para>
+Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
+</para></summary></member>
+</doc>

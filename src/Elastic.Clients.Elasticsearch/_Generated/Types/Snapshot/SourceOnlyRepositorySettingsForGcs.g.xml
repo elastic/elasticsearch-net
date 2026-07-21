@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForGcs#application_name"><summary><para>
+The name used by the client when it uses the Google Cloud Storage service.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForGcs#base_path"><summary><para>
+The path to the repository data within the bucket.
+It defaults to the root of the bucket.
+</para>
+<para>
+NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
+Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForGcs#bucket"><summary><para>
+The name of the bucket to be used for snapshots.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForGcs#client"><summary><para>
+The name of the client to use to connect to Google Cloud Storage.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForGcs#readonly"><summary><para>
+If <c>true</c>, the repository is read-only.
+The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
+</para>
+<para>
+Only a cluster with write access can create snapshots in the repository.
+All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
+</para>
+<para>
+If <c>false</c>, the cluster can write to the repository and create snapshots in it.
+</para>
+<para>
+IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
+Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
+</para></summary></member>
+</doc>

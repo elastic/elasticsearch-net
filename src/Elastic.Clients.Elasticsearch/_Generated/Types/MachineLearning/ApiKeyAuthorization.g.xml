@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.ApiKeyAuthorization#id"><summary><para>
+The identifier for the API key.
+</para></summary></member>
+  <member key="ml._types.ApiKeyAuthorization#name"><summary><para>
+The name of the API key.
+</para></summary></member>
+</doc>

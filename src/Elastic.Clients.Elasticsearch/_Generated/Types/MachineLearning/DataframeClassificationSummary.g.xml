@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.evaluate_data_frame.DataframeClassificationSummary#accuracy"><summary><para>
+Accuracy of predictions (per-class and overall).
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.DataframeClassificationSummary#auc_roc"><summary><para>
+The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve.
+It is calculated for a specific class (provided as "class_name") treated as positive.
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.DataframeClassificationSummary#multiclass_confusion_matrix"><summary><para>
+Multiclass confusion matrix.
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.DataframeClassificationSummary#precision"><summary><para>
+Precision of predictions (per-class and average).
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.DataframeClassificationSummary#recall"><summary><para>
+Recall of predictions (per-class and average).
+</para></summary></member>
+</doc>

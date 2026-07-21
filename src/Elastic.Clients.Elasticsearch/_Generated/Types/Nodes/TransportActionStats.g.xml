@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.TransportActionStats#requests"><summary><para>
+Statistics about the requests received for this action.
+</para></summary></member>
+  <member key="nodes._types.TransportActionStats#responses"><summary><para>
+Statistics about the responses sent for this action.
+</para></summary></member>
+</doc>

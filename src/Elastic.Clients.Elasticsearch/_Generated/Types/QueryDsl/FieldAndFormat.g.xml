@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.FieldAndFormat"><summary><para>
+A reference to a field with formatting instructions on how to return the value
+</para></summary></member>
+  <member key="_types.query_dsl.FieldAndFormat#field"><summary><para>
+A wildcard pattern. The request returns values for field names matching this pattern.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldAndFormat#format"><summary><para>
+The format in which the values are returned.
+</para></summary></member>
+</doc>

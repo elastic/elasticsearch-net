@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.ModelSnapshot#description"><summary><para>
+An optional description of the job.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#job_id"><summary><para>
+A numerical character string that uniquely identifies the job that the snapshot was created for.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#latest_record_time_stamp"><summary><para>
+The timestamp of the latest processed record.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#latest_result_time_stamp"><summary><para>
+The timestamp of the latest bucket result.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#min_version"><summary><para>
+The minimum version required to be able to restore the model snapshot.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#model_size_stats"><summary><para>
+Summary information describing the model.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#retain"><summary><para>
+If true, this snapshot will not be deleted during automatic cleanup of snapshots older than model_snapshot_retention_days. However, this snapshot will be deleted when the job is deleted. The default value is false.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#snapshot_doc_count"><summary><para>
+For internal use only.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#snapshot_id"><summary><para>
+A numerical character string that uniquely identifies the model snapshot.
+</para></summary></member>
+  <member key="ml._types.ModelSnapshot#timestamp"><summary><para>
+The creation timestamp for the snapshot.
+</para></summary></member>
+</doc>

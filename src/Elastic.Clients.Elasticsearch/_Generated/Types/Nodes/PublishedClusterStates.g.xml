@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.PublishedClusterStates#compatible_diffs"><summary><para>
+Number of compatible differences between published cluster states.
+</para></summary></member>
+  <member key="nodes._types.PublishedClusterStates#full_states"><summary><para>
+Number of published cluster states.
+</para></summary></member>
+  <member key="nodes._types.PublishedClusterStates#incompatible_diffs"><summary><para>
+Number of incompatible differences between published cluster states.
+</para></summary></member>
+</doc>

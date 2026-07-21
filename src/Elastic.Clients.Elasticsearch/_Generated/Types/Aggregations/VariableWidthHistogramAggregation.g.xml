@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.VariableWidthHistogramAggregation#buckets"><summary><para>
+The target number of buckets.
+</para></summary></member>
+  <member key="_types.aggregations.VariableWidthHistogramAggregation#field"><summary><para>
+The name of the field.
+</para></summary></member>
+  <member key="_types.aggregations.VariableWidthHistogramAggregation#initial_buffer"><summary><para>
+Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.
+Defaults to <c>min(10 * shard_size, 50000)</c>.
+</para></summary></member>
+  <member key="_types.aggregations.VariableWidthHistogramAggregation#shard_size"><summary><para>
+The number of buckets that the coordinating node will request from each shard.
+Defaults to <c>buckets * 50</c>.
+</para></summary></member>
+</doc>

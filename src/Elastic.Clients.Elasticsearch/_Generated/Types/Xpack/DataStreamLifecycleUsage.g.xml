@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.DataStreamLifecycleUsage"><summary><para>
+Usage statistics for data stream lifecycle (DLM), reported by <c>_xpack/usage</c> under <c>data_lifecycle</c>.
+Besides <c>available</c> and <c>enabled</c>, all the following statistics are only present when the feature is enabled.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleUsage#count"><summary><para>
+The number of data streams that have a lifecycle configured.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleUsage#data_retention"><summary><para>
+Statistics about the explicitly configured data retention across data streams.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleUsage#default_rollover_used"><summary><para>
+Whether the default rollover configuration is used by at least one data stream.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleUsage#effective_retention"><summary><para>
+Statistics about the effective retention (configured or derived from global retention) across data streams.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleUsage#frozen_after"><summary><para>
+Statistics about the configured <c>frozen_after</c> (searchable snapshot) tier threshold across data streams.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleUsage#global_retention"><summary><para>
+Statistics about the cluster's global default and maximum retention settings.
+</para></summary></member>
+</doc>

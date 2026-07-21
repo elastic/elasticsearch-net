@@ -1,0 +1,13 @@
+{
+  query: {
+    bool: {
+      filter: {
+        term: {
+          name: {
+            value: x
+          }
+        }
+      }
+    }
+  }
+}

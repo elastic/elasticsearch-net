@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.get_node_stats.Request"><summary><para>
+Get node stats.
+</para>
+<para>
+Get per-node information about transform usage.
+</para></summary></member>
+</doc>

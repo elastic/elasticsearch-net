@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.QueryCacheStats#cache_count"><summary><para>
+Total number of entries added to the query cache across all shards assigned to selected nodes.
+This number includes current and evicted entries.
+</para></summary></member>
+  <member key="_types.QueryCacheStats#cache_size"><summary><para>
+Total number of entries currently in the query cache across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.QueryCacheStats#evictions"><summary><para>
+Total number of query cache evictions across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.QueryCacheStats#hit_count"><summary><para>
+Total count of query cache hits across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.QueryCacheStats#memory_size"><summary><para>
+Total amount of memory used for the query cache across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.QueryCacheStats#memory_size_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for the query cache across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.QueryCacheStats#miss_count"><summary><para>
+Total count of query cache misses across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.QueryCacheStats#total_count"><summary><para>
+Total count of hits and misses in the query cache across all shards assigned to selected nodes.
+</para></summary></member>
+</doc>

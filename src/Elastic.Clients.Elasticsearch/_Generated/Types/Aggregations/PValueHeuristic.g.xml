@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.PValueHeuristic#normalize_above"><summary><para>
+Should the results be normalized when above the given value.
+Allows for consistent significance results at various scales.
+Note: <c>0</c> is a special value which means no normalization
+</para></summary></member>
+</doc>

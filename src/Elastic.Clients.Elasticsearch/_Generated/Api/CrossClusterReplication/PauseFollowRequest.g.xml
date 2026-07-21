@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.pause_follow.Request"><summary><para>
+Pause a follower.
+</para>
+<para>
+Pause a cross-cluster replication follower index.
+The follower index will not fetch any additional operations from the leader index.
+You can resume following with the resume follower API.
+You can pause and resume a follower index to change the configuration of the following task.
+</para></summary></member>
+  <member key="ccr.pause_follow.Request#index"><summary><para>
+The name of the follower index.
+</para></summary></member>
+  <member key="ccr.pause_follow.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+It can also be set to <c>-1</c> to indicate that the request should never timeout.
+</para></summary></member>
+</doc>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.update_aliases.RemoveIndexAction#index"><summary><para>
+Data stream or index for the action.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.update_aliases.RemoveIndexAction#indices"><summary><para>
+Data streams or indices for the action.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.update_aliases.RemoveIndexAction#must_exist"><summary><para>
+If <c>true</c>, the alias must exist to perform the action.
+</para></summary></member>
+</doc>

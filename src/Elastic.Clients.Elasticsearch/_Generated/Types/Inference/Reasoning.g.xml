@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.Reasoning"><summary><para>
+The reasoning configuration to use for the completion request.
+Currently supported only for <c>elastic</c> provider.
+</para></summary></member>
+  <member key="inference._types.Reasoning#effort"><summary><para>
+The level of effort the model should put into reasoning.
+This is a hint that guides the model in how much effort to put into reasoning,
+with <c>xhigh</c> being the most effort and <c>none</c> being no effort.
+</para></summary></member>
+  <member key="inference._types.Reasoning#enabled"><summary><para>
+Whether to enable reasoning with default settings.
+This is a shortcut for enabling reasoning without having to specify the other parameters.
+If <c>enabled</c> is set to <c>true</c>, then reasoning at the <c>medium</c> effort level is enabled.
+Ignored if <c>effort</c> is specified,
+in which case that parameter will control the reasoning process instead.
+</para></summary></member>
+  <member key="inference._types.Reasoning#exclude"><summary><para>
+Whether to exclude reasoning information from the response.
+If <c>true</c>, the response will not include any reasoning details.
+</para></summary></member>
+  <member key="inference._types.Reasoning#summary"><summary><para>
+The level of detail included in the reasoning summary returned in the response.
+This is a hint on how much detail to include in the summary of the reasoning that is returned in the response,
+with <c>auto</c> being the default level of detail, <c>concise</c> being less detail, and <c>detailed</c> being more detail.
+</para></summary></member>
+</doc>

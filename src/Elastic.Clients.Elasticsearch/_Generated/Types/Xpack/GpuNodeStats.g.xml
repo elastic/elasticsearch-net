@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.GpuNodeStats"><summary><para>
+Per-node GPU statistics for vector indexing.
+</para></summary></member>
+  <member key="xpack.usage.GpuNodeStats#enabled"><summary><para>
+Whether GPU vector indexing is enabled on this node.
+</para></summary></member>
+  <member key="xpack.usage.GpuNodeStats#index_build_count"><summary><para>
+Number of GPU index builds performed on this node.
+</para></summary></member>
+  <member key="xpack.usage.GpuNodeStats#memory_in_bytes"><summary><para>
+GPU memory in bytes.
+</para></summary></member>
+  <member key="xpack.usage.GpuNodeStats#type"><summary><para>
+GPU device type (e.g., "NVIDIA L4", "NVIDIA A100").
+</para></summary></member>
+</doc>

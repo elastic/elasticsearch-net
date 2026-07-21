@@ -1,0 +1,6 @@
+{
+  name: {
+    boost: 1.2,
+    type: text
+  }
+}

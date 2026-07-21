@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.PercentilesAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.PercentilesAggregation#hdr"><summary><para>
+Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.
+</para></summary></member>
+  <member key="_types.aggregations.PercentilesAggregation#keyed"><summary><para>
+By default, the aggregation associates a unique string key with each bucket and returns the ranges as a hash rather than an array.
+Set to <c>false</c> to disable this behavior.
+</para></summary></member>
+  <member key="_types.aggregations.PercentilesAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.PercentilesAggregation#percents"><summary><para>
+The percentiles to calculate.
+</para></summary></member>
+  <member key="_types.aggregations.PercentilesAggregation#tdigest"><summary><para>
+Sets parameters for the default TDigest algorithm used to calculate percentiles.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.ChunkingConfig#mode"><summary><para>
+If the mode is <c>auto</c>, the chunk size is dynamically calculated;
+this is the recommended value when the datafeed does not use aggregations.
+If the mode is <c>manual</c>, chunking is applied according to the specified <c>time_span</c>;
+use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
+</para></summary></member>
+  <member key="ml._types.ChunkingConfig#time_span"><summary><para>
+The time span that each search will be querying. This setting is applicable only when the <c>mode</c> is set to <c>manual</c>.
+</para></summary></member>
+</doc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.MinHashTokenFilter#bucket_count"><summary><para>
+Number of buckets to which hashes are assigned. Defaults to <c>512</c>.
+</para></summary></member>
+  <member key="_types.analysis.MinHashTokenFilter#hash_count"><summary><para>
+Number of ways to hash each token in the stream. Defaults to <c>1</c>.
+</para></summary></member>
+  <member key="_types.analysis.MinHashTokenFilter#hash_set_size"><summary><para>
+Number of hashes to keep from each bucket. Defaults to <c>1</c>.
+Hashes are retained by ascending size, starting with the bucket’s smallest hash first.
+</para></summary></member>
+  <member key="_types.analysis.MinHashTokenFilter#with_rotation"><summary><para>
+If <c>true</c>, the filter fills empty buckets with the value of the first non-empty bucket to its circular right if the <c>hash_set_size</c> is <c>1</c>. If the <c>bucket_count</c> argument is greater than 1, this parameter defaults to <c>true</c>. Otherwise, this parameter defaults to <c>false</c>.
+</para></summary></member>
+</doc>

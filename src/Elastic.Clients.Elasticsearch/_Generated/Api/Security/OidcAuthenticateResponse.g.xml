@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.oidc_authenticate.Response#access_token"><summary><para>
+The Elasticsearch access token.
+</para></summary></member>
+  <member key="security.oidc_authenticate.Response#expires_in"><summary><para>
+The duration (in seconds) of the tokens.
+</para></summary></member>
+  <member key="security.oidc_authenticate.Response#refresh_token"><summary><para>
+The Elasticsearch refresh token.
+</para></summary></member>
+  <member key="security.oidc_authenticate.Response#type"><summary><para>
+The type of token.
+</para></summary></member>
+</doc>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.GeoResults#actual_point"><summary><para>
+The actual value for the bucket formatted as a <c>geo_point</c>.
+</para></summary></member>
+  <member key="ml._types.GeoResults#typical_point"><summary><para>
+The typical value for the bucket formatted as a <c>geo_point</c>.
+</para></summary></member>
+</doc>

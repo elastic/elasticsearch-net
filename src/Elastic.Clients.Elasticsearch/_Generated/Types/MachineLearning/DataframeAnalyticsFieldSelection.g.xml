@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalyticsFieldSelection#feature_type"><summary><para>
+The feature type of this field for the analysis. May be categorical or numerical.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsFieldSelection#is_included"><summary><para>
+Whether the field is selected to be included in the analysis.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsFieldSelection#is_required"><summary><para>
+Whether the field is required.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsFieldSelection#mapping_types"><summary><para>
+The mapping types of the field.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsFieldSelection#name"><summary><para>
+The field name.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsFieldSelection#reason"><summary><para>
+The reason a field is not selected to be included in the analysis.
+</para></summary></member>
+</doc>

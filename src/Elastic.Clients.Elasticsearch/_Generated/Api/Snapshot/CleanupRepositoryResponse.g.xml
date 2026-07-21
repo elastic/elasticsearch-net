@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.cleanup_repository.Response#results"><summary><para>
+Statistics for cleanup operations.
+</para></summary></member>
+</doc>

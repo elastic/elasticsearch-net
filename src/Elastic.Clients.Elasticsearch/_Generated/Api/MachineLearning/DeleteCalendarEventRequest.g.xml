@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.delete_calendar_event.Request"><summary><para>
+Delete events from a calendar.
+</para></summary></member>
+  <member key="ml.delete_calendar_event.Request#calendar_id"><summary><para>
+A string that uniquely identifies a calendar.
+</para></summary></member>
+  <member key="ml.delete_calendar_event.Request#event_id"><summary><para>
+Identifier for the scheduled event.
+You can obtain this identifier by using the get calendar events API.
+</para></summary></member>
+</doc>

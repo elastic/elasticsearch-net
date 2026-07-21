@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="graph._types.VertexDefinition#exclude"><summary><para>
+Prevents the specified terms from being included in the results.
+</para></summary></member>
+  <member key="graph._types.VertexDefinition#field"><summary><para>
+Identifies a field in the documents of interest.
+</para></summary></member>
+  <member key="graph._types.VertexDefinition#include"><summary><para>
+Identifies the terms of interest that form the starting points from which you want to spider out.
+</para></summary></member>
+  <member key="graph._types.VertexDefinition#min_doc_count"><summary><para>
+Specifies how many documents must contain a pair of terms before it is considered to be a useful connection.
+This setting acts as a certainty threshold.
+</para></summary></member>
+  <member key="graph._types.VertexDefinition#shard_min_doc_count"><summary><para>
+Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.
+</para></summary></member>
+  <member key="graph._types.VertexDefinition#size"><summary><para>
+Specifies the maximum number of vertex terms returned for each field.
+</para></summary></member>
+</doc>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.DataStreamOptionsTemplate"><summary><para>
+Data stream options template contains the same information as DataStreamOptions but allows them to be set explicitly to null.
+</para></summary></member>
+</doc>

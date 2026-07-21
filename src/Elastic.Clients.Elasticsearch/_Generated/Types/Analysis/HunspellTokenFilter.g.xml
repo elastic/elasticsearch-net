@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.HunspellTokenFilter#dedup"><summary><para>
+If <c>true</c>, duplicate tokens are removed from the filter’s output. Defaults to <c>true</c>.
+</para></summary></member>
+  <member key="_types.analysis.HunspellTokenFilter#dictionary"><summary><para>
+One or more <c>.dic</c> files (e.g, <c>en_US.dic</c>, my_custom.dic) to use for the Hunspell dictionary.
+By default, the <c>hunspell</c> filter uses all <c>.dic</c> files in the <c>&lt;$ES_PATH_CONF>/hunspell/&lt;locale></c> directory specified using the <c>lang</c>, <c>language</c>, or <c>locale</c> parameter.
+</para></summary></member>
+  <member key="_types.analysis.HunspellTokenFilter#locale"><summary><para>
+Locale directory used to specify the <c>.aff</c> and <c>.dic</c> files for a Hunspell dictionary.
+</para></summary></member>
+  <member key="_types.analysis.HunspellTokenFilter#longest_only"><summary><para>
+If <c>true</c>, only the longest stemmed version of each token is included in the output. If <c>false</c>, all stemmed versions of the token are included. Defaults to <c>false</c>.
+</para></summary></member>
+</doc>

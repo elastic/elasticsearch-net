@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_role_mapping.Request"><summary><para>
+Get role mappings.
+</para>
+<para>
+Role mappings define which roles are assigned to each user.
+The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
+</para></summary></member>
+  <member key="security.get_role_mapping.Request#name"><summary><para>
+The distinct name that identifies the role mapping. The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way. You can specify multiple mapping names as a comma-separated list. If you do not specify this parameter, the API returns information about all role mappings.
+</para></summary></member>
+</doc>

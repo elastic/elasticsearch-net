@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_user_profile.Response#profiles"><summary><para>
+A successful call returns the JSON representation of the user profile and its internal versioning numbers.
+The API returns an empty object if no profile document is found for the provided <c>uid</c>.
+The content of the data field is not returned by default to avoid deserializing a potential large payload.
+</para></summary></member>
+</doc>

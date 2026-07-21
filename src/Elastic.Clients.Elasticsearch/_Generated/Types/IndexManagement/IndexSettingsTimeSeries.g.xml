@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexSettingsTimeSeries#temporality_field"><summary><para>
+The name of the field that stores the temporality of a metric.
+The referenced field must be a <c>keyword</c> dimension field; if the setting is unset or the
+field is missing or invalid, the metric temporality resolves to null.
+</para></summary></member>
+</doc>

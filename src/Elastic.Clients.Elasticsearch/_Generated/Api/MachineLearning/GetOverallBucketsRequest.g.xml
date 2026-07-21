@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_overall_buckets.Request"><summary><para>
+Get overall bucket results.
+</para>
+<para>
+Retrievs overall bucket results that summarize the bucket results of
+multiple anomaly detection jobs.
+</para>
+<para>
+The <c>overall_score</c> is calculated by combining the scores of all the
+buckets within the overall bucket span. First, the maximum
+<c>anomaly_score</c> per anomaly detection job in the overall bucket is
+calculated. Then the <c>top_n</c> of those scores are averaged to result in
+the <c>overall_score</c>. This means that you can fine-tune the
+<c>overall_score</c> so that it is more or less sensitive to the number of
+jobs that detect an anomaly at the same time. For example, if you set
+<c>top_n</c> to <c>1</c>, the <c>overall_score</c> is the maximum bucket score in the
+overall bucket. Alternatively, if you set <c>top_n</c> to the number of jobs,
+the <c>overall_score</c> is high only when all jobs detect anomalies in that
+overall bucket. If you set the <c>bucket_span</c> parameter (to a value
+greater than its default), the <c>overall_score</c> is the maximum
+<c>overall_score</c> of the overall buckets that have a span equal to the
+jobs' largest bucket span.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#allow_no_match"><summary><para>
+Refer to the description for the <c>allow_no_match</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#bucket_span"><summary><para>
+Refer to the description for the <c>bucket_span</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#end"><summary><para>
+Refer to the description for the <c>end</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#exclude_interim"><summary><para>
+Refer to the description for the <c>exclude_interim</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#job_id"><summary><para>
+Identifier for the anomaly detection job. It can be a job identifier, a
+group name, a comma-separated list of jobs or groups, or a wildcard
+expression.
+</para>
+<para>
+You can summarize the bucket results for all anomaly detection jobs by
+using <c>_all</c> or by specifying <c>*</c> as the <c>&lt;job_id></c>.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#overall_score"><summary><para>
+Refer to the description for the <c>overall_score</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#start"><summary><para>
+Refer to the description for the <c>start</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_overall_buckets.Request#top_n"><summary><para>
+Refer to the description for the <c>top_n</c> query parameter.
+</para></summary></member>
+</doc>

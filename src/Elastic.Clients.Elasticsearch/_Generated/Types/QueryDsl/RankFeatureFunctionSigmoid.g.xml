@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.RankFeatureFunctionSigmoid#exponent"><summary><para>
+Configurable Exponent.
+</para></summary></member>
+  <member key="_types.query_dsl.RankFeatureFunctionSigmoid#pivot"><summary><para>
+Configurable pivot value so that the result will be less than 0.5.
+</para></summary></member>
+</doc>

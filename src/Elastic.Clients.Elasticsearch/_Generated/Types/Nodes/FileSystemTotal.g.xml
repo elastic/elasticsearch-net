@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.FileSystemTotal#available"><summary><para>
+Total disk space available to this Java virtual machine on all file stores.
+Depending on OS or process level restrictions, this might appear less than <c>free</c>.
+This is the actual amount of free disk space the Elasticsearch node can utilise.
+</para></summary></member>
+  <member key="nodes._types.FileSystemTotal#available_in_bytes"><summary><para>
+Total number of bytes available to this Java virtual machine on all file stores.
+Depending on OS or process level restrictions, this might appear less than <c>free_in_bytes</c>.
+This is the actual amount of free disk space the Elasticsearch node can utilise.
+</para></summary></member>
+  <member key="nodes._types.FileSystemTotal#free"><summary><para>
+Total unallocated disk space in all file stores.
+</para></summary></member>
+  <member key="nodes._types.FileSystemTotal#free_in_bytes"><summary><para>
+Total number of unallocated bytes in all file stores.
+</para></summary></member>
+  <member key="nodes._types.FileSystemTotal#total"><summary><para>
+Total size of all file stores.
+</para></summary></member>
+  <member key="nodes._types.FileSystemTotal#total_in_bytes"><summary><para>
+Total size of all file stores in bytes.
+</para></summary></member>
+</doc>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="license.post.Request"><summary><para>
+Update the license.
+</para>
+<para>
+You can update your license at runtime without shutting down your nodes.
+License updates take effect immediately.
+If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
+You must then re-submit the API request with the acknowledge parameter set to true.
+</para>
+<para>
+NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
+If the operator privileges feature is enabled, only operator users can use this API.
+</para></summary></member>
+  <member key="license.post.Request#acknowledge"><summary><para>
+To update a license, you must accept the acknowledge messages and set this parameter to <c>true</c>.
+In particular, if you are upgrading or downgrading a license, you must acknowlege the feature changes.
+</para></summary></member>
+  <member key="license.post.Request#licenses"><summary><para>
+A sequence of one or more JSON documents containing the license information.
+</para></summary></member>
+  <member key="license.post.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="license.post.Request#timeout"><summary><para>
+The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

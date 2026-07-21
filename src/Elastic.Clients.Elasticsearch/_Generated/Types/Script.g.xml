@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.Script#id"><summary><para>
+The <c>id</c> for a stored script.
+</para></summary></member>
+  <member key="_types.Script#lang"><summary><para>
+Specifies the language the script is written in.
+</para></summary></member>
+  <member key="_types.Script#params"><summary><para>
+Specifies any named parameters that are passed into the script as variables.
+Use parameters instead of hard-coded values to decrease compile time.
+</para></summary></member>
+  <member key="_types.Script#source"><summary><para>
+The script source.
+</para></summary></member>
+</doc>

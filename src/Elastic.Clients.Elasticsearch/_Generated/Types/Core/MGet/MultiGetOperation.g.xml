@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.mget.Operation#_id"><summary><para>
+The unique document ID.
+</para></summary></member>
+  <member key="_global.mget.Operation#_index"><summary><para>
+The index that contains the document.
+</para></summary></member>
+  <member key="_global.mget.Operation#_source"><summary><para>
+If <c>false</c>, excludes all _source fields.
+</para></summary></member>
+  <member key="_global.mget.Operation#routing"><summary><para>
+The key for the primary shard the document resides on. Required if routing is used during indexing.
+</para></summary></member>
+  <member key="_global.mget.Operation#stored_fields"><summary><para>
+The stored fields you want to retrieve.
+</para></summary></member>
+</doc>

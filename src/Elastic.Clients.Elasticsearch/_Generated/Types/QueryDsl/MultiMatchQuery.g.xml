@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.MultiMatchQuery#analyzer"><summary><para>
+Analyzer used to convert the text in the query value into tokens.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#auto_generate_synonyms_phrase_query"><summary><para>
+If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#fields"><summary><para>
+The fields to be queried.
+Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#fuzziness"><summary><para>
+Maximum edit distance allowed for matching.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#fuzzy_rewrite"><summary><para>
+Method used to rewrite the query.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#fuzzy_transpositions"><summary><para>
+If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+Can be applied to the term subqueries constructed for all terms but the final term.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#lenient"><summary><para>
+If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#max_expansions"><summary><para>
+Maximum number of terms to which the query will expand.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#minimum_should_match"><summary><para>
+Minimum number of clauses that must match for a document to be returned.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#operator"><summary><para>
+Boolean logic used to interpret text in the query value.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#prefix_length"><summary><para>
+Number of beginning characters left unchanged for fuzzy matching.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#query"><summary><para>
+Text, number, boolean value or date you wish to find in the provided field.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#slop"><summary><para>
+Maximum number of positions allowed between matching tokens.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#tie_breaker"><summary><para>
+Determines how scores for each per-term blended query and scores across groups are combined.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#type"><summary><para>
+How <c>the</c> multi_match query is executed internally.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiMatchQuery#zero_terms_query"><summary><para>
+Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
+</para></summary></member>
+</doc>

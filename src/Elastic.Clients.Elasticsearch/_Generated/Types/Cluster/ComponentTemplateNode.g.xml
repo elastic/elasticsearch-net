@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster._types.ComponentTemplateNode#created_date"><summary><para>
+Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+</para></summary></member>
+  <member key="cluster._types.ComponentTemplateNode#created_date_millis"><summary><para>
+Date and time when the component template was created, in milliseconds since the epoch.
+</para></summary></member>
+  <member key="cluster._types.ComponentTemplateNode#modified_date"><summary><para>
+Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+</para></summary></member>
+  <member key="cluster._types.ComponentTemplateNode#modified_date_millis"><summary><para>
+Date and time when the component template was last modified, in milliseconds since the epoch.
+</para></summary></member>
+</doc>

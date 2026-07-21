@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.CCSStats#_esql"><summary><para>
+Information about ES|QL cross-cluster query usage.
+</para></summary></member>
+  <member key="cluster.stats.CCSStats#_search"><summary><para>
+Information about cross-cluster search usage.
+</para></summary></member>
+  <member key="cluster.stats.CCSStats#clusters"><summary><para>
+Contains remote cluster settings and metrics collected from them.
+The keys are cluster names, and the values are per-cluster data.
+Only present if <c>include_remotes</c> option is set to true.
+</para></summary></member>
+</doc>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.FrequentItemSetsField#exclude"><summary><para>
+Values to exclude.
+Can be regular expression strings or arrays of strings of exact terms.
+</para></summary></member>
+  <member key="_types.aggregations.FrequentItemSetsField#include"><summary><para>
+Values to include.
+Can be regular expression strings or arrays of strings of exact terms.
+</para></summary></member>
+</doc>

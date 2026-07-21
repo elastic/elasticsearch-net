@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform._types.TimeSync#delay"><summary><para>
+The time delay between the current time and the latest input data time.
+</para></summary></member>
+  <member key="transform._types.TimeSync#field"><summary><para>
+The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
+that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
+accounts for data transmission delays.
+</para></summary></member>
+</doc>

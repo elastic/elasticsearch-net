@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.S3Repository#settings"><summary><para>
+The repository settings.
+</para>
+<para>
+NOTE: In addition to the specified settings, you can also use all non-secure client settings in the repository settings.
+In this case, the client settings found in the repository settings will be merged with those of the named client used by the repository.
+Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
+</para></summary></member>
+  <member key="snapshot._types.S3Repository#type"><summary><para>
+The S3 repository type.
+</para></summary></member>
+</doc>

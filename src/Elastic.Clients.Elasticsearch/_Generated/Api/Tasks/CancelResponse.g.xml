@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="tasks.cancel.Response#nodes"><summary><para>
+Task information grouped by node, if <c>group_by</c> was set to <c>node</c> (the default).
+</para></summary></member>
+  <member key="tasks.cancel.Response#tasks"><summary><para>
+Either a flat list of tasks if <c>group_by</c> was set to <c>none</c>, or grouped by parents if
+<c>group_by</c> was set to <c>parents</c>.
+</para></summary></member>
+</doc>

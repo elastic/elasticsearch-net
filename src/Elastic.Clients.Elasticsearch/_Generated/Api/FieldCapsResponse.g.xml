@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.field_caps.Response#indices"><summary><para>
+The list of indices where this field has the same type family, or null if all indices have the same type family for the field.
+</para></summary></member>
+</doc>

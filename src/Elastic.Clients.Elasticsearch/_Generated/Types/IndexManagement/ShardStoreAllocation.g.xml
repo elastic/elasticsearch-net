@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.shard_stores.ShardStoreAllocation#primary"><summary><para>
+The store copy is used as a primary shard.
+</para></summary></member>
+  <member key="indices.shard_stores.ShardStoreAllocation#replica"><summary><para>
+The store copy is used as a replica shard.
+</para></summary></member>
+  <member key="indices.shard_stores.ShardStoreAllocation#unused"><summary><para>
+The store copy is not used.
+</para></summary></member>
+</doc>

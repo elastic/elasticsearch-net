@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.OpenShiftAiServiceSettings#api_key"><summary><para>
+A valid API key for your OpenShift AI endpoint.
+Can be found in <c>Token authentication</c> section of model related information.
+</para></summary></member>
+  <member key="inference._types.OpenShiftAiServiceSettings#max_input_tokens"><summary><para>
+For a <c>text_embedding</c> task, the maximum number of tokens per input before chunking occurs.
+</para></summary></member>
+  <member key="inference._types.OpenShiftAiServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the hosted model's documentation for the name if needed.
+Service has been tested and confirmed to be working with the following models:
+</para>
+<list type="bullet">
+<item>
+<para>
+For <c>text_embedding</c> task - <c>gritlm-7b</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>completion</c> and <c>chat_completion</c> tasks - <c>llama-31-8b-instruct</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>rerank</c> task - <c>bge-reranker-v2-m3</c>.
+</para>
+</item>
+</list></summary></member>
+  <member key="inference._types.OpenShiftAiServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from the OpenShift AI API.
+By default, the <c>openshift_ai</c> service sets the number of requests allowed per minute to 3000.
+</para></summary></member>
+  <member key="inference._types.OpenShiftAiServiceSettings#similarity"><summary><para>
+For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
+If not specified, the default dot_product value is used.
+</para></summary></member>
+  <member key="inference._types.OpenShiftAiServiceSettings#url"><summary><para>
+The URL of the OpenShift AI hosted model endpoint.
+</para></summary></member>
+</doc>

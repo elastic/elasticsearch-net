@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeoLinePoint#field"><summary><para>
+The name of the geo_point field.
+</para></summary></member>
+</doc>

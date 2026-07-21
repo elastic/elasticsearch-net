@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <!-- Type Providers are restored using net461, fine for netcoreapp2.2 so we kill the warning -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+    <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Commandline.fs" />
+    <Compile Include="Paths.fs" />
+    <Compile Include="Tooling.fs" />
+    <Compile Include="ReposTooling.fs" />
+    <Compile Include="Versioning.fs" />
+    <Compile Include="ReleaseNotes.fs" />
+    <Compile Include="Benchmarking.fs" />
+    <Compile Include="XmlDocPatcher.fs" />
+    <Compile Include="Building.fs" />
+    <Compile Include="Testing.fs" />
+    <Compile Include="Documentation.fs" />
+    <Compile Include="Targets.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\build.sh"><Link>build.sh</Link></Content>
+    <Content Include="..\..\build.bat"><Link>build.bat</Link></Content>
+    <Content Include="..\..\.github\workflows\auto-label.yml"><Link>auto-label.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\backport.yml"><Link>backport.yml</Link></Content>
+    <Content Include="..\..\.github\auto-label.json"><Link>auto-label.json</Link></Content>
+    <Content Include="..\..\.github\workflows\test-jobs.yml"><Link>test-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\stale-jobs.yml"><Link>stale-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\integration-jobs.yml"><Link>integration-jobs.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\unified-release.yml"><Link>unified-release.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\make-codegen.yml"><Link>make-codegen.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\make-bump.yml"><Link>make-bump.yml</Link></Content>
+    <Content Include="..\..\.github\workflows\make-release-notes.yml"><Link>make-release-notes.yml</Link></Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bullseye" Version="3.3.0" />
+    <PackageReference Include="Elastic.Elasticsearch.Managed" Version="0.4.3" />
+    <PackageReference Include="Fake.Core.Environment" Version="5.15.0" />
+    <PackageReference Include="Fake.Core.SemVer" Version="5.15.0" />
+    <PackageReference Include="Fake.IO.FileSystem" Version="5.15.0" />
+    <PackageReference Include="Fake.IO.Zip" Version="5.15.0" />
+    <PackageReference Include="Fake.Tools.Git" Version="5.15.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Octokit" Version="0.32.0" />
+    <PackageReference Include="Proc" Version="0.6.1" />
+  </ItemGroup>
+</Project>

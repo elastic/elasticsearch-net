@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.OpenAIServiceSettings#api_key"><summary><para>
+A valid API key of your OpenAI account.
+You can find your OpenAI API keys in your OpenAI account under the API keys section.
+</para>
+<para>
+IMPORTANT: You must specify either <c>api_key</c> or <c>client_secret</c>.
+If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#client_id"><summary><para>
+For OAuth 2.0 authorization using the client credentials grant flow.
+The application ID that's assigned to your app.
+</para>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify <c>client_id</c>, <c>scopes</c>, <c>token_url</c>, and <c>client_secret</c> together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#client_secret"><summary><para>
+For OAuth 2.0 authorization using the client credentials grant flow.
+The application secret that you created for your app.
+</para>
+<para>
+IMPORTANT: You must specify either <c>api_key</c> or <c>client_secret</c>.
+If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
+</para>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify <c>client_id</c>, <c>scopes</c>, <c>token_url</c>, and <c>client_secret</c> together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#dimensions"><summary><para>
+For a <c>text_embedding</c> or <c>embedding</c> task, the number of dimensions the resulting output embeddings should have.
+It is supported only in <c>text-embedding-3</c> and later models.
+If it is not set, the OpenAI defined default for the model is used.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the OpenAI documentation for the list of available text embedding models.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#organization_id"><summary><para>
+The unique identifier for your organization.
+You can find the Organization ID in your OpenAI account under <em>Settings > Organizations</em>.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from OpenAI.
+The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
+For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
+For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#scopes"><summary><para>
+For OAuth 2.0 authorization using the client credentials grant flow.
+The resource identifier of the resource you want.
+For example:
+</para>
+<code>
+"scopes": [
+  "scope1",
+  "scope2"
+]
+</code>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify <c>client_id</c>, <c>scopes</c>, <c>token_url</c>, and <c>client_secret</c> together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#similarity"><summary><para>
+For a <c>text_embedding</c> or <c>embedding</c> task, the similarity measure. One of <c>cosine</c>, <c>dot_product</c>, <c>l2_norm</c>. Defaults to <c>dot_product</c>.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#token_url"><summary><para>
+For OAuth 2.0 authorization using the client credentials grant flow.
+An OAuth2 token endpoint where Elasticsearch sends a request to exchange client credentials for an access token.
+</para>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify <c>client_id</c>, <c>scopes</c>, <c>token_url</c>, and <c>client_secret</c> together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#url"><summary><para>
+The URL endpoint to use for the requests.
+It can be changed for testing purposes.
+Default value is <c>https://api.openai.com/v1/embeddings</c> for a <c>text_embedding</c> or <c>embedding</c> task,
+<c>https://api.openai.com/v1/chat/completions</c> for a <c>completion</c> or <c>chat_completion</c> task.
+</para></summary></member>
+</doc>

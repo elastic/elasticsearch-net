@@ -1,0 +1,42 @@
+{
+  query: {
+    bool: {
+      must: [
+        {
+          term: {
+            name: {
+              value: x
+            }
+          }
+        },
+        {
+          bool: {
+            should: [
+              {
+                term: {
+                  name: {
+                    value: x
+                  }
+                }
+              },
+              {
+                term: {
+                  name: {
+                    value: x
+                  }
+                }
+              },
+              {
+                term: {
+                  name: {
+                    value: x
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

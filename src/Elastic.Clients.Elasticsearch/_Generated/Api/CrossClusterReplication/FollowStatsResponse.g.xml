@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.follow_stats.Response#indices"><summary><para>
+An array of follower index statistics.
+</para></summary></member>
+</doc>

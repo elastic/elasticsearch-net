@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.IntervalsFuzzy#analyzer"><summary><para>
+Analyzer used to normalize the term.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsFuzzy#fuzziness"><summary><para>
+Maximum edit distance allowed for matching.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsFuzzy#prefix_length"><summary><para>
+Number of beginning characters left unchanged when creating expansions.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsFuzzy#term"><summary><para>
+The term to match.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsFuzzy#transpositions"><summary><para>
+Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsFuzzy#use_field"><summary><para>
+If specified, match intervals from this field rather than the top-level field.
+The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
+</para></summary></member>
+</doc>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.ESQLDataSource"><summary><para>
+Represents a data source definition stored in cluster state. A data source holds
+connection settings (credentials, endpoints, auth) for an external data provider.
+</para></summary></member>
+  <member key="esql._types.ESQLDataSource#description"><summary><para>
+A free-text description.
+</para></summary></member>
+  <member key="esql._types.ESQLDataSource#name"><summary><para>
+The data source name.
+</para></summary></member>
+  <member key="esql._types.ESQLDataSource#settings"><summary><para>
+Type-specific connection and authentication settings.
+</para></summary></member>
+  <member key="esql._types.ESQLDataSource#type"><summary><para>
+The data source type. Currently, <c>s3</c> is supported.
+</para></summary></member>
+</doc>

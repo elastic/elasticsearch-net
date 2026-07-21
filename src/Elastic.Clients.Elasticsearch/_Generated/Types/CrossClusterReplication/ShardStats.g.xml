@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr._types.ShardStats#bytes_read"><summary><para>
+The total of transferred bytes read from the leader.
+This is only an estimate and does not account for compression if enabled.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#failed_read_requests"><summary><para>
+The number of failed reads.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#failed_write_requests"><summary><para>
+The number of failed bulk write requests on the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#follower_aliases_version"><summary><para>
+The index aliases version the follower is synced up to.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#follower_global_checkpoint"><summary><para>
+The current global checkpoint on the follower.
+The difference between the <c>leader_global_checkpoint</c> and the <c>follower_global_checkpoint</c> is an indication of how much the follower is lagging the leader.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#follower_index"><summary><para>
+The name of the follower index.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#follower_mapping_version"><summary><para>
+The mapping version the follower is synced up to.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#follower_max_seq_no"><summary><para>
+The current maximum sequence number on the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#follower_settings_version"><summary><para>
+The index settings version the follower is synced up to.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#last_requested_seq_no"><summary><para>
+The starting sequence number of the last batch of operations requested from the leader.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#leader_global_checkpoint"><summary><para>
+The current global checkpoint on the leader known to the follower task.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#leader_index"><summary><para>
+The name of the index in the leader cluster being followed.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#leader_max_seq_no"><summary><para>
+The current maximum sequence number on the leader known to the follower task.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#operations_read"><summary><para>
+The total number of operations read from the leader.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#operations_written"><summary><para>
+The number of operations written on the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#outstanding_read_requests"><summary><para>
+The number of active read requests from the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#outstanding_write_requests"><summary><para>
+The number of active bulk write requests on the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#read_exceptions"><summary><para>
+An array of objects representing failed reads.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#remote_cluster"><summary><para>
+The remote cluster containing the leader index.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#shard_id"><summary><para>
+The numerical shard ID, with values from 0 to one less than the number of replicas.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#successful_read_requests"><summary><para>
+The number of successful fetches.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#successful_write_requests"><summary><para>
+The number of bulk write requests run on the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#time_since_last_read_millis"><summary><para>
+The number of milliseconds since a read request was sent to the leader.
+When the follower is caught up to the leader, this number will increase up to the configured <c>read_poll_timeout</c> at which point another read request will be sent to the leader.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#total_read_remote_exec_time_millis"><summary><para>
+The total time reads spent running on the remote cluster.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#total_read_time_millis"><summary><para>
+The total time reads were outstanding, measured from the time a read was sent to the leader to the time a reply was returned to the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#total_write_time_millis"><summary><para>
+The total time spent writing on the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#write_buffer_operation_count"><summary><para>
+The number of write operations queued on the follower.
+</para></summary></member>
+  <member key="ccr._types.ShardStats#write_buffer_size_in_bytes"><summary><para>
+The total number of bytes of operations currently queued for writing.
+</para></summary></member>
+</doc>

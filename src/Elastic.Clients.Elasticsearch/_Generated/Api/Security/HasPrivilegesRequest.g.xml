@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.has_privileges.Request"><summary><para>
+Check user privileges.
+</para>
+<para>
+Determine whether the specified user has a specified list of privileges.
+All users can use this API, but only to determine their own privileges.
+To check the privileges of other users, you must use the run as feature.
+</para></summary></member>
+  <member key="security.has_privileges.Request#cluster"><summary><para>
+A list of the cluster privileges that you want to check.
+</para></summary></member>
+  <member key="security.has_privileges.Request#user"><summary><para>
+Username
+</para></summary></member>
+</doc>

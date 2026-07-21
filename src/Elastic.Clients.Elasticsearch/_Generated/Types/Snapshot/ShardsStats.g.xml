@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot._types.ShardsStats#done"><summary><para>
+The number of shards that initialized, started, and finalized successfully.
+</para></summary></member>
+  <member key="snapshot._types.ShardsStats#failed"><summary><para>
+The number of shards that failed to be included in the snapshot.
+</para></summary></member>
+  <member key="snapshot._types.ShardsStats#finalizing"><summary><para>
+The number of shards that are finalizing but are not done.
+</para></summary></member>
+  <member key="snapshot._types.ShardsStats#initializing"><summary><para>
+The number of shards that are still initializing.
+</para></summary></member>
+  <member key="snapshot._types.ShardsStats#started"><summary><para>
+The number of shards that have started but are not finalized.
+</para></summary></member>
+  <member key="snapshot._types.ShardsStats#total"><summary><para>
+The total number of shards included in the snapshot.
+</para></summary></member>
+</doc>

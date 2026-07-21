@@ -1,0 +1,13 @@
+{
+  query: {
+    bool: {
+      must_not: {
+        term: {
+          name: {
+            value: x
+          }
+        }
+      }
+    }
+  }
+}

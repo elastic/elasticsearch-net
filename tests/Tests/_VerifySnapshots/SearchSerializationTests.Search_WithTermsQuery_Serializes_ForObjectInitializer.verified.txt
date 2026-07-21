@@ -1,0 +1,9 @@
+{
+  terms: {
+    boost: 1.2,
+    description: [
+      term1,
+      term2
+    ]
+  }
+}

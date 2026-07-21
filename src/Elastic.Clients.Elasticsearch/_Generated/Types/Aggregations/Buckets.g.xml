@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.Buckets"><summary><para>
+Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for
+the different buckets, the result is a dictionary.
+</para></summary></member>
+</doc>

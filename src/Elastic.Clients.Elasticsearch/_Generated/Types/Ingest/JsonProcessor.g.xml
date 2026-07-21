@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.JsonProcessor#add_to_root"><summary><para>
+Flag that forces the parsed JSON to be added at the top level of the document.
+<c>target_field</c> must not be set when this option is chosen.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#add_to_root_conflict_strategy"><summary><para>
+When set to <c>replace</c>, root fields that conflict with fields from the parsed JSON will be overridden.
+When set to <c>merge</c>, conflicting fields will be merged.
+Only applicable <c>if add_to_root</c> is set to true.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#allow_duplicate_keys"><summary><para>
+When set to <c>true</c>, the JSON parser will not fail if the JSON contains duplicate keys.
+Instead, the last encountered value for any duplicate key wins.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#field"><summary><para>
+The field to be parsed.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.JsonProcessor#target_field"><summary><para>
+The field that the converted structured object will be written into.
+Any existing content in this field will be overwritten.
+</para></summary></member>
+</doc>

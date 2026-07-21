@@ -1,0 +1,18 @@
+{
+  aggregations: {
+    viewport: {
+      geo_bounds: {
+        field: locationPoint,
+        wrap_longitude: true
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}

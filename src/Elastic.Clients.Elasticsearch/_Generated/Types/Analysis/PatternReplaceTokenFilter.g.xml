@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.PatternReplaceTokenFilter#all"><summary><para>
+If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
+</para></summary></member>
+  <member key="_types.analysis.PatternReplaceTokenFilter#pattern"><summary><para>
+Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
+</para></summary></member>
+  <member key="_types.analysis.PatternReplaceTokenFilter#replacement"><summary><para>
+Replacement substring. Defaults to an empty substring (<c>""</c>).
+</para></summary></member>
+</doc>

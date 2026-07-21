@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CustomTaskSettings#parameters"><summary><para>
+Specifies parameters that are required to run the custom service. The parameters depend on the model your custom service uses.
+For example:
+</para>
+<code>
+"task_settings":{
+  "parameters":{
+    "input_type":"query",
+    "return_token":true
+  }
+}
+</code>
+<para>
+warn
+The <c>task_settings.parameters</c> cannot contain the same keys as <c>secret_parameters</c>. If they do, an error will be returned. This applies to PUT requests and POST requests.
+</para></summary></member>
+</doc>

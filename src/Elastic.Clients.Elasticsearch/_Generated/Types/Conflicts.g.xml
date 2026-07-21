@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.Conflicts#abort"><summary><para>
+Stop reindexing if there are conflicts.
+</para></summary></member>
+  <member key="_types.Conflicts#proceed"><summary><para>
+Continue reindexing even if there are conflicts.
+</para></summary></member>
+</doc>

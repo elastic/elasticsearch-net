@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.CompositeAggregation#after"><summary><para>
+When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
+</para></summary></member>
+  <member key="_types.aggregations.CompositeAggregation#size"><summary><para>
+The number of composite buckets that should be returned.
+</para></summary></member>
+  <member key="_types.aggregations.CompositeAggregation#sources"><summary><para>
+The value sources used to build composite buckets.
+Keys are returned in the order of the <c>sources</c> definition.
+</para></summary></member>
+</doc>

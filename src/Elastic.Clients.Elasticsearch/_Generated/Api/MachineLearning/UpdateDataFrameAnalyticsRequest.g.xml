@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.update_data_frame_analytics.Request"><summary><para>
+Update a data frame analytics job.
+</para></summary></member>
+  <member key="ml.update_data_frame_analytics.Request#allow_lazy_start"><summary><para>
+Specifies whether this job can start when there is insufficient machine
+learning node capacity for it to be immediately assigned to a node.
+</para></summary></member>
+  <member key="ml.update_data_frame_analytics.Request#description"><summary><para>
+A description of the job.
+</para></summary></member>
+  <member key="ml.update_data_frame_analytics.Request#id"><summary><para>
+Identifier for the data frame analytics job. This identifier can contain
+lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+underscores. It must start and end with alphanumeric characters.
+</para></summary></member>
+  <member key="ml.update_data_frame_analytics.Request#max_num_threads"><summary><para>
+The maximum number of threads to be used by the analysis. Using more
+threads may decrease the time necessary to complete the analysis at the
+cost of using more CPU. Note that the process may use additional threads
+for operational functionality other than the analysis itself.
+</para></summary></member>
+  <member key="ml.update_data_frame_analytics.Request#model_memory_limit"><summary><para>
+The approximate maximum amount of memory resources that are permitted for
+analytical processing. If your <c>elasticsearch.yml</c> file contains an
+<c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
+to create data frame analytics jobs that have <c>model_memory_limit</c> values
+greater than that setting.
+</para></summary></member>
+</doc>

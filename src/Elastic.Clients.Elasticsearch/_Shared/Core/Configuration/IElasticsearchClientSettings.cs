@@ -1,0 +1,170 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information.
+
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
+using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
+
+using Elastic.Transport;
+
+namespace Elastic.Clients.Elasticsearch;
+
+/// <summary>
+/// An event that is fired before a request is sent.
+/// </summary>
+/// <param name="name">The <see cref="ElasticsearchClient"/> instance used to send the request.</param>
+/// <param name="request">The request.</param>
+/// <param name="endpointPath">The endpoint path.</param>
+/// <param name="postData">The post data.</param>
+/// <param name="requestConfiguration">The request configuration.</param>
+public delegate void BeforeRequestEvent(
+	ElasticsearchClient client,
+	Request request,
+	EndpointPath endpointPath,
+	ref PostData? postData,
+	ref IRequestConfiguration? requestConfiguration);
+
+/// <summary>
+///     Provides the connection settings for Elastic.Clients.Elasticsearch's high level <see cref="ElasticsearchClient" />
+/// </summary>
+public interface IElasticsearchClientSettings : ITransportConfiguration
+{
+	/// <summary>
+	///     Specifies how field names are inferred from CLR property names.
+	///     <para></para>
+	///     By default, Elastic.Clients.Elasticsearch camel cases property names.
+	/// </summary>
+	/// <example>
+	///     CLR property EmailAddress will be inferred as "emailAddress" Elasticsearch document field name
+	/// </example>
+	Func<string, string> DefaultFieldNameInferrer { get; }
+
+	/// <summary>
+	///     The default index to use for a request when no index has been explicitly specified
+	///     and no default indices are specified for the given CLR type specified for the request.
+	/// </summary>
+	string DefaultIndex { get; }
+
+	/// <summary>
+	///     The default index/indices to use for a request for a given CLR type specified in the request.
+	/// </summary>
+	FluentDictionary<Type, string> DefaultIndices { get; }
+
+	/// <summary>
+	///     The default relation name to use for a request for a given CLR type specified in the request.
+	/// </summary>
+	FluentDictionary<Type, string> DefaultRelationNames { get; }
+
+	/// <summary>
+	///     Specify a property for a CLR type to use to infer the _id of the document when indexed in Elasticsearch.
+	/// </summary>
+	FluentDictionary<Type, string> IdProperties { get; }
+
+	/// <summary>
+	///     Infers index, type, id, relation, routing and field names
+	/// </summary>
+	Inferrer Inferrer { get; }
+
+	/// <summary>
+	/// Provides mappings for CLR types
+	/// </summary>
+	IPropertyMappingProvider PropertyMappingProvider { get; }
+
+	/// <summary>
+	/// Provides mappings for CLR type members
+	/// </summary>
+	FluentDictionary<MemberInfo, PropertyMapping> PropertyMappings { get; }
+
+	/// <summary>
+	///     Specify a property for a CLR type to use to infer the routing for of a document when indexed in Elasticsearch.
+	/// </summary>
+	FluentDictionary<Type, string> RouteProperties { get; }
+
+	/// <summary>
+	///     Disables automatic Id inference for given CLR types.
+	///     <para></para>
+	///     Elastic.Clients.Elasticsearch by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch. Adding
+	///     a type
+	///     will disable this behaviour for that CLR type. If Id inference should be disabled for all CLR types, use
+	///     <see cref="DefaultDisableIdInference" />
+	/// </summary>
+	HashSet<Type> DisableIdInference { get; }
+
+	/// <summary>
+	///     Disables automatic Id inference for all CLR types.
+	///     <para></para>
+	///     Elastic.Clients.Elasticsearch by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch.
+	///     Setting this to <c>true</c>
+	///     will disable this behaviour for all CLR types and cannot be overridden. If Id inference should be disabled only for
+	///     specific types, use
+	///     <see cref="DisableIdInference" />
+	/// </summary>
+	bool DefaultDisableIdInference { get; }
+
+	/// <summary>
+	///     The serializer use to serialize CLR types representing documents and other types related to documents.
+	/// </summary>
+	Serializer SourceSerializer { get; }
+
+	/// <summary>
+	/// A callback that is invoked immediately before a request is sent.
+	/// <para>
+	///	Allows to dynamically update the <see cref="PostData"/> and <see cref="IRequestConfiguration"/>.
+	/// </para>
+	/// </summary>
+	BeforeRequestEvent? OnBeforeRequest { get; }
+
+	/// <summary>
+	/// This is an advanced setting which controls serialization behaviour for inferred properties such as ID, routing and index name.
+	/// <para>When enabled, it may reduce allocations on serialization paths where the cost can be more significant, such as in bulk operations.</para>
+	/// <para>As a by-product it may cause null values to be included in the serialized data and impact payload size. This will only be a concern should some
+	/// typed not have inference mappings defined for the required properties.</para>
+	/// </summary>
+	/// <remarks>This is marked as experimental and may be removed or renamed in the future once its impact is evaluated.</remarks>
+	bool ExperimentalEnableSerializeNullInferredValues { get; }
+
+	/// <summary>
+	/// Controls the vector data encoding to use for <see cref="ReadOnlyMemory{T}"/> properties
+	/// in documents during ingestion when the <see cref="FloatVectorDataConverter"/> is used.
+	/// </summary>
+	/// <remarks>
+	///	Setting this value to <see cref="FloatVectorDataEncoding.Legacy"/> provides backwards
+	/// compatibility when talking to Elasticsearch servers with a version older than 9.3.0
+	/// (required for <see cref="ByteVectorDataEncoding.Base64"/>).
+	/// </remarks>
+	FloatVectorDataEncoding FloatVectorDataEncoding { get; }
+
+	/// <summary>
+	/// Controls the vector data encoding to use for <see cref="ReadOnlyMemory{T}"/> properties
+	/// in documents during ingestion when the <see cref="ByteVectorDataConverter"/> is used.
+	/// </summary>
+	/// <remarks>
+	///	Setting this value to <see cref="ByteVectorDataEncoding.Legacy"/> provides backwards
+	/// compatibility when talking to Elasticsearch servers with a version older than 8.14.0
+	/// (required for <see cref="ByteVectorDataEncoding.Hex"/>) or older than 9.3.0 (required
+	/// for <see cref="ByteVectorDataEncoding.Base64"/>).
+	/// </remarks>
+	ByteVectorDataEncoding ByteVectorDataEncoding { get; }
+
+	/// <summary>
+	/// Experimental settings.
+	/// </summary>
+	ExperimentalSettings Experimental { get; }
+
+	/// <summary>
+	/// The registry of plugin-defined CLR types for non-exhaustive variant families.
+	/// </summary>
+	VariantRegistry Variants { get; }
+}
+
+public sealed class ExperimentalSettings
+{
+	/// <summary>
+	/// When enabled, the parameters for a script will be serialised using the SourceSerializer.
+	/// </summary>
+	public bool UseSourceSerializerForScriptParameters { get; set; }
+}

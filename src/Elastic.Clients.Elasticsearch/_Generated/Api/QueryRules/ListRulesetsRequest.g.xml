@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.list_rulesets.Request"><summary><para>
+Get all query rulesets.
+</para>
+<para>
+Get summarized information about the query rulesets.
+</para></summary></member>
+  <member key="query_rules.list_rulesets.Request#from"><summary><para>
+The offset from the first result to fetch.
+</para></summary></member>
+  <member key="query_rules.list_rulesets.Request#size"><summary><para>
+The maximum number of results to retrieve.
+</para></summary></member>
+</doc>

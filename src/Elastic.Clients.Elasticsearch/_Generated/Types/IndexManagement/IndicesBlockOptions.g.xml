@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndicesBlockOptions#metadata"><summary><para>
+Disable metadata changes, such as closing the index.
+</para></summary></member>
+  <member key="indices._types.IndicesBlockOptions#read"><summary><para>
+Disable read operations.
+</para></summary></member>
+  <member key="indices._types.IndicesBlockOptions#read_only"><summary><para>
+Disable write operations and metadata changes.
+</para></summary></member>
+  <member key="indices._types.IndicesBlockOptions#write"><summary><para>
+Disable write operations. However, metadata changes are still allowed.
+</para></summary></member>
+</doc>

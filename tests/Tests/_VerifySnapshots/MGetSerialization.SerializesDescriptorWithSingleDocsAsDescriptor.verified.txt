@@ -1,0 +1,8 @@
+{
+  docs: [
+    {
+      _id: single-value,
+      _index: test-index
+    }
+  ]
+}

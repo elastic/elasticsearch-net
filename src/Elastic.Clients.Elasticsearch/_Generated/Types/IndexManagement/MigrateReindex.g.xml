@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.migrate_reindex.MigrateReindex#mode"><summary><para>
+Reindex mode. Currently only 'upgrade' is supported.
+</para></summary></member>
+  <member key="indices.migrate_reindex.MigrateReindex#source"><summary><para>
+The source index or data stream (only data streams are currently supported).
+</para></summary></member>
+</doc>

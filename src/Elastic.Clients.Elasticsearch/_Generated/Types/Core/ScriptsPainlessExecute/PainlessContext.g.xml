@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.scripts_painless_execute.PainlessContext#boolean_field"><summary><para>
+The context for boolean fields. The script returns a <c>true</c> or <c>false</c> response.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#composite_field"><summary><para>
+The context for composite runtime fields. The script returns a map of values.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#date_field"><summary><para>
+The context for date fields. <c>emit</c> takes a long value and the script returns a sorted list of dates.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#double_field"><summary><para>
+The context for double numeric fields. The script returns a sorted list of double values.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#filter"><summary><para>
+Treats scripts as if they were run inside a script query.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#geo_point_field"><summary><para>
+The context for geo-point fields. <c>emit</c> takes two double parameters, the latitude and longitude values, and the script returns an object in GeoJSON format containing the coordinates for the geo point.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#ip_field"><summary><para>
+The context for <c>ip</c> fields. The script returns a sorted list of IP addresses.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#keyword_field"><summary><para>
+The context for keyword fields. The script returns a sorted list of string values.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#long_field"><summary><para>
+The context for long numeric fields. The script returns a sorted list of long values.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#painless_test"><summary><para>
+The default context if no other context is specified.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.PainlessContext#score"><summary><para>
+Treats scripts as if they were run inside a <c>script_score</c> function in a <c>function_score</c> query.
+</para></summary></member>
+</doc>

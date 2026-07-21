@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.NGramTokenFilter#max_gram"><summary><para>
+Maximum length of characters in a gram. Defaults to <c>2</c>.
+</para></summary></member>
+  <member key="_types.analysis.NGramTokenFilter#min_gram"><summary><para>
+Minimum length of characters in a gram. Defaults to <c>1</c>.
+</para></summary></member>
+  <member key="_types.analysis.NGramTokenFilter#preserve_original"><summary><para>
+Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+</para></summary></member>
+</doc>

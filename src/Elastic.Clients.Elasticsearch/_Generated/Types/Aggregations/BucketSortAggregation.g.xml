@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.BucketSortAggregation#from"><summary><para>
+Buckets in positions prior to <c>from</c> will be truncated.
+</para></summary></member>
+  <member key="_types.aggregations.BucketSortAggregation#gap_policy"><summary><para>
+The policy to apply when gaps are found in the data.
+</para></summary></member>
+  <member key="_types.aggregations.BucketSortAggregation#size"><summary><para>
+The number of buckets to return.
+Defaults to all buckets of the parent aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.BucketSortAggregation#sort"><summary><para>
+The list of fields to sort on.
+</para></summary></member>
+</doc>

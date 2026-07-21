@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.CumulativeCardinalityAggregate"><summary><para>
+Result of the <c>cumulative_cardinality</c> aggregation
+</para></summary></member>
+</doc>

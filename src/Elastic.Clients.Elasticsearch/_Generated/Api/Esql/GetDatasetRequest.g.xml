@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.get_dataset.Request"><summary><para>
+Get ES|QL datasets.
+</para>
+<para>
+Returns one or more datasets used in ES|QL data federation.
+A concrete-name miss returns <c>404</c>; a wildcard pattern or list-all request with no match
+returns <c>200</c> with an empty array.
+</para></summary></member>
+  <member key="esql.get_dataset.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="esql.get_dataset.Request#name"><summary><para>
+A comma-separated list of dataset names or wildcard patterns. Omit to return all datasets.
+</para></summary></member>
+</doc>

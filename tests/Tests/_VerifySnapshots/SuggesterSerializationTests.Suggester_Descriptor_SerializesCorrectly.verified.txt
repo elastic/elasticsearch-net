@@ -1,0 +1,13 @@
+{
+  my-suggester-1: {
+    term: {
+      field: description
+    }
+  },
+  my-suggester-2: {
+    term: {
+      field: leadDeveloper
+    }
+  },
+  text: Trying out Elasticsearch
+}

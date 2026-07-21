@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.put_behavioral_analytics.Response#acknowledged"><summary><para>
+For a successful response, this value is always true. On failure, an exception is returned instead.
+</para></summary></member>
+  <member key="search_application.put_behavioral_analytics.Response#name"><summary><para>
+The name of the analytics collection created or updated
+</para></summary></member>
+</doc>

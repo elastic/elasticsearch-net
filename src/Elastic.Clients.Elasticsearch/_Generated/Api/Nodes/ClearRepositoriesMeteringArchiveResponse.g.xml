@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.clear_repositories_metering_archive.Response#_nodes"><summary><para>
+Contains statistics about the number of nodes selected by the request’s node filters.
+</para></summary></member>
+  <member key="nodes.clear_repositories_metering_archive.Response#cluster_name"><summary><para>
+Name of the cluster. Based on the <c>cluster.name</c> setting.
+</para></summary></member>
+  <member key="nodes.clear_repositories_metering_archive.Response#nodes"><summary><para>
+Contains repositories metering information for the nodes selected by the request.
+</para></summary></member>
+</doc>

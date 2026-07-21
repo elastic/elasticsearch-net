@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_settings.Request"><summary><para>
+Get index settings.
+</para>
+<para>
+Get setting information for one or more indices.
+For data streams, it returns setting information for the stream's backing indices.
+</para></summary></member>
+  <member key="indices.get_settings.Request#allow_no_indices"><summary><para>
+A setting that does two separate checks on the index expression.
+If <c>false</c>, the request returns an error (1) if any wildcard expression
+(including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+complete set of resolved indices, aliases or data streams is empty after all
+expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+indices are allowed and the request returns an empty result.
+</para></summary></member>
+  <member key="indices.get_settings.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.get_settings.Request#flat_settings"><summary><para>
+If <c>true</c>, returns settings in flat format.
+</para></summary></member>
+  <member key="indices.get_settings.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+index, alias, or data stream that is missing, closed, or otherwise unavailable.
+If <c>true</c>, unavailable concrete targets are silently ignored.
+</para></summary></member>
+  <member key="indices.get_settings.Request#include_defaults"><summary><para>
+If <c>true</c>, return all default settings in the response.
+</para></summary></member>
+  <member key="indices.get_settings.Request#index"><summary><para>
+Comma-separated list of data streams, indices, and aliases used to limit
+the request. Supports wildcards (<c>*</c>). To target all data streams and
+indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="indices.get_settings.Request#local"><summary><para>
+If <c>true</c>, the request retrieves information from the local node only. If
+<c>false</c>, information is retrieved from the master node.
+</para></summary></member>
+  <member key="indices.get_settings.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is
+received before the timeout expires, the request fails and returns an
+error.
+</para></summary></member>
+  <member key="indices.get_settings.Request#name"><summary><para>
+Comma-separated list or wildcard expression of settings to retrieve.
+</para></summary></member>
+</doc>

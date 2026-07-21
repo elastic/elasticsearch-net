@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.Slices"><summary><para>
+Slices configuration used to parallelize a process.
+</para></summary></member>
+</doc>

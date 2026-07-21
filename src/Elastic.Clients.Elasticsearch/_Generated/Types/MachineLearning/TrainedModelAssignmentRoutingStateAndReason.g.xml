@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelAssignmentRoutingStateAndReason#reason"><summary><para>
+The reason for the current state. It is usually populated only when the
+<c>routing_state</c> is <c>failed</c>.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentRoutingStateAndReason#routing_state"><summary><para>
+The current routing state.
+</para></summary></member>
+</doc>

@@ -1,0 +1,16 @@
+<Project>
+  <Import Project="$(SolutionRoot)\src\_PublishArtifacts.Build.props" Condition="$(IsPackable) == True"/>
+  <PropertyGroup Condition="$(IsPackable) == True OR $(MSBuildProjectName.StartsWith('Tests'))">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionRoot)\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(IsPackable) == True">
+    <NoWarn>$(NoWarn), 1591,1572,1571,1573,1587,1570,NU5048</NoWarn>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+  
+</Project>

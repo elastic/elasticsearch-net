@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.get_ip_location_database.Request"><summary><para>
+Get IP geolocation database configurations.
+</para></summary></member>
+  <member key="ingest.get_ip_location_database.Request#id"><summary><para>
+Comma-separated list of database configuration IDs to retrieve.
+Wildcard (<c>*</c>) expressions are supported.
+To get all database configurations, omit this parameter or use <c>*</c>.
+</para></summary></member>
+</doc>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TestPopulation#field"><summary><para>
+The field to aggregate.
+</para></summary></member>
+  <member key="_types.aggregations.TestPopulation#filter"><summary><para>
+A filter used to define a set of records to run unpaired t-test on.
+</para></summary></member>
+</doc>

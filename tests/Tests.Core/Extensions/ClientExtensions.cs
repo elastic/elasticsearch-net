@@ -1,0 +1,29 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information.
+
+//using Elastic.Clients.Elasticsearch.Cluster;
+
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Cluster;
+
+namespace Tests.Core.Extensions
+{
+	public static class ClientExtensions
+	{
+		public static HealthResponse WaitForSecurityIndices(this ElasticsearchClient client) =>
+			client.Cluster.Health(
+				new HealthRequest(".security-*")
+				{
+					WaitForStatus = HealthStatus.Green
+				});
+
+		//public static async Task<HealthResponse> WaitForSecurityIndicesAsync(this IElasticsearchClient client) =>
+		//	await client.Cluster.HealthAsync(
+		//		new HealthRequest(".security-*")
+		//		{
+		//			WaitForStatus = WaitForStatus.Green,
+		//			//ExpandWildcards = ExpandWildcards.All
+		//		}).ConfigureAwait(false);
+	}
+}

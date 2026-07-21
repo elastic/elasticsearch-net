@@ -1,0 +1,15 @@
+{
+  aliases: {
+    alias_1: {},
+    alias_2: {
+      filter: {
+        term: {
+          username: {
+            value: stevegordon
+          }
+        }
+      },
+      routing: shard-1
+    }
+  }
+}

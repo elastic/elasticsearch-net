@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.preview_data_frame_analytics.Response#feature_values"><summary><para>
+An array of objects that contain feature name and value pairs. The features have been processed and indicate what will be sent to the model for training.
+</para></summary></member>
+</doc>

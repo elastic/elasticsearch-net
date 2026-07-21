@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.preview_transform.Request"><summary><para>
+Preview a transform.
+</para>
+<para>
+Generates a preview of the results that you will get when you create a transform with the same configuration.
+</para>
+<para>
+It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
+generates a list of mappings and settings for the destination index. These values are determined based on the field
+types of the source index and the transform aggregations.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#description"><summary><para>
+Free text description of the transform.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#dest"><summary><para>
+The destination for the transform.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#frequency"><summary><para>
+The interval between checks for changes in the source indices when the
+transform is running continuously. Also determines the retry interval in
+the event of transient failures while the transform is searching or
+indexing. The minimum value is 1s and the maximum is 1h.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#latest"><summary><para>
+The latest method transforms the data by finding the latest document for
+each unique key.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#pivot"><summary><para>
+The pivot method transforms the data by aggregating and grouping it.
+These objects define the group by fields and the aggregation to reduce
+the data.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#retention_policy"><summary><para>
+Defines a retention policy for the transform. Data that meets the defined
+criteria is deleted from the destination index.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#settings"><summary><para>
+Defines optional transform settings.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#source"><summary><para>
+The source of the data for the transform.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#sync"><summary><para>
+Defines the properties transforms require to run continuously.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the
+timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="transform.preview_transform.Request#transform_id"><summary><para>
+Identifier for the transform to preview. If you specify this path parameter, you cannot provide transform
+configuration details in the request body.
+</para></summary></member>
+</doc>

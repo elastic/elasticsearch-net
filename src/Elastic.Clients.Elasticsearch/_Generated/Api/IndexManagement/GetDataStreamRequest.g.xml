@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_data_stream.Request"><summary><para>
+Get data streams.
+</para>
+<para>
+Get information about one or more data streams.
+</para></summary></member>
+  <member key="indices.get_data_stream.Request#expand_wildcards"><summary><para>
+Type of data stream that wildcard patterns can match.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.get_data_stream.Request#include_defaults"><summary><para>
+If true, returns all relevant default configurations for the index template.
+</para></summary></member>
+  <member key="indices.get_data_stream.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.get_data_stream.Request#name"><summary><para>
+Comma-separated list of data stream names used to limit the request.
+Wildcard (<c>*</c>) expressions are supported. If omitted, all data streams are returned.
+</para></summary></member>
+  <member key="indices.get_data_stream.Request#verbose"><summary><para>
+Whether the maximum timestamp for each data stream should be calculated and returned.
+</para></summary></member>
+</doc>

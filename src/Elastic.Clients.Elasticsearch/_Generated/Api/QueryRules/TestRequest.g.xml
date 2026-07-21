@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.test.Request"><summary><para>
+Test a query ruleset.
+</para>
+<para>
+Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
+</para></summary></member>
+  <member key="query_rules.test.Request#match_criteria"><summary><para>
+The match criteria to apply to rules in the given query ruleset.
+Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
+</para></summary></member>
+  <member key="query_rules.test.Request#ruleset_id"><summary><para>
+The unique identifier of the query ruleset to be created or updated
+</para></summary></member>
+</doc>

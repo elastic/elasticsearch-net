@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>RequestConverter.Wasm</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
+
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    <WasmMainJSPath>main.mjs</WasmMainJSPath>
+
+    <!-- JSExport requires unsafe code. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- Trims the unused ICU data; the converter does not depend on culture-specific formatting. -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <WasmEmitSymbolMap>false</WasmEmitSymbolMap>
+
+    <!-- The converter materializes request types by runtime dictionary lookup and drives System.Text.Json
+         (de)serialization over them, so IL trimming can strip types it needs at runtime. Ship untrimmed
+         until a trimmed build is verified to produce byte-identical output in the browser. -->
+    <PublishTrimmed>false</PublishTrimmed>
+
+    <!-- The referenced RequestConverter relies on deprecated request members to faithfully convert any request. -->
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RequestConverter\RequestConverter.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.put_index_template.IndexTemplateMapping#aliases"><summary><para>
+Aliases to add.
+If the index template includes a <c>data_stream</c> object, these are data stream aliases.
+Otherwise, these are index aliases.
+Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
+</para></summary></member>
+  <member key="indices.put_index_template.IndexTemplateMapping#mappings"><summary><para>
+Mapping for fields in the index.
+If specified, this mapping can include field names, field data types, and mapping parameters.
+</para></summary></member>
+  <member key="indices.put_index_template.IndexTemplateMapping#settings"><summary><para>
+Configuration options for the index.
+</para></summary></member>
+</doc>

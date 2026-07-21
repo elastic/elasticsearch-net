@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.get_view.Request"><summary><para>
+Get an ES|QL view.
+</para>
+<para>
+Returns a stored ES|QL view.
+</para></summary></member>
+  <member key="esql.get_view.Request#name"><summary><para>
+The comma-separated view names to retrieve.
+</para></summary></member>
+</doc>

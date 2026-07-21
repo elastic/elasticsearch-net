@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.SignificantTermsAggregation#background_filter"><summary><para>
+A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#chi_square"><summary><para>
+Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#exclude"><summary><para>
+Terms to exclude.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#execution_hint"><summary><para>
+Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#field"><summary><para>
+The field from which to return significant terms.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#gnd"><summary><para>
+Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#include"><summary><para>
+Terms to include.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#jlh"><summary><para>
+Use JLH score as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#min_doc_count"><summary><para>
+Only return terms that are found in more than <c>min_doc_count</c> hits.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#mutual_information"><summary><para>
+Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#p_value"><summary><para>
+Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+</para>
+<para>
+The p-value is the probability of obtaining test results at least as extreme as
+the results actually observed, under the assumption that the null hypothesis is
+correct. The p-value is calculated assuming that the foreground set and the
+background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+hypothesis that the probabilities are the same.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#percentage"><summary><para>
+A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#script_heuristic"><summary><para>
+Customized score, implemented via a script.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#shard_min_doc_count"><summary><para>
+Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
+Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#shard_size"><summary><para>
+Can be used to control the volumes of candidate terms produced by each shard.
+By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTermsAggregation#size"><summary><para>
+The number of buckets returned out of the overall terms list.
+</para></summary></member>
+</doc>

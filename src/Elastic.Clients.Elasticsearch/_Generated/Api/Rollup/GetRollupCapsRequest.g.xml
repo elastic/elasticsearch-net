@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup.get_rollup_caps.Request"><summary><para>
+Get the rollup job capabilities.
+</para>
+<para>
+Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+</para>
+<para>
+This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+This API enables you to inspect an index and determine:
+</para>
+<list type="number">
+<item>
+<para>
+Does this index have associated rollup data somewhere in the cluster?
+</para>
+</item>
+<item>
+<para>
+If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+</para>
+</item>
+</list></summary></member>
+  <member key="rollup.get_rollup_caps.Request#id"><summary><para>
+Index, indices or index-pattern to return rollup capabilities for.
+<c>_all</c> may be used to fetch rollup capabilities from all jobs.
+</para></summary></member>
+</doc>

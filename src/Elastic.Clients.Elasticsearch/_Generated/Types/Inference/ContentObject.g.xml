@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ContentObject"><summary><para>
+An object style representation of a single portion of a conversation.
+</para></summary></member>
+  <member key="inference._types.ContentObject#file"><summary><para>
+The file content. Only applicable for the <c>file</c> type
+</para></summary></member>
+  <member key="inference._types.ContentObject#image_url"><summary><para>
+The image content. Only applicable for the <c>image_url</c> type
+</para></summary></member>
+  <member key="inference._types.ContentObject#text"><summary><para>
+The text content. Only applicable for the <c>text</c> type
+</para></summary></member>
+  <member key="inference._types.ContentObject#type"><summary><para>
+The type of content. Must be one of <c>text</c>, <c>image_url</c> or <c>file</c>. Not all services/models support content
+types other than "text"
+</para></summary></member>
+</doc>

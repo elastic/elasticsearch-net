@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.get.Response#analytics_collection_name"><summary><para>
+Analytics collection associated to the Search Application.
+</para></summary></member>
+  <member key="search_application.get.Response#indices"><summary><para>
+Indices that are part of the Search Application.
+</para></summary></member>
+  <member key="search_application.get.Response#name"><summary><para>
+Search Application name
+</para></summary></member>
+  <member key="search_application.get.Response#template"><summary><para>
+Search template to use on search operations.
+</para></summary></member>
+  <member key="search_application.get.Response#updated_at_millis"><summary><para>
+Last time the Search Application was updated.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.ApplicationPrivileges#application"><summary><para>
+The name of the application to which this entry applies.
+</para></summary></member>
+  <member key="security._types.ApplicationPrivileges#privileges"><summary><para>
+A list of strings, where each element is the name of an application privilege or action.
+</para></summary></member>
+  <member key="security._types.ApplicationPrivileges#resources"><summary><para>
+A list resources to which the privileges are applied.
+</para></summary></member>
+</doc>

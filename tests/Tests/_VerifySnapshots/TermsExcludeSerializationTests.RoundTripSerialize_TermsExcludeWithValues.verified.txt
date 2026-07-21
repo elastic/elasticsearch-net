@@ -1,0 +1,6 @@
+{
+  exclude: [
+    term_a,
+    term_b
+  ]
+}

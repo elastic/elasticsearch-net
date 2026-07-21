@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.ForeachProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.ForeachProcessor#field"><summary><para>
+Field containing array or object values.
+</para></summary></member>
+  <member key="ingest._types.ForeachProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.ForeachProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.ForeachProcessor#ignore_missing"><summary><para>
+If <c>true</c>, the processor silently exits without changing the document if the <c>field</c> is <c>null</c> or missing.
+</para></summary></member>
+  <member key="ingest._types.ForeachProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.ForeachProcessor#processor"><summary><para>
+Ingest processor to run on each element.
+</para></summary></member>
+  <member key="ingest._types.ForeachProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+</doc>

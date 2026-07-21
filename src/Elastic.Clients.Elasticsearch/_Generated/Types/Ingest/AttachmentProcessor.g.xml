@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.AttachmentProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#field"><summary><para>
+The field to get the base64 encoded field from.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#ignore_missing"><summary><para>
+If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#indexed_chars"><summary><para>
+The number of chars being used for extraction to prevent huge fields.
+Use <c>-1</c> for no limit.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#indexed_chars_field"><summary><para>
+Field name from which you can overwrite the number of chars being used for extraction.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#max_field_bytes"><summary><para>
+Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
+checked before base64 decoding) or byte array length for binary (for example, CBOR).
+If set to <c>-1</c>, there is no per-processor limit.
+The node setting <c>ingest.attachment.max_field_size</c> also applies.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#properties"><summary><para>
+Array of properties to select to be stored.
+Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#remove_binary"><summary><para>
+If true, the binary field will be removed from the document
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#resource_name"><summary><para>
+Field containing the name of the resource to decode.
+If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.AttachmentProcessor#target_field"><summary><para>
+The field that will hold the attachment information.
+</para></summary></member>
+</doc>

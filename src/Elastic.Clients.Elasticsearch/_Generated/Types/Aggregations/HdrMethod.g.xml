@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.HdrMethod#number_of_significant_value_digits"><summary><para>
+Specifies the resolution of values for the histogram in number of significant digits.
+</para></summary></member>
+</doc>

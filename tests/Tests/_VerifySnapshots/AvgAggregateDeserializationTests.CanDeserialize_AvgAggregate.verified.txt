@@ -1,0 +1,7 @@
+{
+  Aggregations: {
+    my-agg-name: {
+      Value: 75.0
+    }
+  }
+}

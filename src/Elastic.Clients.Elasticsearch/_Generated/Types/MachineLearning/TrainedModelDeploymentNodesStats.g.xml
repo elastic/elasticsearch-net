@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#average_inference_time_ms"><summary><para>
+The average time for each inference call to complete on this node.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#average_inference_time_ms_excluding_cache_hits"><summary><para>
+The average time for each inference call to complete on this node, excluding cache
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#error_count"><summary><para>
+The number of errors when evaluating the trained model.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#inference_count"><summary><para>
+The total number of inference calls made against this node for this model.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#last_access"><summary><para>
+The epoch time stamp of the last inference call for the model on this node.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#node"><summary><para>
+Information pertaining to the node.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#number_of_allocations"><summary><para>
+The number of allocations assigned to this node.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#number_of_pending_requests"><summary><para>
+The number of inference requests queued to be processed.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#rejected_execution_count"><summary><para>
+The number of inference requests that were not processed because the queue was full.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#routing_state"><summary><para>
+The current routing state and reason for the current routing state for this allocation.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#start_time"><summary><para>
+The epoch timestamp when the allocation started.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#threads_per_allocation"><summary><para>
+The number of threads used by each allocation during inference.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentNodesStats#timeout_count"><summary><para>
+The number of inference requests that timed out before being processed.
+</para></summary></member>
+</doc>

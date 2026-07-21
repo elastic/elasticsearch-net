@@ -1,0 +1,16 @@
+{
+  query: {
+    bool: {
+      filter: [
+        {
+          range: {
+            lastActivity: {
+              gte: now-1d/d,
+              lt: now/d
+            }
+          }
+        }
+      ]
+    }
+  }
+}

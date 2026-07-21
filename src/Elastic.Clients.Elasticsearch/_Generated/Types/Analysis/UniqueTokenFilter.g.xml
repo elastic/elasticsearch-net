@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.UniqueTokenFilter#only_on_same_position"><summary><para>
+If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
+</para></summary></member>
+</doc>

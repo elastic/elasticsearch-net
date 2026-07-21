@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.FlattenedProperty#meta"><summary><para>
+Metadata about the field.
+</para></summary></member>
+  <member key="_types.mapping.FlattenedProperty#preserve_leaf_arrays"><summary><para>
+How leaf arrays are represented in synthetic source.
+When set to <c>lossy</c>, leaf arrays are sorted, de-nulled, and deduplicated in the returned synthetic source.
+When set to <c>exact</c>, leaf arrays preserve order, nulls, and duplicates.
+</para></summary></member>
+</doc>

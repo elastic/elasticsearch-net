@@ -1,0 +1,5 @@
+{
+  index: {
+    _index: project
+  }
+}

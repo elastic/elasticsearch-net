@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.PinnedDoc#_id"><summary><para>
+The unique document ID.
+</para></summary></member>
+  <member key="_types.query_dsl.PinnedDoc#_index"><summary><para>
+The index that contains the document.
+</para></summary></member>
+</doc>

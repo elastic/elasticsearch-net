@@ -1,0 +1,20 @@
+{
+  aggregations: {
+    my_geohash_grid: {
+      geohash_grid: {
+        field: locationPoint,
+        precision: 3,
+        shard_size: 100,
+        size: 1000
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}

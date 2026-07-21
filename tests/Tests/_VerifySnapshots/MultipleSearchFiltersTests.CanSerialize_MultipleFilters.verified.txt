@@ -1,0 +1,22 @@
+{
+  query: {
+    bool: {
+      filter: [
+        {
+          term: {
+            age: {
+              value: 37
+            }
+          }
+        },
+        {
+          term: {
+            name: {
+              value: Steve
+            }
+          }
+        }
+      ]
+    }
+  }
+}

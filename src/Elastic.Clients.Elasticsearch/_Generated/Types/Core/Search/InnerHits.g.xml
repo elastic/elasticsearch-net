@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.InnerHits#from"><summary><para>
+Inner hit starting document offset.
+</para></summary></member>
+  <member key="_global.search._types.InnerHits#name"><summary><para>
+The name for the particular inner hit definition in the response.
+Useful when a search request contains multiple inner hits.
+</para></summary></member>
+  <member key="_global.search._types.InnerHits#size"><summary><para>
+The maximum number of hits to return per <c>inner_hits</c>.
+</para></summary></member>
+  <member key="_global.search._types.InnerHits#sort"><summary><para>
+How the inner hits should be sorted per <c>inner_hits</c>.
+By default, inner hits are sorted by score.
+</para></summary></member>
+</doc>

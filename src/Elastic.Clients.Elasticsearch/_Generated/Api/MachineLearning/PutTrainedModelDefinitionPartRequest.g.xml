@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_trained_model_definition_part.Request"><summary><para>
+Create part of a trained model definition.
+</para></summary></member>
+  <member key="ml.put_trained_model_definition_part.Request#definition"><summary><para>
+The definition part for the model. Must be a base64 encoded string.
+</para></summary></member>
+  <member key="ml.put_trained_model_definition_part.Request#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+  <member key="ml.put_trained_model_definition_part.Request#part"><summary><para>
+The definition part number. When the definition is loaded for inference the definition parts are streamed in the
+order of their part number. The first part must be <c>0</c> and the final part must be <c>total_parts - 1</c>.
+</para></summary></member>
+  <member key="ml.put_trained_model_definition_part.Request#total_definition_length"><summary><para>
+The total uncompressed definition length in bytes. Not base64 encoded.
+</para></summary></member>
+  <member key="ml.put_trained_model_definition_part.Request#total_parts"><summary><para>
+The total number of parts that will be uploaded. Must be greater than 0.
+</para></summary></member>
+</doc>

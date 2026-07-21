@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_memory_stats.Memory#jvm"><summary><para>
+Contains Java Virtual Machine (JVM) statistics for the node.
+</para></summary></member>
+  <member key="ml.get_memory_stats.Memory#mem"><summary><para>
+Contains statistics about memory usage for the node.
+</para></summary></member>
+  <member key="ml.get_memory_stats.Memory#name"><summary><para>
+Human-readable identifier for the node. Based on the Node name setting setting.
+</para></summary></member>
+  <member key="ml.get_memory_stats.Memory#roles"><summary><para>
+Roles assigned to the node.
+</para></summary></member>
+  <member key="ml.get_memory_stats.Memory#transport_address"><summary><para>
+The host and port where transport HTTP connections are accepted.
+</para></summary></member>
+</doc>

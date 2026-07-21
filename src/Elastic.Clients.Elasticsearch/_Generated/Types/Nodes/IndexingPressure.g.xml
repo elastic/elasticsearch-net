@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.IndexingPressure#memory"><summary><para>
+Contains statistics for memory consumption from indexing load.
+</para></summary></member>
+</doc>

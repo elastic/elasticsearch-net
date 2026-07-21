@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.follow.Request"><summary><para>
+Create a follower.
+</para>
+<para>
+Create a cross-cluster replication follower index that follows a specific leader index.
+When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
+</para></summary></member>
+  <member key="ccr.follow.Request#data_stream_name"><summary><para>
+If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
+</para></summary></member>
+  <member key="ccr.follow.Request#index"><summary><para>
+The name of the follower index.
+</para></summary></member>
+  <member key="ccr.follow.Request#leader_index"><summary><para>
+The name of the index in the leader cluster to follow.
+</para></summary></member>
+  <member key="ccr.follow.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_outstanding_read_requests"><summary><para>
+The maximum number of outstanding reads requests from the remote cluster.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_outstanding_write_requests"><summary><para>
+The maximum number of outstanding write requests on the follower.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_read_request_operation_count"><summary><para>
+The maximum number of operations to pull per read from the remote cluster.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_read_request_size"><summary><para>
+The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_retry_delay"><summary><para>
+The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
+retrying.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_write_buffer_count"><summary><para>
+The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
+deferred until the number of queued operations goes below the limit.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_write_buffer_size"><summary><para>
+The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
+be deferred until the total bytes of queued operations goes below the limit.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_write_request_operation_count"><summary><para>
+The maximum number of operations per bulk write request executed on the follower.
+</para></summary></member>
+  <member key="ccr.follow.Request#max_write_request_size"><summary><para>
+The maximum total bytes of operations per bulk write request executed on the follower.
+</para></summary></member>
+  <member key="ccr.follow.Request#read_poll_timeout"><summary><para>
+The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
+When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
+Then the follower will immediately attempt to read from the leader again.
+</para></summary></member>
+  <member key="ccr.follow.Request#remote_cluster"><summary><para>
+The remote cluster containing the leader index.
+</para></summary></member>
+  <member key="ccr.follow.Request#settings"><summary><para>
+Settings to override from the leader index.
+</para></summary></member>
+  <member key="ccr.follow.Request#wait_for_active_shards"><summary><para>
+Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
+active.
+A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
+remote Lucene segment files to the follower index.
+</para></summary></member>
+</doc>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexingPressureMemory#limit"><summary><para>
+Number of outstanding bytes that may be consumed by indexing requests. When this limit is reached or exceeded,
+the node will reject new coordinating and primary operations. When replica operations consume 1.5x this limit,
+the node will reject new replica operations. Defaults to 10% of the heap.
+</para></summary></member>
+</doc>

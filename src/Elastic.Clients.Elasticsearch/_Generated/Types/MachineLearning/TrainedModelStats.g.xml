@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelStats#deployment_stats"><summary><para>
+A collection of deployment stats, which is present when the models are deployed.
+</para></summary></member>
+  <member key="ml._types.TrainedModelStats#inference_stats"><summary><para>
+A collection of inference stats fields.
+</para></summary></member>
+  <member key="ml._types.TrainedModelStats#ingest"><summary><para>
+A collection of ingest stats for the model across all nodes.
+The values are summations of the individual node statistics.
+The format matches the ingest section in the nodes stats API.
+</para></summary></member>
+  <member key="ml._types.TrainedModelStats#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+  <member key="ml._types.TrainedModelStats#model_size_stats"><summary><para>
+A collection of model size stats.
+</para></summary></member>
+  <member key="ml._types.TrainedModelStats#pipeline_count"><summary><para>
+The number of ingest pipelines that currently refer to the model.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.get_settings.Response#defaults"><summary><para>
+The default setting values.
+</para></summary></member>
+  <member key="cluster.get_settings.Response#persistent"><summary><para>
+The settings that persist after the cluster restarts.
+</para></summary></member>
+  <member key="cluster.get_settings.Response#transient"><summary><para>
+The settings that do not persist after the cluster restarts.
+</para></summary></member>
+</doc>

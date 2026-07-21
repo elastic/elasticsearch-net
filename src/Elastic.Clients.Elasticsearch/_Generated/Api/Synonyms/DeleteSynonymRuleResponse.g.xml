@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.delete_synonym_rule.Response#reload_analyzers_details"><summary><para>
+Updating synonyms in a synonym set can reload the associated analyzers in case refresh is set to true.
+This information is the analyzers reloading result.
+</para></summary></member>
+  <member key="synonyms.delete_synonym_rule.Response#result"><summary><para>
+The update operation result.
+</para></summary></member>
+</doc>

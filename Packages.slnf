@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "Elasticsearch.sln",
+    "projects": [
+      "src\\Elastic.Clients.Elasticsearch\\Elastic.Clients.Elasticsearch.csproj"
+    ]
+  }
+}

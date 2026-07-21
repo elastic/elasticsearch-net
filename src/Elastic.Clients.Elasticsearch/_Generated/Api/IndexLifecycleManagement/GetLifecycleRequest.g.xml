@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm.get_lifecycle.Request"><summary><para>
+Get lifecycle policies.
+</para></summary></member>
+  <member key="ilm.get_lifecycle.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="ilm.get_lifecycle.Request#policy"><summary><para>
+Identifier for the policy.
+</para></summary></member>
+  <member key="ilm.get_lifecycle.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

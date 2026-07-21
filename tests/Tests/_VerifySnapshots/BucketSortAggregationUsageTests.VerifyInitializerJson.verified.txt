@@ -1,0 +1,37 @@
+{
+  aggregations: {
+    projects_started_per_month: {
+      aggregations: {
+        commits: {
+          sum: {
+            field: numberOfCommits
+          }
+        },
+        commits_bucket_sort: {
+          bucket_sort: {
+            from: 0,
+            gap_policy: insert_zeros,
+            size: 3,
+            sort: {
+              commits: {
+                order: desc
+              }
+            }
+          }
+        }
+      },
+      date_histogram: {
+        calendar_interval: month,
+        field: startedOn
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}

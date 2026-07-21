@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.CompletionContext#boost"><summary><para>
+The factor by which the score of the suggestion should be boosted.
+The score is computed by multiplying the boost with the suggestion weight.
+</para></summary></member>
+  <member key="_global.search._types.CompletionContext#context"><summary><para>
+The value of the category to filter/boost on.
+</para></summary></member>
+  <member key="_global.search._types.CompletionContext#neighbours"><summary><para>
+An array of precision values at which neighboring geohashes should be taken into account.
+Precision value can be a distance value (<c>5m</c>, <c>10km</c>, etc.) or a raw geohash precision (<c>1</c>..<c>12</c>).
+Defaults to generating neighbors for index time precision level.
+</para></summary></member>
+  <member key="_global.search._types.CompletionContext#precision"><summary><para>
+The precision of the geohash to encode the query geo point.
+Can be specified as a distance value (<c>5m</c>, <c>10km</c>, etc.), or as a raw geohash precision (<c>1</c>..<c>12</c>).
+Defaults to index time precision level.
+</para></summary></member>
+  <member key="_global.search._types.CompletionContext#prefix"><summary><para>
+Whether the category value should be treated as a prefix or not.
+</para></summary></member>
+</doc>

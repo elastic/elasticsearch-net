@@ -1,0 +1,32 @@
+{
+  query: {
+    bool: {
+      should: [
+        {
+          bool: {
+            should: {
+              term: {
+                name: {
+                  value: x
+                }
+              }
+            },
+            _name: leftBool
+          }
+        },
+        {
+          bool: {
+            should: {
+              term: {
+                name: {
+                  value: x
+                }
+              }
+            },
+            _name: rightBool
+          }
+        }
+      ]
+    }
+  }
+}

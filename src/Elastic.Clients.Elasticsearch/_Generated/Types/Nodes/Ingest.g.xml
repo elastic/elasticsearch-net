@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Ingest#pipelines"><summary><para>
+Contains statistics about ingest pipelines for the node.
+</para></summary></member>
+  <member key="nodes._types.Ingest#total"><summary><para>
+Contains statistics about ingest operations for the node.
+</para></summary></member>
+</doc>

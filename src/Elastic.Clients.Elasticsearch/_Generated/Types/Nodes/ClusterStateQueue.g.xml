@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.ClusterStateQueue#committed"><summary><para>
+Number of committed cluster states in queue.
+</para></summary></member>
+  <member key="nodes._types.ClusterStateQueue#pending"><summary><para>
+Number of pending cluster states in queue.
+</para></summary></member>
+  <member key="nodes._types.ClusterStateQueue#total"><summary><para>
+Total number of cluster states in queue.
+</para></summary></member>
+</doc>

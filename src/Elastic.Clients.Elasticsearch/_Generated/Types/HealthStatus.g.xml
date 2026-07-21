@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.HealthStatus#green"><summary><para>
+All shards are assigned.
+</para></summary></member>
+  <member key="_types.HealthStatus#red"><summary><para>
+One or more primary shards are unassigned, so some data is unavailable. This can occur briefly during cluster startup as primary shards are assigned.
+</para></summary></member>
+  <member key="_types.HealthStatus#yellow"><summary><para>
+All primary shards are assigned, but one or more replica shards are unassigned. If a node in the cluster fails, some data could be unavailable until that node is repaired.
+</para></summary></member>
+</doc>

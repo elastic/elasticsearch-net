@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeoBoundsAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.GeoBoundsAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.GeoBoundsAggregation#wrap_longitude"><summary><para>
+Specifies whether the bounding box should be allowed to overlap the international date line.
+</para></summary></member>
+</doc>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.UppercaseProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.UppercaseProcessor#field"><summary><para>
+The field to make uppercase.
+</para></summary></member>
+  <member key="ingest._types.UppercaseProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.UppercaseProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.UppercaseProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.UppercaseProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.UppercaseProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.UppercaseProcessor#target_field"><summary><para>
+The field to assign the converted value to.
+By default, the field is updated in-place.
+</para></summary></member>
+</doc>

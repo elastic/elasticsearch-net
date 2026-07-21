@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TransformAuthorization#api_key"><summary><para>
+If an API key was used for the most recent update to the transform, its name and identifier are listed in the response.
+</para></summary></member>
+  <member key="ml._types.TransformAuthorization#roles"><summary><para>
+If a user ID was used for the most recent update to the transform, its roles at the time of the update are listed in the response.
+</para></summary></member>
+  <member key="ml._types.TransformAuthorization#service_account"><summary><para>
+If a service account was used for the most recent update to the transform, the account name is listed in the response.
+</para></summary></member>
+</doc>

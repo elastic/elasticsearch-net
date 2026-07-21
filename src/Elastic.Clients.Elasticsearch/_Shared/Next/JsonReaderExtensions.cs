@@ -1,0 +1,766 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information.
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace Elastic.Clients.Elasticsearch.Serialization;
+
+/// <summary>
+/// A delegate that reads a value from a given <see cref="Utf8JsonReader"/> instance.
+/// </summary>
+/// <typeparam name="T">The type of the value to read.</typeparam>
+/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+/// <returns>The value read from the <paramref name="reader"/>.</returns>
+internal delegate T? JsonReadFunc<out T>(ref Utf8JsonReader reader, JsonSerializerOptions options);
+
+// NOTE:
+// The marker type concept allows us to use specialized converters on a per-property basis in custom converters.
+// This basically emulates using the '[JsonConverter({ConverterType})]' attribute on property level.
+
+// NOTE:
+// We make use of '[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]' for
+// marker type parameters.
+// The marker types are not actually constructed at any time, but this tricks the trimmer into checking the static
+// constructor of all marker types. We use the static constructor to root the corresponding marker type converters,
+// if the marker type has generic type arguments.
+
+internal static class JsonReaderExtensions
+{
+	#region General Purpose
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static void ValidateToken(this ref Utf8JsonReader reader, JsonTokenType expected)
+	{
+		if (reader.TokenType != expected)
+		{
+			throw new JsonException($"Expected JSON '{expected}' token, but got '{reader.TokenType}'.");
+		}
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static JsonException UnexpectedTokenException(this ref Utf8JsonReader reader, params ReadOnlySpan<JsonTokenType> expected)
+	{
+		string valid;
+		if (expected.Length <= 1)
+		{
+			valid = $"'{expected[0]}'";
+		}
+		else
+		{
+			valid = string.Join(",", expected[..^2].ToArray().Select(x => $"'{x}'"));
+			valid += $" or '{expected[^1]}'";
+		}
+
+		return new JsonException($"Expected JSON {valid} token, but got '{reader.TokenType}'.");
+	}
+
+	public static void SafeSkip(this ref Utf8JsonReader reader)
+	{
+		// Utf8JsonReader.Skip() unconditionally throws, if the reader instance is constructed with `isFinalBlock = false`.
+		// This may happen when reading from streams or pipes.
+
+		// For custom converters, System.Text.JSON always guarantees that the entire JSON value for the current scope is available.
+		// See:
+		// https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/converters-how-to#steps-to-follow-the-basic-pattern
+
+		// > Override the Read method to deserialize the incoming JSON and convert it to type T. Use the Utf8JsonReader that's passed to
+		// > the method to read the JSON. You don't have to worry about handling partial data, as the serializer passes all the data for
+		// > the current JSON scope.
+
+		// We use `TrySkip()` here to avoid the exception.
+
+		if (!reader.TrySkip())
+		{
+			throw new InvalidOperationException(
+				"Failed to skip JSON token. This case should never happen and indicates a severe problem. " +
+				"Please open an issue in the Github repository.");
+		}
+	}
+
+	/// <summary>
+	/// Compares the JSON encoded text to the JSON token value in the source and returns <see langword="true"/> if they match.
+	/// </summary>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="text">The JSON encoded text to compare against.</param>
+	/// <returns><see langword="true"/> if the JSON token value in the source matches the JSON encoded look up text.</returns>
+	/// <remarks>
+	///     This is an alternative version of the built-in <see cref="Utf8JsonReader.ValueTextEquals(ReadOnlySpan{byte})"/> method
+	///     with the only difference that this overload operates on pre-encoded JSON text.
+	/// </remarks>
+	public static bool ValueTextEquals(this ref Utf8JsonReader reader, JsonEncodedText text)
+	{
+		return reader.HasValueSequence
+			? CompareToSequence(ref reader, text.EncodedUtf8Bytes)
+			: reader.ValueSpan.SequenceEqual(text.EncodedUtf8Bytes);
+
+		static bool CompareToSequence(ref Utf8JsonReader reader, ReadOnlySpan<byte> other)
+		{
+			var localSequence = reader.ValueSequence;
+			if (localSequence.Length != other.Length)
+			{
+				return false;
+			}
+
+			var matchedSoFar = 0;
+
+			foreach (var memory in localSequence)
+			{
+				var span = memory.Span;
+
+				if (other[matchedSoFar..].StartsWith(span))
+				{
+					matchedSoFar += span.Length;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+	}
+
+	/// <summary>
+	/// Copies the current token's value into <paramref name="buffer"/> and returns its length, so the caller
+	/// can use <c>buffer[..length]</c> as a contiguous span. For a single-segment reader this copies
+	/// <see cref="Utf8JsonReader.ValueSpan"/>; for a multi-segment reader it copies <see cref="Utf8JsonReader.ValueSequence"/>.
+	/// Throws when the value is larger than <paramref name="buffer"/>, so size it to the longest token value the
+	/// caller expects (with headroom). Use this instead of <see cref="Utf8JsonReader.ValueSpan"/> in converters
+	/// that must support readers constructed over a multi-segment ReadOnlySequence.
+	/// </summary>
+	public static int GetValueBytes(this ref Utf8JsonReader reader, scoped Span<byte> buffer)
+	{
+		if (!reader.HasValueSequence)
+		{
+			var span = reader.ValueSpan;
+			if (span.Length > buffer.Length)
+				ThrowValueLargerThanBuffer(span.Length, buffer.Length);
+			span.CopyTo(buffer);
+			return span.Length;
+		}
+
+		var sequence = reader.ValueSequence;
+		if (sequence.Length > buffer.Length)
+			ThrowValueLargerThanBuffer((int)sequence.Length, buffer.Length);
+
+		var remaining = buffer;
+		foreach (var segment in sequence)
+		{
+			segment.Span.CopyTo(remaining);
+			remaining = remaining[segment.Length..];
+		}
+		return (int)sequence.Length;
+	}
+
+	[DoesNotReturn]
+	private static void ThrowValueLargerThanBuffer(int valueLength, int bufferLength)
+		=> throw new JsonException(
+			$"JSON token value of {valueLength} bytes exceeds the {bufferLength}-byte scratch buffer. " +
+			"Increase the converter's stackalloc size estimate.");
+
+	#endregion General Purpose
+
+	#region Default Generic Read Methods
+
+	/// <summary>
+	/// Reads a value from a given <see cref="Utf8JsonReader"/> instance using the default <see cref="JsonConverter"/> for the
+	/// type <typeparamref name="T"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <returns>The value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options)
+	{
+		var converter = options.GetConverter<T>(null);
+
+		if ((reader.TokenType is JsonTokenType.Null) && !converter.HandleNull)
+		{
+			return default;
+		}
+
+		return converter.Read(ref reader, typeof(T), options);
+	}
+
+	/// <summary>
+	/// Reads a value from a given <see cref="Utf8JsonReader"/> instance using a specific <see cref="JsonConverter"/> that is
+	/// retrieved from the <see cref="JsonSerializerOptions"/> based on <paramref name="markerType"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="markerType">
+	/// The marker type that is used to retrieve a specific <see cref="IMarkerTypeConverter"/> from the given <paramref name="options"/>.
+	/// </param>
+	/// <returns>The value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadValueEx<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
+	{
+		var converter = options.GetConverter<T>(markerType);
+
+		if ((reader.TokenType is JsonTokenType.Null) && !converter.HandleNull)
+		{
+			return default;
+		}
+
+		return converter.Read(ref reader, typeof(T), options);
+	}
+
+	/// <summary>
+	/// Reads a nullable value-type value from a given <see cref="Utf8JsonReader"/> instance using the default
+	/// <see cref="JsonConverter"/> for the type <typeparamref name="T"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <returns>The value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadNullableValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options)
+		where T : struct
+	{
+		// TODO: Support custom `T?` converters with `HandleNull`.
+		var converter = options.GetConverter<T>(null);
+
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return converter.Read(ref reader, typeof(T), options);
+	}
+
+	/// <summary>
+	/// Reads a nullable value-type value from a given <see cref="Utf8JsonReader"/> instance using a specific <see cref="JsonConverter"/>
+	/// that is retrieved from the <see cref="JsonSerializerOptions"/> based on <paramref name="markerType"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="markerType">
+	/// The marker type that is used to retrieve a specific <see cref="IMarkerTypeConverter"/> from the given <paramref name="options"/>.
+	/// </param>
+	/// <returns>The value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadNullableValueEx<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
+		where T : struct
+	{
+		// TODO: Support custom `T?` converters with `HandleNull`.
+		var converter = options.GetConverter<T>(markerType);
+
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return converter.Read(ref reader, typeof(T), options);
+	}
+
+	/// <summary>
+	/// Reads a property name value from a given <see cref="Utf8JsonReader"/> instance using the default <see cref="JsonConverter"/>
+	/// for the type <typeparamref name="T"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <returns>The property name value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T ReadPropertyName<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options)
+	{
+		Debug.Assert(reader.TokenType is JsonTokenType.PropertyName);
+
+		if (typeof(T) == typeof(string))
+		{
+			return (T)(object)reader.GetString()!;
+		}
+
+		return options.GetConverter<T>(null).ReadAsPropertyName(ref reader, typeof(T), options);
+	}
+
+	/// <summary>
+	/// Reads a property name value from a given <see cref="Utf8JsonReader"/> instance using a specific <see cref="JsonConverter"/>
+	/// that is retrieved from the <see cref="JsonSerializerOptions"/> based on <paramref name="markerType"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="markerType">
+	/// The marker type that is used to retrieve a specific <see cref="IMarkerTypeConverter"/> from the given <paramref name="options"/>.
+	/// </param>
+	/// <returns>The property name value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T ReadPropertyNameEx<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
+	{
+		Debug.Assert(reader.TokenType is JsonTokenType.PropertyName);
+
+		return options.GetConverter<T>(markerType).ReadAsPropertyName(ref reader, typeof(T), options);
+	}
+
+	#endregion Default Generic Read Methods
+
+	#region Delegate Based Read Methods
+
+	/// <summary>
+	/// Reads a value from a given <see cref="Utf8JsonReader"/> instance using a custom <see cref="JsonReadFunc{T}"/> delegate.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="readValue">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the value, or <see langword="null"/> to use
+	/// the default converter for the type <typeparamref name="T"/>.
+	/// </param>
+	/// <returns>The value read from the <paramref name="reader"/> instance.</returns>
+	/// <remarks>
+	/// This overload provides a streamlined entry-point for reading arbitrary values when using custom read delegates.
+	/// </remarks>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonReadFunc<T>? readValue)
+	{
+		if (readValue is null)
+		{
+			return reader.ReadValue<T>(options);
+		}
+
+		return readValue(ref reader, options);
+	}
+
+	/// <summary>
+	/// Reads a property name value from a given <see cref="Utf8JsonReader"/> instance using a custom <see cref="JsonReadFunc{T}"/>
+	/// delegate.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="readValue">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the property name value, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T"/>.
+	/// </param>
+	/// <returns>The property name value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadPropertyName<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonReadFunc<T>? readValue)
+	{
+		if (readValue is null)
+		{
+			return reader.ReadPropertyName<T>(options);
+		}
+
+		return readValue(ref reader, options);
+	}
+
+	/// <summary>
+	/// Reads a collection value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T">The type of the items in the collection.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="readElement">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the collection items, or <see langword="null"/> to use
+	/// the default converter for the item type <typeparamref name="T"/>.
+	/// </param>
+	/// <returns>An instance of <see cref="List{T}"/>, or <see langword="null"/>.</returns>
+	public static List<T>? ReadCollectionValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonReadFunc<T>? readElement)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		reader.ValidateToken(JsonTokenType.StartArray);
+
+		readElement ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T>(ref r, o);
+
+		var result = new List<T>();
+
+		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndArray))
+		{
+			result.Add(readElement(ref reader, options));
+		}
+
+		return result;
+	}
+
+	/// <summary>
+	/// Reads a dictionary value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+	/// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="readKey">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the dictionary key, or <see langword="null"/> to use
+	/// the default converter for the type <typeparamref name="TKey"/>.
+	/// </param>
+	/// /// <param name="readValue">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the dictionary values, or <see langword="null"/> to use
+	/// the default converter for the type <typeparamref name="TValue"/>.
+	/// </param>
+	/// <returns>An instance of <see cref="Dictionary{TKey, TValue}"/>, or <see langword="null"/>.</returns>
+	/// <exception cref="JsonException">If any dictionary key value is <see langword="null"/>.</exception>
+	public static Dictionary<TKey, TValue>? ReadDictionaryValue<TKey, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonReadFunc<TKey>? readKey, JsonReadFunc<TValue>? readValue)
+		where TKey : notnull
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		reader.ValidateToken(JsonTokenType.StartObject);
+
+		readKey ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadPropertyName<TKey>(ref r, o);
+		readValue ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<TValue>(ref r, o);
+
+		var result = new Dictionary<TKey, TValue>();
+
+		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndObject))
+		{
+			var key = readKey(ref reader, options);
+			reader.Read();
+			var value = readValue(ref reader, options);
+
+			result[key] = value;
+		}
+
+		return result;
+	}
+
+	/// <summary>
+	/// Reads a <see cref="KeyValuePair{TKey,TValue}"/> value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="TKey">The type of the key.</typeparam>
+	/// <typeparam name="TValue">The type of the value.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="readKey">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the key, or <see langword="null"/> to use the default
+	/// converter for the type <typeparamref name="TKey"/>.
+	/// </param>
+	/// /// <param name="readValue">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the value, or <see langword="null"/> to use the default
+	/// converter for the type <typeparamref name="TValue"/>.
+	/// </param>
+	/// <returns>An instance of <see cref="KeyValuePair{TKey, TValue}"/>.</returns>
+	public static KeyValuePair<TKey, TValue> ReadKeyValuePairValue<TKey, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonReadFunc<TKey>? readKey, JsonReadFunc<TValue>? readValue)
+		where TKey : notnull
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			throw new JsonException("JSON key-value pair must not be 'null'.");
+		}
+
+		reader.ValidateToken(JsonTokenType.StartObject);
+
+		readKey ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadPropertyName<TKey>(ref r, o);
+		readValue ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<TValue>(ref r, o);
+
+		KeyValuePair<TKey, TValue> result = default;
+		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndObject))
+		{
+			var key = readKey(ref reader, options);
+			reader.Read();
+			var value = readValue(ref reader, options);
+
+			result = new KeyValuePair<TKey, TValue>(key, value);
+		}
+
+		return result;
+	}
+
+	/// <summary>
+	/// Reads an inline union value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T1">The first union type.</typeparam>
+	/// <typeparam name="T2">The second union type.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="selector">A function that selects the union variant (e.g. based on the current JSON token type).</param>
+	/// <param name="readType1">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the first union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T1"/>.
+	/// </param>
+	/// <param name="readType2">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the second union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T2"/>.
+	/// </param>
+	/// <returns>An instance of <see cref="Union{T1,T2}"/>, or <see langword="null"/>.</returns>
+	/// <exception cref="InvalidOperationException">If no matching union variant could be selected.</exception>
+	public static Union<T1, T2>? ReadUnionValue<T1, T2>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonUnionSelectorFunc selector, JsonReadFunc<T1>? readType1, JsonReadFunc<T2>? readType2)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			// TODO: We might want the selector to handle 'null'.
+			return null;
+		}
+
+		return selector(ref reader, options) switch
+		{
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			_ => throw new InvalidOperationException($"Failed to select an union variant for union of type '{typeof(T1).Name}' or '{typeof(T2).Name}'.")
+		};
+	}
+
+	/// <summary>
+	/// Reads an inline union value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T1">The first union type.</typeparam>
+	/// <typeparam name="T2">The second union type.</typeparam>
+	/// <typeparam name="T3">The third union type.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="selector">A function that selects the union variant (e.g. based on the current JSON token type).</param>
+	/// <param name="readType1">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the first union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T1"/>.
+	/// </param>
+	/// <param name="readType2">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the second union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T2"/>.
+	/// </param>
+	/// <param name="readType3">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the third union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T3"/>.
+	/// </param>
+	/// <returns>A boxed value of the selected union variant.</returns>
+	/// <exception cref="InvalidOperationException">If no matching union variant could be selected.</exception>
+	public static object? ReadUnionValue<T1, T2, T3>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonUnionSelectorFunc selector, JsonReadFunc<T1>? readType1, JsonReadFunc<T2>? readType2,
+		JsonReadFunc<T3>? readType3)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return selector(ref reader, options) switch
+		{
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			3 => (readType3 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T3>(ref r, o))).Invoke(ref reader, options),
+			_ => throw new InvalidOperationException($"Failed to select a union variant for union of type '{typeof(T1).Name}', '{typeof(T2).Name}' or '{typeof(T3).Name}'.")
+		};
+	}
+
+	/// <summary>
+	/// Reads an inline union value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T1">The first union type.</typeparam>
+	/// <typeparam name="T2">The second union type.</typeparam>
+	/// <typeparam name="T3">The third union type.</typeparam>
+	/// <typeparam name="T4">The fourth union type.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="selector">A function that selects the union variant (e.g. based on the current JSON token type).</param>
+	/// <param name="readType1">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the first union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T1"/>.
+	/// </param>
+	/// <param name="readType2">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the second union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T2"/>.
+	/// </param>
+	/// <param name="readType3">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the third union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T3"/>.
+	/// </param>
+	/// <param name="readType4">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the fourth union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T4"/>.
+	/// </param>
+	/// <returns>A boxed value of the selected union variant.</returns>
+	/// <exception cref="InvalidOperationException">If no matching union variant could be selected.</exception>
+	public static object? ReadUnionValue<T1, T2, T3, T4>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonUnionSelectorFunc selector, JsonReadFunc<T1>? readType1, JsonReadFunc<T2>? readType2,
+		JsonReadFunc<T3>? readType3, JsonReadFunc<T4>? readType4)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return selector(ref reader, options) switch
+		{
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			3 => (readType3 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T3>(ref r, o))).Invoke(ref reader, options),
+			4 => (readType4 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T4>(ref r, o))).Invoke(ref reader, options),
+			_ => throw new InvalidOperationException($"Failed to select a union variant for union of type '{typeof(T1).Name}', '{typeof(T2).Name}', '{typeof(T3).Name}' or '{typeof(T4).Name}'.")
+		};
+	}
+
+	/// <summary>
+	/// Reads an inline union value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T1">The first union type.</typeparam>
+	/// <typeparam name="T2">The second union type.</typeparam>
+	/// <typeparam name="T3">The third union type.</typeparam>
+	/// <typeparam name="T4">The fourth union type.</typeparam>
+	/// <typeparam name="T5">The fifth union type.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="selector">A function that selects the union variant (e.g. based on the current JSON token type).</param>
+	/// <param name="readType1">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the first union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T1"/>.
+	/// </param>
+	/// <param name="readType2">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the second union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T2"/>.
+	/// </param>
+	/// <param name="readType3">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the third union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T3"/>.
+	/// </param>
+	/// <param name="readType4">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the fourth union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T4"/>.
+	/// </param>
+	/// <param name="readType5">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the fifth union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T5"/>.
+	/// </param>
+	/// <returns>A boxed value of the selected union variant.</returns>
+	/// <exception cref="InvalidOperationException">If no matching union variant could be selected.</exception>
+	public static object? ReadUnionValue<T1, T2, T3, T4, T5>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonUnionSelectorFunc selector, JsonReadFunc<T1>? readType1, JsonReadFunc<T2>? readType2,
+		JsonReadFunc<T3>? readType3, JsonReadFunc<T4>? readType4, JsonReadFunc<T5>? readType5)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return selector(ref reader, options) switch
+		{
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			3 => (readType3 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T3>(ref r, o))).Invoke(ref reader, options),
+			4 => (readType4 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T4>(ref r, o))).Invoke(ref reader, options),
+			5 => (readType5 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T5>(ref r, o))).Invoke(ref reader, options),
+			_ => throw new InvalidOperationException($"Failed to select a union variant for union of type '{typeof(T1).Name}', '{typeof(T2).Name}', '{typeof(T3).Name}', '{typeof(T4).Name}' or '{typeof(T5).Name}'.")
+		};
+	}
+
+	#region Specialized Read Methods
+
+	/// <summary>
+	/// Reads a single item or collection value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T">The type of the items in the collection.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="readElement">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the collection items, or <see langword="null"/> to use
+	/// the default converter for the item type <typeparamref name="T"/>.
+	/// </param>
+	/// <returns>An instance of <see cref="List{T}"/>, or <see langword="null"/>.</returns>
+	public static List<T>? ReadSingleOrManyCollectionValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonReadFunc<T>? readElement)
+	{
+		// TODO: Allow passing a selector function to distinguish between single or many in complex scenarios
+		// (e.g. when the single element can be an array, see: GeoLocation).
+
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		readElement ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T>(ref r, o);
+
+		if (reader.TokenType is not JsonTokenType.StartArray)
+		{
+			return [readElement(ref reader, options)];
+		}
+
+		var result = new List<T>();
+
+		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndArray))
+		{
+			result.Add(readElement(ref reader, options));
+		}
+
+		return result;
+	}
+
+	// TODO: For 'object' or 'object | object[]' (single or many) shortcut properties:
+	//       => we assume the canonical representation to be used most of the time
+
+	#endregion Specialized Read Methods
+
+	#endregion Delegate Based Read Methods
+
+	#region Property Read Methods
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static void ReadProperty<TName, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		[DisallowNull] out TName name, out TValue? value)
+	{
+		name = reader.ReadPropertyName<TName>(options);
+		reader.Read();
+		value = reader.ReadValue<TValue?>(options);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static void ReadProperty<TName, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		[DisallowNull] out TName name, out TValue? value,
+		JsonReadFunc<TName>? readName, JsonReadFunc<TValue>? readValue)
+	{
+		readName ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadPropertyName<TName>(ref r, o);
+		readValue ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<TValue>(ref r, o);
+
+		name = readName(ref reader, options) ?? throw new InvalidOperationException("JSON property name must not be 'null'.");
+		reader.Read();
+		value = readValue(ref reader, options);
+	}
+
+	/// <summary>
+	/// Checks, if the current property name token is equal to the given <paramref name="name"/> and proceeds to read
+	/// the corresponding value if the condition was met.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="name">The property name to match.</param>
+	/// <param name="value">Receives the deserialized value.</param>
+	/// <param name="readValue">The <see cref="JsonReadFunc{T}"/> delegate used to read the value.</param>
+	/// <returns><see langword="true"/> if the value has been read or <see langword="false"/>, if the property name did not match.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool TryReadProperty<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options, JsonEncodedText name,
+		ref T? value, JsonReadFunc<T>? readValue)
+	{
+		Debug.Assert(reader.TokenType is JsonTokenType.PropertyName);
+
+		if (!reader.ValueTextEquals(name))
+		{
+			return false;
+		}
+
+		readValue ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T?>(ref r, o);
+
+		reader.Read();
+		value = readValue.Invoke(ref reader, options);
+
+		return true;
+	}
+
+	#endregion Property Read Methods
+}

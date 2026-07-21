@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeoLineSort#field"><summary><para>
+The name of the numeric field to use as the sort key for ordering the points.
+</para></summary></member>
+</doc>

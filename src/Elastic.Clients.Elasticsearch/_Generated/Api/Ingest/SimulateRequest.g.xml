@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.simulate.Request"><summary><para>
+Simulate a pipeline.
+</para>
+<para>
+Run an ingest pipeline against a set of provided documents.
+You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
+</para></summary></member>
+  <member key="ingest.simulate.Request#docs"><summary><para>
+Sample documents to test in the pipeline.
+</para></summary></member>
+  <member key="ingest.simulate.Request#id"><summary><para>
+The pipeline to test.
+If you don't specify a <c>pipeline</c> in the request body, this parameter is required.
+</para></summary></member>
+  <member key="ingest.simulate.Request#pipeline"><summary><para>
+The pipeline to test.
+If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
+If you specify both this and the request path parameter, the API only uses the request path parameter.
+</para></summary></member>
+  <member key="ingest.simulate.Request#verbose"><summary><para>
+If <c>true</c>, the response includes output data for each processor in the executed pipeline.
+</para></summary></member>
+</doc>

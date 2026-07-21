@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.put_view.Request"><summary><para>
+Create or update an ES|QL view.
+</para></summary></member>
+  <member key="esql.put_view.Request#name"><summary><para>
+The view name to create or update.
+</para></summary></member>
+  <member key="esql.put_view.Request#query"><summary><para>
+The ES|QL query string from which to create a view.
+</para></summary></member>
+</doc>

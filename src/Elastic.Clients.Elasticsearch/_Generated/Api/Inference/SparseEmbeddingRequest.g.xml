@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.sparse_embedding.Request"><summary><para>
+Perform sparse embedding inference on the service.
+</para></summary></member>
+  <member key="inference.sparse_embedding.Request#inference_id"><summary><para>
+The inference Id
+</para></summary></member>
+  <member key="inference.sparse_embedding.Request#input"><summary><para>
+Inference input.
+Either a string or an array of strings.
+</para></summary></member>
+  <member key="inference.sparse_embedding.Request#task_settings"><summary><para>
+Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
+</para></summary></member>
+  <member key="inference.sparse_embedding.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference request to complete.
+</para></summary></member>
+</doc>

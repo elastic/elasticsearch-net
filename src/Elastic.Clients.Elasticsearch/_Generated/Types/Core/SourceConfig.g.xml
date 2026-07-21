@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.SourceConfig"><summary><para>
+Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
+</para></summary></member>
+</doc>

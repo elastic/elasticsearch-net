@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.repository_analyze.WriteSummaryInfo#count"><summary><para>
+The number of write operations performed in the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.WriteSummaryInfo#total_elapsed"><summary><para>
+The total elapsed time spent on writing blobs in the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.WriteSummaryInfo#total_elapsed_nanos"><summary><para>
+The total elapsed time spent on writing blobs in the test, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.WriteSummaryInfo#total_size"><summary><para>
+The total size of all the blobs written in the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.WriteSummaryInfo#total_size_bytes"><summary><para>
+The total size of all the blobs written in the test, in bytes.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.WriteSummaryInfo#total_throttled"><summary><para>
+The total time spent waiting due to the <c>max_snapshot_bytes_per_sec</c> throttle.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.WriteSummaryInfo#total_throttled_nanos"><summary><para>
+The total time spent waiting due to the <c>max_snapshot_bytes_per_sec</c> throttle, in nanoseconds.
+</para></summary></member>
+</doc>
