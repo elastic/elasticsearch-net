@@ -30,6 +30,14 @@ Contains wildcard expressions and there are only partial matches.
 If this parameter is false, the request returns a 404 status code when
 there are no matches or only partial matches.
 </para></summary></member>
+  <member key="transform.get_transform_stats.Request#basic"><summary><para>
+If true, the response includes <c>id</c>, <c>state</c>, <c>node</c>, <c>stats</c>, <c>health</c>,
+and basic <c>checkpointing</c> information (the last and next checkpoint
+numbers, and the next checkpoint's <c>position</c> and <c>progress</c>). Skips
+statistics that require heavy computations to calculate:
+<c>operations_behind</c>, <c>changes_last_detected_at</c>, <c>last_search_time</c>, and
+the checkpoint timestamps.
+</para></summary></member>
   <member key="transform.get_transform_stats.Request#from"><summary><para>
 Skips the specified number of transforms.
 </para></summary></member>

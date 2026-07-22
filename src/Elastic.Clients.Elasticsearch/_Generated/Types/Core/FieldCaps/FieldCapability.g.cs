@@ -51,6 +51,9 @@ public sealed partial class FieldCapability
 	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? Indices { get; set; }
 
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#inference']/*"/>
+	public bool? Inference { get; set; }
+
 	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#meta']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
@@ -65,6 +68,9 @@ public sealed partial class FieldCapability
 
 	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_dimension_indices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? NonDimensionIndices { get; set; }
+
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_inference_indices']/*"/>
+	public System.Collections.Generic.ICollection<string>? NonInferenceIndices { get; set; }
 
 	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_searchable_indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? NonSearchableIndices { get; set; }

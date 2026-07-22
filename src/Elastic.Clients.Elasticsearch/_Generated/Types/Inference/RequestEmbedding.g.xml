@@ -5,6 +5,7 @@ Inference input.
 Either a string, an array of strings, a <c>content</c> object, or an array of <c>content</c> objects.
 <c>content</c> objects may contain a single item or an array of items. Models that support multiple items per <c>content</c>
 object will return a single embedding for each <c>content</c> object, regardless of how many items it contains.
+Support for multiple items in a single <c>content</c> object is available in Elasticsearch 9.5.0 and later.
 </para>
 <para>
 string example:
@@ -52,7 +53,7 @@ string array example:
 ]
 </code>
 <para>
-Multiple items in one <c>content</c> object example:
+Multiple items in one <c>content</c> object example (available in Elasticsearch 9.5.0 and later):
 </para>
 <code>
 "input": [

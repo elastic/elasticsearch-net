@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.delete_region_policy.Request"><summary><para>
+Delete the inference region policy.
+</para></summary></member>
+</doc>

@@ -26,26 +26,44 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClientId = System.Text.Json.JsonEncodedText.Encode("client_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClientSecret = System.Text.Json.JsonEncodedText.Encode("client_secret"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOrganizationId = System.Text.Json.JsonEncodedText.Encode("organization_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScopes = System.Text.Json.JsonEncodedText.Encode("scopes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenUrl = System.Text.Json.JsonEncodedText.Encode("token_url"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propApiKey = default;
+		LocalJsonValue<string?> propApiKey = default;
+		LocalJsonValue<string?> propClientId = default;
+		LocalJsonValue<string?> propClientSecret = default;
 		LocalJsonValue<int?> propDimensions = default;
 		LocalJsonValue<string> propModelId = default;
 		LocalJsonValue<string?> propOrganizationId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propScopes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType?> propSimilarity = default;
+		LocalJsonValue<string?> propTokenUrl = default;
 		LocalJsonValue<string?> propUrl = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
+			{
+				continue;
+			}
+
+			if (propClientId.TryReadProperty(ref reader, options, PropClientId, null))
+			{
+				continue;
+			}
+
+			if (propClientSecret.TryReadProperty(ref reader, options, PropClientSecret, null))
 			{
 				continue;
 			}
@@ -70,7 +88,17 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 				continue;
 			}
 
+			if (propScopes.TryReadProperty(ref reader, options, PropScopes, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
 			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType>(o)))
+			{
+				continue;
+			}
+
+			if (propTokenUrl.TryReadProperty(ref reader, options, PropTokenUrl, null))
 			{
 				continue;
 			}
@@ -93,11 +121,15 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 		return new Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ApiKey = propApiKey.Value,
+			ClientId = propClientId.Value,
+			ClientSecret = propClientSecret.Value,
 			Dimensions = propDimensions.Value,
 			ModelId = propModelId.Value,
 			OrganizationId = propOrganizationId.Value,
 			RateLimit = propRateLimit.Value,
+			Scopes = propScopes.Value,
 			Similarity = propSimilarity.Value,
+			TokenUrl = propTokenUrl.Value,
 			Url = propUrl.Value
 		};
 	}
@@ -106,11 +138,15 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
+		writer.WriteProperty(options, PropClientId, value.ClientId, null, null);
+		writer.WriteProperty(options, PropClientSecret, value.ClientSecret, null, null);
 		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropOrganizationId, value.OrganizationId, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
+		writer.WriteProperty(options, PropScopes, value.Scopes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType>(o, v));
+		writer.WriteProperty(options, PropTokenUrl, value.TokenUrl, null, null);
 		writer.WriteProperty(options, PropUrl, value.Url, null, null);
 		writer.WriteEndObject();
 	}

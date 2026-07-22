@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.get_data_source.Response#data_sources"><summary><para>
+The matching data sources.
+Credential values in each data source's settings are redacted as <c>::es_redacted::</c> in the response.
+</para></summary></member>
+</doc>

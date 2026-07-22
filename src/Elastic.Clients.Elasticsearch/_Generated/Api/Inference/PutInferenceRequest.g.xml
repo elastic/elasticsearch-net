@@ -141,5 +141,6 @@ The task type. Refer to the integration list in the API description for the avai
 </para></summary></member>
   <member key="inference.put.Request#timeout"><summary><para>
 Specifies the amount of time to wait for the inference endpoint to be created.
+The default depends on the task type: 120s for <c>completion</c> and <c>chat_completion</c>, and 30s for all other task types.
 </para></summary></member>
 </doc>

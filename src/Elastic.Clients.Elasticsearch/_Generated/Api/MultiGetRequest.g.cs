@@ -39,6 +39,9 @@ public sealed partial class MultiGetRequestParameters : Elastic.Transport.Reques
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -96,6 +99,9 @@ public sealed partial class MultiGetRequest : Elastic.Clients.Elasticsearch.Requ
 
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -176,6 +182,13 @@ public readonly partial struct MultiGetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -414,6 +427,13 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

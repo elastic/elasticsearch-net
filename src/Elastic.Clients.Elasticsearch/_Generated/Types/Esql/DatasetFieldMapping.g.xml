@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.DatasetFieldMapping"><summary><para>
+A per-column declaration inside a dataset mapping's <c>properties</c>.
+</para></summary></member>
+  <member key="esql._types.DatasetFieldMapping#format"><summary><para>
+The date-parse pattern for a declared <c>date</c> column, mirroring the index date-field <c>format</c>.
+</para></summary></member>
+  <member key="esql._types.DatasetFieldMapping#path"><summary><para>
+The underlying file column that this logical column reads from.
+This is a read-path rename: the physical column becomes this single logical column.
+</para></summary></member>
+  <member key="esql._types.DatasetFieldMapping#type"><summary><para>
+The declared column type.
+</para></summary></member>
+</doc>

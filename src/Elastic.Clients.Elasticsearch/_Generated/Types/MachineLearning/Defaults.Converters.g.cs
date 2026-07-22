@@ -27,12 +27,14 @@ public sealed partial class DefaultsConverter : System.Text.Json.Serialization.J
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelPlatformVariant = System.Text.Json.JsonEncodedText.Encode("model_platform_variant"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Defaults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors> propAnomalyDetectors = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds> propDatafeeds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlatformVariant> propModelPlatformVariant = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAnomalyDetectors.TryReadProperty(ref reader, options, PropAnomalyDetectors, null))
@@ -41,6 +43,11 @@ public sealed partial class DefaultsConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propDatafeeds.TryReadProperty(ref reader, options, PropDatafeeds, null))
+			{
+				continue;
+			}
+
+			if (propModelPlatformVariant.TryReadProperty(ref reader, options, PropModelPlatformVariant, null))
 			{
 				continue;
 			}
@@ -58,7 +65,8 @@ public sealed partial class DefaultsConverter : System.Text.Json.Serialization.J
 		return new Elastic.Clients.Elasticsearch.MachineLearning.Defaults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			AnomalyDetectors = propAnomalyDetectors.Value,
-			Datafeeds = propDatafeeds.Value
+			Datafeeds = propDatafeeds.Value,
+			ModelPlatformVariant = propModelPlatformVariant.Value
 		};
 	}
 
@@ -67,6 +75,7 @@ public sealed partial class DefaultsConverter : System.Text.Json.Serialization.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnomalyDetectors, value.AnomalyDetectors, null, null);
 		writer.WriteProperty(options, PropDatafeeds, value.Datafeeds, null, null);
+		writer.WriteProperty(options, PropModelPlatformVariant, value.ModelPlatformVariant, null, null);
 		writer.WriteEndObject();
 	}
 }

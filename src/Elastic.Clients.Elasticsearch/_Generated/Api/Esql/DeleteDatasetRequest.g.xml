@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.delete_dataset.Request"><summary><para>
+Delete ES|QL datasets.
+</para>
+<para>
+Deletes one or more datasets used in ES|QL data federation.
+If any specified dataset does not exist, the request fails and no datasets are deleted.
+</para></summary></member>
+  <member key="esql.delete_dataset.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="esql.delete_dataset.Request#name"><summary><para>
+A comma-separated list of dataset names to delete.
+</para></summary></member>
+  <member key="esql.delete_dataset.Request#timeout"><summary><para>
+The time to wait for the request to be completed.
+</para></summary></member>
+</doc>

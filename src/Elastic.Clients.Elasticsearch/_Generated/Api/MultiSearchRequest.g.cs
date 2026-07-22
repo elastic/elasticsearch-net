@@ -61,14 +61,14 @@ public sealed partial class MultiSearchRequestParameters : Elastic.Transport.Req
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public string? Slice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
@@ -151,14 +151,14 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public string? Slice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
@@ -284,6 +284,13 @@ public readonly partial struct MultiSearchRequestDescriptor
 		return this;
 	}
 
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
@@ -295,13 +302,6 @@ public readonly partial struct MultiSearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
-		return this;
-	}
-
-	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Slice(string? value)
-	{
-		Instance.Slice = value;
 		return this;
 	}
 
@@ -499,6 +499,13 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
@@ -510,13 +517,6 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
-		return this;
-	}
-
-	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Slice(string? value)
-	{
-		Instance.Slice = value;
 		return this;
 	}
 

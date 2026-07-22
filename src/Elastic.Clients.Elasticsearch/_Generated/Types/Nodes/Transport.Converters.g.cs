@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class TransportConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Transport>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropInboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("inbound_handling_time_histogram"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOutboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("outbound_handling_time_histogram"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRxCount = System.Text.Json.JsonEncodedText.Encode("rx_count"u8);
@@ -39,6 +40,7 @@ public sealed partial class TransportConverter : System.Text.Json.Serialization.
 	public override Elastic.Clients.Elasticsearch.Nodes.Transport Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.TransportActionStats>?> propActions = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>?> propInboundHandlingTimeHistogram = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>?> propOutboundHandlingTimeHistogram = default;
 		LocalJsonValue<long?> propRxCount = default;
@@ -51,6 +53,11 @@ public sealed partial class TransportConverter : System.Text.Json.Serialization.
 		LocalJsonValue<long?> propTxSizeInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propActions.TryReadProperty(ref reader, options, PropActions, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.TransportActionStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.TransportActionStats>(o, null, null)))
+			{
+				continue;
+			}
+
 			if (propInboundHandlingTimeHistogram.TryReadProperty(ref reader, options, PropInboundHandlingTimeHistogram, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, null)))
 			{
 				continue;
@@ -113,6 +120,7 @@ public sealed partial class TransportConverter : System.Text.Json.Serialization.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Nodes.Transport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Actions = propActions.Value,
 			InboundHandlingTimeHistogram = propInboundHandlingTimeHistogram.Value,
 			OutboundHandlingTimeHistogram = propOutboundHandlingTimeHistogram.Value,
 			RxCount = propRxCount.Value,
@@ -129,6 +137,7 @@ public sealed partial class TransportConverter : System.Text.Json.Serialization.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Transport value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActions, value.Actions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.TransportActionStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.TransportActionStats>(o, v, null, null));
 		writer.WriteProperty(options, PropInboundHandlingTimeHistogram, value.InboundHandlingTimeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, v, null));
 		writer.WriteProperty(options, PropOutboundHandlingTimeHistogram, value.OutboundHandlingTimeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, v, null));
 		writer.WriteProperty(options, PropRxCount, value.RxCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));

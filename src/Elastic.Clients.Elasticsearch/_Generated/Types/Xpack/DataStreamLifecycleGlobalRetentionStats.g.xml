@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.DataStreamLifecycleGlobalRetentionStats"><summary><para>
+The <c>affected_data_streams</c> and <c>retention_millis</c> fields are only present when this global retention is defined.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleGlobalRetentionStats#affected_data_streams"><summary><para>
+The number of data streams affected by this global retention.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleGlobalRetentionStats#defined"><summary><para>
+Whether this global retention is defined for the cluster.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleGlobalRetentionStats#retention_millis"><summary><para>
+The global retention period in milliseconds.
+</para></summary></member>
+</doc>

@@ -26,11 +26,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 public sealed partial class ClientConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Client>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAgent = System.Text.Json.JsonEncodedText.Encode("agent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClosedTime = System.Text.Json.JsonEncodedText.Encode("closed_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropClosedTimeMillis = System.Text.Json.JsonEncodedText.Encode("closed_time_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastRequestTime = System.Text.Json.JsonEncodedText.Encode("last_request_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLastRequestTimeMillis = System.Text.Json.JsonEncodedText.Encode("last_request_time_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLastUri = System.Text.Json.JsonEncodedText.Encode("last_uri"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLocalAddress = System.Text.Json.JsonEncodedText.Encode("local_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOpenedTime = System.Text.Json.JsonEncodedText.Encode("opened_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOpenedTimeMillis = System.Text.Json.JsonEncodedText.Encode("opened_time_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRemoteAddress = System.Text.Json.JsonEncodedText.Encode("remote_address"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRequestCount = System.Text.Json.JsonEncodedText.Encode("request_count"u8);
@@ -41,11 +44,14 @@ public sealed partial class ClientConverter : System.Text.Json.Serialization.Jso
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propAgent = default;
+		LocalJsonValue<string?> propClosedTime = default;
 		LocalJsonValue<long?> propClosedTimeMillis = default;
 		LocalJsonValue<long?> propId = default;
+		LocalJsonValue<string?> propLastRequestTime = default;
 		LocalJsonValue<long?> propLastRequestTimeMillis = default;
 		LocalJsonValue<string?> propLastUri = default;
 		LocalJsonValue<string?> propLocalAddress = default;
+		LocalJsonValue<string?> propOpenedTime = default;
 		LocalJsonValue<long?> propOpenedTimeMillis = default;
 		LocalJsonValue<string?> propRemoteAddress = default;
 		LocalJsonValue<long?> propRequestCount = default;
@@ -58,12 +64,22 @@ public sealed partial class ClientConverter : System.Text.Json.Serialization.Jso
 				continue;
 			}
 
+			if (propClosedTime.TryReadProperty(ref reader, options, PropClosedTime, null))
+			{
+				continue;
+			}
+
 			if (propClosedTimeMillis.TryReadProperty(ref reader, options, PropClosedTimeMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
 			if (propId.TryReadProperty(ref reader, options, PropId, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propLastRequestTime.TryReadProperty(ref reader, options, PropLastRequestTime, null))
 			{
 				continue;
 			}
@@ -79,6 +95,11 @@ public sealed partial class ClientConverter : System.Text.Json.Serialization.Jso
 			}
 
 			if (propLocalAddress.TryReadProperty(ref reader, options, PropLocalAddress, null))
+			{
+				continue;
+			}
+
+			if (propOpenedTime.TryReadProperty(ref reader, options, PropOpenedTime, null))
 			{
 				continue;
 			}
@@ -121,11 +142,14 @@ public sealed partial class ClientConverter : System.Text.Json.Serialization.Jso
 		return new Elastic.Clients.Elasticsearch.Nodes.Client(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Agent = propAgent.Value,
+			ClosedTime = propClosedTime.Value,
 			ClosedTimeMillis = propClosedTimeMillis.Value,
 			Id = propId.Value,
+			LastRequestTime = propLastRequestTime.Value,
 			LastRequestTimeMillis = propLastRequestTimeMillis.Value,
 			LastUri = propLastUri.Value,
 			LocalAddress = propLocalAddress.Value,
+			OpenedTime = propOpenedTime.Value,
 			OpenedTimeMillis = propOpenedTimeMillis.Value,
 			RemoteAddress = propRemoteAddress.Value,
 			RequestCount = propRequestCount.Value,
@@ -138,11 +162,14 @@ public sealed partial class ClientConverter : System.Text.Json.Serialization.Jso
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAgent, value.Agent, null, null);
+		writer.WriteProperty(options, PropClosedTime, value.ClosedTime, null, null);
 		writer.WriteProperty(options, PropClosedTimeMillis, value.ClosedTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropId, value.Id, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLastRequestTime, value.LastRequestTime, null, null);
 		writer.WriteProperty(options, PropLastRequestTimeMillis, value.LastRequestTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropLastUri, value.LastUri, null, null);
 		writer.WriteProperty(options, PropLocalAddress, value.LocalAddress, null, null);
+		writer.WriteProperty(options, PropOpenedTime, value.OpenedTime, null, null);
 		writer.WriteProperty(options, PropOpenedTimeMillis, value.OpenedTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRemoteAddress, value.RemoteAddress, null, null);
 		writer.WriteProperty(options, PropRequestCount, value.RequestCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));

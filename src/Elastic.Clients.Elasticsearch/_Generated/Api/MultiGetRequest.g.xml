@@ -24,6 +24,11 @@ Use the <c>stored_fields</c> attribute to specify the set of stored fields you w
 Any requested fields that are not stored are ignored.
 You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 </para></summary></member>
+  <member key="_global.mget.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.mget.Request#_source"><summary><para>
 True or false to return the <c>_source</c> field or not, or a list of fields to return.
 </para></summary></member>
@@ -61,6 +66,7 @@ If <c>true</c>, the request refreshes relevant shards before retrieving document
 </para></summary></member>
   <member key="_global.mget.Request#routing"><summary><para>
 Custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.mget.Request#stored_fields"><summary><para>
 If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.

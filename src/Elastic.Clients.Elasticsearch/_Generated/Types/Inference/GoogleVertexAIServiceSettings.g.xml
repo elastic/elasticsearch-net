@@ -7,7 +7,9 @@ Refer to the Google documentation for more information.
 </para></summary></member>
   <member key="inference._types.GoogleVertexAIServiceSettings#location"><summary><para>
 The name of the location to use for the inference task for the Google Vertex AI inference task.
-For Google Vertex AI, when <c>provider</c> is omitted or <c>google</c> <c>location</c> is mandatory.
+For Google Vertex AI, when <c>provider</c> is omitted or <c>google</c>, <c>location</c> is optional.
+When <c>location</c> is omitted, the request targets the Google Vertex AI global endpoint (<c>https://aiplatform.googleapis.com</c>); when it is provided, the corresponding regional endpoint (<c>https://&lt;location>-aiplatform.googleapis.com</c>) is used.
+The field must be omitted to select the global endpoint; an empty string is not a valid <c>location</c>.
 For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>location</c> is ignored.
 Refer to the Google documentation for the list of supported locations.
 </para></summary></member>

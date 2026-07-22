@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.put_data_source.Request"><summary><para>
+Create or update an ES|QL data source.
+</para>
+<para>
+Creates or replaces a named, type-specific data source configuration for ES|QL data federation.
+Datasets reference data source configurations to access external data. Names must be lowercase
+and follow index or alias naming rules.
+</para></summary></member>
+  <member key="esql.put_data_source.Request#description"><summary><para>
+A free-text description of the data source.
+</para></summary></member>
+  <member key="esql.put_data_source.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="esql.put_data_source.Request#name"><summary><para>
+The data source name to create or update.
+</para></summary></member>
+  <member key="esql.put_data_source.Request#settings"><summary><para>
+Type-specific connection and authentication settings.
+For <c>s3</c>, connection settings include <c>region</c> and <c>endpoint</c>. Authentication settings
+include <c>auth</c> and the credentials required by the selected authentication method.
+</para></summary></member>
+  <member key="esql.put_data_source.Request#timeout"><summary><para>
+The time to wait for the request to be completed.
+</para></summary></member>
+  <member key="esql.put_data_source.Request#type"><summary><para>
+The data source type. Currently, <c>s3</c> is supported.
+The value must be lowercase and contain no whitespace.
+</para></summary></member>
+</doc>

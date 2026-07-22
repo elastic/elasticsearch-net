@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.TransportMessageSizeHistogramBucket#count"><summary><para>
+The number of messages with a size that falls within the bounds of this bucket.
+</para></summary></member>
+  <member key="nodes._types.TransportMessageSizeHistogramBucket#ge"><summary><para>
+The inclusive lower bound of the bucket.
+May be omitted on the first bucket if this bucket has no lower bound.
+</para></summary></member>
+  <member key="nodes._types.TransportMessageSizeHistogramBucket#ge_bytes"><summary><para>
+The inclusive lower bound of the bucket in bytes.
+May be omitted on the first bucket if this bucket has no lower bound.
+</para></summary></member>
+  <member key="nodes._types.TransportMessageSizeHistogramBucket#lt"><summary><para>
+The exclusive upper bound of the bucket.
+May be omitted on the last bucket if this bucket has no upper bound.
+</para></summary></member>
+  <member key="nodes._types.TransportMessageSizeHistogramBucket#lt_bytes"><summary><para>
+The exclusive upper bound of the bucket in bytes.
+May be omitted on the last bucket if this bucket has no upper bound.
+</para></summary></member>
+</doc>

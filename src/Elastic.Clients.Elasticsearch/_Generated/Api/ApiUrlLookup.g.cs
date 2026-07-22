@@ -56,6 +56,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls CrossClusterReplicationStats = new ApiUrls(new[] { "_ccr/stats" });
 	internal static ApiUrls CrossClusterReplicationUnfollow = new ApiUrls(new[] { "{index}/_ccr/unfollow" });
 	internal static ApiUrls DanglingIndicesListDanglingIndices = new ApiUrls(new[] { "_dangling" });
+	internal static ApiUrls EncryptionReset = new ApiUrls(new[] { "_encryption/_reset" });
 	internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[] { "_enrich/policy/{name}" });
 	internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[] { "_enrich/policy/{name}/_execute" });
 	internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[] { "_enrich/policy/{name}", "_enrich/policy" });
@@ -69,10 +70,16 @@ internal static class ApiUrlLookup
 	internal static ApiUrls EsqlAsyncQueryDelete = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryGet = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryStop = new ApiUrls(new[] { "_query/async/{id}/stop" });
+	internal static ApiUrls EsqlDeleteDataset = new ApiUrls(new[] { "_query/dataset/{name}" });
+	internal static ApiUrls EsqlDeleteDataSource = new ApiUrls(new[] { "_query/data_source/{name}" });
 	internal static ApiUrls EsqlDeleteView = new ApiUrls(new[] { "_query/view/{name}" });
+	internal static ApiUrls EsqlGetDataset = new ApiUrls(new[] { "_query/dataset", "_query/dataset/{name}" });
+	internal static ApiUrls EsqlGetDataSource = new ApiUrls(new[] { "_query/data_source", "_query/data_source/{name}" });
 	internal static ApiUrls EsqlGetQuery = new ApiUrls(new[] { "_query/queries/{id}" });
 	internal static ApiUrls EsqlGetView = new ApiUrls(new[] { "_query/view", "_query/view/{name}" });
 	internal static ApiUrls EsqlListQueries = new ApiUrls(new[] { "_query/queries" });
+	internal static ApiUrls EsqlPutDataset = new ApiUrls(new[] { "_query/dataset/{name}" });
+	internal static ApiUrls EsqlPutDataSource = new ApiUrls(new[] { "_query/data_source/{name}" });
 	internal static ApiUrls EsqlPutView = new ApiUrls(new[] { "_query/view/{name}" });
 	internal static ApiUrls EsqlQuery = new ApiUrls(new[] { "_query" });
 	internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "_features" });
@@ -161,8 +168,10 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferenceChatCompletionUnified = new ApiUrls(new[] { "_inference/chat_completion/{inference_id}/_stream" });
 	internal static ApiUrls InferenceCompletion = new ApiUrls(new[] { "_inference/completion/{inference_id}" });
 	internal static ApiUrls InferenceDelete = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferenceDeleteRegionPolicy = new ApiUrls(new[] { "_inference/_region_policy" });
 	internal static ApiUrls InferenceEmbedding = new ApiUrls(new[] { "_inference/embedding/{inference_id}" });
 	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}", "_inference/{task_type}/_all" });
+	internal static ApiUrls InferenceGetRegionPolicy = new ApiUrls(new[] { "_inference/_region_policy" });
 	internal static ApiUrls InferenceInference = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePutAi21 = new ApiUrls(new[] { "_inference/{task_type}/{ai21_inference_id}" });
@@ -189,6 +198,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePutNvidia = new ApiUrls(new[] { "_inference/{task_type}/{nvidia_inference_id}" });
 	internal static ApiUrls InferencePutOpenai = new ApiUrls(new[] { "_inference/{task_type}/{openai_inference_id}" });
 	internal static ApiUrls InferencePutOpenshiftAi = new ApiUrls(new[] { "_inference/{task_type}/{openshiftai_inference_id}" });
+	internal static ApiUrls InferencePutRegionPolicy = new ApiUrls(new[] { "_inference/_region_policy" });
 	internal static ApiUrls InferencePutVoyageai = new ApiUrls(new[] { "_inference/{task_type}/{voyageai_inference_id}" });
 	internal static ApiUrls InferencePutWatsonx = new ApiUrls(new[] { "_inference/{task_type}/{watsonx_inference_id}" });
 	internal static ApiUrls InferenceRerank = new ApiUrls(new[] { "_inference/rerank/{inference_id}" });

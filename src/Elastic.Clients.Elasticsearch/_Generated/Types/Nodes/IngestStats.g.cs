@@ -58,14 +58,23 @@ public sealed partial class IngestStats
 	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#failed']/*"/>
 	public required long Failed { get; set; }
 
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#ingested_as_first_pipeline']/*"/>
+	public Elastic.Clients.Elasticsearch.ByteSize? IngestedAsFirstPipeline { get; set; }
+
 	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#ingested_as_first_pipeline_in_bytes']/*"/>
 	public required long IngestedAsFirstPipelineInBytes { get; set; }
 
 	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#processors']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> Processors { get; set; }
 
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#produced_as_first_pipeline']/*"/>
+	public Elastic.Clients.Elasticsearch.ByteSize? ProducedAsFirstPipeline { get; set; }
+
 	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#produced_as_first_pipeline_in_bytes']/*"/>
 	public required long ProducedAsFirstPipelineInBytes { get; set; }
+
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#time']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
 
 	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#time_in_millis']/*"/>
 	public required System.TimeSpan TimeInMillis { get; set; }

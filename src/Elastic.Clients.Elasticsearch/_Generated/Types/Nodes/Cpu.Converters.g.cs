@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class CpuConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Cpu>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableProcessors = System.Text.Json.JsonEncodedText.Encode("available_processors"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLoadAverage = System.Text.Json.JsonEncodedText.Encode("load_average"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSys = System.Text.Json.JsonEncodedText.Encode("sys"u8);
@@ -37,6 +38,7 @@ public sealed partial class CpuConverter : System.Text.Json.Serialization.JsonCo
 	public override Elastic.Clients.Elasticsearch.Nodes.Cpu Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propAvailableProcessors = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, double>?> propLoadAverage = default;
 		LocalJsonValue<int?> propPercent = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propSys = default;
@@ -47,6 +49,11 @@ public sealed partial class CpuConverter : System.Text.Json.Serialization.JsonCo
 		LocalJsonValue<System.TimeSpan?> propUserInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAvailableProcessors.TryReadProperty(ref reader, options, PropAvailableProcessors, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
 			if (propLoadAverage.TryReadProperty(ref reader, options, PropLoadAverage, static System.Collections.Generic.IReadOnlyDictionary<string, double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)))
 			{
 				continue;
@@ -99,6 +106,7 @@ public sealed partial class CpuConverter : System.Text.Json.Serialization.JsonCo
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Nodes.Cpu(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			AvailableProcessors = propAvailableProcessors.Value,
 			LoadAverage = propLoadAverage.Value,
 			Percent = propPercent.Value,
 			Sys = propSys.Value,
@@ -113,6 +121,7 @@ public sealed partial class CpuConverter : System.Text.Json.Serialization.JsonCo
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Cpu value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvailableProcessors, value.AvailableProcessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropLoadAverage, value.LoadAverage, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, double>? v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
 		writer.WriteProperty(options, PropPercent, value.Percent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSys, value.Sys, null, null);

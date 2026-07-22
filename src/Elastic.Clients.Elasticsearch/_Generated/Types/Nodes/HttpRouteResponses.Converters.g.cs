@@ -28,6 +28,7 @@ public sealed partial class HttpRouteResponsesConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("handling_time_histogram"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSizeHistogram = System.Text.Json.JsonEncodedText.Encode("size_histogram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.HttpRouteResponses Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,6 +37,7 @@ public sealed partial class HttpRouteResponsesConverter : System.Text.Json.Seria
 		LocalJsonValue<long> propCount = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram>> propHandlingTimeHistogram = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram>> propSizeHistogram = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalSize = default;
 		LocalJsonValue<long> propTotalSizeInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -50,6 +52,11 @@ public sealed partial class HttpRouteResponsesConverter : System.Text.Json.Seria
 			}
 
 			if (propSizeHistogram.TryReadProperty(ref reader, options, PropSizeHistogram, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTotalSize.TryReadProperty(ref reader, options, PropTotalSize, null))
 			{
 				continue;
 			}
@@ -74,6 +81,7 @@ public sealed partial class HttpRouteResponsesConverter : System.Text.Json.Seria
 			Count = propCount.Value,
 			HandlingTimeHistogram = propHandlingTimeHistogram.Value,
 			SizeHistogram = propSizeHistogram.Value,
+			TotalSize = propTotalSize.Value,
 			TotalSizeInBytes = propTotalSizeInBytes.Value
 		};
 	}
@@ -84,6 +92,7 @@ public sealed partial class HttpRouteResponsesConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropHandlingTimeHistogram, value.HandlingTimeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram>(o, v, null));
 		writer.WriteProperty(options, PropSizeHistogram, value.SizeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram>(o, v, null));
+		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);
 		writer.WriteProperty(options, PropTotalSizeInBytes, value.TotalSizeInBytes, null, null);
 		writer.WriteEndObject();
 	}

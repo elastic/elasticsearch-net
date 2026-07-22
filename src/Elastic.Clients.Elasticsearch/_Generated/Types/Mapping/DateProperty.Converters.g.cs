@@ -51,7 +51,7 @@ public sealed partial class DatePropertyConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<double?> propBoost = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
-		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>?> propDocValues = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> propFielddata = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
@@ -80,7 +80,7 @@ public sealed partial class DatePropertyConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, static Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject), null, null)))
 			{
 				continue;
 			}
@@ -210,7 +210,7 @@ public sealed partial class DatePropertyConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
-		writer.WriteProperty(options, PropDocValues, value.DocValues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? v) => w.WriteUnionValue<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>(o, v, null, null));
 		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o, v));
 		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, null);
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);

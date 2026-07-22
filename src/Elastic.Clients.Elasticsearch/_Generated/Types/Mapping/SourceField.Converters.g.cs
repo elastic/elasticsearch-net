@@ -25,8 +25,6 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class SourceFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SourceField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropCompressThreshold = System.Text.Json.JsonEncodedText.Encode("compress_threshold"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes"u8);
@@ -35,24 +33,12 @@ public sealed partial class SourceFieldConverter : System.Text.Json.Serializatio
 	public override Elastic.Clients.Elasticsearch.Mapping.SourceField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propCompress = default;
-		LocalJsonValue<string?> propCompressThreshold = default;
 		LocalJsonValue<bool?> propEnabled = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propExcludes = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIncludes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode?> propMode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propCompressThreshold.TryReadProperty(ref reader, options, PropCompressThreshold, null))
-			{
-				continue;
-			}
-
 			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
@@ -85,8 +71,6 @@ public sealed partial class SourceFieldConverter : System.Text.Json.Serializatio
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Mapping.SourceField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Compress = propCompress.Value,
-			CompressThreshold = propCompressThreshold.Value,
 			Enabled = propEnabled.Value,
 			Excludes = propExcludes.Value,
 			Includes = propIncludes.Value,
@@ -97,8 +81,6 @@ public sealed partial class SourceFieldConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.SourceField value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropCompressThreshold, value.CompressThreshold, null, null);
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));

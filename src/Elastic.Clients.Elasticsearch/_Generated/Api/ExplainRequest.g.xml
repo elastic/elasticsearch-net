@@ -7,6 +7,11 @@ Explain a document match result.
 Get information about why a specific document matches, or doesn't match, a query.
 It computes a score explanation for a query and a specific document.
 </para></summary></member>
+  <member key="_global.explain.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.explain.Request#_source"><summary><para>
 <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
 </para></summary></member>
@@ -60,6 +65,7 @@ Defines the search definition using the Query DSL.
 </para></summary></member>
   <member key="_global.explain.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.explain.Request#stored_fields"><summary><para>
 A comma-separated list of stored fields to return in the response.

@@ -270,6 +270,122 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Esql/DeleteDatasetRequest.g.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse DeleteDataset(Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/DeleteDatasetRequest.g.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse DeleteDataset(Elastic.Clients.Elasticsearch.Names name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/DeleteDatasetRequest.g.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse DeleteDataset(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/DeleteDatasetRequest.g.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse> DeleteDatasetAsync(Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/DeleteDatasetRequest.g.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse> DeleteDatasetAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/DeleteDatasetRequest.g.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse> DeleteDatasetAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/DeleteDataSourceRequest.g.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse DeleteDataSource(Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/DeleteDataSourceRequest.g.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse DeleteDataSource(Elastic.Clients.Elasticsearch.Names name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/DeleteDataSourceRequest.g.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse DeleteDataSource(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/DeleteDataSourceRequest.g.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse> DeleteDataSourceAsync(Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/DeleteDataSourceRequest.g.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse> DeleteDataSourceAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/DeleteDataSourceRequest.g.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse> DeleteDataSourceAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.DeleteDataSourceRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/Esql/DeleteViewRequest.g.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.delete_view.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest request)
@@ -326,6 +442,206 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse GetDataset(Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse GetDataset()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse GetDataset(System.Action<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse GetDataset(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse GetDataset(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse> GetDatasetAsync(Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse> GetDatasetAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse> GetDatasetAsync(System.Action<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse> GetDatasetAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDatasetRequest.g.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse> GetDatasetAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDatasetRequest, Elastic.Clients.Elasticsearch.Esql.GetDatasetResponse, Elastic.Clients.Elasticsearch.Esql.GetDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse GetDataSource(Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse GetDataSource()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse GetDataSource(System.Action<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse GetDataSource(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse GetDataSource(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse> GetDataSourceAsync(Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse> GetDataSourceAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse> GetDataSourceAsync(System.Action<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse> GetDataSourceAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/GetDataSourceRequest.g.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse> GetDataSourceAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.GetDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.GetDataSourceRequestParameters>(request, cancellationToken);
 	}
 
 	/// <include file="../Api/Esql/GetEsqlQueryRequest.g.xml" path="doc/member[@key='esql.get_query.Request']/*"/>
@@ -542,6 +858,122 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.ListQueriesRequest, Elastic.Clients.Elasticsearch.Esql.ListQueriesResponse, Elastic.Clients.Elasticsearch.Esql.ListQueriesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/PutDatasetRequest.g.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse PutDataset(Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest, Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse, Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/PutDatasetRequest.g.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse PutDataset(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest, Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse, Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/PutDatasetRequest.g.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse PutDataset(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest, Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse, Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/PutDatasetRequest.g.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse> PutDatasetAsync(Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest, Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse, Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/PutDatasetRequest.g.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse> PutDatasetAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest, Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse, Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/PutDatasetRequest.g.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_dataset.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse> PutDatasetAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutDatasetRequest, Elastic.Clients.Elasticsearch.Esql.PutDatasetResponse, Elastic.Clients.Elasticsearch.Esql.PutDatasetRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/PutDataSourceRequest.g.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse PutDataSource(Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/PutDataSourceRequest.g.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse PutDataSource(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/PutDataSourceRequest.g.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse PutDataSource(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/PutDataSourceRequest.g.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse> PutDataSourceAsync(Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/PutDataSourceRequest.g.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse> PutDataSourceAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/PutDataSourceRequest.g.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.put_data_source.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse> PutDataSourceAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequest, Elastic.Clients.Elasticsearch.Esql.PutDataSourceResponse, Elastic.Clients.Elasticsearch.Esql.PutDataSourceRequestParameters>(request, cancellationToken);
 	}
 
 	/// <include file="../Api/Esql/PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request']/*"/>

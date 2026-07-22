@@ -72,6 +72,9 @@ public sealed partial class UpdateByQueryRequestParameters : Elastic.Transport.R
 	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -190,6 +193,9 @@ public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch
 
 	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -391,6 +397,13 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -787,6 +800,13 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

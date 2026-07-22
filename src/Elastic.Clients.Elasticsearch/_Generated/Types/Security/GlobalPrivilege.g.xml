@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.GlobalPrivilege#data_source"><summary><para>
+A list of data source privilege entries, used to grant access to ES|QL data sources.
+</para></summary></member>
+</doc>

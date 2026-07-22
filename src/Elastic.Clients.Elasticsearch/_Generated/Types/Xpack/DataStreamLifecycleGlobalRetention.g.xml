@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.DataStreamLifecycleGlobalRetention#default"><summary><para>
+Statistics about the cluster's default global retention.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleGlobalRetention#max"><summary><para>
+Statistics about the cluster's maximum global retention.
+</para></summary></member>
+</doc>

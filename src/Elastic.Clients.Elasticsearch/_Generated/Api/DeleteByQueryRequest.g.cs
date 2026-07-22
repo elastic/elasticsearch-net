@@ -72,6 +72,9 @@ public sealed partial class DeleteByQueryRequestParameters : Elastic.Transport.R
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -184,6 +187,9 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -376,6 +382,13 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -763,6 +776,13 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

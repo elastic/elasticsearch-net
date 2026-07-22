@@ -37,6 +37,8 @@ public sealed partial class Cpu
 		_ = sentinel;
 	}
 
+	/// <include file="Cpu.g.xml" path="doc/member[@key='nodes._types.Cpu#available_processors']/*"/>
+	public int? AvailableProcessors { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, double>? LoadAverage { get; set; }
 	public int? Percent { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Sys { get; set; }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="encryption.reset.Request"><summary><para>
+Reset the project encryption key.
+</para>
+<para>
+Destroy the current project encryption key (PEK) and generate a new one.
+This is the recovery path for when the on-disk encrypted PEK becomes permanently
+inaccessible, for example because the key encryption material protecting it was lost.
+</para>
+<para>
+All data that was encrypted under the destroyed key becomes permanently unrecoverable.
+Each feature that stores encrypted data decides how to handle its own data during the
+reset: some features drop the encrypted values entirely, while others preserve the rest
+of the affected data and only clear the values that can no longer be decrypted.
+</para>
+<para>
+Because this operation causes permanent data loss, it requires the <c>accept_data_loss</c>
+query parameter to be set to <c>true</c>.
+</para></summary></member>
+  <member key="encryption.reset.Request#accept_data_loss"><summary><para>
+Acknowledge that resetting the project encryption key permanently destroys all data
+that was encrypted under the current key.
+The request fails if this is not set to <c>true</c>.
+</para></summary></member>
+  <member key="encryption.reset.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="encryption.reset.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -25,21 +25,39 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class PoolConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Pool>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxInBytes = System.Text.Json.JsonEncodedText.Encode("max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakMax = System.Text.Json.JsonEncodedText.Encode("peak_max"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPeakMaxInBytes = System.Text.Json.JsonEncodedText.Encode("peak_max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakUsed = System.Text.Json.JsonEncodedText.Encode("peak_used"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPeakUsedInBytes = System.Text.Json.JsonEncodedText.Encode("peak_used_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsed = System.Text.Json.JsonEncodedText.Encode("used"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Pool Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propMax = default;
 		LocalJsonValue<long?> propMaxInBytes = default;
+		LocalJsonValue<string?> propPeakMax = default;
 		LocalJsonValue<long?> propPeakMaxInBytes = default;
+		LocalJsonValue<string?> propPeakUsed = default;
 		LocalJsonValue<long?> propPeakUsedInBytes = default;
+		LocalJsonValue<string?> propUsed = default;
 		LocalJsonValue<long?> propUsedInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			{
+				continue;
+			}
+
 			if (propMaxInBytes.TryReadProperty(ref reader, options, PropMaxInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propPeakMax.TryReadProperty(ref reader, options, PropPeakMax, null))
 			{
 				continue;
 			}
@@ -49,7 +67,17 @@ public sealed partial class PoolConverter : System.Text.Json.Serialization.JsonC
 				continue;
 			}
 
+			if (propPeakUsed.TryReadProperty(ref reader, options, PropPeakUsed, null))
+			{
+				continue;
+			}
+
 			if (propPeakUsedInBytes.TryReadProperty(ref reader, options, PropPeakUsedInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propUsed.TryReadProperty(ref reader, options, PropUsed, null))
 			{
 				continue;
 			}
@@ -71,9 +99,13 @@ public sealed partial class PoolConverter : System.Text.Json.Serialization.JsonC
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Nodes.Pool(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Max = propMax.Value,
 			MaxInBytes = propMaxInBytes.Value,
+			PeakMax = propPeakMax.Value,
 			PeakMaxInBytes = propPeakMaxInBytes.Value,
+			PeakUsed = propPeakUsed.Value,
 			PeakUsedInBytes = propPeakUsedInBytes.Value,
+			Used = propUsed.Value,
 			UsedInBytes = propUsedInBytes.Value
 		};
 	}
@@ -81,9 +113,13 @@ public sealed partial class PoolConverter : System.Text.Json.Serialization.JsonC
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Pool value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMax, value.Max, null, null);
 		writer.WriteProperty(options, PropMaxInBytes, value.MaxInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPeakMax, value.PeakMax, null, null);
 		writer.WriteProperty(options, PropPeakMaxInBytes, value.PeakMaxInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPeakUsed, value.PeakUsed, null, null);
 		writer.WriteProperty(options, PropPeakUsedInBytes, value.PeakUsedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropUsed, value.Used, null, null);
 		writer.WriteProperty(options, PropUsedInBytes, value.UsedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}

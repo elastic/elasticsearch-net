@@ -40,10 +40,22 @@ public sealed partial class IndexModifyDataStreamAction
 	}
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? AddBackingIndex { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>("add_backing_index"); set => SetVariant("add_backing_index", value); }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? DeleteBackingIndex { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>("delete_backing_index"); set => SetVariant("delete_backing_index", value); }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? RemoveBackingIndex { get => GetVariant<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>("remove_backing_index"); set => SetVariant("remove_backing_index", value); }
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private T? GetVariant<T>(string type)
+	{
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
+		{
+			return result;
+		}
+
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariantValue<T>(string type) where T : struct
 	{
 		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
@@ -89,6 +101,18 @@ public readonly partial struct IndexModifyDataStreamActionDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor AddBackingIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor> action)
 	{
 		Instance.AddBackingIndex = Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor DeleteBackingIndex(Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction? value)
+	{
+		Instance.DeleteBackingIndex = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor DeleteBackingIndex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor> action)
+	{
+		Instance.DeleteBackingIndex = Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor.Build(action);
 		return this;
 	}
 

@@ -51,7 +51,7 @@ The platform architecture (if applicable) of the trained mode. If the model
 only works on one platform, because it is heavily optimized for a particular
 processor architecture and OS combination, then this field specifies which.
 The format of the string must match the platform identifiers used by Elasticsearch,
-so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
+so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-aarch64</c>,
 or <c>windows-x86_64</c>. For portable models (those that work independent of processor
 architecture or OS features), leave this field unset.
 </para></summary></member>
