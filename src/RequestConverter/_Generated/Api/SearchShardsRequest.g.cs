@@ -78,14 +78,14 @@ public partial class SearchShardsRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
-			}
-
-			if (Slice is not null)
-			{
-				writer.WriteFluentCall("Slice", (w) => { w.WriteString(Slice); });
 			}
 		}
 		else
@@ -133,16 +133,16 @@ public partial class SearchShardsRequest : RequestConverter.ICodeFormattable
 				writer.WriteString(Preference);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
 				Routing.FormatCode(writer);
-			}
-
-			if (Slice is not null)
-			{
-				initializer.Property("Slice");
-				writer.WriteString(Slice);
 			}
 
 			initializer.Dispose();

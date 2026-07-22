@@ -28,6 +28,7 @@ public sealed partial class TermsEnumRequestConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText PropCaseInsensitive = System.Text.Json.JsonEncodedText.Encode("case_insensitive"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropString = System.Text.Json.JsonEncodedText.Encode("string"u8);
@@ -39,6 +40,7 @@ public sealed partial class TermsEnumRequestConverter : System.Text.Json.Seriali
 		LocalJsonValue<bool?> propCaseInsensitive = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<string?> propSearchAfter = default;
 		LocalJsonValue<int?> propSize = default;
 		LocalJsonValue<string?> propString = default;
@@ -56,6 +58,11 @@ public sealed partial class TermsEnumRequestConverter : System.Text.Json.Seriali
 			}
 
 			if (propIndexFilter.TryReadProperty(ref reader, options, PropIndexFilter, null))
+			{
+				continue;
+			}
+
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
 			{
 				continue;
 			}
@@ -95,6 +102,7 @@ public sealed partial class TermsEnumRequestConverter : System.Text.Json.Seriali
 			CaseInsensitive = propCaseInsensitive.Value,
 			Field = propField.Value,
 			IndexFilter = propIndexFilter.Value,
+			ProjectRouting = propProjectRouting.Value,
 			SearchAfter = propSearchAfter.Value,
 			Size = propSize.Value,
 			String = propString.Value,
@@ -108,6 +116,7 @@ public sealed partial class TermsEnumRequestConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, null);
 		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropString, value.String, null, null);

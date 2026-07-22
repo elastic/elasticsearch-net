@@ -28,6 +28,19 @@ public partial class Transport : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Transport", false);
+		if (Actions is not null)
+		{
+			initializer.Property("Actions");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
+			writer.Write(", ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.TransportActionStats");
+			writer.Write(">()");
+			writer.WriteBlockList(Actions, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
+		}
+
 		if (InboundHandlingTimeHistogram is not null)
 		{
 			initializer.Property("InboundHandlingTimeHistogram");

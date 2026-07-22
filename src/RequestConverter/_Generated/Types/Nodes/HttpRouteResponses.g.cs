@@ -44,6 +44,12 @@ public partial class HttpRouteResponses : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(SizeHistogram, (w, item) => { item.FormatCode(w); });
 		}
 
+		if (TotalSize is not null)
+		{
+			initializer.Property("TotalSize");
+			TotalSize.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("TotalSizeInBytes");
 			writer.WriteValue(TotalSizeInBytes);

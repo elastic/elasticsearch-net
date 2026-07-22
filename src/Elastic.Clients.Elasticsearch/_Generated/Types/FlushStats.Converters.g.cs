@@ -28,6 +28,8 @@ public sealed partial class FlushStatsConverter : System.Text.Json.Serialization
 	private static readonly System.Text.Json.JsonEncodedText PropPeriodic = System.Text.Json.JsonEncodedText.Encode("periodic"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeExcludingWaiting = System.Text.Json.JsonEncodedText.Encode("total_time_excluding_waiting"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeExcludingWaitingOnLockInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_excluding_waiting_on_lock_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.FlushStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,6 +38,8 @@ public sealed partial class FlushStatsConverter : System.Text.Json.Serialization
 		LocalJsonValue<long> propPeriodic = default;
 		LocalJsonValue<long> propTotal = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTime = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTimeExcludingWaiting = default;
+		LocalJsonValue<System.TimeSpan> propTotalTimeExcludingWaitingOnLockInMillis = default;
 		LocalJsonValue<System.TimeSpan> propTotalTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -50,6 +54,16 @@ public sealed partial class FlushStatsConverter : System.Text.Json.Serialization
 			}
 
 			if (propTotalTime.TryReadProperty(ref reader, options, PropTotalTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalTimeExcludingWaiting.TryReadProperty(ref reader, options, PropTotalTimeExcludingWaiting, null))
+			{
+				continue;
+			}
+
+			if (propTotalTimeExcludingWaitingOnLockInMillis.TryReadProperty(ref reader, options, PropTotalTimeExcludingWaitingOnLockInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -74,6 +88,8 @@ public sealed partial class FlushStatsConverter : System.Text.Json.Serialization
 			Periodic = propPeriodic.Value,
 			Total = propTotal.Value,
 			TotalTime = propTotalTime.Value,
+			TotalTimeExcludingWaiting = propTotalTimeExcludingWaiting.Value,
+			TotalTimeExcludingWaitingOnLockInMillis = propTotalTimeExcludingWaitingOnLockInMillis.Value,
 			TotalTimeInMillis = propTotalTimeInMillis.Value
 		};
 	}
@@ -84,6 +100,8 @@ public sealed partial class FlushStatsConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropPeriodic, value.Periodic, null, null);
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteProperty(options, PropTotalTime, value.TotalTime, null, null);
+		writer.WriteProperty(options, PropTotalTimeExcludingWaiting, value.TotalTimeExcludingWaiting, null, null);
+		writer.WriteProperty(options, PropTotalTimeExcludingWaitingOnLockInMillis, value.TotalTimeExcludingWaitingOnLockInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropTotalTimeInMillis, value.TotalTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteEndObject();
 	}

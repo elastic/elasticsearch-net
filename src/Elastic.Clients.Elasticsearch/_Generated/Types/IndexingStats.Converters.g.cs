@@ -31,6 +31,7 @@ public sealed partial class IndexingStatsConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropDeleteTotal = System.Text.Json.JsonEncodedText.Encode("delete_total"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexCurrent = System.Text.Json.JsonEncodedText.Encode("index_current"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexFailed = System.Text.Json.JsonEncodedText.Encode("index_failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFailedDueToVersionConflict = System.Text.Json.JsonEncodedText.Encode("index_failed_due_to_version_conflict"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexTime = System.Text.Json.JsonEncodedText.Encode("index_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMillis = System.Text.Json.JsonEncodedText.Encode("index_time_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total"u8);
@@ -52,6 +53,7 @@ public sealed partial class IndexingStatsConverter : System.Text.Json.Serializat
 		LocalJsonValue<long> propDeleteTotal = default;
 		LocalJsonValue<long> propIndexCurrent = default;
 		LocalJsonValue<long> propIndexFailed = default;
+		LocalJsonValue<long> propIndexFailedDueToVersionConflict = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propIndexTime = default;
 		LocalJsonValue<System.TimeSpan> propIndexTimeInMillis = default;
 		LocalJsonValue<long> propIndexTotal = default;
@@ -91,6 +93,11 @@ public sealed partial class IndexingStatsConverter : System.Text.Json.Serializat
 			}
 
 			if (propIndexFailed.TryReadProperty(ref reader, options, PropIndexFailed, null))
+			{
+				continue;
+			}
+
+			if (propIndexFailedDueToVersionConflict.TryReadProperty(ref reader, options, PropIndexFailedDueToVersionConflict, null))
 			{
 				continue;
 			}
@@ -168,6 +175,7 @@ public sealed partial class IndexingStatsConverter : System.Text.Json.Serializat
 			DeleteTotal = propDeleteTotal.Value,
 			IndexCurrent = propIndexCurrent.Value,
 			IndexFailed = propIndexFailed.Value,
+			IndexFailedDueToVersionConflict = propIndexFailedDueToVersionConflict.Value,
 			IndexTime = propIndexTime.Value,
 			IndexTimeInMillis = propIndexTimeInMillis.Value,
 			IndexTotal = propIndexTotal.Value,
@@ -191,6 +199,7 @@ public sealed partial class IndexingStatsConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropDeleteTotal, value.DeleteTotal, null, null);
 		writer.WriteProperty(options, PropIndexCurrent, value.IndexCurrent, null, null);
 		writer.WriteProperty(options, PropIndexFailed, value.IndexFailed, null, null);
+		writer.WriteProperty(options, PropIndexFailedDueToVersionConflict, value.IndexFailedDueToVersionConflict, null, null);
 		writer.WriteProperty(options, PropIndexTime, value.IndexTime, null, null);
 		writer.WriteProperty(options, PropIndexTimeInMillis, value.IndexTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropIndexTotal, value.IndexTotal, null, null);

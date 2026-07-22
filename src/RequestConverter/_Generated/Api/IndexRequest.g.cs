@@ -99,6 +99,11 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("RequireDataStream", (w) => { w.WriteValue(RequireDataStream.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -186,6 +191,12 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("RequireDataStream");
 				writer.WriteValue(RequireDataStream.Value);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

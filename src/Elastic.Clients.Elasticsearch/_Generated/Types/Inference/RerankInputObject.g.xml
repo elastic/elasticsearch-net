@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.rerank.RerankInputObject"><summary><para>
+An object describing a single input for the <c>rerank</c> task, which additionally allows specifying non-text inputs, such as images.
+</para></summary></member>
+  <member key="inference.rerank.RerankInputObject#format"><summary><para>
+The format of the input. For the <c>text</c> type this must be <c>text</c>. For the <c>image</c> type this must be <c>base64</c>.
+If not specified, this defaults to <c>text</c> for the <c>text</c> type and <c>base64</c> for the <c>image</c> type.
+</para></summary></member>
+  <member key="inference.rerank.RerankInputObject#type"><summary><para>
+The type of input. Not all services and models support all input types.
+</para></summary></member>
+  <member key="inference.rerank.RerankInputObject#value"><summary><para>
+The value of the input. For images, this must be a base64-encoded data URI, that is, "data:content/type;base64,...".
+</para></summary></member>
+</doc>

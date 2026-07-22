@@ -17,4 +17,8 @@ The unique identifier of the inference endpoint.
   <member key="inference.update.Request#task_type"><summary><para>
 The type of inference task that the model performs.
 </para></summary></member>
+  <member key="inference.update.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be updated.
+The default depends on the task type: 120s for <c>completion</c> and <c>chat_completion</c>, and 30s for all other task types.
+</para></summary></member>
 </doc>

@@ -53,10 +53,10 @@ public sealed partial class GetStats
 	public Elastic.Clients.Elasticsearch.Duration? ExistsTime { get; set; }
 	public required System.TimeSpan ExistsTimeInMillis { get; set; }
 	public required long ExistsTotal { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? GetTime { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? MissingTime { get; set; }
 	public required System.TimeSpan MissingTimeInMillis { get; set; }
 	public required long MissingTotal { get; set; }
-	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
 	public required System.TimeSpan TimeInMillis { get; set; }
 	public required long Total { get; set; }
 }

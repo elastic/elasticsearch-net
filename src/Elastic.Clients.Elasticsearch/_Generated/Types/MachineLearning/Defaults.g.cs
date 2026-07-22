@@ -28,10 +28,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class Defaults
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Defaults(Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors anomalyDetectors, Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds datafeeds)
+	public Defaults(Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors anomalyDetectors, Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds datafeeds, Elastic.Clients.Elasticsearch.MachineLearning.ModelPlatformVariant modelPlatformVariant)
 	{
 		AnomalyDetectors = anomalyDetectors;
 		Datafeeds = datafeeds;
+		ModelPlatformVariant = modelPlatformVariant;
 	}
 
 	public Defaults()
@@ -46,4 +47,7 @@ public sealed partial class Defaults
 
 	public required Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors AnomalyDetectors { get; set; }
 	public required Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds Datafeeds { get; set; }
+
+	/// <include file="Defaults.g.xml" path="doc/member[@key='ml.info.Defaults#model_platform_variant']/*"/>
+	public required Elastic.Clients.Elasticsearch.MachineLearning.ModelPlatformVariant ModelPlatformVariant { get; set; }
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="nodes._types.Transport#actions"><summary><para>
+Statistics about the transport messages sent and received by the node, broken down by action name.
+</para></summary></member>
   <member key="nodes._types.Transport#inbound_handling_time_histogram"><summary><para>
 The distribution of the time spent handling each inbound message on a transport thread, represented as a histogram.
 </para></summary></member>

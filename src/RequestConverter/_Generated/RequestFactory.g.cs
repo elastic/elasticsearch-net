@@ -238,6 +238,11 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"encryption.reset",
+			CreateEncryptionReset
+		}
+,
+		{
 			"enrich.delete_policy",
 			CreateEnrichDeletePolicy
 		}
@@ -303,8 +308,28 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"esql.delete_data_source",
+			CreateEsqlDeleteDataSource
+		}
+,
+		{
+			"esql.delete_dataset",
+			CreateEsqlDeleteDataset
+		}
+,
+		{
 			"esql.delete_view",
 			CreateEsqlDeleteView
+		}
+,
+		{
+			"esql.get_data_source",
+			CreateEsqlGetDataSource
+		}
+,
+		{
+			"esql.get_dataset",
+			CreateEsqlGetDataset
 		}
 ,
 		{
@@ -320,6 +345,16 @@ internal static partial class RequestFactory
 		{
 			"esql.list_queries",
 			CreateEsqlListQueries
+		}
+,
+		{
+			"esql.put_data_source",
+			CreateEsqlPutDataSource
+		}
+,
+		{
+			"esql.put_dataset",
+			CreateEsqlPutDataset
 		}
 ,
 		{
@@ -823,6 +858,11 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"inference.delete_region_policy",
+			CreateInferenceDeleteRegionPolicy
+		}
+,
+		{
 			"inference.embedding",
 			CreateInferenceEmbedding
 		}
@@ -830,6 +870,11 @@ internal static partial class RequestFactory
 		{
 			"inference.get",
 			CreateInferenceGet
+		}
+,
+		{
+			"inference.get_region_policy",
+			CreateInferenceGetRegionPolicy
 		}
 ,
 		{
@@ -960,6 +1005,11 @@ internal static partial class RequestFactory
 		{
 			"inference.put_openshift_ai",
 			CreateInferencePutOpenshiftAi
+		}
+,
+		{
+			"inference.put_region_policy",
+			CreateInferencePutRegionPolicy
 		}
 ,
 		{

@@ -37,6 +37,9 @@ public sealed partial class JvmMemoryStats
 		_ = sentinel;
 	}
 
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_committed']/*"/>
+	public Elastic.Clients.Elasticsearch.ByteSize? HeapCommitted { get; set; }
+
 	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_committed_in_bytes']/*"/>
 	public long? HeapCommittedInBytes { get; set; }
 
@@ -46,14 +49,23 @@ public sealed partial class JvmMemoryStats
 	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_max_in_bytes']/*"/>
 	public long? HeapMaxInBytes { get; set; }
 
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_used']/*"/>
+	public Elastic.Clients.Elasticsearch.ByteSize? HeapUsed { get; set; }
+
 	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_used_in_bytes']/*"/>
 	public long? HeapUsedInBytes { get; set; }
 
 	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_used_percent']/*"/>
 	public long? HeapUsedPercent { get; set; }
 
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#non_heap_committed']/*"/>
+	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapCommitted { get; set; }
+
 	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#non_heap_committed_in_bytes']/*"/>
 	public long? NonHeapCommittedInBytes { get; set; }
+
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#non_heap_used']/*"/>
+	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapUsed { get; set; }
 
 	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#non_heap_used_in_bytes']/*"/>
 	public long? NonHeapUsedInBytes { get; set; }

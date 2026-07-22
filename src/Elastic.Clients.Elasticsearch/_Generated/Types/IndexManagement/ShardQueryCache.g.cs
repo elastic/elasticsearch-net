@@ -53,6 +53,7 @@ public sealed partial class ShardQueryCache
 	public required long CacheSize { get; set; }
 	public required long Evictions { get; set; }
 	public required long HitCount { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; set; }
 	public required long MemorySizeInBytes { get; set; }
 	public required long MissCount { get; set; }
 	public required long TotalCount { get; set; }

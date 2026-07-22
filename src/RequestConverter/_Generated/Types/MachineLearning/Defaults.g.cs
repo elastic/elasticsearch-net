@@ -38,6 +38,11 @@ public partial class Defaults : RequestConverter.ICodeFormattable
 			Datafeeds.FormatCode(writer);
 		}
 
+		{
+			initializer.Property("ModelPlatformVariant");
+			Elastic.Clients.Elasticsearch.MachineLearning.ModelPlatformVariantCodeFormatter.FormatCode(ModelPlatformVariant, writer);
+		}
+
 		initializer.Dispose();
 	}
 }

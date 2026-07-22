@@ -28,6 +28,7 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Processor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,6 +37,7 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 		LocalJsonValue<long?> propCount = default;
 		LocalJsonValue<long?> propCurrent = default;
 		LocalJsonValue<long?> propFailed = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTime = default;
 		LocalJsonValue<System.TimeSpan?> propTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -50,6 +52,11 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 			}
 
 			if (propFailed.TryReadProperty(ref reader, options, PropFailed, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propTime.TryReadProperty(ref reader, options, PropTime, null))
 			{
 				continue;
 			}
@@ -74,6 +81,7 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 			Count = propCount.Value,
 			Current = propCurrent.Value,
 			Failed = propFailed.Value,
+			Time = propTime.Value,
 			TimeInMillis = propTimeInMillis.Value
 		};
 	}
@@ -84,6 +92,7 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 		writer.WriteProperty(options, PropCount, value.Count, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropCurrent, value.Current, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropFailed, value.Failed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTime, value.Time, null, null);
 		writer.WriteProperty(options, PropTimeInMillis, value.TimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteEndObject();
 	}

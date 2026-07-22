@@ -58,6 +58,12 @@ public partial class Indicators : RequestConverter.ICodeFormattable
 			MasterIsStable.FormatCode(writer);
 		}
 
+		if (ProjectEncryptionKey is not null)
+		{
+			initializer.Property("ProjectEncryptionKey");
+			ProjectEncryptionKey.FormatCode(writer);
+		}
+
 		if (RepositoryIntegrity is not null)
 		{
 			initializer.Property("RepositoryIntegrity");

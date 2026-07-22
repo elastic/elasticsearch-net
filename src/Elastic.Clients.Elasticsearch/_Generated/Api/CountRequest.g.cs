@@ -64,8 +64,14 @@ public sealed partial class CountRequestParameters : Elastic.Transport.RequestPa
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#stats']/*"/>
+	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -138,8 +144,14 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#stats']/*"/>
+	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
@@ -275,10 +287,31 @@ public readonly partial struct CountRequestDescriptor
 		return this;
 	}
 
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#stats']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Stats = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#stats']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Stats(params string[] values)
+	{
+		Instance.Stats = [.. values];
 		return this;
 	}
 
@@ -502,10 +535,31 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 		return this;
 	}
 
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#stats']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Stats = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#stats']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Stats(params string[] values)
+	{
+		Instance.Stats = [.. values];
 		return this;
 	}
 

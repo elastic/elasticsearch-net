@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.ESQLDataset"><summary><para>
+Represents a dataset definition stored in cluster state. A dataset is a named reference
+to external data that participates in the index namespace alongside indices, aliases, and views.
+Datasets inherit credentials from their referenced data source at query time.
+</para></summary></member>
+  <member key="esql._types.ESQLDataset#data_source"><summary><para>
+The name of the referenced data source.
+</para></summary></member>
+  <member key="esql._types.ESQLDataset#description"><summary><para>
+A free-text description.
+</para></summary></member>
+  <member key="esql._types.ESQLDataset#mappings"><summary><para>
+The user-declared mapping on the dataset definition.
+</para></summary></member>
+  <member key="esql._types.ESQLDataset#name"><summary><para>
+The dataset name.
+</para></summary></member>
+  <member key="esql._types.ESQLDataset#resource"><summary><para>
+The URI that identifies the data to read, resolved against the referenced data source.
+It can include glob patterns, for example a recursive pattern that matches
+Parquet files under <c>s3://logs-bucket/access</c>.
+</para></summary></member>
+  <member key="esql._types.ESQLDataset#settings"><summary><para>
+Format- and parsing-specific settings that configure how the resource is read.
+Common keys include <c>format</c> and <c>partition_detection</c>. Additional keys depend on the format reader;
+compression can be inferred from the resource URI.
+</para></summary></member>
+</doc>

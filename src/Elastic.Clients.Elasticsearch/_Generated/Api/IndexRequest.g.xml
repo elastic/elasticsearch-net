@@ -35,7 +35,7 @@ Automatic data stream creation requires a matching index template with data stre
 </para>
 <para>
 NOTE: Replica shards might not all be started when an indexing operation returns successfully.
-By default, only the primary is required. Set <c>wait_for_active_shards</c> to change this default behavior.
+By default, only the primary is required. Set <c>wait_for_active_shards</c> to change this default behavior (this parameter is not available in Elasticsearch Serverless).
 </para>
 <para>
 <strong>Automatically create data streams and indices</strong>
@@ -101,7 +101,7 @@ To improve the resiliency of writes to the system, indexing operations can be co
 If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs.
 By default, write operations only wait for the primary shards to be active before proceeding (that is to say <c>wait_for_active_shards</c> is <c>1</c>).
 This default can be overridden in the index settings dynamically by setting <c>index.write.wait_for_active_shards</c>.
-To alter this behavior per operation, use the <c>wait_for_active_shards request</c> parameter.
+To alter this behavior per operation, use the <c>wait_for_active_shards request</c> parameter (this parameter is not available in Elasticsearch Serverless).
 </para>
 <para>
 Valid values are all or any positive integer up to the total number of configured copies per shard in the index (which is <c>number_of_replicas</c>+1).
@@ -168,6 +168,11 @@ If the document was already updated and its version was set to 2 or higher, the 
 A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 </para></summary></member>
+  <member key="_global.index.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.index.Request#id"><summary><para>
 A unique identifier for the document.
 To automatically generate a document ID, use the <c>POST /&lt;target>/_doc/</c> request format and omit this parameter.
@@ -213,6 +218,7 @@ If <c>true</c>, the request's actions must target a data stream (existing or to 
 </para></summary></member>
   <member key="_global.index.Request#routing"><summary><para>
 A custom value that is used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.index.Request#timeout"><summary><para>
 The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.

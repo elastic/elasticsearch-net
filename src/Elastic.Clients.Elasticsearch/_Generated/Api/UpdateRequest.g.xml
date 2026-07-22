@@ -40,6 +40,11 @@ The <c>_source</c> field must be enabled to use this API.
 In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 For usage examples such as partial updates, upserts, and scripted updates, see the External documentation.
 </para></summary></member>
+  <member key="_global.update.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.update.Request#_source"><summary><para>
 If <c>false</c>, turn off source retrieval.
 You can also specify a comma-separated list of the fields you want to retrieve.
@@ -93,6 +98,7 @@ The number of times the operation should be retried when a conflict occurs.
 </para></summary></member>
   <member key="_global.update.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.update.Request#script"><summary><para>
 The script to run to update the document.

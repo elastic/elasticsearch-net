@@ -26,12 +26,14 @@ namespace Elastic.Clients.Elasticsearch.Json;
 public sealed partial class SearchStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchStats>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFetchCurrent = System.Text.Json.JsonEncodedText.Encode("fetch_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFetchFailure = System.Text.Json.JsonEncodedText.Encode("fetch_failure"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFetchTime = System.Text.Json.JsonEncodedText.Encode("fetch_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFetchTimeInMillis = System.Text.Json.JsonEncodedText.Encode("fetch_time_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFetchTotal = System.Text.Json.JsonEncodedText.Encode("fetch_total"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOpenContexts = System.Text.Json.JsonEncodedText.Encode("open_contexts"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryCurrent = System.Text.Json.JsonEncodedText.Encode("query_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryFailure = System.Text.Json.JsonEncodedText.Encode("query_failure"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryTime = System.Text.Json.JsonEncodedText.Encode("query_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryTimeInMillis = System.Text.Json.JsonEncodedText.Encode("query_time_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryTotal = System.Text.Json.JsonEncodedText.Encode("query_total"u8);
@@ -49,12 +51,14 @@ public sealed partial class SearchStatsConverter : System.Text.Json.Serializatio
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long> propFetchCurrent = default;
+		LocalJsonValue<long> propFetchFailure = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFetchTime = default;
 		LocalJsonValue<System.TimeSpan> propFetchTimeInMillis = default;
 		LocalJsonValue<long> propFetchTotal = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>?> propGroups = default;
 		LocalJsonValue<long?> propOpenContexts = default;
 		LocalJsonValue<long> propQueryCurrent = default;
+		LocalJsonValue<long> propQueryFailure = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propQueryTime = default;
 		LocalJsonValue<System.TimeSpan> propQueryTimeInMillis = default;
 		LocalJsonValue<long> propQueryTotal = default;
@@ -70,6 +74,11 @@ public sealed partial class SearchStatsConverter : System.Text.Json.Serializatio
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFetchCurrent.TryReadProperty(ref reader, options, PropFetchCurrent, null))
+			{
+				continue;
+			}
+
+			if (propFetchFailure.TryReadProperty(ref reader, options, PropFetchFailure, null))
 			{
 				continue;
 			}
@@ -100,6 +109,11 @@ public sealed partial class SearchStatsConverter : System.Text.Json.Serializatio
 			}
 
 			if (propQueryCurrent.TryReadProperty(ref reader, options, PropQueryCurrent, null))
+			{
+				continue;
+			}
+
+			if (propQueryFailure.TryReadProperty(ref reader, options, PropQueryFailure, null))
 			{
 				continue;
 			}
@@ -177,12 +191,14 @@ public sealed partial class SearchStatsConverter : System.Text.Json.Serializatio
 		return new Elastic.Clients.Elasticsearch.SearchStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			FetchCurrent = propFetchCurrent.Value,
+			FetchFailure = propFetchFailure.Value,
 			FetchTime = propFetchTime.Value,
 			FetchTimeInMillis = propFetchTimeInMillis.Value,
 			FetchTotal = propFetchTotal.Value,
 			Groups = propGroups.Value,
 			OpenContexts = propOpenContexts.Value,
 			QueryCurrent = propQueryCurrent.Value,
+			QueryFailure = propQueryFailure.Value,
 			QueryTime = propQueryTime.Value,
 			QueryTimeInMillis = propQueryTimeInMillis.Value,
 			QueryTotal = propQueryTotal.Value,
@@ -202,12 +218,14 @@ public sealed partial class SearchStatsConverter : System.Text.Json.Serializatio
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFetchCurrent, value.FetchCurrent, null, null);
+		writer.WriteProperty(options, PropFetchFailure, value.FetchFailure, null, null);
 		writer.WriteProperty(options, PropFetchTime, value.FetchTime, null, null);
 		writer.WriteProperty(options, PropFetchTimeInMillis, value.FetchTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropFetchTotal, value.FetchTotal, null, null);
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchStats>(o, v, null, null));
 		writer.WriteProperty(options, PropOpenContexts, value.OpenContexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropQueryCurrent, value.QueryCurrent, null, null);
+		writer.WriteProperty(options, PropQueryFailure, value.QueryFailure, null, null);
 		writer.WriteProperty(options, PropQueryTime, value.QueryTime, null, null);
 		writer.WriteProperty(options, PropQueryTimeInMillis, value.QueryTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropQueryTotal, value.QueryTotal, null, null);

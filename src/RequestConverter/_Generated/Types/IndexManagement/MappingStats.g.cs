@@ -29,6 +29,12 @@ public partial class MappingStats : RequestConverter.ICodeFormattable
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.MappingStats", false);
 		{
+			initializer.Property("AverageFieldsPerSegment");
+			writer.WriteValue(AverageFieldsPerSegment);
+			writer.Write("L");
+		}
+
+		{
 			initializer.Property("TotalCount");
 			writer.WriteValue(TotalCount);
 			writer.Write("L");
@@ -43,6 +49,18 @@ public partial class MappingStats : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("TotalEstimatedOverheadInBytes");
 			writer.WriteValue(TotalEstimatedOverheadInBytes);
+			writer.Write("L");
+		}
+
+		{
+			initializer.Property("TotalSegmentFields");
+			writer.WriteValue(TotalSegmentFields);
+			writer.Write("L");
+		}
+
+		{
+			initializer.Property("TotalSegments");
+			writer.WriteValue(TotalSegments);
 			writer.Write("L");
 		}
 

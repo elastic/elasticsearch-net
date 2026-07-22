@@ -70,6 +70,11 @@ Internally, Elasticsearch has marked the old document as deleted and added an en
 The old version of the document doesn't disappear immediately, although you won't be able to access it.
 Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 </para></summary></member>
+  <member key="_global.get.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.get.Request#_source"><summary><para>
 Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
 </para></summary></member>
@@ -117,6 +122,7 @@ Setting it to <c>true</c> should be done after careful thought and verification 
 </para></summary></member>
   <member key="_global.get.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.get.Request#stored_fields"><summary><para>
 A comma-separated list of stored fields to return as part of a hit.

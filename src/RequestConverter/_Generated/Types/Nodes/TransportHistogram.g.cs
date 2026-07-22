@@ -35,11 +35,23 @@ public partial class TransportHistogram : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (Ge is not null)
+		{
+			initializer.Property("Ge");
+			Ge.FormatCode(writer);
+		}
+
 		if (GeMillis is not null)
 		{
 			initializer.Property("GeMillis");
 			writer.WriteValue(GeMillis.Value);
 			writer.Write("L");
+		}
+
+		if (Lt is not null)
+		{
+			initializer.Property("Lt");
+			Lt.FormatCode(writer);
 		}
 
 		if (LtMillis is not null)

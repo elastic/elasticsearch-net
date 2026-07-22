@@ -34,6 +34,12 @@ public partial class SearchStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		{
+			initializer.Property("FetchFailure");
+			writer.WriteValue(FetchFailure);
+			writer.Write("L");
+		}
+
 		if (FetchTime is not null)
 		{
 			initializer.Property("FetchTime");
@@ -74,6 +80,12 @@ public partial class SearchStats : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("QueryCurrent");
 			writer.WriteValue(QueryCurrent);
+			writer.Write("L");
+		}
+
+		{
+			initializer.Property("QueryFailure");
+			writer.WriteValue(QueryFailure);
 			writer.Write("L");
 		}
 

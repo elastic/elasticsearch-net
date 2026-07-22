@@ -32,6 +32,11 @@ public partial class GlobalPrivilege : RequestConverter.ICodeFormattable
 			{
 				writer.WriteFluentDescriptorCall("Application", (w) => { Application.FormatCode(w); }, (w) => { Application.FormatCode(w); });
 			}
+
+			if (DataSource is not null)
+			{
+				writer.WriteFluentDescriptorParams("DataSource", DataSource, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>"); w.Write("()"); });
+			}
 		}
 		else
 		{
@@ -39,6 +44,12 @@ public partial class GlobalPrivilege : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Application");
 				Application.FormatCode(writer);
+			}
+
+			if (DataSource is not null)
+			{
+				initializer.Property("DataSource");
+				writer.WriteInlineList(DataSource, (w, item) => { item.FormatCode(w); });
 			}
 
 			initializer.Dispose();

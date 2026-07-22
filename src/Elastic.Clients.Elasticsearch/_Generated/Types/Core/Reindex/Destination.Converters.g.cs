@@ -28,6 +28,7 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOpType = System.Text.Json.JsonEncodedText.Encode("op_type"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouteSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type"u8);
 
@@ -37,6 +38,7 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.OpType?> propOpType = default;
 		LocalJsonValue<string?> propPipeline = default;
+		LocalJsonValue<string?> propRouteSlice = default;
 		LocalJsonValue<string?> propRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -52,6 +54,11 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 			}
 
 			if (propPipeline.TryReadProperty(ref reader, options, PropPipeline, null))
+			{
+				continue;
+			}
+
+			if (propRouteSlice.TryReadProperty(ref reader, options, PropRouteSlice, null))
 			{
 				continue;
 			}
@@ -81,6 +88,7 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 			Index = propIndex.Value,
 			OpType = propOpType.Value,
 			Pipeline = propPipeline.Value,
+			RouteSlice = propRouteSlice.Value,
 			Routing = propRouting.Value,
 			VersionType = propVersionType.Value
 		};
@@ -92,6 +100,7 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropOpType, value.OpType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.OpType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.OpType>(o, v));
 		writer.WriteProperty(options, PropPipeline, value.Pipeline, null, null);
+		writer.WriteProperty(options, PropRouteSlice, value.RouteSlice, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropVersionType, value.VersionType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.VersionType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.VersionType>(o, v));
 		writer.WriteEndObject();

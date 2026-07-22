@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 public sealed partial class StatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Stats>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveSelection = System.Text.Json.JsonEncodedText.Encode("adaptive_selection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAllocations = System.Text.Json.JsonEncodedText.Encode("allocations"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropBreakers = System.Text.Json.JsonEncodedText.Encode("breakers"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery"u8);
@@ -40,6 +41,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropScriptCache = System.Text.Json.JsonEncodedText.Encode("script_cache"u8);
@@ -52,6 +54,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>?> propAdaptiveSelection = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Allocations?> propAllocations = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propAttributes = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>?> propBreakers = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Discovery?> propDiscovery = default;
@@ -66,6 +69,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.OperatingSystem?> propOs = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Process?> propProcess = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositorySnapshotStats>?> propRepositories = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>?> propRoles = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.Scripting?> propScript = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>?> propScriptCache = default;
@@ -76,6 +80,11 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAdaptiveSelection.TryReadProperty(ref reader, options, PropAdaptiveSelection, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propAllocations.TryReadProperty(ref reader, options, PropAllocations, null))
 			{
 				continue;
 			}
@@ -150,6 +159,11 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
+			if (propRepositories.TryReadProperty(ref reader, options, PropRepositories, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositorySnapshotStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.RepositorySnapshotStats>(o, null, null)))
+			{
+				continue;
+			}
+
 			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, null)))
 			{
 				continue;
@@ -198,6 +212,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 		return new Elastic.Clients.Elasticsearch.Nodes.Stats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			AdaptiveSelection = propAdaptiveSelection.Value,
+			Allocations = propAllocations.Value,
 			Attributes = propAttributes.Value,
 			Breakers = propBreakers.Value,
 			Discovery = propDiscovery.Value,
@@ -212,6 +227,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 			Name = propName.Value,
 			Os = propOs.Value,
 			Process = propProcess.Value,
+			Repositories = propRepositories.Value,
 			Roles = propRoles.Value,
 			Script = propScript.Value,
 			ScriptCache = propScriptCache.Value,
@@ -226,6 +242,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAdaptiveSelection, value.AdaptiveSelection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>(o, v, null, null));
+		writer.WriteProperty(options, PropAllocations, value.Allocations, null, null);
 		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropBreakers, value.Breakers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>(o, v, null, null));
 		writer.WriteProperty(options, PropDiscovery, value.Discovery, null, null);
@@ -240,6 +257,7 @@ public sealed partial class StatsConverter : System.Text.Json.Serialization.Json
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropOs, value.Os, null, null);
 		writer.WriteProperty(options, PropProcess, value.Process, null, null);
+		writer.WriteProperty(options, PropRepositories, value.Repositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositorySnapshotStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.RepositorySnapshotStats>(o, v, null, null));
 		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropScriptCache, value.ScriptCache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>(o, v, null)));

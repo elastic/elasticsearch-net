@@ -48,6 +48,7 @@ public sealed partial class RefreshStats
 	}
 
 	public required long ExternalTotal { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? ExternalTotalTime { get; set; }
 	public required System.TimeSpan ExternalTotalTimeInMillis { get; set; }
 	public required long Listeners { get; set; }
 	public required long Total { get; set; }

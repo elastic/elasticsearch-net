@@ -85,6 +85,11 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 				writer.WriteFluentCall("RetryOnConflict", (w) => { w.WriteValue(RetryOnConflict.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -200,6 +205,12 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 			{
 				initializer.Property("RetryOnConflict");
 				writer.WriteValue(RetryOnConflict.Value);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

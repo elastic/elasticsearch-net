@@ -34,11 +34,23 @@ public partial class SizeHttpHistogram : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (Ge is not null)
+		{
+			initializer.Property("Ge");
+			Ge.FormatCode(writer);
+		}
+
 		if (GeBytes is not null)
 		{
 			initializer.Property("GeBytes");
 			writer.WriteValue(GeBytes.Value);
 			writer.Write("L");
+		}
+
+		if (Lt is not null)
+		{
+			initializer.Property("Lt");
+			Lt.FormatCode(writer);
 		}
 
 		if (LtBytes is not null)

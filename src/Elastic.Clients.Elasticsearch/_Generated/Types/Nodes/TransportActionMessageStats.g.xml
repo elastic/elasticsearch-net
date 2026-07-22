@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.TransportActionMessageStats#count"><summary><para>
+The number of messages of this kind that the node has handled for this action.
+</para></summary></member>
+  <member key="nodes._types.TransportActionMessageStats#histogram"><summary><para>
+The distribution of the sizes of the messages of this kind that the node has handled for this action, represented as a histogram.
+</para></summary></member>
+  <member key="nodes._types.TransportActionMessageStats#total_size"><summary><para>
+The cumulative size of the messages of this kind that the node has handled for this action.
+</para></summary></member>
+  <member key="nodes._types.TransportActionMessageStats#total_size_in_bytes"><summary><para>
+The cumulative size, in bytes, of the messages of this kind that the node has handled for this action.
+</para></summary></member>
+</doc>

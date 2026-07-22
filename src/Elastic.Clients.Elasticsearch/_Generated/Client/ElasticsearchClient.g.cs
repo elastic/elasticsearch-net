@@ -29,6 +29,7 @@ public partial class ElasticsearchClient
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient Cluster { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient CrossClusterReplication { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient DanglingIndices { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.Encryption.EncryptionNamespacedClient Encryption { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient Enrich { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlNamespacedClient Eql { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Esql.EsqlNamespacedClient Esql { get; private set; }
@@ -64,6 +65,7 @@ public partial class ElasticsearchClient
 		Cluster = new Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient(this);
 		CrossClusterReplication = new Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient(this);
 		DanglingIndices = new Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient(this);
+		Encryption = new Elastic.Clients.Elasticsearch.Encryption.EncryptionNamespacedClient(this);
 		Enrich = new Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient(this);
 		Eql = new Elastic.Clients.Elasticsearch.Eql.EqlNamespacedClient(this);
 		Esql = new Elastic.Clients.Elasticsearch.Esql.EsqlNamespacedClient(this);

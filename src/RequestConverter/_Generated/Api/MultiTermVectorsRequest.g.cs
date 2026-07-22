@@ -83,6 +83,11 @@ public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -162,6 +167,12 @@ public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Realtime");
 				writer.WriteValue(Realtime.Value);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

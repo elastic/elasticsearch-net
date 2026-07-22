@@ -36,6 +36,7 @@ public sealed partial class FlattenedPropertyConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreserveLeafArrays = System.Text.Json.JsonEncodedText.Encode("preserve_leaf_arrays"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSplitQueriesOnWhitespace = System.Text.Json.JsonEncodedText.Encode("split_queries_on_whitespace"u8);
@@ -57,6 +58,7 @@ public sealed partial class FlattenedPropertyConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.IndexOptions?> propIndexOptions = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<string?> propNullValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays?> propPreserveLeafArrays = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
 		LocalJsonValue<string?> propSimilarity = default;
 		LocalJsonValue<bool?> propSplitQueriesOnWhitespace = default;
@@ -119,6 +121,11 @@ public sealed partial class FlattenedPropertyConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propPreserveLeafArrays.TryReadProperty(ref reader, options, PropPreserveLeafArrays, static Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays>(o)))
+			{
+				continue;
+			}
+
 			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
 			{
 				continue;
@@ -173,6 +180,7 @@ public sealed partial class FlattenedPropertyConverter : System.Text.Json.Serial
 			IndexOptions = propIndexOptions.Value,
 			Meta = propMeta.Value,
 			NullValue = propNullValue.Value,
+			PreserveLeafArrays = propPreserveLeafArrays.Value,
 			Properties = propProperties.Value,
 			Similarity = propSimilarity.Value,
 			SplitQueriesOnWhitespace = propSplitQueriesOnWhitespace.Value,
@@ -195,6 +203,7 @@ public sealed partial class FlattenedPropertyConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.IndexOptions? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.IndexOptions>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropPreserveLeafArrays, value.PreserveLeafArrays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays>(o, v));
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
 		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
 		writer.WriteProperty(options, PropSplitQueriesOnWhitespace, value.SplitQueriesOnWhitespace, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));

@@ -46,6 +46,9 @@ public sealed partial class Processor
 	/// <include file="Processor.g.xml" path="doc/member[@key='nodes._types.Processor#failed']/*"/>
 	public long? Failed { get; set; }
 
+	/// <include file="Processor.g.xml" path="doc/member[@key='nodes._types.Processor#time']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
+
 	/// <include file="Processor.g.xml" path="doc/member[@key='nodes._types.Processor#time_in_millis']/*"/>
 	public System.TimeSpan? TimeInMillis { get; set; }
 }

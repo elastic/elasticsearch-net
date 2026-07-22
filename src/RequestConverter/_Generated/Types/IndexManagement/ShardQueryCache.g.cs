@@ -52,6 +52,12 @@ public partial class ShardQueryCache : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (MemorySize is not null)
+		{
+			initializer.Property("MemorySize");
+			MemorySize.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("MemorySizeInBytes");
 			writer.WriteValue(MemorySizeInBytes);

@@ -4889,6 +4889,20 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
+					case "routing":
+						{
+							if (parameter.Value is string value)
+								request.Routing = Elastic.Clients.Elasticsearch.Routing.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
 					default:
 						{
 							unsupportedParameters.Add(parameter.Key);

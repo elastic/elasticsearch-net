@@ -34,6 +34,12 @@ public partial class Client : RequestConverter.ICodeFormattable
 			writer.WriteString(Agent);
 		}
 
+		if (ClosedTime is not null)
+		{
+			initializer.Property("ClosedTime");
+			writer.WriteString(ClosedTime);
+		}
+
 		if (ClosedTimeMillis is not null)
 		{
 			initializer.Property("ClosedTimeMillis");
@@ -46,6 +52,12 @@ public partial class Client : RequestConverter.ICodeFormattable
 			initializer.Property("Id");
 			writer.WriteValue(Id.Value);
 			writer.Write("L");
+		}
+
+		if (LastRequestTime is not null)
+		{
+			initializer.Property("LastRequestTime");
+			writer.WriteString(LastRequestTime);
 		}
 
 		if (LastRequestTimeMillis is not null)
@@ -65,6 +77,12 @@ public partial class Client : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("LocalAddress");
 			writer.WriteString(LocalAddress);
+		}
+
+		if (OpenedTime is not null)
+		{
+			initializer.Property("OpenedTime");
+			writer.WriteString(OpenedTime);
 		}
 
 		if (OpenedTimeMillis is not null)

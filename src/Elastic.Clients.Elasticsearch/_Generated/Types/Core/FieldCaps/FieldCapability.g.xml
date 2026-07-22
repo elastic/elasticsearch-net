@@ -6,6 +6,9 @@ Whether this field can be aggregated on all indices.
   <member key="_global.field_caps.FieldCapability#indices"><summary><para>
 The list of indices where this field has the same type family, or null if all indices have the same type family for the field.
 </para></summary></member>
+  <member key="_global.field_caps.FieldCapability#inference"><summary><para>
+Whether this field is an inference field, meaning a field that automatically performs inference (for example, <c>semantic_text</c> fields), on all indices.
+</para></summary></member>
   <member key="_global.field_caps.FieldCapability#meta"><summary><para>
 Merged metadata across all indices as a map of string keys to arrays of values. A value length of 1 indicates that all indices had the same value for this key, while a length of 2 or more indicates that not all indices had the same value for this key.
 </para></summary></member>
@@ -22,6 +25,9 @@ The list of indices where this field is not aggregatable, or null if all indices
   <member key="_global.field_caps.FieldCapability#non_dimension_indices"><summary><para>
 If this list is present in response then some indices have the
 field marked as a dimension and other indices, the ones in this list, do not.
+</para></summary></member>
+  <member key="_global.field_caps.FieldCapability#non_inference_indices"><summary><para>
+The list of indices where this field is not an inference field, or null if all indices have the same definition for the field.
 </para></summary></member>
   <member key="_global.field_caps.FieldCapability#non_searchable_indices"><summary><para>
 The list of indices where this field is not searchable, or null if all indices have the same definition for the field.

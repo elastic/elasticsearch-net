@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_region_policy.Request"><summary><para>
+Create or update the inference region policy.
+</para>
+<para>
+The region policy restricts inference to a set of allowed geographic areas or cloud service provider regions.
+</para></summary></member>
+  <member key="inference.put_region_policy.Request#force"><summary><para>
+If <c>true</c>, the region policy is applied even if it would deny access to inference endpoints that are currently in use by ingest pipeline or indices.
+</para></summary></member>
+  <member key="inference.put_region_policy.Request#region_policy"><summary><para>
+The region policy configuration.
+</para></summary></member>
+</doc>

@@ -26,7 +26,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 public sealed partial class RecoveryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RecoveryStats>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsSource = System.Text.Json.JsonEncodedText.Encode("current_as_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsSourceQueued = System.Text.Json.JsonEncodedText.Encode("current_as_source_queued"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsTarget = System.Text.Json.JsonEncodedText.Encode("current_as_target"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsTargetQueued = System.Text.Json.JsonEncodedText.Encode("current_as_target_queued"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentFromStore = System.Text.Json.JsonEncodedText.Encode("current_from_store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentFromStoreQueued = System.Text.Json.JsonEncodedText.Encode("current_from_store_queued"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropThrottleTime = System.Text.Json.JsonEncodedText.Encode("throttle_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("throttle_time_in_millis"u8);
 
@@ -34,7 +38,11 @@ public sealed partial class RecoveryStatsConverter : System.Text.Json.Serializat
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long> propCurrentAsSource = default;
+		LocalJsonValue<long?> propCurrentAsSourceQueued = default;
 		LocalJsonValue<long> propCurrentAsTarget = default;
+		LocalJsonValue<long?> propCurrentAsTargetQueued = default;
+		LocalJsonValue<long?> propCurrentFromStore = default;
+		LocalJsonValue<long?> propCurrentFromStoreQueued = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propThrottleTime = default;
 		LocalJsonValue<System.TimeSpan> propThrottleTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -44,7 +52,27 @@ public sealed partial class RecoveryStatsConverter : System.Text.Json.Serializat
 				continue;
 			}
 
+			if (propCurrentAsSourceQueued.TryReadProperty(ref reader, options, PropCurrentAsSourceQueued, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
 			if (propCurrentAsTarget.TryReadProperty(ref reader, options, PropCurrentAsTarget, null))
+			{
+				continue;
+			}
+
+			if (propCurrentAsTargetQueued.TryReadProperty(ref reader, options, PropCurrentAsTargetQueued, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propCurrentFromStore.TryReadProperty(ref reader, options, PropCurrentFromStore, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propCurrentFromStoreQueued.TryReadProperty(ref reader, options, PropCurrentFromStoreQueued, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -72,7 +100,11 @@ public sealed partial class RecoveryStatsConverter : System.Text.Json.Serializat
 		return new Elastic.Clients.Elasticsearch.RecoveryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			CurrentAsSource = propCurrentAsSource.Value,
+			CurrentAsSourceQueued = propCurrentAsSourceQueued.Value,
 			CurrentAsTarget = propCurrentAsTarget.Value,
+			CurrentAsTargetQueued = propCurrentAsTargetQueued.Value,
+			CurrentFromStore = propCurrentFromStore.Value,
+			CurrentFromStoreQueued = propCurrentFromStoreQueued.Value,
 			ThrottleTime = propThrottleTime.Value,
 			ThrottleTimeInMillis = propThrottleTimeInMillis.Value
 		};
@@ -82,7 +114,11 @@ public sealed partial class RecoveryStatsConverter : System.Text.Json.Serializat
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCurrentAsSource, value.CurrentAsSource, null, null);
+		writer.WriteProperty(options, PropCurrentAsSourceQueued, value.CurrentAsSourceQueued, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropCurrentAsTarget, value.CurrentAsTarget, null, null);
+		writer.WriteProperty(options, PropCurrentAsTargetQueued, value.CurrentAsTargetQueued, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCurrentFromStore, value.CurrentFromStore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCurrentFromStoreQueued, value.CurrentFromStoreQueued, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropThrottleTime, value.ThrottleTime, null, null);
 		writer.WriteProperty(options, PropThrottleTimeInMillis, value.ThrottleTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteEndObject();

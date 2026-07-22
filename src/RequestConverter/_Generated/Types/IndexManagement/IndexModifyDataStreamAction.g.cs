@@ -34,6 +34,11 @@ public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormatt
 				writer.WriteFluentDescriptorCall("AddBackingIndex", (w) => { AddBackingIndex.FormatCode(w); }, (w) => { AddBackingIndex.FormatCode(w); });
 			}
 
+			if (DeleteBackingIndex is not null)
+			{
+				writer.WriteFluentDescriptorCall("DeleteBackingIndex", (w) => { DeleteBackingIndex.FormatCode(w); }, (w) => { DeleteBackingIndex.FormatCode(w); });
+			}
+
 			if (RemoveBackingIndex is not null)
 			{
 				writer.WriteFluentDescriptorCall("RemoveBackingIndex", (w) => { RemoveBackingIndex.FormatCode(w); }, (w) => { RemoveBackingIndex.FormatCode(w); });
@@ -46,6 +51,12 @@ public partial class IndexModifyDataStreamAction : RequestConverter.ICodeFormatt
 			{
 				initializer.Property("AddBackingIndex");
 				AddBackingIndex.FormatCode(writer);
+			}
+
+			if (DeleteBackingIndex is not null)
+			{
+				initializer.Property("DeleteBackingIndex");
+				DeleteBackingIndex.FormatCode(writer);
 			}
 
 			if (RemoveBackingIndex is not null)

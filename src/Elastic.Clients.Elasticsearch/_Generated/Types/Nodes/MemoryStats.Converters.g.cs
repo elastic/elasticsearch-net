@@ -25,33 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class MemoryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.MemoryStats>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotal = System.Text.Json.JsonEncodedText.Encode("adjusted_total"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropResident = System.Text.Json.JsonEncodedText.Encode("resident"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropResidentInBytes = System.Text.Json.JsonEncodedText.Encode("resident_in_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShare = System.Text.Json.JsonEncodedText.Encode("share"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShareInBytes = System.Text.Json.JsonEncodedText.Encode("share_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtual = System.Text.Json.JsonEncodedText.Encode("total_virtual"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtualInBytes = System.Text.Json.JsonEncodedText.Encode("total_virtual_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsed = System.Text.Json.JsonEncodedText.Encode("used"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.MemoryStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAdjustedTotal = default;
 		LocalJsonValue<long?> propAdjustedTotalInBytes = default;
+		LocalJsonValue<string?> propFree = default;
 		LocalJsonValue<long?> propFreeInBytes = default;
 		LocalJsonValue<string?> propResident = default;
 		LocalJsonValue<long?> propResidentInBytes = default;
 		LocalJsonValue<string?> propShare = default;
 		LocalJsonValue<long?> propShareInBytes = default;
+		LocalJsonValue<string?> propTotal = default;
 		LocalJsonValue<long?> propTotalInBytes = default;
 		LocalJsonValue<string?> propTotalVirtual = default;
 		LocalJsonValue<long?> propTotalVirtualInBytes = default;
+		LocalJsonValue<string?> propUsed = default;
 		LocalJsonValue<long?> propUsedInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAdjustedTotal.TryReadProperty(ref reader, options, PropAdjustedTotal, null))
+			{
+				continue;
+			}
+
 			if (propAdjustedTotalInBytes.TryReadProperty(ref reader, options, PropAdjustedTotalInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propFree.TryReadProperty(ref reader, options, PropFree, null))
 			{
 				continue;
 			}
@@ -81,6 +99,11 @@ public sealed partial class MemoryStatsConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
 			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
@@ -92,6 +115,11 @@ public sealed partial class MemoryStatsConverter : System.Text.Json.Serializatio
 			}
 
 			if (propTotalVirtualInBytes.TryReadProperty(ref reader, options, PropTotalVirtualInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propUsed.TryReadProperty(ref reader, options, PropUsed, null))
 			{
 				continue;
 			}
@@ -113,15 +141,19 @@ public sealed partial class MemoryStatsConverter : System.Text.Json.Serializatio
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Nodes.MemoryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			AdjustedTotal = propAdjustedTotal.Value,
 			AdjustedTotalInBytes = propAdjustedTotalInBytes.Value,
+			Free = propFree.Value,
 			FreeInBytes = propFreeInBytes.Value,
 			Resident = propResident.Value,
 			ResidentInBytes = propResidentInBytes.Value,
 			Share = propShare.Value,
 			ShareInBytes = propShareInBytes.Value,
+			Total = propTotal.Value,
 			TotalInBytes = propTotalInBytes.Value,
 			TotalVirtual = propTotalVirtual.Value,
 			TotalVirtualInBytes = propTotalVirtualInBytes.Value,
+			Used = propUsed.Value,
 			UsedInBytes = propUsedInBytes.Value
 		};
 	}
@@ -129,15 +161,19 @@ public sealed partial class MemoryStatsConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.MemoryStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAdjustedTotal, value.AdjustedTotal, null, null);
 		writer.WriteProperty(options, PropAdjustedTotalInBytes, value.AdjustedTotalInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFree, value.Free, null, null);
 		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropResident, value.Resident, null, null);
 		writer.WriteProperty(options, PropResidentInBytes, value.ResidentInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropShare, value.Share, null, null);
 		writer.WriteProperty(options, PropShareInBytes, value.ShareInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotalVirtual, value.TotalVirtual, null, null);
 		writer.WriteProperty(options, PropTotalVirtualInBytes, value.TotalVirtualInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropUsed, value.Used, null, null);
 		writer.WriteProperty(options, PropUsedInBytes, value.UsedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}

@@ -183,12 +183,6 @@ It automatically follows the behavior of the index or delete operation based on 
 NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 </para>
 <para>
-<strong>Wait for active shards</strong>
-</para>
-<para>
-When making bulk calls, you can set the <c>wait_for_active_shards</c> parameter to require a minimum number of shard copies to be active before starting to process the bulk request.
-</para>
-<para>
 <strong>Refresh</strong>
 </para>
 <para>
@@ -203,6 +197,11 @@ The other two shards that make up the index do not participate in the <c>_bulk</
 <para>
 You might want to disable the refresh interval temporarily to improve indexing throughput for large bulk requests.
 Refer to the linked documentation for step-by-step instructions using the index settings API.
+</para></summary></member>
+  <member key="_global.bulk.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
 </para></summary></member>
   <member key="_global.bulk.Request#_source"><summary><para>
 Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
@@ -246,6 +245,7 @@ If <c>true</c>, the request's actions must target a data stream (existing or to 
 </para></summary></member>
   <member key="_global.bulk.Request#routing"><summary><para>
 A custom value that is used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.bulk.Request#timeout"><summary><para>
 The period each action waits for the following operations: automatic index creation, dynamic mapping updates, and waiting for active shards.

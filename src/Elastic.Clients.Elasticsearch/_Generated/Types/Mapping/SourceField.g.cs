@@ -37,8 +37,6 @@ public sealed partial class SourceField
 		_ = sentinel;
 	}
 
-	public bool? Compress { get; set; }
-	public string? CompressThreshold { get; set; }
 	public bool? Enabled { get; set; }
 	public System.Collections.Generic.ICollection<string>? Excludes { get; set; }
 	public System.Collections.Generic.ICollection<string>? Includes { get; set; }
@@ -64,18 +62,6 @@ public readonly partial struct SourceFieldDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.SourceField instance) => new Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SourceField(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor) => descriptor.Instance;
-
-	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Compress(bool? value = true)
-	{
-		Instance.Compress = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor CompressThreshold(string? value)
-	{
-		Instance.CompressThreshold = value;
-		return this;
-	}
 
 	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor Enabled(bool? value = true)
 	{

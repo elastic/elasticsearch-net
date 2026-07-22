@@ -50,11 +50,35 @@ public sealed partial class DataPathStats
 	public string? DiskWriteSize { get; set; }
 	public long? DiskWriteSizeInBytes { get; set; }
 
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#flood_stage_free_space']/*"/>
+	public string? FloodStageFreeSpace { get; set; }
+
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#flood_stage_free_space_in_bytes']/*"/>
+	public long? FloodStageFreeSpaceInBytes { get; set; }
+
 	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#free']/*"/>
 	public string? Free { get; set; }
 
 	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#free_in_bytes']/*"/>
 	public long? FreeInBytes { get; set; }
+
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#frozen_flood_stage_free_space']/*"/>
+	public string? FrozenFloodStageFreeSpace { get; set; }
+
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#frozen_flood_stage_free_space_in_bytes']/*"/>
+	public long? FrozenFloodStageFreeSpaceInBytes { get; set; }
+
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#high_watermark_free_space']/*"/>
+	public string? HighWatermarkFreeSpace { get; set; }
+
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#high_watermark_free_space_in_bytes']/*"/>
+	public long? HighWatermarkFreeSpaceInBytes { get; set; }
+
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#low_watermark_free_space']/*"/>
+	public string? LowWatermarkFreeSpace { get; set; }
+
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#low_watermark_free_space_in_bytes']/*"/>
+	public long? LowWatermarkFreeSpaceInBytes { get; set; }
 
 	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#mount']/*"/>
 	public string? Mount { get; set; }

@@ -45,6 +45,9 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
+	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -110,6 +113,9 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
+
+	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -201,6 +207,13 @@ public readonly partial struct BulkRequestDescriptor
 	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RequireDataStream(bool? value = true)
 	{
 		Instance.RequireDataStream = value;
+		return this;
+	}
+
+	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -406,6 +419,13 @@ public readonly partial struct BulkRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
 	{
 		Instance.RequireDataStream = value;
+		return this;
+	}
+
+	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

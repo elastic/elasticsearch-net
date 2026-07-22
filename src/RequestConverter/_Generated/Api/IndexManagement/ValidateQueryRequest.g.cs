@@ -108,6 +108,16 @@ public partial class ValidateQueryRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Rewrite", (w) => { w.WriteValue(Rewrite.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
+			if (Routing is not null)
+			{
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+			}
+
 			if (Query is not null)
 			{
 				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
@@ -192,6 +202,18 @@ public partial class ValidateQueryRequest : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Rewrite");
 				writer.WriteValue(Rewrite.Value);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
+			if (Routing is not null)
+			{
+				initializer.Property("Routing");
+				Routing.FormatCode(writer);
 			}
 
 			if (Query is not null)

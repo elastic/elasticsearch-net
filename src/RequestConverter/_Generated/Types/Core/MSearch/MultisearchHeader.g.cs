@@ -79,6 +79,11 @@ public partial class MultisearchHeader : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("RequestCache", (w) => { w.WriteValue(RequestCache.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -87,11 +92,6 @@ public partial class MultisearchHeader : RequestConverter.ICodeFormattable
 			if (SearchType is not null)
 			{
 				writer.WriteFluentCall("SearchType", (w) => { Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
-			}
-
-			if (Slice is not null)
-			{
-				writer.WriteFluentCall("Slice", (w) => { w.WriteString(Slice); });
 			}
 		}
 		else
@@ -157,6 +157,12 @@ public partial class MultisearchHeader : RequestConverter.ICodeFormattable
 				writer.WriteValue(RequestCache.Value);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
@@ -167,12 +173,6 @@ public partial class MultisearchHeader : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("SearchType");
 				Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
-			}
-
-			if (Slice is not null)
-			{
-				initializer.Property("Slice");
-				writer.WriteString(Slice);
 			}
 
 			initializer.Dispose();

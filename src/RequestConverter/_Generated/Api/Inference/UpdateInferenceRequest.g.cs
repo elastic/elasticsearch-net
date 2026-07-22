@@ -40,6 +40,12 @@ public partial class UpdateInferenceRequest : RequestConverter.ICodeFormattable
 			Elastic.Clients.Elasticsearch.Inference.TaskTypeCodeFormatter.FormatCode(TaskType.Value, writer);
 		}
 
+		if (Timeout is not null)
+		{
+			initializer.Property("Timeout");
+			Timeout.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("InferenceConfig");
 			InferenceConfig.FormatCode(writer);

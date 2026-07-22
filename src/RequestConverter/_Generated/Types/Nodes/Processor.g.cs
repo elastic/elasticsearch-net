@@ -49,6 +49,12 @@ public partial class Processor : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (Time is not null)
+		{
+			initializer.Property("Time");
+			Time.FormatCode(writer);
+		}
+
 		if (TimeInMillis is not null)
 		{
 			initializer.Property("TimeInMillis");

@@ -103,6 +103,11 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -111,11 +116,6 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 			if (SearchType is not null)
 			{
 				writer.WriteFluentCall("SearchType", (w) => { Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
-			}
-
-			if (Slice is not null)
-			{
-				writer.WriteFluentCall("Slice", (w) => { w.WriteString(Slice); });
 			}
 
 			if (TypedKeys is not null)
@@ -203,6 +203,12 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 				writer.WriteValue(RestTotalHitsAsInt.Value);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
@@ -213,12 +219,6 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("SearchType");
 				Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, writer);
-			}
-
-			if (Slice is not null)
-			{
-				initializer.Property("Slice");
-				writer.WriteString(Slice);
 			}
 
 			if (TypedKeys is not null)

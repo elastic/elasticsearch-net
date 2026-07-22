@@ -43,7 +43,7 @@ public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Reques
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RerankRequest(Elastic.Clients.Elasticsearch.Id inferenceId, System.Collections.Generic.ICollection<string> input, string query) : base(r => r.Required("inference_id", inferenceId))
+	public RerankRequest(Elastic.Clients.Elasticsearch.Id inferenceId, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>> input, Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject> query) : base(r => r.Required("inference_id", inferenceId))
 	{
 		Input = input;
 		Query = query;
@@ -74,10 +74,10 @@ public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Reques
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#input']/*"/>
-	public required System.Collections.Generic.ICollection<string> Input { get; set; }
+	public required Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>> Input { get; set; }
 
 	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#query']/*"/>
-	public required string Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject> Query { get; set; }
 
 	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
@@ -132,21 +132,14 @@ public readonly partial struct RerankRequestDescriptor
 	}
 
 	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#input']/*"/>
-	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
+	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#input']/*"/>
-	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(params string[] values)
-	{
-		Instance.Input = [.. values];
-		return this;
-	}
-
 	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#query']/*"/>
-	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Query(string value)
+	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Query(Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject> value)
 	{
 		Instance.Query = value;
 		return this;

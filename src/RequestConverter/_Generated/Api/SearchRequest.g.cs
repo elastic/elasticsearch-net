@@ -148,6 +148,11 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -507,6 +512,12 @@ public partial class SearchRequest : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("RestTotalHitsAsInt");
 				writer.WriteValue(RestTotalHitsAsInt.Value);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)
