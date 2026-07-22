@@ -1,0 +1,64 @@
+name: Request converter npm publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build and publish from (e.g. 9.5, 8.19)'
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve branch
+        id: branch
+        run: |
+          BRANCH="${{ github.event.inputs.branch || github.event.release.target_commitish }}"
+          if ! [[ "$BRANCH" =~ ^[0-9]+\.[0-9]+$ ]]; then
+            echo "Refusing to publish from '$BRANCH': only release branches (major.minor) are supported."
+            exit 1
+          fi
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.branch.outputs.branch }}
+      - uses: actions/setup-dotnet@v4
+      - run: dotnet workload install wasm-tools
+      - run: dotnet test RequestConverter.sln
+      - run: dotnet publish src/RequestConverter.Wasm/RequestConverter.Wasm.csproj -c Release
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+      - name: Compute package version
+        id: version
+        run: |
+          MINOR="${{ steps.branch.outputs.branch }}"
+          LATEST_PATCH=$(npm view @elastic/request-converter-dotnet versions --json 2>/dev/null \
+            | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{const v=JSON.parse(d||'[]');const p=v.filter(x=>x.startsWith(process.argv[1]+'.')).map(x=>parseInt(x.split('.')[2],10));console.log(p.length?Math.max(...p):-1)})" "$MINOR" \
+            || echo "-1")
+          VERSION="$MINOR.$((LATEST_PATCH + 1))"
+          CLIENT_VERSION="${{ github.event.release.tag_name }}"
+          CLIENT_VERSION="${CLIENT_VERSION#v}"
+          if [ -z "$CLIENT_VERSION" ]; then
+            CLIENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "unreleased")
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "client-version=$CLIENT_VERSION" >> "$GITHUB_OUTPUT"
+      - name: Assemble package
+        run: |
+          node src/RequestConverter.Wasm/npm/prepare-package.mjs \
+            --app-bundle .artifacts/bin/RequestConverter.Wasm/release_browser-wasm/AppBundle \
+            --version "${{ steps.version.outputs.version }}" \
+            --client-version "${{ steps.version.outputs.client-version }}" \
+            --commit "$GITHUB_SHA" \
+            --out .artifacts/npm/request-converter-dotnet
+      - run: node src/RequestConverter.Wasm/npm/smoke.mjs .artifacts/npm/request-converter-dotnet
+      - run: npm publish .artifacts/npm/request-converter-dotnet --access public --provenance
