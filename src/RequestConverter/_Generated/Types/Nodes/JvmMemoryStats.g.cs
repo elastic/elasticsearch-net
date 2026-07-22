@@ -28,6 +28,12 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats", false);
+		if (HeapCommitted is not null)
+		{
+			initializer.Property("HeapCommitted");
+			HeapCommitted.FormatCode(writer);
+		}
+
 		if (HeapCommittedInBytes is not null)
 		{
 			initializer.Property("HeapCommittedInBytes");
@@ -48,6 +54,12 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (HeapUsed is not null)
+		{
+			initializer.Property("HeapUsed");
+			HeapUsed.FormatCode(writer);
+		}
+
 		if (HeapUsedInBytes is not null)
 		{
 			initializer.Property("HeapUsedInBytes");
@@ -62,11 +74,23 @@ public partial class JvmMemoryStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (NonHeapCommitted is not null)
+		{
+			initializer.Property("NonHeapCommitted");
+			NonHeapCommitted.FormatCode(writer);
+		}
+
 		if (NonHeapCommittedInBytes is not null)
 		{
 			initializer.Property("NonHeapCommittedInBytes");
 			writer.WriteValue(NonHeapCommittedInBytes.Value);
 			writer.Write("L");
+		}
+
+		if (NonHeapUsed is not null)
+		{
+			initializer.Property("NonHeapUsed");
+			NonHeapUsed.FormatCode(writer);
 		}
 
 		if (NonHeapUsedInBytes is not null)

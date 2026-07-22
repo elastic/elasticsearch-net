@@ -26,8 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCenifSize = System.Text.Json.JsonEncodedText.Encode("total_cenif_size"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCenifSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_cenif_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCenivfSize = System.Text.Json.JsonEncodedText.Encode("total_cenivf_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCenivfSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_cenivf_size_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalClivfSize = System.Text.Json.JsonEncodedText.Encode("total_clivf_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalClivfSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_clivf_size_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
@@ -45,8 +45,8 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>?> propFielddata = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalCenifSize = default;
-		LocalJsonValue<long> propTotalCenifSizeBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalCenivfSize = default;
+		LocalJsonValue<long> propTotalCenivfSizeBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalClivfSize = default;
 		LocalJsonValue<long> propTotalClivfSizeBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalSize = default;
@@ -66,12 +66,12 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propTotalCenifSize.TryReadProperty(ref reader, options, PropTotalCenifSize, null))
+			if (propTotalCenivfSize.TryReadProperty(ref reader, options, PropTotalCenivfSize, null))
 			{
 				continue;
 			}
 
-			if (propTotalCenifSizeBytes.TryReadProperty(ref reader, options, PropTotalCenifSizeBytes, null))
+			if (propTotalCenivfSizeBytes.TryReadProperty(ref reader, options, PropTotalCenivfSizeBytes, null))
 			{
 				continue;
 			}
@@ -149,8 +149,8 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 		return new Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Fielddata = propFielddata.Value,
-			TotalCenifSize = propTotalCenifSize.Value,
-			TotalCenifSizeBytes = propTotalCenifSizeBytes.Value,
+			TotalCenivfSize = propTotalCenivfSize.Value,
+			TotalCenivfSizeBytes = propTotalCenivfSizeBytes.Value,
 			TotalClivfSize = propTotalClivfSize.Value,
 			TotalClivfSizeBytes = propTotalClivfSizeBytes.Value,
 			TotalSize = propTotalSize.Value,
@@ -170,8 +170,8 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null)));
-		writer.WriteProperty(options, PropTotalCenifSize, value.TotalCenifSize, null, null);
-		writer.WriteProperty(options, PropTotalCenifSizeBytes, value.TotalCenifSizeBytes, null, null);
+		writer.WriteProperty(options, PropTotalCenivfSize, value.TotalCenivfSize, null, null);
+		writer.WriteProperty(options, PropTotalCenivfSizeBytes, value.TotalCenivfSizeBytes, null, null);
 		writer.WriteProperty(options, PropTotalClivfSize, value.TotalClivfSize, null, null);
 		writer.WriteProperty(options, PropTotalClivfSizeBytes, value.TotalClivfSizeBytes, null, null);
 		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);

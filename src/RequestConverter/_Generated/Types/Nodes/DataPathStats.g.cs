@@ -87,6 +87,19 @@ public partial class DataPathStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (FloodStageFreeSpace is not null)
+		{
+			initializer.Property("FloodStageFreeSpace");
+			writer.WriteString(FloodStageFreeSpace);
+		}
+
+		if (FloodStageFreeSpaceInBytes is not null)
+		{
+			initializer.Property("FloodStageFreeSpaceInBytes");
+			writer.WriteValue(FloodStageFreeSpaceInBytes.Value);
+			writer.Write("L");
+		}
+
 		if (Free is not null)
 		{
 			initializer.Property("Free");
@@ -97,6 +110,45 @@ public partial class DataPathStats : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("FreeInBytes");
 			writer.WriteValue(FreeInBytes.Value);
+			writer.Write("L");
+		}
+
+		if (FrozenFloodStageFreeSpace is not null)
+		{
+			initializer.Property("FrozenFloodStageFreeSpace");
+			writer.WriteString(FrozenFloodStageFreeSpace);
+		}
+
+		if (FrozenFloodStageFreeSpaceInBytes is not null)
+		{
+			initializer.Property("FrozenFloodStageFreeSpaceInBytes");
+			writer.WriteValue(FrozenFloodStageFreeSpaceInBytes.Value);
+			writer.Write("L");
+		}
+
+		if (HighWatermarkFreeSpace is not null)
+		{
+			initializer.Property("HighWatermarkFreeSpace");
+			writer.WriteString(HighWatermarkFreeSpace);
+		}
+
+		if (HighWatermarkFreeSpaceInBytes is not null)
+		{
+			initializer.Property("HighWatermarkFreeSpaceInBytes");
+			writer.WriteValue(HighWatermarkFreeSpaceInBytes.Value);
+			writer.Write("L");
+		}
+
+		if (LowWatermarkFreeSpace is not null)
+		{
+			initializer.Property("LowWatermarkFreeSpace");
+			writer.WriteString(LowWatermarkFreeSpace);
+		}
+
+		if (LowWatermarkFreeSpaceInBytes is not null)
+		{
+			initializer.Property("LowWatermarkFreeSpaceInBytes");
+			writer.WriteValue(LowWatermarkFreeSpaceInBytes.Value);
 			writer.Write("L");
 		}
 

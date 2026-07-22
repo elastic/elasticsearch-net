@@ -102,6 +102,11 @@ public partial class ExplainRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("QueryLuceneSyntax", (w) => { w.WriteString(QueryLuceneSyntax); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -185,6 +190,12 @@ public partial class ExplainRequest : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("QueryLuceneSyntax");
 				writer.WriteString(QueryLuceneSyntax);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

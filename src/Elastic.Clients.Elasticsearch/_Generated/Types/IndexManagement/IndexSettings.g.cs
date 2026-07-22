@@ -102,6 +102,7 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeries { get; set; }
 	public int? TopMetricsMaxSize { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.Translog? Translog { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassigned? Unassigned { get; set; }
 	public string? Uuid { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<bool, string>? VerifiedBeforeClose { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? Version { get; set; }
@@ -683,13 +684,13 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> TimeSeries()
 	{
-		Instance.TimeSeries = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor.Build(null);
+		Instance.TimeSeries = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> TimeSeries(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> TimeSeries(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument>>? action)
 	{
-		Instance.TimeSeries = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor.Build(action);
+		Instance.TimeSeries = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -714,6 +715,24 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Translog(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor>? action)
 	{
 		Instance.Translog = Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Unassigned(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassigned? value)
+	{
+		Instance.Unassigned = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Unassigned()
+	{
+		Instance.Unassigned = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassignedDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Unassigned(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassignedDescriptor>? action)
+	{
+		Instance.Unassigned = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassignedDescriptor.Build(action);
 		return this;
 	}
 
@@ -1365,6 +1384,12 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor TimeSeries<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<T>>? action)
+	{
+		Instance.TimeSeries = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<T>.Build(action);
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor TopMetricsMaxSize(int? value)
 	{
 		Instance.TopMetricsMaxSize = value;
@@ -1386,6 +1411,24 @@ public readonly partial struct IndexSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Translog(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor>? action)
 	{
 		Instance.Translog = Elastic.Clients.Elasticsearch.IndexManagement.TranslogDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Unassigned(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassigned? value)
+	{
+		Instance.Unassigned = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Unassigned()
+	{
+		Instance.Unassigned = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassignedDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Unassigned(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassignedDescriptor>? action)
+	{
+		Instance.Unassigned = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsUnassignedDescriptor.Build(action);
 		return this;
 	}
 

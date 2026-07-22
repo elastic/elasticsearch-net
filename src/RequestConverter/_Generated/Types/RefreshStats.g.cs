@@ -34,6 +34,12 @@ public partial class RefreshStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (ExternalTotalTime is not null)
+		{
+			initializer.Property("ExternalTotalTime");
+			ExternalTotalTime.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("ExternalTotalTimeInMillis");
 			writer.WriteValue(ExternalTotalTimeInMillis);

@@ -49,6 +49,11 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("InputField", (w) => { InputField.FormatCode(w); }, false);
 			}
 
+			if (OnScriptError is not null)
+			{
+				writer.WriteFluentCall("OnScriptError", (w) => { Elastic.Clients.Elasticsearch.Mapping.OnScriptErrorCodeFormatter.FormatCode(OnScriptError.Value, w); });
+			}
+
 			if (Script is not null)
 			{
 				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
@@ -100,6 +105,12 @@ public partial class RuntimeField : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("InputField");
 				InputField.FormatCode(writer);
+			}
+
+			if (OnScriptError is not null)
+			{
+				initializer.Property("OnScriptError");
+				Elastic.Clients.Elasticsearch.Mapping.OnScriptErrorCodeFormatter.FormatCode(OnScriptError.Value, writer);
 			}
 
 			if (Script is not null)

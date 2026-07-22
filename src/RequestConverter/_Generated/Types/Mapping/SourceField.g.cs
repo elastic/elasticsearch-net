@@ -29,16 +29,6 @@ public partial class SourceField : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			if (Compress is not null)
-			{
-				writer.WriteFluentCall("Compress", (w) => { w.WriteValue(Compress.Value); });
-			}
-
-			if (CompressThreshold is not null)
-			{
-				writer.WriteFluentCall("CompressThreshold", (w) => { w.WriteString(CompressThreshold); });
-			}
-
 			if (Enabled is not null)
 			{
 				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
@@ -62,18 +52,6 @@ public partial class SourceField : RequestConverter.ICodeFormattable
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.SourceField", false);
-			if (Compress is not null)
-			{
-				initializer.Property("Compress");
-				writer.WriteValue(Compress.Value);
-			}
-
-			if (CompressThreshold is not null)
-			{
-				initializer.Property("CompressThreshold");
-				writer.WriteString(CompressThreshold);
-			}
-
 			if (Enabled is not null)
 			{
 				initializer.Property("Enabled");

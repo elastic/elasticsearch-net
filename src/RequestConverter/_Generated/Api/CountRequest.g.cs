@@ -108,9 +108,19 @@ public partial class CountRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("QueryLuceneSyntax", (w) => { w.WriteString(QueryLuceneSyntax); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+			}
+
+			if (Stats is not null)
+			{
+				writer.WriteFluentParams("Stats", Stats, (w, item) => { w.WriteString(item); });
 			}
 
 			if (TerminateAfter is not null)
@@ -210,10 +220,22 @@ public partial class CountRequest : RequestConverter.ICodeFormattable
 				writer.WriteString(QueryLuceneSyntax);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
 				Routing.FormatCode(writer);
+			}
+
+			if (Stats is not null)
+			{
+				initializer.Property("Stats");
+				writer.WriteInlineList(Stats, (w, item) => { w.WriteString(item); });
 			}
 
 			if (TerminateAfter is not null)

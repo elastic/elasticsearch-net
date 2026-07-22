@@ -44,6 +44,8 @@ public sealed partial class SizeHttpHistogram
 	}
 
 	public required long Count { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Ge { get; set; }
 	public long? GeBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Lt { get; set; }
 	public long? LtBytes { get; set; }
 }

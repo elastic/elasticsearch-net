@@ -63,6 +63,12 @@ public partial class IndexingStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		{
+			initializer.Property("IndexFailedDueToVersionConflict");
+			writer.WriteValue(IndexFailedDueToVersionConflict);
+			writer.Write("L");
+		}
+
 		if (IndexTime is not null)
 		{
 			initializer.Property("IndexTime");

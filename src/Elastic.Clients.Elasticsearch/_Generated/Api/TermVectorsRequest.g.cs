@@ -32,6 +32,9 @@ public sealed partial class TermVectorsRequestParameters : Elastic.Transport.Req
 
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 }
 
 /// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
@@ -78,6 +81,9 @@ public sealed partial class TermVectorsRequest<TDocument> : Elastic.Clients.Elas
 
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#doc']/*"/>
 	public TDocument? Doc { get; set; }
@@ -171,6 +177,13 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
+		return this;
+	}
+
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

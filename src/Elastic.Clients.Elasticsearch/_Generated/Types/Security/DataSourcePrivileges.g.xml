@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.DataSourcePrivileges#names"><summary><para>
+A list of data source names or wildcard patterns to which the permissions in this entry apply.
+</para></summary></member>
+  <member key="security._types.DataSourcePrivileges#privileges"><summary><para>
+The data source privileges that owners of the role have for the specified data sources.
+</para></summary></member>
+</doc>

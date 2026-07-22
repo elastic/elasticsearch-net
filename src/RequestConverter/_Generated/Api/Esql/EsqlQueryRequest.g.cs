@@ -90,7 +90,7 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 
 			if (Params is not null)
 			{
-				writer.WriteFluentCall("Params", (w) => { if (Params.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>"); w.Write("[] "); w.WriteInlineList(Params.Value1, (w, item) => { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue"); w.Write("[] "); w.WriteInlineList(item, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.KeyValuePair<string,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>"); w.Write("[] "); w.WriteInlineList(Params.Value2, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<string,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>"); w.WriteString(item.Key); w.Write(", "); w.WriteInlineList(item.Value, (w, item) => { item.FormatCode(w); }); w.Write(")"); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("Params", (w) => { if (Params.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>"); w.Write("[] "); w.WriteInlineList(Params.Value1, (w, item) => { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue"); w.Write("[] "); w.WriteInlineList(item, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.KeyValuePair<string,Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>,Elastic.Clients.Elasticsearch.Esql.ClassifiedNamedParameter>>"); w.Write("[] "); w.WriteInlineList(Params.Value2, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<string,Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>,Elastic.Clients.Elasticsearch.Esql.ClassifiedNamedParameter>>"); w.WriteString(item.Key); w.Write(", "); if (item.Value.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue"); w.Write("[] "); w.WriteInlineList(item.Value.Value1, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } else { item.Value.Value2.FormatCode(w); } w.Write(")"); }, "{ ", " }", ", "); } });
 			}
 
 			if (Profile is not null)
@@ -105,6 +105,11 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 
 			{
 				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
+			}
+
+			if (Settings is not null)
+			{
+				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
 			}
 
 			if (TimeZone is not null)
@@ -182,9 +187,9 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 				else
 				{
 					writer.Write("new ");
-					writer.WriteTypeRef("System.Collections.Generic.KeyValuePair<string,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>");
+					writer.WriteTypeRef("System.Collections.Generic.KeyValuePair<string,Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>,Elastic.Clients.Elasticsearch.Esql.ClassifiedNamedParameter>>");
 					writer.Write("[] ");
-					writer.WriteInlineList(Params.Value2, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<string,System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>"); w.WriteString(item.Key); w.Write(", "); w.WriteInlineList(item.Value, (w, item) => { item.FormatCode(w); }); w.Write(")"); }, "{ ", " }", ", ");
+					writer.WriteInlineList(Params.Value2, (w, item) => { w.WriteArgsConstructorStart("System.Collections.Generic.KeyValuePair<string,Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>,Elastic.Clients.Elasticsearch.Esql.ClassifiedNamedParameter>>"); w.WriteString(item.Key); w.Write(", "); if (item.Value.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.FieldValue"); w.Write("[] "); w.WriteInlineList(item.Value.Value1, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } else { item.Value.Value2.FormatCode(w); } w.Write(")"); }, "{ ", " }", ", ");
 				}
 			}
 
@@ -203,6 +208,12 @@ public partial class EsqlQueryRequest : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Query");
 				writer.WriteString(Query);
+			}
+
+			if (Settings is not null)
+			{
+				initializer.Property("Settings");
+				Settings.FormatCode(writer);
 			}
 
 			if (TimeZone is not null)

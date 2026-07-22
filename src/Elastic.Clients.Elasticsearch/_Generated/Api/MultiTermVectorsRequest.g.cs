@@ -48,6 +48,9 @@ public sealed partial class MultiTermVectorsRequestParameters : Elastic.Transpor
 	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -111,6 +114,9 @@ public sealed partial class MultiTermVectorsRequest : Elastic.Clients.Elasticsea
 
 	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -216,6 +222,13 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
+		return this;
+	}
+
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -447,6 +460,13 @@ public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
+		return this;
+	}
+
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

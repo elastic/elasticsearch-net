@@ -25,18 +25,29 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class MappingStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingStats>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAverageFieldsPerSegment = System.Text.Json.JsonEncodedText.Encode("average_fields_per_segment"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalEstimatedOverhead = System.Text.Json.JsonEncodedText.Encode("total_estimated_overhead"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalEstimatedOverheadInBytes = System.Text.Json.JsonEncodedText.Encode("total_estimated_overhead_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSegmentFields = System.Text.Json.JsonEncodedText.Encode("total_segment_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSegments = System.Text.Json.JsonEncodedText.Encode("total_segments"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propAverageFieldsPerSegment = default;
 		LocalJsonValue<long> propTotalCount = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalEstimatedOverhead = default;
 		LocalJsonValue<long> propTotalEstimatedOverheadInBytes = default;
+		LocalJsonValue<long> propTotalSegmentFields = default;
+		LocalJsonValue<long> propTotalSegments = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAverageFieldsPerSegment.TryReadProperty(ref reader, options, PropAverageFieldsPerSegment, null))
+			{
+				continue;
+			}
+
 			if (propTotalCount.TryReadProperty(ref reader, options, PropTotalCount, null))
 			{
 				continue;
@@ -48,6 +59,16 @@ public sealed partial class MappingStatsConverter : System.Text.Json.Serializati
 			}
 
 			if (propTotalEstimatedOverheadInBytes.TryReadProperty(ref reader, options, PropTotalEstimatedOverheadInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalSegmentFields.TryReadProperty(ref reader, options, PropTotalSegmentFields, null))
+			{
+				continue;
+			}
+
+			if (propTotalSegments.TryReadProperty(ref reader, options, PropTotalSegments, null))
 			{
 				continue;
 			}
@@ -64,18 +85,24 @@ public sealed partial class MappingStatsConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.IndexManagement.MappingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			AverageFieldsPerSegment = propAverageFieldsPerSegment.Value,
 			TotalCount = propTotalCount.Value,
 			TotalEstimatedOverhead = propTotalEstimatedOverhead.Value,
-			TotalEstimatedOverheadInBytes = propTotalEstimatedOverheadInBytes.Value
+			TotalEstimatedOverheadInBytes = propTotalEstimatedOverheadInBytes.Value,
+			TotalSegmentFields = propTotalSegmentFields.Value,
+			TotalSegments = propTotalSegments.Value
 		};
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAverageFieldsPerSegment, value.AverageFieldsPerSegment, null, null);
 		writer.WriteProperty(options, PropTotalCount, value.TotalCount, null, null);
 		writer.WriteProperty(options, PropTotalEstimatedOverhead, value.TotalEstimatedOverhead, null, null);
 		writer.WriteProperty(options, PropTotalEstimatedOverheadInBytes, value.TotalEstimatedOverheadInBytes, null, null);
+		writer.WriteProperty(options, PropTotalSegmentFields, value.TotalSegmentFields, null, null);
+		writer.WriteProperty(options, PropTotalSegments, value.TotalSegments, null, null);
 		writer.WriteEndObject();
 	}
 }

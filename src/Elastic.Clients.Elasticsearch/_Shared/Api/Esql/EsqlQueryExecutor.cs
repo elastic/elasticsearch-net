@@ -203,7 +203,7 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 			request.RequestConfiguration = options.RequestConfiguration;
 	}
 
-	private static Union<ICollection<ICollection<FieldValue>>, ICollection<KeyValuePair<string, ICollection<FieldValue>>>>?
+	private static Union<ICollection<ICollection<FieldValue>>, ICollection<KeyValuePair<string, Union<ICollection<FieldValue>, ClassifiedNamedParameter>>>>?
 		MergeAndConvertParams(EsqlParameters? translated, Dictionary<string, FieldValue>? userParams)
 	{
 		var hasTranslated = translated is not null && translated.HasParameters;
@@ -226,14 +226,14 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 				merged[kvp.Key] = kvp.Value;
 		}
 
-		var namedParams = new List<KeyValuePair<string, ICollection<FieldValue>>>(merged.Count);
+		var namedParams = new List<KeyValuePair<string, Union<ICollection<FieldValue>, ClassifiedNamedParameter>>>(merged.Count);
 		foreach (var kvp in merged)
 		{
-			namedParams.Add(new KeyValuePair<string, ICollection<FieldValue>>(
-				kvp.Key, [kvp.Value]));
+			namedParams.Add(new KeyValuePair<string, Union<ICollection<FieldValue>, ClassifiedNamedParameter>>(
+				kvp.Key, new Union<ICollection<FieldValue>, ClassifiedNamedParameter>((ICollection<FieldValue>)[kvp.Value])));
 		}
 
-		return new Union<ICollection<ICollection<FieldValue>>, ICollection<KeyValuePair<string, ICollection<FieldValue>>>>(namedParams);
+		return new Union<ICollection<ICollection<FieldValue>>, ICollection<KeyValuePair<string, Union<ICollection<FieldValue>, ClassifiedNamedParameter>>>>(namedParams);
 
 		static FieldValue ConvertJsonElement(JsonElement element) =>
 			element.ValueKind switch

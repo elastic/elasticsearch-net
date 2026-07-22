@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.EsqlApproximationSettings#confidence_level"><summary><para>
+The confidence level of the computed confidence intervals.
+A null value disables computing confidence intervals.
+</para></summary></member>
+  <member key="esql._types.EsqlApproximationSettings#rows"><summary><para>
+The number of sampled rows used for approximating the query.
+It must be at least 10,000. A null value uses the system default.
+</para></summary></member>
+</doc>

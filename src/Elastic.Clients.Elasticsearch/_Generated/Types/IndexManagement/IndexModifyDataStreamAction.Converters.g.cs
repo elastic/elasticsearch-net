@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 public sealed partial class IndexModifyDataStreamActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction>
 {
 	private static readonly System.Text.Json.JsonEncodedText VariantAddBackingIndex = System.Text.Json.JsonEncodedText.Encode("add_backing_index");
+	private static readonly System.Text.Json.JsonEncodedText VariantDeleteBackingIndex = System.Text.Json.JsonEncodedText.Encode("delete_backing_index");
 	private static readonly System.Text.Json.JsonEncodedText VariantRemoveBackingIndex = System.Text.Json.JsonEncodedText.Encode("remove_backing_index");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -38,6 +39,14 @@ public sealed partial class IndexModifyDataStreamActionConverter : System.Text.J
 			if (reader.ValueTextEquals(VariantAddBackingIndex))
 			{
 				variantType = VariantAddBackingIndex.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDeleteBackingIndex))
+			{
+				variantType = VariantDeleteBackingIndex.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction>(options, null);
 				continue;
@@ -76,6 +85,9 @@ public sealed partial class IndexModifyDataStreamActionConverter : System.Text.J
 			case null:
 				break;
 			case "add_backing_index":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction)value.Variant, null, null);
+				break;
+			case "delete_backing_index":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction)value.Variant, null, null);
 				break;
 			case "remove_backing_index":

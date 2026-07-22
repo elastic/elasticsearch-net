@@ -36,7 +36,7 @@ public partial class GeoPointProperty : RequestConverter.ICodeFormattable
 
 			if (DocValues is not null)
 			{
-				writer.WriteFluentCall("DocValues", (w) => { w.WriteValue(DocValues.Value); });
+				writer.WriteFluentCall("DocValues", (w) => { if (DocValues.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteValue(DocValues.Value1); } else { DocValues.Value2.FormatCode(w); } });
 			}
 
 			if (Dynamic is not null)
@@ -121,7 +121,14 @@ public partial class GeoPointProperty : RequestConverter.ICodeFormattable
 			if (DocValues is not null)
 			{
 				initializer.Property("DocValues");
-				writer.WriteValue(DocValues.Value);
+				if (DocValues.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteValue(DocValues.Value1);
+				}
+				else
+				{
+					DocValues.Value2.FormatCode(writer);
+				}
 			}
 
 			if (Dynamic is not null)

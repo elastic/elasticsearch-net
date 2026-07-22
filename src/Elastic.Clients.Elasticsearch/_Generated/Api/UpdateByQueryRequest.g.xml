@@ -60,18 +60,6 @@ performs some preflight checks, launches the request, and returns a
 Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
 </para>
 <para>
-<strong>Waiting for active shards</strong>
-</para>
-<para>
-<c>wait_for_active_shards</c> controls how many copies of a shard must be active
-before proceeding with the request. See <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create#operation-create-wait_for_active_shards"><c>wait_for_active_shards</c></a>
-for details. <c>timeout</c> controls how long each write request waits for unavailable
-shards to become available. Both work exactly the way they work in the
-<a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk">Bulk API</a>. Update by query uses scrolled searches, so you can also
-specify the <c>scroll</c> parameter to control how long it keeps the search context
-alive, for example <c>?scroll=10m</c>. The default is 5 minutes.
-</para>
-<para>
 <strong>Throttling update requests</strong>
 </para>
 <para>
@@ -168,6 +156,11 @@ Update performance scales linearly across available resources with the number of
 Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
 Refer to the linked documentation for examples of how to update documents using the <c>_update_by_query</c> API:
 </para></summary></member>
+  <member key="_global.update_by_query.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.update_by_query.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.
 If <c>false</c>, the request returns an error (1) if any wildcard expression
@@ -249,6 +242,7 @@ It can be either <c>-1</c> to turn off throttling or any decimal number like <c>
 </para></summary></member>
   <member key="_global.update_by_query.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.update_by_query.Request#script"><summary><para>
 The script to run to update the document source or metadata when updating.
@@ -306,6 +300,7 @@ The number of shard copies that must be active before proceeding with the operat
 Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
 The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
 Both work exactly the way they work in the bulk API.
+Update by query uses scrolled searches, so you can also specify the <c>scroll</c> parameter to control how long it keeps the search context alive, for example <c>?scroll=10m</c>.
 </para></summary></member>
   <member key="_global.update_by_query.Request#wait_for_completion"><summary><para>
 If <c>true</c>, the request blocks until the operation is complete.

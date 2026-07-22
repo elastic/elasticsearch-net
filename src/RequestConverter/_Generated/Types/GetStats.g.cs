@@ -51,6 +51,12 @@ public partial class GetStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (GetTime is not null)
+		{
+			initializer.Property("GetTime");
+			GetTime.FormatCode(writer);
+		}
+
 		if (MissingTime is not null)
 		{
 			initializer.Property("MissingTime");
@@ -66,12 +72,6 @@ public partial class GetStats : RequestConverter.ICodeFormattable
 			initializer.Property("MissingTotal");
 			writer.WriteValue(MissingTotal);
 			writer.Write("L");
-		}
-
-		if (Time is not null)
-		{
-			initializer.Property("Time");
-			Time.FormatCode(writer);
 		}
 
 		{

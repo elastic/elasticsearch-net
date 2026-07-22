@@ -18,6 +18,11 @@ The operation is broadcast across all shards.
 For each shard ID group, a replica is chosen and the search is run against it.
 This means that replicas increase the scalability of the count.
 </para></summary></member>
+  <member key="_global.count.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.count.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.
 If <c>false</c>, the request returns an error (1) if any wildcard expression
@@ -90,6 +95,10 @@ with the <c>q</c> query string parameter.
 </para></summary></member>
   <member key="_global.count.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
+</para></summary></member>
+  <member key="_global.count.Request#stats"><summary><para>
+Specific <c>tag</c> of the request for logging and statistical purposes.
 </para></summary></member>
   <member key="_global.count.Request#terminate_after"><summary><para>
 The maximum number of documents to collect for each shard.

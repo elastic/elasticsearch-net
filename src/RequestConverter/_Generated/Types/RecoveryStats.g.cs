@@ -34,9 +34,37 @@ public partial class RecoveryStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (CurrentAsSourceQueued is not null)
+		{
+			initializer.Property("CurrentAsSourceQueued");
+			writer.WriteValue(CurrentAsSourceQueued.Value);
+			writer.Write("L");
+		}
+
 		{
 			initializer.Property("CurrentAsTarget");
 			writer.WriteValue(CurrentAsTarget);
+			writer.Write("L");
+		}
+
+		if (CurrentAsTargetQueued is not null)
+		{
+			initializer.Property("CurrentAsTargetQueued");
+			writer.WriteValue(CurrentAsTargetQueued.Value);
+			writer.Write("L");
+		}
+
+		if (CurrentFromStore is not null)
+		{
+			initializer.Property("CurrentFromStore");
+			writer.WriteValue(CurrentFromStore.Value);
+			writer.Write("L");
+		}
+
+		if (CurrentFromStoreQueued is not null)
+		{
+			initializer.Property("CurrentFromStoreQueued");
+			writer.WriteValue(CurrentFromStoreQueued.Value);
 			writer.Write("L");
 		}
 

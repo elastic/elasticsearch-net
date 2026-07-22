@@ -39,6 +39,12 @@ public partial class FieldCapability : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Indices, (w, item) => { w.WriteString(item); });
 		}
 
+		if (Inference is not null)
+		{
+			initializer.Property("Inference");
+			writer.WriteValue(Inference.Value);
+		}
+
 		if (Meta is not null)
 		{
 			initializer.Property("Meta");
@@ -74,6 +80,12 @@ public partial class FieldCapability : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("NonDimensionIndices");
 			writer.WriteInlineList(NonDimensionIndices, (w, item) => { w.WriteString(item); });
+		}
+
+		if (NonInferenceIndices is not null)
+		{
+			initializer.Property("NonInferenceIndices");
+			writer.WriteInlineList(NonInferenceIndices, (w, item) => { w.WriteString(item); });
 		}
 
 		if (NonSearchableIndices is not null)

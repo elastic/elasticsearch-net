@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.delete_data_source.Request"><summary><para>
+Delete ES|QL data sources.
+</para>
+<para>
+Deletes one or more data sources used in ES|QL data federation.
+Fails with <c>409</c> if any dataset references one of the named data sources;
+delete the dependent datasets first.
+</para></summary></member>
+  <member key="esql.delete_data_source.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="esql.delete_data_source.Request#name"><summary><para>
+A comma-separated list of data source names to delete.
+</para></summary></member>
+  <member key="esql.delete_data_source.Request#timeout"><summary><para>
+The time to wait for the request to be completed.
+</para></summary></member>
+</doc>

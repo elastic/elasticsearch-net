@@ -45,11 +45,11 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 			}
 
 			{
-				writer.WriteFluentParams("Input", Input, (w, item) => { w.WriteString(item); });
+				writer.WriteFluentCall("Input", (w) => { if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.RerankInputObject"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
 			}
 
 			{
-				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
+				writer.WriteFluentCall("Query", (w) => { if (Query.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Query.Value1); } else { Query.Value2.FormatCode(w); } });
 			}
 
 			if (ReturnDocuments is not null)
@@ -83,12 +83,32 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 
 			{
 				initializer.Property("Input");
-				writer.WriteInlineList(Input, (w, item) => { w.WriteString(item); });
+				if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("string");
+					writer.Write("[] ");
+					writer.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", ");
+				}
+				else
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.RerankInputObject");
+					writer.Write("[] ");
+					writer.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
+				}
 			}
 
 			{
 				initializer.Property("Query");
-				writer.WriteString(Query);
+				if (Query.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.WriteString(Query.Value1);
+				}
+				else
+				{
+					Query.Value2.FormatCode(writer);
+				}
 			}
 
 			if (ReturnDocuments is not null)

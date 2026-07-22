@@ -29,25 +29,29 @@ public partial class TextIndexPrefixes : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
+			if (MaxChars is not null)
 			{
-				writer.WriteFluentCall("MaxChars", (w) => { w.WriteValue(MaxChars); });
+				writer.WriteFluentCall("MaxChars", (w) => { w.WriteValue(MaxChars.Value); });
 			}
 
+			if (MinChars is not null)
 			{
-				writer.WriteFluentCall("MinChars", (w) => { w.WriteValue(MinChars); });
+				writer.WriteFluentCall("MinChars", (w) => { w.WriteValue(MinChars.Value); });
 			}
 		}
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes", false);
+			if (MaxChars is not null)
 			{
 				initializer.Property("MaxChars");
-				writer.WriteValue(MaxChars);
+				writer.WriteValue(MaxChars.Value);
 			}
 
+			if (MinChars is not null)
 			{
 				initializer.Property("MinChars");
-				writer.WriteValue(MinChars);
+				writer.WriteValue(MinChars.Value);
 			}
 
 			initializer.Dispose();

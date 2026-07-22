@@ -46,6 +46,17 @@ public partial class FlushStats : RequestConverter.ICodeFormattable
 			TotalTime.FormatCode(writer);
 		}
 
+		if (TotalTimeExcludingWaiting is not null)
+		{
+			initializer.Property("TotalTimeExcludingWaiting");
+			TotalTimeExcludingWaiting.FormatCode(writer);
+		}
+
+		{
+			initializer.Property("TotalTimeExcludingWaitingOnLockInMillis");
+			writer.WriteValue(TotalTimeExcludingWaitingOnLockInMillis);
+		}
+
 		{
 			initializer.Property("TotalTimeInMillis");
 			writer.WriteValue(TotalTimeInMillis);

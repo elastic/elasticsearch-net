@@ -26,14 +26,18 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 public sealed partial class TimeHttpHistogramConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGe = System.Text.Json.JsonEncodedText.Encode("ge"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGeMillis = System.Text.Json.JsonEncodedText.Encode("ge_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLtMillis = System.Text.Json.JsonEncodedText.Encode("lt_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propGe = default;
 		LocalJsonValue<long?> propGeMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propLt = default;
 		LocalJsonValue<long?> propLtMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -42,7 +46,17 @@ public sealed partial class TimeHttpHistogramConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propGe.TryReadProperty(ref reader, options, PropGe, null))
+			{
+				continue;
+			}
+
 			if (propGeMillis.TryReadProperty(ref reader, options, PropGeMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propLt.TryReadProperty(ref reader, options, PropLt, null))
 			{
 				continue;
 			}
@@ -65,7 +79,9 @@ public sealed partial class TimeHttpHistogramConverter : System.Text.Json.Serial
 		return new Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Count = propCount.Value,
+			Ge = propGe.Value,
 			GeMillis = propGeMillis.Value,
+			Lt = propLt.Value,
 			LtMillis = propLtMillis.Value
 		};
 	}
@@ -74,7 +90,9 @@ public sealed partial class TimeHttpHistogramConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropGe, value.Ge, null, null);
 		writer.WriteProperty(options, PropGeMillis, value.GeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLt, value.Lt, null, null);
 		writer.WriteProperty(options, PropLtMillis, value.LtMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}

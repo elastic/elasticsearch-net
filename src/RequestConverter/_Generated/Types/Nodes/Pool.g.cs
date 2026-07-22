@@ -28,11 +28,23 @@ public partial class Pool : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Pool", false);
+		if (Max is not null)
+		{
+			initializer.Property("Max");
+			writer.WriteString(Max);
+		}
+
 		if (MaxInBytes is not null)
 		{
 			initializer.Property("MaxInBytes");
 			writer.WriteValue(MaxInBytes.Value);
 			writer.Write("L");
+		}
+
+		if (PeakMax is not null)
+		{
+			initializer.Property("PeakMax");
+			writer.WriteString(PeakMax);
 		}
 
 		if (PeakMaxInBytes is not null)
@@ -42,11 +54,23 @@ public partial class Pool : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (PeakUsed is not null)
+		{
+			initializer.Property("PeakUsed");
+			writer.WriteString(PeakUsed);
+		}
+
 		if (PeakUsedInBytes is not null)
 		{
 			initializer.Property("PeakUsedInBytes");
 			writer.WriteValue(PeakUsedInBytes.Value);
 			writer.Write("L");
+		}
+
+		if (Used is not null)
+		{
+			initializer.Property("Used");
+			writer.WriteString(Used);
 		}
 
 		if (UsedInBytes is not null)

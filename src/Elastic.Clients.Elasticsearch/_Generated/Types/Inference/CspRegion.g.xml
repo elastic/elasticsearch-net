@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CspRegion"><summary><para>
+A cloud service provider region.
+</para></summary></member>
+  <member key="inference._types.CspRegion#csp"><summary><para>
+The cloud service provider, for example <c>aws</c>, <c>gcp</c>, or <c>azure</c>.
+</para></summary></member>
+  <member key="inference._types.CspRegion#region"><summary><para>
+The region of the cloud service provider, for example <c>us-east-1</c>.
+</para></summary></member>
+</doc>

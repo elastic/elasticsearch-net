@@ -46,6 +46,12 @@ public partial class IngestStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (IngestedAsFirstPipeline is not null)
+		{
+			initializer.Property("IngestedAsFirstPipeline");
+			IngestedAsFirstPipeline.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("IngestedAsFirstPipelineInBytes");
 			writer.WriteValue(IngestedAsFirstPipelineInBytes);
@@ -57,10 +63,22 @@ public partial class IngestStats : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Processors, (w, item) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor"); w.Write(">()"); w.WriteBlockList(item, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); }); });
 		}
 
+		if (ProducedAsFirstPipeline is not null)
+		{
+			initializer.Property("ProducedAsFirstPipeline");
+			ProducedAsFirstPipeline.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("ProducedAsFirstPipelineInBytes");
 			writer.WriteValue(ProducedAsFirstPipelineInBytes);
 			writer.Write("L");
+		}
+
+		if (Time is not null)
+		{
+			initializer.Property("Time");
+			Time.FormatCode(writer);
 		}
 
 		{

@@ -48,6 +48,9 @@ public sealed partial class UpdateRequestParameters : Elastic.Transport.RequestP
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#retry_on_conflict']/*"/>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -118,6 +121,9 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : Elastic
 
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#retry_on_conflict']/*"/>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
+
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -242,6 +248,13 @@ public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocume
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> RetryOnConflict(int? value)
 	{
 		Instance.RetryOnConflict = value;
+		return this;
+	}
+
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

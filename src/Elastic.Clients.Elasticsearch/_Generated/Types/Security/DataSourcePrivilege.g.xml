@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.DataSourcePrivilege#create"><summary><para>
+Grants privilege to create a data source with a matching name.
+</para></summary></member>
+  <member key="security._types.DataSourcePrivilege#delete"><summary><para>
+Grants privilege to delete a data source with a matching name.
+</para></summary></member>
+  <member key="security._types.DataSourcePrivilege#manage"><summary><para>
+Grants all data source privileges, including <c>create</c>, <c>delete</c>, <c>read</c>, and <c>read_metadata</c>.
+</para></summary></member>
+  <member key="security._types.DataSourcePrivilege#read"><summary><para>
+Grants privilege to attach a dataset to a data source with a matching name.
+</para></summary></member>
+  <member key="security._types.DataSourcePrivilege#read_metadata"><summary><para>
+Grants privilege to read a data source's metadata.
+</para></summary></member>
+</doc>

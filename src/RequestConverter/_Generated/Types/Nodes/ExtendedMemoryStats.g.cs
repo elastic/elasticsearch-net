@@ -28,11 +28,23 @@ public partial class ExtendedMemoryStats : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.ExtendedMemoryStats", false);
+		if (AdjustedTotal is not null)
+		{
+			initializer.Property("AdjustedTotal");
+			writer.WriteString(AdjustedTotal);
+		}
+
 		if (AdjustedTotalInBytes is not null)
 		{
 			initializer.Property("AdjustedTotalInBytes");
 			writer.WriteValue(AdjustedTotalInBytes.Value);
 			writer.Write("L");
+		}
+
+		if (Free is not null)
+		{
+			initializer.Property("Free");
+			writer.WriteString(Free);
 		}
 
 		if (FreeInBytes is not null)
@@ -74,6 +86,12 @@ public partial class ExtendedMemoryStats : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (Total is not null)
+		{
+			initializer.Property("Total");
+			writer.WriteString(Total);
+		}
+
 		if (TotalInBytes is not null)
 		{
 			initializer.Property("TotalInBytes");
@@ -92,6 +110,12 @@ public partial class ExtendedMemoryStats : RequestConverter.ICodeFormattable
 			initializer.Property("TotalVirtualInBytes");
 			writer.WriteValue(TotalVirtualInBytes.Value);
 			writer.Write("L");
+		}
+
+		if (Used is not null)
+		{
+			initializer.Property("Used");
+			writer.WriteString(Used);
 		}
 
 		if (UsedInBytes is not null)

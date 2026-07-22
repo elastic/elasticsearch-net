@@ -70,6 +70,11 @@ By default, when requesting term vectors of artificial documents, a shard to get
 Use <c>routing</c> only to hit a particular shard.
 Refer to the linked documentation for detailed examples of how to use this API.
 </para></summary></member>
+  <member key="_global.termvectors.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.termvectors.Request#doc"><summary><para>
 An artificial document (a document not present in the index) for which you want to retrieve term vectors.
 </para></summary></member>

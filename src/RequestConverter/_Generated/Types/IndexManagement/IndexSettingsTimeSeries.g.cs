@@ -38,6 +38,11 @@ public partial class IndexSettingsTimeSeries : RequestConverter.ICodeFormattable
 			{
 				writer.WriteFluentCall("StartTime", (w) => { w.WriteValue(StartTime.Value); });
 			}
+
+			if (TemporalityField is not null)
+			{
+				writer.WriteFluentCall("TemporalityField", (w) => { TemporalityField.FormatCode(w); }, false);
+			}
 		}
 		else
 		{
@@ -52,6 +57,12 @@ public partial class IndexSettingsTimeSeries : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("StartTime");
 				writer.WriteValue(StartTime.Value);
+			}
+
+			if (TemporalityField is not null)
+			{
+				initializer.Property("TemporalityField");
+				TemporalityField.FormatCode(writer);
 			}
 
 			initializer.Dispose();

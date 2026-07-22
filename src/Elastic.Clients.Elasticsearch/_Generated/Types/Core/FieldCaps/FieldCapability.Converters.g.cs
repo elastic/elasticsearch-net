@@ -27,11 +27,13 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAggregatable = System.Text.Json.JsonEncodedText.Encode("aggregatable"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInference = System.Text.Json.JsonEncodedText.Encode("inference"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMetadataField = System.Text.Json.JsonEncodedText.Encode("metadata_field"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMetricConflictsIndices = System.Text.Json.JsonEncodedText.Encode("metric_conflicts_indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNonAggregatableIndices = System.Text.Json.JsonEncodedText.Encode("non_aggregatable_indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNonDimensionIndices = System.Text.Json.JsonEncodedText.Encode("non_dimension_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonInferenceIndices = System.Text.Json.JsonEncodedText.Encode("non_inference_indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNonSearchableIndices = System.Text.Json.JsonEncodedText.Encode("non_searchable_indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearchable = System.Text.Json.JsonEncodedText.Encode("searchable"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension"u8);
@@ -43,11 +45,13 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool> propAggregatable = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIndices = default;
+		LocalJsonValue<bool?> propInference = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
 		LocalJsonValue<bool?> propMetadataField = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propMetricConflictsIndices = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonAggregatableIndices = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propNonDimensionIndices = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonInferenceIndices = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonSearchableIndices = default;
 		LocalJsonValue<bool> propSearchable = default;
 		LocalJsonValue<bool?> propTimeSeriesDimension = default;
@@ -61,6 +65,11 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 			}
 
 			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propInference.TryReadProperty(ref reader, options, PropInference, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -86,6 +95,11 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 			}
 
 			if (propNonDimensionIndices.TryReadProperty(ref reader, options, PropNonDimensionIndices, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propNonInferenceIndices.TryReadProperty(ref reader, options, PropNonInferenceIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -129,11 +143,13 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 		{
 			Aggregatable = propAggregatable.Value,
 			Indices = propIndices.Value,
+			Inference = propInference.Value,
 			Meta = propMeta.Value,
 			MetadataField = propMetadataField.Value,
 			MetricConflictsIndices = propMetricConflictsIndices.Value,
 			NonAggregatableIndices = propNonAggregatableIndices.Value,
 			NonDimensionIndices = propNonDimensionIndices.Value,
+			NonInferenceIndices = propNonInferenceIndices.Value,
 			NonSearchableIndices = propNonSearchableIndices.Value,
 			Searchable = propSearchable.Value,
 			TimeSeriesDimension = propTimeSeriesDimension.Value,
@@ -147,11 +163,13 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAggregatable, value.Aggregatable, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropInference, value.Inference, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropMetadataField, value.MetadataField, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMetricConflictsIndices, value.MetricConflictsIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropNonAggregatableIndices, value.NonAggregatableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropNonDimensionIndices, value.NonDimensionIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonInferenceIndices, value.NonInferenceIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropNonSearchableIndices, value.NonSearchableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropSearchable, value.Searchable, null, null);
 		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));

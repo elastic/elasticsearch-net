@@ -27,6 +27,8 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.update.Request']/*"/>
 public sealed partial class UpdateInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#timeout']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request']/*"/>
@@ -81,6 +83,9 @@ public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsear
 
 	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
+
+	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#timeout']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public required Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
 }
 
@@ -130,6 +135,13 @@ public readonly partial struct UpdateInferenceRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
 		Instance.TaskType = value;
+		return this;
+	}
+
+	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#timeout']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
 		return this;
 	}
 

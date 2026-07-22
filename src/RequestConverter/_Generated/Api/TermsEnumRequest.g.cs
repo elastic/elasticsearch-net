@@ -69,6 +69,11 @@ public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("IndexFilter", (w) => { IndexFilter.FormatCode(w); }, (w) => { IndexFilter.FormatCode(w); });
 			}
 
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
+			}
+
 			if (SearchAfter is not null)
 			{
 				writer.WriteFluentCall("SearchAfter", (w) => { w.WriteString(SearchAfter); });
@@ -112,6 +117,12 @@ public partial class TermsEnumRequest : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("IndexFilter");
 				IndexFilter.FormatCode(writer);
+			}
+
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
 			}
 
 			if (SearchAfter is not null)

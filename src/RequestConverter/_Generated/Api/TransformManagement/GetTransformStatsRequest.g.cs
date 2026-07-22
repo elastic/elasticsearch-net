@@ -44,6 +44,11 @@ public partial class GetTransformStatsRequest : RequestConverter.ICodeFormattabl
 				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 			}
 
+			if (Basic is not null)
+			{
+				writer.WriteFluentCall("Basic", (w) => { w.WriteValue(Basic.Value); });
+			}
+
 			if (From is not null)
 			{
 				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); w.Write("L"); });
@@ -71,6 +76,12 @@ public partial class GetTransformStatsRequest : RequestConverter.ICodeFormattabl
 			{
 				initializer.Property("AllowNoMatch");
 				writer.WriteValue(AllowNoMatch.Value);
+			}
+
+			if (Basic is not null)
+			{
+				initializer.Property("Basic");
+				writer.WriteValue(Basic.Value);
 			}
 
 			if (From is not null)

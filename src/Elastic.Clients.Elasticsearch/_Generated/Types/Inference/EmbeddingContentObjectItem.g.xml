@@ -9,6 +9,7 @@ If not specified, this will default to <c>text</c> for the <c>text</c> type and 
 </para></summary></member>
   <member key="inference._types.EmbeddingContentObjectItem#type"><summary><para>
 The type of input to embed. Not all models support all input types.
+The <c>audio</c>, <c>video</c>, and <c>pdf</c> types are available in Elasticsearch 9.5.0 and later.
 </para></summary></member>
   <member key="inference._types.EmbeddingContentObjectItem#value"><summary><para>
 The value of the input to embed. For images, this must be a base64-encoded data URI, i.e. "data:content/type;base64,..."

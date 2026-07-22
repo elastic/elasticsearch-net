@@ -39,6 +39,9 @@ public sealed partial class GetRequestParameters : Elastic.Transport.RequestPara
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
+	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -109,6 +112,9 @@ public sealed partial class GetRequest : Elastic.Clients.Elasticsearch.Requests.
 
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -200,6 +206,13 @@ public readonly partial struct GetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.GetRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -435,6 +448,13 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

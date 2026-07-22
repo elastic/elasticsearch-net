@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.RepositorySnapshotStats#shard_snapshots_completed"><summary><para>
+The number of shard snapshots completed for this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#shard_snapshots_in_progress"><summary><para>
+The number of shard snapshots currently in progress for this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#shard_snapshots_started"><summary><para>
+The number of shard snapshots started for this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_read_throttled_time"><summary><para>
+The cumulative time spent throttling read operations for this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_read_throttled_time_nanos"><summary><para>
+The cumulative time, in nanoseconds, spent throttling read operations for this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_read_time"><summary><para>
+The cumulative time spent reading blobs while uploading to this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_read_time_in_millis"><summary><para>
+The cumulative time, in milliseconds, spent reading blobs while uploading to this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_upload_time"><summary><para>
+The cumulative time spent uploading blobs to this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_upload_time_in_millis"><summary><para>
+The cumulative time, in milliseconds, spent uploading blobs to this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_write_throttled_time"><summary><para>
+The cumulative time spent throttling write operations for this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#total_write_throttled_time_nanos"><summary><para>
+The cumulative time, in nanoseconds, spent throttling write operations for this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#uploaded_blobs"><summary><para>
+The number of blobs uploaded to this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#uploaded_size"><summary><para>
+The cumulative size of the blobs uploaded to this repository.
+</para></summary></member>
+  <member key="nodes._types.RepositorySnapshotStats#uploaded_size_in_bytes"><summary><para>
+The cumulative size, in bytes, of the blobs uploaded to this repository.
+</para></summary></member>
+</doc>

@@ -46,6 +46,12 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 			Completion.FormatCode(writer);
 		}
 
+		if (DenseVector is not null)
+		{
+			initializer.Property("DenseVector");
+			DenseVector.FormatCode(writer);
+		}
+
 		if (Docs is not null)
 		{
 			initializer.Property("Docs");
@@ -79,7 +85,14 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 		if (Indices is not null)
 		{
 			initializer.Property("Indices");
-			Indices.FormatCode(writer);
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
+			writer.Write(", ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ShardStats");
+			writer.Write(">()");
+			writer.WriteBlockList(Indices, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (Mappings is not null)
@@ -171,6 +184,12 @@ public partial class ShardStats : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("ShardStats2");
 			ShardStats2.FormatCode(writer);
+		}
+
+		if (SparseVector is not null)
+		{
+			initializer.Property("SparseVector");
+			SparseVector.FormatCode(writer);
 		}
 
 		if (Store is not null)

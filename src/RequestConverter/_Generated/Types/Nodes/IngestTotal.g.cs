@@ -46,6 +46,12 @@ public partial class IngestTotal : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (Time is not null)
+		{
+			initializer.Property("Time");
+			Time.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("TimeInMillis");
 			writer.WriteValue(TimeInMillis);

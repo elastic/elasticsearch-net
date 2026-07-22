@@ -9,6 +9,9 @@ Total number of documents currently being ingested.
   <member key="nodes._types.IngestTotal#failed"><summary><para>
 Total number of failed ingest operations during the lifetime of this node.
 </para></summary></member>
+  <member key="nodes._types.IngestTotal#time"><summary><para>
+Total time spent preprocessing ingest documents during the lifetime of this node.
+</para></summary></member>
   <member key="nodes._types.IngestTotal#time_in_millis"><summary><para>
 Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
 </para></summary></member>

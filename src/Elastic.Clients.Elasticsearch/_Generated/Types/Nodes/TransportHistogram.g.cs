@@ -40,8 +40,14 @@ public sealed partial class TransportHistogram
 	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#count']/*"/>
 	public long? Count { get; set; }
 
+	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#ge']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? Ge { get; set; }
+
 	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#ge_millis']/*"/>
 	public long? GeMillis { get; set; }
+
+	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#lt']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? Lt { get; set; }
 
 	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#lt_millis']/*"/>
 	public long? LtMillis { get; set; }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Cpu#available_processors"><summary><para>
+The number of processors available to the Java virtual machine.
+</para></summary></member>
+</doc>

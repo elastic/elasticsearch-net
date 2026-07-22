@@ -6,6 +6,11 @@ Validate a query.
 <para>
 Validates a query without running it.
 </para></summary></member>
+  <member key="indices.validate_query.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="indices.validate_query.Request#all_shards"><summary><para>
 If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
 </para></summary></member>
@@ -60,5 +65,9 @@ Query in the Lucene query string syntax.
 </para></summary></member>
   <member key="indices.validate_query.Request#rewrite"><summary><para>
 If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
+</para></summary></member>
+  <member key="indices.validate_query.Request#routing"><summary><para>
+A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
 </doc>

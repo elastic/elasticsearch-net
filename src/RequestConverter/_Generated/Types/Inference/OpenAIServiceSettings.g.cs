@@ -29,8 +29,19 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
+			if (ApiKey is not null)
 			{
 				writer.WriteFluentCall("ApiKey", (w) => { w.WriteString(ApiKey); });
+			}
+
+			if (ClientId is not null)
+			{
+				writer.WriteFluentCall("ClientId", (w) => { w.WriteString(ClientId); });
+			}
+
+			if (ClientSecret is not null)
+			{
+				writer.WriteFluentCall("ClientSecret", (w) => { w.WriteString(ClientSecret); });
 			}
 
 			if (Dimensions is not null)
@@ -52,9 +63,19 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("RateLimit", (w) => { RateLimit.FormatCode(w); });
 			}
 
+			if (Scopes is not null)
+			{
+				writer.WriteFluentParams("Scopes", Scopes, (w, item) => { w.WriteString(item); });
+			}
+
 			if (Similarity is not null)
 			{
 				writer.WriteFluentCall("Similarity", (w) => { Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, w); });
+			}
+
+			if (TokenUrl is not null)
+			{
+				writer.WriteFluentCall("TokenUrl", (w) => { w.WriteString(TokenUrl); });
 			}
 
 			if (Url is not null)
@@ -65,9 +86,22 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings", false);
+			if (ApiKey is not null)
 			{
 				initializer.Property("ApiKey");
 				writer.WriteString(ApiKey);
+			}
+
+			if (ClientId is not null)
+			{
+				initializer.Property("ClientId");
+				writer.WriteString(ClientId);
+			}
+
+			if (ClientSecret is not null)
+			{
+				initializer.Property("ClientSecret");
+				writer.WriteString(ClientSecret);
 			}
 
 			if (Dimensions is not null)
@@ -93,10 +127,22 @@ public partial class OpenAIServiceSettings : RequestConverter.ICodeFormattable
 				RateLimit.FormatCode(writer);
 			}
 
+			if (Scopes is not null)
+			{
+				initializer.Property("Scopes");
+				writer.WriteInlineList(Scopes, (w, item) => { w.WriteString(item); });
+			}
+
 			if (Similarity is not null)
 			{
 				initializer.Property("Similarity");
 				Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityTypeCodeFormatter.FormatCode(Similarity.Value, writer);
+			}
+
+			if (TokenUrl is not null)
+			{
+				initializer.Property("TokenUrl");
+				writer.WriteString(TokenUrl);
 			}
 
 			if (Url is not null)

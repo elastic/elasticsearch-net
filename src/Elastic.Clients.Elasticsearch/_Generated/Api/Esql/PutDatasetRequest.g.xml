@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.put_dataset.Request"><summary><para>
+Create or update an ES|QL dataset.
+</para>
+<para>
+Creates or replaces a dataset that references a data source in ES|QL data federation.
+Dataset names participate in the index namespace and must follow index or alias naming rules.
+Returns <c>404</c> if the referenced data source does not exist.
+</para></summary></member>
+  <member key="esql.put_dataset.Request#data_source"><summary><para>
+The name of the referenced data source. The data source must already exist.
+</para></summary></member>
+  <member key="esql.put_dataset.Request#description"><summary><para>
+A free-text description of the dataset.
+</para></summary></member>
+  <member key="esql.put_dataset.Request#mappings"><summary><para>
+User-declared mapping on the dataset definition
+</para></summary></member>
+  <member key="esql.put_dataset.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="esql.put_dataset.Request#name"><summary><para>
+The dataset name to create or update.
+</para></summary></member>
+  <member key="esql.put_dataset.Request#resource"><summary><para>
+The URI that identifies the data to read, resolved against the referenced data source.
+It can include glob patterns. For example, a recursive pattern can match
+all Parquet files under the <c>s3://logs-bucket/access</c> prefix.
+</para></summary></member>
+  <member key="esql.put_dataset.Request#settings"><summary><para>
+Format and parsing-specific settings that configure how the resource is read.
+Common keys include <c>format</c>, which explicitly selects a registered format, and
+<c>partition_detection</c>, which accepts <c>auto</c>, <c>hive</c>, <c>template</c>, or <c>none</c>. Additional
+keys depend on the format reader. Compression can be inferred from the resource URI.
+</para></summary></member>
+  <member key="esql.put_dataset.Request#timeout"><summary><para>
+The time to wait for the request to be completed.
+</para></summary></member>
+</doc>

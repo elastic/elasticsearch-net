@@ -38,6 +38,69 @@ public sealed partial class IndexSettingsTimeSeries
 
 	public System.DateTimeOffset? EndTime { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
+
+	/// <include file="IndexSettingsTimeSeries.g.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries#temporality_field']/*"/>
+	public Elastic.Clients.Elasticsearch.Field? TemporalityField { get; set; }
+}
+
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries']/*"/>
+public readonly partial struct IndexSettingsTimeSeriesDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsTimeSeriesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexSettingsTimeSeriesDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument> EndTime(System.DateTimeOffset? value)
+	{
+		Instance.EndTime = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument> StartTime(System.DateTimeOffset? value)
+	{
+		Instance.StartTime = value;
+		return this;
+	}
+
+	/// <include file="IndexSettingsTimeSeries.g.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries#temporality_field']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument> TemporalityField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.TemporalityField = value;
+		return this;
+	}
+
+	/// <include file="IndexSettingsTimeSeries.g.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries#temporality_field']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument> TemporalityField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
+	{
+		Instance.TemporalityField = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries']/*"/>
@@ -69,6 +132,20 @@ public readonly partial struct IndexSettingsTimeSeriesDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor StartTime(System.DateTimeOffset? value)
 	{
 		Instance.StartTime = value;
+		return this;
+	}
+
+	/// <include file="IndexSettingsTimeSeries.g.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries#temporality_field']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor TemporalityField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.TemporalityField = value;
+		return this;
+	}
+
+	/// <include file="IndexSettingsTimeSeries.g.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries#temporality_field']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeriesDescriptor TemporalityField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.TemporalityField = value;
 		return this;
 	}
 

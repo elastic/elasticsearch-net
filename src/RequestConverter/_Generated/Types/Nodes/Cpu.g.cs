@@ -28,6 +28,12 @@ public partial class Cpu : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Nodes.Cpu", false);
+		if (AvailableProcessors is not null)
+		{
+			initializer.Property("AvailableProcessors");
+			writer.WriteValue(AvailableProcessors.Value);
+		}
+
 		if (LoadAverage is not null)
 		{
 			initializer.Property("LoadAverage");

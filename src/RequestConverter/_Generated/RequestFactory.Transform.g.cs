@@ -199,6 +199,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "basic":
+						{
+							if (parameter.Value is string value)
+								request.Basic = bool.Parse(value);
+							continue;
+						}
+
 					case "from":
 						{
 							if (parameter.Value is string value)

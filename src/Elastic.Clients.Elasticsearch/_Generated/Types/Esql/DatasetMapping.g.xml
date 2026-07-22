@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.DatasetMapping"><summary><para>
+A user-declared mapping (the <c>mappings</c> block) attached to a dataset.
+It is entirely optional: a dataset with no declared mapping relies on inference.
+</para></summary></member>
+  <member key="esql._types.DatasetMapping#_id"><summary><para>
+The <c>_id</c> meta-field configuration, sourcing the document identity from a column.
+</para></summary></member>
+  <member key="esql._types.DatasetMapping#dynamic"><summary><para>
+The policy for columns that are not declared in <c>properties</c>.
+<c>true</c> (the default) infers undeclared columns and overlays the declarations; <c>false</c> makes the declaration the entire schema, so undeclared columns are not queryable.
+</para></summary></member>
+  <member key="esql._types.DatasetMapping#properties"><summary><para>
+The per-column declarations, keyed by logical column name.
+</para></summary></member>
+</doc>

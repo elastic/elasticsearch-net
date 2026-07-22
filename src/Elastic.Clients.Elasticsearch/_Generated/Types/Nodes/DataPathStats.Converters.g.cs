@@ -34,8 +34,16 @@ public sealed partial class DataPathStatsConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropDiskWrites = System.Text.Json.JsonEncodedText.Encode("disk_writes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSize = System.Text.Json.JsonEncodedText.Encode("disk_write_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSizeInBytes = System.Text.Json.JsonEncodedText.Encode("disk_write_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space_in_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space_in_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMount = System.Text.Json.JsonEncodedText.Encode("mount"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
@@ -54,8 +62,16 @@ public sealed partial class DataPathStatsConverter : System.Text.Json.Serializat
 		LocalJsonValue<long?> propDiskWrites = default;
 		LocalJsonValue<string?> propDiskWriteSize = default;
 		LocalJsonValue<long?> propDiskWriteSizeInBytes = default;
+		LocalJsonValue<string?> propFloodStageFreeSpace = default;
+		LocalJsonValue<long?> propFloodStageFreeSpaceInBytes = default;
 		LocalJsonValue<string?> propFree = default;
 		LocalJsonValue<long?> propFreeInBytes = default;
+		LocalJsonValue<string?> propFrozenFloodStageFreeSpace = default;
+		LocalJsonValue<long?> propFrozenFloodStageFreeSpaceInBytes = default;
+		LocalJsonValue<string?> propHighWatermarkFreeSpace = default;
+		LocalJsonValue<long?> propHighWatermarkFreeSpaceInBytes = default;
+		LocalJsonValue<string?> propLowWatermarkFreeSpace = default;
+		LocalJsonValue<long?> propLowWatermarkFreeSpaceInBytes = default;
 		LocalJsonValue<string?> propMount = default;
 		LocalJsonValue<string?> propPath = default;
 		LocalJsonValue<string?> propTotal = default;
@@ -108,12 +124,52 @@ public sealed partial class DataPathStatsConverter : System.Text.Json.Serializat
 				continue;
 			}
 
+			if (propFloodStageFreeSpace.TryReadProperty(ref reader, options, PropFloodStageFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propFloodStageFreeSpaceInBytes.TryReadProperty(ref reader, options, PropFloodStageFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
 			if (propFree.TryReadProperty(ref reader, options, PropFree, null))
 			{
 				continue;
 			}
 
 			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propFrozenFloodStageFreeSpace.TryReadProperty(ref reader, options, PropFrozenFloodStageFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propFrozenFloodStageFreeSpaceInBytes.TryReadProperty(ref reader, options, PropFrozenFloodStageFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propHighWatermarkFreeSpace.TryReadProperty(ref reader, options, PropHighWatermarkFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propHighWatermarkFreeSpaceInBytes.TryReadProperty(ref reader, options, PropHighWatermarkFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propLowWatermarkFreeSpace.TryReadProperty(ref reader, options, PropLowWatermarkFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propLowWatermarkFreeSpaceInBytes.TryReadProperty(ref reader, options, PropLowWatermarkFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -164,8 +220,16 @@ public sealed partial class DataPathStatsConverter : System.Text.Json.Serializat
 			DiskWrites = propDiskWrites.Value,
 			DiskWriteSize = propDiskWriteSize.Value,
 			DiskWriteSizeInBytes = propDiskWriteSizeInBytes.Value,
+			FloodStageFreeSpace = propFloodStageFreeSpace.Value,
+			FloodStageFreeSpaceInBytes = propFloodStageFreeSpaceInBytes.Value,
 			Free = propFree.Value,
 			FreeInBytes = propFreeInBytes.Value,
+			FrozenFloodStageFreeSpace = propFrozenFloodStageFreeSpace.Value,
+			FrozenFloodStageFreeSpaceInBytes = propFrozenFloodStageFreeSpaceInBytes.Value,
+			HighWatermarkFreeSpace = propHighWatermarkFreeSpace.Value,
+			HighWatermarkFreeSpaceInBytes = propHighWatermarkFreeSpaceInBytes.Value,
+			LowWatermarkFreeSpace = propLowWatermarkFreeSpace.Value,
+			LowWatermarkFreeSpaceInBytes = propLowWatermarkFreeSpaceInBytes.Value,
 			Mount = propMount.Value,
 			Path = propPath.Value,
 			Total = propTotal.Value,
@@ -186,8 +250,16 @@ public sealed partial class DataPathStatsConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropDiskWrites, value.DiskWrites, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDiskWriteSize, value.DiskWriteSize, null, null);
 		writer.WriteProperty(options, PropDiskWriteSizeInBytes, value.DiskWriteSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFloodStageFreeSpace, value.FloodStageFreeSpace, null, null);
+		writer.WriteProperty(options, PropFloodStageFreeSpaceInBytes, value.FloodStageFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropFree, value.Free, null, null);
 		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFrozenFloodStageFreeSpace, value.FrozenFloodStageFreeSpace, null, null);
+		writer.WriteProperty(options, PropFrozenFloodStageFreeSpaceInBytes, value.FrozenFloodStageFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropHighWatermarkFreeSpace, value.HighWatermarkFreeSpace, null, null);
+		writer.WriteProperty(options, PropHighWatermarkFreeSpaceInBytes, value.HighWatermarkFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLowWatermarkFreeSpace, value.LowWatermarkFreeSpace, null, null);
+		writer.WriteProperty(options, PropLowWatermarkFreeSpaceInBytes, value.LowWatermarkFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMount, value.Mount, null, null);
 		writer.WriteProperty(options, PropPath, value.Path, null, null);
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);

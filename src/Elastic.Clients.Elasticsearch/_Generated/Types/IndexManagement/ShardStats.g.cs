@@ -40,12 +40,13 @@ public sealed partial class ShardStats
 	public Elastic.Clients.Elasticsearch.BulkStats? Bulk { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardCommit? Commit { get; set; }
 	public Elastic.Clients.Elasticsearch.CompletionStats? Completion { get; set; }
+	public Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats? DenseVector { get; set; }
 	public Elastic.Clients.Elasticsearch.DocStats? Docs { get; set; }
 	public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata { get; set; }
 	public Elastic.Clients.Elasticsearch.FlushStats? Flush { get; set; }
 	public Elastic.Clients.Elasticsearch.GetStats? Get { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; set; }
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>? Indices { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingStats? Mappings { get; set; }
 	public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardQueryCache? QueryCache { get; set; }
@@ -60,6 +61,7 @@ public sealed partial class ShardStats
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardPath? ShardPath { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Shards { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats2 { get; set; }
+	public Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats? SparseVector { get; set; }
 	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.TranslogStats? Translog { get; set; }
 	public Elastic.Clients.Elasticsearch.WarmerStats? Warmer { get; set; }

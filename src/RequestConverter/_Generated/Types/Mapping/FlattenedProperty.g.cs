@@ -84,6 +84,11 @@ public partial class FlattenedProperty : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("NullValue", (w) => { w.WriteString(NullValue); });
 			}
 
+			if (PreserveLeafArrays is not null)
+			{
+				writer.WriteFluentCall("PreserveLeafArrays", (w) => { Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArraysCodeFormatter.FormatCode(PreserveLeafArrays.Value, w); });
+			}
+
 			if (Properties is not null)
 			{
 				writer.WriteFluentDescriptorCall("Properties", (w) => { Properties.FormatCode(w); }, (w) => { Properties.FormatCode(w); });
@@ -184,6 +189,12 @@ public partial class FlattenedProperty : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("NullValue");
 				writer.WriteString(NullValue);
+			}
+
+			if (PreserveLeafArrays is not null)
+			{
+				initializer.Property("PreserveLeafArrays");
+				Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArraysCodeFormatter.FormatCode(PreserveLeafArrays.Value, writer);
 			}
 
 			if (Properties is not null)

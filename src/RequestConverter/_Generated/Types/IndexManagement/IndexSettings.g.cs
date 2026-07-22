@@ -299,6 +299,11 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("Translog", (w) => { Translog.FormatCode(w); });
 			}
 
+			if (Unassigned is not null)
+			{
+				writer.WriteFluentDescriptorCall("Unassigned", (w) => { Unassigned.FormatCode(w); });
+			}
+
 			if (Uuid is not null)
 			{
 				writer.WriteFluentCall("Uuid", (w) => { w.WriteString(Uuid); });
@@ -681,6 +686,12 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Translog");
 				Translog.FormatCode(writer);
+			}
+
+			if (Unassigned is not null)
+			{
+				initializer.Property("Unassigned");
+				Unassigned.FormatCode(writer);
 			}
 
 			if (Uuid is not null)

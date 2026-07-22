@@ -193,6 +193,12 @@ internal static partial class RequestFactory
 		return request;
 	}
 
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateInferenceDeleteRegionPolicy(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest>(serializer, body);
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateInferenceEmbedding(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		if (string.IsNullOrEmpty(body))
@@ -277,6 +283,12 @@ internal static partial class RequestFactory
 			}
 		}
 
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateInferenceGetRegionPolicy(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest>(serializer, body);
 		return request;
 	}
 
@@ -1794,6 +1806,39 @@ internal static partial class RequestFactory
 		return request;
 	}
 
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateInferencePutRegionPolicy(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		if (string.IsNullOrEmpty(body))
+		{
+			throw new System.InvalidOperationException("Body is required.");
+		}
+
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequest>(serializer, body);
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "force":
+						{
+							if (parameter.Value is string value)
+								request.Force = bool.Parse(value);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateInferencePutVoyageai(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		if (string.IsNullOrEmpty(body))
@@ -2154,6 +2199,28 @@ internal static partial class RequestFactory
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.update'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "timeout":
+						{
+							if (parameter.Value is string value)
+								request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
 						}
 				}
 			}

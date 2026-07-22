@@ -42,6 +42,7 @@ public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elas
 	public required Elastic.Clients.Elasticsearch.Xpack.Archive Archive { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Ccr Ccr { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Base? DataFrame { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.DataStreamLifecycleUsage? DataLifecycle { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Base? DataScience { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.DataStreams? DataStreams { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.DataTiers DataTiers { get; set; }
@@ -52,6 +53,7 @@ public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elas
 	public required Elastic.Clients.Elasticsearch.Xpack.Base Graph { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.HealthStatistics? HealthApi { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Ilm Ilm { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Logging? Logging { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Base Logstash { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.MachineLearning Ml { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Monitoring Monitoring { get; set; }
@@ -63,6 +65,7 @@ public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elas
 	public required Elastic.Clients.Elasticsearch.Xpack.Base Spatial { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Sql Sql { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Base Transform { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.VectorDbDocument? VectordbDocument { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Vector? Vectors { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Base VotingOnly { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Watcher Watcher { get; set; }

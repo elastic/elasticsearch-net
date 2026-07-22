@@ -252,6 +252,64 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Inference/DeleteRegionPolicyRequest.g.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse DeleteRegionPolicy(Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DeleteRegionPolicyRequest.g.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse DeleteRegionPolicy()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DeleteRegionPolicyRequest.g.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse DeleteRegionPolicy(System.Action<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DeleteRegionPolicyRequest.g.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse> DeleteRegionPolicyAsync(Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/DeleteRegionPolicyRequest.g.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse> DeleteRegionPolicyAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/DeleteRegionPolicyRequest.g.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.delete_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse> DeleteRegionPolicyAsync(System.Action<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/Inference/EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Inference.EmbeddingResponse Embedding(Elastic.Clients.Elasticsearch.Inference.EmbeddingRequest request)
@@ -492,6 +550,64 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/GetRegionPolicyRequest.g.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse GetRegionPolicy(Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/GetRegionPolicyRequest.g.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse GetRegionPolicy()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/GetRegionPolicyRequest.g.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse GetRegionPolicy(System.Action<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/GetRegionPolicyRequest.g.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse> GetRegionPolicyAsync(Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/GetRegionPolicyRequest.g.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse> GetRegionPolicyAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/GetRegionPolicyRequest.g.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.get_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse> GetRegionPolicyAsync(System.Action<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.GetRegionPolicyRequestParameters>(request, cancellationToken);
 	}
 
 	/// <include file="../Api/Inference/InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request']/*"/>
@@ -2088,6 +2204,44 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/PutRegionPolicyRequest.g.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse PutRegionPolicy(Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/PutRegionPolicyRequest.g.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse PutRegionPolicy(System.Action<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/PutRegionPolicyRequest.g.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse> PutRegionPolicyAsync(Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/PutRegionPolicyRequest.g.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.put_region_policy.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse> PutRegionPolicyAsync(System.Action<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestParameters>(request, cancellationToken);
 	}
 
 	/// <include file="../Api/Inference/PutVoyageaiRequest.g.xml" path="doc/member[@key='inference.put_voyageai.Request']/*"/>

@@ -53,6 +53,11 @@ The document is not deleted if the correct routing is not specified.
 The delete operation gets hashed into a specific shard ID.
 It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 </para></summary></member>
+  <member key="_global.delete.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.delete.Request#id"><summary><para>
 A unique identifier for the document.
 </para></summary></member>
@@ -72,6 +77,7 @@ If <c>false</c>, it does nothing with refreshes.
 </para></summary></member>
   <member key="_global.delete.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.delete.Request#timeout"><summary><para>
 The period to wait for active shards.

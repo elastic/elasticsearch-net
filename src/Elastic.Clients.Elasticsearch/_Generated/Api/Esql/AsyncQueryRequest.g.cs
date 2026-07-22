@@ -103,7 +103,7 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 	public string? Locale { get; set; }
 
 	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#params']/*"/>
-	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? Params { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.Esql.ClassifiedNamedParameter>>>>? Params { get; set; }
 
 	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#profile']/*"/>
 	public bool? Profile { get; set; }
@@ -113,6 +113,9 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#query']/*"/>
 	public required string Query { get; set; }
+
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettings? Settings { get; set; }
 
 	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#time_zone']/*"/>
 	public string? TimeZone { get; set; }
@@ -233,7 +236,7 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	}
 
 	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#params']/*"/>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.Esql.ClassifiedNamedParameter>>>>? value)
 	{
 		Instance.Params = value;
 		return this;
@@ -257,6 +260,27 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
+		return this;
+	}
+
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Settings(Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettings? value)
+	{
+		Instance.Settings = value;
+		return this;
+	}
+
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Settings()
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettingsDescriptor>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettingsDescriptor.Build(action);
 		return this;
 	}
 
@@ -435,7 +459,7 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 	}
 
 	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#params']/*"/>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.Esql.ClassifiedNamedParameter>>>>? value)
 	{
 		Instance.Params = value;
 		return this;
@@ -459,6 +483,27 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
+		return this;
+	}
+
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettings? value)
+	{
+		Instance.Settings = value;
+		return this;
+	}
+
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Settings()
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#settings']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettingsDescriptor>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Esql.EsqlQuerySettingsDescriptor.Build(action);
 		return this;
 	}
 

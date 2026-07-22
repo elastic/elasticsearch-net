@@ -97,6 +97,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -422,10 +429,32 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
 								request.Routing = Elastic.Clients.Elasticsearch.Routing.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "stats":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.Stats = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 
@@ -626,6 +655,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -812,6 +848,13 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.RequestsPerSecond = float.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 
@@ -1333,6 +1376,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -1555,6 +1605,13 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Refresh = bool.Parse(value);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 
@@ -2019,6 +2076,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -2155,6 +2219,13 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Refresh = bool.Parse(value);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 
@@ -2330,6 +2401,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -2341,13 +2419,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.SearchType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.SearchType>.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.Slice = value;
 							continue;
 						}
 
@@ -2535,6 +2606,13 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Realtime = bool.Parse(value);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 
@@ -3197,6 +3275,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -3416,17 +3501,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					case "routing":
 						{
 							if (parameter.Value is string value)
 								request.Routing = Elastic.Clients.Elasticsearch.Routing.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.Slice = value;
 							continue;
 						}
 
@@ -3655,6 +3740,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							unsupportedParameters.Add(parameter.Key);
@@ -3748,6 +3840,13 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.RetryOnConflict = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 
@@ -3937,6 +4036,13 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.RequestsPerSecond = float.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 

@@ -41,6 +41,12 @@ public partial class Stats : RequestConverter.ICodeFormattable
 			writer.WriteBlockList(AdaptiveSelection, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
+		if (Allocations is not null)
+		{
+			initializer.Property("Allocations");
+			Allocations.FormatCode(writer);
+		}
+
 		if (Attributes is not null)
 		{
 			initializer.Property("Attributes");
@@ -137,6 +143,19 @@ public partial class Stats : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("Process");
 			Process.FormatCode(writer);
+		}
+
+		if (Repositories is not null)
+		{
+			initializer.Property("Repositories");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
+			writer.Write(", ");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.RepositorySnapshotStats");
+			writer.Write(">()");
+			writer.WriteBlockList(Repositories, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (Roles is not null)

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.DataStreamLifecycleRetentionStats#average_millis"><summary><para>
+The average configured value in milliseconds.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleRetentionStats#configured_data_streams"><summary><para>
+The number of data streams for which this value is configured.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleRetentionStats#maximum_millis"><summary><para>
+The largest configured value in milliseconds.
+</para></summary></member>
+  <member key="xpack.usage.DataStreamLifecycleRetentionStats#minimum_millis"><summary><para>
+The smallest configured value in milliseconds.
+</para></summary></member>
+</doc>

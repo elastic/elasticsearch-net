@@ -43,6 +43,11 @@ public partial class Destination : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
@@ -71,6 +76,12 @@ public partial class Destination : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Pipeline");
 				writer.WriteString(Pipeline);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

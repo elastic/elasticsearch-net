@@ -41,15 +41,15 @@ public partial class DenseVectorOffHeapStats : RequestConverter.ICodeFormattable
 			writer.WriteBlockList(Fielddata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); w.Write(" }"); });
 		}
 
-		if (TotalCenifSize is not null)
+		if (TotalCenivfSize is not null)
 		{
-			initializer.Property("TotalCenifSize");
-			TotalCenifSize.FormatCode(writer);
+			initializer.Property("TotalCenivfSize");
+			TotalCenivfSize.FormatCode(writer);
 		}
 
 		{
-			initializer.Property("TotalCenifSizeBytes");
-			writer.WriteValue(TotalCenifSizeBytes);
+			initializer.Property("TotalCenivfSizeBytes");
+			writer.WriteValue(TotalCenivfSizeBytes);
 			writer.Write("L");
 		}
 

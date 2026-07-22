@@ -29,6 +29,7 @@ public sealed partial class ShardQueryCacheConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropHitCount = System.Text.Json.JsonEncodedText.Encode("hit_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySize = System.Text.Json.JsonEncodedText.Encode("memory_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMissCount = System.Text.Json.JsonEncodedText.Encode("miss_count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count"u8);
@@ -40,6 +41,7 @@ public sealed partial class ShardQueryCacheConverter : System.Text.Json.Serializ
 		LocalJsonValue<long> propCacheSize = default;
 		LocalJsonValue<long> propEvictions = default;
 		LocalJsonValue<long> propHitCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMemorySize = default;
 		LocalJsonValue<long> propMemorySizeInBytes = default;
 		LocalJsonValue<long> propMissCount = default;
 		LocalJsonValue<long> propTotalCount = default;
@@ -61,6 +63,11 @@ public sealed partial class ShardQueryCacheConverter : System.Text.Json.Serializ
 			}
 
 			if (propHitCount.TryReadProperty(ref reader, options, PropHitCount, null))
+			{
+				continue;
+			}
+
+			if (propMemorySize.TryReadProperty(ref reader, options, PropMemorySize, null))
 			{
 				continue;
 			}
@@ -96,6 +103,7 @@ public sealed partial class ShardQueryCacheConverter : System.Text.Json.Serializ
 			CacheSize = propCacheSize.Value,
 			Evictions = propEvictions.Value,
 			HitCount = propHitCount.Value,
+			MemorySize = propMemorySize.Value,
 			MemorySizeInBytes = propMemorySizeInBytes.Value,
 			MissCount = propMissCount.Value,
 			TotalCount = propTotalCount.Value
@@ -109,6 +117,7 @@ public sealed partial class ShardQueryCacheConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropCacheSize, value.CacheSize, null, null);
 		writer.WriteProperty(options, PropEvictions, value.Evictions, null, null);
 		writer.WriteProperty(options, PropHitCount, value.HitCount, null, null);
+		writer.WriteProperty(options, PropMemorySize, value.MemorySize, null, null);
 		writer.WriteProperty(options, PropMemorySizeInBytes, value.MemorySizeInBytes, null, null);
 		writer.WriteProperty(options, PropMissCount, value.MissCount, null, null);
 		writer.WriteProperty(options, PropTotalCount, value.TotalCount, null, null);

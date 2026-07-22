@@ -52,12 +52,12 @@ public sealed partial class MultisearchHeader
 	public string? ProjectRouting { get; set; }
 	public bool? RequestCache { get; set; }
 
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#_slice']/*"/>
+	public string? RouteSlice { get; set; }
+
 	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
-
-	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#_slice']/*"/>
-	public string? Slice { get; set; }
 }
 
 /// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
@@ -149,6 +149,13 @@ public readonly partial struct MultisearchHeaderDescriptor
 		return this;
 	}
 
+	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
@@ -159,13 +166,6 @@ public readonly partial struct MultisearchHeaderDescriptor
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
-		return this;
-	}
-
-	/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Slice(string? value)
-	{
-		Instance.Slice = value;
 		return this;
 	}
 

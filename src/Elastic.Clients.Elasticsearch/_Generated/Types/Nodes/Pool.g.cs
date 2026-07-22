@@ -37,14 +37,26 @@ public sealed partial class Pool
 		_ = sentinel;
 	}
 
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#max']/*"/>
+	public string? Max { get; set; }
+
 	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#max_in_bytes']/*"/>
 	public long? MaxInBytes { get; set; }
+
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#peak_max']/*"/>
+	public string? PeakMax { get; set; }
 
 	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#peak_max_in_bytes']/*"/>
 	public long? PeakMaxInBytes { get; set; }
 
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#peak_used']/*"/>
+	public string? PeakUsed { get; set; }
+
 	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#peak_used_in_bytes']/*"/>
 	public long? PeakUsedInBytes { get; set; }
+
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#used']/*"/>
+	public string? Used { get; set; }
 
 	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#used_in_bytes']/*"/>
 	public long? UsedInBytes { get; set; }

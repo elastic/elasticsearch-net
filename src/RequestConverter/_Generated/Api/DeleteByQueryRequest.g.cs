@@ -130,6 +130,11 @@ public partial class DeleteByQueryRequest : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -308,6 +313,12 @@ public partial class DeleteByQueryRequest : RequestConverter.ICodeFormattable
 				initializer.Property("RequestsPerSecond");
 				writer.WriteValue(RequestsPerSecond.Value);
 				writer.Write("f");
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

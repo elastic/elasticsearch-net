@@ -50,6 +50,9 @@ public sealed partial class FlattenedProperty : Elastic.Clients.Elasticsearch.Ma
 	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public string? NullValue { get; set; }
+
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#preserve_leaf_arrays']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays? PreserveLeafArrays { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public string? Similarity { get; set; }
 	public bool? SplitQueriesOnWhitespace { get; set; }
@@ -170,6 +173,13 @@ public readonly partial struct FlattenedPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> NullValue(string? value)
 	{
 		Instance.NullValue = value;
+		return this;
+	}
+
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#preserve_leaf_arrays']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> PreserveLeafArrays(Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays? value)
+	{
+		Instance.PreserveLeafArrays = value;
 		return this;
 	}
 
@@ -346,6 +356,13 @@ public readonly partial struct FlattenedPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor NullValue(string? value)
 	{
 		Instance.NullValue = value;
+		return this;
+	}
+
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#preserve_leaf_arrays']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor PreserveLeafArrays(Elastic.Clients.Elasticsearch.Mapping.PreserveLeafArrays? value)
+	{
+		Instance.PreserveLeafArrays = value;
 		return this;
 	}
 

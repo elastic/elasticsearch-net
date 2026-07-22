@@ -51,6 +51,9 @@ public sealed partial class IndexRequestParameters : Elastic.Transport.RequestPa
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -137,6 +140,9 @@ public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Req
 
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
+
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -258,6 +264,13 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
 	{
 		Instance.RequireDataStream = value;
+		return this;
+	}
+
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

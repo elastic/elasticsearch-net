@@ -63,6 +63,11 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 				writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Doc is not null)
 			{
 				writer.WriteFluentCall("Doc", (w) => { w.WriteDocument(Doc); });
@@ -147,6 +152,12 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.ICodeForma
 			{
 				initializer.Property("Realtime");
 				writer.WriteValue(Realtime.Value);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Doc is not null)
