@@ -28,10 +28,11 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class FlushStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FlushStats(long periodic, long total, System.TimeSpan totalTimeInMillis)
+	public FlushStats(long periodic, long total, System.TimeSpan totalTimeExcludingWaitingOnLockInMillis, System.TimeSpan totalTimeInMillis)
 	{
 		Periodic = periodic;
 		Total = total;
+		TotalTimeExcludingWaitingOnLockInMillis = totalTimeExcludingWaitingOnLockInMillis;
 		TotalTimeInMillis = totalTimeInMillis;
 	}
 
@@ -48,5 +49,7 @@ public sealed partial class FlushStats
 	public required long Periodic { get; set; }
 	public required long Total { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalTimeExcludingWaiting { get; set; }
+	public required System.TimeSpan TotalTimeExcludingWaitingOnLockInMillis { get; set; }
 	public required System.TimeSpan TotalTimeInMillis { get; set; }
 }

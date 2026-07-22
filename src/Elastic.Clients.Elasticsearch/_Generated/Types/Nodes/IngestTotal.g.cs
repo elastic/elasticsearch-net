@@ -55,6 +55,9 @@ public sealed partial class IngestTotal
 	/// <include file="IngestTotal.g.xml" path="doc/member[@key='nodes._types.IngestTotal#failed']/*"/>
 	public required long Failed { get; set; }
 
+	/// <include file="IngestTotal.g.xml" path="doc/member[@key='nodes._types.IngestTotal#time']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
+
 	/// <include file="IngestTotal.g.xml" path="doc/member[@key='nodes._types.IngestTotal#time_in_millis']/*"/>
 	public required System.TimeSpan TimeInMillis { get; set; }
 }

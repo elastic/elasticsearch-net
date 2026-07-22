@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.EsqlLoggingConfig#enabled"><summary><para>
+Whether ES|QL query logging is enabled.
+</para></summary></member>
+  <member key="xpack.usage.EsqlLoggingConfig#thresholds"><summary><para>
+The configured logging thresholds, keyed by threshold name, if any.
+</para></summary></member>
+  <member key="xpack.usage.EsqlLoggingConfig#user"><summary><para>
+Whether user information is included in the ES|QL query log.
+</para></summary></member>
+</doc>

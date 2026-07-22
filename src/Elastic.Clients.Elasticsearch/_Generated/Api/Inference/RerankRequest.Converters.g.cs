@@ -34,19 +34,19 @@ public sealed partial class RerankRequestConverter : System.Text.Json.Serializat
 	public override Elastic.Clients.Elasticsearch.Inference.RerankRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propInput = default;
-		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>>> propInput = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject>> propQuery = default;
 		LocalJsonValue<bool?> propReturnDocuments = default;
 		LocalJsonValue<object?> propTaskSettings = default;
 		LocalJsonValue<int?> propTopN = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propInput.TryReadProperty(ref reader, options, PropInput, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			if (propInput.TryReadProperty(ref reader, options, PropInput, static Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1), static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 2), static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>(o, null)!)!))
 			{
 				continue;
 			}
 
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, static Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject), null, null)!))
 			{
 				continue;
 			}
@@ -89,8 +89,8 @@ public sealed partial class RerankRequestConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.RerankRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropInput, value.Input, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropInput, value.Input, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>> v) => w.WriteUnionValue<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.RerankInputObject> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Inference.RerankInputObject>(o, v, null)));
+		writer.WriteProperty(options, PropQuery, value.Query, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject> v) => w.WriteUnionValue<string, Elastic.Clients.Elasticsearch.Inference.RerankInputObject>(o, v, null, null));
 		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));

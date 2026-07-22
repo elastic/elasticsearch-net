@@ -204,6 +204,11 @@ The other two shards that make up the index do not participate in the <c>_bulk</
 You might want to disable the refresh interval temporarily to improve indexing throughput for large bulk requests.
 Refer to the linked documentation for step-by-step instructions using the index settings API.
 </para></summary></member>
+  <member key="_global.bulk.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.bulk.Request#_source"><summary><para>
 Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or contains a list of fields to return.
 </para></summary></member>
@@ -246,6 +251,7 @@ If <c>true</c>, the request's actions must target a data stream (existing or to 
 </para></summary></member>
   <member key="_global.bulk.Request#routing"><summary><para>
 A custom value that is used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.bulk.Request#timeout"><summary><para>
 The period each action waits for the following operations: automatic index creation, dynamic mapping updates, and waiting for active shards.

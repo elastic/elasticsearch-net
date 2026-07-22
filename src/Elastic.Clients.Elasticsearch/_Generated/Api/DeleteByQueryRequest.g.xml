@@ -150,6 +150,11 @@ The task ID can be found by using the get tasks API.
 Cancellation should happen quickly but might take a few seconds.
 The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 </para></summary></member>
+  <member key="_global.delete_by_query.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.delete_by_query.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.
 If <c>false</c>, the request returns an error (1) if any wildcard expression
@@ -227,6 +232,7 @@ It can be either <c>-1</c> to turn off throttling or any decimal number like <c>
 </para></summary></member>
   <member key="_global.delete_by_query.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.delete_by_query.Request#scroll"><summary><para>
 The period to retain the search context for scrolling.

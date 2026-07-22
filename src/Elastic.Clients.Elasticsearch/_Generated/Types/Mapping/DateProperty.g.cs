@@ -39,7 +39,7 @@ public sealed partial class DateProperty : Elastic.Clients.Elasticsearch.Mapping
 
 	public double? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	public bool? DocValues { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? DocValues { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
@@ -100,7 +100,7 @@ public readonly partial struct DatePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument> DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument> DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;
@@ -306,7 +306,7 @@ public readonly partial struct DatePropertyDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;

@@ -3,6 +3,9 @@
   <member key="nodes._types.Stats#adaptive_selection"><summary><para>
 Statistics about adaptive replica selection.
 </para></summary></member>
+  <member key="nodes._types.Stats#allocations"><summary><para>
+Statistics about shard allocations on the node.
+</para></summary></member>
   <member key="nodes._types.Stats#attributes"><summary><para>
 Contains a list of attributes for the node.
 </para></summary></member>
@@ -45,6 +48,9 @@ Operating system stats, load average, mem, swap.
 </para></summary></member>
   <member key="nodes._types.Stats#process"><summary><para>
 Process statistics, memory consumption, cpu usage, open file descriptors.
+</para></summary></member>
+  <member key="nodes._types.Stats#repositories"><summary><para>
+Statistics about snapshot activity for the node's registered repositories, keyed by repository name.
 </para></summary></member>
   <member key="nodes._types.Stats#roles"><summary><para>
 Roles assigned to the node.

@@ -38,7 +38,7 @@ public sealed partial class PointProperty : Elastic.Clients.Elasticsearch.Mappin
 	}
 
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	public bool? DocValues { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? DocValues { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
@@ -87,7 +87,7 @@ public readonly partial struct PointPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;
@@ -233,7 +233,7 @@ public readonly partial struct PointPropertyDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;

@@ -39,7 +39,7 @@ public sealed partial class DateNanosProperty : Elastic.Clients.Elasticsearch.Ma
 
 	public double? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	public bool? DocValues { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? DocValues { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public string? Format { get; set; }
@@ -98,7 +98,7 @@ public readonly partial struct DateNanosPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument> DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument> DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;
@@ -286,7 +286,7 @@ public readonly partial struct DateNanosPropertyDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;

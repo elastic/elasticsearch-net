@@ -28,10 +28,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class MappingStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public MappingStats(long totalCount, long totalEstimatedOverheadInBytes)
+	public MappingStats(long averageFieldsPerSegment, long totalCount, long totalEstimatedOverheadInBytes, long totalSegmentFields, long totalSegments)
 	{
+		AverageFieldsPerSegment = averageFieldsPerSegment;
 		TotalCount = totalCount;
 		TotalEstimatedOverheadInBytes = totalEstimatedOverheadInBytes;
+		TotalSegmentFields = totalSegmentFields;
+		TotalSegments = totalSegments;
 	}
 
 	public MappingStats()
@@ -44,7 +47,10 @@ public sealed partial class MappingStats
 		_ = sentinel;
 	}
 
+	public required long AverageFieldsPerSegment { get; set; }
 	public required long TotalCount { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalEstimatedOverhead { get; set; }
 	public required long TotalEstimatedOverheadInBytes { get; set; }
+	public required long TotalSegmentFields { get; set; }
+	public required long TotalSegments { get; set; }
 }

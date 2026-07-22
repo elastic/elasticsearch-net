@@ -28,9 +28,8 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class OpenAIServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public OpenAIServiceSettings(string apiKey, string modelId)
+	public OpenAIServiceSettings(string modelId)
 	{
-		ApiKey = apiKey;
 		ModelId = modelId;
 	}
 
@@ -45,7 +44,13 @@ public sealed partial class OpenAIServiceSettings
 	}
 
 	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#api_key']/*"/>
-	public required string ApiKey { get; set; }
+	public string? ApiKey { get; set; }
+
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#client_id']/*"/>
+	public string? ClientId { get; set; }
+
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#client_secret']/*"/>
+	public string? ClientSecret { get; set; }
 
 	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
@@ -59,8 +64,14 @@ public sealed partial class OpenAIServiceSettings
 	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#scopes']/*"/>
+	public System.Collections.Generic.ICollection<string>? Scopes { get; set; }
+
 	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? Similarity { get; set; }
+
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#token_url']/*"/>
+	public string? TokenUrl { get; set; }
 
 	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#url']/*"/>
 	public string? Url { get; set; }
@@ -87,9 +98,23 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
 	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#api_key']/*"/>
-	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor ApiKey(string value)
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor ApiKey(string? value)
 	{
 		Instance.ApiKey = value;
+		return this;
+	}
+
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#client_id']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor ClientId(string? value)
+	{
+		Instance.ClientId = value;
+		return this;
+	}
+
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#client_secret']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor ClientSecret(string? value)
+	{
+		Instance.ClientSecret = value;
 		return this;
 	}
 
@@ -135,10 +160,31 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 		return this;
 	}
 
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#scopes']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Scopes(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Scopes = value;
+		return this;
+	}
+
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#scopes']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Scopes(params string[] values)
+	{
+		Instance.Scopes = [.. values];
+		return this;
+	}
+
 	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? value)
 	{
 		Instance.Similarity = value;
+		return this;
+	}
+
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#token_url']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor TokenUrl(string? value)
+	{
+		Instance.TokenUrl = value;
 		return this;
 	}
 

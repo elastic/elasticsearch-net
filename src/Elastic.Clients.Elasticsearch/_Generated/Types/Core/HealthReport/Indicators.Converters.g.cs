@@ -30,6 +30,7 @@ public sealed partial class IndicatorsConverter : System.Text.Json.Serialization
 	private static readonly System.Text.Json.JsonEncodedText PropFileSettings = System.Text.Json.JsonEncodedText.Encode("file_settings"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMasterIsStable = System.Text.Json.JsonEncodedText.Encode("master_is_stable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectEncryptionKey = System.Text.Json.JsonEncodedText.Encode("project_encryption_key"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRepositoryIntegrity = System.Text.Json.JsonEncodedText.Encode("repository_integrity"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShardsAvailability = System.Text.Json.JsonEncodedText.Encode("shards_availability"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShardsCapacity = System.Text.Json.JsonEncodedText.Encode("shards_capacity"u8);
@@ -43,6 +44,7 @@ public sealed partial class IndicatorsConverter : System.Text.Json.Serialization
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicator?> propFileSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator?> propIlm = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator?> propMasterIsStable = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.ProjectEncryptionKeyIndicator?> propProjectEncryptionKey = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicator?> propRepositoryIntegrity = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicator?> propShardsAvailability = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicator?> propShardsCapacity = default;
@@ -70,6 +72,11 @@ public sealed partial class IndicatorsConverter : System.Text.Json.Serialization
 			}
 
 			if (propMasterIsStable.TryReadProperty(ref reader, options, PropMasterIsStable, null))
+			{
+				continue;
+			}
+
+			if (propProjectEncryptionKey.TryReadProperty(ref reader, options, PropProjectEncryptionKey, null))
 			{
 				continue;
 			}
@@ -111,6 +118,7 @@ public sealed partial class IndicatorsConverter : System.Text.Json.Serialization
 			FileSettings = propFileSettings.Value,
 			Ilm = propIlm.Value,
 			MasterIsStable = propMasterIsStable.Value,
+			ProjectEncryptionKey = propProjectEncryptionKey.Value,
 			RepositoryIntegrity = propRepositoryIntegrity.Value,
 			ShardsAvailability = propShardsAvailability.Value,
 			ShardsCapacity = propShardsCapacity.Value,
@@ -126,6 +134,7 @@ public sealed partial class IndicatorsConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropFileSettings, value.FileSettings, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
 		writer.WriteProperty(options, PropMasterIsStable, value.MasterIsStable, null, null);
+		writer.WriteProperty(options, PropProjectEncryptionKey, value.ProjectEncryptionKey, null, null);
 		writer.WriteProperty(options, PropRepositoryIntegrity, value.RepositoryIntegrity, null, null);
 		writer.WriteProperty(options, PropShardsAvailability, value.ShardsAvailability, null, null);
 		writer.WriteProperty(options, PropShardsCapacity, value.ShardsCapacity, null, null);

@@ -14,7 +14,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.TaskIdConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class TaskId :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class TaskId :
 	IUrlParameter,
 	IEquatable<TaskId>
 #if NET7_0_OR_GREATER

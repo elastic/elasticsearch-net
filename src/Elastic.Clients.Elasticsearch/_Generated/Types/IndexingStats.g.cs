@@ -28,13 +28,14 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class IndexingStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexingStats(long deleteCurrent, System.TimeSpan deleteTimeInMillis, long deleteTotal, long indexCurrent, long indexFailed, System.TimeSpan indexTimeInMillis, long indexTotal, bool isThrottled, long noopUpdateTotal, System.TimeSpan throttleTimeInMillis)
+	public IndexingStats(long deleteCurrent, System.TimeSpan deleteTimeInMillis, long deleteTotal, long indexCurrent, long indexFailed, long indexFailedDueToVersionConflict, System.TimeSpan indexTimeInMillis, long indexTotal, bool isThrottled, long noopUpdateTotal, System.TimeSpan throttleTimeInMillis)
 	{
 		DeleteCurrent = deleteCurrent;
 		DeleteTimeInMillis = deleteTimeInMillis;
 		DeleteTotal = deleteTotal;
 		IndexCurrent = indexCurrent;
 		IndexFailed = indexFailed;
+		IndexFailedDueToVersionConflict = indexFailedDueToVersionConflict;
 		IndexTimeInMillis = indexTimeInMillis;
 		IndexTotal = indexTotal;
 		IsThrottled = isThrottled;
@@ -58,6 +59,7 @@ public sealed partial class IndexingStats
 	public required long DeleteTotal { get; set; }
 	public required long IndexCurrent { get; set; }
 	public required long IndexFailed { get; set; }
+	public required long IndexFailedDueToVersionConflict { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? IndexTime { get; set; }
 	public required System.TimeSpan IndexTimeInMillis { get; set; }
 	public required long IndexTotal { get; set; }

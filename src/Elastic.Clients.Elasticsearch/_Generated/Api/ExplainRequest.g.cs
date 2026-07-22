@@ -48,6 +48,9 @@ public sealed partial class ExplainRequestParameters : Elastic.Transport.Request
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -118,6 +121,9 @@ public sealed partial class ExplainRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -224,6 +230,13 @@ public readonly partial struct ExplainRequestDescriptor
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
+		return this;
+	}
+
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -480,6 +493,13 @@ public readonly partial struct ExplainRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
+		return this;
+	}
+
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

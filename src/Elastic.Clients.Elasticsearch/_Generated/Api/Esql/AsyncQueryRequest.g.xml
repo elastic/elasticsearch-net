@@ -86,6 +86,10 @@ Supported in serverless only.
   <member key="esql.async_query.Request#query"><summary><para>
 The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 </para></summary></member>
+  <member key="esql.async_query.Request#settings"><summary><para>
+Per-query settings, the request-body equivalent of the in-query <c>SET</c> command.
+For example, <c>time_zone</c> can be supplied here instead of as a top-level field.
+</para></summary></member>
   <member key="esql.async_query.Request#time_zone"><summary><para>
 Sets the default timezone of the query.
 </para></summary></member>

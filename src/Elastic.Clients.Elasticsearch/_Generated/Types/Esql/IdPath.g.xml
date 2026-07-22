@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql._types.IdPath"><summary><para>
+The <c>_id</c> meta-field of a dataset mapping.
+</para></summary></member>
+  <member key="esql._types.IdPath#path"><summary><para>
+The name of the column that provides the document identity.
+</para></summary></member>
+</doc>

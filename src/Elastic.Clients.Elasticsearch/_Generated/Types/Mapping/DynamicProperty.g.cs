@@ -41,7 +41,7 @@ public sealed partial class DynamicProperty : Elastic.Clients.Elasticsearch.Mapp
 	public double? Boost { get; set; }
 	public bool? Coerce { get; set; }
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	public bool? DocValues { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? DocValues { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public bool? EagerGlobalOrdinals { get; set; }
 	public bool? Enabled { get; set; }
@@ -124,7 +124,7 @@ public readonly partial struct DynamicPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;
@@ -408,7 +408,7 @@ public readonly partial struct DynamicPropertyDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;

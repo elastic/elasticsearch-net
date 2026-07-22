@@ -37,6 +37,9 @@ public sealed partial class Transport
 		_ = sentinel;
 	}
 
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#actions']/*"/>
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.TransportActionStats>? Actions { get; set; }
+
 	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#inbound_handling_time_histogram']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? InboundHandlingTimeHistogram { get; set; }
 

@@ -28,9 +28,12 @@ public sealed partial class IngestStatsConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngestedAsFirstPipeline = System.Text.Json.JsonEncodedText.Encode("ingested_as_first_pipeline"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIngestedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("ingested_as_first_pipeline_in_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProducedAsFirstPipeline = System.Text.Json.JsonEncodedText.Encode("produced_as_first_pipeline"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProducedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("produced_as_first_pipeline_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.IngestStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -39,9 +42,12 @@ public sealed partial class IngestStatsConverter : System.Text.Json.Serializatio
 		LocalJsonValue<long> propCount = default;
 		LocalJsonValue<long> propCurrent = default;
 		LocalJsonValue<long> propFailed = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propIngestedAsFirstPipeline = default;
 		LocalJsonValue<long> propIngestedAsFirstPipelineInBytes = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>>> propProcessors = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propProducedAsFirstPipeline = default;
 		LocalJsonValue<long> propProducedAsFirstPipelineInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTime = default;
 		LocalJsonValue<System.TimeSpan> propTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -60,6 +66,11 @@ public sealed partial class IngestStatsConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
+			if (propIngestedAsFirstPipeline.TryReadProperty(ref reader, options, PropIngestedAsFirstPipeline, null))
+			{
+				continue;
+			}
+
 			if (propIngestedAsFirstPipelineInBytes.TryReadProperty(ref reader, options, PropIngestedAsFirstPipelineInBytes, null))
 			{
 				continue;
@@ -70,7 +81,17 @@ public sealed partial class IngestStatsConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
+			if (propProducedAsFirstPipeline.TryReadProperty(ref reader, options, PropProducedAsFirstPipeline, null))
+			{
+				continue;
+			}
+
 			if (propProducedAsFirstPipelineInBytes.TryReadProperty(ref reader, options, PropProducedAsFirstPipelineInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTime.TryReadProperty(ref reader, options, PropTime, null))
 			{
 				continue;
 			}
@@ -95,9 +116,12 @@ public sealed partial class IngestStatsConverter : System.Text.Json.Serializatio
 			Count = propCount.Value,
 			Current = propCurrent.Value,
 			Failed = propFailed.Value,
+			IngestedAsFirstPipeline = propIngestedAsFirstPipeline.Value,
 			IngestedAsFirstPipelineInBytes = propIngestedAsFirstPipelineInBytes.Value,
 			Processors = propProcessors.Value,
+			ProducedAsFirstPipeline = propProducedAsFirstPipeline.Value,
 			ProducedAsFirstPipelineInBytes = propProducedAsFirstPipelineInBytes.Value,
+			Time = propTime.Value,
 			TimeInMillis = propTimeInMillis.Value
 		};
 	}
@@ -108,9 +132,12 @@ public sealed partial class IngestStatsConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
 		writer.WriteProperty(options, PropFailed, value.Failed, null, null);
+		writer.WriteProperty(options, PropIngestedAsFirstPipeline, value.IngestedAsFirstPipeline, null, null);
 		writer.WriteProperty(options, PropIngestedAsFirstPipelineInBytes, value.IngestedAsFirstPipelineInBytes, null, null);
 		writer.WriteProperty(options, PropProcessors, value.Processors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> v) => w.WriteCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>(o, v, null, null)));
+		writer.WriteProperty(options, PropProducedAsFirstPipeline, value.ProducedAsFirstPipeline, null, null);
 		writer.WriteProperty(options, PropProducedAsFirstPipelineInBytes, value.ProducedAsFirstPipelineInBytes, null, null);
+		writer.WriteProperty(options, PropTime, value.Time, null, null);
 		writer.WriteProperty(options, PropTimeInMillis, value.TimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteEndObject();
 	}

@@ -53,7 +53,7 @@ public sealed partial class SynonymGraphTokenFilter : Elastic.Clients.Elasticsea
 	public string? SynonymsPath { get; set; }
 
 	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms_set']/*"/>
-	public string? SynonymsSet { get; set; }
+	public System.Collections.Generic.ICollection<string>? SynonymsSet { get; set; }
 
 	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#tokenizer']/*"/>
 	public string? Tokenizer { get; set; }
@@ -128,9 +128,16 @@ public readonly partial struct SynonymGraphTokenFilterDescriptor
 	}
 
 	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms_set']/*"/>
-	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor SynonymsSet(string? value)
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor SynonymsSet(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.SynonymsSet = value;
+		return this;
+	}
+
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms_set']/*"/>
+	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor SynonymsSet(params string[] values)
+	{
+		Instance.SynonymsSet = [.. values];
 		return this;
 	}
 

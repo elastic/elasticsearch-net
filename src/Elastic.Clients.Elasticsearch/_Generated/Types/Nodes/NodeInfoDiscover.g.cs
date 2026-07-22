@@ -38,7 +38,7 @@ public sealed partial class NodeInfoDiscover
 	}
 
 	public System.Collections.Generic.ICollection<string>? SeedHosts { get; set; }
-	public System.Collections.Generic.IReadOnlyCollection<string>? SeedProviders { get; set; }
+	public System.Collections.Generic.ICollection<string>? SeedProviders { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Settings { get; set; }
 	public string? Type { get; set; }
 }

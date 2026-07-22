@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Mapping;
+using Elastic.Clients.Elasticsearch.Nodes;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 

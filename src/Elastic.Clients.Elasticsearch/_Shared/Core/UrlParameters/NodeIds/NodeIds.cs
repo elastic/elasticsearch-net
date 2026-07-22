@@ -13,7 +13,8 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class NodeIds :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class NodeIds :
 	IEquatable<NodeIds>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

@@ -36,6 +36,9 @@ public sealed partial class DeleteRequestParameters : Elastic.Transport.RequestP
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -94,6 +97,9 @@ public partial class DeleteRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
+	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -169,6 +175,13 @@ public readonly partial struct DeleteRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -341,6 +354,13 @@ public readonly partial struct DeleteRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

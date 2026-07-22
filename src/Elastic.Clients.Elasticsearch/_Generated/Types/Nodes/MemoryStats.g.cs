@@ -37,8 +37,14 @@ public sealed partial class MemoryStats
 		_ = sentinel;
 	}
 
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#adjusted_total']/*"/>
+	public string? AdjustedTotal { get; set; }
+
 	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#adjusted_total_in_bytes']/*"/>
 	public long? AdjustedTotalInBytes { get; set; }
+
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#free']/*"/>
+	public string? Free { get; set; }
 
 	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#free_in_bytes']/*"/>
 	public long? FreeInBytes { get; set; }
@@ -47,10 +53,16 @@ public sealed partial class MemoryStats
 	public string? Share { get; set; }
 	public long? ShareInBytes { get; set; }
 
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#total']/*"/>
+	public string? Total { get; set; }
+
 	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#total_in_bytes']/*"/>
 	public long? TotalInBytes { get; set; }
 	public string? TotalVirtual { get; set; }
 	public long? TotalVirtualInBytes { get; set; }
+
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#used']/*"/>
+	public string? Used { get; set; }
 
 	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#used_in_bytes']/*"/>
 	public long? UsedInBytes { get; set; }

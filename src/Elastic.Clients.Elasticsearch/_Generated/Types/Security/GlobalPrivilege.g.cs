@@ -44,6 +44,9 @@ public sealed partial class GlobalPrivilege
 	}
 
 	public required Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Application { get; set; }
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#data_source']/*"/>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>? DataSource { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.GlobalPrivilege']/*"/>
@@ -75,6 +78,33 @@ public readonly partial struct GlobalPrivilegeDescriptor
 	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application(System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor> action)
 	{
 		Instance.Application = Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#data_source']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor DataSource(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>? value)
+	{
+		Instance.DataSource = value;
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#data_source']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor DataSource(params Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges[] values)
+	{
+		Instance.DataSource = [.. values];
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#data_source']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor DataSource(params System.Action<Elastic.Clients.Elasticsearch.Security.DataSourcePrivilegesDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Security.DataSourcePrivilegesDescriptor.Build(action));
+		}
+
+		Instance.DataSource = items;
 		return this;
 	}
 

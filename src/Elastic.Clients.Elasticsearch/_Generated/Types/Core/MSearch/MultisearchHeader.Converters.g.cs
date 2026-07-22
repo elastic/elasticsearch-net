@@ -35,9 +35,9 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropPreference = System.Text.Json.JsonEncodedText.Encode("preference"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouteSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearchType = System.Text.Json.JsonEncodedText.Encode("search_type"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -52,9 +52,9 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 		LocalJsonValue<string?> propPreference = default;
 		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<bool?> propRequestCache = default;
+		LocalJsonValue<string?> propRouteSlice = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchType?> propSearchType = default;
-		LocalJsonValue<string?> propSlice = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAllowNoIndices.TryReadProperty(ref reader, options, PropAllowNoIndices, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
@@ -107,17 +107,17 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propRouteSlice.TryReadProperty(ref reader, options, PropRouteSlice, null))
+			{
+				continue;
+			}
+
 			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
 			}
 
 			if (propSearchType.TryReadProperty(ref reader, options, PropSearchType, static Elastic.Clients.Elasticsearch.SearchType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SearchType>(o)))
-			{
-				continue;
-			}
-
-			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
 			{
 				continue;
 			}
@@ -144,9 +144,9 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 			Preference = propPreference.Value,
 			ProjectRouting = propProjectRouting.Value,
 			RequestCache = propRequestCache.Value,
+			RouteSlice = propRouteSlice.Value,
 			Routing = propRouting.Value,
-			SearchType = propSearchType.Value,
-			Slice = propSlice.Value
+			SearchType = propSearchType.Value
 		};
 	}
 
@@ -163,9 +163,9 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropPreference, value.Preference, null, null);
 		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropRequestCache, value.RequestCache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropRouteSlice, value.RouteSlice, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropSearchType, value.SearchType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SearchType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SearchType>(o, v));
-		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
 		writer.WriteEndObject();
 	}
 }

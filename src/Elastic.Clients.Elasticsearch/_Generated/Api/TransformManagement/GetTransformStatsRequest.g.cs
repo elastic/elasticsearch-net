@@ -30,6 +30,9 @@ public sealed partial class GetTransformStatsRequestParameters : Elastic.Transpo
 	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#basic']/*"/>
+	public bool? Basic { get => Q<bool?>("basic"); set => Q("basic", value); }
+
 	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
@@ -73,6 +76,9 @@ public sealed partial class GetTransformStatsRequest : Elastic.Clients.Elasticse
 
 	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#basic']/*"/>
+	public bool? Basic { get => Q<bool?>("basic"); set => Q("basic", value); }
 
 	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -121,6 +127,13 @@ public readonly partial struct GetTransformStatsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#basic']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor Basic(bool? value = true)
+	{
+		Instance.Basic = value;
 		return this;
 	}
 

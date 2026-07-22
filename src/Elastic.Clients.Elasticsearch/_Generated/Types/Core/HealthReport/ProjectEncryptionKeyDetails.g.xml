@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.health_report.ProjectEncryptionKeyDetails#encryption_required"><summary><para>
+Whether callers must refuse to store secrets when the service is not ready.
+If <c>false</c>, callers may fall back to storing secrets in plaintext (with a warning).
+</para></summary></member>
+</doc>

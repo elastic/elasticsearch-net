@@ -38,7 +38,7 @@ public sealed partial class BinaryProperty : Elastic.Clients.Elasticsearch.Mappi
 	}
 
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	public bool? DocValues { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? DocValues { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
@@ -84,7 +84,7 @@ public readonly partial struct BinaryPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument> DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument> DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;
@@ -212,7 +212,7 @@ public readonly partial struct BinaryPropertyDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor DocValues(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor DocValues(Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Mapping.DocValuesConfig>? value)
 	{
 		Instance.DocValues = value;
 		return this;

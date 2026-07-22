@@ -10,7 +10,7 @@ A list of cluster privileges. These privileges define the cluster level actions 
 Optional description of the role descriptor
 </para></summary></member>
   <member key="security.query_role.QueryRole#global"><summary><para>
-An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware.
 </para></summary></member>
   <member key="security.query_role.QueryRole#indices"><summary><para>
 A list of indices permissions entries.

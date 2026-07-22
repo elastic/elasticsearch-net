@@ -46,7 +46,11 @@ public sealed partial class RecoveryStats
 	}
 
 	public required long CurrentAsSource { get; set; }
+	public long? CurrentAsSourceQueued { get; set; }
 	public required long CurrentAsTarget { get; set; }
+	public long? CurrentAsTargetQueued { get; set; }
+	public long? CurrentFromStore { get; set; }
+	public long? CurrentFromStoreQueued { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; set; }
 	public required System.TimeSpan ThrottleTimeInMillis { get; set; }
 }

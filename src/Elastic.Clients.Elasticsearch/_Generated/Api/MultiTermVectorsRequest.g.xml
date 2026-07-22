@@ -17,6 +17,11 @@ Each element has the structure provided by the termvectors API.
 You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 The mapping used is determined by the specified <c>_index</c>.
 </para></summary></member>
+  <member key="_global.mtermvectors.Request#_slice"><summary><para>
+The slice identifier used to route the operation to a specific slice.
+Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.mtermvectors.Request#docs"><summary><para>
 An array of existing or artificial documents.
 </para></summary></member>
@@ -51,6 +56,7 @@ If true, the request is real-time as opposed to near-real-time.
 </para></summary></member>
   <member key="_global.mtermvectors.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.mtermvectors.Request#term_statistics"><summary><para>
 If true, the response includes term frequency and document frequency.

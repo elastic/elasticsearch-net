@@ -44,6 +44,8 @@ public sealed partial class TimeHttpHistogram
 	}
 
 	public required long Count { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Ge { get; set; }
 	public long? GeMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? Lt { get; set; }
 	public long? LtMillis { get; set; }
 }

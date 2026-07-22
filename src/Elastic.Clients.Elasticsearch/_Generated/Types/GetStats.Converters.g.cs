@@ -29,10 +29,10 @@ public sealed partial class GetStatsConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropExistsTime = System.Text.Json.JsonEncodedText.Encode("exists_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropExistsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("exists_time_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropExistsTotal = System.Text.Json.JsonEncodedText.Encode("exists_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGetTime = System.Text.Json.JsonEncodedText.Encode("getTime"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMissingTime = System.Text.Json.JsonEncodedText.Encode("missing_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMissingTimeInMillis = System.Text.Json.JsonEncodedText.Encode("missing_time_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMissingTotal = System.Text.Json.JsonEncodedText.Encode("missing_total"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
@@ -43,10 +43,10 @@ public sealed partial class GetStatsConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExistsTime = default;
 		LocalJsonValue<System.TimeSpan> propExistsTimeInMillis = default;
 		LocalJsonValue<long> propExistsTotal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propGetTime = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMissingTime = default;
 		LocalJsonValue<System.TimeSpan> propMissingTimeInMillis = default;
 		LocalJsonValue<long> propMissingTotal = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTime = default;
 		LocalJsonValue<System.TimeSpan> propTimeInMillis = default;
 		LocalJsonValue<long> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -71,6 +71,11 @@ public sealed partial class GetStatsConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
+			if (propGetTime.TryReadProperty(ref reader, options, PropGetTime, null))
+			{
+				continue;
+			}
+
 			if (propMissingTime.TryReadProperty(ref reader, options, PropMissingTime, null))
 			{
 				continue;
@@ -82,11 +87,6 @@ public sealed partial class GetStatsConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propMissingTotal.TryReadProperty(ref reader, options, PropMissingTotal, null))
-			{
-				continue;
-			}
-
-			if (propTime.TryReadProperty(ref reader, options, PropTime, null))
 			{
 				continue;
 			}
@@ -117,10 +117,10 @@ public sealed partial class GetStatsConverter : System.Text.Json.Serialization.J
 			ExistsTime = propExistsTime.Value,
 			ExistsTimeInMillis = propExistsTimeInMillis.Value,
 			ExistsTotal = propExistsTotal.Value,
+			GetTime = propGetTime.Value,
 			MissingTime = propMissingTime.Value,
 			MissingTimeInMillis = propMissingTimeInMillis.Value,
 			MissingTotal = propMissingTotal.Value,
-			Time = propTime.Value,
 			TimeInMillis = propTimeInMillis.Value,
 			Total = propTotal.Value
 		};
@@ -133,10 +133,10 @@ public sealed partial class GetStatsConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropExistsTime, value.ExistsTime, null, null);
 		writer.WriteProperty(options, PropExistsTimeInMillis, value.ExistsTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropExistsTotal, value.ExistsTotal, null, null);
+		writer.WriteProperty(options, PropGetTime, value.GetTime, null, null);
 		writer.WriteProperty(options, PropMissingTime, value.MissingTime, null, null);
 		writer.WriteProperty(options, PropMissingTimeInMillis, value.MissingTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropMissingTotal, value.MissingTotal, null, null);
-		writer.WriteProperty(options, PropTime, value.Time, null, null);
 		writer.WriteProperty(options, PropTimeInMillis, value.TimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();

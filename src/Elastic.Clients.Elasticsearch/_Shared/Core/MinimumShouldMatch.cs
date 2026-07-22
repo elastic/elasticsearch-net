@@ -7,7 +7,8 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.MinimumShouldMatchConverter))]
-public sealed class MinimumShouldMatch : Union<int, string>
+[Codegen(ShouldGenerate = false)]
+public sealed partial class MinimumShouldMatch : Union<int, string>
 {
 	public MinimumShouldMatch(int count) : base(count)
 	{

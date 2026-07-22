@@ -40,11 +40,17 @@ public sealed partial class Client
 	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#agent']/*"/>
 	public string? Agent { get; set; }
 
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#closed_time']/*"/>
+	public string? ClosedTime { get; set; }
+
 	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#closed_time_millis']/*"/>
 	public long? ClosedTimeMillis { get; set; }
 
 	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#id']/*"/>
 	public long? Id { get; set; }
+
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#last_request_time']/*"/>
+	public string? LastRequestTime { get; set; }
 
 	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#last_request_time_millis']/*"/>
 	public long? LastRequestTimeMillis { get; set; }
@@ -54,6 +60,9 @@ public sealed partial class Client
 
 	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#local_address']/*"/>
 	public string? LocalAddress { get; set; }
+
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#opened_time']/*"/>
+	public string? OpenedTime { get; set; }
 
 	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#opened_time_millis']/*"/>
 	public long? OpenedTimeMillis { get; set; }

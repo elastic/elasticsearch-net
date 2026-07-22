@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.info.Defaults#model_platform_variant"><summary><para>
+Returns <c>linux-x86_64</c> when all ML nodes are x86, or when no ML nodes exist but the cluster is in Elastic Cloud.
+Returns <c>platform_agnostic</c> otherwise.
+</para></summary></member>
+</doc>

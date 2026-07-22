@@ -76,6 +76,9 @@ public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Req
 	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#project_routing']/*"/>
+	public string? ProjectRouting { get; set; }
+
 	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#search_after']/*"/>
 	public string? SearchAfter { get; set; }
 
@@ -163,6 +166,13 @@ public readonly partial struct TermsEnumRequestDescriptor
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor IndexFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#project_routing']/*"/>
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -318,6 +328,13 @@ public readonly partial struct TermsEnumRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#project_routing']/*"/>
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 

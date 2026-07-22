@@ -8,10 +8,77 @@ The unique identifier for the inference endpoint.
 </para></summary></member>
   <member key="inference.rerank.Request#input"><summary><para>
 The documents to rank.
-</para></summary></member>
+The input can be specified as a single string or an array of strings, or as an object or an array of objects.
+The object form additionally allows specifying non-text inputs, such as images.
+</para>
+<para>
+info
+Only the <c>elastic</c> service currently supports non-text inputs for the <c>rerank</c> task. For all other services, the input must be a string or an array of strings.
+</para>
+<para>
+string example:
+</para>
+<code>
+"input": "some document text"
+</code>
+<para>
+string array example:
+</para>
+<code>
+"input": ["some document text", "some more document text"]
+</code>
+<para>
+object example:
+</para>
+<code>
+"input": {
+  "type": "image",
+  "format": "base64",
+  "value": "data:image/jpeg;base64,..."
+}
+</code>
+<para>
+object array example:
+</para>
+<code>
+"input": [
+  {
+    "type": "text",
+    "format": "text",
+    "value": "some document text"
+  },
+  {
+    "type": "image",
+    "format": "base64",
+    "value": "data:image/jpeg;base64,..."
+  }
+]
+</code></summary></member>
   <member key="inference.rerank.Request#query"><summary><para>
 Query input.
-</para></summary></member>
+The query can be specified as a single string, or as an object.
+The object form additionally allows specifying non-text inputs, such as images.
+</para>
+<para>
+info
+Only the <c>elastic</c> service currently supports non-text queries for the <c>rerank</c> task. For all other services, the query must be a string.
+</para>
+<para>
+string example:
+</para>
+<code>
+"query": "some query text"
+</code>
+<para>
+object example:
+</para>
+<code>
+"query": {
+  "type": "image",
+  "format": "base64",
+  "value": "data:image/jpeg;base64,..."
+}
+</code></summary></member>
   <member key="inference.rerank.Request#return_documents"><summary><para>
 Include the document text in the response.
 </para></summary></member>

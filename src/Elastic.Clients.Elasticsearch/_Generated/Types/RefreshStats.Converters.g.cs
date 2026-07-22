@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 public sealed partial class RefreshStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RefreshStats>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropExternalTotal = System.Text.Json.JsonEncodedText.Encode("external_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExternalTotalTime = System.Text.Json.JsonEncodedText.Encode("external_total_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropExternalTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("external_total_time_in_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropListeners = System.Text.Json.JsonEncodedText.Encode("listeners"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
@@ -36,6 +37,7 @@ public sealed partial class RefreshStatsConverter : System.Text.Json.Serializati
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long> propExternalTotal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExternalTotalTime = default;
 		LocalJsonValue<System.TimeSpan> propExternalTotalTimeInMillis = default;
 		LocalJsonValue<long> propListeners = default;
 		LocalJsonValue<long> propTotal = default;
@@ -44,6 +46,11 @@ public sealed partial class RefreshStatsConverter : System.Text.Json.Serializati
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propExternalTotal.TryReadProperty(ref reader, options, PropExternalTotal, null))
+			{
+				continue;
+			}
+
+			if (propExternalTotalTime.TryReadProperty(ref reader, options, PropExternalTotalTime, null))
 			{
 				continue;
 			}
@@ -86,6 +93,7 @@ public sealed partial class RefreshStatsConverter : System.Text.Json.Serializati
 		return new Elastic.Clients.Elasticsearch.RefreshStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ExternalTotal = propExternalTotal.Value,
+			ExternalTotalTime = propExternalTotalTime.Value,
 			ExternalTotalTimeInMillis = propExternalTotalTimeInMillis.Value,
 			Listeners = propListeners.Value,
 			Total = propTotal.Value,
@@ -98,6 +106,7 @@ public sealed partial class RefreshStatsConverter : System.Text.Json.Serializati
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropExternalTotal, value.ExternalTotal, null, null);
+		writer.WriteProperty(options, PropExternalTotalTime, value.ExternalTotalTime, null, null);
 		writer.WriteProperty(options, PropExternalTotalTimeInMillis, value.ExternalTotalTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropListeners, value.Listeners, null, null);
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_region_policy.Response#created_at"><summary><para>
+The date and time the region policy was created.
+</para></summary></member>
+  <member key="inference.put_region_policy.Response#created_by"><summary><para>
+The user who created the region policy.
+</para></summary></member>
+  <member key="inference.put_region_policy.Response#updated_at"><summary><para>
+The date and time the region policy was last updated.
+</para></summary></member>
+  <member key="inference.put_region_policy.Response#updated_by"><summary><para>
+The user who last updated the region policy.
+</para></summary></member>
+</doc>

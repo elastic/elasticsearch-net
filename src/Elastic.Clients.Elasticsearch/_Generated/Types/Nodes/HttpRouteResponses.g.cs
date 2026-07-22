@@ -49,5 +49,6 @@ public sealed partial class HttpRouteResponses
 	public required long Count { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram> HandlingTimeHistogram { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram> SizeHistogram { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; set; }
 	public required long TotalSizeInBytes { get; set; }
 }

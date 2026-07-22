@@ -52,6 +52,9 @@ public sealed partial class Destination
 	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#pipeline']/*"/>
 	public string? Pipeline { get; set; }
 
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#_slice']/*"/>
+	public string? RouteSlice { get; set; }
+
 	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#routing']/*"/>
 	public string? Routing { get; set; }
 
@@ -97,6 +100,13 @@ public readonly partial struct DestinationDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Pipeline(string? value)
 	{
 		Instance.Pipeline = value;
+		return this;
+	}
+
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

@@ -25,6 +25,16 @@ To search all data streams or indices, omit this parameter or use <c>*</c>  or <
   <member key="_global.terms_enum.Request#index_filter"><summary><para>
 Filter an index shard if the provided query rewrites to <c>match_none</c>.
 </para></summary></member>
+  <member key="_global.terms_enum.Request#project_routing"><summary><para>
+Specifies a subset of projects to target for the search using project
+metadata tags in a subset of Lucene query syntax.
+Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+Examples:
+_alias:my-project
+_alias:_origin
+_alias:<em>pr</em>
+Supported in serverless only.
+</para></summary></member>
   <member key="_global.terms_enum.Request#search_after"><summary><para>
 The string after which terms in the index should be returned.
 It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.

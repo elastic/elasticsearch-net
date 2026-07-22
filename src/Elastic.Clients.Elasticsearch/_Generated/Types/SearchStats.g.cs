@@ -28,12 +28,14 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class SearchStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SearchStats(long fetchCurrent, System.TimeSpan fetchTimeInMillis, long fetchTotal, long queryCurrent, System.TimeSpan queryTimeInMillis, long queryTotal, long scrollCurrent, System.TimeSpan scrollTimeInMillis, long scrollTotal, long suggestCurrent, System.TimeSpan suggestTimeInMillis, long suggestTotal)
+	public SearchStats(long fetchCurrent, long fetchFailure, System.TimeSpan fetchTimeInMillis, long fetchTotal, long queryCurrent, long queryFailure, System.TimeSpan queryTimeInMillis, long queryTotal, long scrollCurrent, System.TimeSpan scrollTimeInMillis, long scrollTotal, long suggestCurrent, System.TimeSpan suggestTimeInMillis, long suggestTotal)
 	{
 		FetchCurrent = fetchCurrent;
+		FetchFailure = fetchFailure;
 		FetchTimeInMillis = fetchTimeInMillis;
 		FetchTotal = fetchTotal;
 		QueryCurrent = queryCurrent;
+		QueryFailure = queryFailure;
 		QueryTimeInMillis = queryTimeInMillis;
 		QueryTotal = queryTotal;
 		ScrollCurrent = scrollCurrent;
@@ -55,12 +57,14 @@ public sealed partial class SearchStats
 	}
 
 	public required long FetchCurrent { get; set; }
+	public required long FetchFailure { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? FetchTime { get; set; }
 	public required System.TimeSpan FetchTimeInMillis { get; set; }
 	public required long FetchTotal { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? Groups { get; set; }
 	public long? OpenContexts { get; set; }
 	public required long QueryCurrent { get; set; }
+	public required long QueryFailure { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? QueryTime { get; set; }
 	public required System.TimeSpan QueryTimeInMillis { get; set; }
 	public required long QueryTotal { get; set; }
