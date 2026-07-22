@@ -32,6 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: 'global.json'
       - run: dotnet test RequestConverter.sln
 
   wasm:
@@ -39,6 +41,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: 'global.json'
       - run: dotnet workload install wasm-tools
       - run: dotnet publish src/RequestConverter.Wasm/RequestConverter.Wasm.csproj -c Release
       - uses: actions/setup-node@v4
