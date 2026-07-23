@@ -10,6 +10,9 @@ on:
       - '.github/workflows/request-converter.yml'
       - 'RequestConverter.sln'
       - 'global.json'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'nuget.config'
       - 'src/Elastic.Clients.Elasticsearch/**'
       - 'src/RequestConverter/**'
       - 'src/RequestConverter.Console/**'
@@ -20,6 +23,9 @@ on:
       - '.github/workflows/request-converter.yml'
       - 'RequestConverter.sln'
       - 'global.json'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'nuget.config'
       - 'src/Elastic.Clients.Elasticsearch/**'
       - 'src/RequestConverter/**'
       - 'src/RequestConverter.Console/**'
@@ -34,6 +40,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           global-json-file: 'global.json'
+      - run: dotnet workload install wasm-tools
       - run: dotnet test RequestConverter.sln
 
   wasm:

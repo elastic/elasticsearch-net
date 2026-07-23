@@ -46,6 +46,9 @@ jobs:
         with:
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
+      # Trusted publishing (OIDC, no NODE_AUTH_TOKEN) requires npm 11.5.1 or newer;
+      # node 22's bundled npm 10.9.x predates it.
+      - run: npm install -g npm@latest
       - name: Compute package version
         id: version
         env:
