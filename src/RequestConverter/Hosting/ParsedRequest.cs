@@ -49,4 +49,12 @@ public sealed record ConvertOptions
 
 	/// <summary>The placeholder document type name used when <see cref="UseStronglyTypedDocument"/> is set. Defaults to <c>MyDocument</c>.</summary>
 	public string? DocumentTypeName { get; init; }
+
+	/// <summary>Selects the client invocation flavor when <see cref="EmitClientCall"/> is set: <c>async</c>
+	/// (default) or <c>sync</c>. Extension to the host contract.</summary>
+	public string? ClientCallStyle { get; init; }
+
+	/// <summary>Append the client invocation that executes the request (e.g.
+	/// <c>var response = await client.Esql.QueryAsync(request);</c>). Extension to the host contract.</summary>
+	public bool? EmitClientCall { get; init; }
 }
