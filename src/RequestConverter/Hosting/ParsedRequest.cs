@@ -26,9 +26,11 @@ public sealed record ParsedRequest
 }
 
 /// <summary>
-/// The host's conversion options. Only <see cref="TypeNameStyle"/> drives the .NET converter; the remaining
-/// fields exist to round-trip the host contract. <see cref="TypeNameStyle"/> is an extension the harness passes
-/// through the host's open-ended options bag to select the emitted type-name spelling.
+/// The host's conversion options. The typed fields - <see cref="TypeNameStyle"/>, <see cref="SyntaxMode"/>,
+/// <see cref="UseStronglyTypedDocument"/>, <see cref="DocumentTypeName"/>, <see cref="EmitClientCall"/>, and
+/// <see cref="ClientCallStyle"/> - drive the .NET converter output. The remaining fields exist to round-trip
+/// the host contract. <see cref="TypeNameStyle"/> is an extension the harness passes through the host's
+/// open-ended options bag to select the emitted type-name spelling.
 /// </summary>
 public sealed record ConvertOptions
 {

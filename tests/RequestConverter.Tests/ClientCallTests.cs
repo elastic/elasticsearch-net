@@ -19,9 +19,10 @@ public sealed class ClientCallTests
 	[Fact]
 	public void Appends_awaited_namespaced_call()
 	{
-		var options = new FormattingOptions { EmitVariableDeclaration = true, EmitClientCall = true };
+		var options = new FormattingOptions { EmitClientCall = true };
 		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
 
+		Assert.StartsWith("EsqlQueryRequest request = ", result.Code, StringComparison.Ordinal);
 		Assert.EndsWith("var response = await client.Esql.QueryAsync(request);", result.Code, StringComparison.Ordinal);
 	}
 
