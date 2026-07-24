@@ -24,11 +24,16 @@ namespace RequestConverter;
 /// Query-parameter keys the endpoint does not define. The converter drops them from the generated code, so a
 /// non-empty collection means the output is not a faithful reconstruction; hosts should warn the user.
 /// </param>
+/// <param name="ClientCall">
+/// The client method that executes the request. Always populated for a successfully materialized endpoint (the
+/// table is generated from the same endpoint set as the factory); <c>null</c> only as a defensive fallback.
+/// </param>
 public sealed record ConversionResult(
 	string Code,
 	Type RequestType,
 	IReadOnlyCollection<string> Namespaces,
-	IReadOnlyCollection<string> UnsupportedParameters);
+	IReadOnlyCollection<string> UnsupportedParameters,
+	ClientCallInfo? ClientCall);
 
 public sealed class RequestConverter
 {
@@ -76,24 +81,89 @@ public sealed class RequestConverter
 			throw new NotSupportedException($"Request for endpoint '{id}' does not implement '{nameof(ICodeFormattable)}'.");
 		}
 
+		ClientCallInfo? clientCall = ClientMethods.Lookup.TryGetValue(id, out var call) ? call : null;
+
 		var writer = new CodeWriter(options);
+
+		// The client call references the request by name, so it forces the variable-declaration form.
+		var emitVariableDeclaration = writer.Options.EmitVariableDeclaration || writer.Options.EmitClientCall;
 
 		// `TypeName variableName = ` goes before the initializer. Writing the type name here (not after FormatCode)
 		// records its namespace up front so the body's collision-aware shortening accounts for it. The materialized
 		// request type is already closed over JsonElement for generic requests (e.g. IndexRequest<JsonElement>), so the
 		// rendered declaration names that concrete type.
-		if (writer.Options.EmitVariableDeclaration)
+		if (emitVariableDeclaration)
 		{
 			writer.WriteTypeName(request.GetType()).Write(" ").Write(writer.Options.VariableName).Write(" = ");
 		}
 
 		formattable.FormatCode(writer);
 
-		if (writer.Options.EmitVariableDeclaration)
+		if (emitVariableDeclaration)
 		{
 			writer.Write(";");
 		}
 
-		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces, unsupportedParameters));
+		if (writer.Options.EmitClientCall && clientCall is { } clientMethod)
+		{
+			WriteClientCall(writer, clientMethod);
+		}
+
+		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces, unsupportedParameters, clientCall));
+	}
+
+	/// <summary>
+	/// Appends the executing client invocation as a second statement, e.g.
+	/// <c>var response = await client.Esql.QueryAsync(request);</c>. Response-only generic type parameters are
+	/// spelled explicitly (the compiler cannot infer them from the request argument): the placeholder document
+	/// type in strongly-typed-document mode, <see cref="System.Text.Json.JsonElement"/> otherwise, matching how
+	/// the declared request variable renders.
+	/// </summary>
+	private static void WriteClientCall(CodeWriter writer, ClientCallInfo clientMethod)
+	{
+		var options = writer.Options;
+		var async = options.ClientCallStyle == ClientCallStyle.Async;
+
+		writer.WriteLine().WriteLine();
+		writer.Write("var ").Write(options.ResponseVariableName).Write(" = ");
+
+		if (async)
+		{
+			writer.Write("await ");
+		}
+
+		writer.Write(options.ClientVariableName).Write(".");
+
+		if (clientMethod.SubClient.Length > 0)
+		{
+			writer.Write(clientMethod.SubClient).Write(".");
+		}
+
+		writer.Write(async ? clientMethod.Method + "Async" : clientMethod.Method);
+
+		if (clientMethod.ResponseGenericArity > 0)
+		{
+			writer.Write("<");
+			for (var i = 0; i < clientMethod.ResponseGenericArity; i++)
+			{
+				if (i > 0)
+				{
+					writer.Write(", ");
+				}
+
+				if (options.UseStronglyTypedDocument)
+				{
+					writer.Write(options.DocumentTypeName);
+				}
+				else
+				{
+					writer.WriteTypeRef("System.Text.Json.JsonElement");
+				}
+			}
+
+			writer.Write(">");
+		}
+
+		writer.Write("(").Write(options.VariableName).Write(");");
 	}
 }

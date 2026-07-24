@@ -49,6 +49,25 @@ public sealed record FormattingOptions
 
 	/// <summary>The placeholder document type name used when <see cref="UseStronglyTypedDocument"/> is set. Defaults to <c>MyDocument</c>.</summary>
 	public string DocumentTypeName { get; init; } = "MyDocument";
+
+	/// <summary>
+	/// When <c>true</c>, appends the client invocation that executes the request after the request expression,
+	/// e.g. <c>var response = await client.Esql.QueryAsync(request);</c>. Implies
+	/// <see cref="EmitVariableDeclaration"/> (the call needs the named request variable). A client method whose
+	/// generic type parameters are not inferrable from the request argument spells them explicitly:
+	/// <see cref="DocumentTypeName"/> when <see cref="UseStronglyTypedDocument"/> is set, <c>JsonElement</c>
+	/// otherwise. Defaults to <c>false</c>.
+	/// </summary>
+	public bool EmitClientCall { get; init; }
+
+	/// <summary>The invocation flavor used when <see cref="EmitClientCall"/> is set. Defaults to <see cref="ClientCallStyle.Async"/>.</summary>
+	public ClientCallStyle ClientCallStyle { get; init; } = ClientCallStyle.Async;
+
+	/// <summary>The client variable name used when <see cref="EmitClientCall"/> is set. Defaults to <c>client</c>.</summary>
+	public string ClientVariableName { get; init; } = "client";
+
+	/// <summary>The response variable name used when <see cref="EmitClientCall"/> is set. Defaults to <c>response</c>.</summary>
+	public string ResponseVariableName { get; init; } = "response";
 }
 
 /// <summary>
@@ -69,6 +88,18 @@ public enum TypeNameStyle
 
 	/// <summary>Fully-qualified names with the <c>global::</c> prefix (e.g. <c>global::System.Collections.Generic.Dictionary&lt;...&gt;</c>).</summary>
 	GlobalFqn = 2
+}
+
+/// <summary>
+/// The invocation flavor emitted for the client call (see <see cref="FormattingOptions.EmitClientCall"/>).
+/// </summary>
+public enum ClientCallStyle
+{
+	/// <summary>The awaited asynchronous method, e.g. <c>var response = await client.SearchAsync&lt;JsonElement&gt;(request);</c>.</summary>
+	Async = 0,
+
+	/// <summary>The synchronous method, e.g. <c>var response = client.Search&lt;JsonElement&gt;(request);</c>.</summary>
+	Sync = 1
 }
 
 /// <summary>
