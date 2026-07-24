@@ -117,4 +117,23 @@ public sealed class ClientCallTests
 
 		Assert.EndsWith("var esqlResponse = await es.Esql.QueryAsync(esqlRequest);", result.Code, StringComparison.Ordinal);
 	}
+
+	[Fact]
+	public void Host_options_map_to_formatting_options()
+	{
+		var options = new Hosting.ConvertOptions { ClientCallStyle = "sync", EmitClientCall = true };
+		var formatting = Hosting.ConvertOptionsMapper.BuildFormattingOptions(options, "request");
+
+		Assert.True(formatting.EmitClientCall);
+		Assert.Equal(ClientCallStyle.Sync, formatting.ClientCallStyle);
+	}
+
+	[Fact]
+	public void Host_options_default_to_no_client_call()
+	{
+		var formatting = Hosting.ConvertOptionsMapper.BuildFormattingOptions(new Hosting.ConvertOptions(), "request");
+
+		Assert.False(formatting.EmitClientCall);
+		Assert.Equal(ClientCallStyle.Async, formatting.ClientCallStyle);
+	}
 }
