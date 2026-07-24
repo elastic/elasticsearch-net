@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>annotations</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
+    <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
     <IsPackable>false</IsPackable>
     <IsPublishable>false</IsPublishable>
     <!-- This project only round-trips converter output; it never ships. -->

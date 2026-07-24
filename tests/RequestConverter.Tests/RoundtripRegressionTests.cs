@@ -243,6 +243,67 @@ public sealed class RoundtripRegressionTests
 	}
 
 	/// <summary>
+	/// Gates the published-example flavor (Descriptor syntax + strongly typed document): every corpus example
+	/// the round-trip Theory converts must also convert here without throwing. This flavor's <c>MyDocument</c>
+	/// type is illustrative and never compiles or round-trips, so unlike the Theory above this only exercises
+	/// conversion, not compilation or round-tripping.
+	/// </summary>
+	[Fact]
+	public void Converted_requests_convert_in_typed_document_mode()
+	{
+		var reportPath = LocateRepoRootFile(Path.Combine("tests", "RequestConverter.Tests", "TestData", "alternatives_report.json"));
+		using var reportStream = File.OpenRead(reportPath);
+		var examples = JsonSerializer.Deserialize<ExampleModel[]>(reportStream)
+			?? throw new InvalidOperationException("Failed to parse alternatives_report.json.");
+
+		var serializer = global::RequestConverter.RequestConverter.DefaultSerializer;
+
+		var options = new FormattingOptions
+		{
+			SyntaxMode = SyntaxMode.Descriptor,
+			UseStronglyTypedDocument = true,
+			EmitVariableDeclaration = true,
+		};
+
+		var failures = new List<string>();
+		var converted = 0;
+		var skippedUnsupported = 0;
+
+		foreach (var example in examples)
+		{
+			if (example.Lang != "console" || example.ParsedSource is null || example.ParsedSource.Count == 0)
+				continue;
+			if (Blacklist.Contains(example.Digest))
+				continue;
+
+			foreach (var source in example.ParsedSource)
+			{
+				var body = source.Body?.GetRawText();
+				try
+				{
+					_ = global::RequestConverter.RequestConverter.ConvertCore(
+						serializer, source.Api, source.PathParameters, source.QueryParameters, body, options);
+					converted++;
+				}
+				catch (NotSupportedException)
+				{
+					// The converter doesn't (yet) support this endpoint; not a regression (mirrors the Theory above).
+					skippedUnsupported++;
+				}
+				catch (Exception ex)
+				{
+					failures.Add($"{source.Api} [{example.Digest}]: {ex.GetType().Name}: {ex.Message}");
+				}
+			}
+		}
+
+		_output.WriteLine($"converted={converted}, skipped(unsupported)={skippedUnsupported}, typed-document-failures={failures.Count}");
+
+		Assert.True(failures.Count == 0,
+			$"{failures.Count} typed-document conversion failures:\n{string.Join("\n", failures)}");
+	}
+
+	/// <summary>
 	/// Resolves a request to its on-the-wire endpoint shape: HTTP method, resolved route values, and
 	/// query-string parameters, using the client's own URL and query-string builder (the same calls the
 	/// client makes in <c>PrepareRequest</c>). <c>RequestParameters</c> is internal and lives on the
