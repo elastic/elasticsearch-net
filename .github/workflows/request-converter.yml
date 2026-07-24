@@ -1,0 +1,58 @@
+name: Request converter
+
+on:
+  push:
+    branches:
+      - main
+      - '8.*'
+      - '9.*'
+    paths:
+      - '.github/workflows/request-converter.yml'
+      - 'RequestConverter.sln'
+      - 'global.json'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'nuget.config'
+      - 'src/Elastic.Clients.Elasticsearch/**'
+      - 'src/RequestConverter/**'
+      - 'src/RequestConverter.Console/**'
+      - 'src/RequestConverter.Wasm/**'
+      - 'tests/RequestConverter.Tests/**'
+  pull_request:
+    paths:
+      - '.github/workflows/request-converter.yml'
+      - 'RequestConverter.sln'
+      - 'global.json'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'nuget.config'
+      - 'src/Elastic.Clients.Elasticsearch/**'
+      - 'src/RequestConverter/**'
+      - 'src/RequestConverter.Console/**'
+      - 'src/RequestConverter.Wasm/**'
+      - 'tests/RequestConverter.Tests/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: 'global.json'
+      - run: dotnet workload install wasm-tools
+      - run: dotnet test RequestConverter.sln
+
+  wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: 'global.json'
+      - run: dotnet workload install wasm-tools
+      - run: dotnet publish src/RequestConverter.Wasm/RequestConverter.Wasm.csproj -c Release
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node src/RequestConverter.Wasm/npm/smoke.mjs .artifacts/bin/RequestConverter.Wasm/release_browser-wasm/AppBundle
