@@ -1,0 +1,17 @@
+{
+  "name": "@elastic/request-converter-dotnet",
+  "version": "0.0.0",
+  "description": "Converts Elasticsearch Dev Console requests to Elastic.Clients.Elasticsearch (.NET) code. .NET WASM bundle consumed by @elastic/request-converter.",
+  "type": "module",
+  "exports": "./main.mjs",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elastic/elasticsearch-net.git",
+    "directory": "src/RequestConverter.Wasm"
+  },
+  "elasticsearch": {
+    "clientVersion": "0.0.0",
+    "commit": ""
+  }
+}
