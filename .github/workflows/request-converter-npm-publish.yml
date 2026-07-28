@@ -74,4 +74,20 @@ jobs:
             --commit "${{ steps.commit.outputs.sha }}" \
             --out .artifacts/npm/request-converter-dotnet
       - run: node src/RequestConverter.Wasm/npm/smoke.mjs .artifacts/npm/request-converter-dotnet
-      - run: npm publish .artifacts/npm/request-converter-dotnet --access public --provenance
+      # npm refuses to publish a version lower than the current "latest" without an explicit
+      # dist-tag (it would implicitly move "latest" backwards). Tag "latest" only when the new
+      # version is the highest published one; otherwise use a per-branch tag. Plain "8.19" is
+      # not a legal dist-tag (npm rejects tags that parse as semver ranges), hence the prefix.
+      - name: Compute dist-tag
+        id: dist-tag
+        run: |
+          CURRENT_LATEST=$(npm view @elastic/request-converter-dotnet version 2>/dev/null || echo "0.0.0")
+          NEW_VERSION="${{ steps.version.outputs.version }}"
+          if [ "$(printf '%s\n%s\n' "$CURRENT_LATEST" "$NEW_VERSION" | sort -V | tail -n1)" = "$NEW_VERSION" ]; then
+            TAG="latest"
+          else
+            TAG="latest-${{ steps.branch.outputs.branch }}"
+          fi
+          echo "Publishing ${NEW_VERSION} with dist-tag ${TAG} (current latest: ${CURRENT_LATEST})"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+      - run: npm publish .artifacts/npm/request-converter-dotnet --access public --provenance --tag "${{ steps.dist-tag.outputs.tag }}"
