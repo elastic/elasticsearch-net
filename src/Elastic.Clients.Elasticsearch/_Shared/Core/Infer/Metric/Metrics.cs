@@ -13,7 +13,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// Represents a collection of unique metric names to be included in URL paths to limit the request.
 /// </summary>
-public sealed class Metrics :
+public sealed partial class Metrics :
 	IEquatable<Metrics>,
 	IUrlParameter
 #if NET7_0_OR_GREATER
