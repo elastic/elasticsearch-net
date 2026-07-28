@@ -598,5 +598,115 @@
 		"digest": "ba70b92f745a1765f1eb62e3457a86c3",
 		"reason": "bulk body recorded as a JSON-string-wrapped NDJSON (leading newline, escaped) rather than a parsed array; a recording artifact the client never receives on the wire.",
 		"failsConversion": false
+	},
+	{
+		"digest": "8b38eeb41eb388ee6d92f26b5c0cc48d",
+		"reason": "8.19 only: the processor 'if' condition is a plain script-source string in the 8.19 spec; the example uses the stored-script object form ({\"id\": ...}) that only 9.x models.",
+		"failsConversion": true
+	},
+	{
+		"digest": "15e90b82827c8512670820cf856a9c71",
+		"reason": "8.19 only: DateIndexNameProcessor.date_formats is required in the 8.19 spec and the generated formatter emits it unconditionally; the example omits it, so formatting NREs.",
+		"failsConversion": true
+	},
+	{
+		"digest": "b0ce54ff4fec0b0c712506eb81e633f4",
+		"reason": "8.19 only: DateIndexNameProcessor.date_formats is required in the 8.19 spec and the generated formatter emits it unconditionally; the example omits it, so formatting NREs.",
+		"failsConversion": true
+	},
+	{
+		"digest": "e6faae2e272ee57727f38e55a3de5bb2",
+		"reason": "8.19 only: Highlight.fields is a plain dictionary in the 8.19 spec; the example uses the order-preserving array form that only 9.x models.",
+		"failsConversion": true
+	},
+	{
+		"digest": "7e48648ca27024831c60b455e836c496",
+		"reason": "8.19 only: PinnedDoc._index is required in the 8.19 spec and the generated formatter emits it unconditionally; the example omits it on one doc, so formatting NREs.",
+		"failsConversion": true
+	},
+	{
+		"digest": "fe208d94ec93eabf3bd06139fa70701e",
+		"reason": "8.19 only: DownsamplingRound models the nested config object ({after, config: {fixed_interval}}); the example uses the flattened {after, fixed_interval} shape that only 9.x models, so config deserializes null and formatting NREs.",
+		"failsConversion": true
+	},
+	{
+		"digest": "e2a753029b450942a3228e3003a55a7d",
+		"reason": "8.19 only: DownsamplingRound models the nested config object ({after, config: {fixed_interval}}); the example uses the flattened {after, fixed_interval} shape that only 9.x models, so config deserializes null and formatting NREs.",
+		"failsConversion": true
+	},
+	{
+		"digest": "d27591881da6f5767523b1beb233adc7",
+		"reason": "8.19 only: AzureRepository.settings is required in the 8.19 spec and the generated formatter emits it unconditionally; the example body is just {\"type\": \"azure\"}, so formatting NREs.",
+		"failsConversion": true
+	},
+	{
+		"digest": "ff7b81fa96c3b994efa3dee230512291",
+		"reason": "8.19 only: Hop.query is required in the 8.19 spec and the generated formatter emits it unconditionally; the example's connections hop omits it, so formatting NREs.",
+		"failsConversion": true
+	},
+	{
+		"digest": "fa82d86a046d67366cfe9ce65535e433",
+		"reason": "8.19 only: VertexInclude is object-only in the 8.19 spec; the example uses the string shorthand for include/exclude terms that only 9.x models.",
+		"failsConversion": true
+	},
+	{
+		"digest": "5e21dbac92f34d236a8f0cc0d3a39cdd",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "8f6f7ea5abf56152b4a5639ddf40848f",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "fe54f3e53dbe7dee40ec3108a461d19a",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "7885ca9d7c61050095288eef6bc6cca9",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "862907653d1c18d2e80eff7f421200e2",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "aac5996a8398cc8f7701a063df0b2346",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "10de9fd4a38755020a07c4ec964d44c9",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "f3ab820e1f2f54ea718017aeae865742",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "e60b7f75ca806f2c74927c3d9409a986",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "5ad365ed9e1a3c26093a0f09666c133a",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "b80e1f5b26bae4f3c2f8a604b7caaf17",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
+	},
+	{
+		"digest": "50dc35d3d8705bd62aed20a15209476c",
+		"reason": "8.19 only: FieldRule keys other than dn/groups/username (e.g. realm.name, metadata.*) are custom variants on 8.19 and the generated formatter cannot emit them, so they are dropped on round-trip. 9.x models the field rule as an open KeyValuePair.",
+		"failsConversion": false
 	}
 ]
