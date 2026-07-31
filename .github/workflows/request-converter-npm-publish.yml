@@ -16,6 +16,10 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      branch: ${{ steps.branch.outputs.branch }}
+      dist-tag: ${{ steps.dist-tag.outputs.tag }}
     steps:
       - name: Resolve branch
         id: branch
@@ -91,3 +95,16 @@ jobs:
           echo "Publishing ${NEW_VERSION} with dist-tag ${TAG} (current latest: ${CURRENT_LATEST})"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
       - run: npm publish .artifacts/npm/request-converter-dotnet --access public --provenance --tag "${{ steps.dist-tag.outputs.tag }}"
+
+  # After a successful publish, open a bump PR in elasticsearch-specification targeting
+  # the matching major.minor branch (and main when this publish moved the "latest" tag).
+  bump-spec:
+    needs: publish
+    if: ${{ needs.publish.result == 'success' }}
+    uses: ./.github/workflows/bump-elasticsearch-specification.yml
+    with:
+      version: ${{ needs.publish.outputs.version }}
+      branch: ${{ needs.publish.outputs.branch }}
+      dist-tag: ${{ needs.publish.outputs.dist-tag }}
+      package: "@elastic/request-converter-dotnet"
+      dry-run: false

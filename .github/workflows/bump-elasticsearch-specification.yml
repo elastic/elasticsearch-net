@@ -1,0 +1,164 @@
+name: Bump elasticsearch-specification
+
+# Reusable workflow that opens PRs in elastic/elasticsearch-specification bumping a
+# converter package pin in docs/examples/package.json. Called from the npm publish
+# workflow after a successful publish; also dispatchable manually for testing.
+#
+# Targets the spec branch matching the published major.minor, and additionally
+# targets `main` when the publish moved the `latest` dist-tag.
+#
+# Uses an ephemeral Vault (ci-prod) token fetched via OIDC rather than the
+# default GITHUB_TOKEN: bump PRs target a different repo and must trigger its
+# CI. Permissions (contents:write, pull_requests:write on
+# elasticsearch-specification) are gated by the spec-bump token policies in
+# catalog-info. Requires id-token:write on the caller.
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'Published package version, e.g. 9.4.2'
+        required: true
+        type: string
+      branch:
+        description: 'Source major.minor branch, e.g. 9.4 (matches the spec branch to target)'
+        required: true
+        type: string
+      dist-tag:
+        description: 'npm dist-tag the version was published with: "latest" or "latest-<branch>"'
+        required: true
+        type: string
+      package:
+        description: 'npm package to bump in docs/examples/package.json'
+        required: true
+        type: string
+      dry-run:
+        description: 'Log the planned PRs without creating them'
+        required: false
+        default: false
+        type: boolean
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Published package version, e.g. 9.4.2'
+        required: true
+      branch:
+        description: 'Source major.minor branch, e.g. 9.4'
+        required: true
+      dist-tag:
+        description: 'npm dist-tag: "latest" or "latest-<branch>"'
+        required: true
+      package:
+        description: 'npm package to bump'
+        required: true
+      dry-run:
+        description: 'Log the planned PRs without creating them'
+        required: false
+        default: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch ephemeral GitHub token
+        id: fetch-token
+        uses: elastic/ci-gh-actions/fetch-github-token@2feb1c6f5086cf8e06f61ef35e275abed3456f7b # v1.5.3
+        with:
+          vault-instance: "ci-prod"
+      - name: Open bump PRs in elasticsearch-specification
+        uses: actions/github-script@v7
+        env:
+          SPEC_PKG: ${{ inputs.package }}
+          SPEC_VERSION: ${{ inputs.version }}
+          SPEC_BRANCH: ${{ inputs.branch }}
+          SPEC_DIST_TAG: ${{ inputs.dist-tag }}
+          SPEC_DRY_RUN: ${{ inputs.dry-run }}
+        with:
+          github-token: ${{ steps.fetch-token.outputs.token }}
+          script: |
+            const owner = 'elastic';
+            const repo = 'elasticsearch-specification';
+            const pkg = process.env.SPEC_PKG;
+            const version = process.env.SPEC_VERSION;
+            const branch = process.env.SPEC_BRANCH;
+            const distTag = process.env.SPEC_DIST_TAG;
+            const dryRun = String(process.env.SPEC_DRY_RUN) === 'true';
+            const unscoped = pkg.replace(/^@[^/]+\//, '');
+            const pin = `~${version}`;
+            const path = 'docs/examples/package.json';
+
+            // Always target the matching major.minor branch; also target main when
+            // the publish moved the "latest" dist-tag.
+            const targets = [branch];
+            if (distTag === 'latest') targets.push('main');
+
+            core.info(`Bumping ${pkg} to ${pin} on ${owner}/${repo}: ${targets.join(', ')}${dryRun ? ' (dry-run)' : ''}`);
+
+            for (const target of targets) {
+              const bumpBranch = `bump/${unscoped}-${version}-${target}`;
+              core.info(`\n--- ${target} -> ${bumpBranch} ---`);
+              try {
+                // Skip if the target spec branch doesn't exist (no branch for this major.minor).
+                let baseSha;
+                try {
+                  const ref = await github.rest.git.getRef({ owner, repo, ref: `heads/${target}` });
+                  baseSha = ref.object.sha;
+                } catch (e) {
+                  core.warning(`Branch '${target}' not found in ${owner}/${repo}; skipping.`);
+                  continue;
+                }
+
+                // Skip if an open PR for this bump branch already exists (idempotent).
+                const existing = await github.rest.pulls.list({
+                  owner, repo, state: 'open', head: `${owner}:${bumpBranch}`, per_page: 1
+                });
+                if (existing.data.length > 0) {
+                  core.info(`Open PR already exists (${existing.data[0].html_url}); skipping.`);
+                  continue;
+                }
+
+                // Read the current package.json from the target branch.
+                const file = await github.rest.repos.getContent({ owner, repo, path, ref: target });
+                const content = Buffer.from(file.data.content.replace(/\s/g, ''), 'base64').toString('utf8');
+                const pkgJson = JSON.parse(content);
+                const current = pkgJson.dependencies && pkgJson.dependencies[pkg];
+                if (current === pin) {
+                  core.info(`${pkg} already at ${pin} on ${target}; skipping.`);
+                  continue;
+                }
+                pkgJson.dependencies = pkgJson.dependencies || {};
+                pkgJson.dependencies[pkg] = pin;
+                const newContent = Buffer.from(JSON.stringify(pkgJson, null, 2) + '\n', 'utf8').toString('base64');
+
+                if (dryRun) {
+                  core.info(`[dry-run] Would bump ${pkg}: ${current || '(missing)'} -> ${pin} on ${target}; open PR from ${bumpBranch}.`);
+                  continue;
+                }
+
+                // Create the bump branch and commit the updated package.json.
+                await github.rest.git.createRef({ owner, repo, ref: `refs/heads/${bumpBranch}`, sha: baseSha });
+                await github.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+                  owner, repo, path,
+                  message: `Bump ${pkg} to ${version} (${target})`,
+                  content: newContent, branch: bumpBranch, sha: file.data.sha
+                });
+                const pr = await github.rest.pulls.create({
+                  owner, repo, head: bumpBranch, base: target,
+                  title: `Bump ${pkg} to ${version}`,
+                  body: [
+                    `Automated bump of \`${pkg}\` to \`${pin}\` in \`${path}\`.`,
+                    '',
+                    `Triggered by the publish of \`${pkg}@${version}\` (dist-tag \`${distTag}\`, source branch \`${branch}\`).`,
+                    '',
+                    'The lockfile is intentionally left unchanged; CI `npm install` reconciles the new version.',
+                  ].join('\n')
+                });
+                core.info(`Opened PR: ${pr.data.html_url}`);
+              } catch (e) {
+                core.error(`Failed for target ${target}: ${e.message}`);
+              }
+            }
