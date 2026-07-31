@@ -18,17 +18,17 @@ The current snapshot state:
 <list type="bullet">
 <item>
 <para>
-<c>FAILED</c>: The snapshot finished with an error and failed to store any data.
-</para>
-</item>
-<item>
-<para>
 <c>STARTED</c>: The snapshot is currently running.
 </para>
 </item>
 <item>
 <para>
-<c>SUCCESS</c>: The snapshot completed.
+<c>SUCCESS</c>: All shard snapshots have completed. The snapshot may or may not have completed finalization.
+</para>
+</item>
+<item>
+<para>
+<c>FAILED</c>: The snapshot finished with an error and failed to store any data.
 </para>
 </item>
 </list></summary></member>
