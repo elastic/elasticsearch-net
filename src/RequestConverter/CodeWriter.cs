@@ -713,6 +713,28 @@ public sealed class CodeWriter
 	}
 
 	/// <summary>
+	/// Writes the argument list of an inline descriptor client call: the hoisted chain-head constructor arguments,
+	/// then the configuration lambda <c>dN =&gt; dN...</c> holding the fluent chain. An empty chain drops the lambda
+	/// (and its separator, mirroring <see cref="WriteFluentVariantAdd"/>) so the call binds to the actionless
+	/// overload, which structurally exists: fluent client overloads and chain-head constructors are generated from
+	/// the same descriptor shadow constructors.
+	/// </summary>
+	public CodeWriter WriteInlineDescriptorArguments(Action<CodeWriter> writeHeadArguments, Action<CodeWriter> writeChain)
+	{
+		var beforeArguments = _builder.Length;
+		writeHeadArguments(this);
+		var beforeSeparator = _builder.Length;
+
+		if (_builder.Length != beforeArguments)
+		{
+			Write(", ");
+		}
+
+		TryWriteDescriptorLambda(beforeSeparator, writeChain, out _);
+		return this;
+	}
+
+	/// <summary>
 	/// Writes a fluent call whose arguments are a <c>params</c> array of descriptor-configuration lambdas, one per item:
 	/// <c>.<paramref name="method"/>(dN =&gt; dN…, dN =&gt; dN…)</c>. Used for collection-of-complex members, whose fluent
 	/// setter takes <c>params Action&lt;ItemDescriptor&gt;[]</c>. Each lambda body is written by

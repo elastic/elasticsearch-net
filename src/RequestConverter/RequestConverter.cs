@@ -187,15 +187,26 @@ public sealed class RequestConverter
 		writer.Write(writer.Options.VariableName).Write(");");
 	}
 
-	/// <summary>Writes the whole invocation with the request expression inlined as the call argument.</summary>
+	/// <summary>Writes the whole invocation with the request inlined as the argument: the configuration lambda
+	/// (plus hoisted chain-head arguments) for a descriptor-capable request in descriptor mode, the request
+	/// expression otherwise.</summary>
 	private static void WriteInlineClientCall(CodeWriter writer, ClientCallInfo clientMethod, ICodeFormattable formattable)
 	{
 		WriteClientCallPrefix(writer, clientMethod);
 
-		// The root argument must name its type: a target-typed new() is ambiguous against the client method's
-		// overload set (request vs. descriptor-action overloads).
-		writer.ForceNextExplicitConstructor();
-		formattable.FormatCode(writer);
+		if (writer.Options.SyntaxMode == SyntaxMode.Descriptor && formattable is IClientCallFormattable descriptorFormattable)
+		{
+			writer.WriteInlineDescriptorArguments(
+				descriptorFormattable.FormatDescriptorHeadArguments,
+				descriptorFormattable.FormatDescriptorChain);
+		}
+		else
+		{
+			// The root argument must name its type: a target-typed new() is ambiguous against the client method's
+			// overload set (request vs. descriptor-action overloads).
+			writer.ForceNextExplicitConstructor();
+			formattable.FormatCode(writer);
+		}
 
 		writer.Write(");");
 	}

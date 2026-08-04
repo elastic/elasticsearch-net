@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Text.Json;
 
 using RequestConverter;
@@ -210,5 +211,42 @@ public class CodeWriterTests
 		writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchRequest").Dispose();
 
 		Assert.Equal("new SearchRequest()new()", writer.ToString());
+	}
+
+	[Fact]
+	public void Inline_descriptor_arguments_write_args_then_lambda()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(
+			w => w.Write("\"idx\""),
+			w => w.WriteFluentCall("Refresh", null));
+		writer.Write(")");
+
+		Assert.StartsWith("M(\"idx\", ", writer.ToString(), StringComparison.Ordinal);
+		Assert.Contains(" => ", writer.ToString(), StringComparison.Ordinal);
+		Assert.Contains(".Refresh()", writer.ToString(), StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_arguments_drop_an_empty_chain_and_its_separator()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(w => w.Write("\"idx\""), _ => { });
+		writer.Write(")");
+
+		Assert.Equal("M(\"idx\")", writer.ToString());
+	}
+
+	[Fact]
+	public void Inline_descriptor_arguments_handle_empty_args_and_chain()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(_ => { }, _ => { });
+		writer.Write(")");
+
+		Assert.Equal("M()", writer.ToString());
 	}
 }
