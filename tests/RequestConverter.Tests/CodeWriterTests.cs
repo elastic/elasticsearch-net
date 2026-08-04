@@ -200,4 +200,15 @@ public class CodeWriterTests
 		var second = writer.ToString();
 		Assert.Equal(first, second);
 	}
+
+	[Fact]
+	public void Force_next_explicit_constructor_applies_to_the_next_initializer_only()
+	{
+		var writer = new CodeWriter();
+		writer.ForceNextExplicitConstructor();
+		writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchRequest").Dispose();
+		writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchRequest").Dispose();
+
+		Assert.Equal("new SearchRequest()new()", writer.ToString());
+	}
 }

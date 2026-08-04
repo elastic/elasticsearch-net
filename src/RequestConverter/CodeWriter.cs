@@ -551,6 +551,17 @@ public sealed class CodeWriter
 	private int _forceExplicitConstructorDepth;
 
 	/// <summary>
+	/// Forces the next <see cref="BeginObjectInitializer"/> to spell its constructor explicitly, without affecting
+	/// nested initializers. The inline client call needs this for its root request argument: a target-typed
+	/// <c>new()</c> is ambiguous against the client method's overload set.
+	/// </summary>
+	public CodeWriter ForceNextExplicitConstructor()
+	{
+		_forceExplicitConstructor = true;
+		return this;
+	}
+
+	/// <summary>
 	/// Forces <see cref="BeginObjectInitializer"/> to emit an explicit <c>new T()</c> (never a target-typed <c>new()</c>)
 	/// until the returned scope is disposed. Used in descriptor mode for the empty-value fallback of an incremental
 	/// dictionary add (<c>.AddX(key, new T())</c>), where a target-typed <c>new()</c> is ambiguous against the setter's

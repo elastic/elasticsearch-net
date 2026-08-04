@@ -84,48 +84,59 @@ public sealed class RequestConverter
 		ClientCallInfo? clientCall = ClientMethods.Lookup.TryGetValue(id, out var call) ? call : null;
 
 		var writer = new CodeWriter(options);
+		var format = writer.Options.ClientCallFormat;
 
-		// The client call references the request by name, so it forces the variable-declaration form.
-		var emitVariableDeclaration = writer.Options.EmitVariableDeclaration
-			|| writer.Options.ClientCallFormat == ClientCallFormat.Statement;
-
-		// `TypeName variableName = ` goes before the initializer. Writing the type name here (not after FormatCode)
-		// records its namespace up front so the body's collision-aware shortening accounts for it. The materialized
-		// request type is already closed over JsonElement for generic requests (e.g. IndexRequest<JsonElement>), so the
-		// rendered declaration names that concrete type.
-		if (emitVariableDeclaration)
+		// Defensive: the table and the factory generate from the same endpoint set, so a missing entry is
+		// unreachable in practice; degrade to the variable-declaration form so the output stays complete.
+		if (format is ClientCallFormat.Inline && clientCall is null)
 		{
-			writer.WriteTypeName(request.GetType()).Write(" ").Write(writer.Options.VariableName).Write(" = ");
+			format = ClientCallFormat.Statement;
 		}
 
-		formattable.FormatCode(writer);
-
-		if (emitVariableDeclaration)
+		if (format is ClientCallFormat.Inline)
 		{
-			writer.Write(";");
+			WriteInlineClientCall(writer, clientCall!.Value, formattable);
 		}
-
-		if (writer.Options.ClientCallFormat == ClientCallFormat.Statement && clientCall is { } clientMethod)
+		else
 		{
-			WriteClientCall(writer, clientMethod);
+			// The client call references the request by name, so it forces the variable-declaration form.
+			var emitVariableDeclaration = writer.Options.EmitVariableDeclaration || format is ClientCallFormat.Statement;
+
+			// `TypeName variableName = ` goes before the initializer. Writing the type name here (not after FormatCode)
+			// records its namespace up front so the body's collision-aware shortening accounts for it. The materialized
+			// request type is already closed over JsonElement for generic requests (e.g. IndexRequest<JsonElement>), so the
+			// rendered declaration names that concrete type.
+			if (emitVariableDeclaration)
+			{
+				writer.WriteTypeName(request.GetType()).Write(" ").Write(writer.Options.VariableName).Write(" = ");
+			}
+
+			formattable.FormatCode(writer);
+
+			if (emitVariableDeclaration)
+			{
+				writer.Write(";");
+			}
+
+			if (format is ClientCallFormat.Statement && clientCall is { } clientMethod)
+			{
+				WriteClientCall(writer, clientMethod);
+			}
 		}
 
 		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces, unsupportedParameters, clientCall));
 	}
 
 	/// <summary>
-	/// Appends the executing client invocation as a second statement, e.g.
-	/// <c>var response = await client.Esql.QueryAsync(request);</c>. Response-only generic type parameters are
-	/// spelled explicitly (the compiler cannot infer them from the request argument): the placeholder document
-	/// type in strongly-typed-document mode, <see cref="System.Text.Json.JsonElement"/> otherwise, matching how
-	/// the declared request variable renders.
+	/// Writes <c>var response = [await ]client.[Sub.]Method[Async][&lt;T, ...&gt;](</c>. Response-only generic type
+	/// parameters are spelled explicitly (the compiler cannot infer them from the argument): the placeholder
+	/// document type in strongly-typed-document mode, <see cref="System.Text.Json.JsonElement"/> otherwise.
 	/// </summary>
-	private static void WriteClientCall(CodeWriter writer, ClientCallInfo clientMethod)
+	private static void WriteClientCallPrefix(CodeWriter writer, ClientCallInfo clientMethod)
 	{
 		var options = writer.Options;
 		var async = options.ClientCallStyle == ClientCallStyle.Async;
 
-		writer.WriteLine().WriteLine();
 		writer.Write("var ").Write(options.ResponseVariableName).Write(" = ");
 
 		if (async)
@@ -165,6 +176,27 @@ public sealed class RequestConverter
 			writer.Write(">");
 		}
 
-		writer.Write("(").Write(options.VariableName).Write(");");
+		writer.Write("(");
+	}
+
+	/// <summary>Appends the executing client invocation as a second statement referencing the request variable.</summary>
+	private static void WriteClientCall(CodeWriter writer, ClientCallInfo clientMethod)
+	{
+		writer.WriteLine().WriteLine();
+		WriteClientCallPrefix(writer, clientMethod);
+		writer.Write(writer.Options.VariableName).Write(");");
+	}
+
+	/// <summary>Writes the whole invocation with the request expression inlined as the call argument.</summary>
+	private static void WriteInlineClientCall(CodeWriter writer, ClientCallInfo clientMethod, ICodeFormattable formattable)
+	{
+		WriteClientCallPrefix(writer, clientMethod);
+
+		// The root argument must name its type: a target-typed new() is ambiguous against the client method's
+		// overload set (request vs. descriptor-action overloads).
+		writer.ForceNextExplicitConstructor();
+		formattable.FormatCode(writer);
+
+		writer.Write(");");
 	}
 }
