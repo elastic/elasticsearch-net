@@ -190,4 +190,69 @@ public sealed class ClientCallTests
 		Assert.StartsWith("var response = await client.BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
 		Assert.Contains("Elastic.Clients.Elasticsearch", result.Namespaces);
 	}
+
+	[Fact]
+	public void Inline_descriptor_emits_a_configuration_lambda()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
+
+		Assert.StartsWith("var response = await client.Esql.QueryAsync(", result.Code, StringComparison.Ordinal);
+		Assert.Contains(" => ", result.Code, StringComparison.Ordinal);
+		Assert.Contains(".Query(\"FROM library\")", result.Code, StringComparison.Ordinal);
+		Assert.EndsWith("));", result.Code, StringComparison.Ordinal);
+		Assert.DoesNotContain("new EsqlQueryRequestDescriptor", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_hoists_required_path_arguments()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("indices.create", """{"settings":{"number_of_shards":1}}""", options,
+			new Dictionary<string, string> { ["index"] = "my-index" });
+
+		Assert.StartsWith("var response = await client.Indices.CreateAsync(\"my-index\", ", result.Code, StringComparison.Ordinal);
+		Assert.Contains(".Settings(", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_drops_the_lambda_for_an_empty_chain()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("indices.create", "{}", options, new Dictionary<string, string> { ["index"] = "my-index" });
+
+		Assert.Equal("var response = await client.Indices.CreateAsync(\"my-index\");", result.Code);
+	}
+
+	[Fact]
+	public void Inline_descriptor_uses_the_actionless_overload_when_everything_is_empty()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("search", "{}", options);
+
+		Assert.Equal("var response = await client.SearchAsync<JsonElement>();", result.Code);
+	}
+
+	[Fact]
+	public void Inline_descriptor_falls_back_to_the_request_form_for_bulk()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("bulk", "{\"index\":{\"_id\":\"1\"}}\n{\"field\":1}\n", options);
+
+		Assert.StartsWith("var response = await client.BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_typed_document_mode_spells_the_document_type()
+	{
+		var options = new FormattingOptions
+		{
+			ClientCallFormat = ClientCallFormat.Inline,
+			SyntaxMode = SyntaxMode.Descriptor,
+			UseStronglyTypedDocument = true
+		};
+		var result = Convert("search", """{"query":{"match_all":{}}}""", options);
+
+		Assert.StartsWith("var response = await client.SearchAsync<MyDocument>(", result.Code, StringComparison.Ordinal);
+	}
 }
