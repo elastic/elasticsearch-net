@@ -66,18 +66,21 @@ public partial class DeleteServiceTokenRequest : RequestConverter.IClientCallFor
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("@namespace");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteString(Namespace);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("service");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteString(Service);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Name.FormatCode(writer);

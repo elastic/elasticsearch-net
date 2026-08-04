@@ -68,6 +68,7 @@ public partial class StartDatafeedRequest : RequestConverter.IClientCallFormatta
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("datafeedId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			DatafeedId.FormatCode(writer);

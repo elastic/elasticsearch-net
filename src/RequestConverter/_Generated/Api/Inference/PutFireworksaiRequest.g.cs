@@ -78,12 +78,14 @@ public partial class PutFireworksaiRequest : RequestConverter.IClientCallFormatt
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.FireworksAITaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("fireworksaiInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			FireworksaiInferenceId.FormatCode(writer);

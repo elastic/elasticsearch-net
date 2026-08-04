@@ -96,6 +96,7 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.IClientCall
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("uid");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteString(Uid);

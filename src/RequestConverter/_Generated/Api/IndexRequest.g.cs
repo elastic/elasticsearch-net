@@ -151,18 +151,21 @@ public partial class IndexRequest<TDocument> : RequestConverter.IClientCallForma
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("document");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteDocument(Document);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("index");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Index.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("id");
 		if (Id is not null)
 		{
 			using var _oi = writer.ForceObjectInitializer();

@@ -56,12 +56,14 @@ public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("nodeId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			NodeId.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("maxArchiveVersion");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteValue(MaxArchiveVersion);

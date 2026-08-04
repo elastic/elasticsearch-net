@@ -78,12 +78,14 @@ public partial class PutOpenaiRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.OpenAITaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("openaiInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			OpenaiInferenceId.FormatCode(writer);

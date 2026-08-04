@@ -78,12 +78,14 @@ public partial class PutVoyageaiRequest : RequestConverter.IClientCallFormattabl
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.VoyageAITaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("voyageaiInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			VoyageaiInferenceId.FormatCode(writer);

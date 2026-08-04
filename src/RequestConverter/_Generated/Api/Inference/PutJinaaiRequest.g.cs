@@ -78,12 +78,14 @@ public partial class PutJinaaiRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.JinaAITaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("jinaaiInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			JinaaiInferenceId.FormatCode(writer);

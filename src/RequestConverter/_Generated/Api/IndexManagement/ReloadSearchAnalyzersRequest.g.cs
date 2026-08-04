@@ -83,6 +83,7 @@ public partial class ReloadSearchAnalyzersRequest : RequestConverter.IClientCall
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("indices");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Indices.FormatCode(writer);

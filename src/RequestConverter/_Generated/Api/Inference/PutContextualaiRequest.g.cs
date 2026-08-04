@@ -72,12 +72,14 @@ public partial class PutContextualaiRequest : RequestConverter.IClientCallFormat
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAICodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("contextualaiInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ContextualaiInferenceId.FormatCode(writer);

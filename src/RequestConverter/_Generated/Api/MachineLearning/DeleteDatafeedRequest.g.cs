@@ -56,6 +56,7 @@ public partial class DeleteDatafeedRequest : RequestConverter.IClientCallFormatt
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("datafeedId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			DatafeedId.FormatCode(writer);

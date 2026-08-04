@@ -72,12 +72,14 @@ public partial class PutAnthropicRequest : RequestConverter.IClientCallFormattab
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.AnthropicTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("anthropicInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			AnthropicInferenceId.FormatCode(writer);

@@ -56,6 +56,7 @@ public partial class DisableUserRequest : RequestConverter.IClientCallFormattabl
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("username");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Username.FormatCode(writer);

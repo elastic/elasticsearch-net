@@ -66,12 +66,14 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICli
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("collectionName");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			CollectionName.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("eventType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);

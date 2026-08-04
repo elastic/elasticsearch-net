@@ -80,6 +80,7 @@ public partial class GetCalendarEventsRequest : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("calendarId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			CalendarId.FormatCode(writer);

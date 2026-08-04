@@ -56,6 +56,7 @@ public partial class EnableUserProfileRequest : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("uid");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteString(Uid);

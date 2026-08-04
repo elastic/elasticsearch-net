@@ -55,12 +55,14 @@ public partial class GetServiceCredentialsRequest : RequestConverter.IClientCall
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("@namespace");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteString(Namespace);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("service");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Service.FormatCode(writer);

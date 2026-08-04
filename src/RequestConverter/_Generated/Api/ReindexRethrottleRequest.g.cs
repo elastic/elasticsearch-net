@@ -63,6 +63,7 @@ public partial class ReindexRethrottleRequest : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			TaskId.FormatCode(writer);

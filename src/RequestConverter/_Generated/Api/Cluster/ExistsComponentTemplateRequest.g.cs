@@ -62,6 +62,7 @@ public partial class ExistsComponentTemplateRequest : RequestConverter.IClientCa
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Name.FormatCode(writer);

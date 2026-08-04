@@ -67,6 +67,7 @@ public partial class CompletionRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("inferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			InferenceId.FormatCode(writer);

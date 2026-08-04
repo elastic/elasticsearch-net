@@ -124,18 +124,21 @@ public partial class CreateRequest<TDocument> : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("document");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteDocument(Document);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("index");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Index.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("id");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Id.FormatCode(writer);

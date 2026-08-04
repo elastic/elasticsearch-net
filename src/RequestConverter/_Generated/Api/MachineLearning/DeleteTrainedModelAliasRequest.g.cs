@@ -55,12 +55,14 @@ public partial class DeleteTrainedModelAliasRequest : RequestConverter.IClientCa
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("modelId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ModelId.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("modelAlias");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ModelAlias.FormatCode(writer);

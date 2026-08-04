@@ -50,6 +50,7 @@ public partial class SamlServiceProviderMetadataRequest : RequestConverter.IClie
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("realmName");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			RealmName.FormatCode(writer);

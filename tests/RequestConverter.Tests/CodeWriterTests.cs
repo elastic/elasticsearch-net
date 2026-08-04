@@ -249,4 +249,28 @@ public class CodeWriterTests
 
 		Assert.Equal("M()", writer.ToString());
 	}
+
+	[Fact]
+	public void Inline_argument_label_writes_nothing_outside_an_inline_call()
+	{
+		var writer = new CodeWriter();
+		writer.WriteInlineArgumentLabel("index");
+		writer.Write("\"idx\"");
+
+		Assert.Equal("\"idx\"", writer.ToString());
+	}
+
+	[Fact]
+	public void Inline_argument_label_writes_the_name_for_hoisted_arguments_only()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(
+			w => w.WriteInlineArgumentLabel("index").Write("\"idx\""),
+			w => w.WriteInlineArgumentLabel("chain").WriteFluentCall("Refresh", null));
+		writer.Write(")");
+
+		Assert.StartsWith("M(index: \"idx\", ", writer.ToString(), StringComparison.Ordinal);
+		Assert.DoesNotContain("chain: ", writer.ToString(), StringComparison.Ordinal);
+	}
 }

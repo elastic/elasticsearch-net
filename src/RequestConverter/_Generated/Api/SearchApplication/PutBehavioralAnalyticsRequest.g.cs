@@ -50,6 +50,7 @@ public partial class PutBehavioralAnalyticsRequest : RequestConverter.IClientCal
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Name.FormatCode(writer);

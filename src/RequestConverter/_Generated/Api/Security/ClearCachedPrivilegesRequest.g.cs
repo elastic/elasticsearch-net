@@ -50,6 +50,7 @@ public partial class ClearCachedPrivilegesRequest : RequestConverter.IClientCall
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("application");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Application.FormatCode(writer);

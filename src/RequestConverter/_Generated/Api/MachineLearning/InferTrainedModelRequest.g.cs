@@ -76,6 +76,7 @@ public partial class InferTrainedModelRequest : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("modelId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ModelId.FormatCode(writer);

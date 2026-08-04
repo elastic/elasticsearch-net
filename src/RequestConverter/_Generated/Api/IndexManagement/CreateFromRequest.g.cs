@@ -70,12 +70,14 @@ public partial class CreateFromRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("source");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Source.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("dest");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Dest.FormatCode(writer);

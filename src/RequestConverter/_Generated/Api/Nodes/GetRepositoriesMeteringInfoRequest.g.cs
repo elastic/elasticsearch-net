@@ -50,6 +50,7 @@ public partial class GetRepositoriesMeteringInfoRequest : RequestConverter.IClie
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("nodeId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			NodeId.FormatCode(writer);

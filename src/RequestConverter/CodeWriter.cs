@@ -57,6 +57,10 @@ public sealed class CodeWriter
 	// span, so each ancestor on the single-call path also closes on its own line.
 	private int _lineCount;
 
+	// Set only while the hoisted chain-head arguments of an inline client call are being written; see
+	// WriteInlineArgumentLabel.
+	private bool _inlineArgumentLabels;
+
 	public CodeWriter(FormattingOptions? options = null) => Options = options ?? FormattingOptions.Default;
 
 	public FormattingOptions Options { get; }
@@ -722,7 +726,16 @@ public sealed class CodeWriter
 	public CodeWriter WriteInlineDescriptorArguments(Action<CodeWriter> writeHeadArguments, Action<CodeWriter> writeChain)
 	{
 		var beforeArguments = _builder.Length;
-		writeHeadArguments(this);
+		_inlineArgumentLabels = true;
+		try
+		{
+			writeHeadArguments(this);
+		}
+		finally
+		{
+			_inlineArgumentLabels = false;
+		}
+
 		var beforeSeparator = _builder.Length;
 
 		if (_builder.Length != beforeArguments)
@@ -731,6 +744,23 @@ public sealed class CodeWriter
 		}
 
 		TryWriteDescriptorLambda(beforeSeparator, writeChain, out _);
+		return this;
+	}
+
+	/// <summary>
+	/// Writes <c>name: </c> when the writer is rendering an inline client call's argument list, and nothing
+	/// otherwise. The generated head-arguments writers label every argument through this call: hoisted arguments
+	/// need the label because some are ambiguous against the client's overload set (e.g. a <c>string</c> converts
+	/// to both <c>IndexName</c> and <c>Id</c>), while the same emission composed into a descriptor constructor
+	/// must stay unlabeled and unchanged.
+	/// </summary>
+	public CodeWriter WriteInlineArgumentLabel(string name)
+	{
+		if (_inlineArgumentLabels)
+		{
+			Write(name).Write(": ");
+		}
+
 		return this;
 	}
 
@@ -981,6 +1011,10 @@ public sealed class CodeWriter
 					AppendTypeRefPlaceholder(token);
 				else if (Options.UseStronglyTypedDocument && IsDocumentTypeParameter(token))
 					_builder.Append(Options.DocumentTypeName); // e.g. IndexRequest<TDocument> -> IndexRequest<MyDocument>
+				else if (IsDocumentTypeParameter(token))
+					// The emission site has no such type parameter in scope, so the token must render as the type the
+					// materialized request is actually closed over: e.g. IndexRequest<TDocument> -> IndexRequest<JsonElement>.
+					AppendTypeRefPlaceholder("System.Text.Json.JsonElement");
 				else
 					_builder.Append(token); // keyword / primitive / open type parameter
 			}
@@ -1049,8 +1083,9 @@ public sealed class CodeWriter
 	}
 
 	// The open document/source type parameters (ConverterType.Source slots: request documents, Get/Hit results, EQL
-	// events). In strongly-typed-document mode they render as the placeholder document type so an explicit constructor
-	// reads e.g. `new IndexRequest<MyDocument>()` rather than leaking the open `TDocument` token.
+	// events). They always render as a closed type - the placeholder document type in strongly-typed-document mode, the
+	// materialized JsonElement otherwise - so an explicit constructor reads e.g. `new IndexRequest<MyDocument>()` rather
+	// than leaking the open `TDocument` token, which is undefined at the emission site.
 	private static bool IsDocumentTypeParameter(string token) =>
 		token is "TDocument" or "TPartialDocument" or "TEvent";
 

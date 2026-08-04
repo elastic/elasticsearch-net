@@ -56,6 +56,7 @@ public partial class GetUserProfileRequest : RequestConverter.IClientCallFormatt
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("uid");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteInlineList(Uid, (w, item) => { w.WriteString(item); });

@@ -89,6 +89,7 @@ public partial class UpdateCrossClusterApiKeyRequest : RequestConverter.IClientC
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("id");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Id.FormatCode(writer);

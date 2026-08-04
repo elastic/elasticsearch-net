@@ -78,12 +78,14 @@ public partial class PutOpenshiftAiRequest : RequestConverter.IClientCallFormatt
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("openshiftaiInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			OpenshiftaiInferenceId.FormatCode(writer);

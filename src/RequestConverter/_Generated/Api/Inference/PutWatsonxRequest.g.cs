@@ -72,12 +72,14 @@ public partial class PutWatsonxRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.WatsonxTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("watsonxInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			WatsonxInferenceId.FormatCode(writer);
