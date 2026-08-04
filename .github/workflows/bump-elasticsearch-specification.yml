@@ -88,8 +88,13 @@ jobs:
             const distTag = process.env.SPEC_DIST_TAG;
             const dryRun = String(process.env.SPEC_DRY_RUN) === 'true';
             const unscoped = pkg.replace(/^@[^/]+\//, '');
-            const pin = `~${version}`;
             const path = 'docs/examples/package.json';
+
+            // main builds are versioned off their commit, so there is no meaningful range to
+            // pin: spec main references the channel instead, and npm resolves the dist-tag to
+            // whatever it currently points at. The first main publish sets the pin and every
+            // later one no-ops against the existing-pin check below.
+            const pin = branch === 'main' ? 'latest-main' : `~${version}`;
 
             // Spec branches are named for the source branch, so the mapping is explicit:
             // `X.Y` bumps spec `X.Y`, `main` bumps spec `main`.
