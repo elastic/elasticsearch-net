@@ -66,12 +66,14 @@ public partial class PutAi21Request : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.Ai21TaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("ai21InferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Ai21InferenceId.FormatCode(writer);

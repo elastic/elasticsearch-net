@@ -50,6 +50,7 @@ public partial class ClearTrainedModelDeploymentCacheRequest : RequestConverter.
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("modelId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ModelId.FormatCode(writer);

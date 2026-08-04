@@ -139,12 +139,14 @@ public partial class GetSnapshotRequest : RequestConverter.IClientCallFormattabl
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("repository");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Repository.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("snapshot");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Snapshot.FormatCode(writer);

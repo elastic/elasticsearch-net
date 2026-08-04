@@ -72,12 +72,14 @@ public partial class PutMistralRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.MistralTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("mistralInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			MistralInferenceId.FormatCode(writer);

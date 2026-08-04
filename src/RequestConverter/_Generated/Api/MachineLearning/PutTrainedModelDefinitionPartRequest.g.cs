@@ -71,12 +71,14 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICl
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("modelId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ModelId.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("part");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteValue(Part);

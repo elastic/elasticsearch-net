@@ -89,6 +89,7 @@ public partial class DeleteIndexRequest : RequestConverter.IClientCallFormattabl
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("indices");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Indices.FormatCode(writer);

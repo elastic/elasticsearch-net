@@ -78,12 +78,14 @@ public partial class PutAzureaistudioRequest : RequestConverter.IClientCallForma
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("azureaistudioInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			AzureaistudioInferenceId.FormatCode(writer);

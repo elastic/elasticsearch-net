@@ -78,12 +78,14 @@ public partial class PutElasticsearchRequest : RequestConverter.IClientCallForma
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("elasticsearchInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ElasticsearchInferenceId.FormatCode(writer);

@@ -56,6 +56,7 @@ public partial class ClearCachedRealmsRequest : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("realms");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Realms.FormatCode(writer);

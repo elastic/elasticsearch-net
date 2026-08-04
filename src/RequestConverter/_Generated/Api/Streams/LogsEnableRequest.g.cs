@@ -62,6 +62,7 @@ public partial class LogsEnableRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Streams.StreamTypeCodeFormatter.FormatCode(Name, writer);

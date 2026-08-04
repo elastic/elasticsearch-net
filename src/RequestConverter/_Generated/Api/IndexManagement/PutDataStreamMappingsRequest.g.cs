@@ -82,6 +82,7 @@ public partial class PutDataStreamMappingsRequest : RequestConverter.IClientCall
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Name.FormatCode(writer);

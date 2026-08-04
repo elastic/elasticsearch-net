@@ -57,6 +57,7 @@ public partial class DeleteByQueryRethrottleRequest : RequestConverter.IClientCa
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			TaskId.FormatCode(writer);

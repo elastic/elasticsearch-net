@@ -72,12 +72,14 @@ public partial class PutElserRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.ElserTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("elserInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			ElserInferenceId.FormatCode(writer);

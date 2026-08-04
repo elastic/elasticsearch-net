@@ -50,6 +50,7 @@ public partial class ClearApiKeyCacheRequest : RequestConverter.IClientCallForma
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("ids");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Ids.FormatCode(writer);

@@ -62,6 +62,7 @@ public partial class DeleteLifecycleRequest : RequestConverter.IClientCallFormat
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("policyId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			PolicyId.FormatCode(writer);

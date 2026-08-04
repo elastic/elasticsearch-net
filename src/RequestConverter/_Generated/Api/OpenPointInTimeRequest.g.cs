@@ -113,6 +113,7 @@ public partial class OpenPointInTimeRequest : RequestConverter.IClientCallFormat
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("indices");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Indices.FormatCode(writer);

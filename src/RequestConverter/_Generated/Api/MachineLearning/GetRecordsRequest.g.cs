@@ -114,6 +114,7 @@ public partial class GetRecordsRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("jobId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			JobId.FormatCode(writer);

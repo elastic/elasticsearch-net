@@ -78,12 +78,14 @@ public partial class PutGooglevertexaiRequest : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("googlevertexaiInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			GooglevertexaiInferenceId.FormatCode(writer);

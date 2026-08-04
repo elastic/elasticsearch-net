@@ -71,6 +71,7 @@ public partial class MigrateToDataStreamRequest : RequestConverter.IClientCallFo
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Name.FormatCode(writer);

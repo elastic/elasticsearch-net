@@ -50,6 +50,7 @@ public partial class DeleteCalendarRequest : RequestConverter.IClientCallFormatt
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("calendarId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			CalendarId.FormatCode(writer);

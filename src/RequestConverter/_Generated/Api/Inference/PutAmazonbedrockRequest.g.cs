@@ -78,12 +78,14 @@ public partial class PutAmazonbedrockRequest : RequestConverter.IClientCallForma
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("amazonbedrockInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			AmazonbedrockInferenceId.FormatCode(writer);

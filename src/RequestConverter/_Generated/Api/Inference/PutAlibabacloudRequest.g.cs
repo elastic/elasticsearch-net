@@ -78,12 +78,14 @@ public partial class PutAlibabacloudRequest : RequestConverter.IClientCallFormat
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("alibabacloudInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			AlibabacloudInferenceId.FormatCode(writer);

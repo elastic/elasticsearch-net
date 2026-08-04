@@ -56,6 +56,7 @@ public partial class CancelReindexRequest : RequestConverter.IClientCallFormatta
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			TaskId.FormatCode(writer);

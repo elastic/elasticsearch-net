@@ -78,12 +78,14 @@ public partial class PutAmazonsagemakerRequest : RequestConverter.IClientCallFor
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMakerCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("amazonsagemakerInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			AmazonsagemakerInferenceId.FormatCode(writer);

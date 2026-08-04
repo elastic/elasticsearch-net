@@ -211,7 +211,7 @@ public sealed class ClientCallTests
 		var result = Convert("indices.create", """{"settings":{"number_of_shards":1}}""", options,
 			new Dictionary<string, string> { ["index"] = "my-index" });
 
-		Assert.StartsWith("var response = await client.Indices.CreateAsync(\"my-index\", ", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client.Indices.CreateAsync(index: \"my-index\", ", result.Code, StringComparison.Ordinal);
 		Assert.Contains(".Settings(", result.Code, StringComparison.Ordinal);
 	}
 
@@ -221,7 +221,7 @@ public sealed class ClientCallTests
 		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
 		var result = Convert("indices.create", "{}", options, new Dictionary<string, string> { ["index"] = "my-index" });
 
-		Assert.Equal("var response = await client.Indices.CreateAsync(\"my-index\");", result.Code);
+		Assert.Equal("var response = await client.Indices.CreateAsync(index: \"my-index\");", result.Code);
 	}
 
 	[Fact]
@@ -240,6 +240,35 @@ public sealed class ClientCallTests
 		var result = Convert("bulk", "{\"index\":{\"_id\":\"1\"}}\n{\"field\":1}\n", options);
 
 		Assert.StartsWith("var response = await client.BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_labels_hoisted_arguments()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("index", """{"name":"book"}""", options,
+			new Dictionary<string, string> { ["index"] = "books" });
+
+		// Spelled with explicit "\n" (the FormattingOptions default) so the expectation does not depend on the
+		// checkout's line endings.
+		Assert.Equal(
+			"var response = await client.IndexAsync(document: JsonSerializer.Deserialize<JsonElement>(\"\"\"\n"
+			+ "{\n"
+			+ "  \"name\": \"book\"\n"
+			+ "}\n"
+			+ "\"\"\"), index: \"books\", id: null);",
+			result.Code);
+	}
+
+	[Fact]
+	public void Inline_request_form_closes_the_generic_request_type()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.ObjectInitializer };
+		var result = Convert("index", """{"name":"book"}""", options,
+			new Dictionary<string, string> { ["index"] = "books" });
+
+		Assert.Contains("new IndexRequest<JsonElement>", result.Code, StringComparison.Ordinal);
+		Assert.Contains("System.Text.Json", result.Namespaces);
 	}
 
 	[Fact]

@@ -55,12 +55,14 @@ public partial class DeleteCalendarJobRequest : RequestConverter.IClientCallForm
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("calendarId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			CalendarId.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("jobId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			JobId.FormatCode(writer);

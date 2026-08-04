@@ -63,6 +63,7 @@ public partial class RenderQueryRequest : RequestConverter.IClientCallFormattabl
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Name.FormatCode(writer);

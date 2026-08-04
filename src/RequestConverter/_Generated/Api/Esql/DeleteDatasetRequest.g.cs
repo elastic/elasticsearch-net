@@ -62,6 +62,7 @@ public partial class DeleteDatasetRequest : RequestConverter.IClientCallFormatta
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("name");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Name.FormatCode(writer);

@@ -183,30 +183,35 @@ public partial class SearchMvtRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("indices");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Indices.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("field");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Field.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("zoom");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteValue(Zoom);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("x");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteValue(X);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("y");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteValue(Y);

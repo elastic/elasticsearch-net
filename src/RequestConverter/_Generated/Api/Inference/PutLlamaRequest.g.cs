@@ -72,12 +72,14 @@ public partial class PutLlamaRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("taskType");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Elastic.Clients.Elasticsearch.Inference.LlamaTaskTypeCodeFormatter.FormatCode(TaskType, writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("llamaInferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			LlamaInferenceId.FormatCode(writer);

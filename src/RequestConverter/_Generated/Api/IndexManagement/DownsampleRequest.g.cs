@@ -69,12 +69,14 @@ public partial class DownsampleRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("index");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Index.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("targetIndex");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			TargetIndex.FormatCode(writer);

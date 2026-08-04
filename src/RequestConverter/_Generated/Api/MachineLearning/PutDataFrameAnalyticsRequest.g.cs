@@ -136,6 +136,7 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.IClientCall
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("id");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Id.FormatCode(writer);

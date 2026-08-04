@@ -61,6 +61,7 @@ public partial class ChatCompletionUnifiedRequest : RequestConverter.IClientCall
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("inferenceId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			InferenceId.FormatCode(writer);

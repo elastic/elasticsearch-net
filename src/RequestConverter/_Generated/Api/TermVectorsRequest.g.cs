@@ -157,12 +157,14 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.IClientCal
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("index");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Index.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("id");
 		if (Id is not null)
 		{
 			using var _oi = writer.ForceObjectInitializer();

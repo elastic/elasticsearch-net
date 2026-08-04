@@ -50,6 +50,7 @@ public partial class ClusterInfoRequest : RequestConverter.IClientCallFormattabl
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("target");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });

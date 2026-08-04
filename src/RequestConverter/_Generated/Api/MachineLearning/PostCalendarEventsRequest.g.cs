@@ -55,6 +55,7 @@ public partial class PostCalendarEventsRequest : RequestConverter.IClientCallFor
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("calendarId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			CalendarId.FormatCode(writer);

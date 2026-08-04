@@ -55,12 +55,14 @@ public partial class GetRuleRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("rulesetId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			RulesetId.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("ruleId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			RuleId.FormatCode(writer);

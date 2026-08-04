@@ -62,6 +62,7 @@ public partial class TestRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("rulesetId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			RulesetId.FormatCode(writer);

@@ -62,6 +62,7 @@ public partial class DeleteGeoipDatabaseRequest : RequestConverter.IClientCallFo
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("id");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Id.FormatCode(writer);

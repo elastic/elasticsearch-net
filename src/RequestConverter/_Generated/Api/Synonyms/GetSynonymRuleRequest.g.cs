@@ -55,12 +55,14 @@ public partial class GetSynonymRuleRequest : RequestConverter.IClientCallFormatt
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("setId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			SetId.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("ruleId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			RuleId.FormatCode(writer);

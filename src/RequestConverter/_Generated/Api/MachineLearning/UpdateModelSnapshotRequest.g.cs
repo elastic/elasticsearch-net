@@ -67,12 +67,14 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.IClientCallFo
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("jobId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			JobId.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("snapshotId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			SnapshotId.FormatCode(writer);

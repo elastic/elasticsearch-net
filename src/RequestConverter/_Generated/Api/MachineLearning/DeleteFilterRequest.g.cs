@@ -50,6 +50,7 @@ public partial class DeleteFilterRequest : RequestConverter.IClientCallFormattab
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("filterId");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			FilterId.FormatCode(writer);

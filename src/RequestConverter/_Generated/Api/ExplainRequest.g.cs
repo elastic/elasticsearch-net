@@ -148,12 +148,14 @@ public partial class ExplainRequest : RequestConverter.IClientCallFormattable
 
 	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
 	{
+		writer.WriteInlineArgumentLabel("index");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Index.FormatCode(writer);
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("id");
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Id.FormatCode(writer);
