@@ -91,6 +91,11 @@ publish and carries no meaning beyond ordering. The exact embedded client is rec
 version compiled into the bundle, and `commit` is the elasticsearch-net commit the bundle was built
 from.
 
+Builds from the `main` branch have no release line of their own, so they ship as prereleases of the
+next unreleased minor: `<next-minor>.0-main.<n>`, for example `9.6.0-main.1`, with `n` incrementing
+per publish. They are published under the `latest-main` dist-tag and never take `latest`, and they
+record `clientVersion: unreleased` - use `commit` to identify what they were built from.
+
 ## Building from source
 
 This package is assembled from a published .NET WASM AppBundle; see

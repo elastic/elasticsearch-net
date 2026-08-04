@@ -6,8 +6,13 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to build and publish from (e.g. 9.5, 8.19)'
+        description: 'Branch to build and publish from (e.g. main, 9.5, 8.19)'
         required: true
+      dry-run:
+        description: 'Compute and log the version/dist-tag without publishing or opening bump PRs'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -27,8 +32,8 @@ jobs:
           BRANCH_INPUT: ${{ github.event.inputs.branch || github.event.release.target_commitish }}
         run: |
           BRANCH="$BRANCH_INPUT"
-          if ! [[ "$BRANCH" =~ ^[0-9]+\.[0-9]+$ ]]; then
-            echo "Refusing to publish from '$BRANCH': only release branches (major.minor) are supported."
+          if ! [[ "$BRANCH" =~ ^([0-9]+\.[0-9]+|main)$ ]]; then
+            echo "Refusing to publish from '$BRANCH': only 'main' and release branches (major.minor) are supported."
             exit 1
           fi
           echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
@@ -53,20 +58,54 @@ jobs:
       # Trusted publishing (OIDC, no NODE_AUTH_TOKEN) requires npm 11.5.1 or newer;
       # node 22's bundled npm 10.9.x predates it.
       - run: npm install -g npm@latest
+      # A numeric branch takes the next free patch on its own minor; "main" has no release line
+      # of its own and takes the next "-main.<n>" prerelease of the next unreleased minor.
+      # Prereleases are excluded from both scans so a 9.6.0-main.* build is never mistaken for
+      # an existing 9.6 release.
       - name: Compute package version
         id: version
         env:
+          BRANCH: ${{ steps.branch.outputs.branch }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
-          MINOR="${{ steps.branch.outputs.branch }}"
-          LATEST_PATCH=$(npm view @elastic/request-converter-dotnet versions --json 2>/dev/null \
-            | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{const v=JSON.parse(d||'[]');const p=v.filter(x=>x.startsWith(process.argv[1]+'.')).map(x=>parseInt(x.split('.')[2],10));console.log(p.length?Math.max(...p):-1)})" "$MINOR" \
-            || echo "-1")
-          VERSION="$MINOR.$((LATEST_PATCH + 1))"
-          CLIENT_VERSION="${RELEASE_TAG#v}"
-          if [ -z "$CLIENT_VERSION" ]; then
-            CLIENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "unreleased")
+          VERSIONS=$(npm view @elastic/request-converter-dotnet versions --json 2>/dev/null || echo "[]")
+          VERSION=$(node -e '
+            let raw;
+            try { raw = JSON.parse(process.argv[1]) } catch { raw = [] }
+            // "npm view versions --json" yields a bare string, not an array, for a single-version package.
+            const all = Array.isArray(raw) ? raw : typeof raw === "string" ? [raw] : [];
+            const released = all.filter(v => !v.includes("-"));
+            const branch = process.argv[2];
+            if (branch === "main") {
+              const [major, minor] = released.reduce((max, v) => {
+                const p = v.split(".").map(Number);
+                return p[0] > max[0] || (p[0] === max[0] && p[1] > max[1]) ? [p[0], p[1]] : max;
+              }, [0, 0]);
+              const base = major + "." + (minor + 1);
+              const counter = new RegExp("^" + base.replace(".", "\\.") + "\\.0-main\\.(\\d+)$");
+              const n = all.reduce((max, v) => {
+                const m = v.match(counter);
+                return m ? Math.max(max, Number(m[1])) : max;
+              }, 0);
+              console.log(base + ".0-main." + (n + 1));
+            } else {
+              const patch = released
+                .filter(v => v.startsWith(branch + "."))
+                .reduce((max, v) => Math.max(max, Number(v.split(".")[2])), -1);
+              console.log(branch + "." + (patch + 1));
+            }
+          ' "$VERSIONS" "$BRANCH")
+          if [ "$BRANCH" = "main" ]; then
+            # No client release corresponds to a main build, and "git describe" would attach an
+            # unrelated tag; the recorded commit is the build's identity instead.
+            CLIENT_VERSION="unreleased"
+          else
+            CLIENT_VERSION="${RELEASE_TAG#v}"
+            if [ -z "$CLIENT_VERSION" ]; then
+              CLIENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "unreleased")
+            fi
           fi
+          echo "Computed version ${VERSION} (client version ${CLIENT_VERSION}) for branch ${BRANCH}"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "client-version=$CLIENT_VERSION" >> "$GITHUB_OUTPUT"
       - name: Assemble package
@@ -82,22 +121,32 @@ jobs:
       # dist-tag (it would implicitly move "latest" backwards). Tag "latest" only when the new
       # version is the highest published one; otherwise use a per-branch tag. Plain "8.19" is
       # not a legal dist-tag (npm rejects tags that parse as semver ranges), hence the prefix.
+      # main builds are prereleases of a minor that has not shipped, so they must never take or
+      # influence "latest" and are pinned to "latest-main".
       - name: Compute dist-tag
         id: dist-tag
+        env:
+          BRANCH: ${{ steps.branch.outputs.branch }}
         run: |
           CURRENT_LATEST=$(npm view @elastic/request-converter-dotnet version 2>/dev/null || echo "0.0.0")
           NEW_VERSION="${{ steps.version.outputs.version }}"
-          if [ "$(printf '%s\n%s\n' "$CURRENT_LATEST" "$NEW_VERSION" | sort -V | tail -n1)" = "$NEW_VERSION" ]; then
+          if [ "$BRANCH" = "main" ]; then
+            TAG="latest-main"
+          elif [ "$(printf '%s\n%s\n' "$CURRENT_LATEST" "$NEW_VERSION" | sort -V | tail -n1)" = "$NEW_VERSION" ]; then
             TAG="latest"
           else
-            TAG="latest-${{ steps.branch.outputs.branch }}"
+            TAG="latest-$BRANCH"
           fi
           echo "Publishing ${NEW_VERSION} with dist-tag ${TAG} (current latest: ${CURRENT_LATEST})"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-      - run: npm publish .artifacts/npm/request-converter-dotnet --access public --provenance --tag "${{ steps.dist-tag.outputs.tag }}"
+      - name: Log package metadata (dry run)
+        if: ${{ github.event.inputs.dry-run == 'true' }}
+        run: cat .artifacts/npm/request-converter-dotnet/package.json
+      - if: ${{ github.event.inputs.dry-run != 'true' }}
+        run: npm publish .artifacts/npm/request-converter-dotnet --access public --provenance --tag "${{ steps.dist-tag.outputs.tag }}"
 
-  # After a successful publish, open a bump PR in elasticsearch-specification targeting
-  # the matching major.minor branch (and main when this publish moved the "latest" tag).
+  # After a successful publish, open a bump PR in elasticsearch-specification targeting the
+  # spec branch of the same name as the branch this was built from.
   bump-spec:
     needs: publish
     if: ${{ needs.publish.result == 'success' }}
@@ -107,4 +156,4 @@ jobs:
       branch: ${{ needs.publish.outputs.branch }}
       dist-tag: ${{ needs.publish.outputs.dist-tag }}
       package: "@elastic/request-converter-dotnet"
-      dry-run: false
+      dry-run: ${{ github.event.inputs.dry-run == 'true' }}
