@@ -94,13 +94,13 @@ async function run() {
   try {
     const requests = await parseRequests(source);
     const code = convert(requests, {
-      type_name_style: els.style.value,
-      syntax_mode: els.syntax.value,
-      use_strongly_typed_document: els.typedDocument.checked,
-      document_type_name: els.documentType.value,
-      emit_usings: els.emitUsings.checked,
       client_call_format: els.clientCall.value,
       client_call_style: els.callStyle.value,
+      document_type_name: els.documentType.value,
+      emit_usings: els.emitUsings.checked,
+      syntax_mode: els.syntax.value,
+      type_name_style: els.style.value,
+      use_strongly_typed_document: els.typedDocument.checked,
     });
     els.output.textContent = code;
     setStatus("Converted.");
