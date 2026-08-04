@@ -58,48 +58,38 @@ jobs:
       # Trusted publishing (OIDC, no NODE_AUTH_TOKEN) requires npm 11.5.1 or newer;
       # node 22's bundled npm 10.9.x predates it.
       - run: npm install -g npm@latest
-      # A numeric branch takes the next free patch on its own minor; "main" has no release line
-      # of its own and takes the next "-main.<n>" prerelease of the next unreleased minor.
-      # Prereleases are excluded from both scans so a 9.6.0-main.* build is never mistaken for
-      # an existing 9.6 release.
+      # A numeric branch takes the next free patch on its own minor, ignoring prereleases so a
+      # prerelease publish is never mistaken for an existing release.
+      #
+      # main is versioned off the commit it was built from, because it may target the next minor
+      # or the next major: the version must encode no target release. The "g" prefix keeps the
+      # identifier from being an all-digit token with a leading zero, which semver rejects. A
+      # given commit publishes exactly once - re-dispatching it fails as an npm duplicate-version
+      # error, by design.
       - name: Compute package version
         id: version
         env:
           BRANCH: ${{ steps.branch.outputs.branch }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
-          VERSIONS=$(npm view @elastic/request-converter-dotnet versions --json 2>/dev/null || echo "[]")
-          VERSION=$(node -e '
-            let raw;
-            try { raw = JSON.parse(process.argv[1]) } catch { raw = [] }
-            // "npm view versions --json" yields a bare string, not an array, for a single-version package.
-            const all = Array.isArray(raw) ? raw : typeof raw === "string" ? [raw] : [];
-            const released = all.filter(v => !v.includes("-"));
-            const branch = process.argv[2];
-            if (branch === "main") {
-              const [major, minor] = released.reduce((max, v) => {
-                const p = v.split(".").map(Number);
-                return p[0] > max[0] || (p[0] === max[0] && p[1] > max[1]) ? [p[0], p[1]] : max;
-              }, [0, 0]);
-              const base = major + "." + (minor + 1);
-              const counter = new RegExp("^" + base.replace(".", "\\.") + "\\.0-main\\.(\\d+)$");
-              const n = all.reduce((max, v) => {
-                const m = v.match(counter);
-                return m ? Math.max(max, Number(m[1])) : max;
-              }, 0);
-              console.log(base + ".0-main." + (n + 1));
-            } else {
-              const patch = released
-                .filter(v => v.startsWith(branch + "."))
-                .reduce((max, v) => Math.max(max, Number(v.split(".")[2])), -1);
-              console.log(branch + "." + (patch + 1));
-            }
-          ' "$VERSIONS" "$BRANCH")
           if [ "$BRANCH" = "main" ]; then
+            VERSION="0.0.0-main.g$(git rev-parse --short=12 HEAD)"
             # No client release corresponds to a main build, and "git describe" would attach an
-            # unrelated tag; the recorded commit is the build's identity instead.
+            # unrelated tag; the commit is the build's identity instead.
             CLIENT_VERSION="unreleased"
           else
+            VERSIONS=$(npm view @elastic/request-converter-dotnet versions --json 2>/dev/null || echo "[]")
+            VERSION=$(node -e '
+              let raw;
+              try { raw = JSON.parse(process.argv[1]) } catch { raw = [] }
+              // "npm view versions --json" yields a bare string, not an array, for a single-version package.
+              const all = Array.isArray(raw) ? raw : typeof raw === "string" ? [raw] : [];
+              const branch = process.argv[2];
+              const patch = all
+                .filter(v => !v.includes("-") && v.startsWith(branch + "."))
+                .reduce((max, v) => Math.max(max, Number(v.split(".")[2])), -1);
+              console.log(branch + "." + (patch + 1));
+            ' "$VERSIONS" "$BRANCH")
             CLIENT_VERSION="${RELEASE_TAG#v}"
             if [ -z "$CLIENT_VERSION" ]; then
               CLIENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "unreleased")
@@ -121,8 +111,8 @@ jobs:
       # dist-tag (it would implicitly move "latest" backwards). Tag "latest" only when the new
       # version is the highest published one; otherwise use a per-branch tag. Plain "8.19" is
       # not a legal dist-tag (npm rejects tags that parse as semver ranges), hence the prefix.
-      # main builds are prereleases of a minor that has not shipped, so they must never take or
-      # influence "latest" and are pinned to "latest-main".
+      # main builds name a commit rather than a release, so they must never take or influence
+      # "latest" and are pinned to "latest-main", which is the tag consumers reference.
       - name: Compute dist-tag
         id: dist-tag
         env:

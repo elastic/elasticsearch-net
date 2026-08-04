@@ -91,10 +91,12 @@ publish and carries no meaning beyond ordering. The exact embedded client is rec
 version compiled into the bundle, and `commit` is the elasticsearch-net commit the bundle was built
 from.
 
-Builds from the `main` branch have no release line of their own, so they ship as prereleases of the
-next unreleased minor: `<next-minor>.0-main.<n>`, for example `9.6.0-main.1`, with `n` incrementing
-per publish. They are published under the `latest-main` dist-tag and never take `latest`, and they
-record `clientVersion: unreleased` - use `commit` to identify what they were built from.
+Builds from the `main` branch are versioned off the commit they were built from, as
+`0.0.0-main.g<commit>` (for example `0.0.0-main.g1a2b3c4d5e6f`). That version names the built commit
+and claims no target release, since `main` may be aiming at the next minor or at the next major.
+Such builds are published under the `latest-main` dist-tag and never take `latest`; reference that
+tag rather than a version range. Their provenance is in the `elasticsearch` metadata as usual:
+`commit` for the full commit, and `clientVersion` set to `unreleased`.
 
 ## Building from source
 
