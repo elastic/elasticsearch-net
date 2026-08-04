@@ -4,8 +4,8 @@ name: Bump elasticsearch-specification
 # converter package pin in docs/examples/package.json. Called from the npm publish
 # workflow after a successful publish; also dispatchable manually for testing.
 #
-# Targets the spec branch matching the published major.minor, and additionally
-# targets `main` when the publish moved the `latest` dist-tag.
+# Targets the spec branch named after the source branch, one for one: a build from
+# `X.Y` bumps spec `X.Y`, a build from `main` bumps spec `main`.
 #
 # Uses an ephemeral Vault (ci-prod) token fetched via OIDC rather than the
 # default GITHUB_TOKEN: bump PRs target a different repo and must trigger its
@@ -21,11 +21,11 @@ on:
         required: true
         type: string
       branch:
-        description: 'Source major.minor branch, e.g. 9.4 (matches the spec branch to target)'
+        description: 'Source branch, e.g. 9.4 or main (names the spec branch to target)'
         required: true
         type: string
       dist-tag:
-        description: 'npm dist-tag the version was published with: "latest" or "latest-<branch>"'
+        description: 'npm dist-tag the version was published with, recorded in the PR body'
         required: true
         type: string
       package:
@@ -43,10 +43,10 @@ on:
         description: 'Published package version, e.g. 9.4.2'
         required: true
       branch:
-        description: 'Source major.minor branch, e.g. 9.4'
+        description: 'Source branch, e.g. 9.4 or main'
         required: true
       dist-tag:
-        description: 'npm dist-tag: "latest" or "latest-<branch>"'
+        description: 'npm dist-tag the version was published with, recorded in the PR body'
         required: true
       package:
         description: 'npm package to bump'
@@ -91,10 +91,9 @@ jobs:
             const pin = `~${version}`;
             const path = 'docs/examples/package.json';
 
-            // Always target the matching major.minor branch; also target main when
-            // the publish moved the "latest" dist-tag.
+            // Spec branches are named for the source branch, so the mapping is explicit:
+            // `X.Y` bumps spec `X.Y`, `main` bumps spec `main`.
             const targets = [branch];
-            if (distTag === 'latest') targets.push('main');
 
             core.info(`Bumping ${pkg} to ${pin} on ${owner}/${repo}: ${targets.join(', ')}${dryRun ? ' (dry-run)' : ''}`);
 
