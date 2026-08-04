@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 
 using Xunit;
 
@@ -13,8 +14,9 @@ public sealed class ClientCallTests
 	private static readonly global::Elastic.Transport.Serializer Serializer =
 		global::RequestConverter.RequestConverter.DefaultSerializer;
 
-	private static ConversionResult Convert(string api, string body, FormattingOptions options) =>
-		global::RequestConverter.RequestConverter.Convert(Serializer, api, null, null, body, options);
+	private static ConversionResult Convert(string api, string body, FormattingOptions options,
+		IReadOnlyDictionary<string, string>? pathParameters = null) =>
+		global::RequestConverter.RequestConverter.Convert(Serializer, api, pathParameters, null, body, options);
 
 	[Fact]
 	public void Appends_awaited_namespaced_call()
@@ -136,5 +138,56 @@ public sealed class ClientCallTests
 
 		Assert.Equal(ClientCallFormat.None, formatting.ClientCallFormat);
 		Assert.Equal(ClientCallStyle.Async, formatting.ClientCallStyle);
+	}
+
+	[Fact]
+	public void Inline_format_inlines_the_request_argument()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline };
+		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
+
+		Assert.StartsWith("var response = await client.Esql.QueryAsync(new EsqlQueryRequest()", result.Code, StringComparison.Ordinal);
+		Assert.EndsWith(");", result.Code, StringComparison.Ordinal);
+		Assert.DoesNotContain("request =", result.Code, StringComparison.Ordinal);
+		Assert.Contains("Elastic.Clients.Elasticsearch.Esql", result.Namespaces);
+	}
+
+	[Fact]
+	public void Inline_format_spells_response_generics()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline };
+		var result = Convert("search", """{"query":{"match_all":{}}}""", options);
+
+		Assert.StartsWith("var response = await client.SearchAsync<JsonElement>(new SearchRequest()", result.Code, StringComparison.Ordinal);
+		Assert.Contains("System.Text.Json", result.Namespaces);
+	}
+
+	[Fact]
+	public void Inline_sync_style_omits_await()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, ClientCallStyle = ClientCallStyle.Sync };
+		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
+
+		Assert.StartsWith("var response = client.Esql.Query(new EsqlQueryRequest()", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_format_ignores_variable_declaration()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, EmitVariableDeclaration = true };
+		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
+
+		Assert.StartsWith("var response = ", result.Code, StringComparison.Ordinal);
+		Assert.DoesNotContain("EsqlQueryRequest request", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_format_names_the_bulk_request_type()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline };
+		var result = Convert("bulk", "{\"index\":{\"_id\":\"1\"}}\n{\"field\":1}\n", options);
+
+		Assert.StartsWith("var response = await client.BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
+		Assert.Contains("Elastic.Clients.Elasticsearch", result.Namespaces);
 	}
 }
