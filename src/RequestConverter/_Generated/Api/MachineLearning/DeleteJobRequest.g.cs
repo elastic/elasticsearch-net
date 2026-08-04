@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class DeleteJobRequest : RequestConverter.ICodeFormattable
+public partial class DeleteJobRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,27 +32,9 @@ public partial class DeleteJobRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (DeleteUserAnnotations is not null)
-			{
-				writer.WriteFluentCall("DeleteUserAnnotations", (w) => { w.WriteValue(DeleteUserAnnotations.Value); });
-			}
-
-			if (Force is not null)
-			{
-				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
-			}
-
-			if (WaitForCompletion is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +63,33 @@ public partial class DeleteJobRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (DeleteUserAnnotations is not null)
+		{
+			writer.WriteFluentCall("DeleteUserAnnotations", (w) => { w.WriteValue(DeleteUserAnnotations.Value); });
+		}
+
+		if (Force is not null)
+		{
+			writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
+		}
+
+		if (WaitForCompletion is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 		}
 	}
 }

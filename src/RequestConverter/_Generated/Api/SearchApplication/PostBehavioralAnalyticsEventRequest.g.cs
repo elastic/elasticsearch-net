@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICodeFormattable
+public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,27 +32,9 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICod
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				CollectionName.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Debug is not null)
-			{
-				writer.WriteFluentCall("Debug", (w) => { w.WriteValue(Debug.Value); });
-			}
-
-			{
-				writer.WriteFluentCall("Payload", (w) => { w.WriteObjectValue(Payload); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -79,6 +61,33 @@ public partial class PostBehavioralAnalyticsEventRequest : RequestConverter.ICod
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			CollectionName.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Elastic.Clients.Elasticsearch.SearchApplication.EventTypeCodeFormatter.FormatCode(EventType, writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Debug is not null)
+		{
+			writer.WriteFluentCall("Debug", (w) => { w.WriteValue(Debug.Value); });
+		}
+
+		{
+			writer.WriteFluentCall("Payload", (w) => { w.WriteObjectValue(Payload); });
 		}
 	}
 }

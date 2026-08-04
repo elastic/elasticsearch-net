@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class FlushJobRequest : RequestConverter.ICodeFormattable
+public partial class FlushJobRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,37 +32,9 @@ public partial class FlushJobRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (AdvanceTime is not null)
-			{
-				writer.WriteFluentCall("AdvanceTime", (w) => { w.WriteValue(AdvanceTime.Value); });
-			}
-
-			if (CalcInterim is not null)
-			{
-				writer.WriteFluentCall("CalcInterim", (w) => { w.WriteValue(CalcInterim.Value); });
-			}
-
-			if (End is not null)
-			{
-				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
-			}
-
-			if (SkipTime is not null)
-			{
-				writer.WriteFluentCall("SkipTime", (w) => { w.WriteValue(SkipTime.Value); });
-			}
-
-			if (Start is not null)
-			{
-				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -103,6 +75,43 @@ public partial class FlushJobRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AdvanceTime is not null)
+		{
+			writer.WriteFluentCall("AdvanceTime", (w) => { w.WriteValue(AdvanceTime.Value); });
+		}
+
+		if (CalcInterim is not null)
+		{
+			writer.WriteFluentCall("CalcInterim", (w) => { w.WriteValue(CalcInterim.Value); });
+		}
+
+		if (End is not null)
+		{
+			writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
+		}
+
+		if (SkipTime is not null)
+		{
+			writer.WriteFluentCall("SkipTime", (w) => { w.WriteValue(SkipTime.Value); });
+		}
+
+		if (Start is not null)
+		{
+			writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class PutRegionPolicyRequest : RequestConverter.ICodeFormattable
+public partial class PutRegionPolicyRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,16 +31,10 @@ public partial class PutRegionPolicyRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.PutRegionPolicyRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Force is not null)
-			{
-				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("RegionPolicy", (w) => { RegionPolicy.FormatCode(w); }, (w) => { RegionPolicy.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -57,6 +51,23 @@ public partial class PutRegionPolicyRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Force is not null)
+		{
+			writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("RegionPolicy", (w) => { RegionPolicy.FormatCode(w); }, (w) => { RegionPolicy.FormatCode(w); });
 		}
 	}
 }

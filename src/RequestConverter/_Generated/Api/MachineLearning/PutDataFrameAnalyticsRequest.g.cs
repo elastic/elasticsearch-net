@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormattable
+public partial class PutDataFrameAnalyticsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,79 +33,17 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Id.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Id.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (AllowLazyStart is not null)
-			{
-				writer.WriteFluentCall("AllowLazyStart", (w) => { w.WriteValue(AllowLazyStart.Value); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); }, (w) => { Analysis.FormatCode(w); });
-			}
-
-			if (AnalyzedFields is not null)
-			{
-				writer.WriteFluentDescriptorCall("AnalyzedFields", (w) => { AnalyzedFields.FormatCode(w); });
-			}
-
-			if (Description is not null)
-			{
-				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { Dest.FormatCode(w); });
-			}
-
-			if (Headers is not null)
-			{
-				writer.WriteFluentCall("Headers", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<string>"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }); });
-			}
-
-			if (MaxNumThreads is not null)
-			{
-				writer.WriteFluentCall("MaxNumThreads", (w) => { w.WriteValue(MaxNumThreads.Value); });
-			}
-
-			if (Meta is not null)
-			{
-				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (ModelMemoryLimit is not null)
-			{
-				writer.WriteFluentCall("ModelMemoryLimit", (w) => { w.WriteString(ModelMemoryLimit); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { Source.FormatCode(w); });
-			}
-
-			if (Version is not null)
-			{
-				writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -193,6 +131,70 @@ public partial class PutDataFrameAnalyticsRequest : RequestConverter.ICodeFormat
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AllowLazyStart is not null)
+		{
+			writer.WriteFluentCall("AllowLazyStart", (w) => { w.WriteValue(AllowLazyStart.Value); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("Analysis", (w) => { Analysis.FormatCode(w); }, (w) => { Analysis.FormatCode(w); });
+		}
+
+		if (AnalyzedFields is not null)
+		{
+			writer.WriteFluentDescriptorCall("AnalyzedFields", (w) => { AnalyzedFields.FormatCode(w); });
+		}
+
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); }, (w) => { Dest.FormatCode(w); });
+		}
+
+		if (Headers is not null)
+		{
+			writer.WriteFluentCall("Headers", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<string>"); w.Write(">()"); w.WriteBlockList(Headers, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }); });
+		}
+
+		if (MaxNumThreads is not null)
+		{
+			writer.WriteFluentCall("MaxNumThreads", (w) => { w.WriteValue(MaxNumThreads.Value); });
+		}
+
+		if (Meta is not null)
+		{
+			writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (ModelMemoryLimit is not null)
+		{
+			writer.WriteFluentCall("ModelMemoryLimit", (w) => { w.WriteString(ModelMemoryLimit); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("Source", (w) => { Source.FormatCode(w); }, (w) => { Source.FormatCode(w); });
+		}
+
+		if (Version is not null)
+		{
+			writer.WriteFluentCall("Version", (w) => { w.WriteString(Version); });
 		}
 	}
 }

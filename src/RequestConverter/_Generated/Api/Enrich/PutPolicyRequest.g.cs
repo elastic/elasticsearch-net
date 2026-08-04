@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
-public partial class PutPolicyRequest : RequestConverter.ICodeFormattable
+public partial class PutPolicyRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,47 +33,17 @@ public partial class PutPolicyRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (GeoMatch is not null)
-			{
-				writer.WriteFluentDescriptorCall("GeoMatch", (w) => { GeoMatch.FormatCode(w); }, (w) => { GeoMatch.FormatCode(w); });
-			}
-
-			if (Match is not null)
-			{
-				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { Match.FormatCode(w); });
-			}
-
-			if (Range is not null)
-			{
-				writer.WriteFluentDescriptorCall("Range", (w) => { Range.FormatCode(w); }, (w) => { Range.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -108,6 +78,38 @@ public partial class PutPolicyRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (GeoMatch is not null)
+		{
+			writer.WriteFluentDescriptorCall("GeoMatch", (w) => { GeoMatch.FormatCode(w); }, (w) => { GeoMatch.FormatCode(w); });
+		}
+
+		if (Match is not null)
+		{
+			writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { Match.FormatCode(w); });
+		}
+
+		if (Range is not null)
+		{
+			writer.WriteFluentDescriptorCall("Range", (w) => { Range.FormatCode(w); }, (w) => { Range.FormatCode(w); });
 		}
 	}
 }

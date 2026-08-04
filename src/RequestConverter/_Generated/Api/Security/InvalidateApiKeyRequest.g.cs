@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
+public partial class InvalidateApiKeyRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,37 +31,10 @@ public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Id is not null)
-			{
-				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
-			}
-
-			if (Ids is not null)
-			{
-				writer.WriteFluentCall("Ids", (w) => { w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
-			}
-
-			if (Name is not null)
-			{
-				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
-			}
-
-			if (Owner is not null)
-			{
-				writer.WriteFluentCall("Owner", (w) => { w.WriteValue(Owner.Value); });
-			}
-
-			if (RealmName is not null)
-			{
-				writer.WriteFluentCall("RealmName", (w) => { w.WriteString(RealmName); });
-			}
-
-			if (Username is not null)
-			{
-				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -103,6 +76,44 @@ public partial class InvalidateApiKeyRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Id is not null)
+		{
+			writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
+		}
+
+		if (Ids is not null)
+		{
+			writer.WriteFluentCall("Ids", (w) => { w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
+		}
+
+		if (Name is not null)
+		{
+			writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
+		}
+
+		if (Owner is not null)
+		{
+			writer.WriteFluentCall("Owner", (w) => { w.WriteValue(Owner.Value); });
+		}
+
+		if (RealmName is not null)
+		{
+			writer.WriteFluentCall("RealmName", (w) => { w.WriteString(RealmName); });
+		}
+
+		if (Username is not null)
+		{
+			writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 		}
 	}
 }

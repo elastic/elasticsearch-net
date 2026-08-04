@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public partial class ListRequest : RequestConverter.ICodeFormattable
+public partial class ListRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,42 +31,10 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Actions is not null)
-			{
-				writer.WriteFluentParams("Actions", Actions, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Detailed is not null)
-			{
-				writer.WriteFluentCall("Detailed", (w) => { w.WriteValue(Detailed.Value); });
-			}
-
-			if (GroupBy is not null)
-			{
-				writer.WriteFluentCall("GroupBy", (w) => { Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, w); });
-			}
-
-			if (Nodes is not null)
-			{
-				writer.WriteFluentCall("Nodes", (w) => { Nodes.FormatCode(w); });
-			}
-
-			if (ParentTaskId is not null)
-			{
-				writer.WriteFluentCall("ParentTaskId", (w) => { ParentTaskId.FormatCode(w); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (WaitForCompletion is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -114,6 +82,49 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Actions is not null)
+		{
+			writer.WriteFluentParams("Actions", Actions, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Detailed is not null)
+		{
+			writer.WriteFluentCall("Detailed", (w) => { w.WriteValue(Detailed.Value); });
+		}
+
+		if (GroupBy is not null)
+		{
+			writer.WriteFluentCall("GroupBy", (w) => { Elastic.Clients.Elasticsearch.Tasks.GroupByCodeFormatter.FormatCode(GroupBy.Value, w); });
+		}
+
+		if (Nodes is not null)
+		{
+			writer.WriteFluentCall("Nodes", (w) => { Nodes.FormatCode(w); });
+		}
+
+		if (ParentTaskId is not null)
+		{
+			writer.WriteFluentCall("ParentTaskId", (w) => { ParentTaskId.FormatCode(w); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (WaitForCompletion is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 		}
 	}
 }

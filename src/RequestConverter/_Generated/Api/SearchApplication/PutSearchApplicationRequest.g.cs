@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormattable
+public partial class PutSearchApplicationRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,21 +32,9 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Name.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Create is not null)
-			{
-				writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("SearchApplication", (w) => { SearchApplication.FormatCode(w); }, (w) => { SearchApplication.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -68,6 +56,27 @@ public partial class PutSearchApplicationRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Create is not null)
+		{
+			writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("SearchApplication", (w) => { SearchApplication.FormatCode(w); }, (w) => { SearchApplication.FormatCode(w); });
 		}
 	}
 }

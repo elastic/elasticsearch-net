@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class UpdateFilterRequest : RequestConverter.ICodeFormattable
+public partial class UpdateFilterRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,27 +32,9 @@ public partial class UpdateFilterRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				FilterId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (AddItems is not null)
-			{
-				writer.WriteFluentParams("AddItems", AddItems, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Description is not null)
-			{
-				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
-			}
-
-			if (RemoveItems is not null)
-			{
-				writer.WriteFluentParams("RemoveItems", RemoveItems, (w, item) => { w.WriteString(item); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +63,33 @@ public partial class UpdateFilterRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			FilterId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AddItems is not null)
+		{
+			writer.WriteFluentParams("AddItems", AddItems, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
+		}
+
+		if (RemoveItems is not null)
+		{
+			writer.WriteFluentParams("RemoveItems", RemoveItems, (w, item) => { w.WriteString(item); });
 		}
 	}
 }

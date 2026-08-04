@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class RerankRequest : RequestConverter.ICodeFormattable
+public partial class RerankRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,40 +32,9 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				InferenceId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentCall("Input", (w) => { if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.RerankInputObject"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
-			}
-
-			{
-				writer.WriteFluentCall("Query", (w) => { if (Query.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Query.Value1); } else { Query.Value2.FormatCode(w); } });
-			}
-
-			if (ReturnDocuments is not null)
-			{
-				writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
-			}
-
-			if (TaskSettings is not null)
-			{
-				writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
-			}
-
-			if (TopN is not null)
-			{
-				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -130,6 +99,46 @@ public partial class RerankRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			InferenceId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentCall("Input", (w) => { if (Input.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("string"); w.Write("[] "); w.WriteInlineList(Input.Value1, (w, item) => { w.WriteString(item); }, "{ ", " }", ", "); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.RerankInputObject"); w.Write("[] "); w.WriteInlineList(Input.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
+		}
+
+		{
+			writer.WriteFluentCall("Query", (w) => { if (Query.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Query.Value1); } else { Query.Value2.FormatCode(w); } });
+		}
+
+		if (ReturnDocuments is not null)
+		{
+			writer.WriteFluentCall("ReturnDocuments", (w) => { w.WriteValue(ReturnDocuments.Value); });
+		}
+
+		if (TaskSettings is not null)
+		{
+			writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
+		}
+
+		if (TopN is not null)
+		{
+			writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
+public partial class UpdateJobRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,102 +33,17 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					JobId.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					JobId.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (AllowLazyOpen is not null)
-			{
-				writer.WriteFluentCall("AllowLazyOpen", (w) => { w.WriteValue(AllowLazyOpen.Value); });
-			}
-
-			if (AnalysisLimits is not null)
-			{
-				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); }, (w) => { AnalysisLimits.FormatCode(w); });
-			}
-
-			if (BackgroundPersistInterval is not null)
-			{
-				writer.WriteFluentCall("BackgroundPersistInterval", (w) => { BackgroundPersistInterval.FormatCode(w); });
-			}
-
-			if (CategorizationFilters is not null)
-			{
-				writer.WriteFluentParams("CategorizationFilters", CategorizationFilters, (w, item) => { w.WriteString(item); });
-			}
-
-			if (CustomSettings is not null)
-			{
-				writer.WriteFluentCall("CustomSettings", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (DailyModelSnapshotRetentionAfterDays is not null)
-			{
-				writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
-			}
-
-			if (Description is not null)
-			{
-				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
-			}
-
-			if (Detectors is not null)
-			{
-				writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>"); w.Write("()"); });
-			}
-
-			if (Groups is not null)
-			{
-				writer.WriteFluentParams("Groups", Groups, (w, item) => { w.WriteString(item); });
-			}
-
-			if (ModelPlotConfig is not null)
-			{
-				writer.WriteFluentDescriptorCall("ModelPlotConfig", (w) => { ModelPlotConfig.FormatCode(w); });
-			}
-
-			if (ModelPruneWindow is not null)
-			{
-				writer.WriteFluentCall("ModelPruneWindow", (w) => { ModelPruneWindow.FormatCode(w); });
-			}
-
-			if (ModelSnapshotRetentionDays is not null)
-			{
-				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
-			}
-
-			if (PerPartitionCategorization is not null)
-			{
-				writer.WriteFluentDescriptorCall("PerPartitionCategorization", (w) => { PerPartitionCategorization.FormatCode(w); });
-			}
-
-			if (RenormalizationWindowDays is not null)
-			{
-				writer.WriteFluentCall("RenormalizationWindowDays", (w) => { w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
-			}
-
-			if (ResultsRetentionDays is not null)
-			{
-				writer.WriteFluentCall("ResultsRetentionDays", (w) => { w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -240,6 +155,93 @@ public partial class UpdateJobRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AllowLazyOpen is not null)
+		{
+			writer.WriteFluentCall("AllowLazyOpen", (w) => { w.WriteValue(AllowLazyOpen.Value); });
+		}
+
+		if (AnalysisLimits is not null)
+		{
+			writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); }, (w) => { AnalysisLimits.FormatCode(w); });
+		}
+
+		if (BackgroundPersistInterval is not null)
+		{
+			writer.WriteFluentCall("BackgroundPersistInterval", (w) => { BackgroundPersistInterval.FormatCode(w); });
+		}
+
+		if (CategorizationFilters is not null)
+		{
+			writer.WriteFluentParams("CategorizationFilters", CategorizationFilters, (w, item) => { w.WriteString(item); });
+		}
+
+		if (CustomSettings is not null)
+		{
+			writer.WriteFluentCall("CustomSettings", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(CustomSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (DailyModelSnapshotRetentionAfterDays is not null)
+		{
+			writer.WriteFluentCall("DailyModelSnapshotRetentionAfterDays", (w) => { w.WriteValue(DailyModelSnapshotRetentionAfterDays.Value); w.Write("L"); });
+		}
+
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
+		}
+
+		if (Detectors is not null)
+		{
+			writer.WriteFluentDescriptorParams("Detectors", Detectors, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>"); w.Write("()"); });
+		}
+
+		if (Groups is not null)
+		{
+			writer.WriteFluentParams("Groups", Groups, (w, item) => { w.WriteString(item); });
+		}
+
+		if (ModelPlotConfig is not null)
+		{
+			writer.WriteFluentDescriptorCall("ModelPlotConfig", (w) => { ModelPlotConfig.FormatCode(w); });
+		}
+
+		if (ModelPruneWindow is not null)
+		{
+			writer.WriteFluentCall("ModelPruneWindow", (w) => { ModelPruneWindow.FormatCode(w); });
+		}
+
+		if (ModelSnapshotRetentionDays is not null)
+		{
+			writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
+		}
+
+		if (PerPartitionCategorization is not null)
+		{
+			writer.WriteFluentDescriptorCall("PerPartitionCategorization", (w) => { PerPartitionCategorization.FormatCode(w); });
+		}
+
+		if (RenormalizationWindowDays is not null)
+		{
+			writer.WriteFluentCall("RenormalizationWindowDays", (w) => { w.WriteValue(RenormalizationWindowDays.Value); w.Write("L"); });
+		}
+
+		if (ResultsRetentionDays is not null)
+		{
+			writer.WriteFluentCall("ResultsRetentionDays", (w) => { w.WriteValue(ResultsRetentionDays.Value); w.Write("L"); });
 		}
 	}
 }
