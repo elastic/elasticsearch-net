@@ -122,6 +122,15 @@ public sealed class ClientCallTests
 	}
 
 	[Fact]
+	public void Host_options_suffix_the_response_variable()
+	{
+		var formatting = Hosting.ConvertOptionsMapper.BuildFormattingOptions(new Hosting.ConvertOptions(), "request1", "response1");
+
+		Assert.Equal("request1", formatting.VariableName);
+		Assert.Equal("response1", formatting.ResponseVariableName);
+	}
+
+	[Fact]
 	public void Host_options_map_to_formatting_options()
 	{
 		var options = new Hosting.ConvertOptions { ClientCallStyle = "sync", ClientCallFormat = "statement" };

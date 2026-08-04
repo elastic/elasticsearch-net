@@ -14,14 +14,15 @@ namespace RequestConverter.Hosting;
 /// </summary>
 public static class ConvertOptionsMapper
 {
-	public static FormattingOptions BuildFormattingOptions(ConvertOptions? options, string variableName)
+	public static FormattingOptions BuildFormattingOptions(ConvertOptions? options, string variableName, string responseVariableName = "response")
 	{
 		// Emit a typed variable declaration (e.g. `SearchRequest request = new() { ... };`) so the request type and its
 		// namespace surface in the generated snippet.
 		var formatting = new FormattingOptions
 		{
 			EmitVariableDeclaration = true,
-			VariableName = variableName
+			VariableName = variableName,
+			ResponseVariableName = responseVariableName
 		};
 
 		// Accept the style name case-insensitively; an unknown or absent value keeps the converter's default style.
