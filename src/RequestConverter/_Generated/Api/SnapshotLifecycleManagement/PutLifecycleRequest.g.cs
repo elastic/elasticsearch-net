@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
+public partial class PutLifecycleRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,47 +32,9 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				PolicyId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (Config is not null)
-			{
-				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); });
-			}
-
-			if (Name is not null)
-			{
-				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
-			}
-
-			if (Repository is not null)
-			{
-				writer.WriteFluentCall("Repository", (w) => { w.WriteString(Repository); });
-			}
-
-			if (Retention is not null)
-			{
-				writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); }, (w) => { Retention.FormatCode(w); });
-			}
-
-			if (Schedule is not null)
-			{
-				writer.WriteFluentCall("Schedule", (w) => { w.WriteString(Schedule); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -125,6 +87,53 @@ public partial class PutLifecycleRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			PolicyId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (Config is not null)
+		{
+			writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); });
+		}
+
+		if (Name is not null)
+		{
+			writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
+		}
+
+		if (Repository is not null)
+		{
+			writer.WriteFluentCall("Repository", (w) => { w.WriteString(Repository); });
+		}
+
+		if (Retention is not null)
+		{
+			writer.WriteFluentDescriptorCall("Retention", (w) => { Retention.FormatCode(w); }, (w) => { Retention.FormatCode(w); });
+		}
+
+		if (Schedule is not null)
+		{
+			writer.WriteFluentCall("Schedule", (w) => { w.WriteString(Schedule); });
 		}
 	}
 }

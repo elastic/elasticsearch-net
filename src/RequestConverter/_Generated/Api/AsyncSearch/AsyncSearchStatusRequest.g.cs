@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public partial class AsyncSearchStatusRequest : RequestConverter.ICodeFormattable
+public partial class AsyncSearchStatusRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,17 +32,9 @@ public partial class AsyncSearchStatusRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Id.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (KeepAlive is not null)
-			{
-				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -59,6 +51,23 @@ public partial class AsyncSearchStatusRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (KeepAlive is not null)
+		{
+			writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
 		}
 	}
 }

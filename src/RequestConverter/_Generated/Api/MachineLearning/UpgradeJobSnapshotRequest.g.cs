@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class UpgradeJobSnapshotRequest : RequestConverter.ICodeFormattable
+public partial class UpgradeJobSnapshotRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,28 +32,9 @@ public partial class UpgradeJobSnapshotRequest : RequestConverter.ICodeFormattab
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				SnapshotId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (WaitForCompletion is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +62,34 @@ public partial class UpgradeJobSnapshotRequest : RequestConverter.ICodeFormattab
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			SnapshotId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (WaitForCompletion is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 		}
 	}
 }

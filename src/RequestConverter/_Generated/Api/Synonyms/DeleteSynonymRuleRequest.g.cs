@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
-public partial class DeleteSynonymRuleRequest : RequestConverter.ICodeFormattable
+public partial class DeleteSynonymRuleRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,23 +32,9 @@ public partial class DeleteSynonymRuleRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				SetId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				RuleId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +56,29 @@ public partial class DeleteSynonymRuleRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			SetId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			RuleId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
 		}
 	}
 }

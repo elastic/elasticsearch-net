@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class TextEmbeddingRequest : RequestConverter.ICodeFormattable
+public partial class TextEmbeddingRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,31 +32,9 @@ public partial class TextEmbeddingRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				InferenceId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentParams("Input", Input, (w, item) => { w.WriteString(item); });
-			}
-
-			if (InputType is not null)
-			{
-				writer.WriteFluentCall("InputType", (w) => { w.WriteString(InputType); });
-			}
-
-			if (TaskSettings is not null)
-			{
-				writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -90,6 +68,37 @@ public partial class TextEmbeddingRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			InferenceId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentParams("Input", Input, (w, item) => { w.WriteString(item); });
+		}
+
+		if (InputType is not null)
+		{
+			writer.WriteFluentCall("InputType", (w) => { w.WriteString(InputType); });
+		}
+
+		if (TaskSettings is not null)
+		{
+			writer.WriteFluentCall("TaskSettings", (w) => { w.WriteObjectValue(TaskSettings); });
 		}
 	}
 }

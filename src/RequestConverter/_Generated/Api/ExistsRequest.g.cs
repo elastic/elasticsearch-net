@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class ExistsRequest : RequestConverter.ICodeFormattable
+public partial class ExistsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,89 +33,17 @@ public partial class ExistsRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Index.FormatCode(writer);
-				}
-
-				writer.Write(", ");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Id.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ExistsRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Index.FormatCode(writer);
-				}
-
-				writer.Write(", ");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Id.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Preference is not null)
-			{
-				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
-			}
-
-			if (Realtime is not null)
-			{
-				writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
-			}
-
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
-			}
-
-			if (Routing is not null)
-			{
-				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
-			}
-
-			if (Source is not null)
-			{
-				writer.WriteFluentCall("Source", (w) => { Source.FormatCode(w); });
-			}
-
-			if (SourceExcludes is not null)
-			{
-				writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); }, false);
-			}
-
-			if (SourceIncludes is not null)
-			{
-				writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); }, false);
-			}
-
-			if (StoredFields is not null)
-			{
-				writer.WriteFluentCall("StoredFields", (w) => { StoredFields.FormatCode(w); }, false);
-			}
-
-			if (Version is not null)
-			{
-				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
-			}
-
-			if (VersionType is not null)
-			{
-				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -192,6 +120,74 @@ public partial class ExistsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Index.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Preference is not null)
+		{
+			writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
+		}
+
+		if (Realtime is not null)
+		{
+			writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
+		}
+
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
+		}
+
+		if (Routing is not null)
+		{
+			writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+		}
+
+		if (Source is not null)
+		{
+			writer.WriteFluentCall("Source", (w) => { Source.FormatCode(w); });
+		}
+
+		if (SourceExcludes is not null)
+		{
+			writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); }, false);
+		}
+
+		if (SourceIncludes is not null)
+		{
+			writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); }, false);
+		}
+
+		if (StoredFields is not null)
+		{
+			writer.WriteFluentCall("StoredFields", (w) => { StoredFields.FormatCode(w); }, false);
+		}
+
+		if (Version is not null)
+		{
+			writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
+		}
+
+		if (VersionType is not null)
+		{
+			writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
 		}
 	}
 }

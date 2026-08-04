@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattable
+public partial class GetServiceAccountsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,17 +31,10 @@ public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattab
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Namespace is not null)
-			{
-				writer.WriteFluentCall("Namespace", (w) => { w.WriteString(Namespace); });
-			}
-
-			if (Service is not null)
-			{
-				writer.WriteFluentCall("Service", (w) => { w.WriteString(Service); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -59,6 +52,24 @@ public partial class GetServiceAccountsRequest : RequestConverter.ICodeFormattab
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Namespace is not null)
+		{
+			writer.WriteFluentCall("Namespace", (w) => { w.WriteString(Namespace); });
+		}
+
+		if (Service is not null)
+		{
+			writer.WriteFluentCall("Service", (w) => { w.WriteString(Service); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class PostCalendarEventsRequest : RequestConverter.ICodeFormattable
+public partial class PostCalendarEventsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,16 +32,9 @@ public partial class PostCalendarEventsRequest : RequestConverter.ICodeFormattab
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				CalendarId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			{
-				writer.WriteFluentDescriptorParams("Events", Events, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent>"); w.Write("()"); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -57,6 +50,22 @@ public partial class PostCalendarEventsRequest : RequestConverter.ICodeFormattab
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			CalendarId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		{
+			writer.WriteFluentDescriptorParams("Events", Events, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent>"); w.Write("()"); });
 		}
 	}
 }

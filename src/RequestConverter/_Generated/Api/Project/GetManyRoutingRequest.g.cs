@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
-public partial class GetManyRoutingRequest : RequestConverter.ICodeFormattable
+public partial class GetManyRoutingRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,13 +31,24 @@ public partial class GetManyRoutingRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest", false);
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

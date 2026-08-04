@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class UpdateDataFrameAnalyticsRequest : RequestConverter.ICodeFormattable
+public partial class UpdateDataFrameAnalyticsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,32 +32,9 @@ public partial class UpdateDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Id.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (AllowLazyStart is not null)
-			{
-				writer.WriteFluentCall("AllowLazyStart", (w) => { w.WriteValue(AllowLazyStart.Value); });
-			}
-
-			if (Description is not null)
-			{
-				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
-			}
-
-			if (MaxNumThreads is not null)
-			{
-				writer.WriteFluentCall("MaxNumThreads", (w) => { w.WriteValue(MaxNumThreads.Value); });
-			}
-
-			if (ModelMemoryLimit is not null)
-			{
-				writer.WriteFluentCall("ModelMemoryLimit", (w) => { w.WriteString(ModelMemoryLimit); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -92,6 +69,38 @@ public partial class UpdateDataFrameAnalyticsRequest : RequestConverter.ICodeFor
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AllowLazyStart is not null)
+		{
+			writer.WriteFluentCall("AllowLazyStart", (w) => { w.WriteValue(AllowLazyStart.Value); });
+		}
+
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
+		}
+
+		if (MaxNumThreads is not null)
+		{
+			writer.WriteFluentCall("MaxNumThreads", (w) => { w.WriteValue(MaxNumThreads.Value); });
+		}
+
+		if (ModelMemoryLimit is not null)
+		{
+			writer.WriteFluentCall("ModelMemoryLimit", (w) => { w.WriteString(ModelMemoryLimit); });
 		}
 	}
 }

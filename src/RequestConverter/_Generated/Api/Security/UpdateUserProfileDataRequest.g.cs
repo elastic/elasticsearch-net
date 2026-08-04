@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormattable
+public partial class UpdateUserProfileDataRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,37 +32,9 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteString(Uid);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (IfPrimaryTerm is not null)
-			{
-				writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
-			}
-
-			if (IfSeqNo is not null)
-			{
-				writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
-			}
-
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
-			}
-
-			if (Data is not null)
-			{
-				writer.WriteFluentCall("Data", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (Labels is not null)
-			{
-				writer.WriteFluentCall("Labels", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -119,6 +91,43 @@ public partial class UpdateUserProfileDataRequest : RequestConverter.ICodeFormat
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(Uid);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (IfPrimaryTerm is not null)
+		{
+			writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+		}
+
+		if (IfSeqNo is not null)
+		{
+			writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+		}
+
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+		}
+
+		if (Data is not null)
+		{
+			writer.WriteFluentCall("Data", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Data, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (Labels is not null)
+		{
+			writer.WriteFluentCall("Labels", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Labels, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 		}
 	}
 }

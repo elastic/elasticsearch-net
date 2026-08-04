@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class DeleteTrainedModelAliasRequest : RequestConverter.ICodeFormattable
+public partial class DeleteTrainedModelAliasRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,19 +32,9 @@ public partial class DeleteTrainedModelAliasRequest : RequestConverter.ICodeForm
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelAlias.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -61,5 +51,24 @@ public partial class DeleteTrainedModelAliasRequest : RequestConverter.ICodeForm
 
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelAlias.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

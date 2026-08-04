@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
-public partial class DeleteRoutingRequest : RequestConverter.ICodeFormattable
+public partial class DeleteRoutingRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,13 +32,9 @@ public partial class DeleteRoutingRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteString(Name);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -50,5 +46,18 @@ public partial class DeleteRoutingRequest : RequestConverter.ICodeFormattable
 
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(Name);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

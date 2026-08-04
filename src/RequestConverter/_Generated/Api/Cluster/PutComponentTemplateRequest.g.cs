@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public partial class PutComponentTemplateRequest : RequestConverter.ICodeFormattable
+public partial class PutComponentTemplateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,61 +33,17 @@ public partial class PutComponentTemplateRequest : RequestConverter.ICodeFormatt
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Cause is not null)
-			{
-				writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
-			}
-
-			if (Create is not null)
-			{
-				writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (Deprecated is not null)
-			{
-				writer.WriteFluentCall("Deprecated", (w) => { w.WriteValue(Deprecated.Value); });
-			}
-
-			if (Meta is not null)
-			{
-				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
-			}
-
-			if (Version is not null)
-			{
-				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -147,6 +103,52 @@ public partial class PutComponentTemplateRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Cause is not null)
+		{
+			writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
+		}
+
+		if (Create is not null)
+		{
+			writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (Deprecated is not null)
+		{
+			writer.WriteFluentCall("Deprecated", (w) => { w.WriteValue(Deprecated.Value); });
+		}
+
+		if (Meta is not null)
+		{
+			writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
+		}
+
+		if (Version is not null)
+		{
+			writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 		}
 	}
 }

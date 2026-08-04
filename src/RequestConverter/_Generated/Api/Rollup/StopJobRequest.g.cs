@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
-public partial class StopJobRequest : RequestConverter.ICodeFormattable
+public partial class StopJobRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,22 +32,9 @@ public partial class StopJobRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Id.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (WaitForCompletion is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +57,28 @@ public partial class StopJobRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (WaitForCompletion is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 		}
 	}
 }

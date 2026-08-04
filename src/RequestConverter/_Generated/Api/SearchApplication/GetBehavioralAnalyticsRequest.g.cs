@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeFormattable
+public partial class GetBehavioralAnalyticsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,12 +31,10 @@ public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeForma
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Name is not null)
-			{
-				writer.WriteFluentCall("Name", (w) => { w.WriteInlineList(Name, (w, item) => { item.FormatCode(w); }); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -48,6 +46,19 @@ public partial class GetBehavioralAnalyticsRequest : RequestConverter.ICodeForma
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Name is not null)
+		{
+			writer.WriteFluentCall("Name", (w) => { w.WriteInlineList(Name, (w, item) => { item.FormatCode(w); }); });
 		}
 	}
 }

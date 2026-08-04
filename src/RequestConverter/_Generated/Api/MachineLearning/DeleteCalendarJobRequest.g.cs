@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class DeleteCalendarJobRequest : RequestConverter.ICodeFormattable
+public partial class DeleteCalendarJobRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,19 +32,9 @@ public partial class DeleteCalendarJobRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				CalendarId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -61,5 +51,24 @@ public partial class DeleteCalendarJobRequest : RequestConverter.ICodeFormattabl
 
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			CalendarId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

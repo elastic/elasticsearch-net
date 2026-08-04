@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
-public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
+public partial class EqlSearchRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,136 +33,17 @@ public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Indices.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Indices.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (AllowNoIndices is not null)
-			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
-			}
-
-			if (CcsMinimizeRoundtrips is not null)
-			{
-				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { w.WriteValue(CcsMinimizeRoundtrips.Value); });
-			}
-
-			if (ExpandWildcards is not null)
-			{
-				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-			}
-
-			if (IgnoreUnavailable is not null)
-			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
-			}
-
-			if (AllowPartialSearchResults is not null)
-			{
-				writer.WriteFluentCall("AllowPartialSearchResults", (w) => { w.WriteValue(AllowPartialSearchResults.Value); });
-			}
-
-			if (AllowPartialSequenceResults is not null)
-			{
-				writer.WriteFluentCall("AllowPartialSequenceResults", (w) => { w.WriteValue(AllowPartialSequenceResults.Value); });
-			}
-
-			if (CaseSensitive is not null)
-			{
-				writer.WriteFluentCall("CaseSensitive", (w) => { w.WriteValue(CaseSensitive.Value); });
-			}
-
-			if (EventCategoryField is not null)
-			{
-				writer.WriteFluentCall("EventCategoryField", (w) => { EventCategoryField.FormatCode(w); }, false);
-			}
-
-			if (FetchSize is not null)
-			{
-				writer.WriteFluentCall("FetchSize", (w) => { w.WriteValue(FetchSize.Value); });
-			}
-
-			if (Fields is not null)
-			{
-				writer.WriteFluentDescriptorParams("Fields", Fields, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>"); w.Write("()"); });
-			}
-
-			if (Filter is not null)
-			{
-				writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
-			}
-
-			if (KeepAlive is not null)
-			{
-				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
-			}
-
-			if (KeepOnCompletion is not null)
-			{
-				writer.WriteFluentCall("KeepOnCompletion", (w) => { w.WriteValue(KeepOnCompletion.Value); });
-			}
-
-			if (MaxSamplesPerKey is not null)
-			{
-				writer.WriteFluentCall("MaxSamplesPerKey", (w) => { w.WriteValue(MaxSamplesPerKey.Value); });
-			}
-
-			if (ProjectRouting is not null)
-			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
-			}
-
-			{
-				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
-			}
-
-			if (ResultPosition is not null)
-			{
-				writer.WriteFluentCall("ResultPosition", (w) => { Elastic.Clients.Elasticsearch.Eql.ResultPositionCodeFormatter.FormatCode(ResultPosition.Value, w); });
-			}
-
-			if (RuntimeMappings is not null)
-			{
-				writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
-
-			if (TiebreakerField is not null)
-			{
-				writer.WriteFluentCall("TiebreakerField", (w) => { TiebreakerField.FormatCode(w); }, false);
-			}
-
-			if (TimestampField is not null)
-			{
-				writer.WriteFluentCall("TimestampField", (w) => { TimestampField.FormatCode(w); }, false);
-			}
-
-			if (WaitForCompletionTimeout is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -311,6 +192,127 @@ public partial class EqlSearchRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Indices.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AllowNoIndices is not null)
+		{
+			writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
+		}
+
+		if (CcsMinimizeRoundtrips is not null)
+		{
+			writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { w.WriteValue(CcsMinimizeRoundtrips.Value); });
+		}
+
+		if (ExpandWildcards is not null)
+		{
+			writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+		}
+
+		if (IgnoreUnavailable is not null)
+		{
+			writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
+		}
+
+		if (AllowPartialSearchResults is not null)
+		{
+			writer.WriteFluentCall("AllowPartialSearchResults", (w) => { w.WriteValue(AllowPartialSearchResults.Value); });
+		}
+
+		if (AllowPartialSequenceResults is not null)
+		{
+			writer.WriteFluentCall("AllowPartialSequenceResults", (w) => { w.WriteValue(AllowPartialSequenceResults.Value); });
+		}
+
+		if (CaseSensitive is not null)
+		{
+			writer.WriteFluentCall("CaseSensitive", (w) => { w.WriteValue(CaseSensitive.Value); });
+		}
+
+		if (EventCategoryField is not null)
+		{
+			writer.WriteFluentCall("EventCategoryField", (w) => { EventCategoryField.FormatCode(w); }, false);
+		}
+
+		if (FetchSize is not null)
+		{
+			writer.WriteFluentCall("FetchSize", (w) => { w.WriteValue(FetchSize.Value); });
+		}
+
+		if (Fields is not null)
+		{
+			writer.WriteFluentDescriptorParams("Fields", Fields, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>"); w.Write("()"); });
+		}
+
+		if (Filter is not null)
+		{
+			writer.WriteFluentDescriptorParams("Filter", Filter, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>"); w.Write("()"); });
+		}
+
+		if (KeepAlive is not null)
+		{
+			writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
+		}
+
+		if (KeepOnCompletion is not null)
+		{
+			writer.WriteFluentCall("KeepOnCompletion", (w) => { w.WriteValue(KeepOnCompletion.Value); });
+		}
+
+		if (MaxSamplesPerKey is not null)
+		{
+			writer.WriteFluentCall("MaxSamplesPerKey", (w) => { w.WriteValue(MaxSamplesPerKey.Value); });
+		}
+
+		if (ProjectRouting is not null)
+		{
+			writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
+		}
+
+		{
+			writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
+		}
+
+		if (ResultPosition is not null)
+		{
+			writer.WriteFluentCall("ResultPosition", (w) => { Elastic.Clients.Elasticsearch.Eql.ResultPositionCodeFormatter.FormatCode(ResultPosition.Value, w); });
+		}
+
+		if (RuntimeMappings is not null)
+		{
+			writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
+		}
+
+		if (TiebreakerField is not null)
+		{
+			writer.WriteFluentCall("TiebreakerField", (w) => { TiebreakerField.FormatCode(w); }, false);
+		}
+
+		if (TimestampField is not null)
+		{
+			writer.WriteFluentCall("TimestampField", (w) => { TimestampField.FormatCode(w); }, false);
+		}
+
+		if (WaitForCompletionTimeout is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
 		}
 	}
 }

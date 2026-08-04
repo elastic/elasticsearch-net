@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class EmbeddingRequest : RequestConverter.ICodeFormattable
+public partial class EmbeddingRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,21 +32,9 @@ public partial class EmbeddingRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				InferenceId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); }, (w) => { Embedding.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -68,6 +56,27 @@ public partial class EmbeddingRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			InferenceId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("Embedding", (w) => { Embedding.FormatCode(w); }, (w) => { Embedding.FormatCode(w); });
 		}
 	}
 }

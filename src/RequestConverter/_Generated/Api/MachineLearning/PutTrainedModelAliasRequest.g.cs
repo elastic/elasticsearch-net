@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormattable
+public partial class PutTrainedModelAliasRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,23 +32,9 @@ public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormatt
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelAlias.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Reassign is not null)
-			{
-				writer.WriteFluentCall("Reassign", (w) => { w.WriteValue(Reassign.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +56,29 @@ public partial class PutTrainedModelAliasRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelAlias.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Reassign is not null)
+		{
+			writer.WriteFluentCall("Reassign", (w) => { w.WriteValue(Reassign.Value); });
 		}
 	}
 }

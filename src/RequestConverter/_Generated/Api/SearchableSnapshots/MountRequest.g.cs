@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
-public partial class MountRequest : RequestConverter.ICodeFormattable
+public partial class MountRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,52 +32,9 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Repository.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Snapshot.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (Storage is not null)
-			{
-				writer.WriteFluentCall("Storage", (w) => { Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, w); });
-			}
-
-			if (WaitForCompletion is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
-			}
-
-			if (IgnoreIndexSettings is not null)
-			{
-				writer.WriteFluentParams("IgnoreIndexSettings", IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
-			}
-
-			{
-				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
-			}
-
-			if (IndexSettings is not null)
-			{
-				writer.WriteFluentCall("IndexSettings", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (RenamedIndex is not null)
-			{
-				writer.WriteFluentCall("RenamedIndex", (w) => { RenamedIndex.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -141,6 +98,58 @@ public partial class MountRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Repository.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Snapshot.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (Storage is not null)
+		{
+			writer.WriteFluentCall("Storage", (w) => { Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOptionCodeFormatter.FormatCode(Storage.Value, w); });
+		}
+
+		if (WaitForCompletion is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
+		}
+
+		if (IgnoreIndexSettings is not null)
+		{
+			writer.WriteFluentParams("IgnoreIndexSettings", IgnoreIndexSettings, (w, item) => { w.WriteString(item); });
+		}
+
+		{
+			writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
+		}
+
+		if (IndexSettings is not null)
+		{
+			writer.WriteFluentCall("IndexSettings", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(IndexSettings, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (RenamedIndex is not null)
+		{
+			writer.WriteFluentCall("RenamedIndex", (w) => { RenamedIndex.FormatCode(w); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class GetMigrateReindexStatusRequest : RequestConverter.ICodeFormattable
+public partial class GetMigrateReindexStatusRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,28 +33,17 @@ public partial class GetMigrateReindexStatusRequest : RequestConverter.ICodeForm
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Indices.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Indices.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -66,5 +55,18 @@ public partial class GetMigrateReindexStatusRequest : RequestConverter.ICodeForm
 
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Indices.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

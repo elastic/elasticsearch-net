@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-public partial class GetAutoFollowPatternRequest : RequestConverter.ICodeFormattable
+public partial class GetAutoFollowPatternRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,17 +31,10 @@ public partial class GetAutoFollowPatternRequest : RequestConverter.ICodeFormatt
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Name is not null)
-			{
-				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -59,6 +52,24 @@ public partial class GetAutoFollowPatternRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Name is not null)
+		{
+			writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 		}
 	}
 }

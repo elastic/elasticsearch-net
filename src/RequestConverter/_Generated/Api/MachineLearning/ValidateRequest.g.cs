@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class ValidateRequest : RequestConverter.ICodeFormattable
+public partial class ValidateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,60 +33,17 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (AnalysisConfig is not null)
-			{
-				writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { AnalysisConfig.FormatCode(w); });
-			}
-
-			if (AnalysisLimits is not null)
-			{
-				writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); });
-			}
-
-			if (DataDescription is not null)
-			{
-				writer.WriteFluentDescriptorCall("DataDescription", (w) => { DataDescription.FormatCode(w); });
-			}
-
-			if (Description is not null)
-			{
-				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
-			}
-
-			if (JobId is not null)
-			{
-				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
-			}
-
-			if (ModelPlot is not null)
-			{
-				writer.WriteFluentDescriptorCall("ModelPlot", (w) => { ModelPlot.FormatCode(w); });
-			}
-
-			if (ModelSnapshotId is not null)
-			{
-				writer.WriteFluentCall("ModelSnapshotId", (w) => { ModelSnapshotId.FormatCode(w); });
-			}
-
-			if (ModelSnapshotRetentionDays is not null)
-			{
-				writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
-			}
-
-			if (ResultsIndexName is not null)
-			{
-				writer.WriteFluentCall("ResultsIndexName", (w) => { ResultsIndexName.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -147,6 +104,59 @@ public partial class ValidateRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AnalysisConfig is not null)
+		{
+			writer.WriteFluentDescriptorCall("AnalysisConfig", (w) => { AnalysisConfig.FormatCode(w); }, (w) => { AnalysisConfig.FormatCode(w); });
+		}
+
+		if (AnalysisLimits is not null)
+		{
+			writer.WriteFluentDescriptorCall("AnalysisLimits", (w) => { AnalysisLimits.FormatCode(w); });
+		}
+
+		if (DataDescription is not null)
+		{
+			writer.WriteFluentDescriptorCall("DataDescription", (w) => { DataDescription.FormatCode(w); });
+		}
+
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
+		}
+
+		if (JobId is not null)
+		{
+			writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
+		}
+
+		if (ModelPlot is not null)
+		{
+			writer.WriteFluentDescriptorCall("ModelPlot", (w) => { ModelPlot.FormatCode(w); });
+		}
+
+		if (ModelSnapshotId is not null)
+		{
+			writer.WriteFluentCall("ModelSnapshotId", (w) => { ModelSnapshotId.FormatCode(w); });
+		}
+
+		if (ModelSnapshotRetentionDays is not null)
+		{
+			writer.WriteFluentCall("ModelSnapshotRetentionDays", (w) => { w.WriteValue(ModelSnapshotRetentionDays.Value); w.Write("L"); });
+		}
+
+		if (ResultsIndexName is not null)
+		{
+			writer.WriteFluentCall("ResultsIndexName", (w) => { ResultsIndexName.FormatCode(w); });
 		}
 	}
 }

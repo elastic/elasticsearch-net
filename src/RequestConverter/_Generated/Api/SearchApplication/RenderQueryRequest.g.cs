@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public partial class RenderQueryRequest : RequestConverter.ICodeFormattable
+public partial class RenderQueryRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,17 +32,9 @@ public partial class RenderQueryRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Name.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Params is not null)
-			{
-				writer.WriteFluentCall("Params", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -66,6 +58,23 @@ public partial class RenderQueryRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Params is not null)
+		{
+			writer.WriteFluentCall("Params", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 		}
 	}
 }

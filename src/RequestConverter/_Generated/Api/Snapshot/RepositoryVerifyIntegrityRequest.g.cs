@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFormattable
+public partial class RepositoryVerifyIntegrityRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,52 +32,9 @@ public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFo
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Name.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (BlobThreadPoolConcurrency is not null)
-			{
-				writer.WriteFluentCall("BlobThreadPoolConcurrency", (w) => { w.WriteValue(BlobThreadPoolConcurrency.Value); });
-			}
-
-			if (IndexSnapshotVerificationConcurrency is not null)
-			{
-				writer.WriteFluentCall("IndexSnapshotVerificationConcurrency", (w) => { w.WriteValue(IndexSnapshotVerificationConcurrency.Value); });
-			}
-
-			if (IndexVerificationConcurrency is not null)
-			{
-				writer.WriteFluentCall("IndexVerificationConcurrency", (w) => { w.WriteValue(IndexVerificationConcurrency.Value); });
-			}
-
-			if (MaxBytesPerSec is not null)
-			{
-				writer.WriteFluentCall("MaxBytesPerSec", (w) => { w.WriteString(MaxBytesPerSec); });
-			}
-
-			if (MaxFailedShardSnapshots is not null)
-			{
-				writer.WriteFluentCall("MaxFailedShardSnapshots", (w) => { w.WriteValue(MaxFailedShardSnapshots.Value); });
-			}
-
-			if (MetaThreadPoolConcurrency is not null)
-			{
-				writer.WriteFluentCall("MetaThreadPoolConcurrency", (w) => { w.WriteValue(MetaThreadPoolConcurrency.Value); });
-			}
-
-			if (SnapshotVerificationConcurrency is not null)
-			{
-				writer.WriteFluentCall("SnapshotVerificationConcurrency", (w) => { w.WriteValue(SnapshotVerificationConcurrency.Value); });
-			}
-
-			if (VerifyBlobContents is not null)
-			{
-				writer.WriteFluentCall("VerifyBlobContents", (w) => { w.WriteValue(VerifyBlobContents.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -136,6 +93,58 @@ public partial class RepositoryVerifyIntegrityRequest : RequestConverter.ICodeFo
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (BlobThreadPoolConcurrency is not null)
+		{
+			writer.WriteFluentCall("BlobThreadPoolConcurrency", (w) => { w.WriteValue(BlobThreadPoolConcurrency.Value); });
+		}
+
+		if (IndexSnapshotVerificationConcurrency is not null)
+		{
+			writer.WriteFluentCall("IndexSnapshotVerificationConcurrency", (w) => { w.WriteValue(IndexSnapshotVerificationConcurrency.Value); });
+		}
+
+		if (IndexVerificationConcurrency is not null)
+		{
+			writer.WriteFluentCall("IndexVerificationConcurrency", (w) => { w.WriteValue(IndexVerificationConcurrency.Value); });
+		}
+
+		if (MaxBytesPerSec is not null)
+		{
+			writer.WriteFluentCall("MaxBytesPerSec", (w) => { w.WriteString(MaxBytesPerSec); });
+		}
+
+		if (MaxFailedShardSnapshots is not null)
+		{
+			writer.WriteFluentCall("MaxFailedShardSnapshots", (w) => { w.WriteValue(MaxFailedShardSnapshots.Value); });
+		}
+
+		if (MetaThreadPoolConcurrency is not null)
+		{
+			writer.WriteFluentCall("MetaThreadPoolConcurrency", (w) => { w.WriteValue(MetaThreadPoolConcurrency.Value); });
+		}
+
+		if (SnapshotVerificationConcurrency is not null)
+		{
+			writer.WriteFluentCall("SnapshotVerificationConcurrency", (w) => { w.WriteValue(SnapshotVerificationConcurrency.Value); });
+		}
+
+		if (VerifyBlobContents is not null)
+		{
+			writer.WriteFluentCall("VerifyBlobContents", (w) => { w.WriteValue(VerifyBlobContents.Value); });
 		}
 	}
 }

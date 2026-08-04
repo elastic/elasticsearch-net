@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattable
+public partial class DeleteExpiredDataRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,22 +31,10 @@ public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattabl
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (JobId is not null)
-			{
-				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
-			}
-
-			if (RequestsPerSecond is not null)
-			{
-				writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -71,6 +59,29 @@ public partial class DeleteExpiredDataRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (JobId is not null)
+		{
+			writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
+		}
+
+		if (RequestsPerSecond is not null)
+		{
+			writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 		}
 	}
 }

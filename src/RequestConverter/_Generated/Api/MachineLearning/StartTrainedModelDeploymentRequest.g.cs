@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class StartTrainedModelDeploymentRequest : RequestConverter.ICodeFormattable
+public partial class StartTrainedModelDeploymentRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,57 +32,9 @@ public partial class StartTrainedModelDeploymentRequest : RequestConverter.ICode
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (CacheSize is not null)
-			{
-				writer.WriteFluentCall("CacheSize", (w) => { CacheSize.FormatCode(w); });
-			}
-
-			if (DeploymentId is not null)
-			{
-				writer.WriteFluentCall("DeploymentId", (w) => { w.WriteString(DeploymentId); });
-			}
-
-			if (NumberOfAllocations is not null)
-			{
-				writer.WriteFluentCall("NumberOfAllocations", (w) => { w.WriteValue(NumberOfAllocations.Value); });
-			}
-
-			if (Priority is not null)
-			{
-				writer.WriteFluentCall("Priority", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority.Value, w); });
-			}
-
-			if (QueueCapacity is not null)
-			{
-				writer.WriteFluentCall("QueueCapacity", (w) => { w.WriteValue(QueueCapacity.Value); });
-			}
-
-			if (ThreadsPerAllocation is not null)
-			{
-				writer.WriteFluentCall("ThreadsPerAllocation", (w) => { w.WriteValue(ThreadsPerAllocation.Value); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (WaitFor is not null)
-			{
-				writer.WriteFluentCall("WaitFor", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(WaitFor.Value, w); });
-			}
-
-			if (AdaptiveAllocations is not null)
-			{
-				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); }, (w) => { AdaptiveAllocations.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -147,6 +99,63 @@ public partial class StartTrainedModelDeploymentRequest : RequestConverter.ICode
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (CacheSize is not null)
+		{
+			writer.WriteFluentCall("CacheSize", (w) => { CacheSize.FormatCode(w); });
+		}
+
+		if (DeploymentId is not null)
+		{
+			writer.WriteFluentCall("DeploymentId", (w) => { w.WriteString(DeploymentId); });
+		}
+
+		if (NumberOfAllocations is not null)
+		{
+			writer.WriteFluentCall("NumberOfAllocations", (w) => { w.WriteValue(NumberOfAllocations.Value); });
+		}
+
+		if (Priority is not null)
+		{
+			writer.WriteFluentCall("Priority", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriorityCodeFormatter.FormatCode(Priority.Value, w); });
+		}
+
+		if (QueueCapacity is not null)
+		{
+			writer.WriteFluentCall("QueueCapacity", (w) => { w.WriteValue(QueueCapacity.Value); });
+		}
+
+		if (ThreadsPerAllocation is not null)
+		{
+			writer.WriteFluentCall("ThreadsPerAllocation", (w) => { w.WriteValue(ThreadsPerAllocation.Value); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (WaitFor is not null)
+		{
+			writer.WriteFluentCall("WaitFor", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationStateCodeFormatter.FormatCode(WaitFor.Value, w); });
+		}
+
+		if (AdaptiveAllocations is not null)
+		{
+			writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); }, (w) => { AdaptiveAllocations.FormatCode(w); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public partial class ClusterInfoRequest : RequestConverter.ICodeFormattable
+public partial class ClusterInfoRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,13 +32,9 @@ public partial class ClusterInfoRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -50,5 +46,18 @@ public partial class ClusterInfoRequest : RequestConverter.ICodeFormattable
 
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteInlineList(Target, (w, item) => { Elastic.Clients.Elasticsearch.ClusterInfoTargetCodeFormatter.FormatCode(item, w); });
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
+public partial class ClearCacheRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,55 +33,17 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Indices is not null)
-			{
-				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
-			}
-
-			if (AllowNoIndices is not null)
-			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
-			}
-
-			if (ExpandWildcards is not null)
-			{
-				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-			}
-
-			if (Fielddata is not null)
-			{
-				writer.WriteFluentCall("Fielddata", (w) => { w.WriteValue(Fielddata.Value); });
-			}
-
-			if (Fields is not null)
-			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
-			}
-
-			if (IgnoreUnavailable is not null)
-			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
-			}
-
-			if (Query is not null)
-			{
-				writer.WriteFluentCall("Query", (w) => { w.WriteValue(Query.Value); });
-			}
-
-			if (Request is not null)
-			{
-				writer.WriteFluentCall("Request", (w) => { w.WriteValue(Request.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -135,6 +97,54 @@ public partial class ClearCacheRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Indices is not null)
+		{
+			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (AllowNoIndices is not null)
+		{
+			writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
+		}
+
+		if (ExpandWildcards is not null)
+		{
+			writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+		}
+
+		if (Fielddata is not null)
+		{
+			writer.WriteFluentCall("Fielddata", (w) => { w.WriteValue(Fielddata.Value); });
+		}
+
+		if (Fields is not null)
+		{
+			writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
+		}
+
+		if (IgnoreUnavailable is not null)
+		{
+			writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
+		}
+
+		if (Query is not null)
+		{
+			writer.WriteFluentCall("Query", (w) => { w.WriteValue(Query.Value); });
+		}
+
+		if (Request is not null)
+		{
+			writer.WriteFluentCall("Request", (w) => { w.WriteValue(Request.Value); });
 		}
 	}
 }

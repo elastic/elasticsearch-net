@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class ForecastRequest : RequestConverter.ICodeFormattable
+public partial class ForecastRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,27 +32,9 @@ public partial class ForecastRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Duration is not null)
-			{
-				writer.WriteFluentCall("Duration", (w) => { Duration.FormatCode(w); });
-			}
-
-			if (ExpiresIn is not null)
-			{
-				writer.WriteFluentCall("ExpiresIn", (w) => { ExpiresIn.FormatCode(w); });
-			}
-
-			if (MaxModelMemory is not null)
-			{
-				writer.WriteFluentCall("MaxModelMemory", (w) => { w.WriteString(MaxModelMemory); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +63,33 @@ public partial class ForecastRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Duration is not null)
+		{
+			writer.WriteFluentCall("Duration", (w) => { Duration.FormatCode(w); });
+		}
+
+		if (ExpiresIn is not null)
+		{
+			writer.WriteFluentCall("ExpiresIn", (w) => { ExpiresIn.FormatCode(w); });
+		}
+
+		if (MaxModelMemory is not null)
+		{
+			writer.WriteFluentCall("MaxModelMemory", (w) => { w.WriteString(MaxModelMemory); });
 		}
 	}
 }

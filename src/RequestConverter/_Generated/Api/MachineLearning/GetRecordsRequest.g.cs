@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class GetRecordsRequest : RequestConverter.ICodeFormattable
+public partial class GetRecordsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,72 +33,17 @@ public partial class GetRecordsRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					JobId.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					JobId.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (From is not null)
-			{
-				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
-
-			if (Desc is not null)
-			{
-				writer.WriteFluentCall("Desc", (w) => { w.WriteValue(Desc.Value); });
-			}
-
-			if (End is not null)
-			{
-				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
-			}
-
-			if (ExcludeInterim is not null)
-			{
-				writer.WriteFluentCall("ExcludeInterim", (w) => { w.WriteValue(ExcludeInterim.Value); });
-			}
-
-			if (Page is not null)
-			{
-				writer.WriteFluentDescriptorCall("Page", (w) => { Page.FormatCode(w); });
-			}
-
-			if (RecordScore is not null)
-			{
-				writer.WriteFluentCall("RecordScore", (w) => { w.WriteValue(RecordScore.Value); w.Write("d"); });
-			}
-
-			if (Sort is not null)
-			{
-				writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); }, false);
-			}
-
-			if (Start is not null)
-			{
-				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -164,6 +109,63 @@ public partial class GetRecordsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (From is not null)
+		{
+			writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
+		}
+
+		if (Desc is not null)
+		{
+			writer.WriteFluentCall("Desc", (w) => { w.WriteValue(Desc.Value); });
+		}
+
+		if (End is not null)
+		{
+			writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
+		}
+
+		if (ExcludeInterim is not null)
+		{
+			writer.WriteFluentCall("ExcludeInterim", (w) => { w.WriteValue(ExcludeInterim.Value); });
+		}
+
+		if (Page is not null)
+		{
+			writer.WriteFluentDescriptorCall("Page", (w) => { Page.FormatCode(w); });
+		}
+
+		if (RecordScore is not null)
+		{
+			writer.WriteFluentCall("RecordScore", (w) => { w.WriteValue(RecordScore.Value); w.Write("d"); });
+		}
+
+		if (Sort is not null)
+		{
+			writer.WriteFluentCall("Sort", (w) => { Sort.FormatCode(w); }, false);
+		}
+
+		if (Start is not null)
+		{
+			writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 		}
 	}
 }

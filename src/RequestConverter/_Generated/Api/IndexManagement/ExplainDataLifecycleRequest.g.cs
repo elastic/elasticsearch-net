@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class ExplainDataLifecycleRequest : RequestConverter.ICodeFormattable
+public partial class ExplainDataLifecycleRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,37 +33,17 @@ public partial class ExplainDataLifecycleRequest : RequestConverter.ICodeFormatt
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Indices.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Indices.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (IncludeDefaults is not null)
-			{
-				writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -86,6 +66,28 @@ public partial class ExplainDataLifecycleRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Indices.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (IncludeDefaults is not null)
+		{
+			writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 		}
 	}
 }

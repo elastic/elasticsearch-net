@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
-public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
+public partial class AsyncQueryStopRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,17 +32,9 @@ public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Id.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (DropNullColumns is not null)
-			{
-				writer.WriteFluentCall("DropNullColumns", (w) => { w.WriteValue(DropNullColumns.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -59,6 +51,23 @@ public partial class AsyncQueryStopRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (DropNullColumns is not null)
+		{
+			writer.WriteFluentCall("DropNullColumns", (w) => { w.WriteValue(DropNullColumns.Value); });
 		}
 	}
 }

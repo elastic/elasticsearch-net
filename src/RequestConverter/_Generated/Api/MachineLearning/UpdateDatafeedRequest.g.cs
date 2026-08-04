@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class UpdateDatafeedRequest : RequestConverter.ICodeFormattable
+public partial class UpdateDatafeedRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,112 +33,17 @@ public partial class UpdateDatafeedRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					DatafeedId.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					DatafeedId.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (AllowNoIndices is not null)
-			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
-			}
-
-			if (ExpandWildcards is not null)
-			{
-				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-			}
-#pragma warning disable CS0618
-			if (IgnoreThrottled is not null)
-			{
-				writer.WriteFluentCall("IgnoreThrottled", (w) => { w.WriteValue(IgnoreThrottled.Value); });
-			}
-#pragma warning restore CS0618
-			if (IgnoreUnavailable is not null)
-			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
-			}
-
-			if (Aggregations is not null)
-			{
-				writer.WriteFluentDescriptorCall("Aggregations", (w) => { w.WriteFluentDictionaryAdds("Add", Aggregations, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
-
-			if (ChunkingConfig is not null)
-			{
-				writer.WriteFluentDescriptorCall("ChunkingConfig", (w) => { ChunkingConfig.FormatCode(w); }, (w) => { ChunkingConfig.FormatCode(w); });
-			}
-
-			if (DelayedDataCheckConfig is not null)
-			{
-				writer.WriteFluentDescriptorCall("DelayedDataCheckConfig", (w) => { DelayedDataCheckConfig.FormatCode(w); }, (w) => { DelayedDataCheckConfig.FormatCode(w); });
-			}
-
-			if (Frequency is not null)
-			{
-				writer.WriteFluentCall("Frequency", (w) => { Frequency.FormatCode(w); });
-			}
-
-			if (Indices is not null)
-			{
-				writer.WriteFluentParams("Indices", Indices, (w, item) => { w.WriteString(item); });
-			}
-
-			if (IndicesOptions is not null)
-			{
-				writer.WriteFluentDescriptorCall("IndicesOptions", (w) => { IndicesOptions.FormatCode(w); });
-			}
-
-			if (JobId is not null)
-			{
-				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
-			}
-
-			if (MaxEmptySearches is not null)
-			{
-				writer.WriteFluentCall("MaxEmptySearches", (w) => { w.WriteValue(MaxEmptySearches.Value); });
-			}
-
-			if (Query is not null)
-			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
-			}
-
-			if (QueryDelay is not null)
-			{
-				writer.WriteFluentCall("QueryDelay", (w) => { QueryDelay.FormatCode(w); });
-			}
-
-			if (RuntimeMappings is not null)
-			{
-				writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
-
-			if (ScriptFields is not null)
-			{
-				writer.WriteFluentDescriptorCall("ScriptFields", (w) => { w.WriteFluentDictionaryAdds("Add", ScriptFields, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
-
-			if (ScrollSize is not null)
-			{
-				writer.WriteFluentCall("ScrollSize", (w) => { w.WriteValue(ScrollSize.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -272,6 +177,103 @@ public partial class UpdateDatafeedRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			DatafeedId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AllowNoIndices is not null)
+		{
+			writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
+		}
+
+		if (ExpandWildcards is not null)
+		{
+			writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+		}
+#pragma warning disable CS0618
+		if (IgnoreThrottled is not null)
+		{
+			writer.WriteFluentCall("IgnoreThrottled", (w) => { w.WriteValue(IgnoreThrottled.Value); });
+		}
+#pragma warning restore CS0618
+		if (IgnoreUnavailable is not null)
+		{
+			writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
+		}
+
+		if (Aggregations is not null)
+		{
+			writer.WriteFluentDescriptorCall("Aggregations", (w) => { w.WriteFluentDictionaryAdds("Add", Aggregations, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
+		}
+
+		if (ChunkingConfig is not null)
+		{
+			writer.WriteFluentDescriptorCall("ChunkingConfig", (w) => { ChunkingConfig.FormatCode(w); }, (w) => { ChunkingConfig.FormatCode(w); });
+		}
+
+		if (DelayedDataCheckConfig is not null)
+		{
+			writer.WriteFluentDescriptorCall("DelayedDataCheckConfig", (w) => { DelayedDataCheckConfig.FormatCode(w); }, (w) => { DelayedDataCheckConfig.FormatCode(w); });
+		}
+
+		if (Frequency is not null)
+		{
+			writer.WriteFluentCall("Frequency", (w) => { Frequency.FormatCode(w); });
+		}
+
+		if (Indices is not null)
+		{
+			writer.WriteFluentParams("Indices", Indices, (w, item) => { w.WriteString(item); });
+		}
+
+		if (IndicesOptions is not null)
+		{
+			writer.WriteFluentDescriptorCall("IndicesOptions", (w) => { IndicesOptions.FormatCode(w); });
+		}
+
+		if (JobId is not null)
+		{
+			writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
+		}
+
+		if (MaxEmptySearches is not null)
+		{
+			writer.WriteFluentCall("MaxEmptySearches", (w) => { w.WriteValue(MaxEmptySearches.Value); });
+		}
+
+		if (Query is not null)
+		{
+			writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
+		}
+
+		if (QueryDelay is not null)
+		{
+			writer.WriteFluentCall("QueryDelay", (w) => { QueryDelay.FormatCode(w); });
+		}
+
+		if (RuntimeMappings is not null)
+		{
+			writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
+		}
+
+		if (ScriptFields is not null)
+		{
+			writer.WriteFluentDescriptorCall("ScriptFields", (w) => { w.WriteFluentDictionaryAdds("Add", ScriptFields, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
+		}
+
+		if (ScrollSize is not null)
+		{
+			writer.WriteFluentCall("ScrollSize", (w) => { w.WriteValue(ScrollSize.Value); });
 		}
 	}
 }

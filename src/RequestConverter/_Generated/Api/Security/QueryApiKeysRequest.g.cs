@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
+public partial class QueryApiKeysRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,60 +33,17 @@ public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (TypedKeys is not null)
-			{
-				writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
-			}
-
-			if (WithLimitedBy is not null)
-			{
-				writer.WriteFluentCall("WithLimitedBy", (w) => { w.WriteValue(WithLimitedBy.Value); });
-			}
-
-			if (WithProfileUid is not null)
-			{
-				writer.WriteFluentCall("WithProfileUid", (w) => { w.WriteValue(WithProfileUid.Value); });
-			}
-
-			if (Aggregations is not null)
-			{
-				writer.WriteFluentDescriptorCall("Aggregations", (w) => { w.WriteFluentDictionaryAdds("Add", Aggregations, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
-
-			if (From is not null)
-			{
-				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
-			}
-
-			if (Query is not null)
-			{
-				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
-			}
-
-			if (SearchAfter is not null)
-			{
-				writer.WriteFluentCall("SearchAfter", (w) => { w.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); }); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
-
-			if (Sort is not null)
-			{
-				writer.WriteFluentDescriptorParams("Sort", Sort, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>"); w.Write("()"); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -153,6 +110,59 @@ public partial class QueryApiKeysRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (TypedKeys is not null)
+		{
+			writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
+		}
+
+		if (WithLimitedBy is not null)
+		{
+			writer.WriteFluentCall("WithLimitedBy", (w) => { w.WriteValue(WithLimitedBy.Value); });
+		}
+
+		if (WithProfileUid is not null)
+		{
+			writer.WriteFluentCall("WithProfileUid", (w) => { w.WriteValue(WithProfileUid.Value); });
+		}
+
+		if (Aggregations is not null)
+		{
+			writer.WriteFluentDescriptorCall("Aggregations", (w) => { w.WriteFluentDictionaryAdds("Add", Aggregations, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
+		}
+
+		if (From is not null)
+		{
+			writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
+		}
+
+		if (Query is not null)
+		{
+			writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
+		}
+
+		if (SearchAfter is not null)
+		{
+			writer.WriteFluentCall("SearchAfter", (w) => { w.WriteInlineList(SearchAfter, (w, item) => { item.FormatCode(w); }); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
+		}
+
+		if (Sort is not null)
+		{
+			writer.WriteFluentDescriptorParams("Sort", Sort, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>"); w.Write("()"); });
 		}
 	}
 }

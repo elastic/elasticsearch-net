@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public partial class GetAsyncRequest : RequestConverter.ICodeFormattable
+public partial class GetAsyncRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,32 +32,9 @@ public partial class GetAsyncRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Id.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Delimiter is not null)
-			{
-				writer.WriteFluentCall("Delimiter", (w) => { w.WriteString(Delimiter); });
-			}
-
-			if (Format is not null)
-			{
-				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
-			}
-
-			if (KeepAlive is not null)
-			{
-				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
-			}
-
-			if (WaitForCompletionTimeout is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -92,6 +69,38 @@ public partial class GetAsyncRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Delimiter is not null)
+		{
+			writer.WriteFluentCall("Delimiter", (w) => { w.WriteString(Delimiter); });
+		}
+
+		if (Format is not null)
+		{
+			writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
+		}
+
+		if (KeepAlive is not null)
+		{
+			writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
+		}
+
+		if (WaitForCompletionTimeout is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
 		}
 	}
 }

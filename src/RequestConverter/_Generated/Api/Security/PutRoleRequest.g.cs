@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class PutRoleRequest : RequestConverter.ICodeFormattable
+public partial class PutRoleRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,82 +33,17 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
-			}
-
-			if (Applications is not null)
-			{
-				writer.WriteFluentDescriptorParams("Applications", Applications, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>"); w.Write("()"); });
-			}
-
-			if (Cluster is not null)
-			{
-				writer.WriteFluentParams("Cluster", Cluster, (w, item) => { item.FormatCode(w); });
-			}
-
-			if (Description is not null)
-			{
-				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
-			}
-
-			if (Global is not null)
-			{
-				writer.WriteFluentCall("Global", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Global, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (Indices is not null)
-			{
-				writer.WriteFluentDescriptorParams("Indices", Indices, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>"); w.Write("()"); });
-			}
-
-			if (Metadata is not null)
-			{
-				writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (RemoteCluster is not null)
-			{
-				writer.WriteFluentDescriptorParams("RemoteCluster", RemoteCluster, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>"); w.Write("()"); });
-			}
-
-			if (RemoteIndices is not null)
-			{
-				writer.WriteFluentDescriptorParams("RemoteIndices", RemoteIndices, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>"); w.Write("()"); });
-			}
-
-			if (RunAs is not null)
-			{
-				writer.WriteFluentParams("RunAs", RunAs, (w, item) => { w.WriteString(item); });
-			}
-
-			if (TransientMetadata is not null)
-			{
-				writer.WriteFluentCall("TransientMetadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -206,6 +141,73 @@ public partial class PutRoleRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+		}
+
+		if (Applications is not null)
+		{
+			writer.WriteFluentDescriptorParams("Applications", Applications, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>"); w.Write("()"); });
+		}
+
+		if (Cluster is not null)
+		{
+			writer.WriteFluentParams("Cluster", Cluster, (w, item) => { item.FormatCode(w); });
+		}
+
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
+		}
+
+		if (Global is not null)
+		{
+			writer.WriteFluentCall("Global", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Global, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (Indices is not null)
+		{
+			writer.WriteFluentDescriptorParams("Indices", Indices, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>"); w.Write("()"); });
+		}
+
+		if (Metadata is not null)
+		{
+			writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (RemoteCluster is not null)
+		{
+			writer.WriteFluentDescriptorParams("RemoteCluster", RemoteCluster, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>"); w.Write("()"); });
+		}
+
+		if (RemoteIndices is not null)
+		{
+			writer.WriteFluentDescriptorParams("RemoteIndices", RemoteIndices, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>"); w.Write("()"); });
+		}
+
+		if (RunAs is not null)
+		{
+			writer.WriteFluentParams("RunAs", RunAs, (w, item) => { w.WriteString(item); });
+		}
+
+		if (TransientMetadata is not null)
+		{
+			writer.WriteFluentCall("TransientMetadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(TransientMetadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 		}
 	}
 }

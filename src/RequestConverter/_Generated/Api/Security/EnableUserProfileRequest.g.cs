@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class EnableUserProfileRequest : RequestConverter.ICodeFormattable
+public partial class EnableUserProfileRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,17 +32,9 @@ public partial class EnableUserProfileRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteString(Uid);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -59,6 +51,23 @@ public partial class EnableUserProfileRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(Uid);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
 		}
 	}
 }
