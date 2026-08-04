@@ -128,11 +128,14 @@ public sealed class RequestConverter
 	}
 
 	/// <summary>
-	/// Writes <c>var response = [await ]client.[Sub.]Method[Async][&lt;T, ...&gt;](</c>. Response-only generic type
-	/// parameters are spelled explicitly (the compiler cannot infer them from the argument): the placeholder
-	/// document type in strongly-typed-document mode, <see cref="System.Text.Json.JsonElement"/> otherwise.
+	/// Writes <c>var response = [await ]client.[Sub.]Method[Async][&lt;T, ...&gt;](</c> with
+	/// <paramref name="genericArity"/> type arguments. They are spelled explicitly because the compiler cannot infer
+	/// them from the argument, as the placeholder document type in strongly-typed-document mode and
+	/// <see cref="System.Text.Json.JsonElement"/> otherwise. The count depends on which overload the call targets:
+	/// the request overload leaves only the response-only parameters open, while a descriptor-action overload takes
+	/// a lambda and so infers nothing at all.
 	/// </summary>
-	private static void WriteClientCallPrefix(CodeWriter writer, ClientCallInfo clientMethod)
+	private static void WriteClientCallPrefix(CodeWriter writer, ClientCallInfo clientMethod, int genericArity)
 	{
 		var options = writer.Options;
 		var async = options.ClientCallStyle == ClientCallStyle.Async;
@@ -153,10 +156,10 @@ public sealed class RequestConverter
 
 		writer.Write(async ? clientMethod.Method + "Async" : clientMethod.Method);
 
-		if (clientMethod.ResponseGenericArity > 0)
+		if (genericArity > 0)
 		{
 			writer.Write("<");
-			for (var i = 0; i < clientMethod.ResponseGenericArity; i++)
+			for (var i = 0; i < genericArity; i++)
 			{
 				if (i > 0)
 				{
@@ -183,7 +186,7 @@ public sealed class RequestConverter
 	private static void WriteClientCall(CodeWriter writer, ClientCallInfo clientMethod)
 	{
 		writer.WriteLine().WriteLine();
-		WriteClientCallPrefix(writer, clientMethod);
+		WriteClientCallPrefix(writer, clientMethod, clientMethod.ResponseGenericArity);
 		writer.Write(writer.Options.VariableName).Write(");");
 	}
 
@@ -192,16 +195,25 @@ public sealed class RequestConverter
 	/// expression otherwise.</summary>
 	private static void WriteInlineClientCall(CodeWriter writer, ClientCallInfo clientMethod, ICodeFormattable formattable)
 	{
-		WriteClientCallPrefix(writer, clientMethod);
-
-		if (writer.Options.SyntaxMode == SyntaxMode.Descriptor && formattable is IClientCallFormattable descriptorFormattable)
+		// A negative descriptor arity means no client overload accepts the hoisted arguments plus a configuration
+		// lambda, so even a split-capable request has to take the request form here.
+		if (writer.Options.SyntaxMode == SyntaxMode.Descriptor
+			&& clientMethod.DescriptorGenericArity >= 0
+			&& formattable is IClientCallFormattable descriptorFormattable)
 		{
+			WriteClientCallPrefix(writer, clientMethod, clientMethod.DescriptorGenericArity);
 			writer.WriteInlineDescriptorArguments(
 				descriptorFormattable.FormatDescriptorHeadArguments,
 				descriptorFormattable.FormatDescriptorChain);
 		}
 		else
 		{
+			WriteClientCallPrefix(writer, clientMethod, clientMethod.ResponseGenericArity);
+
+			// The argument is a request, so it must render as one even in descriptor mode - a split-capable
+			// request's FormatCode would otherwise emit a descriptor the request overload does not accept.
+			using var _objectInitializer = writer.ForceObjectInitializer();
+
 			// The root argument must name its type: a target-typed new() is ambiguous against the client method's
 			// overload set (request vs. descriptor-action overloads).
 			writer.ForceNextExplicitConstructor();

@@ -14,4 +14,10 @@ namespace RequestConverter;
 /// <param name="ResponseGenericArity">The number of generic type parameters on the client method that are not
 /// inferrable from the request argument and must be spelled explicitly (e.g. <c>1</c> for
 /// <c>SearchAsync&lt;TDocument&gt;(SearchRequest)</c>).</param>
-public readonly record struct ClientCallInfo(string SubClient, string Method, int ResponseGenericArity);
+/// <param name="DescriptorGenericArity">The full generic-parameter count of the descriptor-action overload whose
+/// value parameters match the request's chain-head constructor - the count an inline descriptor call must spell
+/// explicitly, since a lambda argument lets the compiler infer nothing on its own (e.g. <c>2</c> for
+/// <c>UpdateAsync&lt;TDocument, TPartialDocument&gt;(IndexName, Id, Action&lt;…&gt;)</c>). <c>-1</c> means no such
+/// overload exists, so the inline descriptor call falls back to the inline request form; <c>0</c> means a
+/// non-generic overload, so nothing is spelled.</param>
+public readonly record struct ClientCallInfo(string SubClient, string Method, int ResponseGenericArity, int DescriptorGenericArity);
