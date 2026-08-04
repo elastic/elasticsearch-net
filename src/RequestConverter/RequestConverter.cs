@@ -86,7 +86,8 @@ public sealed class RequestConverter
 		var writer = new CodeWriter(options);
 
 		// The client call references the request by name, so it forces the variable-declaration form.
-		var emitVariableDeclaration = writer.Options.EmitVariableDeclaration || writer.Options.EmitClientCall;
+		var emitVariableDeclaration = writer.Options.EmitVariableDeclaration
+			|| writer.Options.ClientCallFormat == ClientCallFormat.Statement;
 
 		// `TypeName variableName = ` goes before the initializer. Writing the type name here (not after FormatCode)
 		// records its namespace up front so the body's collision-aware shortening accounts for it. The materialized
@@ -104,7 +105,7 @@ public sealed class RequestConverter
 			writer.Write(";");
 		}
 
-		if (writer.Options.EmitClientCall && clientCall is { } clientMethod)
+		if (writer.Options.ClientCallFormat == ClientCallFormat.Statement && clientCall is { } clientMethod)
 		{
 			WriteClientCall(writer, clientMethod);
 		}

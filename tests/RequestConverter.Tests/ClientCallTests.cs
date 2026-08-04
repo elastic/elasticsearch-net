@@ -19,7 +19,7 @@ public sealed class ClientCallTests
 	[Fact]
 	public void Appends_awaited_namespaced_call()
 	{
-		var options = new FormattingOptions { EmitClientCall = true };
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Statement };
 		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
 
 		Assert.StartsWith("EsqlQueryRequest request = ", result.Code, StringComparison.Ordinal);
@@ -29,7 +29,7 @@ public sealed class ClientCallTests
 	[Fact]
 	public void Appends_root_client_call()
 	{
-		var options = new FormattingOptions { EmitVariableDeclaration = true, EmitClientCall = true };
+		var options = new FormattingOptions { EmitVariableDeclaration = true, ClientCallFormat = ClientCallFormat.Statement };
 		var result = Convert("count", "{}", options);
 
 		Assert.EndsWith("var response = await client.CountAsync(request);", result.Code, StringComparison.Ordinal);
@@ -40,8 +40,8 @@ public sealed class ClientCallTests
 	{
 		var options = new FormattingOptions
 		{
+			ClientCallFormat = ClientCallFormat.Statement,
 			ClientCallStyle = ClientCallStyle.Sync,
-			EmitClientCall = true,
 			EmitVariableDeclaration = true
 		};
 		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
@@ -52,7 +52,7 @@ public sealed class ClientCallTests
 	[Fact]
 	public void Response_only_generic_arity_spells_json_element()
 	{
-		var options = new FormattingOptions { EmitVariableDeclaration = true, EmitClientCall = true };
+		var options = new FormattingOptions { EmitVariableDeclaration = true, ClientCallFormat = ClientCallFormat.Statement };
 		var result = Convert("search", """{"query":{"match_all":{}}}""", options);
 
 		Assert.EndsWith("var response = await client.SearchAsync<JsonElement>(request);", result.Code, StringComparison.Ordinal);
@@ -64,7 +64,7 @@ public sealed class ClientCallTests
 	{
 		var options = new FormattingOptions
 		{
-			EmitClientCall = true,
+			ClientCallFormat = ClientCallFormat.Statement,
 			EmitVariableDeclaration = true,
 			UseStronglyTypedDocument = true
 		};
@@ -78,7 +78,7 @@ public sealed class ClientCallTests
 	{
 		var options = new FormattingOptions
 		{
-			EmitClientCall = true,
+			ClientCallFormat = ClientCallFormat.Statement,
 			EmitVariableDeclaration = true,
 			SyntaxMode = SyntaxMode.Descriptor
 		};
@@ -108,8 +108,8 @@ public sealed class ClientCallTests
 	{
 		var options = new FormattingOptions
 		{
+			ClientCallFormat = ClientCallFormat.Statement,
 			ClientVariableName = "es",
-			EmitClientCall = true,
 			EmitVariableDeclaration = true,
 			ResponseVariableName = "esqlResponse",
 			VariableName = "esqlRequest"
@@ -122,10 +122,10 @@ public sealed class ClientCallTests
 	[Fact]
 	public void Host_options_map_to_formatting_options()
 	{
-		var options = new Hosting.ConvertOptions { ClientCallStyle = "sync", EmitClientCall = true };
+		var options = new Hosting.ConvertOptions { ClientCallStyle = "sync", ClientCallFormat = "statement" };
 		var formatting = Hosting.ConvertOptionsMapper.BuildFormattingOptions(options, "request");
 
-		Assert.True(formatting.EmitClientCall);
+		Assert.Equal(ClientCallFormat.Statement, formatting.ClientCallFormat);
 		Assert.Equal(ClientCallStyle.Sync, formatting.ClientCallStyle);
 	}
 
@@ -134,7 +134,7 @@ public sealed class ClientCallTests
 	{
 		var formatting = Hosting.ConvertOptionsMapper.BuildFormattingOptions(new Hosting.ConvertOptions(), "request");
 
-		Assert.False(formatting.EmitClientCall);
+		Assert.Equal(ClientCallFormat.None, formatting.ClientCallFormat);
 		Assert.Equal(ClientCallStyle.Async, formatting.ClientCallStyle);
 	}
 }

@@ -49,9 +49,11 @@ public static class ConvertOptionsMapper
 			formatting = formatting with { DocumentTypeName = options.DocumentTypeName };
 		}
 
-		if (options?.EmitClientCall is { } emitClientCall)
+		// Accept the format name case-insensitively; an unknown or absent value keeps the no-call default.
+		if (!string.IsNullOrEmpty(options?.ClientCallFormat)
+			&& Enum.TryParse<ClientCallFormat>(options.ClientCallFormat, ignoreCase: true, out var clientCallFormat))
 		{
-			formatting = formatting with { EmitClientCall = emitClientCall };
+			formatting = formatting with { ClientCallFormat = clientCallFormat };
 		}
 
 		// Accept the style name case-insensitively; an unknown or absent value keeps the async default.
