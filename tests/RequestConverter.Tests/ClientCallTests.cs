@@ -94,7 +94,7 @@ public sealed class ClientCallTests
 	{
 		var result = Convert("esql.query", """{"query":"FROM library"}""", new FormattingOptions());
 
-		Assert.Equal(new ClientCallInfo("Esql", "Query", 0), result.ClientCall);
+		Assert.Equal(new ClientCallInfo("Esql", "Query", 0, 0), result.ClientCall);
 	}
 
 	[Fact]
@@ -252,12 +252,62 @@ public sealed class ClientCallTests
 		// Spelled with explicit "\n" (the FormattingOptions default) so the expectation does not depend on the
 		// checkout's line endings.
 		Assert.Equal(
-			"var response = await client.IndexAsync(document: JsonSerializer.Deserialize<JsonElement>(\"\"\"\n"
+			"var response = await client.IndexAsync<JsonElement>(document: JsonSerializer.Deserialize<JsonElement>(\"\"\"\n"
 			+ "{\n"
 			+ "  \"name\": \"book\"\n"
 			+ "}\n"
 			+ "\"\"\"), index: \"books\", id: null);",
 			result.Code);
+	}
+
+	[Fact]
+	public void Inline_descriptor_spells_the_descriptor_overload_generics()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("eql.search", """{"query":"any where true"}""", options,
+			new Dictionary<string, string> { ["index"] = "books" });
+
+		// Every descriptor-action overload is SearchAsync<TDocument, TEvent>, so both arguments are spelled even
+		// though the request overload leaves only TEvent open.
+		Assert.StartsWith("var response = await client.Eql.SearchAsync<JsonElement, JsonElement>(", result.Code, StringComparison.Ordinal);
+		Assert.Contains("indices: new[] { \"books\" }", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_spells_generics_the_request_overload_infers()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("update", """{"doc":{"name":"book"}}""", options,
+			new Dictionary<string, string> { ["index"] = "books", ["id"] = "1" });
+
+		Assert.StartsWith("var response = await client.UpdateAsync<JsonElement, JsonElement>(index: \"books\", id: \"1\", ", result.Code, StringComparison.Ordinal);
+		Assert.Contains(" => ", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_typed_document_mode_spells_the_descriptor_overload_generics()
+	{
+		var options = new FormattingOptions
+		{
+			ClientCallFormat = ClientCallFormat.Inline,
+			SyntaxMode = SyntaxMode.Descriptor,
+			UseStronglyTypedDocument = true
+		};
+		var result = Convert("eql.search", """{"query":"any where true"}""", options,
+			new Dictionary<string, string> { ["index"] = "books" });
+
+		Assert.StartsWith("var response = await client.Eql.SearchAsync<MyDocument, MyDocument>(", result.Code, StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_falls_back_without_a_matching_descriptor_overload()
+	{
+		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
+		var result = Convert("put_script", """{"script":{"lang":"painless","source":"ctx._source.counter += 1"}}""", options,
+			new Dictionary<string, string> { ["id"] = "my-script" });
+
+		Assert.StartsWith("var response = await client.PutScriptAsync(new PutScriptRequest", result.Code, StringComparison.Ordinal);
+		Assert.DoesNotContain(" => ", result.Code, StringComparison.Ordinal);
 	}
 
 	[Fact]

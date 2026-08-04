@@ -29,2437 +29,2437 @@ internal static class ClientMethods
 	{
 		{
 			"async_search.delete",
-			new ClientCallInfo("AsyncSearch", "Delete", 0)
+			new ClientCallInfo("AsyncSearch", "Delete", 0, 0)
 		}
 ,
 		{
 			"async_search.get",
-			new ClientCallInfo("AsyncSearch", "Get", 1)
+			new ClientCallInfo("AsyncSearch", "Get", 1, 1)
 		}
 ,
 		{
 			"async_search.status",
-			new ClientCallInfo("AsyncSearch", "Status", 0)
+			new ClientCallInfo("AsyncSearch", "Status", 0, 0)
 		}
 ,
 		{
 			"async_search.submit",
-			new ClientCallInfo("AsyncSearch", "Submit", 1)
+			new ClientCallInfo("AsyncSearch", "Submit", 1, 1)
 		}
 ,
 		{
 			"bulk",
-			new ClientCallInfo("", "Bulk", 0)
+			new ClientCallInfo("", "Bulk", 0, 0)
 		}
 ,
 		{
 			"cancel_reindex",
-			new ClientCallInfo("", "CancelReindex", 0)
+			new ClientCallInfo("", "CancelReindex", 0, 0)
 		}
 ,
 		{
 			"capabilities",
-			new ClientCallInfo("", "Capabilities", 0)
+			new ClientCallInfo("", "Capabilities", 0, 0)
 		}
 ,
 		{
 			"ccr.delete_auto_follow_pattern",
-			new ClientCallInfo("CrossClusterReplication", "DeleteAutoFollowPattern", 0)
+			new ClientCallInfo("CrossClusterReplication", "DeleteAutoFollowPattern", 0, 0)
 		}
 ,
 		{
 			"ccr.follow",
-			new ClientCallInfo("CrossClusterReplication", "Follow", 0)
+			new ClientCallInfo("CrossClusterReplication", "Follow", 0, 0)
 		}
 ,
 		{
 			"ccr.follow_info",
-			new ClientCallInfo("CrossClusterReplication", "FollowInfo", 0)
+			new ClientCallInfo("CrossClusterReplication", "FollowInfo", 0, 0)
 		}
 ,
 		{
 			"ccr.follow_stats",
-			new ClientCallInfo("CrossClusterReplication", "FollowStats", 0)
+			new ClientCallInfo("CrossClusterReplication", "FollowStats", 0, 0)
 		}
 ,
 		{
 			"ccr.forget_follower",
-			new ClientCallInfo("CrossClusterReplication", "ForgetFollower", 0)
+			new ClientCallInfo("CrossClusterReplication", "ForgetFollower", 0, 0)
 		}
 ,
 		{
 			"ccr.get_auto_follow_pattern",
-			new ClientCallInfo("CrossClusterReplication", "GetAutoFollowPattern", 0)
+			new ClientCallInfo("CrossClusterReplication", "GetAutoFollowPattern", 0, 0)
 		}
 ,
 		{
 			"ccr.pause_auto_follow_pattern",
-			new ClientCallInfo("CrossClusterReplication", "PauseAutoFollowPattern", 0)
+			new ClientCallInfo("CrossClusterReplication", "PauseAutoFollowPattern", 0, 0)
 		}
 ,
 		{
 			"ccr.pause_follow",
-			new ClientCallInfo("CrossClusterReplication", "PauseFollow", 0)
+			new ClientCallInfo("CrossClusterReplication", "PauseFollow", 0, 0)
 		}
 ,
 		{
 			"ccr.put_auto_follow_pattern",
-			new ClientCallInfo("CrossClusterReplication", "PutAutoFollowPattern", 0)
+			new ClientCallInfo("CrossClusterReplication", "PutAutoFollowPattern", 0, 0)
 		}
 ,
 		{
 			"ccr.resume_auto_follow_pattern",
-			new ClientCallInfo("CrossClusterReplication", "ResumeAutoFollowPattern", 0)
+			new ClientCallInfo("CrossClusterReplication", "ResumeAutoFollowPattern", 0, 0)
 		}
 ,
 		{
 			"ccr.resume_follow",
-			new ClientCallInfo("CrossClusterReplication", "ResumeFollow", 0)
+			new ClientCallInfo("CrossClusterReplication", "ResumeFollow", 0, 0)
 		}
 ,
 		{
 			"ccr.stats",
-			new ClientCallInfo("CrossClusterReplication", "Stats", 0)
+			new ClientCallInfo("CrossClusterReplication", "Stats", 0, 0)
 		}
 ,
 		{
 			"ccr.unfollow",
-			new ClientCallInfo("CrossClusterReplication", "Unfollow", 0)
+			new ClientCallInfo("CrossClusterReplication", "Unfollow", 0, 0)
 		}
 ,
 		{
 			"clear_scroll",
-			new ClientCallInfo("", "ClearScroll", 0)
+			new ClientCallInfo("", "ClearScroll", 0, 0)
 		}
 ,
 		{
 			"close_point_in_time",
-			new ClientCallInfo("", "ClosePointInTime", 0)
+			new ClientCallInfo("", "ClosePointInTime", 0, 0)
 		}
 ,
 		{
 			"cluster.allocation_explain",
-			new ClientCallInfo("Cluster", "AllocationExplain", 0)
+			new ClientCallInfo("Cluster", "AllocationExplain", 0, 0)
 		}
 ,
 		{
 			"cluster.delete_component_template",
-			new ClientCallInfo("Cluster", "DeleteComponentTemplate", 0)
+			new ClientCallInfo("Cluster", "DeleteComponentTemplate", 0, 0)
 		}
 ,
 		{
 			"cluster.delete_voting_config_exclusions",
-			new ClientCallInfo("Cluster", "DeleteVotingConfigExclusions", 0)
+			new ClientCallInfo("Cluster", "DeleteVotingConfigExclusions", 0, 0)
 		}
 ,
 		{
 			"cluster.exists_component_template",
-			new ClientCallInfo("Cluster", "ExistsComponentTemplate", 0)
+			new ClientCallInfo("Cluster", "ExistsComponentTemplate", 0, 0)
 		}
 ,
 		{
 			"cluster.get_component_template",
-			new ClientCallInfo("Cluster", "GetComponentTemplate", 0)
+			new ClientCallInfo("Cluster", "GetComponentTemplate", 0, 0)
 		}
 ,
 		{
 			"cluster.get_settings",
-			new ClientCallInfo("Cluster", "GetSettings", 0)
+			new ClientCallInfo("Cluster", "GetSettings", 0, 0)
 		}
 ,
 		{
 			"cluster.health",
-			new ClientCallInfo("Cluster", "Health", 0)
+			new ClientCallInfo("Cluster", "Health", 0, 0)
 		}
 ,
 		{
 			"cluster.info",
-			new ClientCallInfo("Cluster", "Info", 0)
+			new ClientCallInfo("Cluster", "Info", 0, 0)
 		}
 ,
 		{
 			"cluster.pending_tasks",
-			new ClientCallInfo("Cluster", "PendingTasks", 0)
+			new ClientCallInfo("Cluster", "PendingTasks", 0, 0)
 		}
 ,
 		{
 			"cluster.post_voting_config_exclusions",
-			new ClientCallInfo("Cluster", "PostVotingConfigExclusions", 0)
+			new ClientCallInfo("Cluster", "PostVotingConfigExclusions", 0, 0)
 		}
 ,
 		{
 			"cluster.put_component_template",
-			new ClientCallInfo("Cluster", "PutComponentTemplate", 0)
+			new ClientCallInfo("Cluster", "PutComponentTemplate", 0, 0)
 		}
 ,
 		{
 			"cluster.put_settings",
-			new ClientCallInfo("Cluster", "PutSettings", 0)
+			new ClientCallInfo("Cluster", "PutSettings", 0, 0)
 		}
 ,
 		{
 			"cluster.stats",
-			new ClientCallInfo("Cluster", "Stats", 0)
+			new ClientCallInfo("Cluster", "Stats", 0, 0)
 		}
 ,
 		{
 			"count",
-			new ClientCallInfo("", "Count", 0)
+			new ClientCallInfo("", "Count", 0, 0)
 		}
 ,
 		{
 			"create",
-			new ClientCallInfo("", "Create", 0)
+			new ClientCallInfo("", "Create", 0, 1)
 		}
 ,
 		{
 			"dangling_indices.list_dangling_indices",
-			new ClientCallInfo("DanglingIndices", "ListDanglingIndices", 0)
+			new ClientCallInfo("DanglingIndices", "ListDanglingIndices", 0, 0)
 		}
 ,
 		{
 			"delete",
-			new ClientCallInfo("", "Delete", 0)
+			new ClientCallInfo("", "Delete", 0, 0)
 		}
 ,
 		{
 			"delete_by_query",
-			new ClientCallInfo("", "DeleteByQuery", 0)
+			new ClientCallInfo("", "DeleteByQuery", 0, 0)
 		}
 ,
 		{
 			"delete_by_query_rethrottle",
-			new ClientCallInfo("", "DeleteByQueryRethrottle", 0)
+			new ClientCallInfo("", "DeleteByQueryRethrottle", 0, 0)
 		}
 ,
 		{
 			"delete_script",
-			new ClientCallInfo("", "DeleteScript", 0)
+			new ClientCallInfo("", "DeleteScript", 0, 0)
 		}
 ,
 		{
 			"encryption.reset",
-			new ClientCallInfo("Encryption", "Reset", 0)
+			new ClientCallInfo("Encryption", "Reset", 0, 0)
 		}
 ,
 		{
 			"enrich.delete_policy",
-			new ClientCallInfo("Enrich", "DeletePolicy", 0)
+			new ClientCallInfo("Enrich", "DeletePolicy", 0, 0)
 		}
 ,
 		{
 			"enrich.execute_policy",
-			new ClientCallInfo("Enrich", "ExecutePolicy", 0)
+			new ClientCallInfo("Enrich", "ExecutePolicy", 0, 0)
 		}
 ,
 		{
 			"enrich.get_policy",
-			new ClientCallInfo("Enrich", "GetPolicy", 0)
+			new ClientCallInfo("Enrich", "GetPolicy", 0, 0)
 		}
 ,
 		{
 			"enrich.put_policy",
-			new ClientCallInfo("Enrich", "PutPolicy", 0)
+			new ClientCallInfo("Enrich", "PutPolicy", 0, 0)
 		}
 ,
 		{
 			"enrich.stats",
-			new ClientCallInfo("Enrich", "Stats", 0)
+			new ClientCallInfo("Enrich", "Stats", 0, 0)
 		}
 ,
 		{
 			"eql.delete",
-			new ClientCallInfo("Eql", "Delete", 0)
+			new ClientCallInfo("Eql", "Delete", 0, 0)
 		}
 ,
 		{
 			"eql.get",
-			new ClientCallInfo("Eql", "Get", 1)
+			new ClientCallInfo("Eql", "Get", 1, 1)
 		}
 ,
 		{
 			"eql.get_status",
-			new ClientCallInfo("Eql", "GetStatus", 0)
+			new ClientCallInfo("Eql", "GetStatus", 0, 0)
 		}
 ,
 		{
 			"eql.search",
-			new ClientCallInfo("Eql", "Search", 1)
+			new ClientCallInfo("Eql", "Search", 1, 2)
 		}
 ,
 		{
 			"esql.async_query",
-			new ClientCallInfo("Esql", "AsyncQuery", 0)
+			new ClientCallInfo("Esql", "AsyncQuery", 0, 0)
 		}
 ,
 		{
 			"esql.async_query_delete",
-			new ClientCallInfo("Esql", "AsyncQueryDelete", 0)
+			new ClientCallInfo("Esql", "AsyncQueryDelete", 0, 0)
 		}
 ,
 		{
 			"esql.async_query_get",
-			new ClientCallInfo("Esql", "AsyncQueryGet", 0)
+			new ClientCallInfo("Esql", "AsyncQueryGet", 0, 0)
 		}
 ,
 		{
 			"esql.async_query_stop",
-			new ClientCallInfo("Esql", "AsyncQueryStop", 0)
+			new ClientCallInfo("Esql", "AsyncQueryStop", 0, 0)
 		}
 ,
 		{
 			"esql.delete_data_source",
-			new ClientCallInfo("Esql", "DeleteDataSource", 0)
+			new ClientCallInfo("Esql", "DeleteDataSource", 0, 0)
 		}
 ,
 		{
 			"esql.delete_dataset",
-			new ClientCallInfo("Esql", "DeleteDataset", 0)
+			new ClientCallInfo("Esql", "DeleteDataset", 0, 0)
 		}
 ,
 		{
 			"esql.delete_view",
-			new ClientCallInfo("Esql", "DeleteView", 0)
+			new ClientCallInfo("Esql", "DeleteView", 0, 0)
 		}
 ,
 		{
 			"esql.get_data_source",
-			new ClientCallInfo("Esql", "GetDataSource", 0)
+			new ClientCallInfo("Esql", "GetDataSource", 0, 0)
 		}
 ,
 		{
 			"esql.get_dataset",
-			new ClientCallInfo("Esql", "GetDataset", 0)
+			new ClientCallInfo("Esql", "GetDataset", 0, 0)
 		}
 ,
 		{
 			"esql.get_query",
-			new ClientCallInfo("Esql", "GetQuery", 0)
+			new ClientCallInfo("Esql", "GetQuery", 0, 0)
 		}
 ,
 		{
 			"esql.get_view",
-			new ClientCallInfo("Esql", "GetView", 0)
+			new ClientCallInfo("Esql", "GetView", 0, 0)
 		}
 ,
 		{
 			"esql.list_queries",
-			new ClientCallInfo("Esql", "ListQueries", 0)
+			new ClientCallInfo("Esql", "ListQueries", 0, 0)
 		}
 ,
 		{
 			"esql.put_data_source",
-			new ClientCallInfo("Esql", "PutDataSource", 0)
+			new ClientCallInfo("Esql", "PutDataSource", 0, 0)
 		}
 ,
 		{
 			"esql.put_dataset",
-			new ClientCallInfo("Esql", "PutDataset", 0)
+			new ClientCallInfo("Esql", "PutDataset", 0, 0)
 		}
 ,
 		{
 			"esql.put_view",
-			new ClientCallInfo("Esql", "PutView", 0)
+			new ClientCallInfo("Esql", "PutView", 0, 0)
 		}
 ,
 		{
 			"esql.query",
-			new ClientCallInfo("Esql", "Query", 0)
+			new ClientCallInfo("Esql", "Query", 0, 0)
 		}
 ,
 		{
 			"exists",
-			new ClientCallInfo("", "Exists", 0)
+			new ClientCallInfo("", "Exists", 0, 0)
 		}
 ,
 		{
 			"exists_source",
-			new ClientCallInfo("", "ExistsSource", 0)
+			new ClientCallInfo("", "ExistsSource", 0, 0)
 		}
 ,
 		{
 			"explain",
-			new ClientCallInfo("", "Explain", 1)
+			new ClientCallInfo("", "Explain", 1, 1)
 		}
 ,
 		{
 			"features.get_features",
-			new ClientCallInfo("Features", "GetFeatures", 0)
+			new ClientCallInfo("Features", "GetFeatures", 0, 0)
 		}
 ,
 		{
 			"features.reset_features",
-			new ClientCallInfo("Features", "ResetFeatures", 0)
+			new ClientCallInfo("Features", "ResetFeatures", 0, 0)
 		}
 ,
 		{
 			"field_caps",
-			new ClientCallInfo("", "FieldCaps", 0)
+			new ClientCallInfo("", "FieldCaps", 0, 0)
 		}
 ,
 		{
 			"get",
-			new ClientCallInfo("", "Get", 1)
+			new ClientCallInfo("", "Get", 1, 1)
 		}
 ,
 		{
 			"get_reindex",
-			new ClientCallInfo("", "GetReindex", 0)
+			new ClientCallInfo("", "GetReindex", 0, 0)
 		}
 ,
 		{
 			"get_script",
-			new ClientCallInfo("", "GetScript", 0)
+			new ClientCallInfo("", "GetScript", 0, 0)
 		}
 ,
 		{
 			"get_script_context",
-			new ClientCallInfo("", "GetScriptContext", 0)
+			new ClientCallInfo("", "GetScriptContext", 0, 0)
 		}
 ,
 		{
 			"get_script_languages",
-			new ClientCallInfo("", "GetScriptLanguages", 0)
+			new ClientCallInfo("", "GetScriptLanguages", 0, 0)
 		}
 ,
 		{
 			"get_source",
-			new ClientCallInfo("", "GetSource", 1)
+			new ClientCallInfo("", "GetSource", 1, 1)
 		}
 ,
 		{
 			"graph.explore",
-			new ClientCallInfo("Graph", "Explore", 0)
+			new ClientCallInfo("Graph", "Explore", 0, 0)
 		}
 ,
 		{
 			"health_report",
-			new ClientCallInfo("", "HealthReport", 0)
+			new ClientCallInfo("", "HealthReport", 0, 0)
 		}
 ,
 		{
 			"ilm.delete_lifecycle",
-			new ClientCallInfo("IndexLifecycleManagement", "DeleteLifecycle", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "DeleteLifecycle", 0, 0)
 		}
 ,
 		{
 			"ilm.get_lifecycle",
-			new ClientCallInfo("IndexLifecycleManagement", "GetLifecycle", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "GetLifecycle", 0, 0)
 		}
 ,
 		{
 			"ilm.get_status",
-			new ClientCallInfo("IndexLifecycleManagement", "GetStatus", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "GetStatus", 0, 0)
 		}
 ,
 		{
 			"ilm.migrate_to_data_tiers",
-			new ClientCallInfo("IndexLifecycleManagement", "MigrateToDataTiers", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "MigrateToDataTiers", 0, 0)
 		}
 ,
 		{
 			"ilm.move_to_step",
-			new ClientCallInfo("IndexLifecycleManagement", "MoveToStep", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "MoveToStep", 0, 0)
 		}
 ,
 		{
 			"ilm.put_lifecycle",
-			new ClientCallInfo("IndexLifecycleManagement", "PutLifecycle", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "PutLifecycle", 0, 0)
 		}
 ,
 		{
 			"ilm.remove_policy",
-			new ClientCallInfo("IndexLifecycleManagement", "RemovePolicy", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "RemovePolicy", 0, 0)
 		}
 ,
 		{
 			"ilm.retry",
-			new ClientCallInfo("IndexLifecycleManagement", "Retry", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "Retry", 0, 0)
 		}
 ,
 		{
 			"ilm.start",
-			new ClientCallInfo("IndexLifecycleManagement", "Start", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "Start", 0, 0)
 		}
 ,
 		{
 			"ilm.stop",
-			new ClientCallInfo("IndexLifecycleManagement", "Stop", 0)
+			new ClientCallInfo("IndexLifecycleManagement", "Stop", 0, 0)
 		}
 ,
 		{
 			"index",
-			new ClientCallInfo("", "Index", 0)
+			new ClientCallInfo("", "Index", 0, 1)
 		}
 ,
 		{
 			"indices.analyze",
-			new ClientCallInfo("Indices", "Analyze", 0)
+			new ClientCallInfo("Indices", "Analyze", 0, 0)
 		}
 ,
 		{
 			"indices.cancel_migrate_reindex",
-			new ClientCallInfo("Indices", "CancelMigrateReindex", 0)
+			new ClientCallInfo("Indices", "CancelMigrateReindex", 0, 0)
 		}
 ,
 		{
 			"indices.clear_cache",
-			new ClientCallInfo("Indices", "ClearCache", 0)
+			new ClientCallInfo("Indices", "ClearCache", 0, 0)
 		}
 ,
 		{
 			"indices.clone",
-			new ClientCallInfo("Indices", "Clone", 0)
+			new ClientCallInfo("Indices", "Clone", 0, 0)
 		}
 ,
 		{
 			"indices.close",
-			new ClientCallInfo("Indices", "Close", 0)
+			new ClientCallInfo("Indices", "Close", 0, 0)
 		}
 ,
 		{
 			"indices.create",
-			new ClientCallInfo("Indices", "Create", 0)
+			new ClientCallInfo("Indices", "Create", 0, 0)
 		}
 ,
 		{
 			"indices.create_data_stream",
-			new ClientCallInfo("Indices", "CreateDataStream", 0)
+			new ClientCallInfo("Indices", "CreateDataStream", 0, 0)
 		}
 ,
 		{
 			"indices.create_from",
-			new ClientCallInfo("Indices", "CreateFrom", 0)
+			new ClientCallInfo("Indices", "CreateFrom", 0, 0)
 		}
 ,
 		{
 			"indices.data_streams_stats",
-			new ClientCallInfo("Indices", "DataStreamsStats", 0)
+			new ClientCallInfo("Indices", "DataStreamsStats", 0, 0)
 		}
 ,
 		{
 			"indices.delete",
-			new ClientCallInfo("Indices", "Delete", 0)
+			new ClientCallInfo("Indices", "Delete", 0, 0)
 		}
 ,
 		{
 			"indices.delete_alias",
-			new ClientCallInfo("Indices", "DeleteAlias", 0)
+			new ClientCallInfo("Indices", "DeleteAlias", 0, 0)
 		}
 ,
 		{
 			"indices.delete_data_lifecycle",
-			new ClientCallInfo("Indices", "DeleteDataLifecycle", 0)
+			new ClientCallInfo("Indices", "DeleteDataLifecycle", 0, 0)
 		}
 ,
 		{
 			"indices.delete_data_stream",
-			new ClientCallInfo("Indices", "DeleteDataStream", 0)
+			new ClientCallInfo("Indices", "DeleteDataStream", 0, 0)
 		}
 ,
 		{
 			"indices.delete_data_stream_options",
-			new ClientCallInfo("Indices", "DeleteDataStreamOptions", 0)
+			new ClientCallInfo("Indices", "DeleteDataStreamOptions", 0, 0)
 		}
 ,
 		{
 			"indices.delete_index_template",
-			new ClientCallInfo("Indices", "DeleteIndexTemplate", 0)
+			new ClientCallInfo("Indices", "DeleteIndexTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.delete_template",
-			new ClientCallInfo("Indices", "DeleteTemplate", 0)
+			new ClientCallInfo("Indices", "DeleteTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.disk_usage",
-			new ClientCallInfo("Indices", "DiskUsage", 0)
+			new ClientCallInfo("Indices", "DiskUsage", 0, 0)
 		}
 ,
 		{
 			"indices.downsample",
-			new ClientCallInfo("Indices", "Downsample", 0)
+			new ClientCallInfo("Indices", "Downsample", 0, 0)
 		}
 ,
 		{
 			"indices.exists",
-			new ClientCallInfo("Indices", "Exists", 0)
+			new ClientCallInfo("Indices", "Exists", 0, 0)
 		}
 ,
 		{
 			"indices.exists_alias",
-			new ClientCallInfo("Indices", "ExistsAlias", 0)
+			new ClientCallInfo("Indices", "ExistsAlias", 0, -1)
 		}
 ,
 		{
 			"indices.exists_index_template",
-			new ClientCallInfo("Indices", "ExistsIndexTemplate", 0)
+			new ClientCallInfo("Indices", "ExistsIndexTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.exists_template",
-			new ClientCallInfo("Indices", "ExistsTemplate", 0)
+			new ClientCallInfo("Indices", "ExistsTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.explain_data_lifecycle",
-			new ClientCallInfo("Indices", "ExplainDataLifecycle", 0)
+			new ClientCallInfo("Indices", "ExplainDataLifecycle", 0, 0)
 		}
 ,
 		{
 			"indices.field_usage_stats",
-			new ClientCallInfo("Indices", "FieldUsageStats", 0)
+			new ClientCallInfo("Indices", "FieldUsageStats", 0, 0)
 		}
 ,
 		{
 			"indices.flush",
-			new ClientCallInfo("Indices", "Flush", 0)
+			new ClientCallInfo("Indices", "Flush", 0, 0)
 		}
 ,
 		{
 			"indices.forcemerge",
-			new ClientCallInfo("Indices", "Forcemerge", 0)
+			new ClientCallInfo("Indices", "Forcemerge", 0, 0)
 		}
 ,
 		{
 			"indices.get",
-			new ClientCallInfo("Indices", "Get", 0)
+			new ClientCallInfo("Indices", "Get", 0, 0)
 		}
 ,
 		{
 			"indices.get_alias",
-			new ClientCallInfo("Indices", "GetAlias", 0)
+			new ClientCallInfo("Indices", "GetAlias", 0, 0)
 		}
 ,
 		{
 			"indices.get_data_lifecycle",
-			new ClientCallInfo("Indices", "GetDataLifecycle", 0)
+			new ClientCallInfo("Indices", "GetDataLifecycle", 0, 0)
 		}
 ,
 		{
 			"indices.get_data_lifecycle_stats",
-			new ClientCallInfo("Indices", "GetDataLifecycleStats", 0)
+			new ClientCallInfo("Indices", "GetDataLifecycleStats", 0, 0)
 		}
 ,
 		{
 			"indices.get_data_stream",
-			new ClientCallInfo("Indices", "GetDataStream", 0)
+			new ClientCallInfo("Indices", "GetDataStream", 0, 0)
 		}
 ,
 		{
 			"indices.get_data_stream_mappings",
-			new ClientCallInfo("Indices", "GetDataStreamMappings", 0)
+			new ClientCallInfo("Indices", "GetDataStreamMappings", 0, 0)
 		}
 ,
 		{
 			"indices.get_data_stream_options",
-			new ClientCallInfo("Indices", "GetDataStreamOptions", 0)
+			new ClientCallInfo("Indices", "GetDataStreamOptions", 0, 0)
 		}
 ,
 		{
 			"indices.get_data_stream_settings",
-			new ClientCallInfo("Indices", "GetDataStreamSettings", 0)
+			new ClientCallInfo("Indices", "GetDataStreamSettings", 0, 0)
 		}
 ,
 		{
 			"indices.get_field_mapping",
-			new ClientCallInfo("Indices", "GetFieldMapping", 0)
+			new ClientCallInfo("Indices", "GetFieldMapping", 0, -1)
 		}
 ,
 		{
 			"indices.get_index_template",
-			new ClientCallInfo("Indices", "GetIndexTemplate", 0)
+			new ClientCallInfo("Indices", "GetIndexTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.get_mapping",
-			new ClientCallInfo("Indices", "GetMapping", 0)
+			new ClientCallInfo("Indices", "GetMapping", 0, 0)
 		}
 ,
 		{
 			"indices.get_migrate_reindex_status",
-			new ClientCallInfo("Indices", "GetMigrateReindexStatus", 0)
+			new ClientCallInfo("Indices", "GetMigrateReindexStatus", 0, 0)
 		}
 ,
 		{
 			"indices.get_settings",
-			new ClientCallInfo("Indices", "GetSettings", 0)
+			new ClientCallInfo("Indices", "GetSettings", 0, 0)
 		}
 ,
 		{
 			"indices.get_template",
-			new ClientCallInfo("Indices", "GetTemplate", 0)
+			new ClientCallInfo("Indices", "GetTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.migrate_reindex",
-			new ClientCallInfo("Indices", "MigrateReindex", 0)
+			new ClientCallInfo("Indices", "MigrateReindex", 0, 0)
 		}
 ,
 		{
 			"indices.migrate_to_data_stream",
-			new ClientCallInfo("Indices", "MigrateToDataStream", 0)
+			new ClientCallInfo("Indices", "MigrateToDataStream", 0, 0)
 		}
 ,
 		{
 			"indices.modify_data_stream",
-			new ClientCallInfo("Indices", "ModifyDataStream", 0)
+			new ClientCallInfo("Indices", "ModifyDataStream", 0, 0)
 		}
 ,
 		{
 			"indices.open",
-			new ClientCallInfo("Indices", "Open", 0)
+			new ClientCallInfo("Indices", "Open", 0, 0)
 		}
 ,
 		{
 			"indices.promote_data_stream",
-			new ClientCallInfo("Indices", "PromoteDataStream", 0)
+			new ClientCallInfo("Indices", "PromoteDataStream", 0, 0)
 		}
 ,
 		{
 			"indices.put_alias",
-			new ClientCallInfo("Indices", "PutAlias", 0)
+			new ClientCallInfo("Indices", "PutAlias", 0, 0)
 		}
 ,
 		{
 			"indices.put_data_lifecycle",
-			new ClientCallInfo("Indices", "PutDataLifecycle", 0)
+			new ClientCallInfo("Indices", "PutDataLifecycle", 0, 0)
 		}
 ,
 		{
 			"indices.put_data_stream_mappings",
-			new ClientCallInfo("Indices", "PutDataStreamMappings", 0)
+			new ClientCallInfo("Indices", "PutDataStreamMappings", 0, 0)
 		}
 ,
 		{
 			"indices.put_data_stream_options",
-			new ClientCallInfo("Indices", "PutDataStreamOptions", 0)
+			new ClientCallInfo("Indices", "PutDataStreamOptions", 0, 0)
 		}
 ,
 		{
 			"indices.put_data_stream_settings",
-			new ClientCallInfo("Indices", "PutDataStreamSettings", 0)
+			new ClientCallInfo("Indices", "PutDataStreamSettings", 0, 0)
 		}
 ,
 		{
 			"indices.put_index_template",
-			new ClientCallInfo("Indices", "PutIndexTemplate", 0)
+			new ClientCallInfo("Indices", "PutIndexTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.put_mapping",
-			new ClientCallInfo("Indices", "PutMapping", 0)
+			new ClientCallInfo("Indices", "PutMapping", 0, 0)
 		}
 ,
 		{
 			"indices.put_settings",
-			new ClientCallInfo("Indices", "PutSettings", 0)
+			new ClientCallInfo("Indices", "PutSettings", 0, 0)
 		}
 ,
 		{
 			"indices.put_template",
-			new ClientCallInfo("Indices", "PutTemplate", 0)
+			new ClientCallInfo("Indices", "PutTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.recovery",
-			new ClientCallInfo("Indices", "Recovery", 0)
+			new ClientCallInfo("Indices", "Recovery", 0, 0)
 		}
 ,
 		{
 			"indices.refresh",
-			new ClientCallInfo("Indices", "Refresh", 0)
+			new ClientCallInfo("Indices", "Refresh", 0, 0)
 		}
 ,
 		{
 			"indices.reload_search_analyzers",
-			new ClientCallInfo("Indices", "ReloadSearchAnalyzers", 0)
+			new ClientCallInfo("Indices", "ReloadSearchAnalyzers", 0, 0)
 		}
 ,
 		{
 			"indices.remove_block",
-			new ClientCallInfo("Indices", "RemoveBlock", 0)
+			new ClientCallInfo("Indices", "RemoveBlock", 0, 0)
 		}
 ,
 		{
 			"indices.resolve_cluster",
-			new ClientCallInfo("Indices", "ResolveCluster", 0)
+			new ClientCallInfo("Indices", "ResolveCluster", 0, 0)
 		}
 ,
 		{
 			"indices.resolve_index",
-			new ClientCallInfo("Indices", "ResolveIndex", 0)
+			new ClientCallInfo("Indices", "ResolveIndex", 0, 0)
 		}
 ,
 		{
 			"indices.rollover",
-			new ClientCallInfo("Indices", "Rollover", 0)
+			new ClientCallInfo("Indices", "Rollover", 0, -1)
 		}
 ,
 		{
 			"indices.segments",
-			new ClientCallInfo("Indices", "Segments", 0)
+			new ClientCallInfo("Indices", "Segments", 0, 0)
 		}
 ,
 		{
 			"indices.shard_stores",
-			new ClientCallInfo("Indices", "ShardStores", 0)
+			new ClientCallInfo("Indices", "ShardStores", 0, 0)
 		}
 ,
 		{
 			"indices.shrink",
-			new ClientCallInfo("Indices", "Shrink", 0)
+			new ClientCallInfo("Indices", "Shrink", 0, 0)
 		}
 ,
 		{
 			"indices.simulate_index_template",
-			new ClientCallInfo("Indices", "SimulateIndexTemplate", 0)
+			new ClientCallInfo("Indices", "SimulateIndexTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.simulate_template",
-			new ClientCallInfo("Indices", "SimulateTemplate", 0)
+			new ClientCallInfo("Indices", "SimulateTemplate", 0, 0)
 		}
 ,
 		{
 			"indices.split",
-			new ClientCallInfo("Indices", "Split", 0)
+			new ClientCallInfo("Indices", "Split", 0, 0)
 		}
 ,
 		{
 			"indices.stats",
-			new ClientCallInfo("Indices", "Stats", 0)
+			new ClientCallInfo("Indices", "Stats", 0, 0)
 		}
 ,
 		{
 			"indices.update_aliases",
-			new ClientCallInfo("Indices", "UpdateAliases", 0)
+			new ClientCallInfo("Indices", "UpdateAliases", 0, 0)
 		}
 ,
 		{
 			"indices.validate_query",
-			new ClientCallInfo("Indices", "ValidateQuery", 0)
+			new ClientCallInfo("Indices", "ValidateQuery", 0, 0)
 		}
 ,
 		{
 			"inference.chat_completion_unified",
-			new ClientCallInfo("Inference", "ChatCompletionUnified", 0)
+			new ClientCallInfo("Inference", "ChatCompletionUnified", 0, 0)
 		}
 ,
 		{
 			"inference.completion",
-			new ClientCallInfo("Inference", "Completion", 0)
+			new ClientCallInfo("Inference", "Completion", 0, 0)
 		}
 ,
 		{
 			"inference.delete",
-			new ClientCallInfo("Inference", "Delete", 0)
+			new ClientCallInfo("Inference", "Delete", 0, -1)
 		}
 ,
 		{
 			"inference.delete_region_policy",
-			new ClientCallInfo("Inference", "DeleteRegionPolicy", 0)
+			new ClientCallInfo("Inference", "DeleteRegionPolicy", 0, 0)
 		}
 ,
 		{
 			"inference.embedding",
-			new ClientCallInfo("Inference", "Embedding", 0)
+			new ClientCallInfo("Inference", "Embedding", 0, 0)
 		}
 ,
 		{
 			"inference.get",
-			new ClientCallInfo("Inference", "Get", 0)
+			new ClientCallInfo("Inference", "Get", 0, 0)
 		}
 ,
 		{
 			"inference.get_region_policy",
-			new ClientCallInfo("Inference", "GetRegionPolicy", 0)
+			new ClientCallInfo("Inference", "GetRegionPolicy", 0, 0)
 		}
 ,
 		{
 			"inference.inference",
-			new ClientCallInfo("Inference", "Inference", 0)
+			new ClientCallInfo("Inference", "Inference", 0, -1)
 		}
 ,
 		{
 			"inference.put",
-			new ClientCallInfo("Inference", "Put", 0)
+			new ClientCallInfo("Inference", "Put", 0, -1)
 		}
 ,
 		{
 			"inference.put_ai21",
-			new ClientCallInfo("Inference", "PutAi21", 0)
+			new ClientCallInfo("Inference", "PutAi21", 0, 0)
 		}
 ,
 		{
 			"inference.put_alibabacloud",
-			new ClientCallInfo("Inference", "PutAlibabacloud", 0)
+			new ClientCallInfo("Inference", "PutAlibabacloud", 0, 0)
 		}
 ,
 		{
 			"inference.put_amazonbedrock",
-			new ClientCallInfo("Inference", "PutAmazonbedrock", 0)
+			new ClientCallInfo("Inference", "PutAmazonbedrock", 0, 0)
 		}
 ,
 		{
 			"inference.put_amazonsagemaker",
-			new ClientCallInfo("Inference", "PutAmazonsagemaker", 0)
+			new ClientCallInfo("Inference", "PutAmazonsagemaker", 0, 0)
 		}
 ,
 		{
 			"inference.put_anthropic",
-			new ClientCallInfo("Inference", "PutAnthropic", 0)
+			new ClientCallInfo("Inference", "PutAnthropic", 0, 0)
 		}
 ,
 		{
 			"inference.put_azureaistudio",
-			new ClientCallInfo("Inference", "PutAzureaistudio", 0)
+			new ClientCallInfo("Inference", "PutAzureaistudio", 0, 0)
 		}
 ,
 		{
 			"inference.put_azureopenai",
-			new ClientCallInfo("Inference", "PutAzureopenai", 0)
+			new ClientCallInfo("Inference", "PutAzureopenai", 0, 0)
 		}
 ,
 		{
 			"inference.put_cohere",
-			new ClientCallInfo("Inference", "PutCohere", 0)
+			new ClientCallInfo("Inference", "PutCohere", 0, 0)
 		}
 ,
 		{
 			"inference.put_contextualai",
-			new ClientCallInfo("Inference", "PutContextualai", 0)
+			new ClientCallInfo("Inference", "PutContextualai", 0, 0)
 		}
 ,
 		{
 			"inference.put_custom",
-			new ClientCallInfo("Inference", "PutCustom", 0)
+			new ClientCallInfo("Inference", "PutCustom", 0, 0)
 		}
 ,
 		{
 			"inference.put_deepseek",
-			new ClientCallInfo("Inference", "PutDeepseek", 0)
+			new ClientCallInfo("Inference", "PutDeepseek", 0, 0)
 		}
 ,
 		{
 			"inference.put_elasticsearch",
-			new ClientCallInfo("Inference", "PutElasticsearch", 0)
+			new ClientCallInfo("Inference", "PutElasticsearch", 0, 0)
 		}
 ,
 		{
 			"inference.put_elser",
-			new ClientCallInfo("Inference", "PutElser", 0)
+			new ClientCallInfo("Inference", "PutElser", 0, 0)
 		}
 ,
 		{
 			"inference.put_fireworksai",
-			new ClientCallInfo("Inference", "PutFireworksai", 0)
+			new ClientCallInfo("Inference", "PutFireworksai", 0, 0)
 		}
 ,
 		{
 			"inference.put_googleaistudio",
-			new ClientCallInfo("Inference", "PutGoogleaistudio", 0)
+			new ClientCallInfo("Inference", "PutGoogleaistudio", 0, 0)
 		}
 ,
 		{
 			"inference.put_googlevertexai",
-			new ClientCallInfo("Inference", "PutGooglevertexai", 0)
+			new ClientCallInfo("Inference", "PutGooglevertexai", 0, 0)
 		}
 ,
 		{
 			"inference.put_groq",
-			new ClientCallInfo("Inference", "PutGroq", 0)
+			new ClientCallInfo("Inference", "PutGroq", 0, 0)
 		}
 ,
 		{
 			"inference.put_hugging_face",
-			new ClientCallInfo("Inference", "PutHuggingFace", 0)
+			new ClientCallInfo("Inference", "PutHuggingFace", 0, 0)
 		}
 ,
 		{
 			"inference.put_jinaai",
-			new ClientCallInfo("Inference", "PutJinaai", 0)
+			new ClientCallInfo("Inference", "PutJinaai", 0, 0)
 		}
 ,
 		{
 			"inference.put_llama",
-			new ClientCallInfo("Inference", "PutLlama", 0)
+			new ClientCallInfo("Inference", "PutLlama", 0, 0)
 		}
 ,
 		{
 			"inference.put_mistral",
-			new ClientCallInfo("Inference", "PutMistral", 0)
+			new ClientCallInfo("Inference", "PutMistral", 0, 0)
 		}
 ,
 		{
 			"inference.put_nvidia",
-			new ClientCallInfo("Inference", "PutNvidia", 0)
+			new ClientCallInfo("Inference", "PutNvidia", 0, 0)
 		}
 ,
 		{
 			"inference.put_openai",
-			new ClientCallInfo("Inference", "PutOpenai", 0)
+			new ClientCallInfo("Inference", "PutOpenai", 0, 0)
 		}
 ,
 		{
 			"inference.put_openshift_ai",
-			new ClientCallInfo("Inference", "PutOpenshiftAi", 0)
+			new ClientCallInfo("Inference", "PutOpenshiftAi", 0, 0)
 		}
 ,
 		{
 			"inference.put_region_policy",
-			new ClientCallInfo("Inference", "PutRegionPolicy", 0)
+			new ClientCallInfo("Inference", "PutRegionPolicy", 0, 0)
 		}
 ,
 		{
 			"inference.put_voyageai",
-			new ClientCallInfo("Inference", "PutVoyageai", 0)
+			new ClientCallInfo("Inference", "PutVoyageai", 0, 0)
 		}
 ,
 		{
 			"inference.put_watsonx",
-			new ClientCallInfo("Inference", "PutWatsonx", 0)
+			new ClientCallInfo("Inference", "PutWatsonx", 0, 0)
 		}
 ,
 		{
 			"inference.rerank",
-			new ClientCallInfo("Inference", "Rerank", 0)
+			new ClientCallInfo("Inference", "Rerank", 0, 0)
 		}
 ,
 		{
 			"inference.sparse_embedding",
-			new ClientCallInfo("Inference", "SparseEmbedding", 0)
+			new ClientCallInfo("Inference", "SparseEmbedding", 0, 0)
 		}
 ,
 		{
 			"inference.stream_completion",
-			new ClientCallInfo("Inference", "StreamCompletion", 0)
+			new ClientCallInfo("Inference", "StreamCompletion", 0, 0)
 		}
 ,
 		{
 			"inference.text_embedding",
-			new ClientCallInfo("Inference", "TextEmbedding", 0)
+			new ClientCallInfo("Inference", "TextEmbedding", 0, 0)
 		}
 ,
 		{
 			"inference.update",
-			new ClientCallInfo("Inference", "Update", 0)
+			new ClientCallInfo("Inference", "Update", 0, -1)
 		}
 ,
 		{
 			"info",
-			new ClientCallInfo("", "Info", 0)
+			new ClientCallInfo("", "Info", 0, 0)
 		}
 ,
 		{
 			"ingest.delete_geoip_database",
-			new ClientCallInfo("Ingest", "DeleteGeoipDatabase", 0)
+			new ClientCallInfo("Ingest", "DeleteGeoipDatabase", 0, 0)
 		}
 ,
 		{
 			"ingest.delete_ip_location_database",
-			new ClientCallInfo("Ingest", "DeleteIpLocationDatabase", 0)
+			new ClientCallInfo("Ingest", "DeleteIpLocationDatabase", 0, 0)
 		}
 ,
 		{
 			"ingest.delete_pipeline",
-			new ClientCallInfo("Ingest", "DeletePipeline", 0)
+			new ClientCallInfo("Ingest", "DeletePipeline", 0, 0)
 		}
 ,
 		{
 			"ingest.geo_ip_stats",
-			new ClientCallInfo("Ingest", "GeoIpStats", 0)
+			new ClientCallInfo("Ingest", "GeoIpStats", 0, 0)
 		}
 ,
 		{
 			"ingest.get_geoip_database",
-			new ClientCallInfo("Ingest", "GetGeoipDatabase", 0)
+			new ClientCallInfo("Ingest", "GetGeoipDatabase", 0, 0)
 		}
 ,
 		{
 			"ingest.get_ip_location_database",
-			new ClientCallInfo("Ingest", "GetIpLocationDatabase", 0)
+			new ClientCallInfo("Ingest", "GetIpLocationDatabase", 0, 0)
 		}
 ,
 		{
 			"ingest.get_pipeline",
-			new ClientCallInfo("Ingest", "GetPipeline", 0)
+			new ClientCallInfo("Ingest", "GetPipeline", 0, 0)
 		}
 ,
 		{
 			"ingest.processor_grok",
-			new ClientCallInfo("Ingest", "ProcessorGrok", 0)
+			new ClientCallInfo("Ingest", "ProcessorGrok", 0, 0)
 		}
 ,
 		{
 			"ingest.put_geoip_database",
-			new ClientCallInfo("Ingest", "PutGeoipDatabase", 0)
+			new ClientCallInfo("Ingest", "PutGeoipDatabase", 0, 0)
 		}
 ,
 		{
 			"ingest.put_ip_location_database",
-			new ClientCallInfo("Ingest", "PutIpLocationDatabase", 0)
+			new ClientCallInfo("Ingest", "PutIpLocationDatabase", 0, 0)
 		}
 ,
 		{
 			"ingest.put_pipeline",
-			new ClientCallInfo("Ingest", "PutPipeline", 0)
+			new ClientCallInfo("Ingest", "PutPipeline", 0, 0)
 		}
 ,
 		{
 			"ingest.simulate",
-			new ClientCallInfo("Ingest", "Simulate", 0)
+			new ClientCallInfo("Ingest", "Simulate", 0, 0)
 		}
 ,
 		{
 			"license.delete",
-			new ClientCallInfo("LicenseManagement", "Delete", 0)
+			new ClientCallInfo("LicenseManagement", "Delete", 0, 0)
 		}
 ,
 		{
 			"license.get",
-			new ClientCallInfo("LicenseManagement", "Get", 0)
+			new ClientCallInfo("LicenseManagement", "Get", 0, 0)
 		}
 ,
 		{
 			"license.get_basic_status",
-			new ClientCallInfo("LicenseManagement", "GetBasicStatus", 0)
+			new ClientCallInfo("LicenseManagement", "GetBasicStatus", 0, 0)
 		}
 ,
 		{
 			"license.get_trial_status",
-			new ClientCallInfo("LicenseManagement", "GetTrialStatus", 0)
+			new ClientCallInfo("LicenseManagement", "GetTrialStatus", 0, 0)
 		}
 ,
 		{
 			"license.post",
-			new ClientCallInfo("LicenseManagement", "Post", 0)
+			new ClientCallInfo("LicenseManagement", "Post", 0, 0)
 		}
 ,
 		{
 			"license.post_start_basic",
-			new ClientCallInfo("LicenseManagement", "PostStartBasic", 0)
+			new ClientCallInfo("LicenseManagement", "PostStartBasic", 0, 0)
 		}
 ,
 		{
 			"license.post_start_trial",
-			new ClientCallInfo("LicenseManagement", "PostStartTrial", 0)
+			new ClientCallInfo("LicenseManagement", "PostStartTrial", 0, 0)
 		}
 ,
 		{
 			"list_reindex",
-			new ClientCallInfo("", "ListReindex", 0)
+			new ClientCallInfo("", "ListReindex", 0, 0)
 		}
 ,
 		{
 			"mget",
-			new ClientCallInfo("", "MultiGet", 1)
+			new ClientCallInfo("", "MultiGet", 1, 1)
 		}
 ,
 		{
 			"ml.clear_trained_model_deployment_cache",
-			new ClientCallInfo("MachineLearning", "ClearTrainedModelDeploymentCache", 0)
+			new ClientCallInfo("MachineLearning", "ClearTrainedModelDeploymentCache", 0, 0)
 		}
 ,
 		{
 			"ml.close_job",
-			new ClientCallInfo("MachineLearning", "CloseJob", 0)
+			new ClientCallInfo("MachineLearning", "CloseJob", 0, 0)
 		}
 ,
 		{
 			"ml.delete_calendar",
-			new ClientCallInfo("MachineLearning", "DeleteCalendar", 0)
+			new ClientCallInfo("MachineLearning", "DeleteCalendar", 0, 0)
 		}
 ,
 		{
 			"ml.delete_calendar_event",
-			new ClientCallInfo("MachineLearning", "DeleteCalendarEvent", 0)
+			new ClientCallInfo("MachineLearning", "DeleteCalendarEvent", 0, 0)
 		}
 ,
 		{
 			"ml.delete_calendar_job",
-			new ClientCallInfo("MachineLearning", "DeleteCalendarJob", 0)
+			new ClientCallInfo("MachineLearning", "DeleteCalendarJob", 0, 0)
 		}
 ,
 		{
 			"ml.delete_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "DeleteDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "DeleteDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.delete_datafeed",
-			new ClientCallInfo("MachineLearning", "DeleteDatafeed", 0)
+			new ClientCallInfo("MachineLearning", "DeleteDatafeed", 0, 0)
 		}
 ,
 		{
 			"ml.delete_expired_data",
-			new ClientCallInfo("MachineLearning", "DeleteExpiredData", 0)
+			new ClientCallInfo("MachineLearning", "DeleteExpiredData", 0, 0)
 		}
 ,
 		{
 			"ml.delete_filter",
-			new ClientCallInfo("MachineLearning", "DeleteFilter", 0)
+			new ClientCallInfo("MachineLearning", "DeleteFilter", 0, 0)
 		}
 ,
 		{
 			"ml.delete_forecast",
-			new ClientCallInfo("MachineLearning", "DeleteForecast", 0)
+			new ClientCallInfo("MachineLearning", "DeleteForecast", 0, -1)
 		}
 ,
 		{
 			"ml.delete_job",
-			new ClientCallInfo("MachineLearning", "DeleteJob", 0)
+			new ClientCallInfo("MachineLearning", "DeleteJob", 0, 0)
 		}
 ,
 		{
 			"ml.delete_model_snapshot",
-			new ClientCallInfo("MachineLearning", "DeleteModelSnapshot", 0)
+			new ClientCallInfo("MachineLearning", "DeleteModelSnapshot", 0, 0)
 		}
 ,
 		{
 			"ml.delete_trained_model",
-			new ClientCallInfo("MachineLearning", "DeleteTrainedModel", 0)
+			new ClientCallInfo("MachineLearning", "DeleteTrainedModel", 0, 0)
 		}
 ,
 		{
 			"ml.delete_trained_model_alias",
-			new ClientCallInfo("MachineLearning", "DeleteTrainedModelAlias", 0)
+			new ClientCallInfo("MachineLearning", "DeleteTrainedModelAlias", 0, 0)
 		}
 ,
 		{
 			"ml.estimate_model_memory",
-			new ClientCallInfo("MachineLearning", "EstimateModelMemory", 0)
+			new ClientCallInfo("MachineLearning", "EstimateModelMemory", 0, 0)
 		}
 ,
 		{
 			"ml.evaluate_data_frame",
-			new ClientCallInfo("MachineLearning", "EvaluateDataFrame", 0)
+			new ClientCallInfo("MachineLearning", "EvaluateDataFrame", 0, 0)
 		}
 ,
 		{
 			"ml.explain_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "ExplainDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "ExplainDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.flush_job",
-			new ClientCallInfo("MachineLearning", "FlushJob", 0)
+			new ClientCallInfo("MachineLearning", "FlushJob", 0, 0)
 		}
 ,
 		{
 			"ml.forecast",
-			new ClientCallInfo("MachineLearning", "Forecast", 0)
+			new ClientCallInfo("MachineLearning", "Forecast", 0, 0)
 		}
 ,
 		{
 			"ml.get_buckets",
-			new ClientCallInfo("MachineLearning", "GetBuckets", 0)
+			new ClientCallInfo("MachineLearning", "GetBuckets", 0, -1)
 		}
 ,
 		{
 			"ml.get_calendar_events",
-			new ClientCallInfo("MachineLearning", "GetCalendarEvents", 0)
+			new ClientCallInfo("MachineLearning", "GetCalendarEvents", 0, 0)
 		}
 ,
 		{
 			"ml.get_calendars",
-			new ClientCallInfo("MachineLearning", "GetCalendars", 0)
+			new ClientCallInfo("MachineLearning", "GetCalendars", 0, 0)
 		}
 ,
 		{
 			"ml.get_categories",
-			new ClientCallInfo("MachineLearning", "GetCategories", 0)
+			new ClientCallInfo("MachineLearning", "GetCategories", 0, -1)
 		}
 ,
 		{
 			"ml.get_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "GetDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "GetDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.get_data_frame_analytics_stats",
-			new ClientCallInfo("MachineLearning", "GetDataFrameAnalyticsStats", 0)
+			new ClientCallInfo("MachineLearning", "GetDataFrameAnalyticsStats", 0, 0)
 		}
 ,
 		{
 			"ml.get_datafeed_stats",
-			new ClientCallInfo("MachineLearning", "GetDatafeedStats", 0)
+			new ClientCallInfo("MachineLearning", "GetDatafeedStats", 0, 0)
 		}
 ,
 		{
 			"ml.get_datafeeds",
-			new ClientCallInfo("MachineLearning", "GetDatafeeds", 0)
+			new ClientCallInfo("MachineLearning", "GetDatafeeds", 0, 0)
 		}
 ,
 		{
 			"ml.get_filters",
-			new ClientCallInfo("MachineLearning", "GetFilters", 0)
+			new ClientCallInfo("MachineLearning", "GetFilters", 0, 0)
 		}
 ,
 		{
 			"ml.get_influencers",
-			new ClientCallInfo("MachineLearning", "GetInfluencers", 0)
+			new ClientCallInfo("MachineLearning", "GetInfluencers", 0, 0)
 		}
 ,
 		{
 			"ml.get_job_stats",
-			new ClientCallInfo("MachineLearning", "GetJobStats", 0)
+			new ClientCallInfo("MachineLearning", "GetJobStats", 0, 0)
 		}
 ,
 		{
 			"ml.get_jobs",
-			new ClientCallInfo("MachineLearning", "GetJobs", 0)
+			new ClientCallInfo("MachineLearning", "GetJobs", 0, 0)
 		}
 ,
 		{
 			"ml.get_memory_stats",
-			new ClientCallInfo("MachineLearning", "GetMemoryStats", 0)
+			new ClientCallInfo("MachineLearning", "GetMemoryStats", 0, 0)
 		}
 ,
 		{
 			"ml.get_model_snapshot_upgrade_stats",
-			new ClientCallInfo("MachineLearning", "GetModelSnapshotUpgradeStats", 0)
+			new ClientCallInfo("MachineLearning", "GetModelSnapshotUpgradeStats", 0, 0)
 		}
 ,
 		{
 			"ml.get_model_snapshots",
-			new ClientCallInfo("MachineLearning", "GetModelSnapshots", 0)
+			new ClientCallInfo("MachineLearning", "GetModelSnapshots", 0, -1)
 		}
 ,
 		{
 			"ml.get_overall_buckets",
-			new ClientCallInfo("MachineLearning", "GetOverallBuckets", 0)
+			new ClientCallInfo("MachineLearning", "GetOverallBuckets", 0, 0)
 		}
 ,
 		{
 			"ml.get_records",
-			new ClientCallInfo("MachineLearning", "GetRecords", 0)
+			new ClientCallInfo("MachineLearning", "GetRecords", 0, 0)
 		}
 ,
 		{
 			"ml.get_trained_models",
-			new ClientCallInfo("MachineLearning", "GetTrainedModels", 0)
+			new ClientCallInfo("MachineLearning", "GetTrainedModels", 0, 0)
 		}
 ,
 		{
 			"ml.get_trained_models_stats",
-			new ClientCallInfo("MachineLearning", "GetTrainedModelsStats", 0)
+			new ClientCallInfo("MachineLearning", "GetTrainedModelsStats", 0, 0)
 		}
 ,
 		{
 			"ml.infer_trained_model",
-			new ClientCallInfo("MachineLearning", "InferTrainedModel", 0)
+			new ClientCallInfo("MachineLearning", "InferTrainedModel", 0, 0)
 		}
 ,
 		{
 			"ml.info",
-			new ClientCallInfo("MachineLearning", "Info", 0)
+			new ClientCallInfo("MachineLearning", "Info", 0, 0)
 		}
 ,
 		{
 			"ml.open_job",
-			new ClientCallInfo("MachineLearning", "OpenJob", 0)
+			new ClientCallInfo("MachineLearning", "OpenJob", 0, 0)
 		}
 ,
 		{
 			"ml.post_calendar_events",
-			new ClientCallInfo("MachineLearning", "PostCalendarEvents", 0)
+			new ClientCallInfo("MachineLearning", "PostCalendarEvents", 0, 0)
 		}
 ,
 		{
 			"ml.preview_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "PreviewDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "PreviewDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.put_calendar",
-			new ClientCallInfo("MachineLearning", "PutCalendar", 0)
+			new ClientCallInfo("MachineLearning", "PutCalendar", 0, 0)
 		}
 ,
 		{
 			"ml.put_calendar_job",
-			new ClientCallInfo("MachineLearning", "PutCalendarJob", 0)
+			new ClientCallInfo("MachineLearning", "PutCalendarJob", 0, 0)
 		}
 ,
 		{
 			"ml.put_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "PutDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "PutDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.put_datafeed",
-			new ClientCallInfo("MachineLearning", "PutDatafeed", 0)
+			new ClientCallInfo("MachineLearning", "PutDatafeed", 0, 0)
 		}
 ,
 		{
 			"ml.put_filter",
-			new ClientCallInfo("MachineLearning", "PutFilter", 0)
+			new ClientCallInfo("MachineLearning", "PutFilter", 0, 0)
 		}
 ,
 		{
 			"ml.put_job",
-			new ClientCallInfo("MachineLearning", "PutJob", 0)
+			new ClientCallInfo("MachineLearning", "PutJob", 0, 0)
 		}
 ,
 		{
 			"ml.put_trained_model",
-			new ClientCallInfo("MachineLearning", "PutTrainedModel", 0)
+			new ClientCallInfo("MachineLearning", "PutTrainedModel", 0, 0)
 		}
 ,
 		{
 			"ml.put_trained_model_alias",
-			new ClientCallInfo("MachineLearning", "PutTrainedModelAlias", 0)
+			new ClientCallInfo("MachineLearning", "PutTrainedModelAlias", 0, 0)
 		}
 ,
 		{
 			"ml.put_trained_model_definition_part",
-			new ClientCallInfo("MachineLearning", "PutTrainedModelDefinitionPart", 0)
+			new ClientCallInfo("MachineLearning", "PutTrainedModelDefinitionPart", 0, 0)
 		}
 ,
 		{
 			"ml.put_trained_model_vocabulary",
-			new ClientCallInfo("MachineLearning", "PutTrainedModelVocabulary", 0)
+			new ClientCallInfo("MachineLearning", "PutTrainedModelVocabulary", 0, 0)
 		}
 ,
 		{
 			"ml.reset_job",
-			new ClientCallInfo("MachineLearning", "ResetJob", 0)
+			new ClientCallInfo("MachineLearning", "ResetJob", 0, 0)
 		}
 ,
 		{
 			"ml.revert_model_snapshot",
-			new ClientCallInfo("MachineLearning", "RevertModelSnapshot", 0)
+			new ClientCallInfo("MachineLearning", "RevertModelSnapshot", 0, 0)
 		}
 ,
 		{
 			"ml.set_upgrade_mode",
-			new ClientCallInfo("MachineLearning", "SetUpgradeMode", 0)
+			new ClientCallInfo("MachineLearning", "SetUpgradeMode", 0, 0)
 		}
 ,
 		{
 			"ml.start_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "StartDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "StartDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.start_datafeed",
-			new ClientCallInfo("MachineLearning", "StartDatafeed", 0)
+			new ClientCallInfo("MachineLearning", "StartDatafeed", 0, 0)
 		}
 ,
 		{
 			"ml.start_trained_model_deployment",
-			new ClientCallInfo("MachineLearning", "StartTrainedModelDeployment", 0)
+			new ClientCallInfo("MachineLearning", "StartTrainedModelDeployment", 0, 0)
 		}
 ,
 		{
 			"ml.stop_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "StopDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "StopDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.stop_datafeed",
-			new ClientCallInfo("MachineLearning", "StopDatafeed", 0)
+			new ClientCallInfo("MachineLearning", "StopDatafeed", 0, 0)
 		}
 ,
 		{
 			"ml.stop_trained_model_deployment",
-			new ClientCallInfo("MachineLearning", "StopTrainedModelDeployment", 0)
+			new ClientCallInfo("MachineLearning", "StopTrainedModelDeployment", 0, 0)
 		}
 ,
 		{
 			"ml.update_data_frame_analytics",
-			new ClientCallInfo("MachineLearning", "UpdateDataFrameAnalytics", 0)
+			new ClientCallInfo("MachineLearning", "UpdateDataFrameAnalytics", 0, 0)
 		}
 ,
 		{
 			"ml.update_datafeed",
-			new ClientCallInfo("MachineLearning", "UpdateDatafeed", 0)
+			new ClientCallInfo("MachineLearning", "UpdateDatafeed", 0, 0)
 		}
 ,
 		{
 			"ml.update_filter",
-			new ClientCallInfo("MachineLearning", "UpdateFilter", 0)
+			new ClientCallInfo("MachineLearning", "UpdateFilter", 0, 0)
 		}
 ,
 		{
 			"ml.update_job",
-			new ClientCallInfo("MachineLearning", "UpdateJob", 0)
+			new ClientCallInfo("MachineLearning", "UpdateJob", 0, 0)
 		}
 ,
 		{
 			"ml.update_model_snapshot",
-			new ClientCallInfo("MachineLearning", "UpdateModelSnapshot", 0)
+			new ClientCallInfo("MachineLearning", "UpdateModelSnapshot", 0, 0)
 		}
 ,
 		{
 			"ml.update_trained_model_deployment",
-			new ClientCallInfo("MachineLearning", "UpdateTrainedModelDeployment", 0)
+			new ClientCallInfo("MachineLearning", "UpdateTrainedModelDeployment", 0, 0)
 		}
 ,
 		{
 			"ml.upgrade_job_snapshot",
-			new ClientCallInfo("MachineLearning", "UpgradeJobSnapshot", 0)
+			new ClientCallInfo("MachineLearning", "UpgradeJobSnapshot", 0, 0)
 		}
 ,
 		{
 			"ml.validate",
-			new ClientCallInfo("MachineLearning", "Validate", 0)
+			new ClientCallInfo("MachineLearning", "Validate", 0, 0)
 		}
 ,
 		{
 			"ml.validate_detector",
-			new ClientCallInfo("MachineLearning", "ValidateDetector", 0)
+			new ClientCallInfo("MachineLearning", "ValidateDetector", 0, 0)
 		}
 ,
 		{
 			"msearch",
-			new ClientCallInfo("", "MultiSearch", 1)
+			new ClientCallInfo("", "MultiSearch", 1, 1)
 		}
 ,
 		{
 			"msearch_template",
-			new ClientCallInfo("", "MultiSearchTemplate", 1)
+			new ClientCallInfo("", "MultiSearchTemplate", 1, 1)
 		}
 ,
 		{
 			"mtermvectors",
-			new ClientCallInfo("", "Mtermvectors", 0)
+			new ClientCallInfo("", "Mtermvectors", 0, 0)
 		}
 ,
 		{
 			"nodes.clear_repositories_metering_archive",
-			new ClientCallInfo("Nodes", "ClearRepositoriesMeteringArchive", 0)
+			new ClientCallInfo("Nodes", "ClearRepositoriesMeteringArchive", 0, 0)
 		}
 ,
 		{
 			"nodes.get_repositories_metering_info",
-			new ClientCallInfo("Nodes", "GetRepositoriesMeteringInfo", 0)
+			new ClientCallInfo("Nodes", "GetRepositoriesMeteringInfo", 0, 0)
 		}
 ,
 		{
 			"nodes.hot_threads",
-			new ClientCallInfo("Nodes", "HotThreads", 0)
+			new ClientCallInfo("Nodes", "HotThreads", 0, 0)
 		}
 ,
 		{
 			"nodes.info",
-			new ClientCallInfo("Nodes", "Info", 0)
+			new ClientCallInfo("Nodes", "Info", 0, 0)
 		}
 ,
 		{
 			"nodes.reload_secure_settings",
-			new ClientCallInfo("Nodes", "ReloadSecureSettings", 0)
+			new ClientCallInfo("Nodes", "ReloadSecureSettings", 0, 0)
 		}
 ,
 		{
 			"nodes.stats",
-			new ClientCallInfo("Nodes", "Stats", 0)
+			new ClientCallInfo("Nodes", "Stats", 0, 0)
 		}
 ,
 		{
 			"nodes.usage",
-			new ClientCallInfo("Nodes", "Usage", 0)
+			new ClientCallInfo("Nodes", "Usage", 0, 0)
 		}
 ,
 		{
 			"open_point_in_time",
-			new ClientCallInfo("", "OpenPointInTime", 0)
+			new ClientCallInfo("", "OpenPointInTime", 0, 0)
 		}
 ,
 		{
 			"ping",
-			new ClientCallInfo("", "Ping", 0)
+			new ClientCallInfo("", "Ping", 0, 0)
 		}
 ,
 		{
 			"project.create_many_routing",
-			new ClientCallInfo("Project", "CreateManyRouting", 0)
+			new ClientCallInfo("Project", "CreateManyRouting", 0, 0)
 		}
 ,
 		{
 			"project.create_routing",
-			new ClientCallInfo("Project", "CreateRouting", 0)
+			new ClientCallInfo("Project", "CreateRouting", 0, 0)
 		}
 ,
 		{
 			"project.delete_routing",
-			new ClientCallInfo("Project", "DeleteRouting", 0)
+			new ClientCallInfo("Project", "DeleteRouting", 0, 0)
 		}
 ,
 		{
 			"project.get_many_routing",
-			new ClientCallInfo("Project", "GetManyRouting", 0)
+			new ClientCallInfo("Project", "GetManyRouting", 0, 0)
 		}
 ,
 		{
 			"project.get_routing",
-			new ClientCallInfo("Project", "GetRouting", 0)
+			new ClientCallInfo("Project", "GetRouting", 0, 0)
 		}
 ,
 		{
 			"project.tags",
-			new ClientCallInfo("Project", "Tags", 0)
+			new ClientCallInfo("Project", "Tags", 0, 0)
 		}
 ,
 		{
 			"put_script",
-			new ClientCallInfo("", "PutScript", 0)
+			new ClientCallInfo("", "PutScript", 0, -1)
 		}
 ,
 		{
 			"query_rules.delete_rule",
-			new ClientCallInfo("QueryRules", "DeleteRule", 0)
+			new ClientCallInfo("QueryRules", "DeleteRule", 0, 0)
 		}
 ,
 		{
 			"query_rules.delete_ruleset",
-			new ClientCallInfo("QueryRules", "DeleteRuleset", 0)
+			new ClientCallInfo("QueryRules", "DeleteRuleset", 0, 0)
 		}
 ,
 		{
 			"query_rules.get_rule",
-			new ClientCallInfo("QueryRules", "GetRule", 0)
+			new ClientCallInfo("QueryRules", "GetRule", 0, 0)
 		}
 ,
 		{
 			"query_rules.get_ruleset",
-			new ClientCallInfo("QueryRules", "GetRuleset", 0)
+			new ClientCallInfo("QueryRules", "GetRuleset", 0, 0)
 		}
 ,
 		{
 			"query_rules.list_rulesets",
-			new ClientCallInfo("QueryRules", "ListRulesets", 0)
+			new ClientCallInfo("QueryRules", "ListRulesets", 0, 0)
 		}
 ,
 		{
 			"query_rules.put_rule",
-			new ClientCallInfo("QueryRules", "PutRule", 0)
+			new ClientCallInfo("QueryRules", "PutRule", 0, 0)
 		}
 ,
 		{
 			"query_rules.put_ruleset",
-			new ClientCallInfo("QueryRules", "PutRuleset", 0)
+			new ClientCallInfo("QueryRules", "PutRuleset", 0, 0)
 		}
 ,
 		{
 			"query_rules.test",
-			new ClientCallInfo("QueryRules", "Test", 0)
+			new ClientCallInfo("QueryRules", "Test", 0, 0)
 		}
 ,
 		{
 			"rank_eval",
-			new ClientCallInfo("", "RankEval", 0)
+			new ClientCallInfo("", "RankEval", 0, 0)
 		}
 ,
 		{
 			"reindex",
-			new ClientCallInfo("", "Reindex", 0)
+			new ClientCallInfo("", "Reindex", 0, 0)
 		}
 ,
 		{
 			"reindex_rethrottle",
-			new ClientCallInfo("", "ReindexRethrottle", 0)
+			new ClientCallInfo("", "ReindexRethrottle", 0, 0)
 		}
 ,
 		{
 			"render_search_template",
-			new ClientCallInfo("", "RenderSearchTemplate", 0)
+			new ClientCallInfo("", "RenderSearchTemplate", 0, 0)
 		}
 ,
 		{
 			"rollup.delete_job",
-			new ClientCallInfo("Rollup", "DeleteJob", 0)
+			new ClientCallInfo("Rollup", "DeleteJob", 0, 0)
 		}
 ,
 		{
 			"rollup.get_jobs",
-			new ClientCallInfo("Rollup", "GetJobs", 0)
+			new ClientCallInfo("Rollup", "GetJobs", 0, 0)
 		}
 ,
 		{
 			"rollup.get_rollup_caps",
-			new ClientCallInfo("Rollup", "GetRollupCaps", 0)
+			new ClientCallInfo("Rollup", "GetRollupCaps", 0, 0)
 		}
 ,
 		{
 			"rollup.get_rollup_index_caps",
-			new ClientCallInfo("Rollup", "GetRollupIndexCaps", 0)
+			new ClientCallInfo("Rollup", "GetRollupIndexCaps", 0, 0)
 		}
 ,
 		{
 			"rollup.put_job",
-			new ClientCallInfo("Rollup", "PutJob", 0)
+			new ClientCallInfo("Rollup", "PutJob", 0, 0)
 		}
 ,
 		{
 			"rollup.rollup_search",
-			new ClientCallInfo("Rollup", "RollupSearch", 1)
+			new ClientCallInfo("Rollup", "RollupSearch", 1, 1)
 		}
 ,
 		{
 			"rollup.start_job",
-			new ClientCallInfo("Rollup", "StartJob", 0)
+			new ClientCallInfo("Rollup", "StartJob", 0, 0)
 		}
 ,
 		{
 			"rollup.stop_job",
-			new ClientCallInfo("Rollup", "StopJob", 0)
+			new ClientCallInfo("Rollup", "StopJob", 0, 0)
 		}
 ,
 		{
 			"scripts_painless_execute",
-			new ClientCallInfo("", "ScriptsPainlessExecute", 1)
+			new ClientCallInfo("", "ScriptsPainlessExecute", 1, 2)
 		}
 ,
 		{
 			"scroll",
-			new ClientCallInfo("", "Scroll", 1)
+			new ClientCallInfo("", "Scroll", 1, 1)
 		}
 ,
 		{
 			"search",
-			new ClientCallInfo("", "Search", 1)
+			new ClientCallInfo("", "Search", 1, 1)
 		}
 ,
 		{
 			"search_application.delete",
-			new ClientCallInfo("SearchApplication", "Delete", 0)
+			new ClientCallInfo("SearchApplication", "Delete", 0, 0)
 		}
 ,
 		{
 			"search_application.delete_behavioral_analytics",
-			new ClientCallInfo("SearchApplication", "DeleteBehavioralAnalytics", 0)
+			new ClientCallInfo("SearchApplication", "DeleteBehavioralAnalytics", 0, 0)
 		}
 ,
 		{
 			"search_application.get",
-			new ClientCallInfo("SearchApplication", "Get", 0)
+			new ClientCallInfo("SearchApplication", "Get", 0, 0)
 		}
 ,
 		{
 			"search_application.get_behavioral_analytics",
-			new ClientCallInfo("SearchApplication", "GetBehavioralAnalytics", 0)
+			new ClientCallInfo("SearchApplication", "GetBehavioralAnalytics", 0, 0)
 		}
 ,
 		{
 			"search_application.list",
-			new ClientCallInfo("SearchApplication", "List", 0)
+			new ClientCallInfo("SearchApplication", "List", 0, 0)
 		}
 ,
 		{
 			"search_application.post_behavioral_analytics_event",
-			new ClientCallInfo("SearchApplication", "PostBehavioralAnalyticsEvent", 0)
+			new ClientCallInfo("SearchApplication", "PostBehavioralAnalyticsEvent", 0, 0)
 		}
 ,
 		{
 			"search_application.put",
-			new ClientCallInfo("SearchApplication", "Put", 0)
+			new ClientCallInfo("SearchApplication", "Put", 0, 0)
 		}
 ,
 		{
 			"search_application.put_behavioral_analytics",
-			new ClientCallInfo("SearchApplication", "PutBehavioralAnalytics", 0)
+			new ClientCallInfo("SearchApplication", "PutBehavioralAnalytics", 0, 0)
 		}
 ,
 		{
 			"search_application.render_query",
-			new ClientCallInfo("SearchApplication", "RenderQuery", 0)
+			new ClientCallInfo("SearchApplication", "RenderQuery", 0, 0)
 		}
 ,
 		{
 			"search_application.search",
-			new ClientCallInfo("SearchApplication", "Search", 1)
+			new ClientCallInfo("SearchApplication", "Search", 1, 1)
 		}
 ,
 		{
 			"search_mvt",
-			new ClientCallInfo("", "SearchMvt", 0)
+			new ClientCallInfo("", "SearchMvt", 0, 0)
 		}
 ,
 		{
 			"search_shards",
-			new ClientCallInfo("", "SearchShards", 0)
+			new ClientCallInfo("", "SearchShards", 0, 0)
 		}
 ,
 		{
 			"search_template",
-			new ClientCallInfo("", "SearchTemplate", 1)
+			new ClientCallInfo("", "SearchTemplate", 1, 1)
 		}
 ,
 		{
 			"searchable_snapshots.cache_stats",
-			new ClientCallInfo("SearchableSnapshots", "CacheStats", 0)
+			new ClientCallInfo("SearchableSnapshots", "CacheStats", 0, 0)
 		}
 ,
 		{
 			"searchable_snapshots.clear_cache",
-			new ClientCallInfo("SearchableSnapshots", "ClearCache", 0)
+			new ClientCallInfo("SearchableSnapshots", "ClearCache", 0, 0)
 		}
 ,
 		{
 			"searchable_snapshots.mount",
-			new ClientCallInfo("SearchableSnapshots", "Mount", 0)
+			new ClientCallInfo("SearchableSnapshots", "Mount", 0, 0)
 		}
 ,
 		{
 			"searchable_snapshots.stats",
-			new ClientCallInfo("SearchableSnapshots", "Stats", 0)
+			new ClientCallInfo("SearchableSnapshots", "Stats", 0, 0)
 		}
 ,
 		{
 			"security.activate_user_profile",
-			new ClientCallInfo("Security", "ActivateUserProfile", 0)
+			new ClientCallInfo("Security", "ActivateUserProfile", 0, 0)
 		}
 ,
 		{
 			"security.authenticate",
-			new ClientCallInfo("Security", "Authenticate", 0)
+			new ClientCallInfo("Security", "Authenticate", 0, 0)
 		}
 ,
 		{
 			"security.bulk_delete_role",
-			new ClientCallInfo("Security", "BulkDeleteRole", 0)
+			new ClientCallInfo("Security", "BulkDeleteRole", 0, 0)
 		}
 ,
 		{
 			"security.bulk_put_role",
-			new ClientCallInfo("Security", "BulkPutRole", 0)
+			new ClientCallInfo("Security", "BulkPutRole", 0, 0)
 		}
 ,
 		{
 			"security.bulk_update_api_keys",
-			new ClientCallInfo("Security", "BulkUpdateApiKeys", 0)
+			new ClientCallInfo("Security", "BulkUpdateApiKeys", 0, 0)
 		}
 ,
 		{
 			"security.change_password",
-			new ClientCallInfo("Security", "ChangePassword", 0)
+			new ClientCallInfo("Security", "ChangePassword", 0, 0)
 		}
 ,
 		{
 			"security.clear_api_key_cache",
-			new ClientCallInfo("Security", "ClearApiKeyCache", 0)
+			new ClientCallInfo("Security", "ClearApiKeyCache", 0, 0)
 		}
 ,
 		{
 			"security.clear_cached_privileges",
-			new ClientCallInfo("Security", "ClearCachedPrivileges", 0)
+			new ClientCallInfo("Security", "ClearCachedPrivileges", 0, 0)
 		}
 ,
 		{
 			"security.clear_cached_realms",
-			new ClientCallInfo("Security", "ClearCachedRealms", 0)
+			new ClientCallInfo("Security", "ClearCachedRealms", 0, 0)
 		}
 ,
 		{
 			"security.clear_cached_roles",
-			new ClientCallInfo("Security", "ClearCachedRoles", 0)
+			new ClientCallInfo("Security", "ClearCachedRoles", 0, 0)
 		}
 ,
 		{
 			"security.clear_cached_service_tokens",
-			new ClientCallInfo("Security", "ClearCachedServiceTokens", 0)
+			new ClientCallInfo("Security", "ClearCachedServiceTokens", 0, 0)
 		}
 ,
 		{
 			"security.clone_api_key",
-			new ClientCallInfo("Security", "CloneApiKey", 0)
+			new ClientCallInfo("Security", "CloneApiKey", 0, 0)
 		}
 ,
 		{
 			"security.create_api_key",
-			new ClientCallInfo("Security", "CreateApiKey", 0)
+			new ClientCallInfo("Security", "CreateApiKey", 0, 0)
 		}
 ,
 		{
 			"security.create_cross_cluster_api_key",
-			new ClientCallInfo("Security", "CreateCrossClusterApiKey", 0)
+			new ClientCallInfo("Security", "CreateCrossClusterApiKey", 0, 0)
 		}
 ,
 		{
 			"security.create_service_token",
-			new ClientCallInfo("Security", "CreateServiceToken", 0)
+			new ClientCallInfo("Security", "CreateServiceToken", 0, -1)
 		}
 ,
 		{
 			"security.delegate_pki",
-			new ClientCallInfo("Security", "DelegatePki", 0)
+			new ClientCallInfo("Security", "DelegatePki", 0, 0)
 		}
 ,
 		{
 			"security.delete_privileges",
-			new ClientCallInfo("Security", "DeletePrivileges", 0)
+			new ClientCallInfo("Security", "DeletePrivileges", 0, 0)
 		}
 ,
 		{
 			"security.delete_role",
-			new ClientCallInfo("Security", "DeleteRole", 0)
+			new ClientCallInfo("Security", "DeleteRole", 0, 0)
 		}
 ,
 		{
 			"security.delete_role_mapping",
-			new ClientCallInfo("Security", "DeleteRoleMapping", 0)
+			new ClientCallInfo("Security", "DeleteRoleMapping", 0, 0)
 		}
 ,
 		{
 			"security.delete_service_token",
-			new ClientCallInfo("Security", "DeleteServiceToken", 0)
+			new ClientCallInfo("Security", "DeleteServiceToken", 0, 0)
 		}
 ,
 		{
 			"security.delete_user",
-			new ClientCallInfo("Security", "DeleteUser", 0)
+			new ClientCallInfo("Security", "DeleteUser", 0, 0)
 		}
 ,
 		{
 			"security.disable_user",
-			new ClientCallInfo("Security", "DisableUser", 0)
+			new ClientCallInfo("Security", "DisableUser", 0, 0)
 		}
 ,
 		{
 			"security.disable_user_profile",
-			new ClientCallInfo("Security", "DisableUserProfile", 0)
+			new ClientCallInfo("Security", "DisableUserProfile", 0, 0)
 		}
 ,
 		{
 			"security.enable_user",
-			new ClientCallInfo("Security", "EnableUser", 0)
+			new ClientCallInfo("Security", "EnableUser", 0, 0)
 		}
 ,
 		{
 			"security.enable_user_profile",
-			new ClientCallInfo("Security", "EnableUserProfile", 0)
+			new ClientCallInfo("Security", "EnableUserProfile", 0, 0)
 		}
 ,
 		{
 			"security.enroll_kibana",
-			new ClientCallInfo("Security", "EnrollKibana", 0)
+			new ClientCallInfo("Security", "EnrollKibana", 0, 0)
 		}
 ,
 		{
 			"security.enroll_node",
-			new ClientCallInfo("Security", "EnrollNode", 0)
+			new ClientCallInfo("Security", "EnrollNode", 0, 0)
 		}
 ,
 		{
 			"security.get_api_key",
-			new ClientCallInfo("Security", "GetApiKey", 0)
+			new ClientCallInfo("Security", "GetApiKey", 0, 0)
 		}
 ,
 		{
 			"security.get_builtin_privileges",
-			new ClientCallInfo("Security", "GetBuiltinPrivileges", 0)
+			new ClientCallInfo("Security", "GetBuiltinPrivileges", 0, 0)
 		}
 ,
 		{
 			"security.get_privileges",
-			new ClientCallInfo("Security", "GetPrivileges", 0)
+			new ClientCallInfo("Security", "GetPrivileges", 0, 0)
 		}
 ,
 		{
 			"security.get_role",
-			new ClientCallInfo("Security", "GetRole", 0)
+			new ClientCallInfo("Security", "GetRole", 0, 0)
 		}
 ,
 		{
 			"security.get_role_mapping",
-			new ClientCallInfo("Security", "GetRoleMapping", 0)
+			new ClientCallInfo("Security", "GetRoleMapping", 0, 0)
 		}
 ,
 		{
 			"security.get_service_accounts",
-			new ClientCallInfo("Security", "GetServiceAccounts", 0)
+			new ClientCallInfo("Security", "GetServiceAccounts", 0, 0)
 		}
 ,
 		{
 			"security.get_service_credentials",
-			new ClientCallInfo("Security", "GetServiceCredentials", 0)
+			new ClientCallInfo("Security", "GetServiceCredentials", 0, 0)
 		}
 ,
 		{
 			"security.get_settings",
-			new ClientCallInfo("Security", "GetSettings", 0)
+			new ClientCallInfo("Security", "GetSettings", 0, 0)
 		}
 ,
 		{
 			"security.get_stats",
-			new ClientCallInfo("Security", "GetStats", 0)
+			new ClientCallInfo("Security", "GetStats", 0, 0)
 		}
 ,
 		{
 			"security.get_token",
-			new ClientCallInfo("Security", "GetToken", 0)
+			new ClientCallInfo("Security", "GetToken", 0, 0)
 		}
 ,
 		{
 			"security.get_user",
-			new ClientCallInfo("Security", "GetUser", 0)
+			new ClientCallInfo("Security", "GetUser", 0, 0)
 		}
 ,
 		{
 			"security.get_user_privileges",
-			new ClientCallInfo("Security", "GetUserPrivileges", 0)
+			new ClientCallInfo("Security", "GetUserPrivileges", 0, 0)
 		}
 ,
 		{
 			"security.get_user_profile",
-			new ClientCallInfo("Security", "GetUserProfile", 0)
+			new ClientCallInfo("Security", "GetUserProfile", 0, 0)
 		}
 ,
 		{
 			"security.grant_api_key",
-			new ClientCallInfo("Security", "GrantApiKey", 0)
+			new ClientCallInfo("Security", "GrantApiKey", 0, 0)
 		}
 ,
 		{
 			"security.has_privileges",
-			new ClientCallInfo("Security", "HasPrivileges", 0)
+			new ClientCallInfo("Security", "HasPrivileges", 0, 0)
 		}
 ,
 		{
 			"security.has_privileges_user_profile",
-			new ClientCallInfo("Security", "HasPrivilegesUserProfile", 0)
+			new ClientCallInfo("Security", "HasPrivilegesUserProfile", 0, 0)
 		}
 ,
 		{
 			"security.invalidate_api_key",
-			new ClientCallInfo("Security", "InvalidateApiKey", 0)
+			new ClientCallInfo("Security", "InvalidateApiKey", 0, 0)
 		}
 ,
 		{
 			"security.invalidate_token",
-			new ClientCallInfo("Security", "InvalidateToken", 0)
+			new ClientCallInfo("Security", "InvalidateToken", 0, 0)
 		}
 ,
 		{
 			"security.oidc_authenticate",
-			new ClientCallInfo("Security", "OidcAuthenticate", 0)
+			new ClientCallInfo("Security", "OidcAuthenticate", 0, 0)
 		}
 ,
 		{
 			"security.oidc_logout",
-			new ClientCallInfo("Security", "OidcLogout", 0)
+			new ClientCallInfo("Security", "OidcLogout", 0, 0)
 		}
 ,
 		{
 			"security.oidc_prepare_authentication",
-			new ClientCallInfo("Security", "OidcPrepareAuthentication", 0)
+			new ClientCallInfo("Security", "OidcPrepareAuthentication", 0, 0)
 		}
 ,
 		{
 			"security.put_privileges",
-			new ClientCallInfo("Security", "PutPrivileges", 0)
+			new ClientCallInfo("Security", "PutPrivileges", 0, 0)
 		}
 ,
 		{
 			"security.put_role",
-			new ClientCallInfo("Security", "PutRole", 0)
+			new ClientCallInfo("Security", "PutRole", 0, 0)
 		}
 ,
 		{
 			"security.put_role_mapping",
-			new ClientCallInfo("Security", "PutRoleMapping", 0)
+			new ClientCallInfo("Security", "PutRoleMapping", 0, 0)
 		}
 ,
 		{
 			"security.put_user",
-			new ClientCallInfo("Security", "PutUser", 0)
+			new ClientCallInfo("Security", "PutUser", 0, 0)
 		}
 ,
 		{
 			"security.query_api_keys",
-			new ClientCallInfo("Security", "QueryApiKeys", 0)
+			new ClientCallInfo("Security", "QueryApiKeys", 0, 0)
 		}
 ,
 		{
 			"security.query_role",
-			new ClientCallInfo("Security", "QueryRole", 0)
+			new ClientCallInfo("Security", "QueryRole", 0, 0)
 		}
 ,
 		{
 			"security.query_user",
-			new ClientCallInfo("Security", "QueryUser", 0)
+			new ClientCallInfo("Security", "QueryUser", 0, 0)
 		}
 ,
 		{
 			"security.saml_authenticate",
-			new ClientCallInfo("Security", "SamlAuthenticate", 0)
+			new ClientCallInfo("Security", "SamlAuthenticate", 0, 0)
 		}
 ,
 		{
 			"security.saml_complete_logout",
-			new ClientCallInfo("Security", "SamlCompleteLogout", 0)
+			new ClientCallInfo("Security", "SamlCompleteLogout", 0, 0)
 		}
 ,
 		{
 			"security.saml_invalidate",
-			new ClientCallInfo("Security", "SamlInvalidate", 0)
+			new ClientCallInfo("Security", "SamlInvalidate", 0, 0)
 		}
 ,
 		{
 			"security.saml_logout",
-			new ClientCallInfo("Security", "SamlLogout", 0)
+			new ClientCallInfo("Security", "SamlLogout", 0, 0)
 		}
 ,
 		{
 			"security.saml_prepare_authentication",
-			new ClientCallInfo("Security", "SamlPrepareAuthentication", 0)
+			new ClientCallInfo("Security", "SamlPrepareAuthentication", 0, 0)
 		}
 ,
 		{
 			"security.saml_service_provider_metadata",
-			new ClientCallInfo("Security", "SamlServiceProviderMetadata", 0)
+			new ClientCallInfo("Security", "SamlServiceProviderMetadata", 0, 0)
 		}
 ,
 		{
 			"security.suggest_user_profiles",
-			new ClientCallInfo("Security", "SuggestUserProfiles", 0)
+			new ClientCallInfo("Security", "SuggestUserProfiles", 0, 0)
 		}
 ,
 		{
 			"security.update_api_key",
-			new ClientCallInfo("Security", "UpdateApiKey", 0)
+			new ClientCallInfo("Security", "UpdateApiKey", 0, 0)
 		}
 ,
 		{
 			"security.update_cross_cluster_api_key",
-			new ClientCallInfo("Security", "UpdateCrossClusterApiKey", 0)
+			new ClientCallInfo("Security", "UpdateCrossClusterApiKey", 0, 0)
 		}
 ,
 		{
 			"security.update_settings",
-			new ClientCallInfo("Security", "UpdateSettings", 0)
+			new ClientCallInfo("Security", "UpdateSettings", 0, 0)
 		}
 ,
 		{
 			"security.update_user_profile_data",
-			new ClientCallInfo("Security", "UpdateUserProfileData", 0)
+			new ClientCallInfo("Security", "UpdateUserProfileData", 0, 0)
 		}
 ,
 		{
 			"simulate.ingest",
-			new ClientCallInfo("Simulate", "Ingest", 0)
+			new ClientCallInfo("Simulate", "Ingest", 0, 0)
 		}
 ,
 		{
 			"slm.delete_lifecycle",
-			new ClientCallInfo("SnapshotLifecycleManagement", "DeleteLifecycle", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "DeleteLifecycle", 0, 0)
 		}
 ,
 		{
 			"slm.execute_lifecycle",
-			new ClientCallInfo("SnapshotLifecycleManagement", "ExecuteLifecycle", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "ExecuteLifecycle", 0, 0)
 		}
 ,
 		{
 			"slm.execute_retention",
-			new ClientCallInfo("SnapshotLifecycleManagement", "ExecuteRetention", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "ExecuteRetention", 0, 0)
 		}
 ,
 		{
 			"slm.get_lifecycle",
-			new ClientCallInfo("SnapshotLifecycleManagement", "GetLifecycle", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "GetLifecycle", 0, 0)
 		}
 ,
 		{
 			"slm.get_stats",
-			new ClientCallInfo("SnapshotLifecycleManagement", "GetStats", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "GetStats", 0, 0)
 		}
 ,
 		{
 			"slm.get_status",
-			new ClientCallInfo("SnapshotLifecycleManagement", "GetStatus", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "GetStatus", 0, 0)
 		}
 ,
 		{
 			"slm.put_lifecycle",
-			new ClientCallInfo("SnapshotLifecycleManagement", "PutLifecycle", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "PutLifecycle", 0, 0)
 		}
 ,
 		{
 			"slm.start",
-			new ClientCallInfo("SnapshotLifecycleManagement", "Start", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "Start", 0, 0)
 		}
 ,
 		{
 			"slm.stop",
-			new ClientCallInfo("SnapshotLifecycleManagement", "Stop", 0)
+			new ClientCallInfo("SnapshotLifecycleManagement", "Stop", 0, 0)
 		}
 ,
 		{
 			"snapshot.cleanup_repository",
-			new ClientCallInfo("Snapshot", "CleanupRepository", 0)
+			new ClientCallInfo("Snapshot", "CleanupRepository", 0, 0)
 		}
 ,
 		{
 			"snapshot.clone",
-			new ClientCallInfo("Snapshot", "Clone", 0)
+			new ClientCallInfo("Snapshot", "Clone", 0, 0)
 		}
 ,
 		{
 			"snapshot.create",
-			new ClientCallInfo("Snapshot", "Create", 0)
+			new ClientCallInfo("Snapshot", "Create", 0, 0)
 		}
 ,
 		{
 			"snapshot.create_repository",
-			new ClientCallInfo("Snapshot", "CreateRepository", 0)
+			new ClientCallInfo("Snapshot", "CreateRepository", 0, 0)
 		}
 ,
 		{
 			"snapshot.delete",
-			new ClientCallInfo("Snapshot", "Delete", 0)
+			new ClientCallInfo("Snapshot", "Delete", 0, 0)
 		}
 ,
 		{
 			"snapshot.delete_repository",
-			new ClientCallInfo("Snapshot", "DeleteRepository", 0)
+			new ClientCallInfo("Snapshot", "DeleteRepository", 0, 0)
 		}
 ,
 		{
 			"snapshot.get",
-			new ClientCallInfo("Snapshot", "Get", 0)
+			new ClientCallInfo("Snapshot", "Get", 0, 0)
 		}
 ,
 		{
 			"snapshot.get_repository",
-			new ClientCallInfo("Snapshot", "GetRepository", 0)
+			new ClientCallInfo("Snapshot", "GetRepository", 0, 0)
 		}
 ,
 		{
 			"snapshot.repository_analyze",
-			new ClientCallInfo("Snapshot", "RepositoryAnalyze", 0)
+			new ClientCallInfo("Snapshot", "RepositoryAnalyze", 0, 0)
 		}
 ,
 		{
 			"snapshot.repository_verify_integrity",
-			new ClientCallInfo("Snapshot", "RepositoryVerifyIntegrity", 0)
+			new ClientCallInfo("Snapshot", "RepositoryVerifyIntegrity", 0, 0)
 		}
 ,
 		{
 			"snapshot.restore",
-			new ClientCallInfo("Snapshot", "Restore", 0)
+			new ClientCallInfo("Snapshot", "Restore", 0, 0)
 		}
 ,
 		{
 			"snapshot.status",
-			new ClientCallInfo("Snapshot", "Status", 0)
+			new ClientCallInfo("Snapshot", "Status", 0, 0)
 		}
 ,
 		{
 			"snapshot.verify_repository",
-			new ClientCallInfo("Snapshot", "VerifyRepository", 0)
+			new ClientCallInfo("Snapshot", "VerifyRepository", 0, 0)
 		}
 ,
 		{
 			"sql.clear_cursor",
-			new ClientCallInfo("Sql", "ClearCursor", 0)
+			new ClientCallInfo("Sql", "ClearCursor", 0, 0)
 		}
 ,
 		{
 			"sql.delete_async",
-			new ClientCallInfo("Sql", "DeleteAsync", 0)
+			new ClientCallInfo("Sql", "DeleteAsync", 0, 0)
 		}
 ,
 		{
 			"sql.get_async",
-			new ClientCallInfo("Sql", "GetAsync", 0)
+			new ClientCallInfo("Sql", "GetAsync", 0, 0)
 		}
 ,
 		{
 			"sql.get_async_status",
-			new ClientCallInfo("Sql", "GetAsyncStatus", 0)
+			new ClientCallInfo("Sql", "GetAsyncStatus", 0, 0)
 		}
 ,
 		{
 			"sql.query",
-			new ClientCallInfo("Sql", "Query", 0)
+			new ClientCallInfo("Sql", "Query", 0, 0)
 		}
 ,
 		{
 			"sql.translate",
-			new ClientCallInfo("Sql", "Translate", 0)
+			new ClientCallInfo("Sql", "Translate", 0, 0)
 		}
 ,
 		{
 			"streams.logs_disable",
-			new ClientCallInfo("Streams", "LogsDisable", 0)
+			new ClientCallInfo("Streams", "LogsDisable", 0, 0)
 		}
 ,
 		{
 			"streams.logs_enable",
-			new ClientCallInfo("Streams", "LogsEnable", 0)
+			new ClientCallInfo("Streams", "LogsEnable", 0, 0)
 		}
 ,
 		{
 			"streams.status",
-			new ClientCallInfo("Streams", "Status", 0)
+			new ClientCallInfo("Streams", "Status", 0, 0)
 		}
 ,
 		{
 			"synonyms.delete_synonym",
-			new ClientCallInfo("Synonyms", "DeleteSynonym", 0)
+			new ClientCallInfo("Synonyms", "DeleteSynonym", 0, 0)
 		}
 ,
 		{
 			"synonyms.delete_synonym_rule",
-			new ClientCallInfo("Synonyms", "DeleteSynonymRule", 0)
+			new ClientCallInfo("Synonyms", "DeleteSynonymRule", 0, 0)
 		}
 ,
 		{
 			"synonyms.get_synonym",
-			new ClientCallInfo("Synonyms", "GetSynonym", 0)
+			new ClientCallInfo("Synonyms", "GetSynonym", 0, 0)
 		}
 ,
 		{
 			"synonyms.get_synonym_rule",
-			new ClientCallInfo("Synonyms", "GetSynonymRule", 0)
+			new ClientCallInfo("Synonyms", "GetSynonymRule", 0, 0)
 		}
 ,
 		{
 			"synonyms.get_synonyms_sets",
-			new ClientCallInfo("Synonyms", "GetSynonymsSets", 0)
+			new ClientCallInfo("Synonyms", "GetSynonymsSets", 0, 0)
 		}
 ,
 		{
 			"synonyms.put_synonym",
-			new ClientCallInfo("Synonyms", "PutSynonym", 0)
+			new ClientCallInfo("Synonyms", "PutSynonym", 0, 0)
 		}
 ,
 		{
 			"synonyms.put_synonym_rule",
-			new ClientCallInfo("Synonyms", "PutSynonymRule", 0)
+			new ClientCallInfo("Synonyms", "PutSynonymRule", 0, 0)
 		}
 ,
 		{
 			"tasks.cancel",
-			new ClientCallInfo("Tasks", "Cancel", 0)
+			new ClientCallInfo("Tasks", "Cancel", 0, 0)
 		}
 ,
 		{
 			"tasks.get",
-			new ClientCallInfo("Tasks", "Get", 0)
+			new ClientCallInfo("Tasks", "Get", 0, 0)
 		}
 ,
 		{
 			"tasks.list",
-			new ClientCallInfo("Tasks", "List", 0)
+			new ClientCallInfo("Tasks", "List", 0, 0)
 		}
 ,
 		{
 			"terms_enum",
-			new ClientCallInfo("", "TermsEnum", 0)
+			new ClientCallInfo("", "TermsEnum", 0, 0)
 		}
 ,
 		{
 			"termvectors",
-			new ClientCallInfo("", "Termvectors", 0)
+			new ClientCallInfo("", "Termvectors", 0, 1)
 		}
 ,
 		{
 			"text_structure.find_field_structure",
-			new ClientCallInfo("TextStructure", "FindFieldStructure", 0)
+			new ClientCallInfo("TextStructure", "FindFieldStructure", 0, 0)
 		}
 ,
 		{
 			"text_structure.find_message_structure",
-			new ClientCallInfo("TextStructure", "FindMessageStructure", 0)
+			new ClientCallInfo("TextStructure", "FindMessageStructure", 0, 0)
 		}
 ,
 		{
 			"text_structure.test_grok_pattern",
-			new ClientCallInfo("TextStructure", "TestGrokPattern", 0)
+			new ClientCallInfo("TextStructure", "TestGrokPattern", 0, 0)
 		}
 ,
 		{
 			"transform.delete_transform",
-			new ClientCallInfo("TransformManagement", "DeleteTransform", 0)
+			new ClientCallInfo("TransformManagement", "DeleteTransform", 0, 0)
 		}
 ,
 		{
 			"transform.get_node_stats",
-			new ClientCallInfo("TransformManagement", "GetNodeStats", 0)
+			new ClientCallInfo("TransformManagement", "GetNodeStats", 0, 0)
 		}
 ,
 		{
 			"transform.get_transform",
-			new ClientCallInfo("TransformManagement", "GetTransform", 0)
+			new ClientCallInfo("TransformManagement", "GetTransform", 0, 0)
 		}
 ,
 		{
 			"transform.get_transform_stats",
-			new ClientCallInfo("TransformManagement", "GetTransformStats", 0)
+			new ClientCallInfo("TransformManagement", "GetTransformStats", 0, 0)
 		}
 ,
 		{
 			"transform.preview_transform",
-			new ClientCallInfo("TransformManagement", "PreviewTransform", 1)
+			new ClientCallInfo("TransformManagement", "PreviewTransform", 1, 2)
 		}
 ,
 		{
 			"transform.put_transform",
-			new ClientCallInfo("TransformManagement", "PutTransform", 0)
+			new ClientCallInfo("TransformManagement", "PutTransform", 0, 0)
 		}
 ,
 		{
 			"transform.reset_transform",
-			new ClientCallInfo("TransformManagement", "ResetTransform", 0)
+			new ClientCallInfo("TransformManagement", "ResetTransform", 0, 0)
 		}
 ,
 		{
 			"transform.schedule_now_transform",
-			new ClientCallInfo("TransformManagement", "ScheduleNowTransform", 0)
+			new ClientCallInfo("TransformManagement", "ScheduleNowTransform", 0, 0)
 		}
 ,
 		{
 			"transform.set_upgrade_mode",
-			new ClientCallInfo("TransformManagement", "SetUpgradeMode", 0)
+			new ClientCallInfo("TransformManagement", "SetUpgradeMode", 0, 0)
 		}
 ,
 		{
 			"transform.start_transform",
-			new ClientCallInfo("TransformManagement", "StartTransform", 0)
+			new ClientCallInfo("TransformManagement", "StartTransform", 0, 0)
 		}
 ,
 		{
 			"transform.stop_transform",
-			new ClientCallInfo("TransformManagement", "StopTransform", 0)
+			new ClientCallInfo("TransformManagement", "StopTransform", 0, 0)
 		}
 ,
 		{
 			"transform.update_transform",
-			new ClientCallInfo("TransformManagement", "UpdateTransform", 0)
+			new ClientCallInfo("TransformManagement", "UpdateTransform", 0, 0)
 		}
 ,
 		{
 			"transform.upgrade_transforms",
-			new ClientCallInfo("TransformManagement", "UpgradeTransforms", 0)
+			new ClientCallInfo("TransformManagement", "UpgradeTransforms", 0, 0)
 		}
 ,
 		{
 			"update",
-			new ClientCallInfo("", "Update", 0)
+			new ClientCallInfo("", "Update", 0, 2)
 		}
 ,
 		{
 			"update_by_query",
-			new ClientCallInfo("", "UpdateByQuery", 0)
+			new ClientCallInfo("", "UpdateByQuery", 0, 0)
 		}
 ,
 		{
 			"update_by_query_rethrottle",
-			new ClientCallInfo("", "UpdateByQueryRethrottle", 0)
+			new ClientCallInfo("", "UpdateByQueryRethrottle", 0, 0)
 		}
 ,
 		{
 			"xpack.info",
-			new ClientCallInfo("Xpack", "Info", 0)
+			new ClientCallInfo("Xpack", "Info", 0, 0)
 		}
 ,
 		{
 			"xpack.usage",
-			new ClientCallInfo("Xpack", "Usage", 0)
+			new ClientCallInfo("Xpack", "Usage", 0, 0)
 		}
 	});
 }
