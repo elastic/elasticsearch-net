@@ -51,22 +51,18 @@ public sealed record FormattingOptions
 	public string DocumentTypeName { get; init; } = "MyDocument";
 
 	/// <summary>
-	/// When <c>true</c>, appends the client invocation that executes the request after the request expression,
-	/// e.g. <c>var response = await client.Esql.QueryAsync(request);</c>. Implies
-	/// <see cref="EmitVariableDeclaration"/> (the call needs the named request variable). A client method whose
-	/// generic type parameters are not inferrable from the request argument spells them explicitly:
-	/// <see cref="DocumentTypeName"/> when <see cref="UseStronglyTypedDocument"/> is set, <c>JsonElement</c>
-	/// otherwise. Defaults to <c>false</c>.
+	/// How the client invocation that executes the request is emitted. Defaults to
+	/// <see cref="ClientCallFormat.None"/> (no invocation; the output is the bare request/descriptor expression).
 	/// </summary>
-	public bool EmitClientCall { get; init; }
+	public ClientCallFormat ClientCallFormat { get; init; } = ClientCallFormat.None;
 
-	/// <summary>The invocation flavor used when <see cref="EmitClientCall"/> is set. Defaults to <see cref="ClientCallStyle.Async"/>.</summary>
+	/// <summary>The invocation flavor used when <see cref="ClientCallFormat"/> is not <see cref="ClientCallFormat.None"/>. Defaults to <see cref="ClientCallStyle.Async"/>.</summary>
 	public ClientCallStyle ClientCallStyle { get; init; } = ClientCallStyle.Async;
 
-	/// <summary>The client variable name used when <see cref="EmitClientCall"/> is set. Defaults to <c>client</c>.</summary>
+	/// <summary>The client variable name used when <see cref="ClientCallFormat"/> is not <see cref="ClientCallFormat.None"/>. Defaults to <c>client</c>.</summary>
 	public string ClientVariableName { get; init; } = "client";
 
-	/// <summary>The response variable name used when <see cref="EmitClientCall"/> is set. Defaults to <c>response</c>.</summary>
+	/// <summary>The response variable name used when <see cref="ClientCallFormat"/> is not <see cref="ClientCallFormat.None"/>. Defaults to <c>response</c>.</summary>
 	public string ResponseVariableName { get; init; } = "response";
 }
 
@@ -91,7 +87,7 @@ public enum TypeNameStyle
 }
 
 /// <summary>
-/// The invocation flavor emitted for the client call (see <see cref="FormattingOptions.EmitClientCall"/>).
+/// The invocation flavor emitted for the client call (see <see cref="FormattingOptions.ClientCallFormat"/>).
 /// </summary>
 public enum ClientCallStyle
 {
@@ -100,6 +96,28 @@ public enum ClientCallStyle
 
 	/// <summary>The synchronous method, e.g. <c>var response = client.Search&lt;JsonElement&gt;(request);</c>.</summary>
 	Sync = 1
+}
+
+/// <summary>
+/// How the client invocation that executes a converted request is emitted (see
+/// <see cref="FormattingOptions.ClientCallFormat"/>).
+/// </summary>
+public enum ClientCallFormat
+{
+	/// <summary>No client invocation; the output is the bare request/descriptor expression.</summary>
+	None = 0,
+
+	/// <summary>A variable declaration followed by a call statement referencing it, e.g.
+	/// <c>SearchRequest request = new() { ... };</c> then
+	/// <c>var response = await client.SearchAsync&lt;JsonElement&gt;(request);</c>. Implies
+	/// <see cref="FormattingOptions.EmitVariableDeclaration"/>.</summary>
+	Statement = 1,
+
+	/// <summary>The request initializer (object-initializer mode) or descriptor lambda (descriptor mode) is
+	/// inlined as the call argument, e.g.
+	/// <c>var response = await client.SearchAsync&lt;JsonElement&gt;(s =&gt; s.Query(...));</c>.
+	/// <see cref="FormattingOptions.EmitVariableDeclaration"/> is ignored.</summary>
+	Inline = 2
 }
 
 /// <summary>
