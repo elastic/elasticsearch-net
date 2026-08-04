@@ -37,8 +37,10 @@ illustrative and generally does not compile or round-trip as-is. Both map to
 `options.client_call_format` (`none` | `statement` | `inline`, default `none`) appends the client invocation that
 executes the request: `statement` declares the request variable and calls
 `var response = await client.Esql.QueryAsync(request);`; `inline` passes the request initializer (object-initializer
-mode) or the configuration lambda with hoisted required path arguments (descriptor mode) directly as the call
-argument, e.g. `var response = await client.Indices.CreateAsync("my-index", d1 => d1.Settings(...));`.
+mode) or, in descriptor mode, the chain-head constructor arguments hoisted as labeled call arguments followed by the
+configuration lambda, e.g.
+`var response = await client.Indices.CreateAsync(index: "my-index", d1 => d1.Settings(...));`.
+Document-bodied requests also hoist the document and optional parameters such as `id: null`.
 `options.client_call_style` (`async` | `sync`, default `async`) selects the awaited asynchronous flavor or the
 synchronous one. In a batch, request and response variables are suffixed (`request1`/`response1`, ...) so the
 snippets can be pasted together.
