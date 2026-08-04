@@ -12,11 +12,12 @@ How to draft a GitHub release for `elastic/elasticsearch-net`. Always work from 
 1. **`targetCommitish` = the major.minor branch.** 9.3.x → `9.3`, 9.4.x → `9.4`, 8.19.x → `8.19`. NEVER `main`. *Most important rule.*
 2. **Backports reference the original main PR only.** When the GH baseline lists a `[X.Y]` backport, replace it with the original main PR (drop the `[X.Y]` prefix). The backport PR is not linked at all — not the URL, not the number, not the bot author. *Rationale: attribute the work to where it was originally done; the backport is an internal mechanism, not user-facing.*
 3. **Issue references.** `Fixes <full-issue-url>` for main bullets, `(#issue)` shorthand for sub-bullets.
-4. **Regenerate PR uses the `[X.Y]` branch-prefixed PR**, never the main one. Summarize with up to 5 grounded sub-bullets.
+4. **Regenerate PR uses the `[X.Y]` branch-prefixed PR**, never the main one. Summarize with up to 5 grounded non-breaking sub-bullets, plus every breaking change (see rule 9).
 5. **Multiple regenerate PRs in one release.** Combine into one line item; link both PRs.
 6. **Always create the release as a draft.** Use `gh release create ... --draft`. Never publish — the user reviews and publishes manually. **Default to `--draft` even when the user's request doesn't explicitly say "draft"** — a request to "create release X.Y.Z" is not authorization to publish. *Rationale: publishing has user-visible consequences (notifications, package release pipelines, public visibility) the user wants to control manually after reviewing the generated notes.*
 7. **Every non-regen PR gets up to 2 sub-bullets** describing what changed/fixed/improved. Skip when the title is already fully self-describing.
 8. **Best-effort upstream correlation** for the regen PR — try to match diffs to PRs in `elastic/elasticsearch-specification` (spec changes) and `elastic/client-generator-net` (generator changes). Optional grounding; don't fabricate matches.
+9. **Breaking changes are never capped.** Every breaking change gets its own sub-bullet, prefixed `**Breaking**` (or `**Breaking (area)**` when there are enough to group by Elasticsearch area), and these do not count against the sub-bullet caps in rules 4 and 7. List them after the non-breaking bullets. When a release carries any breaking change, open the notes with a `> [!WARNING]` callout telling readers to review the list before upgrading. *Rationale: a cap that silently drops a breaking change leaves users to discover it as a compile error after upgrading; 8.19.0 set the `> [!WARNING]` precedent.*
 
 ## Quick reference: version → target branch
 
@@ -121,6 +122,18 @@ gh pr diff <num> -R elastic/elasticsearch-net
 | `*.csproj` version change (e.g. `Elastic.Transport`) | Dependency bump |
 | Same code-shape change applied uniformly across many existing files (converter pattern, attribute, init block) | Generator change — likely from `elastic/client-generator-net` |
 | Small +/- on existing `*Request.g.cs` (XML doc only) | Skip — not user-facing |
+| In a modified `*.g.cs`: changed property type, removed/renamed member, or a member gaining/losing `required` | Breaking change (uncapped, rule 9) |
+| A `sealed class` becoming `interface I*` alongside new per-variant types and a `*Factory` | Breaking change: variant family split |
+| Changed union arm or discriminator string in a modified `*.Converters.g.cs` | Behavior fix — the old code mis-deserialized that arm |
+
+**Breaking changes hide in modified files, not added ones.** The path signals above only catch new and deleted files, so diff the modified generated sources too:
+
+```
+git diff <prev-tag> origin/<branch> --name-status -- src/Elastic.Clients.Elasticsearch/_Generated
+git diff <prev-tag> origin/<branch> -- '**/_Generated/**/*.g.cs'
+```
+
+A regen touching hundreds of files is too large to read directly, and the request-converter metadata and XML doc churn swamp the real signal. Delegate the sweep to a subagent, telling it to ignore `.g.xml` files, XML doc comments, `SpecReferences.xml` and request-converter metadata, and to report changed property types, removed members, new `required` members and renamed members. Verify each reported breaking change against the actual diff hunk before writing it into the notes.
 
 **Cross-reference with the closed-issue list from step 1.** Match symptoms to categorized changes (e.g. issue `"FieldType missing Wildcard"` → enum addition; issue `"SearchMvtAsync TransportException"` → content-type fix). When matched, use the issue title for the bullet text and link `(#issue)`.
 
@@ -146,17 +159,17 @@ When a match is found, use the upstream PR's title/body to write a more accurate
 
 If correlation isn't obvious within a few minutes, fall back to client-side analysis. **Don't fabricate matches.**
 
-**Pick the top ≤5 bullets**, prioritized:
+**List every breaking change** in its own sub-bullet (uncapped, per rule 9). Then **pick the top ≤5 non-breaking bullets**, prioritized:
 
 1. Bullets grounded in BOTH a closed issue AND an upstream PR (highest signal)
 2. Issue-grounded fixes
 3. New endpoints (spec-grounded if possible)
-4. Removed/consolidated response types (call out as breaking when applicable)
+4. Behavior fixes where a generated converter or discriminator was previously wrong
 5. New query/aggregation/enum types
 6. Generator improvements with user-visible effects
 7. Dependency bumps (only if user-visible behavior changes)
 
-Cap at 5 even if more candidates qualify.
+Cap the non-breaking bullets at 5 even if more candidates qualify. Never drop a breaking change to fit a cap.
 
 Format:
 
@@ -168,7 +181,7 @@ Format:
 
 ### 5. Combining multiple regenerate PRs
 
-If two or more `[X.Y] Regenerate client` PRs fall in the release window, diff each, categorize each, combine + dedupe, then pick top ≤5 across the union. Link **both** PRs on one line:
+If two or more `[X.Y] Regenerate client` PRs fall in the release window, diff each, categorize each, combine + dedupe, then pick the top ≤5 non-breaking bullets across the union (breaking changes stay uncapped). Link **both** PRs on one line:
 
 ```
 * Regenerate client by @<author> in <PR1-url> and <PR2-url>
@@ -186,8 +199,10 @@ GitHub auto-generates this section from the contributor graph. Don't invent it, 
 - [ ] Tag matches the version, no `v` prefix (e.g. `9.3.6`, not `v9.3.6`)
 - [ ] Every backport line references the ORIGINAL main PR only (the `[X.Y]` backport PR is NOT linked)
 - [ ] Every PR with a related issue references it (`Fixes <url>` or `(#X)`)
-- [ ] Every non-regen PR has ≤2 sub-bullets (or none if title is fully self-describing)
-- [ ] Regenerate line has ≤5 grounded sub-bullets
+- [ ] Every non-regen PR has ≤2 sub-bullets (or none if title is fully self-describing), not counting breaking changes
+- [ ] Regenerate line has ≤5 grounded non-breaking sub-bullets
+- [ ] Every breaking change is listed, prefixed `**Breaking**`, and none was dropped to fit a cap
+- [ ] `> [!WARNING]` callout present when the release carries any breaking change
 - [ ] Regen bullets attempted upstream correlation (spec and/or generator) where signals suggest it
 - [ ] Multiple regen PRs combined into one line, both linked
 - [ ] `## New Contributors` kept exactly as GH generated it (or omitted if absent)
@@ -218,8 +233,9 @@ Never include AI/Claude attribution anywhere in release notes.
 | Adding `### Bug Fixes` category headers | No prior release uses them |
 | Tagging as `v9.3.6` | Tags have no `v` prefix |
 | Linking the `[X.Y]` backport PR (or both) | Reference ONLY the original main PR — the backport is not linked |
-| >5 regen bullets / unsubstantiated bullets | Cap at 5; ground each in a diff signal, closed issue, or upstream PR |
-| >2 sub-bullets on a non-regen PR | Cap is 2 |
+| >5 non-breaking regen bullets / unsubstantiated bullets | Cap non-breaking at 5; ground each in a diff signal, closed issue, or upstream PR |
+| >2 non-breaking sub-bullets on a non-regen PR | Cap is 2 |
+| Dropping a breaking change to respect a cap | Breaking changes are uncapped; a missed one becomes a compile error for users |
 | Padding sub-bullets when the title already describes the PR fully | Skip them entirely in that case |
 | Fabricating an upstream PR correlation | Only correlate when the match is clear; otherwise client-diff analysis |
 | Publishing the release directly (omitting `--draft`) | Always create as draft; the user publishes manually |
