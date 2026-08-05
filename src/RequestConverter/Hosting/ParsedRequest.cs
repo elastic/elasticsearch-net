@@ -27,7 +27,7 @@ public sealed record ParsedRequest
 
 /// <summary>
 /// The host's conversion options. The typed fields - <see cref="TypeNameStyle"/>, <see cref="SyntaxMode"/>,
-/// <see cref="UseStronglyTypedDocument"/>, <see cref="DocumentTypeName"/>, <see cref="EmitClientCall"/>, and
+/// <see cref="UseStronglyTypedDocument"/>, <see cref="DocumentTypeName"/>, <see cref="ClientCallFormat"/>, and
 /// <see cref="ClientCallStyle"/> - drive the .NET converter output. The remaining fields exist to round-trip
 /// the host contract. <see cref="TypeNameStyle"/> is an extension the harness passes through the host's
 /// open-ended options bag to select the emitted type-name spelling.
@@ -52,11 +52,12 @@ public sealed record ConvertOptions
 	/// <summary>The placeholder document type name used when <see cref="UseStronglyTypedDocument"/> is set. Defaults to <c>MyDocument</c>.</summary>
 	public string? DocumentTypeName { get; init; }
 
-	/// <summary>Selects the client invocation flavor when <see cref="EmitClientCall"/> is set: <c>async</c>
+	/// <summary>Selects the client invocation flavor when <see cref="ClientCallFormat"/> is set: <c>async</c>
 	/// (default) or <c>sync</c>. Extension to the host contract.</summary>
 	public string? ClientCallStyle { get; init; }
 
-	/// <summary>Append the client invocation that executes the request (e.g.
-	/// <c>var response = await client.Esql.QueryAsync(request);</c>). Extension to the host contract.</summary>
-	public bool? EmitClientCall { get; init; }
+	/// <summary>How the client invocation that executes the request is emitted: <c>none</c> (default),
+	/// <c>statement</c> (request variable plus a call statement), or <c>inline</c> (request or descriptor lambda
+	/// inlined as the call argument). Extension to the host contract.</summary>
+	public string? ClientCallFormat { get; init; }
 }
