@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class GetCalendarsRequest : RequestConverter.ICodeFormattable
+public partial class GetCalendarsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,27 +31,10 @@ public partial class GetCalendarsRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (CalendarId is not null)
-			{
-				writer.WriteFluentCall("CalendarId", (w) => { CalendarId.FormatCode(w); });
-			}
-
-			if (From is not null)
-			{
-				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
-
-			if (Page is not null)
-			{
-				writer.WriteFluentDescriptorCall("Page", (w) => { Page.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +64,34 @@ public partial class GetCalendarsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (CalendarId is not null)
+		{
+			writer.WriteFluentCall("CalendarId", (w) => { CalendarId.FormatCode(w); });
+		}
+
+		if (From is not null)
+		{
+			writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
+		}
+
+		if (Page is not null)
+		{
+			writer.WriteFluentDescriptorCall("Page", (w) => { Page.FormatCode(w); });
 		}
 	}
 }

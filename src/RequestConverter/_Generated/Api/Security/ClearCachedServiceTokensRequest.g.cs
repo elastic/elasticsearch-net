@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class ClearCachedServiceTokensRequest : RequestConverter.ICodeFormattable
+public partial class ClearCachedServiceTokensRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,25 +32,9 @@ public partial class ClearCachedServiceTokensRequest : RequestConverter.ICodeFor
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteString(Namespace);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteString(Service);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Name.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -72,5 +56,33 @@ public partial class ClearCachedServiceTokensRequest : RequestConverter.ICodeFor
 
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("@namespace");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(Namespace);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("service");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(Service);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("name");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

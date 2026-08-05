@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
+public partial class StopDatafeedRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,32 +32,9 @@ public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				DatafeedId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (AllowNoMatch is not null)
-			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
-			}
-
-			if (CloseJob is not null)
-			{
-				writer.WriteFluentCall("CloseJob", (w) => { w.WriteValue(CloseJob.Value); });
-			}
-
-			if (Force is not null)
-			{
-				writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -92,6 +69,39 @@ public partial class StopDatafeedRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("datafeedId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			DatafeedId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AllowNoMatch is not null)
+		{
+			writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
+		}
+
+		if (CloseJob is not null)
+		{
+			writer.WriteFluentCall("CloseJob", (w) => { w.WriteValue(CloseJob.Value); });
+		}
+
+		if (Force is not null)
+		{
+			writer.WriteFluentCall("Force", (w) => { w.WriteValue(Force.Value); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 		}
 	}
 }

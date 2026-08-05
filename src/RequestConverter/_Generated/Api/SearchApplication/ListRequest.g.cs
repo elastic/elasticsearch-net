@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public partial class ListRequest : RequestConverter.ICodeFormattable
+public partial class ListRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,22 +31,10 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (From is not null)
-			{
-				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
-			}
-
-			if (QueryLuceneSyntax is not null)
-			{
-				writer.WriteFluentCall("QueryLuceneSyntax", (w) => { w.WriteString(QueryLuceneSyntax); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +58,29 @@ public partial class ListRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (From is not null)
+		{
+			writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
+		}
+
+		if (QueryLuceneSyntax is not null)
+		{
+			writer.WriteFluentCall("QueryLuceneSyntax", (w) => { w.WriteString(QueryLuceneSyntax); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public partial class HealthRequest : RequestConverter.ICodeFormattable
+public partial class HealthRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,75 +33,17 @@ public partial class HealthRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Indices is not null)
-			{
-				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
-			}
-
-			if (ExpandWildcards is not null)
-			{
-				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-			}
-
-			if (Level is not null)
-			{
-				writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, w); });
-			}
-
-			if (Local is not null)
-			{
-				writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (WaitForActiveShards is not null)
-			{
-				writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
-			}
-
-			if (WaitForEvents is not null)
-			{
-				writer.WriteFluentCall("WaitForEvents", (w) => { Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(WaitForEvents.Value, w); });
-			}
-
-			if (WaitForNodes is not null)
-			{
-				writer.WriteFluentCall("WaitForNodes", (w) => { WaitForNodes.FormatCode(w); });
-			}
-
-			if (WaitForNoInitializingShards is not null)
-			{
-				writer.WriteFluentCall("WaitForNoInitializingShards", (w) => { w.WriteValue(WaitForNoInitializingShards.Value); });
-			}
-
-			if (WaitForNoRelocatingShards is not null)
-			{
-				writer.WriteFluentCall("WaitForNoRelocatingShards", (w) => { w.WriteValue(WaitForNoRelocatingShards.Value); });
-			}
-
-			if (WaitForStatus is not null)
-			{
-				writer.WriteFluentCall("WaitForStatus", (w) => { Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(WaitForStatus.Value, w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -179,6 +121,74 @@ public partial class HealthRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Indices is not null)
+		{
+			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (ExpandWildcards is not null)
+		{
+			writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+		}
+
+		if (Level is not null)
+		{
+			writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, w); });
+		}
+
+		if (Local is not null)
+		{
+			writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (WaitForActiveShards is not null)
+		{
+			writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
+		}
+
+		if (WaitForEvents is not null)
+		{
+			writer.WriteFluentCall("WaitForEvents", (w) => { Elastic.Clients.Elasticsearch.WaitForEventsCodeFormatter.FormatCode(WaitForEvents.Value, w); });
+		}
+
+		if (WaitForNodes is not null)
+		{
+			writer.WriteFluentCall("WaitForNodes", (w) => { WaitForNodes.FormatCode(w); });
+		}
+
+		if (WaitForNoInitializingShards is not null)
+		{
+			writer.WriteFluentCall("WaitForNoInitializingShards", (w) => { w.WriteValue(WaitForNoInitializingShards.Value); });
+		}
+
+		if (WaitForNoRelocatingShards is not null)
+		{
+			writer.WriteFluentCall("WaitForNoRelocatingShards", (w) => { w.WriteValue(WaitForNoRelocatingShards.Value); });
+		}
+
+		if (WaitForStatus is not null)
+		{
+			writer.WriteFluentCall("WaitForStatus", (w) => { Elastic.Clients.Elasticsearch.HealthStatusCodeFormatter.FormatCode(WaitForStatus.Value, w); });
 		}
 	}
 }

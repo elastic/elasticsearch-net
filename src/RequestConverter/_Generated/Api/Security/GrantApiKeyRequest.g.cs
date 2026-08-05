@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
+public partial class GrantApiKeyRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,48 +33,17 @@ public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
-			}
-
-			if (AccessToken is not null)
-			{
-				writer.WriteFluentCall("AccessToken", (w) => { w.WriteString(AccessToken); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); }, (w) => { ApiKey.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, w); });
-			}
-
-			if (Password is not null)
-			{
-				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
-			}
-
-			if (RunAs is not null)
-			{
-				writer.WriteFluentCall("RunAs", (w) => { RunAs.FormatCode(w); });
-			}
-
-			if (Username is not null)
-			{
-				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -120,6 +89,47 @@ public partial class GrantApiKeyRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+		}
+
+		if (AccessToken is not null)
+		{
+			writer.WriteFluentCall("AccessToken", (w) => { w.WriteString(AccessToken); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); }, (w) => { ApiKey.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, w); });
+		}
+
+		if (Password is not null)
+		{
+			writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
+		}
+
+		if (RunAs is not null)
+		{
+			writer.WriteFluentCall("RunAs", (w) => { RunAs.FormatCode(w); });
+		}
+
+		if (Username is not null)
+		{
+			writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 		}
 	}
 }

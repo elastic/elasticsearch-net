@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
-public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
+public partial class PutRulesetRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,16 +32,9 @@ public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				RulesetId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			{
-				writer.WriteFluentDescriptorParams("Rules", Rules, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>"); w.Write("()"); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -57,6 +50,23 @@ public partial class PutRulesetRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("rulesetId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			RulesetId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		{
+			writer.WriteFluentDescriptorParams("Rules", Rules, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRule>"); w.Write("()"); });
 		}
 	}
 }

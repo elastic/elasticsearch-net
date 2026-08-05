@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class PutTemplateRequest : RequestConverter.ICodeFormattable
+public partial class PutTemplateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,72 +33,17 @@ public partial class PutTemplateRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Cause is not null)
-			{
-				writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
-			}
-
-			if (Create is not null)
-			{
-				writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (Aliases is not null)
-			{
-				writer.WriteFluentDescriptorCall("Aliases", (w) => { w.WriteFluentDictionaryAdds("Add", Aliases, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
-
-			if (IndexPatterns is not null)
-			{
-				writer.WriteFluentParams("IndexPatterns", IndexPatterns, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Mappings is not null)
-			{
-				writer.WriteFluentDescriptorCall("Mappings", (w) => { Mappings.FormatCode(w); });
-			}
-
-			if (Order is not null)
-			{
-				writer.WriteFluentCall("Order", (w) => { w.WriteValue(Order.Value); });
-			}
-
-			if (Settings is not null)
-			{
-				writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
-			}
-
-			if (Version is not null)
-			{
-				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -171,6 +116,64 @@ public partial class PutTemplateRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("name");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Cause is not null)
+		{
+			writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
+		}
+
+		if (Create is not null)
+		{
+			writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (Aliases is not null)
+		{
+			writer.WriteFluentDescriptorCall("Aliases", (w) => { w.WriteFluentDictionaryAdds("Add", Aliases, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
+		}
+
+		if (IndexPatterns is not null)
+		{
+			writer.WriteFluentParams("IndexPatterns", IndexPatterns, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Mappings is not null)
+		{
+			writer.WriteFluentDescriptorCall("Mappings", (w) => { Mappings.FormatCode(w); });
+		}
+
+		if (Order is not null)
+		{
+			writer.WriteFluentCall("Order", (w) => { w.WriteValue(Order.Value); });
+		}
+
+		if (Settings is not null)
+		{
+			writer.WriteFluentDescriptorCall("Settings", (w) => { Settings.FormatCode(w); });
+		}
+
+		if (Version is not null)
+		{
+			writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 		}
 	}
 }

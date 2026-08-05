@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
+public partial class ForcemergeRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,55 +33,17 @@ public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Indices is not null)
-			{
-				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
-			}
-
-			if (AllowNoIndices is not null)
-			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
-			}
-
-			if (ExpandWildcards is not null)
-			{
-				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-			}
-
-			if (Flush is not null)
-			{
-				writer.WriteFluentCall("Flush", (w) => { w.WriteValue(Flush.Value); });
-			}
-
-			if (IgnoreUnavailable is not null)
-			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
-			}
-
-			if (MaxNumSegments is not null)
-			{
-				writer.WriteFluentCall("MaxNumSegments", (w) => { w.WriteValue(MaxNumSegments.Value); w.Write("L"); });
-			}
-
-			if (OnlyExpungeDeletes is not null)
-			{
-				writer.WriteFluentCall("OnlyExpungeDeletes", (w) => { w.WriteValue(OnlyExpungeDeletes.Value); });
-			}
-
-			if (WaitForCompletion is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -136,6 +98,54 @@ public partial class ForcemergeRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Indices is not null)
+		{
+			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (AllowNoIndices is not null)
+		{
+			writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
+		}
+
+		if (ExpandWildcards is not null)
+		{
+			writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+		}
+
+		if (Flush is not null)
+		{
+			writer.WriteFluentCall("Flush", (w) => { w.WriteValue(Flush.Value); });
+		}
+
+		if (IgnoreUnavailable is not null)
+		{
+			writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
+		}
+
+		if (MaxNumSegments is not null)
+		{
+			writer.WriteFluentCall("MaxNumSegments", (w) => { w.WriteValue(MaxNumSegments.Value); w.Write("L"); });
+		}
+
+		if (OnlyExpungeDeletes is not null)
+		{
+			writer.WriteFluentCall("OnlyExpungeDeletes", (w) => { w.WriteValue(OnlyExpungeDeletes.Value); });
+		}
+
+		if (WaitForCompletion is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 		}
 	}
 }

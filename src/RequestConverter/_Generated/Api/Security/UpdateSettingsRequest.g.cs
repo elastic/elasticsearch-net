@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class UpdateSettingsRequest : RequestConverter.ICodeFormattable
+public partial class UpdateSettingsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,40 +33,17 @@ public partial class UpdateSettingsRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (Security is not null)
-			{
-				writer.WriteFluentDescriptorCall("Security", (w) => { Security.FormatCode(w); });
-			}
-
-			if (SecurityProfile is not null)
-			{
-				writer.WriteFluentDescriptorCall("SecurityProfile", (w) => { SecurityProfile.FormatCode(w); });
-			}
-
-			if (SecurityTokens is not null)
-			{
-				writer.WriteFluentDescriptorCall("SecurityTokens", (w) => { SecurityTokens.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -102,6 +79,39 @@ public partial class UpdateSettingsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (Security is not null)
+		{
+			writer.WriteFluentDescriptorCall("Security", (w) => { Security.FormatCode(w); });
+		}
+
+		if (SecurityProfile is not null)
+		{
+			writer.WriteFluentDescriptorCall("SecurityProfile", (w) => { SecurityProfile.FormatCode(w); });
+		}
+
+		if (SecurityTokens is not null)
+		{
+			writer.WriteFluentDescriptorCall("SecurityTokens", (w) => { SecurityTokens.FormatCode(w); });
 		}
 	}
 }

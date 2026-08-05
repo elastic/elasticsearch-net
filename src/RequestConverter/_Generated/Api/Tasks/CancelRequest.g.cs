@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public partial class CancelRequest : RequestConverter.ICodeFormattable
+public partial class CancelRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,32 +31,10 @@ public partial class CancelRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (TaskId is not null)
-			{
-				writer.WriteFluentCall("TaskId", (w) => { TaskId.FormatCode(w); });
-			}
-
-			if (Actions is not null)
-			{
-				writer.WriteFluentParams("Actions", Actions, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Nodes is not null)
-			{
-				writer.WriteFluentParams("Nodes", Nodes, (w, item) => { w.WriteString(item); });
-			}
-
-			if (ParentTaskId is not null)
-			{
-				writer.WriteFluentCall("ParentTaskId", (w) => { w.WriteString(ParentTaskId); });
-			}
-
-			if (WaitForCompletion is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -92,6 +70,39 @@ public partial class CancelRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (TaskId is not null)
+		{
+			writer.WriteFluentCall("TaskId", (w) => { TaskId.FormatCode(w); });
+		}
+
+		if (Actions is not null)
+		{
+			writer.WriteFluentParams("Actions", Actions, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Nodes is not null)
+		{
+			writer.WriteFluentParams("Nodes", Nodes, (w, item) => { w.WriteString(item); });
+		}
+
+		if (ParentTaskId is not null)
+		{
+			writer.WriteFluentCall("ParentTaskId", (w) => { w.WriteString(ParentTaskId); });
+		}
+
+		if (WaitForCompletion is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletion", (w) => { w.WriteValue(WaitForCompletion.Value); });
 		}
 	}
 }

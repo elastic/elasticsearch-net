@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormattable
+public partial class RevertModelSnapshotRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,23 +32,9 @@ public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormatta
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				SnapshotId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (DeleteInterveningResults is not null)
-			{
-				writer.WriteFluentCall("DeleteInterveningResults", (w) => { w.WriteValue(DeleteInterveningResults.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +56,31 @@ public partial class RevertModelSnapshotRequest : RequestConverter.ICodeFormatta
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("jobId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("snapshotId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			SnapshotId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (DeleteInterveningResults is not null)
+		{
+			writer.WriteFluentCall("DeleteInterveningResults", (w) => { w.WriteValue(DeleteInterveningResults.Value); });
 		}
 	}
 }

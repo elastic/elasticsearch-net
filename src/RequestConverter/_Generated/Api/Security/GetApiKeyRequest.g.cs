@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
+public partial class GetApiKeyRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,47 +31,10 @@ public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (ActiveOnly is not null)
-			{
-				writer.WriteFluentCall("ActiveOnly", (w) => { w.WriteValue(ActiveOnly.Value); });
-			}
-
-			if (Id is not null)
-			{
-				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
-			}
-
-			if (Name is not null)
-			{
-				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
-			}
-
-			if (Owner is not null)
-			{
-				writer.WriteFluentCall("Owner", (w) => { w.WriteValue(Owner.Value); });
-			}
-
-			if (RealmName is not null)
-			{
-				writer.WriteFluentCall("RealmName", (w) => { RealmName.FormatCode(w); });
-			}
-
-			if (Username is not null)
-			{
-				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
-			}
-
-			if (WithLimitedBy is not null)
-			{
-				writer.WriteFluentCall("WithLimitedBy", (w) => { w.WriteValue(WithLimitedBy.Value); });
-			}
-
-			if (WithProfileUid is not null)
-			{
-				writer.WriteFluentCall("WithProfileUid", (w) => { w.WriteValue(WithProfileUid.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -125,6 +88,54 @@ public partial class GetApiKeyRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (ActiveOnly is not null)
+		{
+			writer.WriteFluentCall("ActiveOnly", (w) => { w.WriteValue(ActiveOnly.Value); });
+		}
+
+		if (Id is not null)
+		{
+			writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
+		}
+
+		if (Name is not null)
+		{
+			writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
+		}
+
+		if (Owner is not null)
+		{
+			writer.WriteFluentCall("Owner", (w) => { w.WriteValue(Owner.Value); });
+		}
+
+		if (RealmName is not null)
+		{
+			writer.WriteFluentCall("RealmName", (w) => { RealmName.FormatCode(w); });
+		}
+
+		if (Username is not null)
+		{
+			writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
+		}
+
+		if (WithLimitedBy is not null)
+		{
+			writer.WriteFluentCall("WithLimitedBy", (w) => { w.WriteValue(WithLimitedBy.Value); });
+		}
+
+		if (WithProfileUid is not null)
+		{
+			writer.WriteFluentCall("WithProfileUid", (w) => { w.WriteValue(WithProfileUid.Value); });
 		}
 	}
 }

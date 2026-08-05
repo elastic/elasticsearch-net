@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class RenderSearchTemplateRequest : RequestConverter.ICodeFormattable
+public partial class RenderSearchTemplateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,27 +31,10 @@ public partial class RenderSearchTemplateRequest : RequestConverter.ICodeFormatt
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (File is not null)
-			{
-				writer.WriteFluentCall("File", (w) => { w.WriteString(File); });
-			}
-
-			if (Id is not null)
-			{
-				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
-			}
-
-			if (Params is not null)
-			{
-				writer.WriteFluentCall("Params", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (Source is not null)
-			{
-				writer.WriteFluentCall("Source", (w) => { w.WriteString(Source); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -88,6 +71,34 @@ public partial class RenderSearchTemplateRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (File is not null)
+		{
+			writer.WriteFluentCall("File", (w) => { w.WriteString(File); });
+		}
+
+		if (Id is not null)
+		{
+			writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
+		}
+
+		if (Params is not null)
+		{
+			writer.WriteFluentCall("Params", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Params, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (Source is not null)
+		{
+			writer.WriteFluentCall("Source", (w) => { w.WriteString(Source); });
 		}
 	}
 }

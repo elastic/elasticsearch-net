@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFormattable
+public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,25 +33,17 @@ public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Id is not null)
-			{
-				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
-			}
-
-			if (Config is not null)
-			{
-				writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); }, (w) => { Config.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -69,6 +61,24 @@ public partial class PreviewDataFrameAnalyticsRequest : RequestConverter.ICodeFo
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Id is not null)
+		{
+			writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
+		}
+
+		if (Config is not null)
+		{
+			writer.WriteFluentDescriptorCall("Config", (w) => { Config.FormatCode(w); }, (w) => { Config.FormatCode(w); });
 		}
 	}
 }

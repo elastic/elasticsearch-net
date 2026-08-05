@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public partial class AllocationExplainRequest : RequestConverter.ICodeFormattable
+public partial class AllocationExplainRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,42 +31,10 @@ public partial class AllocationExplainRequest : RequestConverter.ICodeFormattabl
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (IncludeDiskInfo is not null)
-			{
-				writer.WriteFluentCall("IncludeDiskInfo", (w) => { w.WriteValue(IncludeDiskInfo.Value); });
-			}
-
-			if (IncludeYesDecisions is not null)
-			{
-				writer.WriteFluentCall("IncludeYesDecisions", (w) => { w.WriteValue(IncludeYesDecisions.Value); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (CurrentNode is not null)
-			{
-				writer.WriteFluentCall("CurrentNode", (w) => { w.WriteString(CurrentNode); });
-			}
-
-			if (Index is not null)
-			{
-				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
-			}
-
-			if (Primary is not null)
-			{
-				writer.WriteFluentCall("Primary", (w) => { w.WriteValue(Primary.Value); });
-			}
-
-			if (Shard is not null)
-			{
-				writer.WriteFluentCall("Shard", (w) => { w.WriteValue(Shard.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -114,6 +82,49 @@ public partial class AllocationExplainRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (IncludeDiskInfo is not null)
+		{
+			writer.WriteFluentCall("IncludeDiskInfo", (w) => { w.WriteValue(IncludeDiskInfo.Value); });
+		}
+
+		if (IncludeYesDecisions is not null)
+		{
+			writer.WriteFluentCall("IncludeYesDecisions", (w) => { w.WriteValue(IncludeYesDecisions.Value); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (CurrentNode is not null)
+		{
+			writer.WriteFluentCall("CurrentNode", (w) => { w.WriteString(CurrentNode); });
+		}
+
+		if (Index is not null)
+		{
+			writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
+		}
+
+		if (Primary is not null)
+		{
+			writer.WriteFluentCall("Primary", (w) => { w.WriteValue(Primary.Value); });
+		}
+
+		if (Shard is not null)
+		{
+			writer.WriteFluentCall("Shard", (w) => { w.WriteValue(Shard.Value); });
 		}
 	}
 }
