@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.ICodeFormattable
+public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,20 +32,9 @@ public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				NodeId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteValue(MaxArchiveVersion);
-				writer.Write("L");
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -63,5 +52,27 @@ public partial class ClearRepositoriesMeteringArchiveRequest : RequestConverter.
 
 			initializer.Dispose();
 		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("nodeId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			NodeId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("maxArchiveVersion");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteValue(MaxArchiveVersion);
+			writer.Write("L");
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
-public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
+public partial class TestGrokPatternRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,20 +31,10 @@ public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (EcsCompatibility is not null)
-			{
-				writer.WriteFluentCall("EcsCompatibility", (w) => { w.WriteString(EcsCompatibility); });
-			}
-
-			{
-				writer.WriteFluentCall("GrokPattern", (w) => { w.WriteString(GrokPattern); });
-			}
-
-			{
-				writer.WriteFluentParams("Text", Text, (w, item) => { w.WriteString(item); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -66,6 +56,27 @@ public partial class TestGrokPatternRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (EcsCompatibility is not null)
+		{
+			writer.WriteFluentCall("EcsCompatibility", (w) => { w.WriteString(EcsCompatibility); });
+		}
+
+		{
+			writer.WriteFluentCall("GrokPattern", (w) => { w.WriteString(GrokPattern); });
+		}
+
+		{
+			writer.WriteFluentParams("Text", Text, (w, item) => { w.WriteString(item); });
 		}
 	}
 }

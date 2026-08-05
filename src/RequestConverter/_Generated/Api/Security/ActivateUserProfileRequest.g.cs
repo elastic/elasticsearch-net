@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormattable
+public partial class ActivateUserProfileRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,26 +31,10 @@ public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormatta
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (AccessToken is not null)
-			{
-				writer.WriteFluentCall("AccessToken", (w) => { w.WriteString(AccessToken); });
-			}
-
-			{
-				writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, w); });
-			}
-
-			if (Password is not null)
-			{
-				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
-			}
-
-			if (Username is not null)
-			{
-				writer.WriteFluentCall("Username", (w) => { w.WriteString(Username); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -79,6 +63,33 @@ public partial class ActivateUserProfileRequest : RequestConverter.ICodeFormatta
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AccessToken is not null)
+		{
+			writer.WriteFluentCall("AccessToken", (w) => { w.WriteString(AccessToken); });
+		}
+
+		{
+			writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.GrantTypeCodeFormatter.FormatCode(GrantType, w); });
+		}
+
+		if (Password is not null)
+		{
+			writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
+		}
+
+		if (Username is not null)
+		{
+			writer.WriteFluentCall("Username", (w) => { w.WriteString(Username); });
 		}
 	}
 }

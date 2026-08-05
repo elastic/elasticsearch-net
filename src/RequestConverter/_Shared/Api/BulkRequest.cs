@@ -19,7 +19,7 @@ public partial class BulkRequest : RequestConverter.ICodeFormattable
 		// descriptor-capable nested value (e.g. an update operation's Script) renders as a value, not a chain.
 		using var _objectInitializer = writer.ForceObjectInitializer();
 
-		var initializer = writer.BeginObjectInitializer("BulkRequest", false);
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.BulkRequest", false);
 		if (Index is not null)
 		{
 			initializer.Property("Index");

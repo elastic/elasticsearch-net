@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormattable
+public partial class ReloadSecureSettingsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,22 +31,10 @@ public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormatt
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (NodeId is not null)
-			{
-				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (SecureSettingsPassword is not null)
-			{
-				writer.WriteFluentCall("SecureSettingsPassword", (w) => { w.WriteString(SecureSettingsPassword); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +58,29 @@ public partial class ReloadSecureSettingsRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (NodeId is not null)
+		{
+			writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (SecureSettingsPassword is not null)
+		{
+			writer.WriteFluentCall("SecureSettingsPassword", (w) => { w.WriteString(SecureSettingsPassword); });
 		}
 	}
 }

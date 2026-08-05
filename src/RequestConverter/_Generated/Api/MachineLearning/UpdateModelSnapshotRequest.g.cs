@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormattable
+public partial class UpdateModelSnapshotRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,28 +32,9 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormatta
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				SnapshotId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Description is not null)
-			{
-				writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
-			}
-
-			if (Retain is not null)
-			{
-				writer.WriteFluentCall("Retain", (w) => { w.WriteValue(Retain.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +62,36 @@ public partial class UpdateModelSnapshotRequest : RequestConverter.ICodeFormatta
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("jobId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("snapshotId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			SnapshotId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
+		}
+
+		if (Retain is not null)
+		{
+			writer.WriteFluentCall("Retain", (w) => { w.WriteValue(Retain.Value); });
 		}
 	}
 }

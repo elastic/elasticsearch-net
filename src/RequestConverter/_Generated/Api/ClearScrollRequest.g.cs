@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
+public partial class ClearScrollRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,12 +31,10 @@ public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (ScrollId is not null)
-			{
-				writer.WriteFluentCall("ScrollId", (w) => { ScrollId.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -48,6 +46,19 @@ public partial class ClearScrollRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (ScrollId is not null)
+		{
+			writer.WriteFluentCall("ScrollId", (w) => { ScrollId.FormatCode(w); });
 		}
 	}
 }

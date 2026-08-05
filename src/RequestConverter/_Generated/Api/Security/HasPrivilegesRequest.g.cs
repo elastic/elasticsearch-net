@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
+public partial class HasPrivilegesRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,27 +31,10 @@ public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (User is not null)
-			{
-				writer.WriteFluentCall("User", (w) => { User.FormatCode(w); });
-			}
-
-			if (Application is not null)
-			{
-				writer.WriteFluentDescriptorParams("Application", Application, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>"); w.Write("()"); });
-			}
-
-			if (Cluster is not null)
-			{
-				writer.WriteFluentParams("Cluster", Cluster, (w, item) => { item.FormatCode(w); });
-			}
-
-			if (Index is not null)
-			{
-				writer.WriteFluentDescriptorParams("Index", Index, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>"); w.Write("()"); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +64,34 @@ public partial class HasPrivilegesRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (User is not null)
+		{
+			writer.WriteFluentCall("User", (w) => { User.FormatCode(w); });
+		}
+
+		if (Application is not null)
+		{
+			writer.WriteFluentDescriptorParams("Application", Application, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>"); w.Write("()"); });
+		}
+
+		if (Cluster is not null)
+		{
+			writer.WriteFluentParams("Cluster", Cluster, (w, item) => { item.FormatCode(w); });
+		}
+
+		if (Index is not null)
+		{
+			writer.WriteFluentDescriptorParams("Index", Index, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>"); w.Write("()"); });
 		}
 	}
 }

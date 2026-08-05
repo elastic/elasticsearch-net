@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICodeFormattable
+public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,22 +32,9 @@ public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICod
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (AdaptiveAllocations is not null)
-			{
-				writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); }, (w) => { AdaptiveAllocations.FormatCode(w); });
-			}
-
-			if (NumberOfAllocations is not null)
-			{
-				writer.WriteFluentCall("NumberOfAllocations", (w) => { w.WriteValue(NumberOfAllocations.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +57,29 @@ public partial class UpdateTrainedModelDeploymentRequest : RequestConverter.ICod
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("modelId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AdaptiveAllocations is not null)
+		{
+			writer.WriteFluentDescriptorCall("AdaptiveAllocations", (w) => { AdaptiveAllocations.FormatCode(w); }, (w) => { AdaptiveAllocations.FormatCode(w); });
+		}
+
+		if (NumberOfAllocations is not null)
+		{
+			writer.WriteFluentCall("NumberOfAllocations", (w) => { w.WriteValue(NumberOfAllocations.Value); });
 		}
 	}
 }

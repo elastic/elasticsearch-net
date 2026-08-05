@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class PutOpenshiftAiRequest : RequestConverter.ICodeFormattable
+public partial class PutOpenshiftAiRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,37 +32,9 @@ public partial class PutOpenshiftAiRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskTypeCodeFormatter.FormatCode(TaskType, writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				OpenshiftaiInferenceId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (ChunkingSettings is not null)
-			{
-				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { ServiceSettings.FormatCode(w); });
-			}
-
-			if (TaskSettings is not null)
-			{
-				writer.WriteFluentDescriptorCall("TaskSettings", (w) => { TaskSettings.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -101,6 +73,45 @@ public partial class PutOpenshiftAiRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("taskType");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("openshiftaiInferenceId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			OpenshiftaiInferenceId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (ChunkingSettings is not null)
+		{
+			writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { ServiceSettings.FormatCode(w); });
+		}
+
+		if (TaskSettings is not null)
+		{
+			writer.WriteFluentDescriptorCall("TaskSettings", (w) => { TaskSettings.FormatCode(w); });
 		}
 	}
 }

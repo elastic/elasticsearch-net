@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
-public partial class FindMessageStructureRequest : RequestConverter.ICodeFormattable
+public partial class FindMessageStructureRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,79 +33,17 @@ public partial class FindMessageStructureRequest : RequestConverter.ICodeFormatt
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (ColumnNames is not null)
-			{
-				writer.WriteFluentParams("ColumnNames", ColumnNames, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Delimiter is not null)
-			{
-				writer.WriteFluentCall("Delimiter", (w) => { w.WriteString(Delimiter); });
-			}
-
-			if (EcsCompatibility is not null)
-			{
-				writer.WriteFluentCall("EcsCompatibility", (w) => { Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, w); });
-			}
-
-			if (Explain is not null)
-			{
-				writer.WriteFluentCall("Explain", (w) => { w.WriteValue(Explain.Value); });
-			}
-
-			if (Format is not null)
-			{
-				writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, w); });
-			}
-
-			if (GrokPattern is not null)
-			{
-				writer.WriteFluentCall("GrokPattern", (w) => { w.WriteString(GrokPattern); });
-			}
-
-			if (Quote is not null)
-			{
-				writer.WriteFluentCall("Quote", (w) => { w.WriteString(Quote); });
-			}
-
-			if (ShouldParseRecursively is not null)
-			{
-				writer.WriteFluentCall("ShouldParseRecursively", (w) => { w.WriteValue(ShouldParseRecursively.Value); });
-			}
-
-			if (ShouldTrimFields is not null)
-			{
-				writer.WriteFluentCall("ShouldTrimFields", (w) => { w.WriteValue(ShouldTrimFields.Value); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (TimestampField is not null)
-			{
-				writer.WriteFluentCall("TimestampField", (w) => { TimestampField.FormatCode(w); }, false);
-			}
-
-			if (TimestampFormat is not null)
-			{
-				writer.WriteFluentCall("TimestampFormat", (w) => { w.WriteString(TimestampFormat); });
-			}
-
-			{
-				writer.WriteFluentParams("Messages", Messages, (w, item) => { w.WriteString(item); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -188,6 +126,78 @@ public partial class FindMessageStructureRequest : RequestConverter.ICodeFormatt
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (ColumnNames is not null)
+		{
+			writer.WriteFluentParams("ColumnNames", ColumnNames, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Delimiter is not null)
+		{
+			writer.WriteFluentCall("Delimiter", (w) => { w.WriteString(Delimiter); });
+		}
+
+		if (EcsCompatibility is not null)
+		{
+			writer.WriteFluentCall("EcsCompatibility", (w) => { Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityTypeCodeFormatter.FormatCode(EcsCompatibility.Value, w); });
+		}
+
+		if (Explain is not null)
+		{
+			writer.WriteFluentCall("Explain", (w) => { w.WriteValue(Explain.Value); });
+		}
+
+		if (Format is not null)
+		{
+			writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.TextStructure.FormatTypeCodeFormatter.FormatCode(Format.Value, w); });
+		}
+
+		if (GrokPattern is not null)
+		{
+			writer.WriteFluentCall("GrokPattern", (w) => { w.WriteString(GrokPattern); });
+		}
+
+		if (Quote is not null)
+		{
+			writer.WriteFluentCall("Quote", (w) => { w.WriteString(Quote); });
+		}
+
+		if (ShouldParseRecursively is not null)
+		{
+			writer.WriteFluentCall("ShouldParseRecursively", (w) => { w.WriteValue(ShouldParseRecursively.Value); });
+		}
+
+		if (ShouldTrimFields is not null)
+		{
+			writer.WriteFluentCall("ShouldTrimFields", (w) => { w.WriteValue(ShouldTrimFields.Value); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (TimestampField is not null)
+		{
+			writer.WriteFluentCall("TimestampField", (w) => { TimestampField.FormatCode(w); }, false);
+		}
+
+		if (TimestampFormat is not null)
+		{
+			writer.WriteFluentCall("TimestampFormat", (w) => { w.WriteString(TimestampFormat); });
+		}
+
+		{
+			writer.WriteFluentParams("Messages", Messages, (w, item) => { w.WriteString(item); });
 		}
 	}
 }

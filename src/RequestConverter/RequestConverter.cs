@@ -84,47 +84,62 @@ public sealed class RequestConverter
 		ClientCallInfo? clientCall = ClientMethods.Lookup.TryGetValue(id, out var call) ? call : null;
 
 		var writer = new CodeWriter(options);
+		var format = writer.Options.ClientCallFormat;
 
-		// The client call references the request by name, so it forces the variable-declaration form.
-		var emitVariableDeclaration = writer.Options.EmitVariableDeclaration || writer.Options.EmitClientCall;
-
-		// `TypeName variableName = ` goes before the initializer. Writing the type name here (not after FormatCode)
-		// records its namespace up front so the body's collision-aware shortening accounts for it. The materialized
-		// request type is already closed over JsonElement for generic requests (e.g. IndexRequest<JsonElement>), so the
-		// rendered declaration names that concrete type.
-		if (emitVariableDeclaration)
+		// Defensive: the table and the factory generate from the same endpoint set, so a missing entry is
+		// unreachable in practice; degrade to the variable-declaration form so the output stays complete.
+		if (format is ClientCallFormat.Inline && clientCall is null)
 		{
-			writer.WriteTypeName(request.GetType()).Write(" ").Write(writer.Options.VariableName).Write(" = ");
+			format = ClientCallFormat.Statement;
 		}
 
-		formattable.FormatCode(writer);
-
-		if (emitVariableDeclaration)
+		if (format is ClientCallFormat.Inline)
 		{
-			writer.Write(";");
+			WriteInlineClientCall(writer, clientCall!.Value, formattable);
 		}
-
-		if (writer.Options.EmitClientCall && clientCall is { } clientMethod)
+		else
 		{
-			WriteClientCall(writer, clientMethod);
+			// The client call references the request by name, so it forces the variable-declaration form.
+			var emitVariableDeclaration = writer.Options.EmitVariableDeclaration || format is ClientCallFormat.Statement;
+
+			// `TypeName variableName = ` goes before the initializer. Writing the type name here (not after FormatCode)
+			// records its namespace up front so the body's collision-aware shortening accounts for it. The materialized
+			// request type is already closed over JsonElement for generic requests (e.g. IndexRequest<JsonElement>), so the
+			// rendered declaration names that concrete type.
+			if (emitVariableDeclaration)
+			{
+				writer.WriteTypeName(request.GetType()).Write(" ").Write(writer.Options.VariableName).Write(" = ");
+			}
+
+			formattable.FormatCode(writer);
+
+			if (emitVariableDeclaration)
+			{
+				writer.Write(";");
+			}
+
+			if (format is ClientCallFormat.Statement && clientCall is { } clientMethod)
+			{
+				WriteClientCall(writer, clientMethod);
+			}
 		}
 
 		return (request, new ConversionResult(writer.ToString(), request.GetType(), writer.Namespaces, unsupportedParameters, clientCall));
 	}
 
 	/// <summary>
-	/// Appends the executing client invocation as a second statement, e.g.
-	/// <c>var response = await client.Esql.QueryAsync(request);</c>. Response-only generic type parameters are
-	/// spelled explicitly (the compiler cannot infer them from the request argument): the placeholder document
-	/// type in strongly-typed-document mode, <see cref="System.Text.Json.JsonElement"/> otherwise, matching how
-	/// the declared request variable renders.
+	/// Writes <c>var response = [await ]client.[Sub.]Method[Async][&lt;T, ...&gt;](</c> with
+	/// <paramref name="genericArity"/> type arguments. They are spelled explicitly because the compiler cannot infer
+	/// them from the argument, as the placeholder document type in strongly-typed-document mode and
+	/// <see cref="System.Text.Json.JsonElement"/> otherwise. The count depends on which overload the call targets:
+	/// the request overload leaves only the response-only parameters open, while a descriptor-action overload takes
+	/// a lambda and so infers nothing at all.
 	/// </summary>
-	private static void WriteClientCall(CodeWriter writer, ClientCallInfo clientMethod)
+	private static void WriteClientCallPrefix(CodeWriter writer, ClientCallInfo clientMethod, int genericArity)
 	{
 		var options = writer.Options;
 		var async = options.ClientCallStyle == ClientCallStyle.Async;
 
-		writer.WriteLine().WriteLine();
 		writer.Write("var ").Write(options.ResponseVariableName).Write(" = ");
 
 		if (async)
@@ -141,10 +156,10 @@ public sealed class RequestConverter
 
 		writer.Write(async ? clientMethod.Method + "Async" : clientMethod.Method);
 
-		if (clientMethod.ResponseGenericArity > 0)
+		if (genericArity > 0)
 		{
 			writer.Write("<");
-			for (var i = 0; i < clientMethod.ResponseGenericArity; i++)
+			for (var i = 0; i < genericArity; i++)
 			{
 				if (i > 0)
 				{
@@ -164,6 +179,47 @@ public sealed class RequestConverter
 			writer.Write(">");
 		}
 
-		writer.Write("(").Write(options.VariableName).Write(");");
+		writer.Write("(");
+	}
+
+	/// <summary>Appends the executing client invocation as a second statement referencing the request variable.</summary>
+	private static void WriteClientCall(CodeWriter writer, ClientCallInfo clientMethod)
+	{
+		writer.WriteLine().WriteLine();
+		WriteClientCallPrefix(writer, clientMethod, clientMethod.ResponseGenericArity);
+		writer.Write(writer.Options.VariableName).Write(");");
+	}
+
+	/// <summary>Writes the whole invocation with the request inlined as the argument: the configuration lambda
+	/// (plus hoisted chain-head arguments) for a descriptor-capable request in descriptor mode, the request
+	/// expression otherwise.</summary>
+	private static void WriteInlineClientCall(CodeWriter writer, ClientCallInfo clientMethod, ICodeFormattable formattable)
+	{
+		// A negative descriptor arity means no client overload accepts the hoisted arguments plus a configuration
+		// lambda, so even a split-capable request has to take the request form here.
+		if (writer.Options.SyntaxMode == SyntaxMode.Descriptor
+			&& clientMethod.DescriptorGenericArity >= 0
+			&& formattable is IClientCallFormattable descriptorFormattable)
+		{
+			WriteClientCallPrefix(writer, clientMethod, clientMethod.DescriptorGenericArity);
+			writer.WriteInlineDescriptorArguments(
+				descriptorFormattable.FormatDescriptorHeadArguments,
+				descriptorFormattable.FormatDescriptorChain);
+		}
+		else
+		{
+			WriteClientCallPrefix(writer, clientMethod, clientMethod.ResponseGenericArity);
+
+			// The argument is a request, so it must render as one even in descriptor mode - a split-capable
+			// request's FormatCode would otherwise emit a descriptor the request overload does not accept.
+			using var _objectInitializer = writer.ForceObjectInitializer();
+
+			// The root argument must name its type: a target-typed new() is ambiguous against the client method's
+			// overload set (request vs. descriptor-action overloads).
+			writer.ForceNextExplicitConstructor();
+			formattable.FormatCode(writer);
+		}
+
+		writer.Write(");");
 	}
 }

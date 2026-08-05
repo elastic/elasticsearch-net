@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class OidcAuthenticateRequest : RequestConverter.ICodeFormattable
+public partial class OidcAuthenticateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,24 +31,10 @@ public partial class OidcAuthenticateRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			{
-				writer.WriteFluentCall("Nonce", (w) => { w.WriteString(Nonce); });
-			}
-
-			if (Realm is not null)
-			{
-				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
-			}
-
-			{
-				writer.WriteFluentCall("RedirectUri", (w) => { w.WriteString(RedirectUri); });
-			}
-
-			{
-				writer.WriteFluentCall("State", (w) => { w.WriteString(State); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -75,6 +61,31 @@ public partial class OidcAuthenticateRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		{
+			writer.WriteFluentCall("Nonce", (w) => { w.WriteString(Nonce); });
+		}
+
+		if (Realm is not null)
+		{
+			writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
+		}
+
+		{
+			writer.WriteFluentCall("RedirectUri", (w) => { w.WriteString(RedirectUri); });
+		}
+
+		{
+			writer.WriteFluentCall("State", (w) => { w.WriteString(State); });
 		}
 	}
 }

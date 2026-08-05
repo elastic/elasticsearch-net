@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class PutGoogleaistudioRequest : RequestConverter.ICodeFormattable
+public partial class PutGoogleaistudioRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,32 +32,9 @@ public partial class PutGoogleaistudioRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskTypeCodeFormatter.FormatCode(TaskType, writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				GoogleaistudioInferenceId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (ChunkingSettings is not null)
-			{
-				writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { ServiceSettings.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -90,6 +67,40 @@ public partial class PutGoogleaistudioRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("taskType");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskTypeCodeFormatter.FormatCode(TaskType, writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("googleaistudioInferenceId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			GoogleaistudioInferenceId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (ChunkingSettings is not null)
+		{
+			writer.WriteFluentDescriptorCall("ChunkingSettings", (w) => { ChunkingSettings.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentDescriptorCall("ServiceSettings", (w) => { ServiceSettings.FormatCode(w); }, (w) => { ServiceSettings.FormatCode(w); });
 		}
 	}
 }
