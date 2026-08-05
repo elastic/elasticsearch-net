@@ -16,14 +16,16 @@ const SCHEMA_URL =
 
 const els = {
   bundleUrl: document.getElementById("bundleUrl"),
+  callStyle: document.getElementById("callStyle"),
+  clientCall: document.getElementById("clientCall"),
+  documentType: document.getElementById("documentType"),
+  namespaces: document.getElementById("namespaces"),
+  output: document.getElementById("output"),
+  source: document.getElementById("source"),
+  status: document.getElementById("status"),
   style: document.getElementById("style"),
   syntax: document.getElementById("syntax"),
   typedDocument: document.getElementById("typedDocument"),
-  documentType: document.getElementById("documentType"),
-  status: document.getElementById("status"),
-  source: document.getElementById("source"),
-  output: document.getElementById("output"),
-  namespaces: document.getElementById("namespaces"),
 };
 
 function setStatus(text, isError = false) {
@@ -95,6 +97,8 @@ async function run() {
       syntax_mode: els.syntax.value,
       use_strongly_typed_document: els.typedDocument.checked,
       document_type_name: els.documentType.value,
+      client_call_format: els.clientCall.value,
+      client_call_style: els.callStyle.value,
     });
     els.output.textContent = code;
     setStatus("Converted.");
@@ -104,11 +108,13 @@ async function run() {
   }
 }
 
+els.callStyle.addEventListener("change", run);
+els.clientCall.addEventListener("change", run);
+els.documentType.addEventListener("input", schedule);
 els.source.addEventListener("input", schedule);
 els.style.addEventListener("change", run);
 els.syntax.addEventListener("change", run);
 els.typedDocument.addEventListener("change", run);
-els.documentType.addEventListener("input", schedule);
 els.bundleUrl.addEventListener("change", () => {
   wasm = undefined;
   loadBundle().catch((err) => setStatus(String(err.message ?? err), true));

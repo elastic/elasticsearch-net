@@ -14,14 +14,15 @@ namespace RequestConverter.Hosting;
 /// </summary>
 public static class ConvertOptionsMapper
 {
-	public static FormattingOptions BuildFormattingOptions(ConvertOptions? options, string variableName)
+	public static FormattingOptions BuildFormattingOptions(ConvertOptions? options, string variableName, string responseVariableName = "response")
 	{
 		// Emit a typed variable declaration (e.g. `SearchRequest request = new() { ... };`) so the request type and its
 		// namespace surface in the generated snippet.
 		var formatting = new FormattingOptions
 		{
 			EmitVariableDeclaration = true,
-			VariableName = variableName
+			VariableName = variableName,
+			ResponseVariableName = responseVariableName
 		};
 
 		// Accept the style name case-insensitively; an unknown or absent value keeps the converter's default style.
@@ -47,6 +48,20 @@ public static class ConvertOptionsMapper
 		if (!string.IsNullOrEmpty(options?.DocumentTypeName))
 		{
 			formatting = formatting with { DocumentTypeName = options.DocumentTypeName };
+		}
+
+		// Accept the format name case-insensitively; an unknown or absent value keeps the no-call default.
+		if (!string.IsNullOrEmpty(options?.ClientCallFormat)
+			&& Enum.TryParse<ClientCallFormat>(options.ClientCallFormat, ignoreCase: true, out var clientCallFormat))
+		{
+			formatting = formatting with { ClientCallFormat = clientCallFormat };
+		}
+
+		// Accept the style name case-insensitively; an unknown or absent value keeps the async default.
+		if (!string.IsNullOrEmpty(options?.ClientCallStyle)
+			&& Enum.TryParse<ClientCallStyle>(options.ClientCallStyle, ignoreCase: true, out var clientCallStyle))
+		{
+			formatting = formatting with { ClientCallStyle = clientCallStyle };
 		}
 
 		return formatting;
