@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFormattable
+public partial class OidcPrepareAuthenticationRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,32 +31,10 @@ public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFo
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Iss is not null)
-			{
-				writer.WriteFluentCall("Iss", (w) => { w.WriteString(Iss); });
-			}
-
-			if (LoginHint is not null)
-			{
-				writer.WriteFluentCall("LoginHint", (w) => { w.WriteString(LoginHint); });
-			}
-
-			if (Nonce is not null)
-			{
-				writer.WriteFluentCall("Nonce", (w) => { w.WriteString(Nonce); });
-			}
-
-			if (Realm is not null)
-			{
-				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
-			}
-
-			if (State is not null)
-			{
-				writer.WriteFluentCall("State", (w) => { w.WriteString(State); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -92,6 +70,39 @@ public partial class OidcPrepareAuthenticationRequest : RequestConverter.ICodeFo
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Iss is not null)
+		{
+			writer.WriteFluentCall("Iss", (w) => { w.WriteString(Iss); });
+		}
+
+		if (LoginHint is not null)
+		{
+			writer.WriteFluentCall("LoginHint", (w) => { w.WriteString(LoginHint); });
+		}
+
+		if (Nonce is not null)
+		{
+			writer.WriteFluentCall("Nonce", (w) => { w.WriteString(Nonce); });
+		}
+
+		if (Realm is not null)
+		{
+			writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
+		}
+
+		if (State is not null)
+		{
+			writer.WriteFluentCall("State", (w) => { w.WriteString(State); });
 		}
 	}
 }

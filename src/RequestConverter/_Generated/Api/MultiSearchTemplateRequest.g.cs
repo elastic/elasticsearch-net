@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormattable
+public partial class MultiSearchTemplateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,54 +33,17 @@ public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormatta
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Indices is not null)
-			{
-				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
-			}
-
-			if (CcsMinimizeRoundtrips is not null)
-			{
-				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { w.WriteValue(CcsMinimizeRoundtrips.Value); });
-			}
-
-			if (MaxConcurrentSearches is not null)
-			{
-				writer.WriteFluentCall("MaxConcurrentSearches", (w) => { w.WriteValue(MaxConcurrentSearches.Value); w.Write("L"); });
-			}
-
-			if (ProjectRouting is not null)
-			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
-			}
-
-			if (RestTotalHitsAsInt is not null)
-			{
-				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
-			}
-
-			if (SearchType is not null)
-			{
-				writer.WriteFluentCall("SearchType", (w) => { Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
-			}
-
-			if (TypedKeys is not null)
-			{
-				writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
-			}
-
-			{
-				writer.WriteFluentCall("SearchTemplates", (w) => { w.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); }); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -134,6 +97,53 @@ public partial class MultiSearchTemplateRequest : RequestConverter.ICodeFormatta
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Indices is not null)
+		{
+			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (CcsMinimizeRoundtrips is not null)
+		{
+			writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { w.WriteValue(CcsMinimizeRoundtrips.Value); });
+		}
+
+		if (MaxConcurrentSearches is not null)
+		{
+			writer.WriteFluentCall("MaxConcurrentSearches", (w) => { w.WriteValue(MaxConcurrentSearches.Value); w.Write("L"); });
+		}
+
+		if (ProjectRouting is not null)
+		{
+			writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
+		}
+
+		if (RestTotalHitsAsInt is not null)
+		{
+			writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
+		}
+
+		if (SearchType is not null)
+		{
+			writer.WriteFluentCall("SearchType", (w) => { Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
+		}
+
+		if (TypedKeys is not null)
+		{
+			writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
+		}
+
+		{
+			writer.WriteFluentCall("SearchTemplates", (w) => { w.WriteInlineList(SearchTemplates, (w, item) => { item.FormatCode(w); }); });
 		}
 	}
 }

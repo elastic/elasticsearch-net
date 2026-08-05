@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class PutIndexTemplateRequest : RequestConverter.ICodeFormattable
+public partial class PutIndexTemplateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,92 +33,17 @@ public partial class PutIndexTemplateRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Cause is not null)
-			{
-				writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
-			}
-
-			if (Create is not null)
-			{
-				writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (AllowAutoCreate is not null)
-			{
-				writer.WriteFluentCall("AllowAutoCreate", (w) => { w.WriteValue(AllowAutoCreate.Value); });
-			}
-
-			if (ComposedOf is not null)
-			{
-				writer.WriteFluentCall("ComposedOf", (w) => { w.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); }); });
-			}
-
-			if (DataStream is not null)
-			{
-				writer.WriteFluentDescriptorCall("DataStream", (w) => { DataStream.FormatCode(w); });
-			}
-
-			if (Deprecated is not null)
-			{
-				writer.WriteFluentCall("Deprecated", (w) => { w.WriteValue(Deprecated.Value); });
-			}
-
-			if (IgnoreMissingComponentTemplates is not null)
-			{
-				writer.WriteFluentParams("IgnoreMissingComponentTemplates", IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
-			}
-
-			if (IndexPatterns is not null)
-			{
-				writer.WriteFluentCall("IndexPatterns", (w) => { IndexPatterns.FormatCode(w); });
-			}
-
-			if (Meta is not null)
-			{
-				writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
-			}
-
-			if (Priority is not null)
-			{
-				writer.WriteFluentCall("Priority", (w) => { w.WriteValue(Priority.Value); w.Write("L"); });
-			}
-
-			if (Template is not null)
-			{
-				writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
-			}
-
-			if (Version is not null)
-			{
-				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -216,6 +141,84 @@ public partial class PutIndexTemplateRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("name");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Cause is not null)
+		{
+			writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
+		}
+
+		if (Create is not null)
+		{
+			writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (AllowAutoCreate is not null)
+		{
+			writer.WriteFluentCall("AllowAutoCreate", (w) => { w.WriteValue(AllowAutoCreate.Value); });
+		}
+
+		if (ComposedOf is not null)
+		{
+			writer.WriteFluentCall("ComposedOf", (w) => { w.WriteInlineList(ComposedOf, (w, item) => { item.FormatCode(w); }); });
+		}
+
+		if (DataStream is not null)
+		{
+			writer.WriteFluentDescriptorCall("DataStream", (w) => { DataStream.FormatCode(w); });
+		}
+
+		if (Deprecated is not null)
+		{
+			writer.WriteFluentCall("Deprecated", (w) => { w.WriteValue(Deprecated.Value); });
+		}
+
+		if (IgnoreMissingComponentTemplates is not null)
+		{
+			writer.WriteFluentParams("IgnoreMissingComponentTemplates", IgnoreMissingComponentTemplates, (w, item) => { w.WriteString(item); });
+		}
+
+		if (IndexPatterns is not null)
+		{
+			writer.WriteFluentCall("IndexPatterns", (w) => { IndexPatterns.FormatCode(w); });
+		}
+
+		if (Meta is not null)
+		{
+			writer.WriteFluentCall("Meta", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Meta, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
+		}
+
+		if (Priority is not null)
+		{
+			writer.WriteFluentCall("Priority", (w) => { w.WriteValue(Priority.Value); w.Write("L"); });
+		}
+
+		if (Template is not null)
+		{
+			writer.WriteFluentDescriptorCall("Template", (w) => { Template.FormatCode(w); });
+		}
+
+		if (Version is not null)
+		{
+			writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
 		}
 	}
 }

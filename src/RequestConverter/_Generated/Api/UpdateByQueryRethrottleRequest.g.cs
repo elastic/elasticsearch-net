@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class UpdateByQueryRethrottleRequest : RequestConverter.ICodeFormattable
+public partial class UpdateByQueryRethrottleRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,17 +32,9 @@ public partial class UpdateByQueryRethrottleRequest : RequestConverter.ICodeForm
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				TaskId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (RequestsPerSecond is not null)
-			{
-				writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -60,6 +52,24 @@ public partial class UpdateByQueryRethrottleRequest : RequestConverter.ICodeForm
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("taskId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			TaskId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (RequestsPerSecond is not null)
+		{
+			writer.WriteFluentCall("RequestsPerSecond", (w) => { w.WriteValue(RequestsPerSecond.Value); w.Write("f"); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
+public partial class ChangePasswordRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,27 +31,10 @@ public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Username is not null)
-			{
-				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
-			}
-
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
-			}
-
-			if (Password is not null)
-			{
-				writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
-			}
-
-			if (PasswordHash is not null)
-			{
-				writer.WriteFluentCall("PasswordHash", (w) => { w.WriteString(PasswordHash); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +64,34 @@ public partial class ChangePasswordRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Username is not null)
+		{
+			writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
+		}
+
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+		}
+
+		if (Password is not null)
+		{
+			writer.WriteFluentCall("Password", (w) => { w.WriteString(Password); });
+		}
+
+		if (PasswordHash is not null)
+		{
+			writer.WriteFluentCall("PasswordHash", (w) => { w.WriteString(PasswordHash); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public partial class PostVotingConfigExclusionsRequest : RequestConverter.ICodeFormattable
+public partial class PostVotingConfigExclusionsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,27 +31,10 @@ public partial class PostVotingConfigExclusionsRequest : RequestConverter.ICodeF
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (NodeIds is not null)
-			{
-				writer.WriteFluentCall("NodeIds", (w) => { NodeIds.FormatCode(w); });
-			}
-
-			if (NodeNames is not null)
-			{
-				writer.WriteFluentCall("NodeNames", (w) => { NodeNames.FormatCode(w); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +64,34 @@ public partial class PostVotingConfigExclusionsRequest : RequestConverter.ICodeF
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (NodeIds is not null)
+		{
+			writer.WriteFluentCall("NodeIds", (w) => { NodeIds.FormatCode(w); });
+		}
+
+		if (NodeNames is not null)
+		{
+			writer.WriteFluentCall("NodeNames", (w) => { NodeNames.FormatCode(w); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 		}
 	}
 }

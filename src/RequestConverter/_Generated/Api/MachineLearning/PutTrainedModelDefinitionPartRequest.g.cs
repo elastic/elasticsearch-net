@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICodeFormattable
+public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,30 +32,9 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICo
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelId.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteValue(Part);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			{
-				writer.WriteFluentCall("Definition", (w) => { w.WriteString(Definition); });
-			}
-
-			{
-				writer.WriteFluentCall("TotalDefinitionLength", (w) => { w.WriteValue(TotalDefinitionLength); w.Write("L"); });
-			}
-
-			{
-				writer.WriteFluentCall("TotalParts", (w) => { w.WriteValue(TotalParts); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -87,6 +66,38 @@ public partial class PutTrainedModelDefinitionPartRequest : RequestConverter.ICo
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("modelId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelId.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("part");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteValue(Part);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		{
+			writer.WriteFluentCall("Definition", (w) => { w.WriteString(Definition); });
+		}
+
+		{
+			writer.WriteFluentCall("TotalDefinitionLength", (w) => { w.WriteValue(TotalDefinitionLength); w.Write("L"); });
+		}
+
+		{
+			writer.WriteFluentCall("TotalParts", (w) => { w.WriteValue(TotalParts); });
 		}
 	}
 }

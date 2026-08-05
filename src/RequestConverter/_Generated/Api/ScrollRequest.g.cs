@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class ScrollRequest : RequestConverter.ICodeFormattable
+public partial class ScrollRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,21 +31,10 @@ public partial class ScrollRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScrollRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (RestTotalHitsAsInt is not null)
-			{
-				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
-			}
-
-			if (Scroll is not null)
-			{
-				writer.WriteFluentCall("Scroll", (w) => { Scroll.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentCall("ScrollId", (w) => { ScrollId.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -68,6 +57,28 @@ public partial class ScrollRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (RestTotalHitsAsInt is not null)
+		{
+			writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
+		}
+
+		if (Scroll is not null)
+		{
+			writer.WriteFluentCall("Scroll", (w) => { Scroll.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentCall("ScrollId", (w) => { ScrollId.FormatCode(w); });
 		}
 	}
 }

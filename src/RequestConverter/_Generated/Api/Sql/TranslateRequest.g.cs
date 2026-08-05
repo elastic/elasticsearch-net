@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public partial class TranslateRequest : RequestConverter.ICodeFormattable
+public partial class TranslateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,34 +33,17 @@ public partial class TranslateRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (FetchSize is not null)
-			{
-				writer.WriteFluentCall("FetchSize", (w) => { w.WriteValue(FetchSize.Value); });
-			}
-
-			if (Filter is not null)
-			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
-			}
-
-			{
-				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
-			}
-
-			if (TimeZone is not null)
-			{
-				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -89,6 +72,33 @@ public partial class TranslateRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (FetchSize is not null)
+		{
+			writer.WriteFluentCall("FetchSize", (w) => { w.WriteValue(FetchSize.Value); });
+		}
+
+		if (Filter is not null)
+		{
+			writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
+		}
+
+		{
+			writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
+		}
+
+		if (TimeZone is not null)
+		{
+			writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
 		}
 	}
 }
