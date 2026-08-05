@@ -13904,6 +13904,7 @@ internal static class KnownNamespaces
 			"RequestConverter",
 			new(System.StringComparer.Ordinal)
 			{
+				"ClientMethods",
 				"RequestFactory"
 			}
 		},
