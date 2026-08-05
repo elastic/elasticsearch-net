@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public partial class QueryRequest : RequestConverter.ICodeFormattable
+public partial class QueryRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,105 +33,17 @@ public partial class QueryRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Format is not null)
-			{
-				writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.Sql.SqlFormatCodeFormatter.FormatCode(Format.Value, w); });
-			}
-
-			if (AllowPartialSearchResults is not null)
-			{
-				writer.WriteFluentCall("AllowPartialSearchResults", (w) => { w.WriteValue(AllowPartialSearchResults.Value); });
-			}
-
-			if (Catalog is not null)
-			{
-				writer.WriteFluentCall("Catalog", (w) => { w.WriteString(Catalog); });
-			}
-
-			if (Columnar is not null)
-			{
-				writer.WriteFluentCall("Columnar", (w) => { w.WriteValue(Columnar.Value); });
-			}
-
-			if (Cursor is not null)
-			{
-				writer.WriteFluentCall("Cursor", (w) => { w.WriteString(Cursor); });
-			}
-
-			if (FetchSize is not null)
-			{
-				writer.WriteFluentCall("FetchSize", (w) => { w.WriteValue(FetchSize.Value); });
-			}
-
-			if (FieldMultiValueLeniency is not null)
-			{
-				writer.WriteFluentCall("FieldMultiValueLeniency", (w) => { w.WriteValue(FieldMultiValueLeniency.Value); });
-			}
-
-			if (Filter is not null)
-			{
-				writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
-			}
-
-			if (IndexUsingFrozen is not null)
-			{
-				writer.WriteFluentCall("IndexUsingFrozen", (w) => { w.WriteValue(IndexUsingFrozen.Value); });
-			}
-
-			if (KeepAlive is not null)
-			{
-				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
-			}
-
-			if (KeepOnCompletion is not null)
-			{
-				writer.WriteFluentCall("KeepOnCompletion", (w) => { w.WriteValue(KeepOnCompletion.Value); });
-			}
-
-			if (PageTimeout is not null)
-			{
-				writer.WriteFluentCall("PageTimeout", (w) => { PageTimeout.FormatCode(w); });
-			}
-
-			if (Params is not null)
-			{
-				writer.WriteFluentCall("Params", (w) => { w.WriteInlineList(Params, (w, item) => { w.WriteObjectValue(item); }); });
-			}
-
-			if (Query is not null)
-			{
-				writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
-			}
-
-			if (RequestTimeout is not null)
-			{
-				writer.WriteFluentCall("RequestTimeout", (w) => { RequestTimeout.FormatCode(w); });
-			}
-
-			if (RuntimeMappings is not null)
-			{
-				writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
-
-			if (TimeZone is not null)
-			{
-				writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
-			}
-
-			if (WaitForCompletionTimeout is not null)
-			{
-				writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -252,6 +164,104 @@ public partial class QueryRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Format is not null)
+		{
+			writer.WriteFluentCall("Format", (w) => { Elastic.Clients.Elasticsearch.Sql.SqlFormatCodeFormatter.FormatCode(Format.Value, w); });
+		}
+
+		if (AllowPartialSearchResults is not null)
+		{
+			writer.WriteFluentCall("AllowPartialSearchResults", (w) => { w.WriteValue(AllowPartialSearchResults.Value); });
+		}
+
+		if (Catalog is not null)
+		{
+			writer.WriteFluentCall("Catalog", (w) => { w.WriteString(Catalog); });
+		}
+
+		if (Columnar is not null)
+		{
+			writer.WriteFluentCall("Columnar", (w) => { w.WriteValue(Columnar.Value); });
+		}
+
+		if (Cursor is not null)
+		{
+			writer.WriteFluentCall("Cursor", (w) => { w.WriteString(Cursor); });
+		}
+
+		if (FetchSize is not null)
+		{
+			writer.WriteFluentCall("FetchSize", (w) => { w.WriteValue(FetchSize.Value); });
+		}
+
+		if (FieldMultiValueLeniency is not null)
+		{
+			writer.WriteFluentCall("FieldMultiValueLeniency", (w) => { w.WriteValue(FieldMultiValueLeniency.Value); });
+		}
+
+		if (Filter is not null)
+		{
+			writer.WriteFluentDescriptorCall("Filter", (w) => { Filter.FormatCode(w); }, (w) => { Filter.FormatCode(w); });
+		}
+
+		if (IndexUsingFrozen is not null)
+		{
+			writer.WriteFluentCall("IndexUsingFrozen", (w) => { w.WriteValue(IndexUsingFrozen.Value); });
+		}
+
+		if (KeepAlive is not null)
+		{
+			writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
+		}
+
+		if (KeepOnCompletion is not null)
+		{
+			writer.WriteFluentCall("KeepOnCompletion", (w) => { w.WriteValue(KeepOnCompletion.Value); });
+		}
+
+		if (PageTimeout is not null)
+		{
+			writer.WriteFluentCall("PageTimeout", (w) => { PageTimeout.FormatCode(w); });
+		}
+
+		if (Params is not null)
+		{
+			writer.WriteFluentCall("Params", (w) => { w.WriteInlineList(Params, (w, item) => { w.WriteObjectValue(item); }); });
+		}
+
+		if (Query is not null)
+		{
+			writer.WriteFluentCall("Query", (w) => { w.WriteString(Query); });
+		}
+
+		if (RequestTimeout is not null)
+		{
+			writer.WriteFluentCall("RequestTimeout", (w) => { RequestTimeout.FormatCode(w); });
+		}
+
+		if (RuntimeMappings is not null)
+		{
+			writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
+		}
+
+		if (TimeZone is not null)
+		{
+			writer.WriteFluentCall("TimeZone", (w) => { w.WriteString(TimeZone); });
+		}
+
+		if (WaitForCompletionTimeout is not null)
+		{
+			writer.WriteFluentCall("WaitForCompletionTimeout", (w) => { WaitForCompletionTimeout.FormatCode(w); });
 		}
 	}
 }

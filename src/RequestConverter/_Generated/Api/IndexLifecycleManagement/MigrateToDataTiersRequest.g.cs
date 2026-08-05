@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattable
+public partial class MigrateToDataTiersRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,22 +31,10 @@ public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattab
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (DryRun is not null)
-			{
-				writer.WriteFluentCall("DryRun", (w) => { w.WriteValue(DryRun.Value); });
-			}
-
-			if (LegacyTemplateToDelete is not null)
-			{
-				writer.WriteFluentCall("LegacyTemplateToDelete", (w) => { w.WriteString(LegacyTemplateToDelete); });
-			}
-
-			if (NodeAttribute is not null)
-			{
-				writer.WriteFluentCall("NodeAttribute", (w) => { w.WriteString(NodeAttribute); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +58,29 @@ public partial class MigrateToDataTiersRequest : RequestConverter.ICodeFormattab
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (DryRun is not null)
+		{
+			writer.WriteFluentCall("DryRun", (w) => { w.WriteValue(DryRun.Value); });
+		}
+
+		if (LegacyTemplateToDelete is not null)
+		{
+			writer.WriteFluentCall("LegacyTemplateToDelete", (w) => { w.WriteString(LegacyTemplateToDelete); });
+		}
+
+		if (NodeAttribute is not null)
+		{
+			writer.WriteFluentCall("NodeAttribute", (w) => { w.WriteString(NodeAttribute); });
 		}
 	}
 }

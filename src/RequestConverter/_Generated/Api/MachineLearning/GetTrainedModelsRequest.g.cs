@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class GetTrainedModelsRequest : RequestConverter.ICodeFormattable
+public partial class GetTrainedModelsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,52 +31,10 @@ public partial class GetTrainedModelsRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (ModelId is not null)
-			{
-				writer.WriteFluentCall("ModelId", (w) => { ModelId.FormatCode(w); });
-			}
-
-			if (AllowNoMatch is not null)
-			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
-			}
-
-			if (DecompressDefinition is not null)
-			{
-				writer.WriteFluentCall("DecompressDefinition", (w) => { w.WriteValue(DecompressDefinition.Value); });
-			}
-
-			if (ExcludeGenerated is not null)
-			{
-				writer.WriteFluentCall("ExcludeGenerated", (w) => { w.WriteValue(ExcludeGenerated.Value); });
-			}
-
-			if (From is not null)
-			{
-				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
-			}
-
-			if (Include is not null)
-			{
-				writer.WriteFluentCall("Include", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.IncludeCodeFormatter.FormatCode(Include.Value, w); });
-			}
-#pragma warning disable CS0618
-			if (IncludeModelDefinition is not null)
-			{
-				writer.WriteFluentCall("IncludeModelDefinition", (w) => { w.WriteValue(IncludeModelDefinition.Value); });
-			}
-#pragma warning restore CS0618
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
-
-			if (Tags is not null)
-			{
-				writer.WriteFluentParams("Tags", Tags, (w, item) => { w.WriteString(item); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -136,6 +94,59 @@ public partial class GetTrainedModelsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (ModelId is not null)
+		{
+			writer.WriteFluentCall("ModelId", (w) => { ModelId.FormatCode(w); });
+		}
+
+		if (AllowNoMatch is not null)
+		{
+			writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
+		}
+
+		if (DecompressDefinition is not null)
+		{
+			writer.WriteFluentCall("DecompressDefinition", (w) => { w.WriteValue(DecompressDefinition.Value); });
+		}
+
+		if (ExcludeGenerated is not null)
+		{
+			writer.WriteFluentCall("ExcludeGenerated", (w) => { w.WriteValue(ExcludeGenerated.Value); });
+		}
+
+		if (From is not null)
+		{
+			writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
+		}
+
+		if (Include is not null)
+		{
+			writer.WriteFluentCall("Include", (w) => { Elastic.Clients.Elasticsearch.MachineLearning.IncludeCodeFormatter.FormatCode(Include.Value, w); });
+		}
+#pragma warning disable CS0618
+		if (IncludeModelDefinition is not null)
+		{
+			writer.WriteFluentCall("IncludeModelDefinition", (w) => { w.WriteValue(IncludeModelDefinition.Value); });
+		}
+#pragma warning restore CS0618
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
+		}
+
+		if (Tags is not null)
+		{
+			writer.WriteFluentParams("Tags", Tags, (w, item) => { w.WriteString(item); });
 		}
 	}
 }

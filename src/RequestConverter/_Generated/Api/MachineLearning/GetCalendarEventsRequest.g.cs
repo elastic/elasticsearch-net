@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class GetCalendarEventsRequest : RequestConverter.ICodeFormattable
+public partial class GetCalendarEventsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,37 +32,9 @@ public partial class GetCalendarEventsRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				CalendarId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (End is not null)
-			{
-				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
-			}
-
-			if (From is not null)
-			{
-				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
-			}
-
-			if (JobId is not null)
-			{
-				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
-
-			if (Start is not null)
-			{
-				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -103,6 +75,44 @@ public partial class GetCalendarEventsRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("calendarId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			CalendarId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (End is not null)
+		{
+			writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
+		}
+
+		if (From is not null)
+		{
+			writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
+		}
+
+		if (JobId is not null)
+		{
+			writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
+		}
+
+		if (Start is not null)
+		{
+			writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
 		}
 	}
 }

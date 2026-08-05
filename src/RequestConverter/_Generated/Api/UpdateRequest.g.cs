@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConverter.ICodeFormattable
+public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -37,113 +37,9 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 			writer.WriteTypeName(typeof(TPartialDocument));
 			writer.Write(">");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Index.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Id.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (IfPrimaryTerm is not null)
-			{
-				writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
-			}
-
-			if (IfSeqNo is not null)
-			{
-				writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
-			}
-
-			if (IncludeSourceOnError is not null)
-			{
-				writer.WriteFluentCall("IncludeSourceOnError", (w) => { w.WriteValue(IncludeSourceOnError.Value); });
-			}
-
-			if (Lang is not null)
-			{
-				writer.WriteFluentCall("Lang", (w) => { w.WriteString(Lang); });
-			}
-
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
-			}
-
-			if (RequireAlias is not null)
-			{
-				writer.WriteFluentCall("RequireAlias", (w) => { w.WriteValue(RequireAlias.Value); });
-			}
-
-			if (RetryOnConflict is not null)
-			{
-				writer.WriteFluentCall("RetryOnConflict", (w) => { w.WriteValue(RetryOnConflict.Value); });
-			}
-
-			if (Routing is not null)
-			{
-				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
-			}
-
-			if (SourceExcludes is not null)
-			{
-				writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); }, false);
-			}
-
-			if (SourceIncludes is not null)
-			{
-				writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); }, false);
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (WaitForActiveShards is not null)
-			{
-				writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
-			}
-
-			if (DetectNoop is not null)
-			{
-				writer.WriteFluentCall("DetectNoop", (w) => { w.WriteValue(DetectNoop.Value); });
-			}
-
-			if (Doc is not null)
-			{
-				writer.WriteFluentCall("Doc", (w) => { w.WriteDocument(Doc); });
-			}
-
-			if (DocAsUpsert is not null)
-			{
-				writer.WriteFluentCall("DocAsUpsert", (w) => { w.WriteValue(DocAsUpsert.Value); });
-			}
-
-			if (Script is not null)
-			{
-				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
-			}
-
-			if (ScriptedUpsert is not null)
-			{
-				writer.WriteFluentCall("ScriptedUpsert", (w) => { w.WriteValue(ScriptedUpsert.Value); });
-			}
-
-			if (Source is not null)
-			{
-				writer.WriteFluentCall("Source", (w) => { Source.FormatCode(w); });
-			}
-
-			if (Upsert is not null)
-			{
-				writer.WriteFluentCall("Upsert", (w) => { w.WriteDocument(Upsert); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -275,6 +171,121 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("index");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Index.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("id");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (IfPrimaryTerm is not null)
+		{
+			writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+		}
+
+		if (IfSeqNo is not null)
+		{
+			writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+		}
+
+		if (IncludeSourceOnError is not null)
+		{
+			writer.WriteFluentCall("IncludeSourceOnError", (w) => { w.WriteValue(IncludeSourceOnError.Value); });
+		}
+
+		if (Lang is not null)
+		{
+			writer.WriteFluentCall("Lang", (w) => { w.WriteString(Lang); });
+		}
+
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+		}
+
+		if (RequireAlias is not null)
+		{
+			writer.WriteFluentCall("RequireAlias", (w) => { w.WriteValue(RequireAlias.Value); });
+		}
+
+		if (RetryOnConflict is not null)
+		{
+			writer.WriteFluentCall("RetryOnConflict", (w) => { w.WriteValue(RetryOnConflict.Value); });
+		}
+
+		if (Routing is not null)
+		{
+			writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+		}
+
+		if (SourceExcludes is not null)
+		{
+			writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); }, false);
+		}
+
+		if (SourceIncludes is not null)
+		{
+			writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); }, false);
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (WaitForActiveShards is not null)
+		{
+			writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
+		}
+
+		if (DetectNoop is not null)
+		{
+			writer.WriteFluentCall("DetectNoop", (w) => { w.WriteValue(DetectNoop.Value); });
+		}
+
+		if (Doc is not null)
+		{
+			writer.WriteFluentCall("Doc", (w) => { w.WriteDocument(Doc); });
+		}
+
+		if (DocAsUpsert is not null)
+		{
+			writer.WriteFluentCall("DocAsUpsert", (w) => { w.WriteValue(DocAsUpsert.Value); });
+		}
+
+		if (Script is not null)
+		{
+			writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
+		}
+
+		if (ScriptedUpsert is not null)
+		{
+			writer.WriteFluentCall("ScriptedUpsert", (w) => { w.WriteValue(ScriptedUpsert.Value); });
+		}
+
+		if (Source is not null)
+		{
+			writer.WriteFluentCall("Source", (w) => { Source.FormatCode(w); });
+		}
+
+		if (Upsert is not null)
+		{
+			writer.WriteFluentCall("Upsert", (w) => { w.WriteDocument(Upsert); });
 		}
 	}
 }
