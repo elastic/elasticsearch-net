@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class SamlInvalidateRequest : RequestConverter.ICodeFormattable
+public partial class SamlInvalidateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,21 +31,10 @@ public partial class SamlInvalidateRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Acs is not null)
-			{
-				writer.WriteFluentCall("Acs", (w) => { w.WriteString(Acs); });
-			}
-
-			{
-				writer.WriteFluentCall("QueryString", (w) => { w.WriteString(QueryString); });
-			}
-
-			if (Realm is not null)
-			{
-				writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -68,6 +57,28 @@ public partial class SamlInvalidateRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Acs is not null)
+		{
+			writer.WriteFluentCall("Acs", (w) => { w.WriteString(Acs); });
+		}
+
+		{
+			writer.WriteFluentCall("QueryString", (w) => { w.WriteString(QueryString); });
+		}
+
+		if (Realm is not null)
+		{
+			writer.WriteFluentCall("Realm", (w) => { w.WriteString(Realm); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
+public partial class AnalyzeIndexRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,65 +33,17 @@ public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Index is not null)
-			{
-				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
-			}
-
-			if (Analyzer is not null)
-			{
-				writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
-			}
-
-			if (Attributes is not null)
-			{
-				writer.WriteFluentParams("Attributes", Attributes, (w, item) => { w.WriteString(item); });
-			}
-
-			if (CharFilter is not null)
-			{
-				writer.WriteFluentCall("CharFilter", (w) => { w.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); }); });
-			}
-
-			if (Explain is not null)
-			{
-				writer.WriteFluentCall("Explain", (w) => { w.WriteValue(Explain.Value); });
-			}
-
-			if (Field is not null)
-			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
-			}
-
-			if (Filter is not null)
-			{
-				writer.WriteFluentCall("Filter", (w) => { w.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); }); });
-			}
-
-			if (Normalizer is not null)
-			{
-				writer.WriteFluentCall("Normalizer", (w) => { w.WriteString(Normalizer); });
-			}
-
-			if (Text is not null)
-			{
-				writer.WriteFluentParams("Text", Text, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Tokenizer is not null)
-			{
-				writer.WriteFluentCall("Tokenizer", (w) => { Tokenizer.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -157,6 +109,64 @@ public partial class AnalyzeIndexRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Index is not null)
+		{
+			writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
+		}
+
+		if (Analyzer is not null)
+		{
+			writer.WriteFluentCall("Analyzer", (w) => { w.WriteString(Analyzer); });
+		}
+
+		if (Attributes is not null)
+		{
+			writer.WriteFluentParams("Attributes", Attributes, (w, item) => { w.WriteString(item); });
+		}
+
+		if (CharFilter is not null)
+		{
+			writer.WriteFluentCall("CharFilter", (w) => { w.WriteInlineList(CharFilter, (w, item) => { item.FormatCode(w); }); });
+		}
+
+		if (Explain is not null)
+		{
+			writer.WriteFluentCall("Explain", (w) => { w.WriteValue(Explain.Value); });
+		}
+
+		if (Field is not null)
+		{
+			writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
+		}
+
+		if (Filter is not null)
+		{
+			writer.WriteFluentCall("Filter", (w) => { w.WriteInlineList(Filter, (w, item) => { item.FormatCode(w); }); });
+		}
+
+		if (Normalizer is not null)
+		{
+			writer.WriteFluentCall("Normalizer", (w) => { w.WriteString(Normalizer); });
+		}
+
+		if (Text is not null)
+		{
+			writer.WriteFluentParams("Text", Text, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Tokenizer is not null)
+		{
+			writer.WriteFluentCall("Tokenizer", (w) => { Tokenizer.FormatCode(w); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
+public partial class MultiSearchRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,94 +33,17 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Indices is not null)
-			{
-				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
-			}
-
-			if (AllowNoIndices is not null)
-			{
-				writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
-			}
-
-			if (CcsMinimizeRoundtrips is not null)
-			{
-				writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { w.WriteValue(CcsMinimizeRoundtrips.Value); });
-			}
-
-			if (ExpandWildcards is not null)
-			{
-				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-			}
-#pragma warning disable CS0618
-			if (IgnoreThrottled is not null)
-			{
-				writer.WriteFluentCall("IgnoreThrottled", (w) => { w.WriteValue(IgnoreThrottled.Value); });
-			}
-#pragma warning restore CS0618
-			if (IgnoreUnavailable is not null)
-			{
-				writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
-			}
-
-			if (IncludeNamedQueriesScore is not null)
-			{
-				writer.WriteFluentCall("IncludeNamedQueriesScore", (w) => { w.WriteValue(IncludeNamedQueriesScore.Value); });
-			}
-
-			if (MaxConcurrentSearches is not null)
-			{
-				writer.WriteFluentCall("MaxConcurrentSearches", (w) => { w.WriteValue(MaxConcurrentSearches.Value); });
-			}
-
-			if (MaxConcurrentShardRequests is not null)
-			{
-				writer.WriteFluentCall("MaxConcurrentShardRequests", (w) => { w.WriteValue(MaxConcurrentShardRequests.Value); });
-			}
-
-			if (PreFilterShardSize is not null)
-			{
-				writer.WriteFluentCall("PreFilterShardSize", (w) => { w.WriteValue(PreFilterShardSize.Value); w.Write("L"); });
-			}
-
-			if (ProjectRouting is not null)
-			{
-				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
-			}
-
-			if (RestTotalHitsAsInt is not null)
-			{
-				writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
-			}
-
-			if (Routing is not null)
-			{
-				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
-			}
-
-			if (SearchType is not null)
-			{
-				writer.WriteFluentCall("SearchType", (w) => { Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
-			}
-
-			if (TypedKeys is not null)
-			{
-				writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
-			}
-
-			{
-				writer.WriteFluentCall("Searches", (w) => { w.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); }); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -222,6 +145,93 @@ public partial class MultiSearchRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Indices is not null)
+		{
+			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (AllowNoIndices is not null)
+		{
+			writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
+		}
+
+		if (CcsMinimizeRoundtrips is not null)
+		{
+			writer.WriteFluentCall("CcsMinimizeRoundtrips", (w) => { w.WriteValue(CcsMinimizeRoundtrips.Value); });
+		}
+
+		if (ExpandWildcards is not null)
+		{
+			writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+		}
+#pragma warning disable CS0618
+		if (IgnoreThrottled is not null)
+		{
+			writer.WriteFluentCall("IgnoreThrottled", (w) => { w.WriteValue(IgnoreThrottled.Value); });
+		}
+#pragma warning restore CS0618
+		if (IgnoreUnavailable is not null)
+		{
+			writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
+		}
+
+		if (IncludeNamedQueriesScore is not null)
+		{
+			writer.WriteFluentCall("IncludeNamedQueriesScore", (w) => { w.WriteValue(IncludeNamedQueriesScore.Value); });
+		}
+
+		if (MaxConcurrentSearches is not null)
+		{
+			writer.WriteFluentCall("MaxConcurrentSearches", (w) => { w.WriteValue(MaxConcurrentSearches.Value); });
+		}
+
+		if (MaxConcurrentShardRequests is not null)
+		{
+			writer.WriteFluentCall("MaxConcurrentShardRequests", (w) => { w.WriteValue(MaxConcurrentShardRequests.Value); });
+		}
+
+		if (PreFilterShardSize is not null)
+		{
+			writer.WriteFluentCall("PreFilterShardSize", (w) => { w.WriteValue(PreFilterShardSize.Value); w.Write("L"); });
+		}
+
+		if (ProjectRouting is not null)
+		{
+			writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
+		}
+
+		if (RestTotalHitsAsInt is not null)
+		{
+			writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
+		}
+
+		if (Routing is not null)
+		{
+			writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+		}
+
+		if (SearchType is not null)
+		{
+			writer.WriteFluentCall("SearchType", (w) => { Elastic.Clients.Elasticsearch.SearchTypeCodeFormatter.FormatCode(SearchType.Value, w); });
+		}
+
+		if (TypedKeys is not null)
+		{
+			writer.WriteFluentCall("TypedKeys", (w) => { w.WriteValue(TypedKeys.Value); });
+		}
+
+		{
+			writer.WriteFluentCall("Searches", (w) => { w.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); }); });
 		}
 	}
 }

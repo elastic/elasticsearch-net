@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public partial class RepositoryAnalyzeRequest : RequestConverter.ICodeFormattable
+public partial class RepositoryAnalyzeRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,72 +32,9 @@ public partial class RepositoryAnalyzeRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Name.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (BlobCount is not null)
-			{
-				writer.WriteFluentCall("BlobCount", (w) => { w.WriteValue(BlobCount.Value); });
-			}
-
-			if (Concurrency is not null)
-			{
-				writer.WriteFluentCall("Concurrency", (w) => { w.WriteValue(Concurrency.Value); });
-			}
-
-			if (Detailed is not null)
-			{
-				writer.WriteFluentCall("Detailed", (w) => { w.WriteValue(Detailed.Value); });
-			}
-
-			if (EarlyReadNodeCount is not null)
-			{
-				writer.WriteFluentCall("EarlyReadNodeCount", (w) => { w.WriteValue(EarlyReadNodeCount.Value); });
-			}
-
-			if (MaxBlobSize is not null)
-			{
-				writer.WriteFluentCall("MaxBlobSize", (w) => { MaxBlobSize.FormatCode(w); });
-			}
-
-			if (MaxTotalDataSize is not null)
-			{
-				writer.WriteFluentCall("MaxTotalDataSize", (w) => { MaxTotalDataSize.FormatCode(w); });
-			}
-
-			if (RareActionProbability is not null)
-			{
-				writer.WriteFluentCall("RareActionProbability", (w) => { w.WriteValue(RareActionProbability.Value); w.Write("d"); });
-			}
-
-			if (RarelyAbortWrites is not null)
-			{
-				writer.WriteFluentCall("RarelyAbortWrites", (w) => { w.WriteValue(RarelyAbortWrites.Value); });
-			}
-
-			if (ReadNodeCount is not null)
-			{
-				writer.WriteFluentCall("ReadNodeCount", (w) => { w.WriteValue(ReadNodeCount.Value); });
-			}
-
-			if (RegisterOperationCount is not null)
-			{
-				writer.WriteFluentCall("RegisterOperationCount", (w) => { w.WriteValue(RegisterOperationCount.Value); });
-			}
-
-			if (Seed is not null)
-			{
-				writer.WriteFluentCall("Seed", (w) => { w.WriteValue(Seed.Value); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -181,6 +118,79 @@ public partial class RepositoryAnalyzeRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("name");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (BlobCount is not null)
+		{
+			writer.WriteFluentCall("BlobCount", (w) => { w.WriteValue(BlobCount.Value); });
+		}
+
+		if (Concurrency is not null)
+		{
+			writer.WriteFluentCall("Concurrency", (w) => { w.WriteValue(Concurrency.Value); });
+		}
+
+		if (Detailed is not null)
+		{
+			writer.WriteFluentCall("Detailed", (w) => { w.WriteValue(Detailed.Value); });
+		}
+
+		if (EarlyReadNodeCount is not null)
+		{
+			writer.WriteFluentCall("EarlyReadNodeCount", (w) => { w.WriteValue(EarlyReadNodeCount.Value); });
+		}
+
+		if (MaxBlobSize is not null)
+		{
+			writer.WriteFluentCall("MaxBlobSize", (w) => { MaxBlobSize.FormatCode(w); });
+		}
+
+		if (MaxTotalDataSize is not null)
+		{
+			writer.WriteFluentCall("MaxTotalDataSize", (w) => { MaxTotalDataSize.FormatCode(w); });
+		}
+
+		if (RareActionProbability is not null)
+		{
+			writer.WriteFluentCall("RareActionProbability", (w) => { w.WriteValue(RareActionProbability.Value); w.Write("d"); });
+		}
+
+		if (RarelyAbortWrites is not null)
+		{
+			writer.WriteFluentCall("RarelyAbortWrites", (w) => { w.WriteValue(RarelyAbortWrites.Value); });
+		}
+
+		if (ReadNodeCount is not null)
+		{
+			writer.WriteFluentCall("ReadNodeCount", (w) => { w.WriteValue(ReadNodeCount.Value); });
+		}
+
+		if (RegisterOperationCount is not null)
+		{
+			writer.WriteFluentCall("RegisterOperationCount", (w) => { w.WriteValue(RegisterOperationCount.Value); });
+		}
+
+		if (Seed is not null)
+		{
+			writer.WriteFluentCall("Seed", (w) => { w.WriteValue(Seed.Value); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
+public partial class InvalidateTokenRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,27 +31,10 @@ public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (RealmName is not null)
-			{
-				writer.WriteFluentCall("RealmName", (w) => { RealmName.FormatCode(w); });
-			}
-
-			if (RefreshToken is not null)
-			{
-				writer.WriteFluentCall("RefreshToken", (w) => { w.WriteString(RefreshToken); });
-			}
-
-			if (Token is not null)
-			{
-				writer.WriteFluentCall("Token", (w) => { w.WriteString(Token); });
-			}
-
-			if (Username is not null)
-			{
-				writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +64,34 @@ public partial class InvalidateTokenRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (RealmName is not null)
+		{
+			writer.WriteFluentCall("RealmName", (w) => { RealmName.FormatCode(w); });
+		}
+
+		if (RefreshToken is not null)
+		{
+			writer.WriteFluentCall("RefreshToken", (w) => { w.WriteString(RefreshToken); });
+		}
+
+		if (Token is not null)
+		{
+			writer.WriteFluentCall("Token", (w) => { w.WriteString(Token); });
+		}
+
+		if (Username is not null)
+		{
+			writer.WriteFluentCall("Username", (w) => { Username.FormatCode(w); });
 		}
 	}
 }

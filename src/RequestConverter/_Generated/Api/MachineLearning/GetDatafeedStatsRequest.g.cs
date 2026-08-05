@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class GetDatafeedStatsRequest : RequestConverter.ICodeFormattable
+public partial class GetDatafeedStatsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,17 +31,10 @@ public partial class GetDatafeedStatsRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (DatafeedId is not null)
-			{
-				writer.WriteFluentCall("DatafeedId", (w) => { DatafeedId.FormatCode(w); });
-			}
-
-			if (AllowNoMatch is not null)
-			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -59,6 +52,24 @@ public partial class GetDatafeedStatsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (DatafeedId is not null)
+		{
+			writer.WriteFluentCall("DatafeedId", (w) => { DatafeedId.FormatCode(w); });
+		}
+
+		if (AllowNoMatch is not null)
+		{
+			writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
 		}
 	}
 }

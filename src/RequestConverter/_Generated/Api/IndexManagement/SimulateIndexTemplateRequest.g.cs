@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormattable
+public partial class SimulateIndexTemplateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,52 +33,17 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Name.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Cause is not null)
-			{
-				writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
-			}
-
-			if (Create is not null)
-			{
-				writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
-			}
-
-			if (IncludeDefaults is not null)
-			{
-				writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (IndexTemplate is not null)
-			{
-				writer.WriteFluentDescriptorCall("IndexTemplate", (w) => { IndexTemplate.FormatCode(w); }, (w) => { IndexTemplate.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -119,6 +84,44 @@ public partial class SimulateIndexTemplateRequest : RequestConverter.ICodeFormat
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("name");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Name.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Cause is not null)
+		{
+			writer.WriteFluentCall("Cause", (w) => { w.WriteString(Cause); });
+		}
+
+		if (Create is not null)
+		{
+			writer.WriteFluentCall("Create", (w) => { w.WriteValue(Create.Value); });
+		}
+
+		if (IncludeDefaults is not null)
+		{
+			writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (IndexTemplate is not null)
+		{
+			writer.WriteFluentDescriptorCall("IndexTemplate", (w) => { IndexTemplate.FormatCode(w); }, (w) => { IndexTemplate.FormatCode(w); });
 		}
 	}
 }

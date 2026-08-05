@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
+public partial class HotThreadsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,47 +31,10 @@ public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (NodeId is not null)
-			{
-				writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
-			}
-
-			if (IgnoreIdleThreads is not null)
-			{
-				writer.WriteFluentCall("IgnoreIdleThreads", (w) => { w.WriteValue(IgnoreIdleThreads.Value); });
-			}
-
-			if (Interval is not null)
-			{
-				writer.WriteFluentCall("Interval", (w) => { Interval.FormatCode(w); });
-			}
-
-			if (Snapshots is not null)
-			{
-				writer.WriteFluentCall("Snapshots", (w) => { w.WriteValue(Snapshots.Value); w.Write("L"); });
-			}
-
-			if (Sort is not null)
-			{
-				writer.WriteFluentCall("Sort", (w) => { Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, w); });
-			}
-
-			if (Threads is not null)
-			{
-				writer.WriteFluentCall("Threads", (w) => { w.WriteValue(Threads.Value); w.Write("L"); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (Type is not null)
-			{
-				writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -127,6 +90,54 @@ public partial class HotThreadsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (NodeId is not null)
+		{
+			writer.WriteFluentCall("NodeId", (w) => { NodeId.FormatCode(w); });
+		}
+
+		if (IgnoreIdleThreads is not null)
+		{
+			writer.WriteFluentCall("IgnoreIdleThreads", (w) => { w.WriteValue(IgnoreIdleThreads.Value); });
+		}
+
+		if (Interval is not null)
+		{
+			writer.WriteFluentCall("Interval", (w) => { Interval.FormatCode(w); });
+		}
+
+		if (Snapshots is not null)
+		{
+			writer.WriteFluentCall("Snapshots", (w) => { w.WriteValue(Snapshots.Value); w.Write("L"); });
+		}
+
+		if (Sort is not null)
+		{
+			writer.WriteFluentCall("Sort", (w) => { Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, w); });
+		}
+
+		if (Threads is not null)
+		{
+			writer.WriteFluentCall("Threads", (w) => { w.WriteValue(Threads.Value); w.Write("L"); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (Type is not null)
+		{
+			writer.WriteFluentCall("Type", (w) => { Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Type.Value, w); });
 		}
 	}
 }
