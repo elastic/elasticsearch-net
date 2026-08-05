@@ -109,7 +109,7 @@ public sealed class RoundtripRegressionTests
 		var compilation = CSharpCompilation.Create(
 			$"RequestConverter.Generated.{syntaxMode}.{constructorStyle}",
 			trees,
-			ReferenceAssemblies(),
+			CompilationHarness.ReferenceAssemblies(),
 			new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
 				.WithNullableContextOptions(NullableContextOptions.Annotations));
 
@@ -446,16 +446,6 @@ public sealed class RoundtripRegressionTests
 				}
 			}
 			""";
-	}
-
-	private static List<MetadataReference> ReferenceAssemblies()
-	{
-		var tpa = (string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!;
-		return tpa
-			.Split(Path.PathSeparator)
-			.Where(p => p.Length > 0 && File.Exists(p))
-			.Select(p => (MetadataReference)MetadataReference.CreateFromFile(p))
-			.ToList();
 	}
 
 	/// <summary>Formats a CLR type as a fully-qualified C# type reference (handles closed generics).</summary>
