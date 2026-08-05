@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeFormattable
+public partial class ScriptsPainlessExecuteRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,30 +33,17 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Context is not null)
-			{
-				writer.WriteFluentCall("Context", (w) => { Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, w); });
-			}
-
-			if (ContextSetup is not null)
-			{
-				writer.WriteFluentDescriptorCall("ContextSetup", (w) => { ContextSetup.FormatCode(w); }, (w) => { ContextSetup.FormatCode(w); });
-			}
-
-			if (Script is not null)
-			{
-				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -80,6 +67,29 @@ public partial class ScriptsPainlessExecuteRequest : RequestConverter.ICodeForma
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Context is not null)
+		{
+			writer.WriteFluentCall("Context", (w) => { Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextCodeFormatter.FormatCode(Context.Value, w); });
+		}
+
+		if (ContextSetup is not null)
+		{
+			writer.WriteFluentDescriptorCall("ContextSetup", (w) => { ContextSetup.FormatCode(w); }, (w) => { ContextSetup.FormatCode(w); });
+		}
+
+		if (Script is not null)
+		{
+			writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
 		}
 	}
 }

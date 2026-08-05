@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
+public partial class ForgetFollowerRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,52 +33,17 @@ public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Index.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor");
-				writer.Write("(");
-				{
-					using var _oi = writer.ForceObjectInitializer();
-					Index.FormatCode(writer);
-				}
-
-				writer.Write(")");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (FollowerCluster is not null)
-			{
-				writer.WriteFluentCall("FollowerCluster", (w) => { w.WriteString(FollowerCluster); });
-			}
-
-			if (FollowerIndex is not null)
-			{
-				writer.WriteFluentCall("FollowerIndex", (w) => { FollowerIndex.FormatCode(w); });
-			}
-
-			if (FollowerIndexUuid is not null)
-			{
-				writer.WriteFluentCall("FollowerIndexUuid", (w) => { w.WriteString(FollowerIndexUuid); });
-			}
-
-			if (LeaderRemoteCluster is not null)
-			{
-				writer.WriteFluentCall("LeaderRemoteCluster", (w) => { w.WriteString(LeaderRemoteCluster); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -119,6 +84,44 @@ public partial class ForgetFollowerRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("index");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Index.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (FollowerCluster is not null)
+		{
+			writer.WriteFluentCall("FollowerCluster", (w) => { w.WriteString(FollowerCluster); });
+		}
+
+		if (FollowerIndex is not null)
+		{
+			writer.WriteFluentCall("FollowerIndex", (w) => { FollowerIndex.FormatCode(w); });
+		}
+
+		if (FollowerIndexUuid is not null)
+		{
+			writer.WriteFluentCall("FollowerIndexUuid", (w) => { w.WriteString(FollowerIndexUuid); });
+		}
+
+		if (LeaderRemoteCluster is not null)
+		{
+			writer.WriteFluentCall("LeaderRemoteCluster", (w) => { w.WriteString(LeaderRemoteCluster); });
 		}
 	}
 }

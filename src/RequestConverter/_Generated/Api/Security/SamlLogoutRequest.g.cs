@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class SamlLogoutRequest : RequestConverter.ICodeFormattable
+public partial class SamlLogoutRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,16 +31,10 @@ public partial class SamlLogoutRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (RefreshToken is not null)
-			{
-				writer.WriteFluentCall("RefreshToken", (w) => { w.WriteString(RefreshToken); });
-			}
-
-			{
-				writer.WriteFluentCall("Token", (w) => { w.WriteString(Token); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -57,6 +51,23 @@ public partial class SamlLogoutRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (RefreshToken is not null)
+		{
+			writer.WriteFluentCall("RefreshToken", (w) => { w.WriteString(RefreshToken); });
+		}
+
+		{
+			writer.WriteFluentCall("Token", (w) => { w.WriteString(Token); });
 		}
 	}
 }

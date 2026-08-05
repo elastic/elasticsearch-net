@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormattable
+public partial class SuggestUserProfilesRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,27 +31,10 @@ public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormatta
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Data is not null)
-			{
-				writer.WriteFluentParams("Data", Data, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Hint is not null)
-			{
-				writer.WriteFluentDescriptorCall("Hint", (w) => { Hint.FormatCode(w); });
-			}
-
-			if (Name is not null)
-			{
-				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); w.Write("L"); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -82,6 +65,34 @@ public partial class SuggestUserProfilesRequest : RequestConverter.ICodeFormatta
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Data is not null)
+		{
+			writer.WriteFluentParams("Data", Data, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Hint is not null)
+		{
+			writer.WriteFluentDescriptorCall("Hint", (w) => { Hint.FormatCode(w); });
+		}
+
+		if (Name is not null)
+		{
+			writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); w.Write("L"); });
 		}
 	}
 }

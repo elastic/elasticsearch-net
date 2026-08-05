@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
-public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFormattable
+public partial class SearchableSnapshotsStatsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,25 +33,17 @@ public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFor
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Indices is not null)
-			{
-				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
-			}
-
-			if (Level is not null)
-			{
-				writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -69,6 +61,24 @@ public partial class SearchableSnapshotsStatsRequest : RequestConverter.ICodeFor
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Indices is not null)
+		{
+			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (Level is not null)
+		{
+			writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevelCodeFormatter.FormatCode(Level.Value, w); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class IndicesStatsRequest : RequestConverter.ICodeFormattable
+public partial class IndicesStatsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,70 +33,17 @@ public partial class IndicesStatsRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Indices is not null)
-			{
-				writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
-			}
-
-			if (Metric is not null)
-			{
-				writer.WriteFluentCall("Metric", (w) => { Metric.FormatCode(w); });
-			}
-
-			if (CompletionFields is not null)
-			{
-				writer.WriteFluentCall("CompletionFields", (w) => { CompletionFields.FormatCode(w); }, false);
-			}
-
-			if (ExpandWildcards is not null)
-			{
-				writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
-			}
-
-			if (FielddataFields is not null)
-			{
-				writer.WriteFluentCall("FielddataFields", (w) => { FielddataFields.FormatCode(w); }, false);
-			}
-
-			if (Fields is not null)
-			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
-			}
-
-			if (ForbidClosedIndices is not null)
-			{
-				writer.WriteFluentCall("ForbidClosedIndices", (w) => { w.WriteValue(ForbidClosedIndices.Value); });
-			}
-
-			if (Groups is not null)
-			{
-				writer.WriteFluentParams("Groups", Groups, (w, item) => { w.WriteString(item); });
-			}
-
-			if (IncludeSegmentFileSizes is not null)
-			{
-				writer.WriteFluentCall("IncludeSegmentFileSizes", (w) => { w.WriteValue(IncludeSegmentFileSizes.Value); });
-			}
-
-			if (IncludeUnloadedSegments is not null)
-			{
-				writer.WriteFluentCall("IncludeUnloadedSegments", (w) => { w.WriteValue(IncludeUnloadedSegments.Value); });
-			}
-
-			if (Level is not null)
-			{
-				writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -168,6 +115,69 @@ public partial class IndicesStatsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Indices is not null)
+		{
+			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (Metric is not null)
+		{
+			writer.WriteFluentCall("Metric", (w) => { Metric.FormatCode(w); });
+		}
+
+		if (CompletionFields is not null)
+		{
+			writer.WriteFluentCall("CompletionFields", (w) => { CompletionFields.FormatCode(w); }, false);
+		}
+
+		if (ExpandWildcards is not null)
+		{
+			writer.WriteFluentParams("ExpandWildcards", ExpandWildcards, (w, item) => { Elastic.Clients.Elasticsearch.ExpandWildcardCodeFormatter.FormatCode(item, w); });
+		}
+
+		if (FielddataFields is not null)
+		{
+			writer.WriteFluentCall("FielddataFields", (w) => { FielddataFields.FormatCode(w); }, false);
+		}
+
+		if (Fields is not null)
+		{
+			writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
+		}
+
+		if (ForbidClosedIndices is not null)
+		{
+			writer.WriteFluentCall("ForbidClosedIndices", (w) => { w.WriteValue(ForbidClosedIndices.Value); });
+		}
+
+		if (Groups is not null)
+		{
+			writer.WriteFluentParams("Groups", Groups, (w, item) => { w.WriteString(item); });
+		}
+
+		if (IncludeSegmentFileSizes is not null)
+		{
+			writer.WriteFluentCall("IncludeSegmentFileSizes", (w) => { w.WriteValue(IncludeSegmentFileSizes.Value); });
+		}
+
+		if (IncludeUnloadedSegments is not null)
+		{
+			writer.WriteFluentCall("IncludeUnloadedSegments", (w) => { w.WriteValue(IncludeUnloadedSegments.Value); });
+		}
+
+		if (Level is not null)
+		{
+			writer.WriteFluentCall("Level", (w) => { Elastic.Clients.Elasticsearch.LevelCodeFormatter.FormatCode(Level.Value, w); });
 		}
 	}
 }
