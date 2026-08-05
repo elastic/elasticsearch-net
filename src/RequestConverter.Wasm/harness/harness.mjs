@@ -19,6 +19,7 @@ const els = {
   callStyle: document.getElementById("callStyle"),
   clientCall: document.getElementById("clientCall"),
   documentType: document.getElementById("documentType"),
+  emitUsings: document.getElementById("emitUsings"),
   namespaces: document.getElementById("namespaces"),
   output: document.getElementById("output"),
   source: document.getElementById("source"),
@@ -93,12 +94,13 @@ async function run() {
   try {
     const requests = await parseRequests(source);
     const code = convert(requests, {
-      type_name_style: els.style.value,
-      syntax_mode: els.syntax.value,
-      use_strongly_typed_document: els.typedDocument.checked,
-      document_type_name: els.documentType.value,
       client_call_format: els.clientCall.value,
       client_call_style: els.callStyle.value,
+      document_type_name: els.documentType.value,
+      emit_usings: els.emitUsings.checked,
+      syntax_mode: els.syntax.value,
+      type_name_style: els.style.value,
+      use_strongly_typed_document: els.typedDocument.checked,
     });
     els.output.textContent = code;
     setStatus("Converted.");
@@ -111,6 +113,7 @@ async function run() {
 els.callStyle.addEventListener("change", run);
 els.clientCall.addEventListener("change", run);
 els.documentType.addEventListener("input", schedule);
+els.emitUsings.addEventListener("change", run);
 els.source.addEventListener("input", schedule);
 els.style.addEventListener("change", run);
 els.syntax.addEventListener("change", run);
