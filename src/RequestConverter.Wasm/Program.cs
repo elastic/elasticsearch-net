@@ -93,18 +93,19 @@ internal static partial class Exporter
 			var requests = parsed.Requests ?? [];
 			var debug = parsed.Options?.Debug ?? false;
 
-			// Each request becomes a typed variable declaration. In a batch the first variable is `request`, then
-			// `request1`, `request2`, ... so the snippets don't collide when pasted together.
+			// Each request becomes a typed variable declaration. In a batch the first variables are `request`/`response`,
+			// then `request1`/`response1`, `request2`/`response2`, ... so the snippets don't collide when pasted together.
 			var declarations = new List<string>(requests.Count);
 			var namespaces = new SortedSet<string>(StringComparer.Ordinal);
 
 			for (var i = 0; i < requests.Count; i++)
 			{
 				var variableName = i == 0 ? "request" : $"request{i}";
+				var responseVariableName = i == 0 ? "response" : $"response{i}";
 				ConversionResult result;
 				try
 				{
-					result = ConvertRequest(requests[i], parsed.Options, variableName);
+					result = ConvertRequest(requests[i], parsed.Options, variableName, responseVariableName);
 				}
 				catch (Exception e)
 				{
@@ -127,7 +128,7 @@ internal static partial class Exporter
 		});
 	}
 
-	private static ConversionResult ConvertRequest(ParsedRequest request, ConvertOptions? options, string variableName)
+	private static ConversionResult ConvertRequest(ParsedRequest request, ConvertOptions? options, string variableName, string responseVariableName = "response")
 	{
 		if (string.IsNullOrEmpty(request.Api))
 		{
@@ -140,7 +141,7 @@ internal static partial class Exporter
 			ConvertOptionsMapper.ToStringMap(request.Params),
 			ConvertOptionsMapper.ToStringMap(request.Query),
 			request.Body?.GetRawText(),
-			ConvertOptionsMapper.BuildFormattingOptions(options, variableName));
+			ConvertOptionsMapper.BuildFormattingOptions(options, variableName, responseVariableName));
 	}
 
 	/// <summary>
