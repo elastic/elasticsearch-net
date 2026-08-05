@@ -27,10 +27,10 @@ public sealed record ParsedRequest
 
 /// <summary>
 /// The host's conversion options. The typed fields - <see cref="TypeNameStyle"/>, <see cref="SyntaxMode"/>,
-/// <see cref="UseStronglyTypedDocument"/>, <see cref="DocumentTypeName"/>, <see cref="ClientCallFormat"/>, and
-/// <see cref="ClientCallStyle"/> - drive the .NET converter output. The remaining fields exist to round-trip
-/// the host contract. <see cref="TypeNameStyle"/> is an extension the harness passes through the host's
-/// open-ended options bag to select the emitted type-name spelling.
+/// <see cref="UseStronglyTypedDocument"/>, <see cref="DocumentTypeName"/>, <see cref="ClientCallFormat"/>,
+/// <see cref="ClientCallStyle"/>, and <see cref="EmitUsings"/> - drive the .NET converter output. The remaining
+/// fields exist to round-trip the host contract. <see cref="TypeNameStyle"/> is an extension the harness passes
+/// through the host's open-ended options bag to select the emitted type-name spelling.
 /// </summary>
 public sealed record ConvertOptions
 {
@@ -60,4 +60,9 @@ public sealed record ConvertOptions
 	/// <c>statement</c> (request variable plus a call statement), or <c>inline</c> (request or descriptor lambda
 	/// inlined as the call argument). Extension to the host contract.</summary>
 	public string? ClientCallFormat { get; init; }
+
+	/// <summary>Prepend the <c>using</c> directives for the namespaces the generated code references. Defaults to
+	/// <c>true</c>; with the default <see cref="TypeNameStyle"/> of <c>Simplified</c> the code does not compile
+	/// without them. Extension to the host contract.</summary>
+	public bool? EmitUsings { get; init; }
 }

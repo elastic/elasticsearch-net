@@ -92,6 +92,7 @@ internal static partial class Exporter
 
 			var requests = parsed.Requests ?? [];
 			var debug = parsed.Options?.Debug ?? false;
+			var emitUsings = parsed.Options?.EmitUsings ?? true;
 
 			// Each request becomes a typed variable declaration. In a batch the first variables are `request`/`response`,
 			// then `request1`/`response1`, `request2`/`response2`, ... so the snippets don't collide when pasted together.
@@ -120,8 +121,9 @@ internal static partial class Exporter
 				}
 			}
 
-			// The using directives appear once at the top, deduplicated and ordered, covering every request below.
-			var usings = string.Concat(namespaces.Select(ns => $"using {ns};\n"));
+			// Unless disabled via emit_usings, the using directives appear once at the top, deduplicated and ordered,
+			// covering every request below.
+			var usings = emitUsings ? string.Concat(namespaces.Select(ns => $"using {ns};\n")) : "";
 			var body = string.Join("\n\n", declarations);
 
 			return StringResponse(usings.Length > 0 ? $"{usings}\n{body}" : body);
