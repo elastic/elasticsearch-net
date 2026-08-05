@@ -62,6 +62,10 @@ Document-bodied requests also hoist the document and optional parameters such as
 synchronous one. In a batch, request and response variables are suffixed (`request1`/`response1`, ...) so the
 snippets can be pasted together.
 
+`options.emit_usings` (bool, default `true`) prepends the `using` directives for the namespaces the generated code
+references, deduplicated across the batch. Disable it when the host supplies its own directives; with the default
+`type_name_style` of `Simplified` the snippet does not compile without them.
+
 `ParsedRequest` is produced by the host's parser, not by this module: turning Dev Console text into
 the API name and URL parameters needs the Elasticsearch schema, which the host library owns. The
 browser harness below shows the full pipeline (parse with the host, convert with this module).
