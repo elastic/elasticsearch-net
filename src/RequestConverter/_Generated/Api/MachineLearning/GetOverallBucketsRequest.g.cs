@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattable
+public partial class GetOverallBucketsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,47 +32,9 @@ public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattabl
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				JobId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (AllowNoMatch is not null)
-			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
-			}
-
-			if (BucketSpan is not null)
-			{
-				writer.WriteFluentCall("BucketSpan", (w) => { BucketSpan.FormatCode(w); });
-			}
-
-			if (End is not null)
-			{
-				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
-			}
-
-			if (ExcludeInterim is not null)
-			{
-				writer.WriteFluentCall("ExcludeInterim", (w) => { w.WriteValue(ExcludeInterim.Value); });
-			}
-
-			if (OverallScore is not null)
-			{
-				writer.WriteFluentCall("OverallScore", (w) => { w.WriteValue(OverallScore.Value); w.Write("d"); });
-			}
-
-			if (Start is not null)
-			{
-				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
-			}
-
-			if (TopN is not null)
-			{
-				writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -126,6 +88,54 @@ public partial class GetOverallBucketsRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("jobId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			JobId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (AllowNoMatch is not null)
+		{
+			writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
+		}
+
+		if (BucketSpan is not null)
+		{
+			writer.WriteFluentCall("BucketSpan", (w) => { BucketSpan.FormatCode(w); });
+		}
+
+		if (End is not null)
+		{
+			writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
+		}
+
+		if (ExcludeInterim is not null)
+		{
+			writer.WriteFluentCall("ExcludeInterim", (w) => { w.WriteValue(ExcludeInterim.Value); });
+		}
+
+		if (OverallScore is not null)
+		{
+			writer.WriteFluentCall("OverallScore", (w) => { w.WriteValue(OverallScore.Value); w.Write("d"); });
+		}
+
+		if (Start is not null)
+		{
+			writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
+		}
+
+		if (TopN is not null)
+		{
+			writer.WriteFluentCall("TopN", (w) => { w.WriteValue(TopN.Value); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public partial class GetPipelineRequest : RequestConverter.ICodeFormattable
+public partial class GetPipelineRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,22 +31,10 @@ public partial class GetPipelineRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Id is not null)
-			{
-				writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
-			}
-
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
-
-			if (Summary is not null)
-			{
-				writer.WriteFluentCall("Summary", (w) => { w.WriteValue(Summary.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -70,6 +58,29 @@ public partial class GetPipelineRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Id is not null)
+		{
+			writer.WriteFluentCall("Id", (w) => { Id.FormatCode(w); });
+		}
+
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
+		}
+
+		if (Summary is not null)
+		{
+			writer.WriteFluentCall("Summary", (w) => { w.WriteValue(Summary.Value); });
 		}
 	}
 }

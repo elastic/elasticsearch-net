@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public partial class GetTransformRequest : RequestConverter.ICodeFormattable
+public partial class GetTransformRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,32 +31,10 @@ public partial class GetTransformRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (TransformId is not null)
-			{
-				writer.WriteFluentCall("TransformId", (w) => { TransformId.FormatCode(w); });
-			}
-
-			if (AllowNoMatch is not null)
-			{
-				writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
-			}
-
-			if (ExcludeGenerated is not null)
-			{
-				writer.WriteFluentCall("ExcludeGenerated", (w) => { w.WriteValue(ExcludeGenerated.Value); });
-			}
-
-			if (From is not null)
-			{
-				writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
-			}
-
-			if (Size is not null)
-			{
-				writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -92,6 +70,39 @@ public partial class GetTransformRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (TransformId is not null)
+		{
+			writer.WriteFluentCall("TransformId", (w) => { TransformId.FormatCode(w); });
+		}
+
+		if (AllowNoMatch is not null)
+		{
+			writer.WriteFluentCall("AllowNoMatch", (w) => { w.WriteValue(AllowNoMatch.Value); });
+		}
+
+		if (ExcludeGenerated is not null)
+		{
+			writer.WriteFluentCall("ExcludeGenerated", (w) => { w.WriteValue(ExcludeGenerated.Value); });
+		}
+
+		if (From is not null)
+		{
+			writer.WriteFluentCall("From", (w) => { w.WriteValue(From.Value); });
+		}
+
+		if (Size is not null)
+		{
+			writer.WriteFluentCall("Size", (w) => { w.WriteValue(Size.Value); });
 		}
 	}
 }

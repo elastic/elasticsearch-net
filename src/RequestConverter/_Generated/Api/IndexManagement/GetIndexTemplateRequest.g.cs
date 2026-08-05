@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public partial class GetIndexTemplateRequest : RequestConverter.ICodeFormattable
+public partial class GetIndexTemplateRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,32 +31,10 @@ public partial class GetIndexTemplateRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			if (Name is not null)
-			{
-				writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
-			}
-
-			if (FlatSettings is not null)
-			{
-				writer.WriteFluentCall("FlatSettings", (w) => { w.WriteValue(FlatSettings.Value); });
-			}
-
-			if (IncludeDefaults is not null)
-			{
-				writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
-			}
-#pragma warning disable CS0618
-			if (Local is not null)
-			{
-				writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
-			}
-#pragma warning restore CS0618
-			if (MasterTimeout is not null)
-			{
-				writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -92,6 +70,39 @@ public partial class GetIndexTemplateRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Name is not null)
+		{
+			writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
+		}
+
+		if (FlatSettings is not null)
+		{
+			writer.WriteFluentCall("FlatSettings", (w) => { w.WriteValue(FlatSettings.Value); });
+		}
+
+		if (IncludeDefaults is not null)
+		{
+			writer.WriteFluentCall("IncludeDefaults", (w) => { w.WriteValue(IncludeDefaults.Value); });
+		}
+#pragma warning disable CS0618
+		if (Local is not null)
+		{
+			writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
+		}
+#pragma warning restore CS0618
+		if (MasterTimeout is not null)
+		{
+			writer.WriteFluentCall("MasterTimeout", (w) => { MasterTimeout.FormatCode(w); });
 		}
 	}
 }
