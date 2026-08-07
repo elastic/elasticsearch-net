@@ -38,8 +38,25 @@ illustrative and generally does not compile or round-trip as-is. Both map to
 executes the request: `statement` declares the request variable and calls
 `var response = await client.Esql.QueryAsync(request);`; `inline` passes the request initializer (object-initializer
 mode) or, in descriptor mode, the chain-head constructor arguments hoisted as labeled call arguments followed by the
-configuration lambda, e.g.
-`var response = await client.Indices.CreateAsync(index: "my-index", d1 => d1.Settings(...));`.
+configuration lambda. A call whose argument spans multiple lines wraps the method onto its own line
+(a lambda additionally closes `);` on its own line):
+
+```csharp
+var response = await client.Indices
+    .CreateAsync(index: "my-index", d1 => d1
+        .Settings(...)
+    );
+
+var response = await client.Indices
+    .CreateAsync(new CreateIndexRequest()
+    {
+        Index = "my-index",
+        Settings = ...
+    });
+```
+
+A call whose argument stays single-line stays on one line, e.g.
+`var response = await client.Indices.CreateAsync(index: "my-index");`.
 Document-bodied requests also hoist the document and optional parameters such as `id: null`.
 `options.client_call_style` (`async` | `sync`, default `async`) selects the awaited asynchronous flavor or the
 synchronous one. In a batch, request and response variables are suffixed (`request1`/`response1`, ...) so the
