@@ -717,6 +717,32 @@ public sealed class CodeWriter
 	}
 
 	/// <summary>
+	/// Whether <paramref name="writeBody"/> emits no text, probed against a scratch writer with the same options
+	/// (type refs and state recorded during the probe are discarded with it). The inline client call asks this
+	/// about the descriptor chain before writing anything: a non-empty chain wraps the method call onto its own
+	/// line, and that break precedes text the chain itself only produces later.
+	/// </summary>
+	public bool WritesNothing(Action<CodeWriter> writeBody)
+	{
+		var probe = new CodeWriter(Options);
+		writeBody(probe);
+		return probe._builder.Length == 0;
+	}
+
+	/// <summary>
+	/// Whether <paramref name="writeBody"/> emits at least one line break, probed against a scratch writer with the
+	/// same options (type refs and state recorded during the probe are discarded with it). The inline client call
+	/// asks this about the request argument before writing anything: a multi-line argument wraps the method call
+	/// onto its own line, and that break precedes text the argument itself only produces later.
+	/// </summary>
+	public bool WritesMultipleLines(Action<CodeWriter> writeBody)
+	{
+		var probe = new CodeWriter(Options);
+		writeBody(probe);
+		return probe._lineCount > 0;
+	}
+
+	/// <summary>
 	/// Writes the argument list of an inline descriptor client call: the hoisted chain-head constructor arguments,
 	/// then the configuration lambda <c>dN =&gt; dN...</c> holding the fluent chain. An empty chain drops the lambda
 	/// (and its separator, mirroring <see cref="WriteFluentVariantAdd"/>) so the call binds to the actionless
