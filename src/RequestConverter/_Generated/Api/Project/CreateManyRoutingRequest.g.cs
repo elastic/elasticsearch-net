@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
-public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattable
+public partial class CreateManyRoutingRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,11 +31,10 @@ public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattabl
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-			{
-				writer.WriteFluentDescriptorCall("Expressions", (w) => { w.WriteFluentDictionaryAdds("Add", Expressions, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -53,6 +52,18 @@ public partial class CreateManyRoutingRequest : RequestConverter.ICodeFormattabl
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		{
+			writer.WriteFluentDescriptorCall("Expressions", (w) => { w.WriteFluentDictionaryAdds("Add", Expressions, (w, kvp) => { w.WriteString(kvp.Key); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
 		}
 	}
 }

@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
-public partial class GetLicenseRequest : RequestConverter.ICodeFormattable
+public partial class GetLicenseRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -31,18 +31,10 @@ public partial class GetLicenseRequest : RequestConverter.ICodeFormattable
 		{
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor");
-			writer.Write("()");
-			using var _chainIndent = writer.Indent();
-#pragma warning disable CS0618
-			if (AcceptEnterprise is not null)
-			{
-				writer.WriteFluentCall("AcceptEnterprise", (w) => { w.WriteValue(AcceptEnterprise.Value); });
-			}
-#pragma warning restore CS0618
-			if (Local is not null)
-			{
-				writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -61,6 +53,25 @@ public partial class GetLicenseRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+#pragma warning disable CS0618
+		if (AcceptEnterprise is not null)
+		{
+			writer.WriteFluentCall("AcceptEnterprise", (w) => { w.WriteValue(AcceptEnterprise.Value); });
+		}
+#pragma warning restore CS0618
+		if (Local is not null)
+		{
+			writer.WriteFluentCall("Local", (w) => { w.WriteValue(Local.Value); });
 		}
 	}
 }

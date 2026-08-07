@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class StartDatafeedRequest : RequestConverter.ICodeFormattable
+public partial class StartDatafeedRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,27 +32,9 @@ public partial class StartDatafeedRequest : RequestConverter.ICodeFormattable
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				DatafeedId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (End is not null)
-			{
-				writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
-			}
-
-			if (Start is not null)
-			{
-				writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -81,6 +63,34 @@ public partial class StartDatafeedRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("datafeedId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			DatafeedId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (End is not null)
+		{
+			writer.WriteFluentCall("End", (w) => { w.WriteValue(End.Value); });
+		}
+
+		if (Start is not null)
+		{
+			writer.WriteFluentCall("Start", (w) => { w.WriteValue(Start.Value); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
 		}
 	}
 }

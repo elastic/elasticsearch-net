@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFormattable
+public partial class PutTrainedModelVocabularyRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -32,26 +32,9 @@ public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFo
 			writer.Write("new ");
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				ModelId.FormatCode(writer);
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (Merges is not null)
-			{
-				writer.WriteFluentParams("Merges", Merges, (w, item) => { w.WriteString(item); });
-			}
-
-			if (Scores is not null)
-			{
-				writer.WriteFluentParams("Scores", Scores, (w, item) => { w.WriteValue(item); w.Write("d"); });
-			}
-
-			{
-				writer.WriteFluentParams("Vocabulary", Vocabulary, (w, item) => { w.WriteString(item); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -79,6 +62,33 @@ public partial class PutTrainedModelVocabularyRequest : RequestConverter.ICodeFo
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("modelId");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			ModelId.FormatCode(writer);
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Merges is not null)
+		{
+			writer.WriteFluentParams("Merges", Merges, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Scores is not null)
+		{
+			writer.WriteFluentParams("Scores", Scores, (w, item) => { w.WriteValue(item); w.Write("d"); });
+		}
+
+		{
+			writer.WriteFluentParams("Vocabulary", Vocabulary, (w, item) => { w.WriteString(item); });
 		}
 	}
 }

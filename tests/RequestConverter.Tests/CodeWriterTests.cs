@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Text.Json;
 
 using RequestConverter;
@@ -199,5 +200,77 @@ public class CodeWriterTests
 		var first = writer.ToString();
 		var second = writer.ToString();
 		Assert.Equal(first, second);
+	}
+
+	[Fact]
+	public void Force_next_explicit_constructor_applies_to_the_next_initializer_only()
+	{
+		var writer = new CodeWriter();
+		writer.ForceNextExplicitConstructor();
+		writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchRequest").Dispose();
+		writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.SearchRequest").Dispose();
+
+		Assert.Equal("new SearchRequest()new()", writer.ToString());
+	}
+
+	[Fact]
+	public void Inline_descriptor_arguments_write_args_then_lambda()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(
+			w => w.Write("\"idx\""),
+			w => w.WriteFluentCall("Refresh", null));
+		writer.Write(")");
+
+		Assert.StartsWith("M(\"idx\", ", writer.ToString(), StringComparison.Ordinal);
+		Assert.Contains(" => ", writer.ToString(), StringComparison.Ordinal);
+		Assert.Contains(".Refresh()", writer.ToString(), StringComparison.Ordinal);
+	}
+
+	[Fact]
+	public void Inline_descriptor_arguments_drop_an_empty_chain_and_its_separator()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(w => w.Write("\"idx\""), _ => { });
+		writer.Write(")");
+
+		Assert.Equal("M(\"idx\")", writer.ToString());
+	}
+
+	[Fact]
+	public void Inline_descriptor_arguments_handle_empty_args_and_chain()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(_ => { }, _ => { });
+		writer.Write(")");
+
+		Assert.Equal("M()", writer.ToString());
+	}
+
+	[Fact]
+	public void Inline_argument_label_writes_nothing_outside_an_inline_call()
+	{
+		var writer = new CodeWriter();
+		writer.WriteInlineArgumentLabel("index");
+		writer.Write("\"idx\"");
+
+		Assert.Equal("\"idx\"", writer.ToString());
+	}
+
+	[Fact]
+	public void Inline_argument_label_writes_the_name_for_hoisted_arguments_only()
+	{
+		var writer = new CodeWriter();
+		writer.Write("M(");
+		writer.WriteInlineDescriptorArguments(
+			w => w.WriteInlineArgumentLabel("index").Write("\"idx\""),
+			w => w.WriteInlineArgumentLabel("chain").WriteFluentCall("Refresh", null));
+		writer.Write(")");
+
+		Assert.StartsWith("M(index: \"idx\", ", writer.ToString(), StringComparison.Ordinal);
+		Assert.DoesNotContain("chain: ", writer.ToString(), StringComparison.Ordinal);
 	}
 }

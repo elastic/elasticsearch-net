@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
+public partial class MultiTermVectorsRequest : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -33,90 +33,17 @@ public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>");
-				writer.Write("()");
 			}
 			else
 			{
 				writer.Write("new ");
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor");
-				writer.Write("()");
 			}
 
-			using var _chainIndent = writer.Indent();
-			if (Index is not null)
-			{
-				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
-			}
-
-			if (Fields is not null)
-			{
-				writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
-			}
-
-			if (FieldStatistics is not null)
-			{
-				writer.WriteFluentCall("FieldStatistics", (w) => { w.WriteValue(FieldStatistics.Value); });
-			}
-
-			if (Offsets is not null)
-			{
-				writer.WriteFluentCall("Offsets", (w) => { w.WriteValue(Offsets.Value); });
-			}
-
-			if (Payloads is not null)
-			{
-				writer.WriteFluentCall("Payloads", (w) => { w.WriteValue(Payloads.Value); });
-			}
-
-			if (Positions is not null)
-			{
-				writer.WriteFluentCall("Positions", (w) => { w.WriteValue(Positions.Value); });
-			}
-
-			if (Preference is not null)
-			{
-				writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
-			}
-
-			if (Realtime is not null)
-			{
-				writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
-			}
-
-			if (RouteSlice is not null)
-			{
-				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
-			}
-
-			if (Routing is not null)
-			{
-				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
-			}
-
-			if (TermStatistics is not null)
-			{
-				writer.WriteFluentCall("TermStatistics", (w) => { w.WriteValue(TermStatistics.Value); });
-			}
-
-			if (Version is not null)
-			{
-				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
-			}
-
-			if (VersionType is not null)
-			{
-				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
-			}
-
-			if (Docs is not null)
-			{
-				writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>"); w.Write("()"); });
-			}
-
-			if (Ids is not null)
-			{
-				writer.WriteFluentCall("Ids", (w) => { w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
-			}
+			writer.Write("(");
+			FormatDescriptorHeadArguments(writer);
+			writer.Write(")");
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -213,6 +140,89 @@ public partial class MultiTermVectorsRequest : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (Index is not null)
+		{
+			writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
+		}
+
+		if (Fields is not null)
+		{
+			writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
+		}
+
+		if (FieldStatistics is not null)
+		{
+			writer.WriteFluentCall("FieldStatistics", (w) => { w.WriteValue(FieldStatistics.Value); });
+		}
+
+		if (Offsets is not null)
+		{
+			writer.WriteFluentCall("Offsets", (w) => { w.WriteValue(Offsets.Value); });
+		}
+
+		if (Payloads is not null)
+		{
+			writer.WriteFluentCall("Payloads", (w) => { w.WriteValue(Payloads.Value); });
+		}
+
+		if (Positions is not null)
+		{
+			writer.WriteFluentCall("Positions", (w) => { w.WriteValue(Positions.Value); });
+		}
+
+		if (Preference is not null)
+		{
+			writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
+		}
+
+		if (Realtime is not null)
+		{
+			writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
+		}
+
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+		}
+
+		if (Routing is not null)
+		{
+			writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+		}
+
+		if (TermStatistics is not null)
+		{
+			writer.WriteFluentCall("TermStatistics", (w) => { w.WriteValue(TermStatistics.Value); });
+		}
+
+		if (Version is not null)
+		{
+			writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
+		}
+
+		if (VersionType is not null)
+		{
+			writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+		}
+
+		if (Docs is not null)
+		{
+			writer.WriteFluentDescriptorParams("Docs", Docs, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>"); w.Write("()"); });
+		}
+
+		if (Ids is not null)
+		{
+			writer.WriteFluentCall("Ids", (w) => { w.WriteInlineList(Ids, (w, item) => { item.FormatCode(w); }); });
 		}
 	}
 }

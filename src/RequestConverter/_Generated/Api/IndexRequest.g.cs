@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
+public partial class IndexRequest<TDocument> : RequestConverter.IClientCallFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
@@ -35,99 +35,9 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 			writer.WriteTypeName(typeof(TDocument));
 			writer.Write(">");
 			writer.Write("(");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				writer.WriteDocument(Document);
-			}
-
-			writer.Write(", ");
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Index.FormatCode(writer);
-			}
-
-			writer.Write(", ");
-			if (Id is not null)
-			{
-				using var _oi = writer.ForceObjectInitializer();
-				Id.FormatCode(writer);
-			}
-			else
-			{
-				writer.Write("null");
-			}
-
+			FormatDescriptorHeadArguments(writer);
 			writer.Write(")");
-			using var _chainIndent = writer.Indent();
-			if (IfPrimaryTerm is not null)
-			{
-				writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
-			}
-
-			if (IfSeqNo is not null)
-			{
-				writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
-			}
-
-			if (IncludeSourceOnError is not null)
-			{
-				writer.WriteFluentCall("IncludeSourceOnError", (w) => { w.WriteValue(IncludeSourceOnError.Value); });
-			}
-
-			if (OpType is not null)
-			{
-				writer.WriteFluentCall("OpType", (w) => { Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, w); });
-			}
-
-			if (Pipeline is not null)
-			{
-				writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
-			}
-
-			if (Refresh is not null)
-			{
-				writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
-			}
-
-			if (RequireAlias is not null)
-			{
-				writer.WriteFluentCall("RequireAlias", (w) => { w.WriteValue(RequireAlias.Value); });
-			}
-
-			if (RequireDataStream is not null)
-			{
-				writer.WriteFluentCall("RequireDataStream", (w) => { w.WriteValue(RequireDataStream.Value); });
-			}
-
-			if (RouteSlice is not null)
-			{
-				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
-			}
-
-			if (Routing is not null)
-			{
-				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
-			}
-
-			if (Timeout is not null)
-			{
-				writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
-			}
-
-			if (Version is not null)
-			{
-				writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
-			}
-
-			if (VersionType is not null)
-			{
-				writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
-			}
-
-			if (WaitForActiveShards is not null)
-			{
-				writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
-			}
+			FormatDescriptorChain(writer);
 		}
 		else
 		{
@@ -236,6 +146,108 @@ public partial class IndexRequest<TDocument> : RequestConverter.ICodeFormattable
 			}
 
 			initializer.Dispose();
+		}
+	}
+
+	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
+	{
+		writer.WriteInlineArgumentLabel("document");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteDocument(Document);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("index");
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Index.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("id");
+		if (Id is not null)
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			Id.FormatCode(writer);
+		}
+		else
+		{
+			writer.Write("null");
+		}
+	}
+
+	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
+	{
+		using var _chainIndent = writer.Indent();
+		if (IfPrimaryTerm is not null)
+		{
+			writer.WriteFluentCall("IfPrimaryTerm", (w) => { w.WriteValue(IfPrimaryTerm.Value); w.Write("L"); });
+		}
+
+		if (IfSeqNo is not null)
+		{
+			writer.WriteFluentCall("IfSeqNo", (w) => { w.WriteValue(IfSeqNo.Value); w.Write("L"); });
+		}
+
+		if (IncludeSourceOnError is not null)
+		{
+			writer.WriteFluentCall("IncludeSourceOnError", (w) => { w.WriteValue(IncludeSourceOnError.Value); });
+		}
+
+		if (OpType is not null)
+		{
+			writer.WriteFluentCall("OpType", (w) => { Elastic.Clients.Elasticsearch.OpTypeCodeFormatter.FormatCode(OpType.Value, w); });
+		}
+
+		if (Pipeline is not null)
+		{
+			writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
+		}
+
+		if (Refresh is not null)
+		{
+			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+		}
+
+		if (RequireAlias is not null)
+		{
+			writer.WriteFluentCall("RequireAlias", (w) => { w.WriteValue(RequireAlias.Value); });
+		}
+
+		if (RequireDataStream is not null)
+		{
+			writer.WriteFluentCall("RequireDataStream", (w) => { w.WriteValue(RequireDataStream.Value); });
+		}
+
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+		}
+
+		if (Routing is not null)
+		{
+			writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+		}
+
+		if (Timeout is not null)
+		{
+			writer.WriteFluentCall("Timeout", (w) => { Timeout.FormatCode(w); });
+		}
+
+		if (Version is not null)
+		{
+			writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
+		}
+
+		if (VersionType is not null)
+		{
+			writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+		}
+
+		if (WaitForActiveShards is not null)
+		{
+			writer.WriteFluentCall("WaitForActiveShards", (w) => { WaitForActiveShards.FormatCode(w); });
 		}
 	}
 }

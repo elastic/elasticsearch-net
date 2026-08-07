@@ -57,6 +57,10 @@ public sealed class CodeWriter
 	// span, so each ancestor on the single-call path also closes on its own line.
 	private int _lineCount;
 
+	// Set only while the hoisted chain-head arguments of an inline client call are being written; see
+	// WriteInlineArgumentLabel.
+	private bool _inlineArgumentLabels;
+
 	public CodeWriter(FormattingOptions? options = null) => Options = options ?? FormattingOptions.Default;
 
 	public FormattingOptions Options { get; }
@@ -558,6 +562,17 @@ public sealed class CodeWriter
 	/// </summary>
 	public ForceExplicitConstructorScope ForceExplicitConstructor() => new(this);
 
+	/// <summary>
+	/// Forces the next <see cref="BeginObjectInitializer"/> to spell its constructor explicitly, without affecting
+	/// nested initializers. The inline client call needs this for its root request argument: a target-typed
+	/// <c>new()</c> is ambiguous against the client method's overload set.
+	/// </summary>
+	public CodeWriter ForceNextExplicitConstructor()
+	{
+		_forceExplicitConstructor = true;
+		return this;
+	}
+
 	/// <summary>Disposable returned by <see cref="ForceExplicitConstructor"/>; restores the constructor style on dispose.</summary>
 	public readonly struct ForceExplicitConstructorScope : IDisposable
 	{
@@ -699,6 +714,80 @@ public sealed class CodeWriter
 		// at this call's indent (the body's Indent() block has exited). This cascades up the nesting for free - a wrapped
 		// descendant's line endings lie within every ancestor body's span - so parens never collapse to ")))".
 		return multiline ? WriteLine().Write(")") : Write(")");
+	}
+
+	/// <summary>
+	/// Whether <paramref name="writeBody"/> emits no text, probed against a scratch writer with the same options
+	/// (type refs and state recorded during the probe are discarded with it). The inline client call asks this
+	/// about the descriptor chain before writing anything: a non-empty chain wraps the method call onto its own
+	/// line, and that break precedes text the chain itself only produces later.
+	/// </summary>
+	public bool WritesNothing(Action<CodeWriter> writeBody)
+	{
+		var probe = new CodeWriter(Options);
+		writeBody(probe);
+		return probe._builder.Length == 0;
+	}
+
+	/// <summary>
+	/// Whether <paramref name="writeBody"/> emits at least one line break, probed against a scratch writer with the
+	/// same options (type refs and state recorded during the probe are discarded with it). The inline client call
+	/// asks this about the request argument before writing anything: a multi-line argument wraps the method call
+	/// onto its own line, and that break precedes text the argument itself only produces later.
+	/// </summary>
+	public bool WritesMultipleLines(Action<CodeWriter> writeBody)
+	{
+		var probe = new CodeWriter(Options);
+		writeBody(probe);
+		return probe._lineCount > 0;
+	}
+
+	/// <summary>
+	/// Writes the argument list of an inline descriptor client call: the hoisted chain-head constructor arguments,
+	/// then the configuration lambda <c>dN =&gt; dN...</c> holding the fluent chain. An empty chain drops the lambda
+	/// (and its separator, mirroring <see cref="WriteFluentVariantAdd"/>) so the call binds to the actionless
+	/// overload, which structurally exists: fluent client overloads and chain-head constructors are generated from
+	/// the same descriptor shadow constructors.
+	/// </summary>
+	public CodeWriter WriteInlineDescriptorArguments(Action<CodeWriter> writeHeadArguments, Action<CodeWriter> writeChain)
+	{
+		var beforeArguments = _builder.Length;
+		_inlineArgumentLabels = true;
+		try
+		{
+			writeHeadArguments(this);
+		}
+		finally
+		{
+			_inlineArgumentLabels = false;
+		}
+
+		var beforeSeparator = _builder.Length;
+
+		if (_builder.Length != beforeArguments)
+		{
+			Write(", ");
+		}
+
+		TryWriteDescriptorLambda(beforeSeparator, writeChain, out _);
+		return this;
+	}
+
+	/// <summary>
+	/// Writes <c>name: </c> when the writer is rendering an inline client call's argument list, and nothing
+	/// otherwise. The generated head-arguments writers label every argument through this call: hoisted arguments
+	/// need the label because some are ambiguous against the client's overload set (e.g. a <c>string</c> converts
+	/// to both <c>IndexName</c> and <c>Id</c>), while the same emission composed into a descriptor constructor
+	/// must stay unlabeled and unchanged.
+	/// </summary>
+	public CodeWriter WriteInlineArgumentLabel(string name)
+	{
+		if (_inlineArgumentLabels)
+		{
+			Write(name).Write(": ");
+		}
+
+		return this;
 	}
 
 	/// <summary>
@@ -948,6 +1037,10 @@ public sealed class CodeWriter
 					AppendTypeRefPlaceholder(token);
 				else if (Options.UseStronglyTypedDocument && IsDocumentTypeParameter(token))
 					_builder.Append(Options.DocumentTypeName); // e.g. IndexRequest<TDocument> -> IndexRequest<MyDocument>
+				else if (IsDocumentTypeParameter(token))
+					// The emission site has no such type parameter in scope, so the token must render as the type the
+					// materialized request is actually closed over: e.g. IndexRequest<TDocument> -> IndexRequest<JsonElement>.
+					AppendTypeRefPlaceholder("System.Text.Json.JsonElement");
 				else
 					_builder.Append(token); // keyword / primitive / open type parameter
 			}
@@ -1016,8 +1109,9 @@ public sealed class CodeWriter
 	}
 
 	// The open document/source type parameters (ConverterType.Source slots: request documents, Get/Hit results, EQL
-	// events). In strongly-typed-document mode they render as the placeholder document type so an explicit constructor
-	// reads e.g. `new IndexRequest<MyDocument>()` rather than leaking the open `TDocument` token.
+	// events). They always render as a closed type - the placeholder document type in strongly-typed-document mode, the
+	// materialized JsonElement otherwise - so an explicit constructor reads e.g. `new IndexRequest<MyDocument>()` rather
+	// than leaking the open `TDocument` token, which is undefined at the emission site.
 	private static bool IsDocumentTypeParameter(string token) =>
 		token is "TDocument" or "TPartialDocument" or "TEvent";
 
