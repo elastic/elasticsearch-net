@@ -155,8 +155,8 @@ public sealed class ClientCallTests
 		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline };
 		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
 
-		Assert.StartsWith("var response = await client.Esql.QueryAsync(new EsqlQueryRequest()", result.Code, StringComparison.Ordinal);
-		Assert.EndsWith(");", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client.Esql\n    .QueryAsync(new EsqlQueryRequest()", result.Code, StringComparison.Ordinal);
+		Assert.EndsWith("});", result.Code, StringComparison.Ordinal);
 		Assert.DoesNotContain("request =", result.Code, StringComparison.Ordinal);
 		Assert.Contains("Elastic.Clients.Elasticsearch.Esql", result.Namespaces);
 	}
@@ -167,7 +167,7 @@ public sealed class ClientCallTests
 		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline };
 		var result = Convert("search", """{"query":{"match_all":{}}}""", options);
 
-		Assert.StartsWith("var response = await client.SearchAsync<JsonElement>(new SearchRequest()", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client\n    .SearchAsync<JsonElement>(new SearchRequest()", result.Code, StringComparison.Ordinal);
 		Assert.Contains("System.Text.Json", result.Namespaces);
 	}
 
@@ -177,7 +177,7 @@ public sealed class ClientCallTests
 		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, ClientCallStyle = ClientCallStyle.Sync };
 		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
 
-		Assert.StartsWith("var response = client.Esql.Query(new EsqlQueryRequest()", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = client.Esql\n    .Query(new EsqlQueryRequest()", result.Code, StringComparison.Ordinal);
 	}
 
 	[Fact]
@@ -196,7 +196,7 @@ public sealed class ClientCallTests
 		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline };
 		var result = Convert("bulk", "{\"index\":{\"_id\":\"1\"}}\n{\"field\":1}\n", options);
 
-		Assert.StartsWith("var response = await client.BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client\n    .BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
 		Assert.Contains("Elastic.Clients.Elasticsearch", result.Namespaces);
 	}
 
@@ -206,11 +206,14 @@ public sealed class ClientCallTests
 		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
 		var result = Convert("esql.query", """{"query":"FROM library"}""", options);
 
-		Assert.StartsWith("var response = await client.Esql.QueryAsync(", result.Code, StringComparison.Ordinal);
-		Assert.Contains(" => ", result.Code, StringComparison.Ordinal);
-		Assert.Contains(".Query(\"FROM library\")", result.Code, StringComparison.Ordinal);
-		Assert.EndsWith("));", result.Code, StringComparison.Ordinal);
-		Assert.DoesNotContain("new EsqlQueryRequestDescriptor", result.Code, StringComparison.Ordinal);
+		// Spelled with explicit "\n" (the FormattingOptions default) so the expectation does not depend on the
+		// checkout's line endings. The non-empty chain wraps the method onto its own line and closes ");" on its own.
+		Assert.Equal(
+			"var response = await client.Esql\n"
+			+ "    .QueryAsync(d1 => d1\n"
+			+ "        .Query(\"FROM library\")\n"
+			+ "    );",
+			result.Code);
 	}
 
 	[Fact]
@@ -220,8 +223,9 @@ public sealed class ClientCallTests
 		var result = Convert("indices.create", """{"settings":{"number_of_shards":1}}""", options,
 			new Dictionary<string, string> { ["index"] = "my-index" });
 
-		Assert.StartsWith("var response = await client.Indices.CreateAsync(index: \"my-index\", ", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client.Indices\n    .CreateAsync(index: \"my-index\", d1 => d1\n", result.Code, StringComparison.Ordinal);
 		Assert.Contains(".Settings(", result.Code, StringComparison.Ordinal);
+		Assert.EndsWith("\n    );", result.Code, StringComparison.Ordinal);
 	}
 
 	[Fact]
@@ -248,7 +252,7 @@ public sealed class ClientCallTests
 		var options = new FormattingOptions { ClientCallFormat = ClientCallFormat.Inline, SyntaxMode = SyntaxMode.Descriptor };
 		var result = Convert("bulk", "{\"index\":{\"_id\":\"1\"}}\n{\"field\":1}\n", options);
 
-		Assert.StartsWith("var response = await client.BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client\n    .BulkAsync(new BulkRequest", result.Code, StringComparison.Ordinal);
 	}
 
 	[Fact]
@@ -278,7 +282,7 @@ public sealed class ClientCallTests
 
 		// Every descriptor-action overload is SearchAsync<TDocument, TEvent>, so both arguments are spelled even
 		// though the request overload leaves only TEvent open.
-		Assert.StartsWith("var response = await client.Eql.SearchAsync<JsonElement, JsonElement>(", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client.Eql\n    .SearchAsync<JsonElement, JsonElement>(", result.Code, StringComparison.Ordinal);
 		Assert.Contains("indices: new[] { \"books\" }", result.Code, StringComparison.Ordinal);
 	}
 
@@ -289,7 +293,7 @@ public sealed class ClientCallTests
 		var result = Convert("update", """{"doc":{"name":"book"}}""", options,
 			new Dictionary<string, string> { ["index"] = "books", ["id"] = "1" });
 
-		Assert.StartsWith("var response = await client.UpdateAsync<JsonElement, JsonElement>(index: \"books\", id: \"1\", ", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client\n    .UpdateAsync<JsonElement, JsonElement>(index: \"books\", id: \"1\", ", result.Code, StringComparison.Ordinal);
 		Assert.Contains(" => ", result.Code, StringComparison.Ordinal);
 	}
 
@@ -305,7 +309,7 @@ public sealed class ClientCallTests
 		var result = Convert("eql.search", """{"query":"any where true"}""", options,
 			new Dictionary<string, string> { ["index"] = "books" });
 
-		Assert.StartsWith("var response = await client.Eql.SearchAsync<MyDocument, MyDocument>(", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client.Eql\n    .SearchAsync<MyDocument, MyDocument>(", result.Code, StringComparison.Ordinal);
 	}
 
 	[Fact]
@@ -315,7 +319,7 @@ public sealed class ClientCallTests
 		var result = Convert("put_script", """{"script":{"lang":"painless","source":"ctx._source.counter += 1"}}""", options,
 			new Dictionary<string, string> { ["id"] = "my-script" });
 
-		Assert.StartsWith("var response = await client.PutScriptAsync(new PutScriptRequest", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client\n    .PutScriptAsync(new PutScriptRequest", result.Code, StringComparison.Ordinal);
 		Assert.DoesNotContain(" => ", result.Code, StringComparison.Ordinal);
 	}
 
@@ -341,6 +345,6 @@ public sealed class ClientCallTests
 		};
 		var result = Convert("search", """{"query":{"match_all":{}}}""", options);
 
-		Assert.StartsWith("var response = await client.SearchAsync<MyDocument>(", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client\n    .SearchAsync<MyDocument>(", result.Code, StringComparison.Ordinal);
 	}
 }
