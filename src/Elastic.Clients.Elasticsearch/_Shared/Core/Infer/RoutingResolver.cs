@@ -54,7 +54,16 @@ public class RoutingResolver
 			return route;
 		}
 
-		return GetJoinFieldFromObject(type, instance)?.Match(_ => _settings.Inferrer.Id(instance), child => ResolveId(_settings, child.ParentId));
+		var joinField = GetJoinFieldFromObject(type, instance);
+		if (joinField is null)
+		{
+			return null;
+		}
+
+		// Avoid 'JoinField.Match()', its lambdas capture 'instance' and allocate a closure per call.
+		return (joinField.Tag == 1)
+			? ResolveId(_settings, joinField.ChildOption.ParentId)
+			: _settings.Inferrer.Id(instance);
 
 		static string? ResolveId(IElasticsearchClientSettings settings, Id id)
 		{
