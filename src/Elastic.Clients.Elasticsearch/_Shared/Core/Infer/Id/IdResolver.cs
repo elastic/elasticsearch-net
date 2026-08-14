@@ -73,6 +73,9 @@ public class IdResolver
 			return null;
 		}
 
+		// Avoid reflection calls for subsequent invocations.
+		delegateCache.TryAdd(type, getterDelegate);
+
 		return getterDelegate(instance);
 	}
 
