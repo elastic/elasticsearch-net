@@ -67,6 +67,9 @@ public sealed partial class PutViewRequest : Elastic.Clients.Elasticsearch.Reque
 	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Name { get => P<Elastic.Clients.Elasticsearch.Id>("name"); set => PR("name", value); }
 
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#description']/*"/>
+	public string? Description { get; set; }
+
 	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#query']/*"/>
 	public required string Query { get; set; }
 }
@@ -103,6 +106,13 @@ public readonly partial struct PutViewRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#description']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor Description(string? value)
+	{
+		Instance.Description = value;
 		return this;
 	}
 

@@ -102,6 +102,12 @@ public partial class UpdateDatafeedRequest : RequestConverter.IClientCallFormatt
 				DelayedDataCheckConfig.FormatCode(writer);
 			}
 
+			if (ForceRekeying is not null)
+			{
+				initializer.Property("ForceRekeying");
+				writer.WriteValue(ForceRekeying.Value);
+			}
+
 			if (Frequency is not null)
 			{
 				initializer.Property("Frequency");
@@ -225,6 +231,11 @@ public partial class UpdateDatafeedRequest : RequestConverter.IClientCallFormatt
 		if (DelayedDataCheckConfig is not null)
 		{
 			writer.WriteFluentDescriptorCall("DelayedDataCheckConfig", (w) => { DelayedDataCheckConfig.FormatCode(w); }, (w) => { DelayedDataCheckConfig.FormatCode(w); });
+		}
+
+		if (ForceRekeying is not null)
+		{
+			writer.WriteFluentCall("ForceRekeying", (w) => { w.WriteValue(ForceRekeying.Value); });
 		}
 
 		if (Frequency is not null)

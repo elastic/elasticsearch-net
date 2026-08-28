@@ -17,6 +17,8 @@ specific quantization settings.
 Inference endpoint that will be used to generate embeddings for the field.
 This parameter cannot be updated. Use the Create inference API to create the endpoint.
 If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
+If the <c>inference_id</c> is not specified, it will default to <c>.jina-embeddings-v5-text-small</c> if the cluster is authorized to use the Elastic Inference Service,
+otherwise it will default to <c>.elser-2-elasticsearch</c>. The <c>.elser-2-elasticsearch</c> inference endpoint relies on a local ML node to run the ELSER model.
 </para></summary></member>
   <member key="_types.mapping.SemanticTextProperty#search_inference_id"><summary><para>
 Inference endpoint that will be used to generate embeddings at query time.

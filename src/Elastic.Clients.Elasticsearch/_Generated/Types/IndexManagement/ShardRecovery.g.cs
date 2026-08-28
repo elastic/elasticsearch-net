@@ -56,6 +56,9 @@ public sealed partial class ShardRecovery
 	public required long Id { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus Index { get; set; }
 	public required bool Primary { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#priority']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryPriority? Priority { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Source { get; set; }
 
 	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#stage']/*"/>

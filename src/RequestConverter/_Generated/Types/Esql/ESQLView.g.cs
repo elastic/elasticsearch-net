@@ -28,6 +28,12 @@ public partial class ESQLView : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Esql.ESQLView", false);
+		if (Description is not null)
+		{
+			initializer.Property("Description");
+			writer.WriteString(Description);
+		}
+
 		{
 			initializer.Property("Name");
 			writer.WriteString(Name);

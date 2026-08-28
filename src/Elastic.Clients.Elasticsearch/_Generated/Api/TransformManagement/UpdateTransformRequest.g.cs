@@ -77,6 +77,9 @@ public sealed partial class UpdateTransformRequest : Elastic.Clients.Elasticsear
 	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Destination? Dest { get; set; }
 
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_force_rekeying']/*"/>
+	public bool? ForceRekeying { get; set; }
+
 	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
@@ -168,6 +171,13 @@ public readonly partial struct UpdateTransformRequestDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_force_rekeying']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor ForceRekeying(bool? value = true)
+	{
+		Instance.ForceRekeying = value;
 		return this;
 	}
 
@@ -425,6 +435,13 @@ public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_force_rekeying']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> ForceRekeying(bool? value = true)
+	{
+		Instance.ForceRekeying = value;
 		return this;
 	}
 

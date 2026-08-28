@@ -25,16 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Esql.Json;
 
 public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.ESQLView>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 
 	public override Elastic.Clients.Elasticsearch.Esql.ESQLView Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<string> propName = default;
 		LocalJsonValue<string> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
 			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
@@ -57,6 +64,7 @@ public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.J
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Esql.ESQLView(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Description = propDescription.Value,
 			Name = propName.Value,
 			Query = propQuery.Value
 		};
@@ -65,6 +73,7 @@ public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.ESQLView value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();

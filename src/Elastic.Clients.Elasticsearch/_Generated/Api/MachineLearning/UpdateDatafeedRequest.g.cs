@@ -94,6 +94,9 @@ public sealed partial class UpdateDatafeedRequest : Elastic.Clients.Elasticsearc
 	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#delayed_data_check_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#_force_rekeying']/*"/>
+	public bool? ForceRekeying { get; set; }
+
 	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
@@ -266,6 +269,13 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor DelayedDataCheckConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> action)
 	{
 		Instance.DelayedDataCheckConfig = Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#_force_rekeying']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ForceRekeying(bool? value = true)
+	{
+		Instance.ForceRekeying = value;
 		return this;
 	}
 
@@ -649,6 +659,13 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> action)
 	{
 		Instance.DelayedDataCheckConfig = Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#_force_rekeying']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ForceRekeying(bool? value = true)
+	{
+		Instance.ForceRekeying = value;
 		return this;
 	}
 
