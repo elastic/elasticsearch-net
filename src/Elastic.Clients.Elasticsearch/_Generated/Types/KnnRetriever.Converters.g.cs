@@ -44,7 +44,7 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 		LocalJsonValue<int> propK = default;
 		LocalJsonValue<float?> propMinScore = default;
 		LocalJsonValue<string?> propName = default;
-		LocalJsonValue<int> propNumCandidates = default;
+		LocalJsonValue<int?> propNumCandidates = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<float>?> propQueryVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.RescoreVector?> propRescoreVector = default;
@@ -76,7 +76,7 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, null))
+			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -134,7 +134,7 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropK, value.K, null, null);
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, null);
+		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
 		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);

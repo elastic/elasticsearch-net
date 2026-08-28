@@ -25,16 +25,23 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class DestinationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Destination>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.Destination Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>?> propAliases = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
 		LocalJsonValue<string?> propPipeline = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>(o, null)))
+			{
+				continue;
+			}
+
 			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
 			{
 				continue;
@@ -57,6 +64,7 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Aliases = propAliases.Value,
 			Index = propIndex.Value,
 			Pipeline = propPipeline.Value
 		};
@@ -65,6 +73,7 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Destination value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>(o, v, null));
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropPipeline, value.Pipeline, null, null);
 		writer.WriteEndObject();
