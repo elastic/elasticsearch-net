@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="transform._types.Destination#aliases"><summary><para>
+The aliases that the destination index for the transform should have.
+Aliases are manipulated using the stored credentials of the transform, which means the secondary credentials
+supplied at creation time (if both primary and secondary credentials are specified).
+</para>
+<para>
+The destination index is added to the aliases regardless of whether the destination index was created by the
+transform or pre-created by the user.
+</para></summary></member>
   <member key="transform._types.Destination#index"><summary><para>
 The destination index for the transform. The mappings of the destination index are deduced based on the source
 fields when possible. If alternate mappings are required, use the create index API prior to starting the

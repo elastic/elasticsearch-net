@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 public sealed partial class TransformSummary
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TransformSummary(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest, string id, Elastic.Clients.Elasticsearch.TransformManagement.Source source)
+	public TransformSummary(Elastic.Clients.Elasticsearch.TransformManagement.Destination dest, string id, Elastic.Clients.Elasticsearch.TransformManagement.Source source)
 	{
 		Dest = dest;
 		Id = id;
@@ -56,7 +56,7 @@ public sealed partial class TransformSummary
 	public string? Description { get; set; }
 
 	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#dest']/*"/>
-	public required Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.Destination Dest { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 	public required string Id { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
