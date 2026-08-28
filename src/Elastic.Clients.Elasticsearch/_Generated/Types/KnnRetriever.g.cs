@@ -28,11 +28,10 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class KnnRetriever
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public KnnRetriever(string field, int k, int numCandidates)
+	public KnnRetriever(string field, int k)
 	{
 		Field = field;
 		K = k;
-		NumCandidates = numCandidates;
 	}
 
 	public KnnRetriever()
@@ -61,7 +60,7 @@ public sealed partial class KnnRetriever
 	public string? Name { get; set; }
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#num_candidates']/*"/>
-	public required int NumCandidates { get; set; }
+	public int? NumCandidates { get; set; }
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
 	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
@@ -152,7 +151,7 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 	}
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#num_candidates']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> NumCandidates(int value)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> NumCandidates(int? value)
 	{
 		Instance.NumCandidates = value;
 		return this;
@@ -305,7 +304,7 @@ public readonly partial struct KnnRetrieverDescriptor
 	}
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#num_candidates']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor NumCandidates(int value)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor NumCandidates(int? value)
 	{
 		Instance.NumCandidates = value;
 		return this;

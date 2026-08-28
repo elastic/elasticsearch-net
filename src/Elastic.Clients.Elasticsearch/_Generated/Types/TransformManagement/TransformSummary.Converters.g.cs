@@ -48,7 +48,7 @@ public sealed partial class TransformSummaryConverter : System.Text.Json.Seriali
 		LocalJsonValue<System.DateTimeOffset?> propCreateTime = default;
 		LocalJsonValue<System.DateTimeOffset?> propCreateTimeString = default;
 		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Destination> propDest = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Latest?> propLatest = default;

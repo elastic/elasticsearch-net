@@ -37,6 +37,9 @@ public sealed partial class Destination
 		_ = sentinel;
 	}
 
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#aliases']/*"/>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>? Aliases { get; set; }
+
 	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
@@ -63,6 +66,33 @@ public readonly partial struct DestinationDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Destination instance) => new Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor descriptor) => descriptor.Instance;
+
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#aliases']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>? value)
+	{
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#aliases']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Aliases(params Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias[] values)
+	{
+		Instance.Aliases = [.. values];
+		return this;
+	}
+
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#aliases']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Aliases(params System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAliasDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.TransformManagement.DestinationAliasDescriptor.Build(action));
+		}
+
+		Instance.Aliases = items;
+		return this;
+	}
 
 	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#index']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)

@@ -52,8 +52,9 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Name", (w) => { w.WriteString(Name); });
 			}
 
+			if (NumCandidates is not null)
 			{
-				writer.WriteFluentCall("NumCandidates", (w) => { w.WriteValue(NumCandidates); });
+				writer.WriteFluentCall("NumCandidates", (w) => { w.WriteValue(NumCandidates.Value); });
 			}
 
 			if (QueryVector is not null)
@@ -108,9 +109,10 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 				writer.WriteString(Name);
 			}
 
+			if (NumCandidates is not null)
 			{
 				initializer.Property("NumCandidates");
-				writer.WriteValue(NumCandidates);
+				writer.WriteValue(NumCandidates.Value);
 			}
 
 			if (QueryVector is not null)
