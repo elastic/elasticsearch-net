@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform._types.DestinationAlias#alias"><summary><para>
+The name of the alias.
+</para></summary></member>
+  <member key="transform._types.DestinationAlias#move_on_creation"><summary><para>
+Whether the destination index should be the only index in this alias.
+If <c>true</c>, all the other indices will be removed from this alias before adding the destination index to this
+alias. This does not delete the removed indices; it only removes them from the alias.
+</para></summary></member>
+</doc>

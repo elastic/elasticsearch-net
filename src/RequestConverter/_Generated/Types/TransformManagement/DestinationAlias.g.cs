@@ -23,46 +23,33 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public partial class Destination : RequestConverter.ICodeFormattable
+public partial class DestinationAlias : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			if (Aliases is not null)
 			{
-				writer.WriteFluentDescriptorParams("Aliases", Aliases, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>"); w.Write("()"); });
+				writer.WriteFluentCall("Alias", (w) => { Alias.FormatCode(w); });
 			}
 
-			if (Index is not null)
+			if (MoveOnCreation is not null)
 			{
-				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
-			}
-
-			if (Pipeline is not null)
-			{
-				writer.WriteFluentCall("Pipeline", (w) => { w.WriteString(Pipeline); });
+				writer.WriteFluentCall("MoveOnCreation", (w) => { w.WriteValue(MoveOnCreation.Value); });
 			}
 		}
 		else
 		{
-			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.Destination", false);
-			if (Aliases is not null)
+			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias", false);
 			{
-				initializer.Property("Aliases");
-				writer.WriteInlineList(Aliases, (w, item) => { item.FormatCode(w); });
+				initializer.Property("Alias");
+				Alias.FormatCode(writer);
 			}
 
-			if (Index is not null)
+			if (MoveOnCreation is not null)
 			{
-				initializer.Property("Index");
-				Index.FormatCode(writer);
-			}
-
-			if (Pipeline is not null)
-			{
-				initializer.Property("Pipeline");
-				writer.WriteString(Pipeline);
+				initializer.Property("MoveOnCreation");
+				writer.WriteValue(MoveOnCreation.Value);
 			}
 
 			initializer.Dispose();
