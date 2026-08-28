@@ -44,6 +44,12 @@ public partial class ShardRecovery : RequestConverter.ICodeFormattable
 			writer.WriteValue(Primary);
 		}
 
+		if (Priority is not null)
+		{
+			initializer.Property("Priority");
+			Elastic.Clients.Elasticsearch.IndexManagement.RecoveryPriorityCodeFormatter.FormatCode(Priority.Value, writer);
+		}
+
 		{
 			initializer.Property("Source");
 			Source.FormatCode(writer);

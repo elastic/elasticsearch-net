@@ -3,6 +3,9 @@
   <member key="esql._types.ESQLView"><summary><para>
 A non-materialized ES|QL view.
 </para></summary></member>
+  <member key="esql._types.ESQLView#description"><summary><para>
+A free-text description of the view.
+</para></summary></member>
   <member key="esql._types.ESQLView#name"><summary><para>
 The name of the ES|QL view
 </para></summary></member>

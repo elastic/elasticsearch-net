@@ -45,6 +45,9 @@ public sealed partial class ESQLView
 		_ = sentinel;
 	}
 
+	/// <include file="ESQLView.g.xml" path="doc/member[@key='esql._types.ESQLView#description']/*"/>
+	public string? Description { get; set; }
+
 	/// <include file="ESQLView.g.xml" path="doc/member[@key='esql._types.ESQLView#name']/*"/>
 	public required string Name { get; set; }
 

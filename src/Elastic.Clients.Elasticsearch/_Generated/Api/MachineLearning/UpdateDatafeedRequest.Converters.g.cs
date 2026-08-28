@@ -28,6 +28,7 @@ public sealed partial class UpdateDatafeedRequestConverter : System.Text.Json.Se
 	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropChunkingConfig = System.Text.Json.JsonEncodedText.Encode("chunking_config"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDelayedDataCheckConfig = System.Text.Json.JsonEncodedText.Encode("delayed_data_check_config"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForceRekeying = System.Text.Json.JsonEncodedText.Encode("_force_rekeying"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFrequency = System.Text.Json.JsonEncodedText.Encode("frequency"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndices1 = System.Text.Json.JsonEncodedText.Encode("indexes"u8);
@@ -46,6 +47,7 @@ public sealed partial class UpdateDatafeedRequestConverter : System.Text.Json.Se
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig?> propChunkingConfig = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig?> propDelayedDataCheckConfig = default;
+		LocalJsonValue<bool?> propForceRekeying = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndicesOptions?> propIndicesOptions = default;
@@ -69,6 +71,11 @@ public sealed partial class UpdateDatafeedRequestConverter : System.Text.Json.Se
 			}
 
 			if (propDelayedDataCheckConfig.TryReadProperty(ref reader, options, PropDelayedDataCheckConfig, null))
+			{
+				continue;
+			}
+
+			if (propForceRekeying.TryReadProperty(ref reader, options, PropForceRekeying, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -138,6 +145,7 @@ public sealed partial class UpdateDatafeedRequestConverter : System.Text.Json.Se
 			Aggregations = propAggregations.Value,
 			ChunkingConfig = propChunkingConfig.Value,
 			DelayedDataCheckConfig = propDelayedDataCheckConfig.Value,
+			ForceRekeying = propForceRekeying.Value,
 			Frequency = propFrequency.Value,
 			Indices = propIndices.Value,
 			IndicesOptions = propIndicesOptions.Value,
@@ -157,6 +165,7 @@ public sealed partial class UpdateDatafeedRequestConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
 		writer.WriteProperty(options, PropChunkingConfig, value.ChunkingConfig, null, null);
 		writer.WriteProperty(options, PropDelayedDataCheckConfig, value.DelayedDataCheckConfig, null, null);
+		writer.WriteProperty(options, PropForceRekeying, value.ForceRekeying, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions, null, null);

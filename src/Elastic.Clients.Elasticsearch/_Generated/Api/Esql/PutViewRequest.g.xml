@@ -3,6 +3,9 @@
   <member key="esql.put_view.Request"><summary><para>
 Create or update an ES|QL view.
 </para></summary></member>
+  <member key="esql.put_view.Request#description"><summary><para>
+A free-text description of the view.
+</para></summary></member>
   <member key="esql.put_view.Request#name"><summary><para>
 The view name to create or update.
 </para></summary></member>

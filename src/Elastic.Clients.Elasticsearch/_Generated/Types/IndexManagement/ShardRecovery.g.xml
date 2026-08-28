@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="indices.recovery.ShardRecovery#priority"><summary><para>
+The recovery priority.
+</para></summary></member>
   <member key="indices.recovery.ShardRecovery#stage"><summary><para>
 The recovery stage.
 </para></summary></member>

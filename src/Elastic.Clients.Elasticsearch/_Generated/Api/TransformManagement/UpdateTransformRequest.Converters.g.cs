@@ -27,6 +27,7 @@ public sealed partial class UpdateTransformRequestConverter : System.Text.Json.S
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForceRekeying = System.Text.Json.JsonEncodedText.Encode("_force_rekeying"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFrequency = System.Text.Json.JsonEncodedText.Encode("frequency"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRetentionPolicy = System.Text.Json.JsonEncodedText.Encode("retention_policy"u8);
@@ -39,6 +40,7 @@ public sealed partial class UpdateTransformRequestConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Destination?> propDest = default;
+		LocalJsonValue<bool?> propForceRekeying = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy?> propRetentionPolicy = default;
@@ -53,6 +55,11 @@ public sealed partial class UpdateTransformRequestConverter : System.Text.Json.S
 			}
 
 			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
+			{
+				continue;
+			}
+
+			if (propForceRekeying.TryReadProperty(ref reader, options, PropForceRekeying, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -101,6 +108,7 @@ public sealed partial class UpdateTransformRequestConverter : System.Text.Json.S
 		{
 			Description = propDescription.Value,
 			Dest = propDest.Value,
+			ForceRekeying = propForceRekeying.Value,
 			Frequency = propFrequency.Value,
 			Meta = propMeta.Value,
 			RetentionPolicy = propRetentionPolicy.Value,
@@ -115,6 +123,7 @@ public sealed partial class UpdateTransformRequestConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropForceRekeying, value.ForceRekeying, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropRetentionPolicy, value.RetentionPolicy, null, null);

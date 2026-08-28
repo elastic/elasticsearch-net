@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.recovery.RecoveryPriority#RELOCATE_REBALANCING"><summary><para>
+A shard which is assigned, and is being relocated for rebalancing.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryPriority#RELOCATION_CAN_REMAIN_NO"><summary><para>
+A shard which is assigned, and is being relocated because it cannot remain on its current node according to the allocation deciders.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryPriority#RELOCATION_CAN_REMAIN_NOT_PREFERRED"><summary><para>
+A shard which is assigned, and is being relocated because it is not preferred for it to remain on its current node according to the allocation deciders.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryPriority#UNASSIGNED_EXPECTED"><summary><para>
+A shard which is unassigned for an expected condition, i.e. because of a user operation such as opening or restoring an index, but which is not an UNASSIGNED_NEW_PRIMARY.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryPriority#UNASSIGNED_NEW_PRIMARY"><summary><para>
+A primary shard which is unassigned because it is newly created.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryPriority#UNASSIGNED_UNEXPECTED"><summary><para>
+A shard which is unassigned because of an unexpected condition, i.e. some kind of failure.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryPriority#UNKNOWN"><summary><para>
+Placeholder value for unknown priorities.
+</para></summary></member>
+</doc>

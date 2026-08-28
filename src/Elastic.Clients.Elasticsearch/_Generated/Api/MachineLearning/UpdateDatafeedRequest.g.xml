@@ -9,6 +9,12 @@ When Elasticsearch security features are enabled, your datafeed remembers which 
 the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
 those credentials are used instead.
 </para></summary></member>
+  <member key="ml.update_datafeed.Request#_force_rekeying"><summary><para>
+When true, force reminting of the datafeed's internal cloud API key from the
+caller's cloud credential without requiring other configuration changes.
+Requires a cloud-authenticated caller and an environment that supports
+cross-project calls. Rejected with 400 otherwise. The datafeed must be stopped.
+</para></summary></member>
   <member key="ml.update_datafeed.Request#aggregations"><summary><para>
 If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
 with low cardinality data.

@@ -46,7 +46,7 @@ public sealed partial class UpdateTransformResponseConverter : System.Text.Json.
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization?> propAuthorization = default;
 		LocalJsonValue<long> propCreateTime = default;
 		LocalJsonValue<string> propDescription = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Destination> propDest = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Latest?> propLatest = default;

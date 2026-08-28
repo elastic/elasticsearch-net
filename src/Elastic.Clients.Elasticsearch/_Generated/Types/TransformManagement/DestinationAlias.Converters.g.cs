@@ -21,26 +21,26 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Esql.Json;
+namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
-public sealed partial class PutViewRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.PutViewRequest>
+public sealed partial class DestinationAliasConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("alias"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMoveOnCreation = System.Text.Json.JsonEncodedText.Encode("move_on_creation"u8);
 
-	public override Elastic.Clients.Elasticsearch.Esql.PutViewRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexAlias> propAlias = default;
+		LocalJsonValue<bool?> propMoveOnCreation = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			if (propAlias.TryReadProperty(ref reader, options, PropAlias, null))
 			{
 				continue;
 			}
 
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			if (propMoveOnCreation.TryReadProperty(ref reader, options, PropMoveOnCreation, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -55,18 +55,18 @@ public sealed partial class PutViewRequestConverter : System.Text.Json.Serializa
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Esql.PutViewRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Description = propDescription.Value,
-			Query = propQuery.Value
+			Alias = propAlias.Value,
+			MoveOnCreation = propMoveOnCreation.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.PutViewRequest value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.DestinationAlias value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropAlias, value.Alias, null, null);
+		writer.WriteProperty(options, PropMoveOnCreation, value.MoveOnCreation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

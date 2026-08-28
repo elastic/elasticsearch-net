@@ -77,6 +77,12 @@ public partial class UpdateTransformRequest : RequestConverter.IClientCallFormat
 				Dest.FormatCode(writer);
 			}
 
+			if (ForceRekeying is not null)
+			{
+				initializer.Property("ForceRekeying");
+				writer.WriteValue(ForceRekeying.Value);
+			}
+
 			if (Frequency is not null)
 			{
 				initializer.Property("Frequency");
@@ -154,6 +160,11 @@ public partial class UpdateTransformRequest : RequestConverter.IClientCallFormat
 		if (Dest is not null)
 		{
 			writer.WriteFluentDescriptorCall("Dest", (w) => { Dest.FormatCode(w); });
+		}
+
+		if (ForceRekeying is not null)
+		{
+			writer.WriteFluentCall("ForceRekeying", (w) => { w.WriteValue(ForceRekeying.Value); });
 		}
 
 		if (Frequency is not null)
