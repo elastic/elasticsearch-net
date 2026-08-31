@@ -110,10 +110,16 @@ jobs:
                 let baseSha;
                 try {
                   const ref = await github.rest.git.getRef({ owner, repo, ref: `heads/${target}` });
-                  baseSha = ref.object.sha;
+                  baseSha = ref.data.object.sha;
                 } catch (e) {
-                  core.warning(`Branch '${target}' not found in ${owner}/${repo}; skipping.`);
-                  continue;
+                  // Only a genuine 404 means the branch is absent. Anything else (auth, rate
+                  // limit, a client-side TypeError) must surface rather than be reported as a
+                  // missing branch.
+                  if (e.status === 404) {
+                    core.warning(`Branch '${target}' not found in ${owner}/${repo}; skipping.`);
+                    continue;
+                  }
+                  throw e;
                 }
 
                 // Skip if an open PR for this bump branch already exists (idempotent).
