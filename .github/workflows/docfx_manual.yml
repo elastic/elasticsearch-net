@@ -2,6 +2,11 @@ name: 'DocFx'
 
 on:
   workflow_dispatch:
+    inputs:
+      name:
+        description: 'The name to use for the documentation folder (defaults to the name of the current ref)'
+        type: 'string'
+        required: false
 
 jobs:
   docfx:
@@ -14,4 +19,8 @@ jobs:
     uses: ./.github/workflows/docfx.yml
     with:
       target_branch: 'refdoc'
+      # An omitted input still arrives as an empty string, which would override
+      # the default declared in docfx.yml and target the refdoc root, so the
+      # fallback has to be applied here.
+      name: ${{ inputs.name || github.ref_name }}
     secrets: 'inherit'
