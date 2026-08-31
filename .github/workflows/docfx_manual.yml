@@ -6,6 +6,11 @@ on:
 jobs:
   docfx:
     name: 'DocFx'
+    # docfx.yml pushes the generated site to the refdoc branch. A called workflow
+    # cannot request more than its caller holds, and the repository default is
+    # read-only, so the grant has to be repeated here.
+    permissions:
+      contents: write
     uses: ./.github/workflows/docfx.yml
     with:
       target_branch: 'refdoc'
