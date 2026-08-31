@@ -18,6 +18,15 @@ permissions:
   contents: read
   id-token: write
 
+# npm rewrites the whole packument on publish, so two releases publishing this package
+# seconds apart make the loser fail with E409. Release branches are tagged together, so
+# the publishes have to be serialized. "queue: max" holds a later run rather than
+# cancelling it, which the default single pending slot would do.
+concurrency:
+  group: request-converter-npm-publish
+  queue: max
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
