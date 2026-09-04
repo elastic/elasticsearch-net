@@ -32,12 +32,12 @@ public sealed partial class InnerRetrieverConverter : System.Text.Json.Serializa
 	public override Elastic.Clients.Elasticsearch.InnerRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ScoreNormalizer> propNormalizer = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScoreNormalizer?> propNormalizer = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
-		LocalJsonValue<float> propWeight = default;
+		LocalJsonValue<float?> propWeight = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNormalizer.TryReadProperty(ref reader, options, PropNormalizer, null))
+			if (propNormalizer.TryReadProperty(ref reader, options, PropNormalizer, static Elastic.Clients.Elasticsearch.ScoreNormalizer? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.ScoreNormalizer>(o)))
 			{
 				continue;
 			}
@@ -47,7 +47,7 @@ public sealed partial class InnerRetrieverConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
+			if (propWeight.TryReadProperty(ref reader, options, PropWeight, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ public sealed partial class InnerRetrieverConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.InnerRetriever value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNormalizer, value.Normalizer, null, null);
+		writer.WriteProperty(options, PropNormalizer, value.Normalizer, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.ScoreNormalizer? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.ScoreNormalizer>(o, v));
 		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
-		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
+		writer.WriteProperty(options, PropWeight, value.Weight, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }

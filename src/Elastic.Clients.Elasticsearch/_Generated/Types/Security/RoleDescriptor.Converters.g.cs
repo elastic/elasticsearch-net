@@ -44,7 +44,7 @@ public sealed partial class RoleDescriptorConverter : System.Text.Json.Serializa
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>?> propApplications = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>?> propCluster = default;
 		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>?> propGlobal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege?> propGlobal = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>?> propIndices = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>?> propRemoteCluster = default;
@@ -69,7 +69,7 @@ public sealed partial class RoleDescriptorConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propGlobal.TryReadProperty(ref reader, options, PropGlobal, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, null)))
+			if (propGlobal.TryReadProperty(ref reader, options, PropGlobal, null))
 			{
 				continue;
 			}
@@ -141,7 +141,7 @@ public sealed partial class RoleDescriptorConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropApplications, value.Applications, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>(o, v, null));
 		writer.WriteProperty(options, PropCluster, value.Cluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>(o, v, null));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropGlobal, value.Global, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>(o, v, null));
+		writer.WriteProperty(options, PropGlobal, value.Global, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, v, null));
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>(o, v, null));
