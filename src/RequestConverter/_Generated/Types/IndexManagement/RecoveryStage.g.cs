@@ -29,6 +29,10 @@ public static class RecoveryStageCodeFormatter
 	{
 		switch (instance)
 		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Created:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
+				writer.Write(".Created");
+				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Done:
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage");
 				writer.Write(".Done");

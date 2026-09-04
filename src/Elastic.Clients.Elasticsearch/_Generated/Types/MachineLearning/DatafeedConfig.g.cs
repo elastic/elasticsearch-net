@@ -62,6 +62,9 @@ public sealed partial class DatafeedConfig
 	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#max_empty_searches']/*"/>
 	public int? MaxEmptySearches { get; set; }
 
+	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#project_routing']/*"/>
+	public string? ProjectRouting { get; set; }
+
 	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
@@ -213,6 +216,13 @@ public readonly partial struct DatafeedConfigDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument> MaxEmptySearches(int? value)
 	{
 		Instance.MaxEmptySearches = value;
+		return this;
+	}
+
+	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#project_routing']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -491,6 +501,13 @@ public readonly partial struct DatafeedConfigDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor MaxEmptySearches(int? value)
 	{
 		Instance.MaxEmptySearches = value;
+		return this;
+	}
+
+	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#project_routing']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 

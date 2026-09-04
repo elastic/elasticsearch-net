@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="indices.recovery.ShardRecovery#local_retries"><summary><para>
+The number of times this recovery has failed in a way which is retried locally (i.e. on the data node).
+</para></summary></member>
   <member key="indices.recovery.ShardRecovery#priority"><summary><para>
 The recovery priority.
 </para></summary></member>
   <member key="indices.recovery.ShardRecovery#stage"><summary><para>
 The recovery stage.
+</para></summary></member>
+  <member key="indices.recovery.ShardRecovery#start_time"><summary><para>
+The time the recovery started.
+For recoveries in the <c>CREATED</c> stage (not yet started), this value is the Unix epoch (1970-01-01T00:00:00.000Z).
+</para></summary></member>
+  <member key="indices.recovery.ShardRecovery#start_time_in_millis"><summary><para>
+The time the recovery started, in milliseconds since the Unix epoch.
+For recoveries in the <c>CREATED</c> stage (not yet started), this value is 0.
+</para></summary></member>
+  <member key="indices.recovery.ShardRecovery#stop_time"><summary><para>
+The time the recovery completed. Only present for completed recoveries (<c>DONE</c> stage).
+</para></summary></member>
+  <member key="indices.recovery.ShardRecovery#stop_time_in_millis"><summary><para>
+The time the recovery completed, in milliseconds since the Unix epoch.
+Only present for completed recoveries (<c>DONE</c> stage).
+</para></summary></member>
+  <member key="indices.recovery.ShardRecovery#total_time_in_millis"><summary><para>
+The total elapsed recovery time in milliseconds.
+For recoveries in the <c>CREATED</c> stage (not yet started), this value is 0.
 </para></summary></member>
   <member key="indices.recovery.ShardRecovery#type"><summary><para>
 The recovery source type.

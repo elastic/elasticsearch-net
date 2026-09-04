@@ -39,6 +39,12 @@ public partial class ShardRecovery : RequestConverter.ICodeFormattable
 			Index.FormatCode(writer);
 		}
 
+		if (LocalRetries is not null)
+		{
+			initializer.Property("LocalRetries");
+			writer.WriteValue(LocalRetries.Value);
+		}
+
 		{
 			initializer.Property("Primary");
 			writer.WriteValue(Primary);

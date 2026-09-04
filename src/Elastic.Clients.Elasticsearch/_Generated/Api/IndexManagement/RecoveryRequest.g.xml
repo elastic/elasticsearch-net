@@ -58,7 +58,7 @@ It only reports the last recovery for each shard copy and does not report histor
 This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 </para></summary></member>
   <member key="indices.recovery.Request#active_only"><summary><para>
-If <c>true</c>, the response only includes ongoing shard recoveries.
+If <c>true</c>, the response only includes shard recoveries that have not yet completed (excludes <c>DONE</c> stage).
 </para></summary></member>
   <member key="indices.recovery.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.

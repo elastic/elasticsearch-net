@@ -24,6 +24,12 @@ Specifies index expansion options that are used during search.
   <member key="ml._types.DatafeedConfig#max_empty_searches"><summary><para>
 If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.
 </para></summary></member>
+  <member key="ml._types.DatafeedConfig#project_routing"><summary><para>
+A Lucene-style expression that limits which linked projects the datafeed
+searches when cross-project search is enabled. Examples: <c>_alias:_origin</c>,
+<c>_alias:prod-*</c>. If omitted, searches all linked projects within the cross-project
+search scope. Rejected when CPS is not enabled for datafeeds.
+</para></summary></member>
   <member key="ml._types.DatafeedConfig#query"><summary><para>
 The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.
 </para></summary></member>

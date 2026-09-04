@@ -43,8 +43,21 @@ public sealed partial class DenseVectorIndexOptions
 		_ = sentinel;
 	}
 
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#auto_calibrate']/*"/>
+	public bool? AutoCalibrate { get; set; }
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#bits']/*"/>
+	public int? Bits { get; set; }
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#cluster_size']/*"/>
+	public int? ClusterSize { get; set; }
+
 	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#confidence_interval']/*"/>
+	[System.Obsolete("Deprecated in '9.5.0'.")]
 	public float? ConfidenceInterval { get; set; }
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#default_visit_percentage']/*"/>
+	public float? DefaultVisitPercentage { get; set; }
 
 	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#ef_construction']/*"/>
 	public int? EfConstruction { get; set; }
@@ -57,6 +70,9 @@ public sealed partial class DenseVectorIndexOptions
 
 	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#on_disk_rescore']/*"/>
 	public bool? OnDiskRescore { get; set; }
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#precondition']/*"/>
+	public bool? Precondition { get; set; }
 
 	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector? RescoreVector { get; set; }
@@ -85,10 +101,39 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions instance) => new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor descriptor) => descriptor.Instance;
 
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#auto_calibrate']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor AutoCalibrate(bool? value = true)
+	{
+		Instance.AutoCalibrate = value;
+		return this;
+	}
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#bits']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor Bits(int? value)
+	{
+		Instance.Bits = value;
+		return this;
+	}
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#cluster_size']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor ClusterSize(int? value)
+	{
+		Instance.ClusterSize = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '9.5.0'.")]
 	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#confidence_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor ConfidenceInterval(float? value)
 	{
 		Instance.ConfidenceInterval = value;
+		return this;
+	}
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#default_visit_percentage']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor DefaultVisitPercentage(float? value)
+	{
+		Instance.DefaultVisitPercentage = value;
 		return this;
 	}
 
@@ -117,6 +162,13 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor OnDiskRescore(bool? value = true)
 	{
 		Instance.OnDiskRescore = value;
+		return this;
+	}
+
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#precondition']/*"/>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor Precondition(bool? value = true)
+	{
+		Instance.Precondition = value;
 		return this;
 	}
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_datafeed.Response#project_routing"><summary><para>
+A Lucene-style expression that limits which linked projects the datafeed
+searches when cross-project search is enabled. Examples: <c>_alias:_origin</c>,
+<c>_alias:prod-*</c>. If omitted, searches all linked projects within the cross-project
+search scope. Rejected when CPS is not enabled for datafeeds.
+</para></summary></member>
+</doc>

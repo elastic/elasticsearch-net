@@ -138,6 +138,12 @@ public partial class UpdateDatafeedRequest : RequestConverter.IClientCallFormatt
 				writer.WriteValue(MaxEmptySearches.Value);
 			}
 
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
+			}
+
 			if (Query is not null)
 			{
 				initializer.Property("Query");
@@ -261,6 +267,11 @@ public partial class UpdateDatafeedRequest : RequestConverter.IClientCallFormatt
 		if (MaxEmptySearches is not null)
 		{
 			writer.WriteFluentCall("MaxEmptySearches", (w) => { w.WriteValue(MaxEmptySearches.Value); });
+		}
+
+		if (ProjectRouting is not null)
+		{
+			writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
 		}
 
 		if (Query is not null)

@@ -55,6 +55,9 @@ public sealed partial class ShardRecovery
 
 	public required long Id { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus Index { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#local_retries']/*"/>
+	public int? LocalRetries { get; set; }
 	public required bool Primary { get; set; }
 
 	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#priority']/*"/>
@@ -64,12 +67,22 @@ public sealed partial class ShardRecovery
 	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#stage']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage Stage { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus? Start { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#start_time']/*"/>
 	public System.DateTimeOffset? StartTime { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#start_time_in_millis']/*"/>
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#stop_time']/*"/>
 	public System.DateTimeOffset? StopTime { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#stop_time_in_millis']/*"/>
 	public System.DateTimeOffset? StopTimeInMillis { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Target { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#total_time_in_millis']/*"/>
 	public required System.TimeSpan TotalTimeInMillis { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus Translog { get; set; }
 

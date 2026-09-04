@@ -49,6 +49,9 @@ public sealed partial class UpdateDatafeedResponse : Elastic.Transport.Products.
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
 	public required string JobId { get; set; }
 	public int? MaxEmptySearches { get; set; }
+
+	/// <include file="UpdateDatafeedResponse.g.xml" path="doc/member[@key='ml.update_datafeed.Response#project_routing']/*"/>
+	public string? ProjectRouting { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public required Elastic.Clients.Elasticsearch.Duration QueryDelay { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
