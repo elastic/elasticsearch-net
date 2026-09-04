@@ -53,7 +53,7 @@ public sealed partial class QueryRole
 	public string? Description { get; set; }
 
 	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#global']/*"/>
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilege? Global { get; set; }
 
 	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#indices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }

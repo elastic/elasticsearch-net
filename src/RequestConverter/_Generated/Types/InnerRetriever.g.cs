@@ -29,24 +29,27 @@ public partial class InnerRetriever : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
+			if (Normalizer is not null)
 			{
-				writer.WriteFluentCall("Normalizer", (w) => { Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer, w); });
+				writer.WriteFluentCall("Normalizer", (w) => { Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer.Value, w); });
 			}
 
 			{
 				writer.WriteFluentDescriptorCall("Retriever", (w) => { Retriever.FormatCode(w); }, (w) => { Retriever.FormatCode(w); });
 			}
 
+			if (Weight is not null)
 			{
-				writer.WriteFluentCall("Weight", (w) => { w.WriteValue(Weight); w.Write("f"); });
+				writer.WriteFluentCall("Weight", (w) => { w.WriteValue(Weight.Value); w.Write("f"); });
 			}
 		}
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.InnerRetriever", false);
+			if (Normalizer is not null)
 			{
 				initializer.Property("Normalizer");
-				Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer, writer);
+				Elastic.Clients.Elasticsearch.ScoreNormalizerCodeFormatter.FormatCode(Normalizer.Value, writer);
 			}
 
 			{
@@ -54,9 +57,10 @@ public partial class InnerRetriever : RequestConverter.ICodeFormattable
 				Retriever.FormatCode(writer);
 			}
 
+			if (Weight is not null)
 			{
 				initializer.Property("Weight");
-				writer.WriteValue(Weight);
+				writer.WriteValue(Weight.Value);
 				writer.Write("f");
 			}
 

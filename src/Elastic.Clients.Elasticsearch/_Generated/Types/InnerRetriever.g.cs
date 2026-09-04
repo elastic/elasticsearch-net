@@ -28,11 +28,9 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class InnerRetriever
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public InnerRetriever(Elastic.Clients.Elasticsearch.ScoreNormalizer normalizer, Elastic.Clients.Elasticsearch.Retriever retriever, float weight)
+	public InnerRetriever(Elastic.Clients.Elasticsearch.Retriever retriever)
 	{
-		Normalizer = normalizer;
 		Retriever = retriever;
-		Weight = weight;
 	}
 
 	public InnerRetriever()
@@ -45,9 +43,14 @@ public sealed partial class InnerRetriever
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.ScoreNormalizer Normalizer { get; set; }
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#normalizer']/*"/>
+	public Elastic.Clients.Elasticsearch.ScoreNormalizer? Normalizer { get; set; }
+
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#retriever']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
-	public required float Weight { get; set; }
+
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#weight']/*"/>
+	public float? Weight { get; set; }
 }
 
 /// <include file="../SpecReferences.xml" path="doc/member[@key='_types.InnerRetriever']/*"/>
@@ -70,25 +73,29 @@ public readonly partial struct InnerRetrieverDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.InnerRetriever instance) => new Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.InnerRetriever(Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument> Normalizer(Elastic.Clients.Elasticsearch.ScoreNormalizer value)
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#normalizer']/*"/>
+	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument> Normalizer(Elastic.Clients.Elasticsearch.ScoreNormalizer? value)
 	{
 		Instance.Normalizer = value;
 		return this;
 	}
 
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument> Weight(float value)
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#weight']/*"/>
+	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument> Weight(float? value)
 	{
 		Instance.Weight = value;
 		return this;
@@ -123,31 +130,36 @@ public readonly partial struct InnerRetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor(Elastic.Clients.Elasticsearch.InnerRetriever instance) => new Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.InnerRetriever(Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor Normalizer(Elastic.Clients.Elasticsearch.ScoreNormalizer value)
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#normalizer']/*"/>
+	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor Normalizer(Elastic.Clients.Elasticsearch.ScoreNormalizer? value)
 	{
 		Instance.Normalizer = value;
 		return this;
 	}
 
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor Weight(float value)
+	/// <include file="InnerRetriever.g.xml" path="doc/member[@key='_types.InnerRetriever#weight']/*"/>
+	public Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor Weight(float? value)
 	{
 		Instance.Weight = value;
 		return this;
