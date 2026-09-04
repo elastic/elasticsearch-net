@@ -54,7 +54,7 @@ public sealed partial class RoleDescriptorRead
 	public string? Description { get; set; }
 
 	/// <include file="RoleDescriptorRead.g.xml" path="doc/member[@key='security._types.RoleDescriptorRead#global']/*"/>
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilege? Global { get; set; }
 
 	/// <include file="RoleDescriptorRead.g.xml" path="doc/member[@key='security._types.RoleDescriptorRead#indices']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices { get; set; }

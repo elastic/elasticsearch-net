@@ -47,7 +47,7 @@ public sealed partial class RoleDescriptor
 	public string? Description { get; set; }
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilege? Global { get; set; }
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
@@ -138,29 +138,16 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 	}
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? value)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(Elastic.Clients.Elasticsearch.Security.GlobalPrivilege? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(params Elastic.Clients.Elasticsearch.Security.GlobalPrivilege[] values)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> action)
 	{
-		Instance.Global = [.. values];
-		return this;
-	}
-
-	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(params System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action));
-		}
-
-		Instance.Global = items;
+		Instance.Global = Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action);
 		return this;
 	}
 
@@ -409,29 +396,16 @@ public readonly partial struct RoleDescriptorDescriptor
 	}
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? value)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(Elastic.Clients.Elasticsearch.Security.GlobalPrivilege? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(params Elastic.Clients.Elasticsearch.Security.GlobalPrivilege[] values)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> action)
 	{
-		Instance.Global = [.. values];
-		return this;
-	}
-
-	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(params System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action));
-		}
-
-		Instance.Global = items;
+		Instance.Global = Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action);
 		return this;
 	}
 

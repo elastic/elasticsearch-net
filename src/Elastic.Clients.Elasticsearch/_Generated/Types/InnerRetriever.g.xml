@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.InnerRetriever#normalizer"><summary><para>
+Score normalizer to apply to this retriever's results before weighting.
+Falls back to the top-level <c>normalizer</c> on the linear retriever if unset,
+then to <c>none</c> (identity) if neither is set.
+</para></summary></member>
+  <member key="_types.InnerRetriever#retriever"><summary><para>
+The nested retriever configuration.
+</para></summary></member>
+  <member key="_types.InnerRetriever#weight"><summary><para>
+Weight multiplier for this retriever's contribution to the linear combination.
+Must be non-negative.
+</para></summary></member>
+</doc>

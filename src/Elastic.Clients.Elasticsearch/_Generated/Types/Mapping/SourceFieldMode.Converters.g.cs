@@ -25,12 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class SourceFieldModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberColumnarStored = System.Text.Json.JsonEncodedText.Encode("columnar_stored"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberStored = System.Text.Json.JsonEncodedText.Encode("stored"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberSynthetic = System.Text.Json.JsonEncodedText.Encode("synthetic"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberColumnarStored))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.ColumnarStored;
+		}
+
 		if (reader.ValueTextEquals(MemberDisabled))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Disabled;
@@ -47,6 +53,11 @@ public sealed partial class SourceFieldModeConverter : System.Text.Json.Serializ
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberColumnarStored.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.ColumnarStored;
+		}
+
 		if (string.Equals(value, MemberDisabled.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Disabled;
@@ -69,6 +80,9 @@ public sealed partial class SourceFieldModeConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.ColumnarStored:
+				writer.WriteStringValue(MemberColumnarStored);
+				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Disabled:
 				writer.WriteStringValue(MemberDisabled);
 				break;

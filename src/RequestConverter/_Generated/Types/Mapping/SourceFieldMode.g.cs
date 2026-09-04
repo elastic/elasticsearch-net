@@ -29,6 +29,10 @@ public static class SourceFieldModeCodeFormatter
 	{
 		switch (instance)
 		{
+			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.ColumnarStored:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode");
+				writer.Write(".ColumnarStored");
+				break;
 			case Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode.Disabled:
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode");
 				writer.Write(".Disabled");
