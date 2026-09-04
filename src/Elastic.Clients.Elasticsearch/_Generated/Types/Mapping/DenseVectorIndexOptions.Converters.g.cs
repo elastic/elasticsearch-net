@@ -25,27 +25,57 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAutoCalibrate = System.Text.Json.JsonEncodedText.Encode("auto_calibrate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBits = System.Text.Json.JsonEncodedText.Encode("bits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusterSize = System.Text.Json.JsonEncodedText.Encode("cluster_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropConfidenceInterval = System.Text.Json.JsonEncodedText.Encode("confidence_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultVisitPercentage = System.Text.Json.JsonEncodedText.Encode("default_visit_percentage"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEfConstruction = System.Text.Json.JsonEncodedText.Encode("ef_construction"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFlatIndexThreshold = System.Text.Json.JsonEncodedText.Encode("flat_index_threshold"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropM = System.Text.Json.JsonEncodedText.Encode("m"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOnDiskRescore = System.Text.Json.JsonEncodedText.Encode("on_disk_rescore"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrecondition = System.Text.Json.JsonEncodedText.Encode("precondition"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRescoreVector = System.Text.Json.JsonEncodedText.Encode("rescore_vector"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAutoCalibrate = default;
+		LocalJsonValue<int?> propBits = default;
+		LocalJsonValue<int?> propClusterSize = default;
 		LocalJsonValue<float?> propConfidenceInterval = default;
+		LocalJsonValue<float?> propDefaultVisitPercentage = default;
 		LocalJsonValue<int?> propEfConstruction = default;
 		LocalJsonValue<int?> propFlatIndexThreshold = default;
 		LocalJsonValue<int?> propM = default;
 		LocalJsonValue<bool?> propOnDiskRescore = default;
+		LocalJsonValue<bool?> propPrecondition = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector?> propRescoreVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAutoCalibrate.TryReadProperty(ref reader, options, PropAutoCalibrate, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propBits.TryReadProperty(ref reader, options, PropBits, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propClusterSize.TryReadProperty(ref reader, options, PropClusterSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
 			if (propConfidenceInterval.TryReadProperty(ref reader, options, PropConfidenceInterval, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
+			{
+				continue;
+			}
+
+			if (propDefaultVisitPercentage.TryReadProperty(ref reader, options, PropDefaultVisitPercentage, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -66,6 +96,11 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 			}
 
 			if (propOnDiskRescore.TryReadProperty(ref reader, options, PropOnDiskRescore, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propPrecondition.TryReadProperty(ref reader, options, PropPrecondition, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -92,11 +127,19 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			ConfidenceInterval = propConfidenceInterval.Value,
+			AutoCalibrate = propAutoCalibrate.Value,
+			Bits = propBits.Value,
+			ClusterSize = propClusterSize.Value,
+#pragma warning disable CS0618
+			ConfidenceInterval = propConfidenceInterval.Value
+#pragma warning restore CS0618
+,
+			DefaultVisitPercentage = propDefaultVisitPercentage.Value,
 			EfConstruction = propEfConstruction.Value,
 			FlatIndexThreshold = propFlatIndexThreshold.Value,
 			M = propM.Value,
 			OnDiskRescore = propOnDiskRescore.Value,
+			Precondition = propPrecondition.Value,
 			RescoreVector = propRescoreVector.Value,
 			Type = propType.Value
 		};
@@ -105,11 +148,19 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropAutoCalibrate, value.AutoCalibrate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropBits, value.Bits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropClusterSize, value.ClusterSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v))
+#pragma warning restore CS0618
+		;
+		writer.WriteProperty(options, PropDefaultVisitPercentage, value.DefaultVisitPercentage, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropEfConstruction, value.EfConstruction, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropFlatIndexThreshold, value.FlatIndexThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropM, value.M, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropOnDiskRescore, value.OnDiskRescore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropPrecondition, value.Precondition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();

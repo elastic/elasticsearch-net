@@ -29,9 +29,29 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
+			if (AutoCalibrate is not null)
+			{
+				writer.WriteFluentCall("AutoCalibrate", (w) => { w.WriteValue(AutoCalibrate.Value); });
+			}
+
+			if (Bits is not null)
+			{
+				writer.WriteFluentCall("Bits", (w) => { w.WriteValue(Bits.Value); });
+			}
+
+			if (ClusterSize is not null)
+			{
+				writer.WriteFluentCall("ClusterSize", (w) => { w.WriteValue(ClusterSize.Value); });
+			}
+#pragma warning disable CS0618
 			if (ConfidenceInterval is not null)
 			{
 				writer.WriteFluentCall("ConfidenceInterval", (w) => { w.WriteValue(ConfidenceInterval.Value); w.Write("f"); });
+			}
+#pragma warning restore CS0618
+			if (DefaultVisitPercentage is not null)
+			{
+				writer.WriteFluentCall("DefaultVisitPercentage", (w) => { w.WriteValue(DefaultVisitPercentage.Value); w.Write("f"); });
 			}
 
 			if (EfConstruction is not null)
@@ -54,6 +74,11 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("OnDiskRescore", (w) => { w.WriteValue(OnDiskRescore.Value); });
 			}
 
+			if (Precondition is not null)
+			{
+				writer.WriteFluentCall("Precondition", (w) => { w.WriteValue(Precondition.Value); });
+			}
+
 			if (RescoreVector is not null)
 			{
 				writer.WriteFluentDescriptorCall("RescoreVector", (w) => { RescoreVector.FormatCode(w); }, (w) => { RescoreVector.FormatCode(w); });
@@ -66,10 +91,35 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions", false);
+			if (AutoCalibrate is not null)
+			{
+				initializer.Property("AutoCalibrate");
+				writer.WriteValue(AutoCalibrate.Value);
+			}
+
+			if (Bits is not null)
+			{
+				initializer.Property("Bits");
+				writer.WriteValue(Bits.Value);
+			}
+
+			if (ClusterSize is not null)
+			{
+				initializer.Property("ClusterSize");
+				writer.WriteValue(ClusterSize.Value);
+			}
+#pragma warning disable CS0618
 			if (ConfidenceInterval is not null)
 			{
 				initializer.Property("ConfidenceInterval");
 				writer.WriteValue(ConfidenceInterval.Value);
+				writer.Write("f");
+			}
+#pragma warning restore CS0618
+			if (DefaultVisitPercentage is not null)
+			{
+				initializer.Property("DefaultVisitPercentage");
+				writer.WriteValue(DefaultVisitPercentage.Value);
 				writer.Write("f");
 			}
 
@@ -95,6 +145,12 @@ public partial class DenseVectorIndexOptions : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("OnDiskRescore");
 				writer.WriteValue(OnDiskRescore.Value);
+			}
+
+			if (Precondition is not null)
+			{
+				initializer.Property("Precondition");
+				writer.WriteValue(Precondition.Value);
 			}
 
 			if (RescoreVector is not null)

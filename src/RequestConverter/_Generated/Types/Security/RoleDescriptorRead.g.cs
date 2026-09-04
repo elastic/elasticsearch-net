@@ -48,7 +48,7 @@ public partial class RoleDescriptorRead : RequestConverter.ICodeFormattable
 		if (Global is not null)
 		{
 			initializer.Property("Global");
-			writer.WriteInlineList(Global, (w, item) => { item.FormatCode(w); });
+			Global.FormatCode(writer);
 		}
 
 		{
