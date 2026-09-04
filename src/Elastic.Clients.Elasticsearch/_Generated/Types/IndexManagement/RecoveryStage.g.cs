@@ -26,6 +26,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RecoveryStageConverter))]
 public enum RecoveryStage
 {
+	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#CREATED']/*"/>
+	[System.Runtime.Serialization.EnumMember(Value = "CREATED")]
+	Created,
 	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#DONE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "DONE")]
 	Done,

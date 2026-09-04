@@ -110,6 +110,9 @@ public sealed partial class UpdateDatafeedRequest : Elastic.Clients.Elasticsearc
 	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#max_empty_searches']/*"/>
 	public int? MaxEmptySearches { get; set; }
 
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#project_routing']/*"/>
+	public string? ProjectRouting { get; set; }
+
 	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
@@ -331,6 +334,13 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor MaxEmptySearches(int? value)
 	{
 		Instance.MaxEmptySearches = value;
+		return this;
+	}
+
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#project_routing']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -721,6 +731,13 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> MaxEmptySearches(int? value)
 	{
 		Instance.MaxEmptySearches = value;
+		return this;
+	}
+
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#project_routing']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 

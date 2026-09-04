@@ -46,7 +46,7 @@ public partial class RoleDescriptor : RequestConverter.ICodeFormattable
 
 			if (Global is not null)
 			{
-				writer.WriteFluentDescriptorParams("Global", Global, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>"); w.Write("()"); });
+				writer.WriteFluentDescriptorCall("Global", (w) => { Global.FormatCode(w); }, (w) => { Global.FormatCode(w); });
 			}
 
 			if (Indices is not null)
@@ -108,7 +108,7 @@ public partial class RoleDescriptor : RequestConverter.ICodeFormattable
 			if (Global is not null)
 			{
 				initializer.Property("Global");
-				writer.WriteInlineList(Global, (w, item) => { item.FormatCode(w); });
+				Global.FormatCode(writer);
 			}
 
 			if (Indices is not null)

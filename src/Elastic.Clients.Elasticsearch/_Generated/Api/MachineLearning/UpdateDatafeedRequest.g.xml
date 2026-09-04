@@ -76,6 +76,12 @@ stops and closes the associated job after this many real-time searches return no
 it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
 end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
 </para></summary></member>
+  <member key="ml.update_datafeed.Request#project_routing"><summary><para>
+A Lucene-style expression that limits which linked projects the datafeed
+searches when cross-project search is enabled. Examples: <c>_alias:_origin</c>,
+<c>_alias:prod-*</c>. If omitted, searches all linked projects within the cross-project
+search scope. Rejected when CPS is not enabled for datafeeds.
+</para></summary></member>
   <member key="ml.update_datafeed.Request#query"><summary><para>
 The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
 Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this

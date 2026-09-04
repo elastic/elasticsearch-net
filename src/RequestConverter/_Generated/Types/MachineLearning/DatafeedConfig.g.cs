@@ -74,6 +74,11 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("MaxEmptySearches", (w) => { w.WriteValue(MaxEmptySearches.Value); });
 			}
 
+			if (ProjectRouting is not null)
+			{
+				writer.WriteFluentCall("ProjectRouting", (w) => { w.WriteString(ProjectRouting); });
+			}
+
 			if (Query is not null)
 			{
 				writer.WriteFluentDescriptorCall("Query", (w) => { Query.FormatCode(w); }, (w) => { Query.FormatCode(w); });
@@ -161,6 +166,12 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("MaxEmptySearches");
 				writer.WriteValue(MaxEmptySearches.Value);
+			}
+
+			if (ProjectRouting is not null)
+			{
+				initializer.Property("ProjectRouting");
+				writer.WriteString(ProjectRouting);
 			}
 
 			if (Query is not null)

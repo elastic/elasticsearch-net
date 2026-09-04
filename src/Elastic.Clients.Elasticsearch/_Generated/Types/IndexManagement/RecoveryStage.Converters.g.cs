@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RecoveryStageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberCreated = System.Text.Json.JsonEncodedText.Encode("CREATED"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberDone = System.Text.Json.JsonEncodedText.Encode("DONE"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberFinalize = System.Text.Json.JsonEncodedText.Encode("FINALIZE"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("INDEX"u8);
@@ -34,6 +35,11 @@ public sealed partial class RecoveryStageConverter : System.Text.Json.Serializat
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberCreated))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Created;
+		}
+
 		if (reader.ValueTextEquals(MemberDone))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Done;
@@ -65,6 +71,11 @@ public sealed partial class RecoveryStageConverter : System.Text.Json.Serializat
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCreated.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Created;
+		}
+
 		if (string.Equals(value, MemberDone.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Done;
@@ -102,6 +113,9 @@ public sealed partial class RecoveryStageConverter : System.Text.Json.Serializat
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Created:
+				writer.WriteStringValue(MemberCreated);
+				break;
 			case Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage.Done:
 				writer.WriteStringValue(MemberDone);
 				break;

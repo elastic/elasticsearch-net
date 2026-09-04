@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SourceFieldModeConverter))]
 public enum SourceFieldMode
 {
+	[System.Runtime.Serialization.EnumMember(Value = "columnar_stored")]
+	ColumnarStored,
 	[System.Runtime.Serialization.EnumMember(Value = "disabled")]
 	Disabled,
 	[System.Runtime.Serialization.EnumMember(Value = "stored")]

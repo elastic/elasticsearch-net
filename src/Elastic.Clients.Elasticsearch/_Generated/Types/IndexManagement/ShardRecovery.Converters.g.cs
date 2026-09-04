@@ -27,6 +27,7 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 {
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocalRetries = System.Text.Json.JsonEncodedText.Encode("local_retries"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
@@ -48,6 +49,7 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus> propIndex = default;
+		LocalJsonValue<int?> propLocalRetries = default;
 		LocalJsonValue<bool> propPrimary = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryPriority?> propPriority = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin> propSource = default;
@@ -71,6 +73,11 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 			}
 
 			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propLocalRetries.TryReadProperty(ref reader, options, PropLocalRetries, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -164,6 +171,7 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 		{
 			Id = propId.Value,
 			Index = propIndex.Value,
+			LocalRetries = propLocalRetries.Value,
 			Primary = propPrimary.Value,
 			Priority = propPriority.Value,
 			Source = propSource.Value,
@@ -187,6 +195,7 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropLocalRetries, value.LocalRetries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
 		writer.WriteProperty(options, PropPriority, value.Priority, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryPriority? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryPriority>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);

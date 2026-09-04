@@ -37,6 +37,7 @@ public sealed partial class DatafeedConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropIndicesOptions = System.Text.Json.JsonEncodedText.Encode("indices_options"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxEmptySearches = System.Text.Json.JsonEncodedText.Encode("max_empty_searches"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryDelay = System.Text.Json.JsonEncodedText.Encode("query_delay"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
@@ -57,6 +58,7 @@ public sealed partial class DatafeedConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndicesOptions?> propIndicesOptions = default;
 		LocalJsonValue<string> propJobId = default;
 		LocalJsonValue<int?> propMaxEmptySearches = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propQueryDelay = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
@@ -119,6 +121,11 @@ public sealed partial class DatafeedConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
+			{
+				continue;
+			}
+
 			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
@@ -167,6 +174,7 @@ public sealed partial class DatafeedConverter : System.Text.Json.Serialization.J
 			IndicesOptions = propIndicesOptions.Value,
 			JobId = propJobId.Value,
 			MaxEmptySearches = propMaxEmptySearches.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
 			QueryDelay = propQueryDelay.Value,
 			RuntimeMappings = propRuntimeMappings.Value,
@@ -189,6 +197,7 @@ public sealed partial class DatafeedConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions, null, null);
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropQueryDelay, value.QueryDelay, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));

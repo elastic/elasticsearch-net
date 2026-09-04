@@ -97,6 +97,12 @@ public partial class Datafeed : RequestConverter.ICodeFormattable
 			writer.WriteValue(MaxEmptySearches.Value);
 		}
 
+		if (ProjectRouting is not null)
+		{
+			initializer.Property("ProjectRouting");
+			writer.WriteString(ProjectRouting);
+		}
+
 		{
 			initializer.Property("Query");
 			Query.FormatCode(writer);
