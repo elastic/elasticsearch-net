@@ -12,14 +12,35 @@ To check for security updates, go to [Security announcements for the Elastic sta
 
 % Release notes include only features, enhancements, and fixes. Add breaking changes, deprecations, and known issues to the applicable release notes sections.
 
-## version.next [felasticsearch-net-client-next-release-notes]
+% ## version.next [felasticsearch-net-client-next-release-notes]
+
+% ### Features and enhancements [elasticsearch-net-client-next-features-enhancements]
+% *
+
+## 9.5.3 [elasticsearch-net-client-953-release-notes]
+
+### Overview
+
+- [1. Cluster name in OpenTelemetry spans for self-managed clusters](#1-cluster-name-in-opentelemetry-spans-for-self-managed-clusters)
+
+### Features and enhancements
+
+#### 1. Cluster name in OpenTelemetry spans for self-managed clusters [1-cluster-name-in-opentelemetry-spans-for-self-managed-clusters]
+
+The `db.elasticsearch.cluster.name` span attribute is now also populated for self-managed clusters. Elasticsearch 9.6
+and later emit an `Elastic-Cluster-Name` response header when the `http.headers.cluster_name.enabled` setting is
+enabled, and the client records its value on the request span. On Elastic Cloud the `X-Found-Handling-Cluster` header
+provided by the proxy continues to take precedence. The cached cluster name is scoped to the client instance, so
+clients talking to different clusters within one process report their own cluster. Provided by `Elastic.Transport`
+1.1.0.
+
+## 9.4.2 [elasticsearch-net-client-942-release-notes]
 
 ### Overview
 
 - [1. Plugin-defined variant types](#1-plugin-defined-variant-types)
-- [2. Cluster name in OpenTelemetry spans for self-managed clusters](#2-cluster-name-in-opentelemetry-spans-for-self-managed-clusters)
 
-### Features and enhancements [elasticsearch-net-client-next-features-enhancements]
+### Features and enhancements
 
 #### 1. Plugin-defined variant types [1-plugin-defined-variant-types]
 
@@ -32,20 +53,6 @@ settings.Variants.RegisterContainer<Query, MyCustomQuery>("my_custom_query");
 ```
 
 Refer to the [Plugin-defined variant types](../reference/plugin-defined-variants.md) documentation for details.
-
-#### 2. Cluster name in OpenTelemetry spans for self-managed clusters [2-cluster-name-in-opentelemetry-spans-for-self-managed-clusters]
-
-The `db.elasticsearch.cluster.name` span attribute is now also populated for self-managed clusters. Elasticsearch 9.6
-and later emit an `Elastic-Cluster-Name` response header when the `http.headers.cluster_name.enabled` setting is
-enabled, and the client records its value on the request span. On Elastic Cloud the `X-Found-Handling-Cluster` header
-provided by the proxy continues to take precedence. The cached cluster name is scoped to the client instance, so
-clients talking to different clusters within one process report their own cluster. Provided by `Elastic.Transport`
-1.1.0.
-
-### Fixes [elasticsearch-net-client-next-fixes]
-
-- Enabling `ParseAllHeaders`, or listing one of the telemetry headers in `ResponseHeadersToParse`, while OpenTelemetry
-  listeners are active no longer fails the request with a duplicate-key `ArgumentException`.
 
 ## 9.3.4 [elasticsearch-net-client-934-release-notes]
 
