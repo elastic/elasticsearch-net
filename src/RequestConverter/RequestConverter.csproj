@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Elastic.Esql" Version="0.11.0" />
-    <PackageReference Include="Elastic.Transport" Version="0.17.1" />
+    <PackageReference Include="Elastic.Transport" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
