@@ -92,16 +92,7 @@ public sealed class BulkDeleteOperation<T> :
 
 	protected override void SetValues(IElasticsearchClientSettings settings)
 	{
-		if (settings.ExperimentalEnableSerializeNullInferredValues)
-		{
-			Routing ??= new Routing(Document);
-		}
-		else if (Routing is null)
-		{
-			var routing = new Routing(Document);
-			if (!string.IsNullOrEmpty(routing.GetString(settings)))
-				Routing = routing;
-		}
+		InferRouting(Document, settings);
 	}
 
 	protected override Type ClrType => typeof(T);

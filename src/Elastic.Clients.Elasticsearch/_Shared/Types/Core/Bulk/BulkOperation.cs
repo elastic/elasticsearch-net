@@ -87,6 +87,19 @@ public abstract class BulkOperation :
 
 	protected abstract Type ClrType { get; }
 
+	// Resolve the routing up front instead of handing the document to RoutingConverter: the converter
+	// writes "routing":null when nothing resolves for the document, which is valid JSON but not what
+	// callers want. Only ExperimentalEnableSerializeNullInferredValues opts into that behaviour.
+	private protected void InferRouting(object? document, IElasticsearchClientSettings settings)
+	{
+		if (Routing is not null || document is null)
+			return;
+
+		var routing = new Routing(document);
+		if (settings.ExperimentalEnableSerializeNullInferredValues || !string.IsNullOrEmpty(routing.GetString(settings)))
+			Routing = routing;
+	}
+
 	/// <summary>
 	/// Derived operations should override this control how the operation and its payload will be serialised into the HTTP request content <see cref="Stream"/>.
 	/// This supports newline delimited JSON data.

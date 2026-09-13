@@ -42,6 +42,6 @@ public sealed class BulkDeleteOperationDescriptor<TDocument> :
 	public BulkDeleteOperationDescriptor(TDocument documentToDelete) :
 		this(new Id(documentToDelete))
 	{
-		Instance.Routing = new Routing(documentToDelete);
+		Instance.Document = documentToDelete;
 	}
 }

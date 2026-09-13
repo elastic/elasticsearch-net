@@ -54,14 +54,7 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> :
 	{
 		Id ??= new Id(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
 
-		if (Routing is null)
-		{
-			if (IdFrom != null)
-				Routing ??= new Routing(IdFrom);
-
-			if (Upsert != null)
-				Routing ??= new Routing(Upsert);
-		}
+		InferRouting(IdFrom is not null ? IdFrom : Upsert, settings);
 	}
 
 	private protected override BulkUpdateBody GetBody() => new BulkUpdateBody<TDocument, TPartialDocument>

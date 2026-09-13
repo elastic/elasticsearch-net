@@ -130,16 +130,7 @@ public sealed class BulkCreateOperation<T> : BulkOperation
 		// Unfortunately, the alternative is we always set to new Routing(Document) which is then
 		// never null even if the inferrer will be unable to return a value for the Routing during serialization
 
-		if (settings.ExperimentalEnableSerializeNullInferredValues)
-		{
-			Routing ??= new Routing(Document);
-		}
-		else if (Routing is null)
-		{
-			var routing = new Routing(Document);
-			if (!string.IsNullOrEmpty(routing.GetString(settings)))
-				Routing = routing;
-		}
+		InferRouting(Document, settings);
 
 		if (settings.ExperimentalEnableSerializeNullInferredValues)
 		{
