@@ -20,6 +20,11 @@ public class BulkDeleteOperationDescriptor :
 		base(new BulkDeleteOperation(id))
 	{
 	}
+
+	internal BulkDeleteOperationDescriptor(BulkDeleteOperation instance) :
+		base(instance)
+	{
+	}
 }
 
 public sealed class BulkDeleteOperationDescriptor<TDocument> :
