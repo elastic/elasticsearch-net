@@ -45,8 +45,7 @@ public sealed class BulkDeleteOperationDescriptor<TDocument> :
 	}
 
 	public BulkDeleteOperationDescriptor(TDocument documentToDelete) :
-		this(new Id(documentToDelete))
+		base(new BulkDeleteOperation<TDocument>(documentToDelete))
 	{
-		Instance.Document = documentToDelete;
 	}
 }

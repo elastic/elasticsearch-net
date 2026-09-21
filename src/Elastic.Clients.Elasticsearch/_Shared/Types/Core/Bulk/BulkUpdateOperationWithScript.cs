@@ -50,5 +50,7 @@ public sealed class BulkUpdateOperationWithScript<TDocument> : BulkUpdateOperati
 
 	public TDocument Upsert { get; set; }
 
+	protected override void BeforeSerialize(IElasticsearchClientSettings settings) => InferRouting(Upsert, settings);
+
 	private protected override BulkUpdateBody GetBody() => new ScriptedBulkUpdateBody<TDocument> { Script = Script, Upsert = Upsert };
 }
