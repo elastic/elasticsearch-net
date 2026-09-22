@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 using Elastic.Clients.Elasticsearch.Core.Search;
@@ -52,16 +51,11 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> :
 
 	protected override void BeforeSerialize(IElasticsearchClientSettings settings)
 	{
-		Id ??= new Id(new[] { IdFrom, Upsert }.FirstOrDefault(o => o != null));
+		var inferFrom = IdFrom is not null ? IdFrom : Upsert;
 
-		if (Routing is null)
-		{
-			if (IdFrom != null)
-				Routing ??= new Routing(IdFrom);
+		Id ??= new Id(inferFrom);
 
-			if (Upsert != null)
-				Routing ??= new Routing(Upsert);
-		}
+		InferRouting(inferFrom, settings);
 	}
 
 	private protected override BulkUpdateBody GetBody() => new BulkUpdateBody<TDocument, TPartialDocument>
