@@ -87,6 +87,18 @@ public abstract class BulkOperation :
 
 	protected abstract Type ClrType { get; }
 
+	// Omit unresolved inferred routing unless null serialization is explicitly enabled.
+	// Preserve any routing already set on the operation.
+	private protected void InferRouting(object? document, IElasticsearchClientSettings settings)
+	{
+		if (Routing is not null || document is null)
+			return;
+
+		var routing = new Routing(document);
+		if (settings.ExperimentalEnableSerializeNullInferredValues || !string.IsNullOrEmpty(routing.GetString(settings)))
+			Routing = routing;
+	}
+
 	/// <summary>
 	/// Derived operations should override this control how the operation and its payload will be serialised into the HTTP request content <see cref="Stream"/>.
 	/// This supports newline delimited JSON data.

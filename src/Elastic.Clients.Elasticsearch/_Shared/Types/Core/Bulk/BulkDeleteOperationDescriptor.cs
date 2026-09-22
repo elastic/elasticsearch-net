@@ -20,6 +20,11 @@ public class BulkDeleteOperationDescriptor :
 		base(new BulkDeleteOperation(id))
 	{
 	}
+
+	internal BulkDeleteOperationDescriptor(BulkDeleteOperation instance) :
+		base(instance)
+	{
+	}
 }
 
 public sealed class BulkDeleteOperationDescriptor<TDocument> :
@@ -40,8 +45,7 @@ public sealed class BulkDeleteOperationDescriptor<TDocument> :
 	}
 
 	public BulkDeleteOperationDescriptor(TDocument documentToDelete) :
-		this(new Id(documentToDelete))
+		base(new BulkDeleteOperation<TDocument>(documentToDelete))
 	{
-		Instance.Routing = new Routing(documentToDelete);
 	}
 }
