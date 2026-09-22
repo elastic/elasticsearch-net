@@ -40,6 +40,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> IdFrom(TDocument idFrom, bool useAsUpsert = false)
 	{
 		Instance.Id = Elasticsearch.Id.From(idFrom);
+		Instance.IdFrom = idFrom;
 
 		if (useAsUpsert)
 		{

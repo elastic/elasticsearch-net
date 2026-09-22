@@ -183,7 +183,7 @@ public readonly partial struct BulkRequestDescriptor
 
 	public BulkRequestDescriptor Delete<TSource>(TSource documentToDelete, Action<BulkDeleteOperationDescriptor>? configure = null)
 	{
-		var descriptor = new BulkDeleteOperationDescriptor(new Id(documentToDelete));
+		var descriptor = new BulkDeleteOperationDescriptor(new BulkDeleteOperation<TSource>(documentToDelete));
 		configure?.Invoke(descriptor);
 		Instance.Operations ??= new();
 		Instance.Operations.Add(descriptor.Instance);
@@ -211,7 +211,7 @@ public readonly partial struct BulkRequestDescriptor
 		AddOperations(objects, null, o => new BulkUpdateOperationDescriptor<TSource, TSource>().IdFrom(o), x => x.Instance);
 
 	public BulkRequestDescriptor DeleteMany<T>(IEnumerable<T> objects, Action<BulkDeleteOperationDescriptor, T> bulkDeleteSelector) =>
-		AddOperations(objects, bulkDeleteSelector, obj => new BulkDeleteOperationDescriptor(new Id(obj)), x => x.Instance);
+		AddOperations(objects, bulkDeleteSelector, obj => new BulkDeleteOperationDescriptor(new BulkDeleteOperation<T>(obj)), x => x.Instance);
 
 	public BulkRequestDescriptor DeleteMany(IEnumerable<Id> ids, Action<BulkDeleteOperationDescriptor, Id> bulkDeleteSelector) =>
 		AddOperations(ids, bulkDeleteSelector, id => new BulkDeleteOperationDescriptor(id), x => x.Instance);
