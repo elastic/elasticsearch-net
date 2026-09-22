@@ -2,7 +2,7 @@
 {"script":{"id":"my-script-id","params":{"param1":"paramvalue1"}}}
 {"update":{"_id":"123"}}
 {"script":{"lang":"painless","options":{"option1":"optionvalue1"},"source":"ctx._source.counter \u002B= params.param1","params":{"param1":1}}}
-{"update":{"_id":"123"}}
+{"update":{"_id":"123","routing":"TestName"}}
 {"script":{"lang":"painless","options":{"option1":"optionvalue1"},"source":"ctx._source.counter \u002B= params.param1","params":{"param1":1}},"upsert":{"name":"TestName"}}
-{"update":{"_id":"123","_index":"configured-index"}}
+{"update":{"_id":"123","_index":"configured-index","routing":"TestName"}}
 {"script":{"lang":"painless","options":{"option1":"optionvalue1"},"source":"ctx._source.counter \u002B= params.param1","params":{"param1":1}},"upsert":{"name":"TestName"}}
