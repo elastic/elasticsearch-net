@@ -54,11 +54,23 @@ public class RoutingResolver
 			return route;
 		}
 
-		return GetJoinFieldFromObject(type, instance)?.Match(_ => _settings.Inferrer.Id(instance), child => ResolveId(_settings, child.ParentId));
-
-		static string? ResolveId(IElasticsearchClientSettings settings, Id id)
+		var joinField = GetJoinFieldFromObject(type, instance);
+		if (joinField is null)
 		{
-			return (id.Document is not null) ? settings.Inferrer.Id(id.Document) : id.StringOrLongValue;
+			return null;
+		}
+
+		// Avoid 'JoinField.Match()', its lambdas capture 'instance' and allocate a closure per call.
+		switch (joinField.Tag)
+		{
+			case 0:
+				return _settings.Inferrer.Id(instance);
+
+			case 1:
+				return joinField.ChildOption.ParentId.GetString(_settings);
+
+			default:
+				throw new Exception($"Unrecognized tag value: {joinField.Tag}");
 		}
 	}
 
