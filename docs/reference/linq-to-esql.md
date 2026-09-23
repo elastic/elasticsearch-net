@@ -14,7 +14,7 @@ The .NET client includes a LINQ provider that translates standard C# LINQ expres
 
 - **ES|QL-specific extensions**
   
-  `Keep`, `Drop`, `LookupJoin`, `From`, `RawEsql`, `Completion`, and `Match` for operations that go beyond standard LINQ.
+  `Keep`, `Drop`, `LookupJoin`, `From`, `Fork`, `Fuse`, `RawEsql`, `Completion`, and `Match` for operations that go beyond standard LINQ.
 
 - **Rich function library**
   
@@ -27,6 +27,18 @@ The .NET client includes a LINQ provider that translates standard C# LINQ expres
 - **Per-row streaming**
   
   Results are materialized one row at a time as `IEnumerable<T>`/`IAsyncEnumerable<T>`, keeping memory usage constant regardless of result set size.
+
+- **Vector search**
+  
+  KNN search via `EsqlFunctions.Knn`, semantic search via `EsqlFunctions.TextEmbedding`, and exact similarity functions (`VCosine`, `VDotProduct`, `VHamming`, `VL1Norm`, `VL2Norm`).
+
+- **Hybrid search**
+  
+  `Fork` and `Fuse` combine multiple sub-pipelines — full-text, KNN, or any other query — into a single ranked result set using RRF or linear scoring.
+
+- **Raw response streams**
+  
+  `ToStream`, `ToStreamAsync`, and `ToPipeReaderAsync` return the response body in any supported wire format (Arrow, CSV, CBOR, etc.) — ready to pipe into columnar consumers like Apache Arrow, DataFusion, or DuckDB, or to do your own zero-copy decoding.
 
 - **Source serialization**
   
@@ -468,6 +480,202 @@ public class Product
 
 This applies to any collection type: `List<T>`, `T[]`, `IReadOnlyList<T>`, and so on.
 
+## Document metadata [linq-esql-metadata]
+
+Access Elasticsearch document metadata fields — `_id`, `_score`, `_index`, and others — by requesting them in the `From` command and referencing them through `EsqlMetadata`.
+
+Pass a `MetadataField` flags value to `From` to declare which metadata fields to include:
+
+```csharp
+using Elastic.Esql;
+using Elastic.Esql.Extensions;
+
+var results = client.Esql.Query<Product>(q => q
+    .From("products", MetadataField.Id | MetadataField.Score)
+    .Where(p => p.InStock)
+    .OrderByDescending(_ => EsqlMetadata.Score));
+```
+
+`MetadataField` is a bitfield; combine values with `|`. `MetadataField.All` requests all supported fields.
+
+| Member      | ES\|QL field   | CLR type     | Description                                        |
+|-------------|-----------------|--------------|---------------------------------------------------|
+| `Id`        | `_id`           | `string`     | Unique document identifier                         |
+| `Ignored`   | `_ignored`      | `string[]`   | Fields ignored at index time                       |
+| `Index`     | `_index`        | `string`     | Index name                                         |
+| `IndexMode` | `_index_mode`   | `string`     | Index mode (`standard`, `lookup`, `logsdb`, …)     |
+| `Score`     | `_score`        | `float`      | Query relevance score                              |
+| `Size`      | `_size`         | `int`        | Size in bytes of the original `_source` field      |
+| `Source`    | `_source`       | `JsonObject` | Original document body as a JSON object            |
+| `Version`   | `_version`      | `long`       | Document version number                            |
+
+`EsqlMetadata.Fork` (the `_fork` discriminator added by `Fork`) is always available after a `Fork` command and does not need to be explicitly requested.
+
+## Vector search [linq-esql-vector-search]
+
+The LINQ provider supports dense-vector fields for approximate nearest-neighbour (KNN) search, semantic search via text embeddings, and exact similarity computations.
+
+### DenseVector type [linq-esql-dense-vector]
+
+Use `DenseVector<T>` to represent vector field values in document models. Two element types are supported:
+
+- `DenseVector<float>` — for `element_type: "float"` fields
+- `DenseVector<byte>` — for `element_type: "byte"` and `element_type: "bit"` fields
+
+```csharp
+using Elastic.Esql;
+
+public class Article
+{
+    public string Title { get; set; }
+    public DenseVector<float> Embedding { get; set; }   // element_type: "float"
+    public DenseVector<byte> ImageHash { get; set; }    // element_type: "byte"
+}
+```
+
+Arrays and `ReadOnlyMemory<T>` values are implicitly converted to `DenseVector<T>`, so you can pass them directly in query expressions.
+
+### KNN search [linq-esql-knn]
+
+Call `EsqlFunctions.Knn` inside a `Where` clause to perform approximate KNN search. Request `MetadataField.Score` to access the relevance score:
+
+```csharp
+using Elastic.Esql;
+using Elastic.Esql.Extensions;
+using Elastic.Esql.Functions;
+
+float[] queryVector = await GetEmbeddingAsync("search term");
+
+var results = client.Esql.Query<Article>(q => q
+    .From("articles", MetadataField.Score)
+    .Where(a => EsqlFunctions.Knn(a.Embedding, queryVector))
+    .OrderByDescending(_ => EsqlMetadata.Score)
+    .Take(10));
+```
+
+Closure-captured arrays and vectors are sent as named parameters, keeping the query safe and enabling server-side plan caching.
+
+### KNN options [linq-esql-knn-options]
+
+Pass a `KnnOptions` record to tune the search behaviour:
+
+```csharp
+var results = client.Esql.Query<Article>(q => q
+    .From("articles", MetadataField.Score)
+    .Where(a => EsqlFunctions.Knn(a.Embedding, queryVector, new KnnOptions
+    {
+        K = 50,
+        Similarity = 0.7,
+        RescoreOversample = 2.0
+    })));
+```
+
+| Property            | ES\|QL key           | Description                                     |
+|---------------------|----------------------|-------------------------------------------------|
+| `K`                 | `k`                  | Number of nearest neighbours per shard          |
+| `MinCandidates`     | `min_candidates`     | Minimum candidates in the approximate search    |
+| `Similarity`        | `similarity`         | Minimum similarity threshold                    |
+| `Boost`             | `boost`              | Score boost for the KNN clause                  |
+| `VisitPercentage`   | `visit_percentage`   | Fraction of vectors visited                     |
+| `RescoreOversample` | `rescore_oversample` | Oversampling factor for re-scoring              |
+
+Unset properties are omitted from the generated query.
+
+### Semantic search with text embeddings [linq-esql-text-embedding]
+
+Use `EsqlFunctions.TextEmbedding` to convert a text query to a vector using a serverless inference endpoint, and pass the result directly to `Knn`:
+
+```csharp
+var results = client.Esql.Query<Article>(q => q
+    .From("articles", MetadataField.Score)
+    .Where(a => EsqlFunctions.Knn(
+        a.Embedding,
+        EsqlFunctions.TextEmbedding("my search query", InferenceEndpoints.TextEmbedding.MultilingualE5Small)))
+    .OrderByDescending(_ => EsqlMetadata.Score)
+    .Take(10));
+```
+
+`InferenceEndpoints` provides constants for Elastic serverless inference endpoints:
+
+| Class                              | Constants                                     | Models                            |
+|------------------------------------|-----------------------------------------------|-----------------------------------|
+| `InferenceEndpoints.TextEmbedding` | `ElserV2`, `MultilingualE5Small`              | ELSER v2, Multilingual E5 Small   |
+| `InferenceEndpoints.Anthropic`     | `Claude46Opus`, `Claude45Sonnet`, …           | Anthropic Claude models           |
+| `InferenceEndpoints.Google`        | `Gemini25Pro`, `Gemini25Flash`                | Google Gemini models              |
+| `InferenceEndpoints.OpenAi`        | `Gpt41`, `Gpt41Mini`, `Gpt52`, …             | OpenAI GPT models                 |
+| `InferenceEndpoints.Elastic`       | `GpLlmV2`                                     | Elastic GP-LLM                    |
+
+### Exact similarity functions [linq-esql-vector-similarity]
+
+For exact (brute-force) similarity, use the vector distance functions in `Where`, `Select`, or `OrderBy` expressions:
+
+```csharp
+// Filter by cosine similarity threshold.
+var results = client.Esql.Query<Article>(q => q
+    .Where(a => EsqlFunctions.VCosine(a.Embedding, queryVector) >= 0.8));
+
+// Order by dot product (for unit-normalised vectors).
+var results = client.Esql.Query<Article>(q => q
+    .OrderByDescending(a => EsqlFunctions.VDotProduct(a.Embedding, queryVector)));
+```
+
+| Method        | ES\|QL function  | Input type           | Description                   |
+|---------------|------------------|----------------------|-------------------------------|
+| `VCosine`     | `V_COSINE`       | `DenseVector<float>` | Cosine similarity             |
+| `VDotProduct` | `V_DOT_PRODUCT`  | `DenseVector<float>` | Dot product                   |
+| `VL1Norm`     | `V_L1_NORM`      | `DenseVector<float>` | L1 (Manhattan) distance       |
+| `VL2Norm`     | `V_L2_NORM`      | `DenseVector<float>` | L2 (Euclidean) distance       |
+| `VHamming`    | `V_HAMMING`      | `DenseVector<byte>`  | Hamming distance (byte / bit) |
+
+## Hybrid search [linq-esql-hybrid-search]
+
+`Fork` and `Fuse` let you run multiple sub-pipelines over the same input — for example a full-text query and a KNN search — and merge their results into a single ranked list.
+
+### Basic Fork + Fuse [linq-esql-fork-fuse]
+
+```csharp
+using Elastic.Esql.Extensions;
+using Elastic.Esql.Functions;
+
+float[] queryVector = await GetEmbeddingAsync("search term");
+
+var results = client.Esql.Query<Article>(q => q
+    .From("articles", MetadataField.Score)
+    .Fork(
+        branch => branch.Where(a => EsqlFunctions.Match(a.Title, "search term")).Take(50), // <1>
+        branch => branch.Where(a => EsqlFunctions.Knn(a.Embedding, queryVector)).Take(50)) // <2>
+    .Fuse()
+    .OrderByDescending(_ => EsqlMetadata.Score)
+    .Take(10));
+```
+
+1. Full-text branch.
+2. KNN branch.
+
+`Fork` translates to an ES|QL `FORK` command and adds a `_fork` discriminator column with values `fork1`, `fork2`, … indicating which branch produced each row. `Fuse()` with no arguments applies Reciprocal Rank Fusion (RRF) with the default rank constant of 60. Each branch that feeds a `Fuse` must include a `Take(...)` (LIMIT).
+
+### Fuse options [linq-esql-fuse-options]
+
+```csharp
+// RRF with a custom rank constant.
+.Fuse(method: FuseMethod.Rrf, rankConstant: 20)
+
+// Linear combination with per-branch weights and min-max normalisation.
+.Fuse(method: FuseMethod.Linear, weights: [0.3, 0.7], normalizer: ScoreNormalizer.MinMax)
+```
+
+| Parameter      | Type              | Description                                                         |
+|----------------|-------------------|---------------------------------------------------------------------|
+| `method`       | `FuseMethod`      | `Rrf` (default) or `Linear`                                         |
+| `rankConstant` | `int?`            | RRF rank constant (default: 60)                                     |
+| `normalizer`   | `ScoreNormalizer` | `None` (default) or `MinMax` — min-max normalisation (linear only)  |
+| `weights`      | `double[]?`       | Per-branch weights, aligned to branch declaration order             |
+| `score`        | `Expression`      | Custom scoring column selector                                      |
+| `group`        | `Expression`      | Custom grouping column selector                                     |
+| `key`          | `Expression`      | Custom key column selector                                          |
+
+`Fork` supports up to 8 branches.
+
 ## Server-side async queries [linq-esql-async-queries]
 
 For long-running queries, you can submit them as server-side async queries. The server processes the query in the background and you poll for results.
@@ -496,6 +704,94 @@ foreach (var product in asyncQuery.AsEnumerable()) <3>
 3. Or consume synchronously.
 
 The `EsqlAsyncQuery<T>` is disposable. Disposing it automatically sends a delete request to clean up the server-side query.
+
+## Raw format response streams [linq-esql-raw-streams]
+
+By default, every query path materializes rows into POCOs by streaming the JSON response through the typed reader. For scenarios where you want the unparsed, server-formatted bytes — piping to a file, feeding columnar consumers like Apache Arrow / DataFusion / DuckDB, or doing your own zero-copy decoding — every queryable also exposes raw-stream terminal methods.
+
+### Supported formats [linq-esql-formats]
+
+Pick the wire format with the `EsqlFormat` enum:
+
+| Value   | Media type                              | Description                     |
+|---------|-----------------------------------------|---------------------------------|
+| `Json`  | `application/json`                      | JSON (default)                  |
+| `Csv`   | `text/csv`                              | Comma-separated values          |
+| `Tsv`   | `text/tab-separated-values`             | Tab-separated values            |
+| `Txt`   | `text/plain`                            | Human-readable table            |
+| `Arrow` | `application/vnd.apache.arrow.stream`   | Apache Arrow IPC stream         |
+| `Smile` | `application/smile`                     | SMILE (binary JSON variant)     |
+| `Cbor`  | `application/cbor`                      | CBOR (binary)                   |
+| `Yaml`  | `application/yaml`                      | YAML                            |
+
+### Synchronous stream [linq-esql-to-stream]
+
+```csharp
+using Elastic.Esql;
+using Elastic.Esql.Extensions;
+
+// The returned Stream owns the HTTP response — dispose it to release the connection.
+using var stream = client.Esql.CreateQuery<Product>()
+    .Where(p => p.InStock)
+    .AsEsqlQueryable() // <1>
+    .ToStream(EsqlFormat.Arrow);
+
+// Pipe into any consumer that accepts a Stream.
+await ProcessArrowStreamAsync(stream);
+```
+
+1. Standard LINQ operators like `Where` return `IQueryable<T>`. Call `AsEsqlQueryable()` before any raw-stream terminal method.
+
+### Asynchronous stream [linq-esql-to-stream-async]
+
+```csharp
+await using var stream = await client.Esql.CreateQuery<Product>()
+    .Where(p => p.InStock)
+    .AsEsqlQueryable()
+    .ToStreamAsync(EsqlFormat.Csv);
+
+using var reader = new StreamReader(stream);
+Console.WriteLine(await reader.ReadToEndAsync());
+```
+
+### PipeReader (.NET 10+) [linq-esql-to-pipe-reader]
+
+On .NET 10 and later, use `ToPipeReaderAsync` for zero-copy access:
+
+```csharp
+var pipeReader = await client.Esql.CreateQuery<Product>()
+    .Where(p => p.InStock)
+    .AsEsqlQueryable()
+    .ToPipeReaderAsync(EsqlFormat.Arrow);
+```
+
+### Raw format async queries [linq-esql-raw-async]
+
+For long-running queries where you need both server-side async execution and raw format output, use `ToAsyncQuery` or `ToAsyncQueryAsync`:
+
+```csharp
+await using var asyncQuery = await client.Esql.CreateQuery<Product>()
+    .Where(p => p.InStock)
+    .AsEsqlQueryable()
+    .ToAsyncQueryAsync(EsqlFormat.Arrow, new EsqlAsyncQueryOptions
+    {
+        WaitForCompletionTimeout = TimeSpan.FromSeconds(5),
+        KeepAlive = TimeSpan.FromMinutes(10)
+    });
+
+await asyncQuery.WaitForCompletionAsync();
+
+// Hand the Arrow IPC stream to the Apache.Arrow.Ipc reader (separate NuGet).
+using var stream = asyncQuery.GetResponseStream();
+using var reader = new ArrowStreamReader(stream);
+while (await reader.ReadNextRecordBatchAsync() is { } batch)
+    Console.WriteLine($"Batch: {batch.Length} rows, {batch.ColumnCount} cols");
+
+// On .NET 10+, access as a PipeReader instead.
+// var pipeReader = asyncQuery.GetResponsePipeReader();
+```
+
+Disposing the `EsqlAsyncQuery` automatically deletes the server-side query.
 
 ## Raw ES|QL escape hatch [linq-esql-raw]
 
