@@ -44,6 +44,8 @@ public sealed class BulkAllRequest<T> :
 
 	public int? MaxDegreeOfParallelism { get; set; }
 
+	public long? MaxRequestBytes { get; set; }
+
 	public Duration? Timeout { get; set; }
 
 	public string? Pipeline { get; set; }
@@ -129,6 +131,12 @@ public sealed class BulkAllRequestDescriptor<T>
 	public BulkAllRequestDescriptor<T> MaxDegreeOfParallelism(int? parallelism)
 	{
 		Instance.MaxDegreeOfParallelism = parallelism;
+		return this;
+	}
+
+	public BulkAllRequestDescriptor<T> MaxRequestBytes(long? maxRequestBytes)
+	{
+		Instance.MaxRequestBytes = maxRequestBytes;
 		return this;
 	}
 
