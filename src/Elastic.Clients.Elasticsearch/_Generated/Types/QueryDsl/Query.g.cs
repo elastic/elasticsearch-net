@@ -61,6 +61,7 @@ public partial class Query
 	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? Ids { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>("ids"); set => SetVariant("ids", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery? Intervals { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery>("intervals"); set => SetVariant("intervals", value); }
 	public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get => GetVariant<Elastic.Clients.Elasticsearch.KnnQuery>("knn"); set => SetVariant("knn", value); }
+	public Elastic.Clients.Elasticsearch.QueryDsl.KqlQuery? Kql { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.KqlQuery>("kql"); set => SetVariant("kql", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? Match { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>("match"); set => SetVariant("match", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? MatchAll { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>("match_all"); set => SetVariant("match_all", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery? MatchBoolPrefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery>("match_bool_prefix"); set => SetVariant("match_bool_prefix", value); }
@@ -132,6 +133,7 @@ public partial class Query
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Ids = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Intervals = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.KnnQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Knn = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.KqlQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Kql = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Match = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { MatchAll = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { MatchBoolPrefix = value };
@@ -506,6 +508,18 @@ public readonly partial struct QueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Knn(System.Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Kql(Elastic.Clients.Elasticsearch.QueryDsl.KqlQuery? value)
+	{
+		Instance.Kql = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Kql(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptor<TDocument>> action)
+	{
+		Instance.Kql = Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1435,6 +1449,24 @@ public readonly partial struct QueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Knn<T>(System.Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<T>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Kql(Elastic.Clients.Elasticsearch.QueryDsl.KqlQuery? value)
+	{
+		Instance.Kql = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Kql(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptor> action)
+	{
+		Instance.Kql = Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Kql<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptor<T>> action)
+	{
+		Instance.Kql = Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptor<T>.Build(action);
 		return this;
 	}
 

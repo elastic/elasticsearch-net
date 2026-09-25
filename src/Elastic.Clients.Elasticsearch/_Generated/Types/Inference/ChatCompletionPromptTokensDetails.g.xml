@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ChatCompletionPromptTokensDetails"><summary><para>
+Breakdown of tokens used in the prompt.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionPromptTokensDetails#cache_write_tokens"><summary><para>
+The number of tokens written to the cache.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionPromptTokensDetails#cached_tokens"><summary><para>
+The number of tokens that were cached from a previous request.
+</para></summary></member>
+</doc>

@@ -27,6 +27,8 @@ namespace Elastic.Clients.Elasticsearch.Security;
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
 public sealed partial class GetServiceAccountsRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#type']/*"/>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>? Type { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>?>("type"); set => Q("type", value); }
 }
 
 /// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
@@ -65,6 +67,9 @@ public sealed partial class GetServiceAccountsRequest : Elastic.Clients.Elastics
 
 	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#service']/*"/>
 	public string? Service { get => P<string?>("service"); set => PO("service", value); }
+
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#type']/*"/>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>? Type { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>?>("type"); set => Q("type", value); }
 }
 
 /// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
@@ -108,6 +113,20 @@ public readonly partial struct GetServiceAccountsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Service(string? value)
 	{
 		Instance.Service = value;
+		return this;
+	}
+
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#type']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Type(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>? value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#type']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Type(params Elastic.Clients.Elasticsearch.Security.ServiceAccountType[] values)
+	{
+		Instance.Type = [.. values];
 		return this;
 	}
 

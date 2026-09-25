@@ -45,6 +45,8 @@ public sealed partial class SearchApplicationSearchResponse<TDocument> : Elastic
 	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
+
+	/// <include file="SearchApplicationSearchResponse.g.xml" path="doc/member[@key='search_application.search.Response#pit_id']/*"/>
 	public string? PitId { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; set; }
 

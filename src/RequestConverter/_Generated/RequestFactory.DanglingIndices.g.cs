@@ -25,6 +25,130 @@ namespace RequestConverter;
 
 internal static partial class RequestFactory
 {
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDanglingIndicesDeleteDanglingIndex(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "index_uuid":
+						{
+							request.IndexUuid = parameter.Value;
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'dangling_indices.delete_dangling_index'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "accept_data_loss":
+						{
+							if (parameter.Value is string value)
+								request.AcceptDataLoss = bool.Parse(value);
+							continue;
+						}
+
+					case "master_timeout":
+						{
+							if (parameter.Value is string value)
+								request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "timeout":
+						{
+							if (parameter.Value is string value)
+								request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDanglingIndicesImportDanglingIndex(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "index_uuid":
+						{
+							request.IndexUuid = parameter.Value;
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'dangling_indices.import_dangling_index'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "accept_data_loss":
+						{
+							if (parameter.Value is string value)
+								request.AcceptDataLoss = bool.Parse(value);
+							continue;
+						}
+
+					case "master_timeout":
+						{
+							if (parameter.Value is string value)
+								request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "timeout":
+						{
+							if (parameter.Value is string value)
+								request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDanglingIndicesListDanglingIndices(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest>(serializer, body);

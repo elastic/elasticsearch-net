@@ -70,6 +70,13 @@ learning nodes must have the <c>remote_cluster_client</c> role.
   <member key="ml.update_datafeed.Request#indices_options"><summary><para>
 Specifies index expansion options that are used during search.
 </para></summary></member>
+  <member key="ml.update_datafeed.Request#max_consecutive_extraction_failures"><summary><para>
+The maximum number of consecutive real-time data extraction failures the datafeed tolerates before it
+automatically stops itself, leaving the associated job open. The consecutive-failure counter resets on any
+cycle that extracts successfully, including empty-data cycles. If not set, the threshold defaults to roughly
+one day's worth of searches based on the datafeed <c>frequency</c> (floored at 1). Set to <c>-1</c> to disable auto-stop
+and retry indefinitely. Values of <c>0</c> or less than <c>-1</c> are rejected.
+</para></summary></member>
   <member key="ml.update_datafeed.Request#max_empty_searches"><summary><para>
 If a real-time datafeed has never seen any data (including during any initial training period), it automatically
 stops and closes the associated job after this many real-time searches return no documents. In other words,

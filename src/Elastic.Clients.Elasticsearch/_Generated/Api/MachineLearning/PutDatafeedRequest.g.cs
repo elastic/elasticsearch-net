@@ -107,6 +107,9 @@ public sealed partial class PutDatafeedRequest : Elastic.Clients.Elasticsearch.R
 	/// <include file="PutDatafeedRequest.g.xml" path="doc/member[@key='ml.put_datafeed.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
+	/// <include file="PutDatafeedRequest.g.xml" path="doc/member[@key='ml.put_datafeed.Request#max_consecutive_extraction_failures']/*"/>
+	public int? MaxConsecutiveExtractionFailures { get; set; }
+
 	/// <include file="PutDatafeedRequest.g.xml" path="doc/member[@key='ml.put_datafeed.Request#max_empty_searches']/*"/>
 	public int? MaxEmptySearches { get; set; }
 
@@ -346,6 +349,13 @@ public readonly partial struct PutDatafeedRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.JobId = value;
+		return this;
+	}
+
+	/// <include file="PutDatafeedRequest.g.xml" path="doc/member[@key='ml.put_datafeed.Request#max_consecutive_extraction_failures']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor MaxConsecutiveExtractionFailures(int? value)
+	{
+		Instance.MaxConsecutiveExtractionFailures = value;
 		return this;
 	}
 
@@ -762,6 +772,13 @@ public readonly partial struct PutDatafeedRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.JobId = value;
+		return this;
+	}
+
+	/// <include file="PutDatafeedRequest.g.xml" path="doc/member[@key='ml.put_datafeed.Request#max_consecutive_extraction_failures']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDatafeedRequestDescriptor<TDocument> MaxConsecutiveExtractionFailures(int? value)
+	{
+		Instance.MaxConsecutiveExtractionFailures = value;
 		return this;
 	}
 

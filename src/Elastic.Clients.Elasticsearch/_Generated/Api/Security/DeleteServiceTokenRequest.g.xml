@@ -5,6 +5,7 @@ Delete service account tokens.
 </para>
 <para>
 Delete service account tokens for a service in a specified namespace.
+This route serves both kinds of service account, but the privileges differ: <c>manage_service_account</c> authorizes tokens of built-in accounts in the <c>elastic</c> namespace only, and tokens of a user-managed account require <c>manage_security</c>.
 </para>
 <para>
 IMPORTANT: On Serverless, non-operator users can delete tokens for only <c>elastic/fleet-server</c> and <c>elastic/fleet-server-remote</c>.

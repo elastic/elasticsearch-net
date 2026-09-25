@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.test_data_source_connection.Request"><summary><para>
+Test an ES|QL data source connection.
+</para>
+<para>
+Tests whether the supplied data source configuration can establish a live connection.
+The data source does not need to exist in cluster state: this endpoint is intended for
+validating a new configuration before saving it.
+The request body accepts the same <c>type</c> and <c>settings</c> fields as the create or update data
+source API.
+</para></summary></member>
+  <member key="esql.test_data_source_connection.Request#settings"><summary><para>
+Type-specific connection and authentication settings to test.
+Uses the same structure as the <c>settings</c> field in the create or update data source API.
+</para></summary></member>
+  <member key="esql.test_data_source_connection.Request#type"><summary><para>
+The data source type to test. Must be a known, registered type such as <c>s3</c>, <c>gcs</c>, or <c>azure</c>.
+Unknown types return a <c>400</c> error.
+</para></summary></member>
+</doc>

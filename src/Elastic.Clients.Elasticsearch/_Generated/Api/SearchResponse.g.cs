@@ -45,6 +45,8 @@ public partial class SearchResponse<TDocument> : Elastic.Transport.Products.Elas
 	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
+
+	/// <include file="SearchResponse.g.xml" path="doc/member[@key='_global.search.Response#pit_id']/*"/>
 	public string? PitId { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; set; }
 

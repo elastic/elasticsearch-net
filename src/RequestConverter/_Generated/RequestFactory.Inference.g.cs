@@ -352,6 +352,59 @@ internal static partial class RequestFactory
 		return request;
 	}
 
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateInferenceNonStreamingChatCompletion(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		if (string.IsNullOrEmpty(body))
+		{
+			throw new System.InvalidOperationException("Body is required.");
+		}
+
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "inference_id":
+						{
+							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'inference.non_streaming_chat_completion'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "timeout":
+						{
+							if (parameter.Value is string value)
+								request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateInferencePut(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		if (string.IsNullOrEmpty(body))

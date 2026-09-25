@@ -69,6 +69,11 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
 			}
 
+			if (MaxConsecutiveExtractionFailures is not null)
+			{
+				writer.WriteFluentCall("MaxConsecutiveExtractionFailures", (w) => { w.WriteValue(MaxConsecutiveExtractionFailures.Value); });
+			}
+
 			if (MaxEmptySearches is not null)
 			{
 				writer.WriteFluentCall("MaxEmptySearches", (w) => { w.WriteValue(MaxEmptySearches.Value); });
@@ -160,6 +165,12 @@ public partial class DatafeedConfig : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("JobId");
 				JobId.FormatCode(writer);
+			}
+
+			if (MaxConsecutiveExtractionFailures is not null)
+			{
+				initializer.Property("MaxConsecutiveExtractionFailures");
+				writer.WriteValue(MaxConsecutiveExtractionFailures.Value);
 			}
 
 			if (MaxEmptySearches is not null)

@@ -23,25 +23,20 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_accounts.RoleDescriptorWrapper']/*"/>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleDescriptorWrapperConverter))]
-public sealed partial class RoleDescriptorWrapper
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DeleteUserManagedServiceAccountResponseConverter))]
+public sealed partial class DeleteUserManagedServiceAccountResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RoleDescriptorWrapper(Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead roleDescriptor)
-	{
-		RoleDescriptor = roleDescriptor;
-	}
-
-	public RoleDescriptorWrapper()
+	public DeleteUserManagedServiceAccountResponse()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal RoleDescriptorWrapper(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal DeleteUserManagedServiceAccountResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead RoleDescriptor { get; set; }
+	/// <include file="DeleteUserManagedServiceAccountResponse.g.xml" path="doc/member[@key='security.delete_user_managed_service_account.Response#found']/*"/>
+	public required bool Found { get; set; }
 }

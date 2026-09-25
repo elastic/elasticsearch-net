@@ -145,7 +145,14 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 	}
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global()
+	{
+		Instance.Global = Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>? action)
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action);
 		return this;
@@ -403,7 +410,14 @@ public readonly partial struct RoleDescriptorDescriptor
 	}
 
 	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global()
+	{
+		Instance.Global = Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>? action)
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor.Build(action);
 		return this;

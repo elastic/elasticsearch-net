@@ -21,18 +21,22 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Security;
+namespace Elastic.Clients.Elasticsearch.DataRecovery;
 
-public partial class RoleDescriptorWrapper : RequestConverter.ICodeFormattable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DataRecovery.Json.GetRecoveryPointsResponseConverter))]
+public sealed partial class GetRecoveryPointsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
-	public void FormatCode(RequestConverter.CodeWriter writer)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRecoveryPointsResponse()
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper", false);
-		{
-			initializer.Property("RoleDescriptor");
-			RoleDescriptor.FormatCode(writer);
-		}
-
-		initializer.Dispose();
 	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetRecoveryPointsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <include file="GetRecoveryPointsResponse.g.xml" path="doc/member[@key='data_recovery.get_recovery_points.Response#recovery_points']/*"/>
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryPoint> RecoveryPoints { get; set; }
 }

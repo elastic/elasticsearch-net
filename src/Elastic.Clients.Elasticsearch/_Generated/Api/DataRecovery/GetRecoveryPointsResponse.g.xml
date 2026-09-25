@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_recovery_points.Response#recovery_points"><summary><para>
+Recovery points in descending order by end time.
+</para></summary></member>
+</doc>

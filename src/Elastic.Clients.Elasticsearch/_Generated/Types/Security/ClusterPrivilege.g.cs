@@ -35,6 +35,7 @@ public readonly partial struct ClusterPrivilege : Elastic.Clients.Elasticsearch.
 	public readonly string Value { get; }
 	public static ClusterPrivilege All { get; } = new ClusterPrivilege("all");
 	public static ClusterPrivilege CancelTask { get; } = new ClusterPrivilege("cancel_task");
+	public static ClusterPrivilege CloneApiKey { get; } = new ClusterPrivilege("clone_api_key");
 	public static ClusterPrivilege CreateSnapshot { get; } = new ClusterPrivilege("create_snapshot");
 	public static ClusterPrivilege CrossClusterReplication { get; } = new ClusterPrivilege("cross_cluster_replication");
 	public static ClusterPrivilege CrossClusterSearch { get; } = new ClusterPrivilege("cross_cluster_search");

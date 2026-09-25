@@ -27,11 +27,11 @@ public sealed partial class GetServiceAccountsResponseConverter : System.Text.Js
 {
 	public override Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { ServiceAccoutns = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>(o, null, null)!) };
+		return new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { ServiceAccounts = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.ServiceAccountInfos>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.ServiceAccoutns, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>(o, v, null, null));
+		writer.WriteValue(options, value.ServiceAccounts, null);
 	}
 }

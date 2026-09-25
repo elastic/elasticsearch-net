@@ -198,6 +198,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"cluster.remote_info",
+			new ClientCallInfo("Cluster", "RemoteInfo", 0, 0)
+		}
+,
+		{
 			"cluster.stats",
 			new ClientCallInfo("Cluster", "Stats", 0, 0)
 		}
@@ -213,8 +218,23 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"dangling_indices.delete_dangling_index",
+			new ClientCallInfo("DanglingIndices", "DeleteDanglingIndex", 0, 0)
+		}
+,
+		{
+			"dangling_indices.import_dangling_index",
+			new ClientCallInfo("DanglingIndices", "ImportDanglingIndex", 0, 0)
+		}
+,
+		{
 			"dangling_indices.list_dangling_indices",
 			new ClientCallInfo("DanglingIndices", "ListDanglingIndices", 0, 0)
+		}
+,
+		{
+			"data_recovery.get_recovery_points",
+			new ClientCallInfo("DataRecovery", "GetRecoveryPoints", 0, 0)
 		}
 ,
 		{
@@ -368,6 +388,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"esql.test_data_source_connection",
+			new ClientCallInfo("Esql", "TestDataSourceConnection", 0, 0)
+		}
+,
+		{
 			"exists",
 			new ClientCallInfo("", "Exists", 0, 0)
 		}
@@ -443,6 +468,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"ilm.explain_lifecycle",
+			new ClientCallInfo("IndexLifecycleManagement", "ExplainLifecycle", 0, 0)
+		}
+,
+		{
 			"ilm.get_lifecycle",
 			new ClientCallInfo("IndexLifecycleManagement", "GetLifecycle", 0, 0)
 		}
@@ -490,6 +520,11 @@ internal static class ClientMethods
 		{
 			"index",
 			new ClientCallInfo("", "Index", 0, 1)
+		}
+,
+		{
+			"indices.add_block",
+			new ClientCallInfo("Indices", "AddBlock", 0, 0)
 		}
 ,
 		{
@@ -880,6 +915,11 @@ internal static class ClientMethods
 		{
 			"inference.inference",
 			new ClientCallInfo("Inference", "Inference", 0, -1)
+		}
+,
+		{
+			"inference.non_streaming_chat_completion",
+			new ClientCallInfo("Inference", "NonStreamingChatCompletion", 0, 0)
 		}
 ,
 		{
@@ -1370,6 +1410,11 @@ internal static class ClientMethods
 		{
 			"ml.preview_data_frame_analytics",
 			new ClientCallInfo("MachineLearning", "PreviewDataFrameAnalytics", 0, 0)
+		}
+,
+		{
+			"ml.preview_datafeed",
+			new ClientCallInfo("MachineLearning", "PreviewDatafeed", 1, 1)
 		}
 ,
 		{
@@ -1913,6 +1958,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"security.delete_user_managed_service_account",
+			new ClientCallInfo("Security", "DeleteUserManagedServiceAccount", 0, 0)
+		}
+,
+		{
 			"security.disable_user",
 			new ClientCallInfo("Security", "DisableUser", 0, 0)
 		}
@@ -2065,6 +2115,11 @@ internal static class ClientMethods
 		{
 			"security.put_user",
 			new ClientCallInfo("Security", "PutUser", 0, 0)
+		}
+,
+		{
+			"security.put_user_managed_service_account",
+			new ClientCallInfo("Security", "PutUserManagedServiceAccount", 0, 0)
 		}
 ,
 		{
@@ -2280,6 +2335,11 @@ internal static class ClientMethods
 		{
 			"sql.translate",
 			new ClientCallInfo("Sql", "Translate", 0, 0)
+		}
+,
+		{
+			"ssl.certificates",
+			new ClientCallInfo("Certificates", "Certificates", 0, 0)
 		}
 ,
 		{

@@ -1306,6 +1306,64 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Security/DeleteUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse DeleteUserManagedServiceAccount(Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/DeleteUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse DeleteUserManagedServiceAccount(string @namespace, string service)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/DeleteUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse DeleteUserManagedServiceAccount(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/DeleteUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse> DeleteUserManagedServiceAccountAsync(Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/DeleteUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse> DeleteUserManagedServiceAccountAsync(string @namespace, string service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/DeleteUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.delete_user_managed_service_account.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse> DeleteUserManagedServiceAccountAsync(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/Security/DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Security.DisableUserRequest request)
@@ -3404,6 +3462,64 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse PutUserManagedServiceAccount(Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse PutUserManagedServiceAccount(string @namespace, string service)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse PutUserManagedServiceAccount(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse> PutUserManagedServiceAccountAsync(Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse> PutUserManagedServiceAccountAsync(string @namespace, string service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.put_user_managed_service_account.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse> PutUserManagedServiceAccountAsync(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountResponse, Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestParameters>(request, cancellationToken);
 	}
 
 	/// <include file="../Api/Security/QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>

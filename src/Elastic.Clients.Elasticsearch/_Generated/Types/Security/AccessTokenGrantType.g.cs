@@ -29,6 +29,9 @@ public enum AccessTokenGrantType
 	/// <include file="AccessTokenGrantType.g.xml" path="doc/member[@key='security.get_token.AccessTokenGrantType#_kerberos']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "_kerberos")]
 	Kerberos,
+	/// <include file="AccessTokenGrantType.g.xml" path="doc/member[@key='security.get_token.AccessTokenGrantType#_user_managed_service_account']/*"/>
+	[System.Runtime.Serialization.EnumMember(Value = "_user_managed_service_account")]
+	UserManagedServiceAccount,
 	/// <include file="AccessTokenGrantType.g.xml" path="doc/member[@key='security.get_token.AccessTokenGrantType#client_credentials']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "client_credentials")]
 	ClientCredentials,

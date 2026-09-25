@@ -51,6 +51,12 @@ public partial class GetServiceAccountsRequest : RequestConverter.IClientCallFor
 				writer.WriteString(Service);
 			}
 
+			if (Type is not null)
+			{
+				initializer.Property("Type");
+				writer.WriteInlineList(Type, (w, item) => { Elastic.Clients.Elasticsearch.Security.ServiceAccountTypeCodeFormatter.FormatCode(item, w); });
+			}
+
 			initializer.Dispose();
 		}
 	}
@@ -70,6 +76,11 @@ public partial class GetServiceAccountsRequest : RequestConverter.IClientCallFor
 		if (Service is not null)
 		{
 			writer.WriteFluentCall("Service", (w) => { w.WriteString(Service); });
+		}
+
+		if (Type is not null)
+		{
+			writer.WriteFluentParams("Type", Type, (w, item) => { Elastic.Clients.Elasticsearch.Security.ServiceAccountTypeCodeFormatter.FormatCode(item, w); });
 		}
 	}
 }

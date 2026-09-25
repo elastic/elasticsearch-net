@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.ValidationLoss#fold_values"><summary><para>
+Validation loss values for every added decision tree during the forest growing procedure.
+</para></summary></member>
+  <member key="ml._types.ValidationLoss#loss_type"><summary><para>
+The type of the loss metric. For example, binomial_logistic.
+</para></summary></member>
+</doc>

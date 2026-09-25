@@ -902,6 +902,64 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Cluster/RemoteInfoRequest.g.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse RemoteInfo(Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Cluster/RemoteInfoRequest.g.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse RemoteInfo()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Cluster/RemoteInfoRequest.g.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse RemoteInfo(System.Action<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Cluster/RemoteInfoRequest.g.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse> RemoteInfoAsync(Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Cluster/RemoteInfoRequest.g.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse> RemoteInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Cluster/RemoteInfoRequest.g.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='cluster.remote_info.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse> RemoteInfoAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequest, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoResponse, Elastic.Clients.Elasticsearch.Cluster.RemoteInfoRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/Cluster/ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest request)

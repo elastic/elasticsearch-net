@@ -719,4 +719,15 @@ internal static partial class RequestFactory
 
 		return request;
 	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateEsqlTestDataSourceConnection(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		if (string.IsNullOrEmpty(body))
+		{
+			throw new System.InvalidOperationException("Body is required.");
+		}
+
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequest>(serializer, body);
+		return request;
+	}
 }

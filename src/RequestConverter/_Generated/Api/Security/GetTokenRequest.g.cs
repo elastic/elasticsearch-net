@@ -69,6 +69,12 @@ public partial class GetTokenRequest : RequestConverter.IClientCallFormattable
 				writer.WriteString(Scope);
 			}
 
+			if (ServiceAccountToken is not null)
+			{
+				initializer.Property("ServiceAccountToken");
+				writer.WriteString(ServiceAccountToken);
+			}
+
 			if (Username is not null)
 			{
 				initializer.Property("Username");
@@ -109,6 +115,11 @@ public partial class GetTokenRequest : RequestConverter.IClientCallFormattable
 		if (Scope is not null)
 		{
 			writer.WriteFluentCall("Scope", (w) => { w.WriteString(Scope); });
+		}
+
+		if (ServiceAccountToken is not null)
+		{
+			writer.WriteFluentCall("ServiceAccountToken", (w) => { w.WriteString(ServiceAccountToken); });
 		}
 
 		if (Username is not null)

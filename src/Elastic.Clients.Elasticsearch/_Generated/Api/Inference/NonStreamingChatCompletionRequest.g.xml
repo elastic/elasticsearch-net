@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.non_streaming_chat_completion.Request"><summary><para>
+Perform non-streaming chat completion inference on the service.
+</para>
+<para>
+The chat completion inference API enables rich responses for chat completion tasks.
+It only works with the <c>chat_completion</c> task type.
+</para>
+<para>
+NOTE: The <c>chat_completion</c> task type supports both streaming and non-streaming.
+The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+To determine whether a given inference service supports this task type, please see the page for that service.
+</para>
+<para>
+These services support non-streaming chat completion inference:
+</para>
+<list type="bullet">
+<item>
+<para>
+AI21
+</para>
+</item>
+<item>
+<para>
+Azure OpenAI
+</para>
+</item>
+<item>
+<para>
+Deepseek
+</para>
+</item>
+<item>
+<para>
+Elastic
+</para>
+</item>
+<item>
+<para>
+FireworksAI
+</para>
+</item>
+<item>
+<para>
+Groq
+</para>
+</item>
+<item>
+<para>
+Huggingface
+</para>
+</item>
+<item>
+<para>
+IBMWatsonX
+</para>
+</item>
+<item>
+<para>
+Llama
+</para>
+</item>
+<item>
+<para>
+Mistral
+</para>
+</item>
+<item>
+<para>
+NVIDIA
+</para>
+</item>
+<item>
+<para>
+OpenAI
+</para>
+</item>
+<item>
+<para>
+OpenShiftAI
+</para>
+</item>
+</list></summary></member>
+  <member key="inference.non_streaming_chat_completion.Request#inference_id"><summary><para>
+The inference Id
+</para></summary></member>
+  <member key="inference.non_streaming_chat_completion.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference request to complete.
+</para></summary></member>
+</doc>

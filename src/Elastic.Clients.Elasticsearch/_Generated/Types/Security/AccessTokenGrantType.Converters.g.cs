@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 public sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberKerberos = System.Text.Json.JsonEncodedText.Encode("_kerberos"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUserManagedServiceAccount = System.Text.Json.JsonEncodedText.Encode("_user_managed_service_account"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberClientCredentials = System.Text.Json.JsonEncodedText.Encode("client_credentials"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token"u8);
@@ -35,6 +36,11 @@ public sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.Ser
 		if (reader.ValueTextEquals(MemberKerberos))
 		{
 			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos;
+		}
+
+		if (reader.ValueTextEquals(MemberUserManagedServiceAccount))
+		{
+			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.UserManagedServiceAccount;
 		}
 
 		if (reader.ValueTextEquals(MemberClientCredentials))
@@ -56,6 +62,11 @@ public sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.Ser
 		if (string.Equals(value, MemberKerberos.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos;
+		}
+
+		if (string.Equals(value, MemberUserManagedServiceAccount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.UserManagedServiceAccount;
 		}
 
 		if (string.Equals(value, MemberClientCredentials.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -82,6 +93,9 @@ public sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.Ser
 		{
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.Kerberos:
 				writer.WriteStringValue(MemberKerberos);
+				break;
+			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.UserManagedServiceAccount:
+				writer.WriteStringValue(MemberUserManagedServiceAccount);
 				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.ClientCredentials:
 				writer.WriteStringValue(MemberClientCredentials);

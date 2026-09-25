@@ -742,6 +742,67 @@ internal static partial class RequestFactory
 		return request;
 	}
 
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateSecurityDeleteUserManagedServiceAccount(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DeleteUserManagedServiceAccountRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "namespace":
+						{
+							request.Namespace = parameter.Value;
+							continue;
+						}
+
+					case "service":
+						{
+							request.Service = parameter.Value;
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.delete_user_managed_service_account'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "force":
+						{
+							if (parameter.Value is string value)
+								request.Force = bool.Parse(value);
+							continue;
+						}
+
+					case "refresh":
+						{
+							if (parameter.Value is string value)
+								request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(value);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateSecurityDisableUser(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.DisableUserRequest>(serializer, body);
@@ -1165,6 +1226,36 @@ internal static partial class RequestFactory
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.get_service_accounts'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "type":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.Type = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>.Parse(x)).ToList();
+							}
+
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
 						}
 				}
 			}
@@ -1627,6 +1718,65 @@ internal static partial class RequestFactory
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.put_user'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "refresh":
+						{
+							if (parameter.Value is string value)
+								request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(value);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateSecurityPutUserManagedServiceAccount(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		if (string.IsNullOrEmpty(body))
+		{
+			throw new System.InvalidOperationException("Body is required.");
+		}
+
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "namespace":
+						{
+							request.Namespace = parameter.Value;
+							continue;
+						}
+
+					case "service":
+						{
+							request.Service = parameter.Value;
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'security.put_user_managed_service_account'.");
 						}
 				}
 			}

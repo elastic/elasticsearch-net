@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_recovery_points.Request"><summary><para>
+Get recovery points.
+</para>
+<para>
+Get recovery points from the platform-managed data recovery repository.
+This API is intended for internal operator use.
+Recovery points are returned in descending order by end time. Repository,
+snapshot, and policy identifiers are not exposed.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_points.Request#end_time_before"><summary><para>
+Return only recovery points whose end time is earlier than this value.
+The boundary is exclusive and can be set to the last recovery point's
+end time to retrieve the next page.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_points.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_points.Request#size"><summary><para>
+The maximum number of recovery points to return. The value must be between 1 and 1000.
+</para></summary></member>
+</doc>

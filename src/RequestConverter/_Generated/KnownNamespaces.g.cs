@@ -599,6 +599,10 @@ internal static class KnownNamespaces
 				"DiversifiedSamplerAggregationDescriptorT",
 				"DoubleTermsAggregate",
 				"DoubleTermsBucket",
+				"EwmaModelSettings",
+				"EwmaModelSettingsDescriptor",
+				"EwmaMovingAverageAggregation",
+				"EwmaMovingAverageAggregationDescriptor",
 				"ExtendedBounds",
 				"ExtendedBoundsOfDoubleDescriptor",
 				"ExtendedBoundsOfFieldDateMathDescriptor",
@@ -677,7 +681,17 @@ internal static class KnownNamespaces
 				"HistogramAggregationDescriptor",
 				"HistogramAggregationDescriptorT",
 				"HistogramBucket",
+				"HoltLinearModelSettings",
+				"HoltLinearModelSettingsDescriptor",
+				"HoltMovingAverageAggregation",
+				"HoltMovingAverageAggregationDescriptor",
+				"HoltWintersModelSettings",
+				"HoltWintersModelSettingsDescriptor",
+				"HoltWintersMovingAverageAggregation",
+				"HoltWintersMovingAverageAggregationDescriptor",
+				"HoltWintersType",
 				"IAggregate",
+				"IMovingAverageAggregation",
 				"Indeterminable",
 				"InferenceAggregate",
 				"InferenceAggregation",
@@ -701,6 +715,8 @@ internal static class KnownNamespaces
 				"IpRangeAggregationRange",
 				"IpRangeAggregationRangeDescriptor",
 				"IpRangeBucket",
+				"LinearMovingAverageAggregation",
+				"LinearMovingAverageAggregationDescriptor",
 				"LongRareTermsAggregate",
 				"LongRareTermsBucket",
 				"LongTermsAggregate",
@@ -732,6 +748,8 @@ internal static class KnownNamespaces
 				"MissingAggregationDescriptor",
 				"MissingAggregationDescriptorT",
 				"MissingOrder",
+				"MovingAverageAggregationFactory",
+				"MovingAverageAggregations",
 				"MovingFunctionAggregation",
 				"MovingFunctionAggregationDescriptor",
 				"MovingPercentilesAggregation",
@@ -812,6 +830,8 @@ internal static class KnownNamespaces
 				"SignificantTextAggregation",
 				"SignificantTextAggregationDescriptor",
 				"SignificantTextAggregationDescriptorT",
+				"SimpleMovingAverageAggregation",
+				"SimpleMovingAverageAggregationDescriptor",
 				"SimpleValueAggregate",
 				"Spike",
 				"StandardDeviationBounds",
@@ -1258,6 +1278,8 @@ internal static class KnownNamespaces
 				"DiversifiedSamplerAggregationConverter",
 				"DoubleTermsAggregateConverter",
 				"DoubleTermsBucketConverter",
+				"EwmaModelSettingsConverter",
+				"EwmaMovingAverageAggregationConverter",
 				"ExtendedBoundsConverter",
 				"ExtendedBoundsConverterFactory",
 				"ExtendedStatsAggregateConverter",
@@ -1302,6 +1324,12 @@ internal static class KnownNamespaces
 				"HistogramAggregateConverter",
 				"HistogramAggregationConverter",
 				"HistogramBucketConverter",
+				"HoltLinearModelSettingsConverter",
+				"HoltMovingAverageAggregationConverter",
+				"HoltWintersModelSettingsConverter",
+				"HoltWintersMovingAverageAggregationConverter",
+				"HoltWintersTypeConverter",
+				"IMovingAverageAggregationConverter",
 				"IndeterminableConverter",
 				"InferenceAggregateConverter",
 				"InferenceAggregationConverter",
@@ -1316,6 +1344,7 @@ internal static class KnownNamespaces
 				"IpRangeAggregationConverter",
 				"IpRangeAggregationRangeConverter",
 				"IpRangeBucketConverter",
+				"LinearMovingAverageAggregationConverter",
 				"LongRareTermsAggregateConverter",
 				"LongRareTermsBucketConverter",
 				"LongTermsAggregateConverter",
@@ -1335,6 +1364,7 @@ internal static class KnownNamespaces
 				"MissingAggregateConverter",
 				"MissingAggregationConverter",
 				"MissingOrderConverter",
+				"MovingAverageAggregationsConverter",
 				"MovingFunctionAggregationConverter",
 				"MovingPercentilesAggregationConverter",
 				"MultiTermLookupConverter",
@@ -1379,6 +1409,7 @@ internal static class KnownNamespaces
 				"SignificantStringTermsBucketConverter",
 				"SignificantTermsAggregationConverter",
 				"SignificantTextAggregationConverter",
+				"SimpleMovingAverageAggregationConverter",
 				"SimpleValueAggregateConverter",
 				"SpikeConverter",
 				"StandardDeviationBoundsAsStringConverter",
@@ -2295,6 +2326,27 @@ internal static class KnownNamespaces
 			}
 		},
 		{
+			"Elastic.Clients.Elasticsearch.Certificates",
+			new(System.StringComparer.Ordinal)
+			{
+				"CertificateInformation",
+				"CertificatesNamespacedClient",
+				"CertificatesRequest",
+				"CertificatesRequestDescriptor",
+				"CertificatesRequestParameters",
+				"CertificatesResponse"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.Certificates.Json",
+			new(System.StringComparer.Ordinal)
+			{
+				"CertificateInformationConverter",
+				"CertificatesRequestConverter",
+				"CertificatesResponseConverter"
+			}
+		},
+		{
 			"Elastic.Clients.Elasticsearch.Cluster",
 			new(System.StringComparer.Ordinal)
 			{
@@ -2335,6 +2387,9 @@ internal static class KnownNamespaces
 				"ClusterProcessCpu",
 				"ClusterProcessOpenFileDescriptors",
 				"ClusterProcessor",
+				"ClusterRemoteInfos",
+				"ClusterRemoteProxyInfo",
+				"ClusterRemoteSniffInfo",
 				"ClusterShardMetrics",
 				"ClusterSnapshotStats",
 				"ClusterStatsRequest",
@@ -2386,6 +2441,7 @@ internal static class KnownNamespaces
 				"HealthRequestDescriptorT",
 				"HealthRequestParameters",
 				"HealthResponse",
+				"IClusterRemoteInfo",
 				"IndexHealthStats",
 				"IndexingPressure",
 				"IndicesVersions",
@@ -2414,6 +2470,10 @@ internal static class KnownNamespaces
 				"PutComponentTemplateRequestParameters",
 				"PutComponentTemplateResponse",
 				"RemoteClusterInfo",
+				"RemoteInfoRequest",
+				"RemoteInfoRequestDescriptor",
+				"RemoteInfoRequestParameters",
+				"RemoteInfoResponse",
 				"RepositoryStatsCurrentCounts",
 				"RepositoryStatsShards",
 				"ReservedSize",
@@ -2487,6 +2547,9 @@ internal static class KnownNamespaces
 				"ClusterProcessCpuConverter",
 				"ClusterProcessOpenFileDescriptorsConverter",
 				"ClusterProcessorConverter",
+				"ClusterRemoteInfosConverter",
+				"ClusterRemoteProxyInfoConverter",
+				"ClusterRemoteSniffInfoConverter",
 				"ClusterShardMetricsConverter",
 				"ClusterSnapshotStatsConverter",
 				"ClusterStatsRequestConverter",
@@ -2519,6 +2582,7 @@ internal static class KnownNamespaces
 				"GetComponentTemplateResponseConverter",
 				"HealthRequestConverter",
 				"HealthResponseConverter",
+				"IClusterRemoteInfoConverter",
 				"IndexHealthStatsConverter",
 				"IndexingPressureConverter",
 				"IndicesVersionsConverter",
@@ -2538,6 +2602,8 @@ internal static class KnownNamespaces
 				"PutComponentTemplateRequestConverter",
 				"PutComponentTemplateResponseConverter",
 				"RemoteClusterInfoConverter",
+				"RemoteInfoRequestConverter",
+				"RemoteInfoResponseConverter",
 				"RepositoryStatsCurrentCountsConverter",
 				"RepositoryStatsShardsConverter",
 				"ReservedSizeConverter",
@@ -3689,6 +3755,14 @@ internal static class KnownNamespaces
 			{
 				"DanglingIndex",
 				"DanglingIndicesNamespacedClient",
+				"DeleteDanglingIndexRequest",
+				"DeleteDanglingIndexRequestDescriptor",
+				"DeleteDanglingIndexRequestParameters",
+				"DeleteDanglingIndexResponse",
+				"ImportDanglingIndexRequest",
+				"ImportDanglingIndexRequestDescriptor",
+				"ImportDanglingIndexRequestParameters",
+				"ImportDanglingIndexResponse",
 				"ListDanglingIndicesRequest",
 				"ListDanglingIndicesRequestDescriptor",
 				"ListDanglingIndicesRequestParameters",
@@ -3700,8 +3774,33 @@ internal static class KnownNamespaces
 			new(System.StringComparer.Ordinal)
 			{
 				"DanglingIndexConverter",
+				"DeleteDanglingIndexRequestConverter",
+				"DeleteDanglingIndexResponseConverter",
+				"ImportDanglingIndexRequestConverter",
+				"ImportDanglingIndexResponseConverter",
 				"ListDanglingIndicesRequestConverter",
 				"ListDanglingIndicesResponseConverter"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.DataRecovery",
+			new(System.StringComparer.Ordinal)
+			{
+				"DataRecoveryNamespacedClient",
+				"GetRecoveryPointsRequest",
+				"GetRecoveryPointsRequestDescriptor",
+				"GetRecoveryPointsRequestParameters",
+				"GetRecoveryPointsResponse",
+				"RecoveryPoint"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.DataRecovery.Json",
+			new(System.StringComparer.Ordinal)
+			{
+				"GetRecoveryPointsRequestConverter",
+				"GetRecoveryPointsResponseConverter",
+				"RecoveryPointConverter"
 			}
 		},
 		{
@@ -3967,6 +4066,7 @@ internal static class KnownNamespaces
 				"AsyncQueryStopRequestDescriptor",
 				"AsyncQueryStopRequestParameters",
 				"ClassifiedNamedParameter",
+				"DataSourceTestStatus",
 				"DatasetFieldMapping",
 				"DatasetFieldMappingDescriptor",
 				"DatasetMapping",
@@ -4030,7 +4130,11 @@ internal static class KnownNamespaces
 				"PutViewRequest",
 				"PutViewRequestDescriptor",
 				"PutViewRequestParameters",
-				"PutViewResponse"
+				"PutViewResponse",
+				"TestDataSourceConnectionRequest",
+				"TestDataSourceConnectionRequestDescriptor",
+				"TestDataSourceConnectionRequestParameters",
+				"TestDataSourceConnectionResponse"
 			}
 		},
 		{
@@ -4057,6 +4161,7 @@ internal static class KnownNamespaces
 				"AsyncQueryRequestConverter",
 				"AsyncQueryStopRequestConverter",
 				"ClassifiedNamedParameterConverter",
+				"DataSourceTestStatusConverter",
 				"DatasetFieldMappingConverter",
 				"DatasetMappingConverter",
 				"DeleteDataSourceRequestConverter",
@@ -4090,7 +4195,9 @@ internal static class KnownNamespaces
 				"PutDatasetRequestConverter",
 				"PutDatasetResponseConverter",
 				"PutViewRequestConverter",
-				"PutViewResponseConverter"
+				"PutViewResponseConverter",
+				"TestDataSourceConnectionRequestConverter",
+				"TestDataSourceConnectionResponseConverter"
 			}
 		},
 		{
@@ -4571,6 +4678,11 @@ internal static class KnownNamespaces
 				"DeleteLifecycleResponse",
 				"DownsampleAction",
 				"DownsampleActionDescriptor",
+				"ExplainLifecycleRequest",
+				"ExplainLifecycleRequestDescriptor",
+				"ExplainLifecycleRequestDescriptorT",
+				"ExplainLifecycleRequestParameters",
+				"ExplainLifecycleResponse",
 				"ForceMergeAction",
 				"ForceMergeActionDescriptor",
 				"GetIlmStatusRequest",
@@ -4581,10 +4693,15 @@ internal static class KnownNamespaces
 				"GetLifecycleRequestDescriptor",
 				"GetLifecycleRequestParameters",
 				"GetLifecycleResponse",
+				"ILifecycleExplain",
 				"IlmPolicy",
 				"IlmPolicyDescriptor",
 				"IndexLifecycleManagementNamespacedClient",
 				"Lifecycle",
+				"LifecycleExplainManaged",
+				"LifecycleExplainPhaseExecution",
+				"LifecycleExplainUnmanaged",
+				"LifecycleExplains",
 				"MigrateAction",
 				"MigrateActionDescriptor",
 				"MigrateToDataTiersRequest",
@@ -4637,6 +4754,13 @@ internal static class KnownNamespaces
 			}
 		},
 		{
+			"Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
+			}
+		},
+		{
 			"Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json",
 			new(System.StringComparer.Ordinal)
 			{
@@ -4646,13 +4770,20 @@ internal static class KnownNamespaces
 				"DeleteLifecycleRequestConverter",
 				"DeleteLifecycleResponseConverter",
 				"DownsampleActionConverter",
+				"ExplainLifecycleRequestConverter",
+				"ExplainLifecycleResponseConverter",
 				"ForceMergeActionConverter",
 				"GetIlmStatusRequestConverter",
 				"GetIlmStatusResponseConverter",
 				"GetLifecycleRequestConverter",
 				"GetLifecycleResponseConverter",
+				"ILifecycleExplainConverter",
 				"IlmPolicyConverter",
 				"LifecycleConverter",
+				"LifecycleExplainManagedConverter",
+				"LifecycleExplainPhaseExecutionConverter",
+				"LifecycleExplainUnmanagedConverter",
+				"LifecycleExplainsConverter",
 				"MigrateActionConverter",
 				"MigrateToDataTiersRequestConverter",
 				"MigrateToDataTiersResponseConverter",
@@ -4706,6 +4837,12 @@ internal static class KnownNamespaces
 				"AddAction",
 				"AddActionDescriptor",
 				"AddActionDescriptorT",
+				"AddBlockRequest",
+				"AddBlockRequestDescriptor",
+				"AddBlockRequestDescriptorT",
+				"AddBlockRequestParameters",
+				"AddBlockResponse",
+				"AddIndicesBlockStatus",
 				"Alias",
 				"AliasDefinition",
 				"AliasDefinitionDescriptor",
@@ -5328,6 +5465,13 @@ internal static class KnownNamespaces
 			}
 		},
 		{
+			"Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
+			}
+		},
+		{
 			"Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptorT",
 			new(System.StringComparer.Ordinal)
 			{
@@ -5591,6 +5735,9 @@ internal static class KnownNamespaces
 			new(System.StringComparer.Ordinal)
 			{
 				"AddActionConverter",
+				"AddBlockRequestConverter",
+				"AddBlockResponseConverter",
+				"AddIndicesBlockStatusConverter",
 				"AliasConverter",
 				"AliasDefinitionConverter",
 				"AnalyzeDetailConverter",
@@ -6138,9 +6285,16 @@ internal static class KnownNamespaces
 				"AzureOpenAITaskType",
 				"AzureOpenAiServiceSettingsDescriptor",
 				"AzureOpenAiTaskSettingsDescriptor",
+				"ChatCompletionChoice",
+				"ChatCompletionCompletionTokensDetails",
+				"ChatCompletionMessage",
+				"ChatCompletionPromptTokensDetails",
+				"ChatCompletionToolCall",
+				"ChatCompletionToolCallFunction",
 				"ChatCompletionUnifiedRequest",
 				"ChatCompletionUnifiedRequestDescriptor",
 				"ChatCompletionUnifiedRequestParameters",
+				"ChatCompletionUsage",
 				"CohereEmbeddingType",
 				"CohereInputType",
 				"CohereServiceSettings",
@@ -6273,6 +6427,10 @@ internal static class KnownNamespaces
 				"MistralServiceSettings",
 				"MistralServiceSettingsDescriptor",
 				"MistralTaskType",
+				"NonStreamingChatCompletionRequest",
+				"NonStreamingChatCompletionRequestDescriptor",
+				"NonStreamingChatCompletionRequestParameters",
+				"NonStreamingChatCompletionResponse",
 				"NvidiaInputType",
 				"NvidiaServiceSettings",
 				"NvidiaServiceSettingsDescriptor",
@@ -6517,7 +6675,14 @@ internal static class KnownNamespaces
 				"AzureOpenAIServiceSettingsConverter",
 				"AzureOpenAITaskSettingsConverter",
 				"AzureOpenAITaskTypeConverter",
+				"ChatCompletionChoiceConverter",
+				"ChatCompletionCompletionTokensDetailsConverter",
+				"ChatCompletionMessageConverter",
+				"ChatCompletionPromptTokensDetailsConverter",
+				"ChatCompletionToolCallConverter",
+				"ChatCompletionToolCallFunctionConverter",
 				"ChatCompletionUnifiedRequestConverter",
+				"ChatCompletionUsageConverter",
 				"CohereEmbeddingTypeConverter",
 				"CohereInputTypeConverter",
 				"CohereServiceSettingsConverter",
@@ -6604,6 +6769,8 @@ internal static class KnownNamespaces
 				"MessageConverter",
 				"MistralServiceSettingsConverter",
 				"MistralTaskTypeConverter",
+				"NonStreamingChatCompletionRequestConverter",
+				"NonStreamingChatCompletionResponseConverter",
 				"NvidiaInputTypeConverter",
 				"NvidiaServiceSettingsConverter",
 				"NvidiaSimilarityTypeConverter",
@@ -8023,8 +8190,11 @@ internal static class KnownNamespaces
 				"DataframeAnalyticsSource",
 				"DataframeAnalyticsSourceDescriptor",
 				"DataframeAnalyticsSourceDescriptorT",
+				"DataframeAnalyticsStats",
 				"DataframeAnalyticsStatsDataCounts",
+				"DataframeAnalyticsStatsHyperparameters",
 				"DataframeAnalyticsStatsMemoryUsage",
+				"DataframeAnalyticsStatsOutlierDetection",
 				"DataframeAnalyticsStatsProgress",
 				"DataframeAnalyticsSummary",
 				"DataframeClassificationSummary",
@@ -8252,6 +8422,7 @@ internal static class KnownNamespaces
 				"GetTrainedModelsStatsRequestParameters",
 				"GetTrainedModelsStatsResponse",
 				"Hyperparameter",
+				"Hyperparameters",
 				"Include",
 				"InferTrainedModelRequest",
 				"InferTrainedModelRequestDescriptor",
@@ -8272,6 +8443,9 @@ internal static class KnownNamespaces
 				"Job",
 				"JobBlocked",
 				"JobBlockedReason",
+				"JobConfig",
+				"JobConfigDescriptor",
+				"JobConfigDescriptorT",
 				"JobForecastStatistics",
 				"JobState",
 				"JobStatistics",
@@ -8316,6 +8490,7 @@ internal static class KnownNamespaces
 				"OpenJobRequestDescriptor",
 				"OpenJobRequestParameters",
 				"OpenJobResponse",
+				"OutlierDetectionParameters",
 				"OverallBucket",
 				"OverallBucketJob",
 				"Page",
@@ -8337,6 +8512,11 @@ internal static class KnownNamespaces
 				"PreviewDataFrameAnalyticsRequestDescriptorT",
 				"PreviewDataFrameAnalyticsRequestParameters",
 				"PreviewDataFrameAnalyticsResponse",
+				"PreviewDatafeedRequest",
+				"PreviewDatafeedRequestDescriptor",
+				"PreviewDatafeedRequestDescriptorT",
+				"PreviewDatafeedRequestParameters",
+				"PreviewDatafeedResponse",
 				"PutCalendarJobRequest",
 				"PutCalendarJobRequestDescriptor",
 				"PutCalendarJobRequestParameters",
@@ -8447,6 +8627,7 @@ internal static class KnownNamespaces
 				"TextExpansionInferenceOptionsDescriptor",
 				"TextExpansionInferenceUpdateOptions",
 				"TextExpansionInferenceUpdateOptionsDescriptor",
+				"TimingStats",
 				"TokenizationConfig",
 				"TokenizationConfigDescriptor",
 				"TokenizationTruncate",
@@ -8523,6 +8704,7 @@ internal static class KnownNamespaces
 				"ValidateRequestDescriptorT",
 				"ValidateRequestParameters",
 				"ValidateResponse",
+				"ValidationLoss",
 				"Vocabulary",
 				"VocabularyDescriptor",
 				"Weights",
@@ -8753,6 +8935,13 @@ internal static class KnownNamespaces
 			}
 		},
 		{
+			"Elastic.Clients.Elasticsearch.MachineLearning.JobConfigDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
+			}
+		},
+		{
 			"Elastic.Clients.Elasticsearch.MachineLearning.Json",
 			new(System.StringComparer.Ordinal)
 			{
@@ -8814,8 +9003,11 @@ internal static class KnownNamespaces
 				"DataframeAnalyticsFieldSelectionConverter",
 				"DataframeAnalyticsMemoryEstimationConverter",
 				"DataframeAnalyticsSourceConverter",
+				"DataframeAnalyticsStatsConverter",
 				"DataframeAnalyticsStatsDataCountsConverter",
+				"DataframeAnalyticsStatsHyperparametersConverter",
 				"DataframeAnalyticsStatsMemoryUsageConverter",
+				"DataframeAnalyticsStatsOutlierDetectionConverter",
 				"DataframeAnalyticsStatsProgressConverter",
 				"DataframeAnalyticsSummaryConverter",
 				"DataframeClassificationSummaryAccuracyConverter",
@@ -8935,6 +9127,7 @@ internal static class KnownNamespaces
 				"GetTrainedModelsStatsRequestConverter",
 				"GetTrainedModelsStatsResponseConverter",
 				"HyperparameterConverter",
+				"HyperparametersConverter",
 				"IncludeConverter",
 				"InferTrainedModelRequestConverter",
 				"InferTrainedModelResponseConverter",
@@ -8946,6 +9139,7 @@ internal static class KnownNamespaces
 				"InputConverter",
 				"JobBlockedConverter",
 				"JobBlockedReasonConverter",
+				"JobConfigConverter",
 				"JobConverter",
 				"JobForecastStatisticsConverter",
 				"JobStateConverter",
@@ -8976,6 +9170,7 @@ internal static class KnownNamespaces
 				"OneHotEncodingPreprocessorConverter",
 				"OpenJobRequestConverter",
 				"OpenJobResponseConverter",
+				"OutlierDetectionParametersConverter",
 				"OverallBucketConverter",
 				"OverallBucketJobConverter",
 				"PageConverter",
@@ -8987,6 +9182,9 @@ internal static class KnownNamespaces
 				"PreprocessorConverter",
 				"PreviewDataFrameAnalyticsRequestConverter",
 				"PreviewDataFrameAnalyticsResponseConverter",
+				"PreviewDatafeedRequestConverter",
+				"PreviewDatafeedResponseConverter",
+				"PreviewDatafeedResponseConverterFactory",
 				"PutCalendarJobRequestConverter",
 				"PutCalendarJobResponseConverter",
 				"PutCalendarRequestConverter",
@@ -9041,6 +9239,7 @@ internal static class KnownNamespaces
 				"TextEmbeddingInferenceUpdateOptionsConverter",
 				"TextExpansionInferenceOptionsConverter",
 				"TextExpansionInferenceUpdateOptionsConverter",
+				"TimingStatsConverter",
 				"TokenizationConfigConverter",
 				"TokenizationTruncateConverter",
 				"TopClassEntryConverter",
@@ -9090,11 +9289,19 @@ internal static class KnownNamespaces
 				"ValidateDetectorResponseConverter",
 				"ValidateRequestConverter",
 				"ValidateResponseConverter",
+				"ValidationLossConverter",
 				"VocabularyConverter",
 				"WeightsConverter",
 				"XlmRobertaTokenizationConfigConverter",
 				"ZeroShotClassificationInferenceOptionsConverter",
 				"ZeroShotClassificationInferenceUpdateOptionsConverter"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.MachineLearning.Json.PreviewDatafeedResponseConverter",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
 			}
 		},
 		{
@@ -9113,6 +9320,20 @@ internal static class KnownNamespaces
 		},
 		{
 			"Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse",
 			new(System.StringComparer.Ordinal)
 			{
 				"TDocument"
@@ -10508,6 +10729,9 @@ internal static class KnownNamespaces
 				"IntervalsWildcard",
 				"IntervalsWildcardDescriptor",
 				"IntervalsWildcardDescriptorT",
+				"KqlQuery",
+				"KqlQueryDescriptor",
+				"KqlQueryDescriptorT",
 				"Like",
 				"LikeDocument",
 				"LikeDocumentDescriptor",
@@ -11030,6 +11254,7 @@ internal static class KnownNamespaces
 				"IntervalsRangeConverter",
 				"IntervalsRegexpConverter",
 				"IntervalsWildcardConverter",
+				"KqlQueryConverter",
 				"LikeConverter",
 				"LikeDocumentConverter",
 				"LongNumberRangeQueryConverter",
@@ -11105,6 +11330,13 @@ internal static class KnownNamespaces
 			{
 				"TOrigin",
 				"TScale"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
 			}
 		},
 		{
@@ -12016,6 +12248,7 @@ internal static class KnownNamespaces
 				"Authentication",
 				"AuthenticationProvider",
 				"AuthenticationRealm",
+				"BuiltInServiceAccount",
 				"BulkDeleteRoleRequest",
 				"BulkDeleteRoleRequestDescriptor",
 				"BulkDeleteRoleRequestParameters",
@@ -12100,6 +12333,10 @@ internal static class KnownNamespaces
 				"DeleteServiceTokenRequestDescriptor",
 				"DeleteServiceTokenRequestParameters",
 				"DeleteServiceTokenResponse",
+				"DeleteUserManagedServiceAccountRequest",
+				"DeleteUserManagedServiceAccountRequestDescriptor",
+				"DeleteUserManagedServiceAccountRequestParameters",
+				"DeleteUserManagedServiceAccountResponse",
 				"DeleteUserRequest",
 				"DeleteUserRequestDescriptor",
 				"DeleteUserRequestParameters",
@@ -12207,6 +12444,7 @@ internal static class KnownNamespaces
 				"HasPrivilegesUserProfileResponse",
 				"Hint",
 				"HintDescriptor",
+				"IServiceAccountInfo",
 				"IndexPrivilege",
 				"IndexPrivilegesCheck",
 				"IndexPrivilegesCheckDescriptor",
@@ -12259,6 +12497,10 @@ internal static class KnownNamespaces
 				"PutRoleRequestDescriptorT",
 				"PutRoleRequestParameters",
 				"PutRoleResponse",
+				"PutUserManagedServiceAccountRequest",
+				"PutUserManagedServiceAccountRequestDescriptor",
+				"PutUserManagedServiceAccountRequestParameters",
+				"PutUserManagedServiceAccountResponse",
 				"PutUserRequest",
 				"PutUserRequestDescriptor",
 				"PutUserRequestParameters",
@@ -12297,7 +12539,6 @@ internal static class KnownNamespaces
 				"RoleDescriptorDescriptor",
 				"RoleDescriptorDescriptorT",
 				"RoleDescriptorRead",
-				"RoleDescriptorWrapper",
 				"RoleInfo",
 				"RoleMapping",
 				"RoleMappingRule",
@@ -12342,6 +12583,8 @@ internal static class KnownNamespaces
 				"SecuritySettings",
 				"SecuritySettingsDescriptor",
 				"SecuritySettingsDescriptorT",
+				"ServiceAccountInfos",
+				"ServiceAccountType",
 				"ServiceToken",
 				"SuggestUserProfilesRequest",
 				"SuggestUserProfilesRequestDescriptor",
@@ -12371,6 +12614,7 @@ internal static class KnownNamespaces
 				"User",
 				"UserIndicesPrivileges",
 				"UserIndicesPrivilegesBase",
+				"UserManagedServiceAccount",
 				"UserProfile",
 				"UserProfileHitMetadata",
 				"UserProfileUser",
@@ -12490,6 +12734,7 @@ internal static class KnownNamespaces
 				"AuthenticationConverter",
 				"AuthenticationProviderConverter",
 				"AuthenticationRealmConverter",
+				"BuiltInServiceAccountConverter",
 				"BulkDeleteRoleRequestConverter",
 				"BulkDeleteRoleResponseConverter",
 				"BulkErrorConverter",
@@ -12533,6 +12778,8 @@ internal static class KnownNamespaces
 				"DeleteRoleResponseConverter",
 				"DeleteServiceTokenRequestConverter",
 				"DeleteServiceTokenResponseConverter",
+				"DeleteUserManagedServiceAccountRequestConverter",
+				"DeleteUserManagedServiceAccountResponseConverter",
 				"DeleteUserRequestConverter",
 				"DeleteUserResponseConverter",
 				"DisableUserProfileRequestConverter",
@@ -12587,6 +12834,7 @@ internal static class KnownNamespaces
 				"HasPrivilegesUserProfileRequestConverter",
 				"HasPrivilegesUserProfileResponseConverter",
 				"HintConverter",
+				"IServiceAccountInfoConverter",
 				"IndexPrivilegeConverter",
 				"IndexPrivilegesCheckConverter",
 				"IndicesPrivilegesBaseConverter",
@@ -12615,6 +12863,8 @@ internal static class KnownNamespaces
 				"PutRoleMappingResponseConverter",
 				"PutRoleRequestConverter",
 				"PutRoleResponseConverter",
+				"PutUserManagedServiceAccountRequestConverter",
+				"PutUserManagedServiceAccountResponseConverter",
 				"PutUserRequestConverter",
 				"PutUserResponseConverter",
 				"QueryApiKeysRequestConverter",
@@ -12635,7 +12885,6 @@ internal static class KnownNamespaces
 				"RestrictionWorkflowConverter",
 				"RoleDescriptorConverter",
 				"RoleDescriptorReadConverter",
-				"RoleDescriptorWrapperConverter",
 				"RoleInfoConverter",
 				"RoleMappingConverter",
 				"RoleMappingRuleConverter",
@@ -12658,6 +12907,8 @@ internal static class KnownNamespaces
 				"SamlServiceProviderMetadataResponseConverter",
 				"SearchAccessConverter",
 				"SecuritySettingsConverter",
+				"ServiceAccountInfosConverter",
+				"ServiceAccountTypeConverter",
 				"ServiceTokenConverter",
 				"SuggestUserProfilesRequestConverter",
 				"SuggestUserProfilesResponseConverter",
@@ -12674,6 +12925,7 @@ internal static class KnownNamespaces
 				"UserConverter",
 				"UserIndicesPrivilegesBaseConverter",
 				"UserIndicesPrivilegesConverter",
+				"UserManagedServiceAccountConverter",
 				"UserProfileConverter",
 				"UserProfileHitMetadataConverter",
 				"UserProfileUserConverter",

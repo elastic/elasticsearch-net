@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ChatCompletionUsage"><summary><para>
+Token usage statistics for the request.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionUsage#completion_tokens"><summary><para>
+The number of tokens in the generated completion.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionUsage#completion_tokens_details"><summary><para>
+Breakdown of the tokens used in the completion.
+Omitted when no details are available.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionUsage#prompt_tokens"><summary><para>
+The number of tokens in the prompt.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionUsage#prompt_tokens_details"><summary><para>
+Breakdown of the tokens used in the prompt.
+Omitted when no details are available.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionUsage#total_tokens"><summary><para>
+The total number of tokens used (prompt + completion).
+</para></summary></member>
+</doc>
