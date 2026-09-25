@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ssl.certificates.CertificateInformation#alias"><summary><para>
+If the path refers to a container file (a jks keystore, or a PKCS#12 file), it is the alias of the certificate.
+Otherwise, it is null.
+</para></summary></member>
+  <member key="ssl.certificates.CertificateInformation#expiry"><summary><para>
+The ISO formatted date of the certificate's expiry (not-after) date.
+</para></summary></member>
+  <member key="ssl.certificates.CertificateInformation#format"><summary><para>
+The format of the file.
+Valid values include <c>jks</c>, <c>PKCS12</c>, and <c>PEM</c>.
+</para></summary></member>
+  <member key="ssl.certificates.CertificateInformation#has_private_key"><summary><para>
+Indicates whether Elasticsearch has access to the private key for this certificate.
+</para></summary></member>
+  <member key="ssl.certificates.CertificateInformation#issuer"><summary><para>
+The Distinguished Name of the certificate's issuer.
+</para></summary></member>
+  <member key="ssl.certificates.CertificateInformation#path"><summary><para>
+The path to the certificate, as configured in the <c>elasticsearch.yml</c> file.
+</para></summary></member>
+  <member key="ssl.certificates.CertificateInformation#serial_number"><summary><para>
+The hexadecimal representation of the certificate's serial number.
+</para></summary></member>
+  <member key="ssl.certificates.CertificateInformation#subject_dn"><summary><para>
+The Distinguished Name of the certificate's subject.
+</para></summary></member>
+</doc>

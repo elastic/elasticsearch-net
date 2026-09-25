@@ -279,6 +279,11 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("Missing", (w) => { Missing.FormatCode(w); });
 			}
 
+			if (MovingAvg is not null)
+			{
+				writer.WriteFluentCall("MovingAvg", (w) => { MovingAvg.FormatCode(w); });
+			}
+
 			if (MovingFn is not null)
 			{
 				writer.WriteFluentDescriptorCall("MovingFn", (w) => { MovingFn.FormatCode(w); });
@@ -754,6 +759,12 @@ public partial class Aggregation : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Missing");
 				Missing.FormatCode(writer);
+			}
+
+			if (MovingAvg is not null)
+			{
+				initializer.Property("MovingAvg");
+				MovingAvg.FormatCode(writer);
 			}
 
 			if (MovingFn is not null)

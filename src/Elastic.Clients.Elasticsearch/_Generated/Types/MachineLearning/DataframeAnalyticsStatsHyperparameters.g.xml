@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalyticsStatsHyperparameters#hyperparameters"><summary><para>
+An object containing the parameters of the classification analysis job.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsHyperparameters#iteration"><summary><para>
+The number of iterations on the analysis.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsHyperparameters#timestamp"><summary><para>
+The timestamp when the statistics were reported in milliseconds since the epoch.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsHyperparameters#timing_stats"><summary><para>
+An object containing time statistics about the data frame analytics job.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsHyperparameters#validation_loss"><summary><para>
+An object containing information about validation loss.
+</para></summary></member>
+</doc>

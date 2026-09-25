@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalyticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalytics>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisStats = System.Text.Json.JsonEncodedText.Encode("analysis_stats"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAssignmentExplanation = System.Text.Json.JsonEncodedText.Encode("assignment_explanation"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDataCounts = System.Text.Json.JsonEncodedText.Encode("data_counts"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
@@ -36,6 +37,7 @@ public sealed partial class DataframeAnalyticsConverter : System.Text.Json.Seria
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalytics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStats?> propAnalysisStats = default;
 		LocalJsonValue<string?> propAssignmentExplanation = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts> propDataCounts = default;
 		LocalJsonValue<string> propId = default;
@@ -45,6 +47,11 @@ public sealed partial class DataframeAnalyticsConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeState> propState = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAnalysisStats.TryReadProperty(ref reader, options, PropAnalysisStats, null))
+			{
+				continue;
+			}
+
 			if (propAssignmentExplanation.TryReadProperty(ref reader, options, PropAssignmentExplanation, null))
 			{
 				continue;
@@ -92,6 +99,7 @@ public sealed partial class DataframeAnalyticsConverter : System.Text.Json.Seria
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalytics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			AnalysisStats = propAnalysisStats.Value,
 			AssignmentExplanation = propAssignmentExplanation.Value,
 			DataCounts = propDataCounts.Value,
 			Id = propId.Value,
@@ -105,6 +113,7 @@ public sealed partial class DataframeAnalyticsConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalytics value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalysisStats, value.AnalysisStats, null, null);
 		writer.WriteProperty(options, PropAssignmentExplanation, value.AssignmentExplanation, null, null);
 		writer.WriteProperty(options, PropDataCounts, value.DataCounts, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);

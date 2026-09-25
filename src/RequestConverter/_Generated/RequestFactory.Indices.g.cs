@@ -25,6 +25,96 @@ namespace RequestConverter;
 
 internal static partial class RequestFactory
 {
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateIndicesAddBlock(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "block":
+						{
+							request.Block = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions>.Parse(parameter.Value);
+							continue;
+						}
+
+					case "index":
+						{
+							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'indices.add_block'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "allow_no_indices":
+						{
+							if (parameter.Value is string value)
+								request.AllowNoIndices = bool.Parse(value);
+							continue;
+						}
+
+					case "expand_wildcards":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.ExpandWildcards = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ExpandWildcard>.Parse(x)).ToList();
+							}
+
+							continue;
+						}
+
+					case "ignore_unavailable":
+						{
+							if (parameter.Value is string value)
+								request.IgnoreUnavailable = bool.Parse(value);
+							continue;
+						}
+
+					case "master_timeout":
+						{
+							if (parameter.Value is string value)
+								request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "timeout":
+						{
+							if (parameter.Value is string value)
+								request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateIndicesAnalyze(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest>(serializer, body);

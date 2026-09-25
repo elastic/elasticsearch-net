@@ -47,6 +47,9 @@ public sealed partial class DataframeAnalytics
 		_ = sentinel;
 	}
 
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#analysis_stats']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStats? AnalysisStats { get; set; }
+
 	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#assignment_explanation']/*"/>
 	public string? AssignmentExplanation { get; set; }
 
