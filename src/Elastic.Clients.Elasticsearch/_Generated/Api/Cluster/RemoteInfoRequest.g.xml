@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.remote_info.Request"><summary><para>
+Get remote cluster information.
+</para>
+<para>
+Get information about configured remote clusters.
+The API returns connection and endpoint information keyed by the configured remote cluster alias.
+</para>
+<para>
+info
+This API returns information that reflects current state on the local cluster.
+The <c>connected</c> field does not necessarily reflect whether a remote cluster is down or unavailable, only whether there is currently an open connection to it.
+Elasticsearch does not spontaneously try to reconnect to a disconnected remote cluster.
+To trigger a reconnection, attempt a cross-cluster search, ES|QL cross-cluster search, or try the <c>/_resolve/cluster</c> endpoint.
+</para></summary></member>
+</doc>

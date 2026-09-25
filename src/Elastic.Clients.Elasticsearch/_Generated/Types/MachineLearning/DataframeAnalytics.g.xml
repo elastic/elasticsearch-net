@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="ml._types.DataframeAnalytics#analysis_stats"><summary><para>
+An object containing information about the analysis job.
+</para></summary></member>
   <member key="ml._types.DataframeAnalytics#assignment_explanation"><summary><para>
 For running jobs only, contains messages relating to the selection of a node to run the job.
 </para></summary></member>

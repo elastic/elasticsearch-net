@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="dangling_indices.delete_dangling_index.Request"><summary><para>
+Delete a dangling index.
+If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+</para></summary></member>
+  <member key="dangling_indices.delete_dangling_index.Request#accept_data_loss"><summary><para>
+This parameter must be set to true to acknowledge that it will no longer be possible to recove data from the dangling index.
+</para></summary></member>
+  <member key="dangling_indices.delete_dangling_index.Request#index_uuid"><summary><para>
+The UUID of the index to delete. Use the get dangling indices API to find the UUID.
+</para></summary></member>
+  <member key="dangling_indices.delete_dangling_index.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="dangling_indices.delete_dangling_index.Request#timeout"><summary><para>
+The period to wait for a response.
+</para></summary></member>
+</doc>

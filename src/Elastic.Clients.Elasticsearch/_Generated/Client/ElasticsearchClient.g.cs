@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch;
 public partial class ElasticsearchClient
 {
 	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient AsyncSearch { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.Certificates.CertificatesNamespacedClient Certificates { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient Cluster { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient CrossClusterReplication { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient DanglingIndices { get; private set; }
@@ -60,6 +61,7 @@ public partial class ElasticsearchClient
 	private partial void SetupNamespaces()
 	{
 		AsyncSearch = new Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient(this);
+		Certificates = new Elastic.Clients.Elasticsearch.Certificates.CertificatesNamespacedClient(this);
 		Cluster = new Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient(this);
 		CrossClusterReplication = new Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient(this);
 		DanglingIndices = new Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient(this);
