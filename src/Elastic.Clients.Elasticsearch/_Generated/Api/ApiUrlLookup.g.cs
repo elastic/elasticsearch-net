@@ -29,6 +29,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls AsyncSearchGet = new ApiUrls(new[] { "_async_search/{id}" });
 	internal static ApiUrls AsyncSearchStatus = new ApiUrls(new[] { "_async_search/status/{id}" });
 	internal static ApiUrls AsyncSearchSubmit = new ApiUrls(new[] { "_async_search", "{index}/_async_search" });
+	internal static ApiUrls CertificatesCertificates = new ApiUrls(new[] { "_ssl/certificates" });
 	internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "_cluster/allocation/explain" });
 	internal static ApiUrls ClusterDeleteComponentTemplate = new ApiUrls(new[] { "_component_template/{name}" });
 	internal static ApiUrls ClusterDeleteVotingConfigExclusions = new ApiUrls(new[] { "_cluster/voting_config_exclusions" });
@@ -41,6 +42,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls ClusterPostVotingConfigExclusions = new ApiUrls(new[] { "_cluster/voting_config_exclusions" });
 	internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[] { "_component_template/{name}" });
 	internal static ApiUrls ClusterPutSettings = new ApiUrls(new[] { "_cluster/settings" });
+	internal static ApiUrls ClusterRemoteInfo = new ApiUrls(new[] { "_remote/info" });
 	internal static ApiUrls ClusterStats = new ApiUrls(new[] { "_cluster/stats", "_cluster/stats/nodes/{node_id}" });
 	internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[] { "_ccr/auto_follow/{name}" });
 	internal static ApiUrls CrossClusterReplicationFollow = new ApiUrls(new[] { "{index}/_ccr/follow" });
@@ -55,6 +57,8 @@ internal static class ApiUrlLookup
 	internal static ApiUrls CrossClusterReplicationResumeFollow = new ApiUrls(new[] { "{index}/_ccr/resume_follow" });
 	internal static ApiUrls CrossClusterReplicationStats = new ApiUrls(new[] { "_ccr/stats" });
 	internal static ApiUrls CrossClusterReplicationUnfollow = new ApiUrls(new[] { "{index}/_ccr/unfollow" });
+	internal static ApiUrls DanglingIndicesDeleteDanglingIndex = new ApiUrls(new[] { "_dangling/{index_uuid}" });
+	internal static ApiUrls DanglingIndicesImportDanglingIndex = new ApiUrls(new[] { "_dangling/{index_uuid}" });
 	internal static ApiUrls DanglingIndicesListDanglingIndices = new ApiUrls(new[] { "_dangling" });
 	internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[] { "_enrich/policy/{name}" });
 	internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[] { "_enrich/policy/{name}/_execute" });
@@ -74,6 +78,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "_features/_reset" });
 	internal static ApiUrls GraphExplore = new ApiUrls(new[] { "{index}/_graph/explore" });
 	internal static ApiUrls IndexLifecycleManagementDeleteLifecycle = new ApiUrls(new[] { "_ilm/policy/{policy}" });
+	internal static ApiUrls IndexLifecycleManagementExplainLifecycle = new ApiUrls(new[] { "{index}/_ilm/explain" });
 	internal static ApiUrls IndexLifecycleManagementGetLifecycle = new ApiUrls(new[] { "_ilm/policy/{policy}", "_ilm/policy" });
 	internal static ApiUrls IndexLifecycleManagementGetStatus = new ApiUrls(new[] { "_ilm/status" });
 	internal static ApiUrls IndexLifecycleManagementMigrateToDataTiers = new ApiUrls(new[] { "_ilm/migrate_to_data_tiers" });
@@ -83,6 +88,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexLifecycleManagementRetry = new ApiUrls(new[] { "{index}/_ilm/retry" });
 	internal static ApiUrls IndexLifecycleManagementStart = new ApiUrls(new[] { "_ilm/start" });
 	internal static ApiUrls IndexLifecycleManagementStop = new ApiUrls(new[] { "_ilm/stop" });
+	internal static ApiUrls IndexManagementAddBlock = new ApiUrls(new[] { "{index}/_block/{block}" });
 	internal static ApiUrls IndexManagementAnalyze = new ApiUrls(new[] { "_analyze", "{index}/_analyze" });
 	internal static ApiUrls IndexManagementCancelMigrateReindex = new ApiUrls(new[] { "_migration/reindex/{index}/_cancel" });
 	internal static ApiUrls IndexManagementClearCache = new ApiUrls(new[] { "_cache/clear", "{index}/_cache/clear" });
@@ -241,6 +247,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls MachineLearningInfo = new ApiUrls(new[] { "_ml/info" });
 	internal static ApiUrls MachineLearningOpenJob = new ApiUrls(new[] { "_ml/anomaly_detectors/{job_id}/_open" });
 	internal static ApiUrls MachineLearningPostCalendarEvents = new ApiUrls(new[] { "_ml/calendars/{calendar_id}/events" });
+	internal static ApiUrls MachineLearningPreviewDatafeed = new ApiUrls(new[] { "_ml/datafeeds/{datafeed_id}/_preview", "_ml/datafeeds/_preview" });
 	internal static ApiUrls MachineLearningPreviewDataFrameAnalytics = new ApiUrls(new[] { "_ml/data_frame/analytics/_preview", "_ml/data_frame/analytics/{id}/_preview" });
 	internal static ApiUrls MachineLearningPutCalendar = new ApiUrls(new[] { "_ml/calendars/{calendar_id}" });
 	internal static ApiUrls MachineLearningPutCalendarJob = new ApiUrls(new[] { "_ml/calendars/{calendar_id}/jobs/{job_id}" });

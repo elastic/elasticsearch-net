@@ -193,6 +193,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"cluster.remote_info",
+			new ClientCallInfo("Cluster", "RemoteInfo", 0, 0)
+		}
+,
+		{
 			"cluster.stats",
 			new ClientCallInfo("Cluster", "Stats", 0, 0)
 		}
@@ -205,6 +210,16 @@ internal static class ClientMethods
 		{
 			"create",
 			new ClientCallInfo("", "Create", 0, 1)
+		}
+,
+		{
+			"dangling_indices.delete_dangling_index",
+			new ClientCallInfo("DanglingIndices", "DeleteDanglingIndex", 0, 0)
+		}
+,
+		{
+			"dangling_indices.import_dangling_index",
+			new ClientCallInfo("DanglingIndices", "ImportDanglingIndex", 0, 0)
 		}
 ,
 		{
@@ -373,6 +388,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"ilm.explain_lifecycle",
+			new ClientCallInfo("IndexLifecycleManagement", "ExplainLifecycle", 0, 0)
+		}
+,
+		{
 			"ilm.get_lifecycle",
 			new ClientCallInfo("IndexLifecycleManagement", "GetLifecycle", 0, 0)
 		}
@@ -420,6 +440,11 @@ internal static class ClientMethods
 		{
 			"index",
 			new ClientCallInfo("", "Index", 0, 1)
+		}
+,
+		{
+			"indices.add_block",
+			new ClientCallInfo("Indices", "AddBlock", 0, 0)
 		}
 ,
 		{
@@ -1225,6 +1250,11 @@ internal static class ClientMethods
 		{
 			"ml.preview_data_frame_analytics",
 			new ClientCallInfo("MachineLearning", "PreviewDataFrameAnalytics", 0, 0)
+		}
+,
+		{
+			"ml.preview_datafeed",
+			new ClientCallInfo("MachineLearning", "PreviewDatafeed", 1, 1)
 		}
 ,
 		{
@@ -2095,6 +2125,11 @@ internal static class ClientMethods
 		{
 			"sql.translate",
 			new ClientCallInfo("Sql", "Translate", 0, 0)
+		}
+,
+		{
+			"ssl.certificates",
+			new ClientCallInfo("Certificates", "Certificates", 0, 0)
 		}
 ,
 		{

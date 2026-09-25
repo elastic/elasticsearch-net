@@ -87,6 +87,7 @@ public sealed partial class Aggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.MinAggregation? Min { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation>("min"); set => SetVariant("min", value); }
 	public Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation? MinBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation>("min_bucket"); set => SetVariant("min_bucket", value); }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? Missing { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation>("missing"); set => SetVariant("missing", value); }
+	public Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation? MovingAvg { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation>("moving_avg"); set => SetVariant("moving_avg", value); }
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation? MovingFn { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation>("moving_fn"); set => SetVariant("moving_fn", value); }
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation? MovingPercentiles { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation>("moving_percentiles"); set => SetVariant("moving_percentiles", value); }
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation? MultiTerms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation>("multi_terms"); set => SetVariant("multi_terms", value); }
@@ -168,6 +169,11 @@ public sealed partial class Aggregation
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.MinAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { Min = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MinBucket = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { Missing = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.EwmaMovingAverageAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MovingAvg = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.HoltMovingAverageAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MovingAvg = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.HoltWintersMovingAverageAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MovingAvg = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.LinearMovingAverageAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MovingAvg = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.SimpleMovingAverageAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MovingAvg = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MovingFn = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MovingPercentiles = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { MultiTerms = value };
@@ -1071,6 +1077,18 @@ public readonly partial struct AggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Missing(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingAvg(Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation? value)
+	{
+		Instance.MovingAvg = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingAvg(System.Func<Elastic.Clients.Elasticsearch.Aggregations.MovingAverageAggregationFactory, Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation> action)
+	{
+		Instance.MovingAvg = Elastic.Clients.Elasticsearch.Aggregations.MovingAverageAggregationFactory.Build(action);
 		return this;
 	}
 
@@ -2741,6 +2759,18 @@ public readonly partial struct AggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Missing<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<T>>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingAvg(Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation? value)
+	{
+		Instance.MovingAvg = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingAvg(System.Func<Elastic.Clients.Elasticsearch.Aggregations.MovingAverageAggregationFactory, Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation> action)
+	{
+		Instance.MovingAvg = Elastic.Clients.Elasticsearch.Aggregations.MovingAverageAggregationFactory.Build(action);
 		return this;
 	}
 

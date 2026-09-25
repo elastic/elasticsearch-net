@@ -77,6 +77,7 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText VariantMin = System.Text.Json.JsonEncodedText.Encode("min");
 	private static readonly System.Text.Json.JsonEncodedText VariantMinBucket = System.Text.Json.JsonEncodedText.Encode("min_bucket");
 	private static readonly System.Text.Json.JsonEncodedText VariantMissing = System.Text.Json.JsonEncodedText.Encode("missing");
+	private static readonly System.Text.Json.JsonEncodedText VariantMovingAvg = System.Text.Json.JsonEncodedText.Encode("moving_avg");
 	private static readonly System.Text.Json.JsonEncodedText VariantMovingFn = System.Text.Json.JsonEncodedText.Encode("moving_fn");
 	private static readonly System.Text.Json.JsonEncodedText VariantMovingPercentiles = System.Text.Json.JsonEncodedText.Encode("moving_percentiles");
 	private static readonly System.Text.Json.JsonEncodedText VariantMultiTerms = System.Text.Json.JsonEncodedText.Encode("multi_terms");
@@ -513,6 +514,14 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
+			if (reader.ValueTextEquals(VariantMovingAvg))
+			{
+				variantType = VariantMovingAvg.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantMovingFn))
 			{
 				variantType = VariantMovingFn.Value;
@@ -943,6 +952,9 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 				break;
 			case "missing":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation)value.Variant, null, null);
+				break;
+			case "moving_avg":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.IMovingAverageAggregation)value.Variant, null, null);
 				break;
 			case "moving_fn":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation)value.Variant, null, null);

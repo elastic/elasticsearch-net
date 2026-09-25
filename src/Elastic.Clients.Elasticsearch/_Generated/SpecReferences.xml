@@ -2198,6 +2198,20 @@
       </para>
     </remarks>
   </member>
+  <member key="_types.aggregations.EwmaModelSettings">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L295-L297">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="_types.aggregations.EwmaMovingAverageAggregation">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L280-L283">View specification</see>
+      </para>
+    </remarks>
+  </member>
   <member key="_types.aggregations.ExtendedBounds">
     <remarks>
       <para>
@@ -2492,6 +2506,34 @@
       </para>
     </remarks>
   </member>
+  <member key="_types.aggregations.HoltLinearModelSettings">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L299-L302">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="_types.aggregations.HoltMovingAverageAggregation">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L285-L288">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="_types.aggregations.HoltWintersModelSettings">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L303-L310">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="_types.aggregations.HoltWintersMovingAverageAggregation">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L290-L293">View specification</see>
+      </para>
+    </remarks>
+  </member>
   <member key="_types.aggregations.Indeterminable">
     <remarks>
       <para>
@@ -2580,6 +2622,13 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/Aggregate.ts#L702-L706">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="_types.aggregations.LinearMovingAverageAggregation">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L270-L273">View specification</see>
       </para>
     </remarks>
   </member>
@@ -2979,6 +3028,13 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/bucket.ts#L922-L997">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="_types.aggregations.SimpleMovingAverageAggregation">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/_types/aggregations/pipeline.ts#L275-L278">View specification</see>
       </para>
     </remarks>
   </member>
@@ -5880,6 +5936,27 @@
       </para>
     </remarks>
   </member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/cluster/remote_info/ClusterRemoteInfoResponse.ts#L58-L83">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="cluster.remote_info.ClusterRemoteSniffInfo">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/cluster/remote_info/ClusterRemoteInfoResponse.ts#L32-L56">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="cluster.remote_info.Request">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/cluster/remote_info/ClusterRemoteInfoRequest.ts#L23-L48">View specification</see>
+      </para>
+    </remarks>
+  </member>
   <member key="cluster.stats.CCSStats">
     <remarks>
       <para>
@@ -6185,6 +6262,20 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/cluster/stats/types.ts#L354-L357">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="dangling_indices.delete_dangling_index.Request">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/dangling_indices/delete_dangling_index/DeleteDanglingIndexRequest.ts#L24-L65">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="dangling_indices.import_dangling_index.Request">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/dangling_indices/import_dangling_index/ImportDanglingIndexRequest.ts#L24-L67">View specification</see>
       </para>
     </remarks>
   </member>
@@ -6542,6 +6633,34 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ilm/delete_lifecycle/DeleteLifecycleRequest.ts#L24-L59">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ilm.explain_lifecycle.LifecycleExplainManaged">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ilm/explain_lifecycle/types.ts#L27-L58">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ilm.explain_lifecycle.LifecycleExplainPhaseExecution">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ilm/explain_lifecycle/types.ts#L70-L75">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ilm.explain_lifecycle.LifecycleExplainUnmanaged">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ilm/explain_lifecycle/types.ts#L60-L63">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ilm.explain_lifecycle.Request">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ilm/explain_lifecycle/ExplainLifecycleRequest.ts#L24-L65">View specification</see>
       </para>
     </remarks>
   </member>
@@ -7165,6 +7284,20 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/indices/_types/IndexSettings.ts#L410-L429">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="indices.add_block.IndicesBlockStatus">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/indices/add_block/IndicesAddBlockResponse.ts#L30-L33">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="indices.add_block.Request">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/indices/add_block/IndicesAddBlockRequest.ts#L24-L90">View specification</see>
       </para>
     </remarks>
   </member>
@@ -9674,10 +9807,24 @@
       </para>
     </remarks>
   </member>
+  <member key="ml._types.DataframeAnalyticsStatsHyperparameters">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/DataframeAnalytics.ts#L384-L403">View specification</see>
+      </para>
+    </remarks>
+  </member>
   <member key="ml._types.DataframeAnalyticsStatsMemoryUsage">
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/DataframeAnalytics.ts#L354-L363">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ml._types.DataframeAnalyticsStatsOutlierDetection">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/DataframeAnalytics.ts#L405-L418">View specification</see>
       </para>
     </remarks>
   </member>
@@ -9856,6 +10003,13 @@
       </para>
     </remarks>
   </member>
+  <member key="ml._types.Hyperparameters">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/DataframeAnalytics.ts#L420-L526">View specification</see>
+      </para>
+    </remarks>
+  </member>
   <member key="ml._types.InferenceResponseResult">
     <remarks>
       <para>
@@ -9888,6 +10042,13 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/Job.ts#L394-L397">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ml._types.JobConfig">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/Job.ts#L182-L285">View specification</see>
       </para>
     </remarks>
   </member>
@@ -9993,6 +10154,13 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/inference.ts#L375-L380">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ml._types.OutlierDetectionParameters">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/DataframeAnalytics.ts#L528-L562">View specification</see>
       </para>
     </remarks>
   </member>
@@ -10119,6 +10287,13 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/inference.ts#L417-L421">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ml._types.TimingStats">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/DataframeAnalytics.ts#L564-L569">View specification</see>
       </para>
     </remarks>
   </member>
@@ -10287,6 +10462,13 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/Authorization.ts#L59-L71">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ml._types.ValidationLoss">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/_types/DataframeAnalytics.ts#L571-L576">View specification</see>
       </para>
     </remarks>
   </member>
@@ -10791,6 +10973,13 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/preview_data_frame_analytics/MlPreviewDataFrameAnalyticsRequest.ts#L24-L62">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ml.preview_datafeed.Request">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ml/preview_datafeed/MlPreviewDatafeedRequest.ts#L26-L85">View specification</see>
       </para>
     </remarks>
   </member>
@@ -13668,6 +13857,20 @@
     <remarks>
       <para>
         <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/sql/translate/TranslateSqlRequest.ts#L26-L68">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ssl.certificates.CertificateInformation">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ssl/certificates/types.ts#L22-L57">View specification</see>
+      </para>
+    </remarks>
+  </member>
+  <member key="ssl.certificates.Request">
+    <remarks>
+      <para>
+        <see href="https://github.com/elastic/elasticsearch-specification/blob/4340716a5cdb8b75654131337835e74e1f5c4c80/specification/ssl/certificates/GetCertificatesRequest.ts#L23-L57">View specification</see>
       </para>
     </remarks>
   </member>
