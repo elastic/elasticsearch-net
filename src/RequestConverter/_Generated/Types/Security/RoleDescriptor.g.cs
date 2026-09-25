@@ -46,7 +46,7 @@ public partial class RoleDescriptor : RequestConverter.ICodeFormattable
 
 			if (Global is not null)
 			{
-				writer.WriteFluentDescriptorCall("Global", (w) => { Global.FormatCode(w); }, (w) => { Global.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Global", (w) => { Global.FormatCode(w); });
 			}
 
 			if (Indices is not null)

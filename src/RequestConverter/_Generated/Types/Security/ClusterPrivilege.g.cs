@@ -41,6 +41,13 @@ public readonly partial struct ClusterPrivilege : RequestConverter.ICodeFormatta
 			return;
 		}
 
+		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CloneApiKey)
+		{
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ClusterPrivilege");
+			writer.Write(".CloneApiKey");
+			return;
+		}
+
 		if (this == Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.CreateSnapshot)
 		{
 			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ClusterPrivilege");

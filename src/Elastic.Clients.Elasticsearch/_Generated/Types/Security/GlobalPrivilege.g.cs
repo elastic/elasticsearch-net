@@ -27,12 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GlobalPrivilegeConverter))]
 public sealed partial class GlobalPrivilege
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GlobalPrivilege(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges application)
-	{
-		Application = application;
-	}
-
 	public GlobalPrivilege()
 	{
 	}
@@ -43,7 +37,7 @@ public sealed partial class GlobalPrivilege
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Application { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges? Application { get; set; }
 
 	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#data_source']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>? DataSource { get; set; }
@@ -69,7 +63,7 @@ public readonly partial struct GlobalPrivilegeDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(Elastic.Clients.Elasticsearch.Security.GlobalPrivilege instance) => new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges value)
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges? value)
 	{
 		Instance.Application = value;
 		return this;
@@ -109,8 +103,13 @@ public readonly partial struct GlobalPrivilegeDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Build(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Build(System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor(new Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

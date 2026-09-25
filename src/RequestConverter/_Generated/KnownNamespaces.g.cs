@@ -10506,6 +10506,9 @@ internal static class KnownNamespaces
 				"IntervalsWildcard",
 				"IntervalsWildcardDescriptor",
 				"IntervalsWildcardDescriptorT",
+				"KqlQuery",
+				"KqlQueryDescriptor",
+				"KqlQueryDescriptorT",
 				"Like",
 				"LikeDocument",
 				"LikeDocumentDescriptor",
@@ -11028,6 +11031,7 @@ internal static class KnownNamespaces
 				"IntervalsRangeConverter",
 				"IntervalsRegexpConverter",
 				"IntervalsWildcardConverter",
+				"KqlQueryConverter",
 				"LikeConverter",
 				"LikeDocumentConverter",
 				"LongNumberRangeQueryConverter",
@@ -11103,6 +11107,13 @@ internal static class KnownNamespaces
 			{
 				"TOrigin",
 				"TScale"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.QueryDsl.KqlQueryDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
 			}
 		},
 		{

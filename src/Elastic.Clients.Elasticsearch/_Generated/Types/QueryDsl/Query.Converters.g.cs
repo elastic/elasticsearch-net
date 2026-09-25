@@ -45,6 +45,7 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 	private static readonly System.Text.Json.JsonEncodedText VariantIds = System.Text.Json.JsonEncodedText.Encode("ids");
 	private static readonly System.Text.Json.JsonEncodedText VariantIntervals = System.Text.Json.JsonEncodedText.Encode("intervals");
 	private static readonly System.Text.Json.JsonEncodedText VariantKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText VariantKql = System.Text.Json.JsonEncodedText.Encode("kql");
 	private static readonly System.Text.Json.JsonEncodedText VariantMatch = System.Text.Json.JsonEncodedText.Encode("match");
 	private static readonly System.Text.Json.JsonEncodedText VariantMatchAll = System.Text.Json.JsonEncodedText.Encode("match_all");
 	private static readonly System.Text.Json.JsonEncodedText VariantMatchBoolPrefix = System.Text.Json.JsonEncodedText.Encode("match_bool_prefix");
@@ -251,6 +252,14 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 				variantType = VariantKnn.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.KnnQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantKql))
+			{
+				variantType = VariantKql.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.KqlQuery>(options, null);
 				continue;
 			}
 
@@ -670,6 +679,9 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 				break;
 			case "knn":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.KnnQuery)value.Variant, null, null);
+				break;
+			case "kql":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.KqlQuery)value.Variant, null, null);
 				break;
 			case "match":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, null, null);
