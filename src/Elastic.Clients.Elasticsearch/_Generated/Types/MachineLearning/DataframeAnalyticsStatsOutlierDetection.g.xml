@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalyticsStatsOutlierDetection#parameters"><summary><para>
+The list of job parameters specified by the user or determined by algorithmic heuristics.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsOutlierDetection#timestamp"><summary><para>
+The timestamp when the statistics were reported in milliseconds since the epoch.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsOutlierDetection#timing_stats"><summary><para>
+An object containing time statistics about the data frame analytics job.
+</para></summary></member>
+</doc>

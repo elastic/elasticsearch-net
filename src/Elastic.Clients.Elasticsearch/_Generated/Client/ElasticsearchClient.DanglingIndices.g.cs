@@ -36,6 +36,122 @@ public partial class DanglingIndicesNamespacedClient : Elastic.Clients.Elasticse
 	{
 	}
 
+	/// <include file="../Api/DanglingIndices/DeleteDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse DeleteDanglingIndex(Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DanglingIndices/DeleteDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse DeleteDanglingIndex(string indexUuid)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestDescriptor(indexUuid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DanglingIndices/DeleteDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse DeleteDanglingIndex(string indexUuid, System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestDescriptor(indexUuid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DanglingIndices/DeleteDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse> DeleteDanglingIndexAsync(Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DanglingIndices/DeleteDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse> DeleteDanglingIndexAsync(string indexUuid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestDescriptor(indexUuid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DanglingIndices/DeleteDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.delete_dangling_index.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse> DeleteDanglingIndexAsync(string indexUuid, System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestDescriptor(indexUuid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.DeleteDanglingIndexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DanglingIndices/ImportDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse ImportDanglingIndex(Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DanglingIndices/ImportDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse ImportDanglingIndex(string indexUuid)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestDescriptor(indexUuid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DanglingIndices/ImportDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse ImportDanglingIndex(string indexUuid, System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestDescriptor(indexUuid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DanglingIndices/ImportDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse> ImportDanglingIndexAsync(Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DanglingIndices/ImportDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse> ImportDanglingIndexAsync(string indexUuid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestDescriptor(indexUuid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DanglingIndices/ImportDanglingIndexRequest.g.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.import_dangling_index.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse> ImportDanglingIndexAsync(string indexUuid, System.Action<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestDescriptor(indexUuid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequest, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexResponse, Elastic.Clients.Elasticsearch.DanglingIndices.ImportDanglingIndexRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/DanglingIndices/ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse ListDanglingIndices(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest request)
