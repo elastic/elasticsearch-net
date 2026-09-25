@@ -54,6 +54,8 @@ public partial class MultiSearchItem<TDocument>
 	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
+
+	/// <include file="MultiSearchItem.g.xml" path="doc/member[@key='_global.msearch.MultiSearchItem#pit_id']/*"/>
 	public string? PitId { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; set; }
 

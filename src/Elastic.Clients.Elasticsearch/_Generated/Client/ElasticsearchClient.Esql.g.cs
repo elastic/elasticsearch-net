@@ -1093,4 +1093,42 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>(request, cancellationToken);
 	}
+
+	/// <include file="../Api/Esql/TestDataSourceConnectionRequest.g.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse TestDataSourceConnection(Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequest, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/TestDataSourceConnectionRequest.g.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse TestDataSourceConnection(System.Action<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequest, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Esql/TestDataSourceConnectionRequest.g.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse> TestDataSourceConnectionAsync(Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequest, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Esql/TestDataSourceConnectionRequest.g.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.test_data_source_connection.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse> TestDataSourceConnectionAsync(System.Action<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequest, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionResponse, Elastic.Clients.Elasticsearch.Esql.TestDataSourceConnectionRequestParameters>(request, cancellationToken);
+	}
 }

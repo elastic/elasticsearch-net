@@ -94,6 +94,128 @@ public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse ExplainLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse ExplainLifecycle(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse ExplainLifecycle(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse ExplainLifecycle<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse ExplainLifecycle<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse ExplainLifecycle<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse> ExplainLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse> ExplainLifecycleAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse> ExplainLifecycleAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse> ExplainLifecycleAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse> ExplainLifecycleAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexLifecycleManagement/ExplainLifecycleRequest.g.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.explain_lifecycle.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse> ExplainLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ExplainLifecycleRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/IndexLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest request)

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ChatCompletionCompletionTokensDetails"><summary><para>
+Breakdown of tokens used in the request.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionCompletionTokensDetails#reasoning_tokens"><summary><para>
+The number of tokens used for reasoning by the model.
+</para></summary></member>
+</doc>

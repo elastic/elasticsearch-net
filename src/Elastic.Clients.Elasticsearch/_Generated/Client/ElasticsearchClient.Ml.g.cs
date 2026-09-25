@@ -3452,6 +3452,190 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse, Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Elastic.Clients.Elasticsearch.Id? datafeedId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument> PreviewDatafeed<TDocument>(Elastic.Clients.Elasticsearch.Id? datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse> PreviewDatafeed<TDocument, TDocumentResponse>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse> PreviewDatafeed<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse> PreviewDatafeed<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id? datafeedId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse> PreviewDatafeed<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id? datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? datafeedId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>> PreviewDatafeedAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocument>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>> PreviewDatafeedAsync<TDocument, TDocumentResponse>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>> PreviewDatafeedAsync<TDocument, TDocumentResponse>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>> PreviewDatafeedAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id? datafeedId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/MachineLearning/PreviewDatafeedRequest.g.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_datafeed.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>> PreviewDatafeedAsync<TDocument, TDocumentResponse>(Elastic.Clients.Elasticsearch.Id? datafeedId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestDescriptor<TDocument>(datafeedId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequest, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.MachineLearning.PreviewDatafeedRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/MachineLearning/PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest request)

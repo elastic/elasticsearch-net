@@ -67,6 +67,9 @@ public sealed partial class GetTokenRequest : Elastic.Clients.Elasticsearch.Requ
 	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#scope']/*"/>
 	public string? Scope { get; set; }
 
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#service_account_token']/*"/>
+	public string? ServiceAccountToken { get; set; }
+
 	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
@@ -123,6 +126,13 @@ public readonly partial struct GetTokenRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Scope(string? value)
 	{
 		Instance.Scope = value;
+		return this;
+	}
+
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#service_account_token']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor ServiceAccountToken(string? value)
+	{
+		Instance.ServiceAccountToken = value;
 		return this;
 	}
 

@@ -29,6 +29,7 @@ public partial class GlobalPrivilege : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
+			if (Application is not null)
 			{
 				writer.WriteFluentDescriptorCall("Application", (w) => { Application.FormatCode(w); }, (w) => { Application.FormatCode(w); });
 			}
@@ -41,6 +42,7 @@ public partial class GlobalPrivilege : RequestConverter.ICodeFormattable
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.GlobalPrivilege", false);
+			if (Application is not null)
 			{
 				initializer.Property("Application");
 				Application.FormatCode(writer);

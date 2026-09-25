@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="dangling_indices.import_dangling_index.Request"><summary><para>
+Import a dangling index.
+</para>
+<para>
+If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
+For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
+</para></summary></member>
+  <member key="dangling_indices.import_dangling_index.Request#accept_data_loss"><summary><para>
+This parameter must be set to true to import a dangling index.
+Because Elasticsearch cannot know where the dangling index data came from or determine which shard copies are fresh and which are stale, it cannot guarantee that the imported data represents the latest state of the index when it was last in the cluster.
+</para></summary></member>
+  <member key="dangling_indices.import_dangling_index.Request#index_uuid"><summary><para>
+The UUID of the index to import. Use the get dangling indices API to locate the UUID.
+</para></summary></member>
+  <member key="dangling_indices.import_dangling_index.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="dangling_indices.import_dangling_index.Request#timeout"><summary><para>
+The period to wait for a response.
+</para></summary></member>
+</doc>

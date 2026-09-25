@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#cluster_credentials"><summary><para>
+This field is present and has a value of <c>::es_redacted::</c> only when the remote cluster is configured with the API key based model. Otherwise, the field is not present.
+</para></summary></member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#connected"><summary><para>
+If it is <c>true</c>, there is at least one open connection to the remote cluster.
+If it is <c>false</c>, it means that the cluster no longer has an open connection to the remote cluster.
+It does not necessarily mean that the remote cluster is down or unavailable, just that at some point a connection was lost.
+</para></summary></member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#initial_connect_timeout"><summary><para>
+The initial connect timeout for remote cluster connections.
+</para></summary></member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#max_proxy_socket_connections"><summary><para>
+The maximum number of socket connections to the remote cluster when proxy mode is configured.
+</para></summary></member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#mode"><summary><para>
+The connection mode for the remote cluster.
+</para></summary></member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#num_proxy_sockets_connected"><summary><para>
+The number of open socket connections to the remote cluster when proxy mode is configured.
+</para></summary></member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#proxy_address"><summary><para>
+The address for remote connections when proxy mode is configured.
+</para></summary></member>
+  <member key="cluster.remote_info.ClusterRemoteProxyInfo#skip_unavailable"><summary><para>
+If <c>true</c>, cross-cluster search skips the remote cluster when its nodes are unavailable during the search and ignores errors returned by the remote cluster.
+</para></summary></member>
+</doc>

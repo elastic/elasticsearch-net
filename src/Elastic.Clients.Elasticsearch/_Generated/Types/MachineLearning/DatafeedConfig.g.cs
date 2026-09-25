@@ -59,6 +59,9 @@ public sealed partial class DatafeedConfig
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
+	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#max_consecutive_extraction_failures']/*"/>
+	public int? MaxConsecutiveExtractionFailures { get; set; }
+
 	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#max_empty_searches']/*"/>
 	public int? MaxEmptySearches { get; set; }
 
@@ -209,6 +212,13 @@ public readonly partial struct DatafeedConfigDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.JobId = value;
+		return this;
+	}
+
+	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#max_consecutive_extraction_failures']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument> MaxConsecutiveExtractionFailures(int? value)
+	{
+		Instance.MaxConsecutiveExtractionFailures = value;
 		return this;
 	}
 
@@ -494,6 +504,13 @@ public readonly partial struct DatafeedConfigDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.JobId = value;
+		return this;
+	}
+
+	/// <include file="DatafeedConfig.g.xml" path="doc/member[@key='ml._types.DatafeedConfig#max_consecutive_extraction_failures']/*"/>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor MaxConsecutiveExtractionFailures(int? value)
+	{
+		Instance.MaxConsecutiveExtractionFailures = value;
 		return this;
 	}
 

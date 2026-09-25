@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.test_data_source_connection.DataSourceTestStatus#failure"><summary><para>
+The probe ran but the backend was unreachable or rejected the connection.
+The <c>error</c> field carries a human-readable reason.
+</para></summary></member>
+  <member key="esql.test_data_source_connection.DataSourceTestStatus#success"><summary><para>
+The probe ran and the backend is reachable from every eligible data node.
+</para></summary></member>
+  <member key="esql.test_data_source_connection.DataSourceTestStatus#untestable"><summary><para>
+The type is valid and registered, but the probe cannot give a meaningful result —
+for example, no connectivity target, anonymous credentials, or bucket-scoped credentials.
+The optional <c>message</c> field may carry user-visible guidance.
+</para></summary></member>
+</doc>

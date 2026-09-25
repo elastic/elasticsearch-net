@@ -11,6 +11,15 @@ A count of shards used for the request.
   <member key="_global.msearch.MultiSearchItem#hits"><summary><para>
 The returned documents and metadata.
 </para></summary></member>
+  <member key="_global.msearch.MultiSearchItem#pit_id"><summary><para>
+An updated identifier for the point-in-time that was searched.
+</para>
+<para>
+IMPORTANT: Each search request against a PIT returns in its response a <c>pit_id</c> field which may be different from the identifier you originally supplied.
+Always use the most recently-received PIT identifier for the next request.
+If you make concurrent search requests against the same PIT, Elasticsearch can return several different <c>pit_id</c> values in its responses.
+In that case, use any of these values for later requests, preferring more recently-received values whenever possible.
+</para></summary></member>
   <member key="_global.msearch.MultiSearchItem#timed_out"><summary><para>
 If <c>true</c>, the request timed out before completion; returned results may be partial or empty.
 </para></summary></member>

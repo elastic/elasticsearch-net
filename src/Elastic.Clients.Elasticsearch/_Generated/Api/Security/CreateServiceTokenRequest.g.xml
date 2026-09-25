@@ -5,6 +5,7 @@ Create a service account token.
 </para>
 <para>
 Create a service accounts token for access without requiring basic authentication.
+This route serves both kinds of service account, but the privileges differ: <c>manage_service_account</c> authorizes tokens of built-in accounts in the <c>elastic</c> namespace only, and tokens of a user-managed account require <c>manage_security</c>.
 </para>
 <para>
 NOTE: Service account tokens never expire.

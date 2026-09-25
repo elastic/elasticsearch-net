@@ -23,11 +23,12 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security.Json;
 
-public sealed partial class RoleDescriptorWrapperConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>
+public sealed partial class BuiltInServiceAccountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.BuiltInServiceAccount>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptor = System.Text.Json.JsonEncodedText.Encode("role_descriptor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
-	public override Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Security.BuiltInServiceAccount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RoleDescriptorRead> propRoleDescriptor = default;
@@ -35,6 +36,12 @@ public sealed partial class RoleDescriptorWrapperConverter : System.Text.Json.Se
 		{
 			if (propRoleDescriptor.TryReadProperty(ref reader, options, PropRoleDescriptor, null))
 			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -48,16 +55,17 @@ public sealed partial class RoleDescriptorWrapperConverter : System.Text.Json.Se
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Security.BuiltInServiceAccount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			RoleDescriptor = propRoleDescriptor.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.BuiltInServiceAccount value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropRoleDescriptor, value.RoleDescriptor, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }

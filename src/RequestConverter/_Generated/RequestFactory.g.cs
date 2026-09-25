@@ -198,6 +198,11 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"cluster.remote_info",
+			CreateClusterRemoteInfo
+		}
+,
+		{
 			"cluster.stats",
 			CreateClusterStats
 		}
@@ -213,8 +218,23 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"dangling_indices.delete_dangling_index",
+			CreateDanglingIndicesDeleteDanglingIndex
+		}
+,
+		{
+			"dangling_indices.import_dangling_index",
+			CreateDanglingIndicesImportDanglingIndex
+		}
+,
+		{
 			"dangling_indices.list_dangling_indices",
 			CreateDanglingIndicesListDanglingIndices
+		}
+,
+		{
+			"data_recovery.get_recovery_points",
+			CreateDataRecoveryGetRecoveryPoints
 		}
 ,
 		{
@@ -368,6 +388,11 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"esql.test_data_source_connection",
+			CreateEsqlTestDataSourceConnection
+		}
+,
+		{
 			"exists",
 			CreateExists
 		}
@@ -443,6 +468,11 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"ilm.explain_lifecycle",
+			CreateIlmExplainLifecycle
+		}
+,
+		{
 			"ilm.get_lifecycle",
 			CreateIlmGetLifecycle
 		}
@@ -490,6 +520,11 @@ internal static partial class RequestFactory
 		{
 			"index",
 			CreateIndex
+		}
+,
+		{
+			"indices.add_block",
+			CreateIndicesAddBlock
 		}
 ,
 		{
@@ -880,6 +915,11 @@ internal static partial class RequestFactory
 		{
 			"inference.inference",
 			CreateInferenceInference
+		}
+,
+		{
+			"inference.non_streaming_chat_completion",
+			CreateInferenceNonStreamingChatCompletion
 		}
 ,
 		{
@@ -1370,6 +1410,11 @@ internal static partial class RequestFactory
 		{
 			"ml.preview_data_frame_analytics",
 			CreateMlPreviewDataFrameAnalytics
+		}
+,
+		{
+			"ml.preview_datafeed",
+			CreateMlPreviewDatafeed
 		}
 ,
 		{
@@ -1913,6 +1958,11 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"security.delete_user_managed_service_account",
+			CreateSecurityDeleteUserManagedServiceAccount
+		}
+,
+		{
 			"security.disable_user",
 			CreateSecurityDisableUser
 		}
@@ -2065,6 +2115,11 @@ internal static partial class RequestFactory
 		{
 			"security.put_user",
 			CreateSecurityPutUser
+		}
+,
+		{
+			"security.put_user_managed_service_account",
+			CreateSecurityPutUserManagedServiceAccount
 		}
 ,
 		{
@@ -2280,6 +2335,11 @@ internal static partial class RequestFactory
 		{
 			"sql.translate",
 			CreateSqlTranslate
+		}
+,
+		{
+			"ssl.certificates",
+			CreateSslCertificates
 		}
 ,
 		{

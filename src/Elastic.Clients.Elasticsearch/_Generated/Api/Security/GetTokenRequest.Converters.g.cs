@@ -30,6 +30,7 @@ public sealed partial class GetTokenRequestConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropScope = System.Text.Json.JsonEncodedText.Encode("scope"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropServiceAccountToken = System.Text.Json.JsonEncodedText.Encode("service_account_token"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GetTokenRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -40,6 +41,7 @@ public sealed partial class GetTokenRequestConverter : System.Text.Json.Serializ
 		LocalJsonValue<string?> propPassword = default;
 		LocalJsonValue<string?> propRefreshToken = default;
 		LocalJsonValue<string?> propScope = default;
+		LocalJsonValue<string?> propServiceAccountToken = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -68,6 +70,11 @@ public sealed partial class GetTokenRequestConverter : System.Text.Json.Serializ
 				continue;
 			}
 
+			if (propServiceAccountToken.TryReadProperty(ref reader, options, PropServiceAccountToken, null))
+			{
+				continue;
+			}
+
 			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
 			{
 				continue;
@@ -90,6 +97,7 @@ public sealed partial class GetTokenRequestConverter : System.Text.Json.Serializ
 			Password = propPassword.Value,
 			RefreshToken = propRefreshToken.Value,
 			Scope = propScope.Value,
+			ServiceAccountToken = propServiceAccountToken.Value,
 			Username = propUsername.Value
 		};
 	}
@@ -102,6 +110,7 @@ public sealed partial class GetTokenRequestConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropPassword, value.Password, null, null);
 		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
 		writer.WriteProperty(options, PropScope, value.Scope, null, null);
+		writer.WriteProperty(options, PropServiceAccountToken, value.ServiceAccountToken, null, null);
 		writer.WriteProperty(options, PropUsername, value.Username, null, null);
 		writer.WriteEndObject();
 	}

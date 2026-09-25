@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="esql.test_data_source_connection.Response#error"><summary><para>
+A human-readable description of why the connection failed.
+Present only when <c>status</c> is <c>failure</c>.
+</para></summary></member>
+  <member key="esql.test_data_source_connection.Response#message"><summary><para>
+Optional user-visible guidance explaining why the connection could not be tested.
+Present only when <c>status</c> is <c>untestable</c> and additional context is available.
+</para></summary></member>
+  <member key="esql.test_data_source_connection.Response#status"><summary><para>
+The outcome of the connection test.
+</para></summary></member>
+</doc>

@@ -46,6 +46,7 @@ public sealed partial class PutDatafeedResponse : Elastic.Transport.Products.Ela
 	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
 	public required string JobId { get; set; }
+	public int? MaxConsecutiveExtractionFailures { get; set; }
 	public int? MaxEmptySearches { get; set; }
 
 	/// <include file="PutDatafeedResponse.g.xml" path="doc/member[@key='ml.put_datafeed.Response#project_routing']/*"/>

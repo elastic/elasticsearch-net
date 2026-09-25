@@ -129,6 +129,11 @@ public partial class Query : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("Knn", (w) => { Knn.FormatCode(w); }, (w) => { Knn.FormatCode(w); });
 			}
 
+			if (Kql is not null)
+			{
+				writer.WriteFluentDescriptorCall("Kql", (w) => { Kql.FormatCode(w); }, (w) => { Kql.FormatCode(w); });
+			}
+
 			if (Match is not null)
 			{
 				writer.WriteFluentDescriptorCall("Match", (w) => { Match.FormatCode(w); }, (w) => { Match.FormatCode(w); });
@@ -457,6 +462,12 @@ public partial class Query : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Knn");
 				Knn.FormatCode(writer);
+			}
+
+			if (Kql is not null)
+			{
+				initializer.Property("Kql");
+				Kql.FormatCode(writer);
 			}
 
 			if (Match is not null)

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.preview_datafeed.Request"><summary><para>
+Preview a datafeed.
+</para>
+<para>
+This API returns the first "page" of search results from a datafeed.
+You can preview an existing datafeed or provide configuration details for a datafeed
+and anomaly detection job in the API. The preview shows the structure of the data
+that will be passed to the anomaly detection engine.
+IMPORTANT: When Elasticsearch security features are enabled, the preview uses the credentials of the user that
+called the API. However, when the datafeed starts it uses the roles of the last user that created or updated the
+datafeed. To get a preview that accurately reflects the behavior of the datafeed, use the appropriate credentials.
+You can also use secondary authorization headers to supply the credentials.
+</para></summary></member>
+  <member key="ml.preview_datafeed.Request#datafeed_config"><summary><para>
+The datafeed definition to preview.
+</para></summary></member>
+  <member key="ml.preview_datafeed.Request#datafeed_id"><summary><para>
+A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
+alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
+characters. NOTE: If you use this path parameter, you cannot provide datafeed or anomaly detection job
+configuration details in the request body.
+</para></summary></member>
+  <member key="ml.preview_datafeed.Request#end"><summary><para>
+The end time when the datafeed preview should stop
+</para></summary></member>
+  <member key="ml.preview_datafeed.Request#job_config"><summary><para>
+The configuration details for the anomaly detection job that is associated with the datafeed. If the
+<c>datafeed_config</c> object does not include a <c>job_id</c> that references an existing anomaly detection job, you must
+supply this <c>job_config</c> object. If you include both a <c>job_id</c> and a <c>job_config</c>, the latter information is
+used. You cannot specify a <c>job_config</c> object unless you also supply a <c>datafeed_config</c> object.
+</para></summary></member>
+  <member key="ml.preview_datafeed.Request#start"><summary><para>
+The start time from where the datafeed preview should begin
+</para></summary></member>
+</doc>

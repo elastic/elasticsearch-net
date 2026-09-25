@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TimingStats#elapsed_time"><summary><para>
+Runtime of the analysis in milliseconds.
+</para></summary></member>
+  <member key="ml._types.TimingStats#iteration_time"><summary><para>
+Runtime of the latest iteration of the analysis in milliseconds.
+</para></summary></member>
+</doc>

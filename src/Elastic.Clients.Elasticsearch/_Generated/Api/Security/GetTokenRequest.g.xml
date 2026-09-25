@@ -22,7 +22,7 @@ If you want to invalidate a token immediately, you can do so by using the invali
 </para></summary></member>
   <member key="security.get_token.Request#grant_type"><summary><para>
 The type of grant.
-Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
+Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, <c>refresh_token</c>, and <c>_user_managed_service_account</c>.
 </para></summary></member>
   <member key="security.get_token.Request#kerberos_ticket"><summary><para>
 The base64 encoded kerberos ticket.
@@ -42,6 +42,11 @@ This parameter is not valid with any other supported grant type.
   <member key="security.get_token.Request#scope"><summary><para>
 The scope of the token.
 Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
+</para></summary></member>
+  <member key="security.get_token.Request#service_account_token"><summary><para>
+The service account token of a user-managed service account, as returned by the create service account token API.
+If you specify the <c>_user_managed_service_account</c> grant type, this parameter is required.
+This parameter is not valid with any other supported grant type.
 </para></summary></member>
   <member key="security.get_token.Request#username"><summary><para>
 The username that identifies the user.

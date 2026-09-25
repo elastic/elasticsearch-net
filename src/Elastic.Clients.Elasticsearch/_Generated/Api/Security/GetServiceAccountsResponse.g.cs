@@ -37,5 +37,5 @@ public sealed partial class GetServiceAccountsResponse : Elastic.Transport.Produ
 		_ = sentinel;
 	}
 
-	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper> ServiceAccoutns { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.ServiceAccountInfos ServiceAccounts { get; set; }
 }

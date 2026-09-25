@@ -26,9 +26,11 @@ namespace Elastic.Clients.Elasticsearch;
 public partial class ElasticsearchClient
 {
 	public virtual Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient AsyncSearch { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.Certificates.CertificatesNamespacedClient Certificates { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient Cluster { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient CrossClusterReplication { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient DanglingIndices { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.DataRecoveryNamespacedClient DataRecovery { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Encryption.EncryptionNamespacedClient Encryption { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient Enrich { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlNamespacedClient Eql { get; private set; }
@@ -62,9 +64,11 @@ public partial class ElasticsearchClient
 	private partial void SetupNamespaces()
 	{
 		AsyncSearch = new Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchNamespacedClient(this);
+		Certificates = new Elastic.Clients.Elasticsearch.Certificates.CertificatesNamespacedClient(this);
 		Cluster = new Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient(this);
 		CrossClusterReplication = new Elastic.Clients.Elasticsearch.CrossClusterReplication.CrossClusterReplicationNamespacedClient(this);
 		DanglingIndices = new Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndicesNamespacedClient(this);
+		DataRecovery = new Elastic.Clients.Elasticsearch.DataRecovery.DataRecoveryNamespacedClient(this);
 		Encryption = new Elastic.Clients.Elasticsearch.Encryption.EncryptionNamespacedClient(this);
 		Enrich = new Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient(this);
 		Eql = new Elastic.Clients.Elasticsearch.Eql.EqlNamespacedClient(this);

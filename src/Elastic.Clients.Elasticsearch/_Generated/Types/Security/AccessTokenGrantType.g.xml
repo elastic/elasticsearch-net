@@ -4,6 +4,14 @@
 This grant type is supported internally and implements SPNEGO based Kerberos support.
 The <c>_kerberos</c> grant type may change from version to version.
 </para></summary></member>
+  <member key="security.get_token.AccessTokenGrantType#_user_managed_service_account"><summary><para>
+This grant type is supported internally and exchanges a user-managed service account token for an access token that represents that service account.
+The request must be made by an authenticated caller with the <c>manage_token</c> cluster privilege, on behalf of the service account whose token is passed in the <c>service_account_token</c> parameter.
+The service account token is authenticated on every exchange, so a disabled account or an invalidated token is rejected.
+Tokens that belong to built-in (<c>elastic/*</c>) service accounts are rejected.
+It generates only access tokens that cannot be refreshed.
+The <c>_user_managed_service_account</c> grant type may change from version to version.
+</para></summary></member>
   <member key="security.get_token.AccessTokenGrantType#client_credentials"><summary><para>
 This grant type implements the Client Credentials Grant of OAuth2.
 It is geared for machine to machine communication and is not suitable or designed for the self-service user creation of tokens.

@@ -36,6 +36,86 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 	}
 
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse AddBlock(Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse AddBlock(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor(indices, block);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse AddBlock(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor(indices, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse AddBlock<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor<TDocument>(indices, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request);
+	}
+
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse> AddBlockAsync(Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse> AddBlockAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor(indices, block);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse> AddBlockAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor(indices, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/IndexManagement/AddBlockRequest.g.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.add_block.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse> AddBlockAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestDescriptor<TDocument>(indices, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.AddBlockRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest request)

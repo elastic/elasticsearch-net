@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_recovery_points.RecoveryPoint#end_time"><summary><para>
+The time when creation of the recovery point completed.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_points.RecoveryPoint#start_time"><summary><para>
+The time when creation of the recovery point started.
+</para></summary></member>
+</doc>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.non_streaming_chat_completion.Response#choices"><summary><para>
+The list of completion choices the model generated for the input message.
+</para></summary></member>
+  <member key="inference.non_streaming_chat_completion.Response#id"><summary><para>
+The unique identifier for the completion.
+</para></summary></member>
+  <member key="inference.non_streaming_chat_completion.Response#model"><summary><para>
+The model used to generate the completion.
+</para></summary></member>
+  <member key="inference.non_streaming_chat_completion.Response#object"><summary><para>
+The object type.
+</para></summary></member>
+  <member key="inference.non_streaming_chat_completion.Response#usage"><summary><para>
+The token usage statistics for the completion request.
+Omitted when usage information is not available.
+</para></summary></member>
+</doc>

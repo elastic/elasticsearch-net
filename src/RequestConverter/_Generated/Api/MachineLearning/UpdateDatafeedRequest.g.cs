@@ -132,6 +132,12 @@ public partial class UpdateDatafeedRequest : RequestConverter.IClientCallFormatt
 				JobId.FormatCode(writer);
 			}
 
+			if (MaxConsecutiveExtractionFailures is not null)
+			{
+				initializer.Property("MaxConsecutiveExtractionFailures");
+				writer.WriteValue(MaxConsecutiveExtractionFailures.Value);
+			}
+
 			if (MaxEmptySearches is not null)
 			{
 				initializer.Property("MaxEmptySearches");
@@ -262,6 +268,11 @@ public partial class UpdateDatafeedRequest : RequestConverter.IClientCallFormatt
 		if (JobId is not null)
 		{
 			writer.WriteFluentCall("JobId", (w) => { JobId.FormatCode(w); });
+		}
+
+		if (MaxConsecutiveExtractionFailures is not null)
+		{
+			writer.WriteFluentCall("MaxConsecutiveExtractionFailures", (w) => { w.WriteValue(MaxConsecutiveExtractionFailures.Value); });
 		}
 
 		if (MaxEmptySearches is not null)

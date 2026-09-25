@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ChatCompletionToolCallFunction"><summary><para>
+The function called by the tool.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionToolCallFunction#arguments"><summary><para>
+The arguments to call the function with, as a JSON string.
+</para></summary></member>
+  <member key="inference._types.ChatCompletionToolCallFunction#name"><summary><para>
+The name of the function.
+</para></summary></member>
+</doc>

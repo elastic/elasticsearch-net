@@ -710,6 +710,64 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Inference/NonStreamingChatCompletionRequest.g.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse NonStreamingChatCompletion(Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/NonStreamingChatCompletionRequest.g.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse NonStreamingChatCompletion(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/NonStreamingChatCompletionRequest.g.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse NonStreamingChatCompletion(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/NonStreamingChatCompletionRequest.g.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse> NonStreamingChatCompletionAsync(Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/NonStreamingChatCompletionRequest.g.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse> NonStreamingChatCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/NonStreamingChatCompletionRequest.g.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.non_streaming_chat_completion.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse> NonStreamingChatCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequest, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionResponse, Elastic.Clients.Elasticsearch.Inference.NonStreamingChatCompletionRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/Inference/PutInferenceRequest.g.xml" path="doc/member[@key='inference.put.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.put.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest request)

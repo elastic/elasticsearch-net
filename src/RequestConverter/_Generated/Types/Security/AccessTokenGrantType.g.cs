@@ -33,6 +33,10 @@ public static class AccessTokenGrantTypeCodeFormatter
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType");
 				writer.Write(".Kerberos");
 				break;
+			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.UserManagedServiceAccount:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType");
+				writer.Write(".UserManagedServiceAccount");
+				break;
 			case Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType.ClientCredentials:
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType");
 				writer.Write(".ClientCredentials");

@@ -35,6 +35,7 @@ public sealed partial class DatafeedConfigConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropIndices1 = System.Text.Json.JsonEncodedText.Encode("indexes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndicesOptions = System.Text.Json.JsonEncodedText.Encode("indices_options"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxConsecutiveExtractionFailures = System.Text.Json.JsonEncodedText.Encode("max_consecutive_extraction_failures"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxEmptySearches = System.Text.Json.JsonEncodedText.Encode("max_empty_searches"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
@@ -54,6 +55,7 @@ public sealed partial class DatafeedConfigConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndicesOptions?> propIndicesOptions = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propJobId = default;
+		LocalJsonValue<int?> propMaxConsecutiveExtractionFailures = default;
 		LocalJsonValue<int?> propMaxEmptySearches = default;
 		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
@@ -99,6 +101,11 @@ public sealed partial class DatafeedConfigConverter : System.Text.Json.Serializa
 			}
 
 			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propMaxConsecutiveExtractionFailures.TryReadProperty(ref reader, options, PropMaxConsecutiveExtractionFailures, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -158,6 +165,7 @@ public sealed partial class DatafeedConfigConverter : System.Text.Json.Serializa
 			Indices = propIndices.Value,
 			IndicesOptions = propIndicesOptions.Value,
 			JobId = propJobId.Value,
+			MaxConsecutiveExtractionFailures = propMaxConsecutiveExtractionFailures.Value,
 			MaxEmptySearches = propMaxEmptySearches.Value,
 			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
@@ -179,6 +187,7 @@ public sealed partial class DatafeedConfigConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
 		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions, null, null);
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropMaxConsecutiveExtractionFailures, value.MaxConsecutiveExtractionFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);

@@ -30,7 +30,6 @@ public sealed partial class RoleDescriptorReadConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGlobal = System.Text.Json.JsonEncodedText.Encode("global"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropIndices1 = System.Text.Json.JsonEncodedText.Encode("index"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRemoteIndices = System.Text.Json.JsonEncodedText.Encode("remote_indices"u8);
@@ -74,7 +73,7 @@ public sealed partial class RoleDescriptorReadConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)!) || propIndices.TryReadProperty(ref reader, options, PropIndices1, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)!))
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>(o, null)!))
 			{
 				continue;
 			}

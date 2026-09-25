@@ -45,6 +45,8 @@ public partial class ScrollResponse<TDocument> : Elastic.Transport.Products.Elas
 	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
+
+	/// <include file="ScrollResponse.g.xml" path="doc/member[@key='_global.scroll.Response#pit_id']/*"/>
 	public string? PitId { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; set; }
 
