@@ -139,7 +139,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 			if (request.Routing != null)
 				s.Routing(request.Routing);
 			if (request.WaitForActiveShards.HasValue)
-				s.WaitForActiveShards(request.WaitForActiveShards.ToString());
+				s.WaitForActiveShards(request.WaitForActiveShards);
 
 			switch (_partitionedBulkRequest)
 			{
