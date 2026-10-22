@@ -24,15 +24,16 @@ toc:
       - file: query.md
       - file: recommendations.md
       - file: transport.md
-  - file: troubleshoot/index.md
+  - folder: troubleshoot
     children:
-      - file: troubleshoot/logging.md
+      - file: index.md
+      - file: logging.md
         children:
-          - file: troubleshoot/logging-with-onrequestcompleted.md
-          - file: troubleshoot/logging-with-fiddler.md
-      - file: troubleshoot/debugging.md
+          - file: logging-with-onrequestcompleted.md
+          - file: logging-with-fiddler.md
+      - file: debugging.md
         children:
-          - file: troubleshoot/audit-trail.md
-          - file: troubleshoot/debug-information.md
-          - file: troubleshoot/debug-mode.md
+          - file: audit-trail.md
+          - file: debug-information.md
+          - file: debug-mode.md
   - file: breaking-changes-policy.md
