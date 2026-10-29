@@ -110,7 +110,10 @@ var response = await client.SearchAsync<MyDoc>(s => s
     .From(0)
     .Size(10)
     .Query(q => q
-        .Term(t => t.User, "flobernd") 
+        .Term(t => t
+            .Field(d => d.User)
+            .Value("flobernd")
+        )
     )
 );
 

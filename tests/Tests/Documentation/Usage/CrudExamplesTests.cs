@@ -106,7 +106,10 @@ var response = await client.SearchAsync<Tweet>(s => s // <1>
     .From(0)
     .Size(10)
     .Query(q => q
-        .Term(t => t.User, "stevejgordon") // <3>
+        .Term(t => t // <3>
+            .Field(f => f.User)
+            .Value("stevejgordon")
+        )
     )
 );
 
