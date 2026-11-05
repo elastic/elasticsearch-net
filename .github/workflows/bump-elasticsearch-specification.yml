@@ -110,7 +110,7 @@ jobs:
                 let baseSha;
                 try {
                   const ref = await github.rest.git.getRef({ owner, repo, ref: `heads/${target}` });
-                  baseSha = ref.object.sha;
+                  baseSha = ref.data.object.sha;
                 } catch (e) {
                   core.warning(`Branch '${target}' not found in ${owner}/${repo}; skipping.`);
                   continue;
