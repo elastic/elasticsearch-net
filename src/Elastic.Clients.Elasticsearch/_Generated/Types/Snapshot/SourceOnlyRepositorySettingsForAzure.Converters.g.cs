@@ -28,10 +28,12 @@ public sealed partial class SourceOnlyRepositorySettingsForAzureConverter : Syst
 	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataAccessTier = System.Text.Json.JsonEncodedText.Encode("data_access_tier"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDelegateType = System.Text.Json.JsonEncodedText.Encode("delegate_type"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLocationMode = System.Text.Json.JsonEncodedText.Encode("location_mode"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentBatchDeletes = System.Text.Json.JsonEncodedText.Encode("max_concurrent_batch_deletes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadataAccessTier = System.Text.Json.JsonEncodedText.Encode("metadata_access_tier"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -40,9 +42,11 @@ public sealed partial class SourceOnlyRepositorySettingsForAzureConverter : Syst
 		LocalJsonValue<string?> propBasePath = default;
 		LocalJsonValue<string?> propClient = default;
 		LocalJsonValue<string?> propContainer = default;
+		LocalJsonValue<string?> propDataAccessTier = default;
 		LocalJsonValue<int?> propDeleteObjectsMaxSize = default;
 		LocalJsonValue<string?> propLocationMode = default;
 		LocalJsonValue<int?> propMaxConcurrentBatchDeletes = default;
+		LocalJsonValue<string?> propMetadataAccessTier = default;
 		LocalJsonValue<bool?> propReadonly = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -57,6 +61,11 @@ public sealed partial class SourceOnlyRepositorySettingsForAzureConverter : Syst
 			}
 
 			if (propContainer.TryReadProperty(ref reader, options, PropContainer, null))
+			{
+				continue;
+			}
+
+			if (propDataAccessTier.TryReadProperty(ref reader, options, PropDataAccessTier, null))
 			{
 				continue;
 			}
@@ -82,6 +91,11 @@ public sealed partial class SourceOnlyRepositorySettingsForAzureConverter : Syst
 				continue;
 			}
 
+			if (propMetadataAccessTier.TryReadProperty(ref reader, options, PropMetadataAccessTier, null))
+			{
+				continue;
+			}
+
 			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
@@ -102,9 +116,11 @@ public sealed partial class SourceOnlyRepositorySettingsForAzureConverter : Syst
 			BasePath = propBasePath.Value,
 			Client = propClient.Value,
 			Container = propContainer.Value,
+			DataAccessTier = propDataAccessTier.Value,
 			DeleteObjectsMaxSize = propDeleteObjectsMaxSize.Value,
 			LocationMode = propLocationMode.Value,
 			MaxConcurrentBatchDeletes = propMaxConcurrentBatchDeletes.Value,
+			MetadataAccessTier = propMetadataAccessTier.Value,
 			Readonly = propReadonly.Value
 		};
 	}
@@ -115,10 +131,12 @@ public sealed partial class SourceOnlyRepositorySettingsForAzureConverter : Syst
 		writer.WriteProperty(options, PropBasePath, value.BasePath, null, null);
 		writer.WriteProperty(options, PropClient, value.Client, null, null);
 		writer.WriteProperty(options, PropContainer, value.Container, null, null);
+		writer.WriteProperty(options, PropDataAccessTier, value.DataAccessTier, null, null);
 		writer.WriteProperty(options, PropDelegateType, value.DelegateType, null, null);
 		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropLocationMode, value.LocationMode, null, null);
 		writer.WriteProperty(options, PropMaxConcurrentBatchDeletes, value.MaxConcurrentBatchDeletes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMetadataAccessTier, value.MetadataAccessTier, null, null);
 		writer.WriteProperty(options, PropReadonly, value.Readonly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}

@@ -42,6 +42,9 @@ public sealed partial class IndexStats
 	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#completion']/*"/>
 	public Elastic.Clients.Elasticsearch.CompletionStats? Completion { get; set; }
 
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#dense_vector']/*"/>
+	public Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats? DenseVector { get; set; }
+
 	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.DocStats? Docs { get; set; }
 
@@ -81,6 +84,9 @@ public sealed partial class IndexStats
 	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#segments']/*"/>
 	public Elastic.Clients.Elasticsearch.SegmentsStats? Segments { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats { get; set; }
+
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#sparse_vector']/*"/>
+	public Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats? SparseVector { get; set; }
 
 	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#store']/*"/>
 	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; set; }

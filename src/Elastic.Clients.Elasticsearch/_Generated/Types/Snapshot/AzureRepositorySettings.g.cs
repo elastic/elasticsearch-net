@@ -52,6 +52,9 @@ public sealed partial class AzureRepositorySettings
 	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#container']/*"/>
 	public string? Container { get; set; }
 
+	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#data_access_tier']/*"/>
+	public string? DataAccessTier { get; set; }
+
 	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#delete_objects_max_size']/*"/>
 	public int? DeleteObjectsMaxSize { get; set; }
 
@@ -66,6 +69,9 @@ public sealed partial class AzureRepositorySettings
 
 	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#max_snapshot_bytes_per_sec']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSnapshotBytesPerSec { get; set; }
+
+	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#metadata_access_tier']/*"/>
+	public string? MetadataAccessTier { get; set; }
 
 	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#readonly']/*"/>
 	public bool? Readonly { get; set; }
@@ -133,6 +139,13 @@ public readonly partial struct AzureRepositorySettingsDescriptor
 		return this;
 	}
 
+	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#data_access_tier']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor DataAccessTier(string? value)
+	{
+		Instance.DataAccessTier = value;
+		return this;
+	}
+
 	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#delete_objects_max_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor DeleteObjectsMaxSize(int? value)
 	{
@@ -179,6 +192,13 @@ public readonly partial struct AzureRepositorySettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
+	}
+
+	/// <include file="AzureRepositorySettings.g.xml" path="doc/member[@key='snapshot._types.AzureRepositorySettings#metadata_access_tier']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor MetadataAccessTier(string? value)
+	{
+		Instance.MetadataAccessTier = value;
 		return this;
 	}
 

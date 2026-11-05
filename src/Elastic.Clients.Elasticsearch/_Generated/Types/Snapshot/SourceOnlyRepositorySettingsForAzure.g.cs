@@ -46,6 +46,9 @@ public sealed partial class SourceOnlyRepositorySettingsForAzure : Elastic.Clien
 	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#container']/*"/>
 	public string? Container { get; set; }
 
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#data_access_tier']/*"/>
+	public string? DataAccessTier { get; set; }
+
 	public string DelegateType => "azure";
 
 	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#delete_objects_max_size']/*"/>
@@ -56,6 +59,9 @@ public sealed partial class SourceOnlyRepositorySettingsForAzure : Elastic.Clien
 
 	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#max_concurrent_batch_deletes']/*"/>
 	public int? MaxConcurrentBatchDeletes { get; set; }
+
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#metadata_access_tier']/*"/>
+	public string? MetadataAccessTier { get; set; }
 
 	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#readonly']/*"/>
 	public bool? Readonly { get; set; }
@@ -102,6 +108,13 @@ public readonly partial struct SourceOnlyRepositorySettingsForAzureDescriptor
 		return this;
 	}
 
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#data_access_tier']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor DataAccessTier(string? value)
+	{
+		Instance.DataAccessTier = value;
+		return this;
+	}
+
 	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#delete_objects_max_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor DeleteObjectsMaxSize(int? value)
 	{
@@ -120,6 +133,13 @@ public readonly partial struct SourceOnlyRepositorySettingsForAzureDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor MaxConcurrentBatchDeletes(int? value)
 	{
 		Instance.MaxConcurrentBatchDeletes = value;
+		return this;
+	}
+
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#metadata_access_tier']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor MetadataAccessTier(string? value)
+	{
+		Instance.MetadataAccessTier = value;
 		return this;
 	}
 

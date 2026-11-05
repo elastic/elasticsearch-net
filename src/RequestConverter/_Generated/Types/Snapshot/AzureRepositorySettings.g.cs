@@ -54,6 +54,11 @@ public partial class AzureRepositorySettings : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Container", (w) => { w.WriteString(Container); });
 			}
 
+			if (DataAccessTier is not null)
+			{
+				writer.WriteFluentCall("DataAccessTier", (w) => { w.WriteString(DataAccessTier); });
+			}
+
 			if (DeleteObjectsMaxSize is not null)
 			{
 				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { w.WriteValue(DeleteObjectsMaxSize.Value); });
@@ -77,6 +82,11 @@ public partial class AzureRepositorySettings : RequestConverter.ICodeFormattable
 			if (MaxSnapshotBytesPerSec is not null)
 			{
 				writer.WriteFluentCall("MaxSnapshotBytesPerSec", (w) => { MaxSnapshotBytesPerSec.FormatCode(w); });
+			}
+
+			if (MetadataAccessTier is not null)
+			{
+				writer.WriteFluentCall("MetadataAccessTier", (w) => { w.WriteString(MetadataAccessTier); });
 			}
 
 			if (Readonly is not null)
@@ -117,6 +127,12 @@ public partial class AzureRepositorySettings : RequestConverter.ICodeFormattable
 				writer.WriteString(Container);
 			}
 
+			if (DataAccessTier is not null)
+			{
+				initializer.Property("DataAccessTier");
+				writer.WriteString(DataAccessTier);
+			}
+
 			if (DeleteObjectsMaxSize is not null)
 			{
 				initializer.Property("DeleteObjectsMaxSize");
@@ -145,6 +161,12 @@ public partial class AzureRepositorySettings : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("MaxSnapshotBytesPerSec");
 				MaxSnapshotBytesPerSec.FormatCode(writer);
+			}
+
+			if (MetadataAccessTier is not null)
+			{
+				initializer.Property("MetadataAccessTier");
+				writer.WriteString(MetadataAccessTier);
 			}
 
 			if (Readonly is not null)

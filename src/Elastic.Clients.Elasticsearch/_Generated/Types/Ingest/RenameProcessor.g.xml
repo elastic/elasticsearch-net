@@ -20,6 +20,10 @@ If <c>true</c> and <c>field</c> does not exist, the processor quietly exits with
   <member key="ingest._types.RenameProcessor#on_failure"><summary><para>
 Handle failures for the processor.
 </para></summary></member>
+  <member key="ingest._types.RenameProcessor#override"><summary><para>
+If <c>true</c>, the processor overwrites <c>target_field</c> if it already exists.
+If <c>false</c>, the processor fails when <c>target_field</c> already exists.
+</para></summary></member>
   <member key="ingest._types.RenameProcessor#tag"><summary><para>
 Identifier for the processor.
 Useful for debugging and metrics.

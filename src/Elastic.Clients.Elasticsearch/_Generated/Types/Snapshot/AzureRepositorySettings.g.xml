@@ -25,6 +25,11 @@ This setting doesn't affect index files that are already compressed by default.
   <member key="snapshot._types.AzureRepositorySettings#container"><summary><para>
 The Azure container.
 </para></summary></member>
+  <member key="snapshot._types.AzureRepositorySettings#data_access_tier"><summary><para>
+The Azure access tier applied to the data blobs of the repository, which hold the files that make up each snapshotted shard.
+Accepted values are <c>hot</c>, <c>cool</c> and <c>cold</c>, in any letter case.
+If not set, no access tier is requested and Azure applies the default tier of the storage account.
+</para></summary></member>
   <member key="snapshot._types.AzureRepositorySettings#delete_objects_max_size"><summary><para>
 The maxmimum batch size, between 1 and 256, used for <c>BlobBatch</c> requests.
 Defaults to 256 which is the maximum number supported by the Azure blob batch API.
@@ -47,6 +52,12 @@ Note that restores are also throttled through recovery settings.
 The maximum snapshot creation rate per node.
 It defaults to 40mb per second.
 Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
+</para></summary></member>
+  <member key="snapshot._types.AzureRepositorySettings#metadata_access_tier"><summary><para>
+The Azure access tier applied to the metadata blobs of the repository.
+These are generally smaller than the data blobs but can be read more often, for example to list the repository contents or to take snapshots.
+Accepted values are <c>hot</c>, <c>cool</c> and <c>cold</c>, in any letter case.
+If not set, no access tier is requested and Azure applies the default tier of the storage account.
 </para></summary></member>
   <member key="snapshot._types.AzureRepositorySettings#readonly"><summary><para>
 If <c>true</c>, the repository is read-only.

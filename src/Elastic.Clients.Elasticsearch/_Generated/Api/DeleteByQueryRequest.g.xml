@@ -234,6 +234,10 @@ It can be either <c>-1</c> to turn off throttling or any decimal number like <c>
 A custom value used to route operations to a specific shard.
 Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
+  <member key="_global.delete_by_query.Request#runtime_mappings"><summary><para>
+One or more runtime fields in the search request.
+These fields take precedence over mapped fields with the same name.
+</para></summary></member>
   <member key="_global.delete_by_query.Request#scroll"><summary><para>
 The period to retain the search context for scrolling.
 </para></summary></member>

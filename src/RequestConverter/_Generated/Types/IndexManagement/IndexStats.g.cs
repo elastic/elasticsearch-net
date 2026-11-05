@@ -40,6 +40,12 @@ public partial class IndexStats : RequestConverter.ICodeFormattable
 			Completion.FormatCode(writer);
 		}
 
+		if (DenseVector is not null)
+		{
+			initializer.Property("DenseVector");
+			DenseVector.FormatCode(writer);
+		}
+
 		if (Docs is not null)
 		{
 			initializer.Property("Docs");
@@ -122,6 +128,12 @@ public partial class IndexStats : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("ShardStats");
 			ShardStats.FormatCode(writer);
+		}
+
+		if (SparseVector is not null)
+		{
+			initializer.Property("SparseVector");
+			SparseVector.FormatCode(writer);
 		}
 
 		if (Store is not null)

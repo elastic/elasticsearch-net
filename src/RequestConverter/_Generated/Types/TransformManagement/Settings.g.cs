@@ -49,6 +49,11 @@ public partial class Settings : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("DocsPerSecond", (w) => { w.WriteValue(DocsPerSecond.Value); w.Write("f"); });
 			}
 
+			if (IndexerRequestTimeout is not null)
+			{
+				writer.WriteFluentCall("IndexerRequestTimeout", (w) => { IndexerRequestTimeout.FormatCode(w); });
+			}
+
 			if (MaxPageSearchSize is not null)
 			{
 				writer.WriteFluentCall("MaxPageSearchSize", (w) => { w.WriteValue(MaxPageSearchSize.Value); });
@@ -95,6 +100,12 @@ public partial class Settings : RequestConverter.ICodeFormattable
 				initializer.Property("DocsPerSecond");
 				writer.WriteValue(DocsPerSecond.Value);
 				writer.Write("f");
+			}
+
+			if (IndexerRequestTimeout is not null)
+			{
+				initializer.Property("IndexerRequestTimeout");
+				IndexerRequestTimeout.FormatCode(writer);
 			}
 
 			if (MaxPageSearchSize is not null)

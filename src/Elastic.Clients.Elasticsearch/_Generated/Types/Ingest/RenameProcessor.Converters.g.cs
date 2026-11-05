@@ -31,6 +31,7 @@ public sealed partial class RenameProcessorConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverride = System.Text.Json.JsonEncodedText.Encode("override"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field"u8);
 
@@ -43,6 +44,7 @@ public sealed partial class RenameProcessorConverter : System.Text.Json.Serializ
 		LocalJsonValue<bool?> propIgnoreFailure = default;
 		LocalJsonValue<bool?> propIgnoreMissing = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<bool?> propOverride = default;
 		LocalJsonValue<string?> propTag = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propTargetField = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -77,6 +79,11 @@ public sealed partial class RenameProcessorConverter : System.Text.Json.Serializ
 				continue;
 			}
 
+			if (propOverride.TryReadProperty(ref reader, options, PropOverride, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
 			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
 			{
 				continue;
@@ -105,6 +112,7 @@ public sealed partial class RenameProcessorConverter : System.Text.Json.Serializ
 			IgnoreFailure = propIgnoreFailure.Value,
 			IgnoreMissing = propIgnoreMissing.Value,
 			OnFailure = propOnFailure.Value,
+			Override = propOverride.Value,
 			Tag = propTag.Value,
 			TargetField = propTargetField.Value
 		};
@@ -119,6 +127,7 @@ public sealed partial class RenameProcessorConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropOverride, value.Override, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
 		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
 		writer.WriteEndObject();
