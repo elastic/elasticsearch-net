@@ -28,6 +28,12 @@ public partial class Indicators : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators", false);
+		if (ClusterStateEncryption is not null)
+		{
+			initializer.Property("ClusterStateEncryption");
+			ClusterStateEncryption.FormatCode(writer);
+		}
+
 		if (DataStreamLifecycle is not null)
 		{
 			initializer.Property("DataStreamLifecycle");
@@ -56,12 +62,6 @@ public partial class Indicators : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("MasterIsStable");
 			MasterIsStable.FormatCode(writer);
-		}
-
-		if (ProjectEncryptionKey is not null)
-		{
-			initializer.Property("ProjectEncryptionKey");
-			ProjectEncryptionKey.FormatCode(writer);
 		}
 
 		if (RepositoryIntegrity is not null)

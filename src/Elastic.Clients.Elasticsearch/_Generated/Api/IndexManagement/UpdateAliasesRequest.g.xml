@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="indices.update_aliases.Request"><summary><para>
-Create or update an alias.
+Update aliases and delete indices atomically.
 </para>
 <para>
 Adds a data stream or index to an alias.

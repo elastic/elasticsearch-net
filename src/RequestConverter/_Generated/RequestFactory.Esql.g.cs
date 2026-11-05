@@ -494,7 +494,7 @@ internal static partial class RequestFactory
 					case "name":
 						{
 							if (parameter.Value is string value)
-								request.Name = Elastic.Clients.Elasticsearch.Id.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+								request.Name = Elastic.Clients.Elasticsearch.Ids.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 

@@ -14,6 +14,11 @@ The name of the Azure repository client to use.
   <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#container"><summary><para>
 The Azure container.
 </para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#data_access_tier"><summary><para>
+The Azure access tier applied to the data blobs of the repository, which hold the files that make up each snapshotted shard.
+Accepted values are <c>hot</c>, <c>cool</c> and <c>cold</c>, in any letter case.
+If not set, no access tier is requested and Azure applies the default tier of the storage account.
+</para></summary></member>
   <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#delete_objects_max_size"><summary><para>
 The maxmimum batch size, between 1 and 256, used for <c>BlobBatch</c> requests.
 Defaults to 256 which is the maximum number supported by the Azure blob batch API.
@@ -26,6 +31,12 @@ Note that if you set it to <c>secondary_only</c>, it will force <c>readonly</c> 
 The maximum number of concurrent batch delete requests that will be submitted for any individual bulk delete with <c>BlobBatch</c>.
 Note that the effective number of concurrent deletes is further limited by the Azure client connection and event loop thread limits.
 Defaults to 10, minimum is 1, maximum is 100.
+</para></summary></member>
+  <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#metadata_access_tier"><summary><para>
+The Azure access tier applied to the metadata blobs of the repository.
+These are generally smaller than the data blobs but can be read more often, for example to list the repository contents or to take snapshots.
+Accepted values are <c>hot</c>, <c>cool</c> and <c>cold</c>, in any letter case.
+If not set, no access tier is requested and Azure applies the default tier of the storage account.
 </para></summary></member>
   <member key="snapshot._types.SourceOnlyRepositorySettingsForAzure#readonly"><summary><para>
 If <c>true</c>, the repository is read-only.

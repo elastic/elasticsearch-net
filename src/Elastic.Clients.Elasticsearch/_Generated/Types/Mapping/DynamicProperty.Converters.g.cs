@@ -33,6 +33,8 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEagerGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("eager_global_ordinals"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFielddataFrequencyFilter = System.Text.Json.JsonEncodedText.Encode("fielddata_frequency_filter"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above"u8);
@@ -52,9 +54,12 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearchAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_analyzer"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearchQuoteAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_quote_analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSubobjects = System.Text.Json.JsonEncodedText.Encode("subobjects"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTermVector = System.Text.Json.JsonEncodedText.Encode("term_vector"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
@@ -69,6 +74,8 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
 		LocalJsonValue<bool?> propEagerGlobalOrdinals = default;
 		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<bool?> propFielddata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> propFielddataFrequencyFilter = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
 		LocalJsonValue<string?> propFormat = default;
 		LocalJsonValue<int?> propIgnoreAbove = default;
@@ -88,9 +95,12 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		LocalJsonValue<string?> propSearchAnalyzer = default;
 		LocalJsonValue<string?> propSearchQuoteAnalyzer = default;
+		LocalJsonValue<string?> propSimilarity = default;
 		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Subobjects?> propSubobjects = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption?> propTermVector = default;
+		LocalJsonValue<bool?> propTimeSeriesDimension = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType?> propTimeSeriesMetric = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -130,6 +140,16 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 			}
 
 			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propFielddata.TryReadProperty(ref reader, options, PropFielddata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propFielddataFrequencyFilter.TryReadProperty(ref reader, options, PropFielddataFrequencyFilter, null))
 			{
 				continue;
 			}
@@ -229,7 +249,17 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 				continue;
 			}
 
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			{
+				continue;
+			}
+
 			if (propStore.TryReadProperty(ref reader, options, PropStore, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propSubobjects.TryReadProperty(ref reader, options, PropSubobjects, static Elastic.Clients.Elasticsearch.Mapping.Subobjects? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.Subobjects>(o)))
 			{
 				continue;
 			}
@@ -240,6 +270,11 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 			}
 
 			if (propTermVector.TryReadProperty(ref reader, options, PropTermVector, static Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption>(o)))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesDimension.TryReadProperty(ref reader, options, PropTimeSeriesDimension, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -275,6 +310,8 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 			Dynamic = propDynamic.Value,
 			EagerGlobalOrdinals = propEagerGlobalOrdinals.Value,
 			Enabled = propEnabled.Value,
+			Fielddata = propFielddata.Value,
+			FielddataFrequencyFilter = propFielddataFrequencyFilter.Value,
 			Fields = propFields.Value,
 			Format = propFormat.Value,
 			IgnoreAbove = propIgnoreAbove.Value,
@@ -294,9 +331,12 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 			Script = propScript.Value,
 			SearchAnalyzer = propSearchAnalyzer.Value,
 			SearchQuoteAnalyzer = propSearchQuoteAnalyzer.Value,
+			Similarity = propSimilarity.Value,
 			Store = propStore.Value,
+			Subobjects = propSubobjects.Value,
 			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
 			TermVector = propTermVector.Value,
+			TimeSeriesDimension = propTimeSeriesDimension.Value,
 			TimeSeriesMetric = propTimeSeriesMetric.Value
 		};
 	}
@@ -312,6 +352,8 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o, v));
 		writer.WriteProperty(options, PropEagerGlobalOrdinals, value.EagerGlobalOrdinals, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropFielddataFrequencyFilter, value.FielddataFrequencyFilter, null, null);
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
@@ -331,9 +373,12 @@ public sealed partial class DynamicPropertyConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropSearchAnalyzer, value.SearchAnalyzer, null, null);
 		writer.WriteProperty(options, PropSearchQuoteAnalyzer, value.SearchQuoteAnalyzer, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
 		writer.WriteProperty(options, PropStore, value.Store, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSubobjects, value.Subobjects, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.Subobjects? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.Subobjects>(o, v));
 		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o, v));
 		writer.WriteProperty(options, PropTermVector, value.TermVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption>(o, v));
+		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();

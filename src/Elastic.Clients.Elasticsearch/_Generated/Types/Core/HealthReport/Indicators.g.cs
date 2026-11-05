@@ -37,12 +37,12 @@ public sealed partial class Indicators
 		_ = sentinel;
 	}
 
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.ProjectEncryptionKeyIndicator? ClusterStateEncryption { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator? DataStreamLifecycle { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator? Disk { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicator? FileSettings { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator? Ilm { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator? MasterIsStable { get; set; }
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.ProjectEncryptionKeyIndicator? ProjectEncryptionKey { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicator? RepositoryIntegrity { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicator? ShardsAvailability { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicator? ShardsCapacity { get; set; }

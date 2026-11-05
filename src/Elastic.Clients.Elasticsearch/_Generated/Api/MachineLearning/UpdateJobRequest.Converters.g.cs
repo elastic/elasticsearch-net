@@ -96,7 +96,7 @@ public sealed partial class UpdateJobRequestConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propDetectors.TryReadProperty(ref reader, options, PropDetectors, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>(o, null)))
+			if (propDetectors.TryReadProperty(ref reader, options, PropDetectors, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>(o, null)))
 			{
 				continue;
 			}
@@ -176,7 +176,7 @@ public sealed partial class UpdateJobRequestConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropDetectors, value.Detectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>(o, v, null));
+		writer.WriteProperty(options, PropDetectors, value.Detectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>(o, v, null));
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
 		writer.WriteProperty(options, PropModelPruneWindow, value.ModelPruneWindow, null, null);

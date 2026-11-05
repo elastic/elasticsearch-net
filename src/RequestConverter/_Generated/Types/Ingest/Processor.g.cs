@@ -174,9 +174,19 @@ public partial class Processor : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("NetworkDirection", (w) => { NetworkDirection.FormatCode(w); });
 			}
 
+			if (NormalizeForStream is not null)
+			{
+				writer.WriteFluentDescriptorCall("NormalizeForStream", (w) => { NormalizeForStream.FormatCode(w); });
+			}
+
 			if (Pipeline is not null)
 			{
 				writer.WriteFluentDescriptorCall("Pipeline", (w) => { Pipeline.FormatCode(w); }, (w) => { Pipeline.FormatCode(w); });
+			}
+
+			if (RecoverFailureDocument is not null)
+			{
+				writer.WriteFluentDescriptorCall("RecoverFailureDocument", (w) => { RecoverFailureDocument.FormatCode(w); });
 			}
 
 			if (Redact is not null)
@@ -436,10 +446,22 @@ public partial class Processor : RequestConverter.ICodeFormattable
 				NetworkDirection.FormatCode(writer);
 			}
 
+			if (NormalizeForStream is not null)
+			{
+				initializer.Property("NormalizeForStream");
+				NormalizeForStream.FormatCode(writer);
+			}
+
 			if (Pipeline is not null)
 			{
 				initializer.Property("Pipeline");
 				Pipeline.FormatCode(writer);
+			}
+
+			if (RecoverFailureDocument is not null)
+			{
+				initializer.Property("RecoverFailureDocument");
+				RecoverFailureDocument.FormatCode(writer);
 			}
 
 			if (Redact is not null)

@@ -68,7 +68,9 @@ public sealed partial class Processor
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor? Kv { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor>("kv"); set => SetVariant("kv", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor? Lowercase { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor>("lowercase"); set => SetVariant("lowercase", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor? NetworkDirection { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor>("network_direction"); set => SetVariant("network_direction", value); }
+	public Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessor? NormalizeForStream { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessor>("normalize_for_stream"); set => SetVariant("normalize_for_stream", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor? Pipeline { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor>("pipeline"); set => SetVariant("pipeline", value); }
+	public Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessor? RecoverFailureDocument { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessor>("recover_failure_document"); set => SetVariant("recover_failure_document", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessor? Redact { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor>("redact"); set => SetVariant("redact", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor? RegisteredDomain { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor>("registered_domain"); set => SetVariant("registered_domain", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor? Remove { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor>("remove"); set => SetVariant("remove", value); }
@@ -115,7 +117,9 @@ public sealed partial class Processor
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Kv = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Lowercase = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { NetworkDirection = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { NormalizeForStream = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Pipeline = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { RecoverFailureDocument = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Redact = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { RegisteredDomain = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Remove = value };
@@ -562,6 +566,24 @@ public readonly partial struct ProcessorDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> NormalizeForStream(Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessor? value)
+	{
+		Instance.NormalizeForStream = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> NormalizeForStream()
+	{
+		Instance.NormalizeForStream = Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> NormalizeForStream(System.Action<Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor<TDocument>>? action)
+	{
+		Instance.NormalizeForStream = Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor? value)
 	{
 		Instance.Pipeline = value;
@@ -571,6 +593,24 @@ public readonly partial struct ProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Pipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> RecoverFailureDocument(Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessor? value)
+	{
+		Instance.RecoverFailureDocument = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> RecoverFailureDocument()
+	{
+		Instance.RecoverFailureDocument = Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> RecoverFailureDocument(System.Action<Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor<TDocument>>? action)
+	{
+		Instance.RecoverFailureDocument = Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1359,6 +1399,30 @@ public readonly partial struct ProcessorDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NormalizeForStream(Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessor? value)
+	{
+		Instance.NormalizeForStream = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NormalizeForStream()
+	{
+		Instance.NormalizeForStream = Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NormalizeForStream(System.Action<Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor>? action)
+	{
+		Instance.NormalizeForStream = Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NormalizeForStream<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor<T>>? action)
+	{
+		Instance.NormalizeForStream = Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptor<T>.Build(action);
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor? value)
 	{
 		Instance.Pipeline = value;
@@ -1374,6 +1438,30 @@ public readonly partial struct ProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Pipeline<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<T>> action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor RecoverFailureDocument(Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessor? value)
+	{
+		Instance.RecoverFailureDocument = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor RecoverFailureDocument()
+	{
+		Instance.RecoverFailureDocument = Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor RecoverFailureDocument(System.Action<Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor>? action)
+	{
+		Instance.RecoverFailureDocument = Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor RecoverFailureDocument<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor<T>>? action)
+	{
+		Instance.RecoverFailureDocument = Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 

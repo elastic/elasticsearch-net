@@ -41,6 +41,9 @@ public sealed partial class IndexRoutingAllocation
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? Include { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
+
+	/// <include file="IndexRoutingAllocation.g.xml" path="doc/member[@key='indices._types.IndexRoutingAllocation#require']/*"/>
+	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Require { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexRoutingAllocation']/*"/>
@@ -120,6 +123,41 @@ public readonly partial struct IndexRoutingAllocationDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor InitialRecovery(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor>? action)
 	{
 		Instance.InitialRecovery = Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecoveryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="IndexRoutingAllocation.g.xml" path="doc/member[@key='indices._types.IndexRoutingAllocation#require']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor Require(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
+	{
+		Instance.Require = value;
+		return this;
+	}
+
+	/// <include file="IndexRoutingAllocation.g.xml" path="doc/member[@key='indices._types.IndexRoutingAllocation#require']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor Require()
+	{
+		Instance.Require = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
+		return this;
+	}
+
+	/// <include file="IndexRoutingAllocation.g.xml" path="doc/member[@key='indices._types.IndexRoutingAllocation#require']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor Require(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
+	{
+		Instance.Require = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor AddRequire(string key, System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Require ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Require.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDescriptor AddRequire(string key, params string[] values)
+	{
+		Instance.Require ??= new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
+		Instance.Require.Add(key, [.. values]);
 		return this;
 	}
 

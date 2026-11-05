@@ -2996,6 +2996,8 @@ internal static class KnownNamespaces
 				"RankEvalRequestItem",
 				"RankEvalRequestItemDescriptor",
 				"RankEvalRequestItemDescriptorT",
+				"RankEvalTemplate",
+				"RankEvalTemplateDescriptor",
 				"UnratedDocument"
 			}
 		},
@@ -3015,6 +3017,7 @@ internal static class KnownNamespaces
 				"RankEvalMetricRecallConverter",
 				"RankEvalQueryConverter",
 				"RankEvalRequestItemConverter",
+				"RankEvalTemplateConverter",
 				"UnratedDocumentConverter"
 			}
 		},
@@ -7005,6 +7008,9 @@ internal static class KnownNamespaces
 				"NetworkDirectionProcessor",
 				"NetworkDirectionProcessorDescriptor",
 				"NetworkDirectionProcessorDescriptorT",
+				"NormalizeForStreamProcessor",
+				"NormalizeForStreamProcessorDescriptor",
+				"NormalizeForStreamProcessorDescriptorT",
 				"Pipeline",
 				"PipelineConfig",
 				"PipelineDescriptor",
@@ -7034,6 +7040,9 @@ internal static class KnownNamespaces
 				"PutPipelineRequestDescriptorT",
 				"PutPipelineRequestParameters",
 				"PutPipelineResponse",
+				"RecoverFailureDocumentProcessor",
+				"RecoverFailureDocumentProcessorDescriptor",
+				"RecoverFailureDocumentProcessorDescriptorT",
 				"Redact",
 				"RedactProcessor",
 				"RedactProcessorDescriptor",
@@ -7360,6 +7369,7 @@ internal static class KnownNamespaces
 				"LowercaseProcessorConverter",
 				"MaxmindConverter",
 				"NetworkDirectionProcessorConverter",
+				"NormalizeForStreamProcessorConverter",
 				"PipelineConfigConverter",
 				"PipelineConverter",
 				"PipelineProcessorConverter",
@@ -7374,6 +7384,7 @@ internal static class KnownNamespaces
 				"PutIpLocationDatabaseResponseConverter",
 				"PutPipelineRequestConverter",
 				"PutPipelineResponseConverter",
+				"RecoverFailureDocumentProcessorConverter",
 				"RedactConverter",
 				"RedactProcessorConverter",
 				"RegisteredDomainProcessorConverter",
@@ -7428,6 +7439,13 @@ internal static class KnownNamespaces
 			}
 		},
 		{
+			"Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessorDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
+			}
+		},
+		{
 			"Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptorT",
 			new(System.StringComparer.Ordinal)
 			{
@@ -7450,6 +7468,13 @@ internal static class KnownNamespaces
 		},
 		{
 			"Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptorT",
+			new(System.StringComparer.Ordinal)
+			{
+				"TDocument"
+			}
+		},
+		{
+			"Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessorDescriptorT",
 			new(System.StringComparer.Ordinal)
 			{
 				"TDocument"

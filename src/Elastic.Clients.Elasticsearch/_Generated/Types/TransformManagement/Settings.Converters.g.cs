@@ -29,6 +29,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropDatesAsEpochMillis = System.Text.Json.JsonEncodedText.Encode("dates_as_epoch_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDeduceMappings = System.Text.Json.JsonEncodedText.Encode("deduce_mappings"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDocsPerSecond = System.Text.Json.JsonEncodedText.Encode("docs_per_second"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexerRequestTimeout = System.Text.Json.JsonEncodedText.Encode("indexer_request_timeout"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxPageSearchSize = System.Text.Json.JsonEncodedText.Encode("max_page_search_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNumFailureRetries = System.Text.Json.JsonEncodedText.Encode("num_failure_retries"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUnattended = System.Text.Json.JsonEncodedText.Encode("unattended"u8);
@@ -41,6 +42,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<bool?> propDatesAsEpochMillis = default;
 		LocalJsonValue<bool?> propDeduceMappings = default;
 		LocalJsonValue<float?> propDocsPerSecond = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propIndexerRequestTimeout = default;
 		LocalJsonValue<int?> propMaxPageSearchSize = default;
 		LocalJsonValue<int?> propNumFailureRetries = default;
 		LocalJsonValue<bool?> propUnattended = default;
@@ -63,6 +65,11 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propDocsPerSecond.TryReadProperty(ref reader, options, PropDocsPerSecond, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
+			{
+				continue;
+			}
+
+			if (propIndexerRequestTimeout.TryReadProperty(ref reader, options, PropIndexerRequestTimeout, null))
 			{
 				continue;
 			}
@@ -103,6 +110,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 			DatesAsEpochMillis = propDatesAsEpochMillis.Value,
 			DeduceMappings = propDeduceMappings.Value,
 			DocsPerSecond = propDocsPerSecond.Value,
+			IndexerRequestTimeout = propIndexerRequestTimeout.Value,
 			MaxPageSearchSize = propMaxPageSearchSize.Value,
 			NumFailureRetries = propNumFailureRetries.Value,
 			Unattended = propUnattended.Value,
@@ -117,6 +125,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropDatesAsEpochMillis, value.DatesAsEpochMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDeduceMappings, value.DeduceMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDocsPerSecond, value.DocsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropIndexerRequestTimeout, value.IndexerRequestTimeout, null, null);
 		writer.WriteProperty(options, PropMaxPageSearchSize, value.MaxPageSearchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNumFailureRetries, value.NumFailureRetries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropUnattended, value.Unattended, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
