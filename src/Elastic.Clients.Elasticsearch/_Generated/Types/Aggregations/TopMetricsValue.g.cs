@@ -45,6 +45,9 @@ public sealed partial class TopMetricsValue
 
 	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#missing']/*"/>
+	public object? Missing { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue']/*"/>
@@ -78,6 +81,13 @@ public readonly partial struct TopMetricsValueDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
+		return this;
+	}
+
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#missing']/*"/>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument> Missing(object? value)
+	{
+		Instance.Missing = value;
 		return this;
 	}
 
@@ -121,6 +131,13 @@ public readonly partial struct TopMetricsValueDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
+		return this;
+	}
+
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#missing']/*"/>
+	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor Missing(object? value)
+	{
+		Instance.Missing = value;
 		return this;
 	}
 

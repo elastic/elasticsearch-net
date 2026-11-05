@@ -10,7 +10,7 @@ transform config. As a result, less document updates in the destination index wi
 overall performance.
 </para></summary></member>
   <member key="transform._types.Settings#dates_as_epoch_millis"><summary><para>
-Defines if dates in the ouput should be written as ISO formatted string or as millis since epoch. epoch_millis was
+Defines if dates in the output should be written as ISO formatted string or as millis since epoch. epoch_millis was
 the default for transforms created before version 7.11. For compatible output set this value to <c>true</c>.
 </para></summary></member>
   <member key="transform._types.Settings#deduce_mappings"><summary><para>
@@ -19,6 +19,11 @@ Specifies whether the transform should deduce the destination index mappings fro
   <member key="transform._types.Settings#docs_per_second"><summary><para>
 Specifies a limit on the number of input documents per second. This setting throttles the transform by adding a
 wait time between search requests. The default value is null, which disables throttling.
+</para></summary></member>
+  <member key="transform._types.Settings#indexer_request_timeout"><summary><para>
+The initial timeout for the requests the transform sends to nodes to retrieve checkpoint information.
+Each consecutive failure doubles the timeout, up to a maximum of <c>12h</c>. The minimum value is <c>1ms</c> and the
+maximum is <c>12h</c>. Defaults to <c>30s</c>.
 </para></summary></member>
   <member key="transform._types.Settings#max_page_search_size"><summary><para>
 Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker

@@ -281,7 +281,7 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 
 			if (Store is not null)
 			{
-				writer.WriteFluentDescriptorCall("Store", (w) => { Store.FormatCode(w); }, (w) => { Store.FormatCode(w); });
+				writer.WriteFluentDescriptorCall("Store", (w) => { Store.FormatCode(w); });
 			}
 
 			if (TimeSeries is not null)

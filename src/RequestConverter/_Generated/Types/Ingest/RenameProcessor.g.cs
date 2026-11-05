@@ -58,6 +58,11 @@ public partial class RenameProcessor : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorParams("OnFailure", OnFailure, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>"); w.Write("()"); });
 			}
 
+			if (Override is not null)
+			{
+				writer.WriteFluentCall("Override", (w) => { w.WriteValue(Override.Value); });
+			}
+
 			if (Tag is not null)
 			{
 				writer.WriteFluentCall("Tag", (w) => { w.WriteString(Tag); });
@@ -103,6 +108,12 @@ public partial class RenameProcessor : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("OnFailure");
 				writer.WriteInlineList(OnFailure, (w, item) => { item.FormatCode(w); });
+			}
+
+			if (Override is not null)
+			{
+				initializer.Property("Override");
+				writer.WriteValue(Override.Value);
 			}
 
 			if (Tag is not null)

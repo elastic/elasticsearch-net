@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="searchable_snapshots.clear_cache.Request"><summary><para>
-Clear the cache.
+Clear the searchable snapshots shared cache.
+</para>
+<para>
 Clear indices and data streams from the shared cache for partially mounted indices.
 </para></summary></member>
   <member key="searchable_snapshots.clear_cache.Request#allow_no_indices"><summary><para>

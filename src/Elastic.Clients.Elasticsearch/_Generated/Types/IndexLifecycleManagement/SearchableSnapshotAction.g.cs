@@ -44,7 +44,13 @@ public sealed partial class SearchableSnapshotAction
 	}
 
 	public bool? ForceMergeIndex { get; set; }
+
+	/// <include file="SearchableSnapshotAction.g.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction#replicate_for']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? ReplicateFor { get; set; }
 	public required string SnapshotRepository { get; set; }
+
+	/// <include file="SearchableSnapshotAction.g.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction#total_shards_per_node']/*"/>
+	public int? TotalShardsPerNode { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction']/*"/>
@@ -73,9 +79,23 @@ public readonly partial struct SearchableSnapshotActionDescriptor
 		return this;
 	}
 
+	/// <include file="SearchableSnapshotAction.g.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction#replicate_for']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor ReplicateFor(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.ReplicateFor = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor SnapshotRepository(string value)
 	{
 		Instance.SnapshotRepository = value;
+		return this;
+	}
+
+	/// <include file="SearchableSnapshotAction.g.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction#total_shards_per_node']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor TotalShardsPerNode(int? value)
+	{
+		Instance.TotalShardsPerNode = value;
 		return this;
 	}
 
