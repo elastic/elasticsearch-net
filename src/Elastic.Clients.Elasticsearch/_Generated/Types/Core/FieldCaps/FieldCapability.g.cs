@@ -72,8 +72,14 @@ public sealed partial class FieldCapability
 	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_inference_indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? NonInferenceIndices { get; set; }
 
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_passthrough_indices']/*"/>
+	public System.Collections.Generic.ICollection<string>? NonPassthroughIndices { get; set; }
+
 	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_searchable_indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? NonSearchableIndices { get; set; }
+
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#passthrough']/*"/>
+	public bool? Passthrough { get; set; }
 
 	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#searchable']/*"/>
 	public required bool Searchable { get; set; }

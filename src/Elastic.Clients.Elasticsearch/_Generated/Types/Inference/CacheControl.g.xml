@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CacheControl"><summary><para>
+The prompt caching configuration to use for the completion request.
+Currently supported only for <c>elastic</c> provider.
+</para></summary></member>
+  <member key="inference._types.CacheControl#ttl"><summary><para>
+The time to live of the cached content, for example <c>1h</c>.
+</para></summary></member>
+  <member key="inference._types.CacheControl#type"><summary><para>
+The type of cache control, for example <c>ephemeral</c>.
+</para></summary></member>
+</doc>

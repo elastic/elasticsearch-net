@@ -65,6 +65,12 @@ public partial class GrantApiKeyRequest : RequestConverter.IClientCallFormattabl
 				ApiKey.FormatCode(writer);
 			}
 
+			if (ClientAuthentication is not null)
+			{
+				initializer.Property("ClientAuthentication");
+				ClientAuthentication.FormatCode(writer);
+			}
+
 			{
 				initializer.Property("GrantType");
 				Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, writer);
@@ -80,6 +86,12 @@ public partial class GrantApiKeyRequest : RequestConverter.IClientCallFormattabl
 			{
 				initializer.Property("RunAs");
 				RunAs.FormatCode(writer);
+			}
+
+			if (ServiceAccountToken is not null)
+			{
+				initializer.Property("ServiceAccountToken");
+				writer.WriteString(ServiceAccountToken);
 			}
 
 			if (Username is not null)
@@ -113,6 +125,11 @@ public partial class GrantApiKeyRequest : RequestConverter.IClientCallFormattabl
 			writer.WriteFluentDescriptorCall("ApiKey", (w) => { ApiKey.FormatCode(w); }, (w) => { ApiKey.FormatCode(w); });
 		}
 
+		if (ClientAuthentication is not null)
+		{
+			writer.WriteFluentDescriptorCall("ClientAuthentication", (w) => { ClientAuthentication.FormatCode(w); }, (w) => { ClientAuthentication.FormatCode(w); });
+		}
+
 		{
 			writer.WriteFluentCall("GrantType", (w) => { Elastic.Clients.Elasticsearch.Security.ApiKeyGrantTypeCodeFormatter.FormatCode(GrantType, w); });
 		}
@@ -125,6 +142,11 @@ public partial class GrantApiKeyRequest : RequestConverter.IClientCallFormattabl
 		if (RunAs is not null)
 		{
 			writer.WriteFluentCall("RunAs", (w) => { RunAs.FormatCode(w); });
+		}
+
+		if (ServiceAccountToken is not null)
+		{
+			writer.WriteFluentCall("ServiceAccountToken", (w) => { w.WriteString(ServiceAccountToken); });
 		}
 
 		if (Username is not null)

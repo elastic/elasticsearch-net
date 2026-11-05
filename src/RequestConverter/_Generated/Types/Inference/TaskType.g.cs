@@ -37,6 +37,14 @@ public static class TaskTypeCodeFormatter
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
 				writer.Write(".Completion");
 				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.Decision:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".Decision");
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.DocumentExtraction:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
+				writer.Write(".DocumentExtraction");
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Embedding:
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.TaskType");
 				writer.Write(".Embedding");

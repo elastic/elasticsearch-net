@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery._types.RecoveryProgress#percent_complete"><summary><para>
+The estimated percentage of the recovery that has completed, from <c>0</c> to <c>100</c>.
+It is omitted when the progress cannot currently be determined, for example before the recovery starts moving data.
+It is <c>100</c> once the recovery has completed.
+</para></summary></member>
+</doc>

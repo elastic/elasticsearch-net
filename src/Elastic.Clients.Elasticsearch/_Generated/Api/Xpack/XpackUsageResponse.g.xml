@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.Response#columnar"><summary><para>
+Usage of the indices with <c>index.mode</c> set to <c>columnar</c>.
+</para></summary></member>
+  <member key="xpack.usage.Response#logsdb_columnar"><summary><para>
+Usage of the indices with <c>index.mode</c> set to <c>logsdb_columnar</c>.
+</para></summary></member>
+  <member key="xpack.usage.Response#vectordb_columnar"><summary><para>
+The <c>vectordb_columnar</c> index mode is behind a feature flag.
+Without the flag, this section is still returned, disabled and with zero counts.
+</para></summary></member>
+</doc>

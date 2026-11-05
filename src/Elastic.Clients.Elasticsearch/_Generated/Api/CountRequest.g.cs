@@ -64,9 +64,6 @@ public sealed partial class CountRequestParameters : Elastic.Transport.RequestPa
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -83,6 +80,10 @@ public sealed partial class CountRequestParameters : Elastic.Transport.RequestPa
 public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CountRequestParameters>
 {
 	public CountRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
+
+	public CountRequest(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice) : base(r => r.Optional("index", indices).Optional("_slice", routeSlice))
 	{
 	}
 
@@ -106,6 +107,9 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => P<System.Collections.Generic.ICollection<string>?>("_slice"); set => PO("_slice", value); }
 
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -144,9 +148,6 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -180,6 +181,11 @@ public readonly partial struct CountRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.CountRequest(indices);
 	}
 
+	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CountRequest(indices, routeSlice);
+	}
+
 	public CountRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.CountRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -192,6 +198,20 @@ public readonly partial struct CountRequestDescriptor
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -284,13 +304,6 @@ public readonly partial struct CountRequestDescriptor
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
-		return this;
-	}
-
-	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.CountRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -428,6 +441,11 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.CountRequest(indices);
 	}
 
+	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CountRequest(indices, routeSlice);
+	}
+
 	public CountRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.CountRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -440,6 +458,20 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -532,13 +564,6 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
-		return this;
-	}
-
-	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

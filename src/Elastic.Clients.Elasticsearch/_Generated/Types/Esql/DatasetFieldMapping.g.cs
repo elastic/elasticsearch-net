@@ -47,8 +47,8 @@ public sealed partial class DatasetFieldMapping
 	/// <include file="DatasetFieldMapping.g.xml" path="doc/member[@key='esql._types.DatasetFieldMapping#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <include file="DatasetFieldMapping.g.xml" path="doc/member[@key='esql._types.DatasetFieldMapping#path']/*"/>
-	public string? Path { get; set; }
+	/// <include file="DatasetFieldMapping.g.xml" path="doc/member[@key='esql._types.DatasetFieldMapping#rename_from']/*"/>
+	public string? RenameFrom { get; set; }
 
 	/// <include file="DatasetFieldMapping.g.xml" path="doc/member[@key='esql._types.DatasetFieldMapping#type']/*"/>
 	public required string Type { get; set; }
@@ -82,10 +82,10 @@ public readonly partial struct DatasetFieldMappingDescriptor
 		return this;
 	}
 
-	/// <include file="DatasetFieldMapping.g.xml" path="doc/member[@key='esql._types.DatasetFieldMapping#path']/*"/>
-	public Elastic.Clients.Elasticsearch.Esql.DatasetFieldMappingDescriptor Path(string? value)
+	/// <include file="DatasetFieldMapping.g.xml" path="doc/member[@key='esql._types.DatasetFieldMapping#rename_from']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.DatasetFieldMappingDescriptor RenameFrom(string? value)
 	{
-		Instance.Path = value;
+		Instance.RenameFrom = value;
 		return this;
 	}
 

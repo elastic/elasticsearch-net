@@ -36,4 +36,8 @@ A set of typical search requests, together with their provided ratings.
   <member key="_global.rank_eval.Request#search_type"><summary><para>
 Search operation type
 </para></summary></member>
+  <member key="_global.rank_eval.Request#templates"><summary><para>
+Query templates that the rated requests can refer to by their <c>template_id</c>.
+This way, queries that differ only in their parameters don't have to be repeated in <c>requests</c>.
+</para></summary></member>
 </doc>

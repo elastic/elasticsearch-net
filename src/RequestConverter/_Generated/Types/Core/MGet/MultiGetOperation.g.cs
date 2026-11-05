@@ -38,6 +38,11 @@ public partial class MultiGetOperation : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -75,6 +80,12 @@ public partial class MultiGetOperation : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Index");
 				Index.FormatCode(writer);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

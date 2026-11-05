@@ -39,6 +39,11 @@ public partial class FieldSummary : RequestConverter.ICodeFormattable
 		}
 
 		{
+			initializer.Property("DocValuesSkipper");
+			writer.WriteValue(DocValuesSkipper);
+		}
+
+		{
 			initializer.Property("InvertedIndex");
 			InvertedIndex.FormatCode(writer);
 		}

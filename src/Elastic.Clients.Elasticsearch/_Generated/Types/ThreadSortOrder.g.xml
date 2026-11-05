@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.ThreadSortOrder#cpu"><summary><para>
+Sort by CPU time only.
+</para></summary></member>
+  <member key="_types.ThreadSortOrder#total"><summary><para>
+Sort by the time the thread was runnable, then by CPU time.
+</para></summary></member>
+</doc>

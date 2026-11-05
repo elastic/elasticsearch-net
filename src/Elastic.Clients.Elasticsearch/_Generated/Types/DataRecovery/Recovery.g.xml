@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery._types.Recovery#completed_at"><summary><para>
+The time when the recovery finished. It is omitted while the recovery is running.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#destination_mode"><summary><para>
+Whether the sources are recovered in place (<c>replace</c>) or under new names (<c>rename</c>).
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#failures"><summary><para>
+The sources that could not be recovered.
+The list is capped, so it can be shorter than <c>total_failure_count</c>.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#metadata"><summary><para>
+The custom metadata that was provided when the recovery was started.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#progress"><summary><para>
+The progress of the recovery.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#recovery_id"><summary><para>
+The identifier of the recovery.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#recovery_point"><summary><para>
+The recovery point that the sources are recovered from.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#sources"><summary><para>
+The sources that the requested source expressions resolved to, with the destinations that they are recovered to.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#started_at"><summary><para>
+The time when the recovery started.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#status"><summary><para>
+The status of the recovery.
+</para></summary></member>
+  <member key="data_recovery._types.Recovery#total_failure_count"><summary><para>
+The total number of sources that could not be recovered, including any that are not listed in <c>failures</c>.
+</para></summary></member>
+</doc>

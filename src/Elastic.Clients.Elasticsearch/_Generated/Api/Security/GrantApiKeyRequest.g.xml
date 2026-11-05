@@ -26,10 +26,16 @@ Elasticsearch access tokens
 JWTs
 </para>
 </item>
+<item>
+<para>
+service account tokens of user-managed service accounts
+</para>
+</item>
 </list>
 <para>
 The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
 In this case, the API key will be created on behalf of the impersonated user.
+Run as is not supported with the <c>_user_managed_service_account</c> grant type.
 </para>
 <para>
 This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
@@ -50,8 +56,12 @@ It is not valid with other grant types.
   <member key="security.grant_api_key.Request#api_key"><summary><para>
 The API key.
 </para></summary></member>
+  <member key="security.grant_api_key.Request#client_authentication"><summary><para>
+The client authentication for a JWT that requires it, which is what is normally sent in the <c>ES-Client-Authentication</c> request header.
+It is valid only with the <c>access_token</c> grant type, when the access token is a JWT.
+</para></summary></member>
   <member key="security.grant_api_key.Request#grant_type"><summary><para>
-The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
+The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>, and <c>_user_managed_service_account</c>.
 </para></summary></member>
   <member key="security.grant_api_key.Request#password"><summary><para>
 The user's password.
@@ -66,6 +76,12 @@ If 'false', nothing is done with refreshes.
 </para></summary></member>
   <member key="security.grant_api_key.Request#run_as"><summary><para>
 The name of the user to be impersonated.
+It is not valid with the <c>_user_managed_service_account</c> grant type.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#service_account_token"><summary><para>
+The service account token of a user-managed service account, as returned by the create service account token API.
+If you specify the <c>_user_managed_service_account</c> grant type, this parameter is required.
+It is not valid with other grant types.
 </para></summary></member>
   <member key="security.grant_api_key.Request#username"><summary><para>
 The user name that identifies the user.

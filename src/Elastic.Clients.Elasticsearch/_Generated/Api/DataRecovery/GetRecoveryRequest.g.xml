@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_recovery.Request"><summary><para>
+Get a recovery.
+</para>
+<para>
+Get the status and details of a recovery that was started with the start recovery API.
+This API is intended for internal operator use.
+The progress of a running recovery is reported as a percentage, and the repository and audit details of the recovery are not exposed.
+</para></summary></member>
+  <member key="data_recovery.get_recovery.Request#recovery_id"><summary><para>
+The identifier of the recovery, as returned when the recovery was started.
+</para></summary></member>
+</doc>

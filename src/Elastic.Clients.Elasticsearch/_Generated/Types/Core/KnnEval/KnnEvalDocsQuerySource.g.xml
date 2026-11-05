@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.KnnEvalDocsQuerySource"><summary><para>
+Samples the query vectors from the stored documents.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalDocsQuerySource#seed"><summary><para>
+The seed of the sampling, to sample the same documents across requests.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalDocsQuerySource#size"><summary><para>
+The number of documents to sample, from 1 to 1000.
+</para></summary></member>
+</doc>

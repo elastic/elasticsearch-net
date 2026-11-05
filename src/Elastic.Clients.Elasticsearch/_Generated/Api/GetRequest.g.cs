@@ -39,9 +39,6 @@ public sealed partial class GetRequestParameters : Elastic.Transport.RequestPara
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -77,6 +74,11 @@ public sealed partial class GetRequest : Elastic.Clients.Elasticsearch.Requests.
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRequest(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Required("id", id))
+	{
+	}
+
 	public GetRequest()
 	{
 	}
@@ -101,6 +103,9 @@ public sealed partial class GetRequest : Elastic.Clients.Elasticsearch.Requests.
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
+	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#force_synthetic_source']/*"/>
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
@@ -112,9 +117,6 @@ public sealed partial class GetRequest : Elastic.Clients.Elasticsearch.Requests.
 
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
-	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -158,6 +160,11 @@ public readonly partial struct GetRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.GetRequest(index, id);
 	}
 
+	public GetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GetRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetRequestDescriptor()
 	{
@@ -178,6 +185,13 @@ public readonly partial struct GetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.GetRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -206,13 +220,6 @@ public readonly partial struct GetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
-		return this;
-	}
-
-	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.GetRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -400,6 +407,11 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.GetRequest(typeof(TDocument), id);
 	}
 
+	public GetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GetRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public GetRequestDescriptor()
 	{
@@ -420,6 +432,13 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -448,13 +467,6 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
-		return this;
-	}
-
-	/// <include file="GetRequest.g.xml" path="doc/member[@key='_global.get.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

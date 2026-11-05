@@ -49,6 +49,12 @@ public partial class Features : RequestConverter.ICodeFormattable
 			Ccr.FormatCode(writer);
 		}
 
+		if (Columnar is not null)
+		{
+			initializer.Property("Columnar");
+			Columnar.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("DataStreams");
 			DataStreams.FormatCode(writer);
@@ -100,6 +106,12 @@ public partial class Features : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("Logsdb");
 			Logsdb.FormatCode(writer);
+		}
+
+		if (LogsdbColumnar is not null)
+		{
+			initializer.Property("LogsdbColumnar");
+			LogsdbColumnar.FormatCode(writer);
 		}
 
 		{

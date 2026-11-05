@@ -169,8 +169,7 @@ A nice side effect is that there is no need to maintain strict ordering of async
 Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 </para></summary></member>
   <member key="_global.index.Request#_slice"><summary><para>
-The slice identifier used to route the operation to a specific slice.
-Use the special value <c>_all</c> to target all slices without restricting to a routing value.
+The slice identifier for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>), which scopes the operation to that slice.
 Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
 </para></summary></member>
   <member key="_global.index.Request#id"><summary><para>

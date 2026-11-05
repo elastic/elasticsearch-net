@@ -6,9 +6,11 @@ A per-column declaration inside a dataset mapping's <c>properties</c>.
   <member key="esql._types.DatasetFieldMapping#format"><summary><para>
 The date-parse pattern for a declared <c>date</c> column, mirroring the index date-field <c>format</c>.
 </para></summary></member>
-  <member key="esql._types.DatasetFieldMapping#path"><summary><para>
+  <member key="esql._types.DatasetFieldMapping#rename_from"><summary><para>
 The underlying file column that this logical column reads from.
 This is a read-path rename: the physical column becomes this single logical column.
+Responses always use <c>rename_from</c>. <c>path</c>, the former name for this field, is still
+accepted in requests and means the same thing.
 </para></summary></member>
   <member key="esql._types.DatasetFieldMapping#type"><summary><para>
 The declared column type.

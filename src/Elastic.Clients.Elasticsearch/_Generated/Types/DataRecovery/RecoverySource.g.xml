@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_recovery_sources.RecoverySource#complete"><summary><para>
+Whether the logical source was completely captured in the recovery point.
+For a data stream, this includes its backing and failure-store indices.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_sources.RecoverySource#name"><summary><para>
+The name of the index or data stream.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_sources.RecoverySource#type"><summary><para>
+The type of logical source.
+</para></summary></member>
+</doc>

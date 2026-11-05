@@ -30,6 +30,7 @@ Arbitrary metadata that you want to associate with the API key. It supports nest
 </para></summary></member>
   <member key="security.create_api_key.Request#name"><summary><para>
 A name for the API key.
+It is required, and it cannot be longer than 256 characters, begin or end with whitespace, or begin with an underscore.
 </para></summary></member>
   <member key="security.create_api_key.Request#refresh"><summary><para>
 If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.

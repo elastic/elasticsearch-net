@@ -670,7 +670,14 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	}
 
 	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Store(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Store()
+	{
+		Instance.Store = Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Store(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor>? action)
 	{
 		Instance.Store = Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.Build(action);
 		return this;
@@ -1360,7 +1367,14 @@ public readonly partial struct IndexSettingsDescriptor
 	}
 
 	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Store(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Store()
+	{
+		Instance.Store = Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Store(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor>? action)
 	{
 		Instance.Store = Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.Build(action);
 		return this;

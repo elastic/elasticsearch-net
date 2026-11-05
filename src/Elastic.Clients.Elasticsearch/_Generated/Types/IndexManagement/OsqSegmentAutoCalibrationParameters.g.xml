@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.segments.OsqSegmentAutoCalibrationParameters#bits"><summary><para>
+The number of bits used to quantize the vectors.
+</para></summary></member>
+  <member key="indices.segments.OsqSegmentAutoCalibrationParameters#oversample"><summary><para>
+The oversampling factor applied when rescoring.
+</para></summary></member>
+  <member key="indices.segments.OsqSegmentAutoCalibrationParameters#precondition"><summary><para>
+If <c>true</c>, the vectors are preconditioned before quantization.
+</para></summary></member>
+  <member key="indices.segments.OsqSegmentAutoCalibrationParameters#query_bits"><summary><para>
+The number of bits used to quantize the query vectors.
+</para></summary></member>
+</doc>

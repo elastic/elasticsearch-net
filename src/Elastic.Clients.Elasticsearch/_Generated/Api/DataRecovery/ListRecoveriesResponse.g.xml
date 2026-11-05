@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.list_recoveries.Response#has_more"><summary><para>
+Whether there are more recoveries after the last one in this page.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Response#recoveries"><summary><para>
+The recoveries, in the requested order.
+</para></summary></member>
+</doc>

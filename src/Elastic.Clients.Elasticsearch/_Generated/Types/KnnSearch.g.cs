@@ -63,7 +63,7 @@ public sealed partial class KnnSearch
 	public string? QueryName { get; set; }
 
 	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
-	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? QueryVector { get; set; }
 
 	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
@@ -188,16 +188,9 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 	}
 
 	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
+	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector(params float[] values)
-	{
-		Instance.QueryVector = [.. values];
 		return this;
 	}
 
@@ -382,16 +375,9 @@ public readonly partial struct KnnSearchDescriptor
 	}
 
 	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
+	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector(params float[] values)
-	{
-		Instance.QueryVector = [.. values];
 		return this;
 	}
 

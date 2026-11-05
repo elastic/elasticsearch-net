@@ -47,14 +47,7 @@ public partial class RoleInfo : RequestConverter.ICodeFormattable
 		if (Global is not null)
 		{
 			initializer.Property("Global");
-			writer.Write("new ");
-			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
-			writer.Write("<");
-			writer.WriteTypeRef("string");
-			writer.Write(", ");
-			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyDictionary<string,System.Collections.Generic.IReadOnlyDictionary<string,System.Collections.Generic.IReadOnlyCollection<string>>>");
-			writer.Write(">()");
-			writer.WriteBlockList(Global, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.IReadOnlyDictionary<string,System.Collections.Generic.IReadOnlyCollection<string>>"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.IReadOnlyCollection<string>"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }); w.Write(" }"); }); w.Write(" }"); });
+			Global.FormatCode(writer);
 		}
 
 		{

@@ -61,7 +61,7 @@ public sealed partial class DiversifyRetriever
 	public string? Name { get; set; }
 
 	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
-	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? QueryVector { get; set; }
 
 	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
@@ -155,16 +155,9 @@ public readonly partial struct DiversifyRetrieverDescriptor<TDocument>
 	}
 
 	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
+	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVector(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVector(params float[] values)
-	{
-		Instance.QueryVector = [.. values];
 		return this;
 	}
 
@@ -315,16 +308,9 @@ public readonly partial struct DiversifyRetrieverDescriptor
 	}
 
 	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
+	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVector(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVector(params float[] values)
-	{
-		Instance.QueryVector = [.. values];
 		return this;
 	}
 

@@ -82,6 +82,12 @@ public partial class GetResult<TDocument> : RequestConverter.ICodeFormattable
 			writer.Write("L");
 		}
 
+		if (Slice is not null)
+		{
+			initializer.Property("Slice");
+			writer.WriteString(Slice);
+		}
+
 		if (Source is not null)
 		{
 			initializer.Property("Source");

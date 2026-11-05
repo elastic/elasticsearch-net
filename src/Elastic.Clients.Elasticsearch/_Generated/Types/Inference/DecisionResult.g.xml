@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.DecisionResult#answers"><summary><para>
+The answers, keyed by the name of the question they answer.
+</para></summary></member>
+</doc>

@@ -61,6 +61,9 @@ public sealed partial class Hit<TDocument>
 	public double? Score { get; set; }
 	public long? SeqNo { get; set; }
 	public string? Shard { get; set; }
+
+	/// <include file="Hit.g.xml" path="doc/member[@key='_global.search._types.Hit#_slice']/*"/>
+	public string? Slice { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; set; }
 	public TDocument? Source { get; set; }
 	public long? Version { get; set; }

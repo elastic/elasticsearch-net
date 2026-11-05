@@ -54,6 +54,12 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 				Index.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (IfPrimaryTerm is not null)
 			{
 				initializer.Property("IfPrimaryTerm");
@@ -96,12 +102,6 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 			{
 				initializer.Property("RetryOnConflict");
 				writer.WriteValue(RetryOnConflict.Value);
-			}
-
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)
@@ -189,6 +189,18 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("routeSlice");
+		if (RouteSlice is not null)
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(RouteSlice);
+		}
+		else
+		{
+			writer.Write("null");
+		}
+
+		writer.Write(", ");
 		writer.WriteInlineArgumentLabel("id");
 		{
 			using var _oi = writer.ForceObjectInitializer();
@@ -232,11 +244,6 @@ public partial class UpdateRequest<TDocument, TPartialDocument> : RequestConvert
 		if (RetryOnConflict is not null)
 		{
 			writer.WriteFluentCall("RetryOnConflict", (w) => { w.WriteValue(RetryOnConflict.Value); });
-		}
-
-		if (RouteSlice is not null)
-		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
 		}
 
 		if (Routing is not null)

@@ -88,9 +88,6 @@ public sealed partial class SearchRequestParameters : Elastic.Transport.RequestP
 	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -134,6 +131,10 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	{
 	}
 
+	public SearchRequest(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice) : base(r => r.Optional("index", indices).Optional("_slice", routeSlice))
+	{
+	}
+
 	public SearchRequest()
 	{
 	}
@@ -154,6 +155,9 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 
 	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => P<System.Collections.Generic.ICollection<string>?>("_slice"); set => PO("_slice", value); }
 
 	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -215,9 +219,6 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 
 	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
-	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -375,6 +376,11 @@ public readonly partial struct SearchRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(indices);
 	}
 
+	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(indices, routeSlice);
+	}
+
 	public SearchRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -387,6 +393,20 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -535,13 +555,6 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
-		return this;
-	}
-
-	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -1467,6 +1480,11 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(indices);
 	}
 
+	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(indices, routeSlice);
+	}
+
 	public SearchRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -1479,6 +1497,20 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -1627,13 +1659,6 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
-		return this;
-	}
-
-	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.update_aliases.AliasActionSummary#aliases"><summary><para>
+Aliases for the action.
+</para></summary></member>
+  <member key="indices.update_aliases.AliasActionSummary#indices"><summary><para>
+Resolved data streams or indices for the action.
+</para></summary></member>
+  <member key="indices.update_aliases.AliasActionSummary#type"><summary><para>
+The action that was applied.
+</para></summary></member>
+</doc>

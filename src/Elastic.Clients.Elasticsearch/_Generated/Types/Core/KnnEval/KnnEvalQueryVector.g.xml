@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.KnnEvalQueryVector#id"><summary><para>
+The identifier of the query, which identifies it in the <c>failures</c> of the response.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalQueryVector#query_vector"><summary><para>
+The query vector.
+</para></summary></member>
+</doc>

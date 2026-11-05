@@ -55,6 +55,12 @@ public partial class PutUserManagedServiceAccountRequest : RequestConverter.ICli
 				Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, writer);
 			}
 
+			if (Description is not null)
+			{
+				initializer.Property("Description");
+				writer.WriteString(Description);
+			}
+
 			if (Enabled is not null)
 			{
 				initializer.Property("Enabled");
@@ -92,6 +98,11 @@ public partial class PutUserManagedServiceAccountRequest : RequestConverter.ICli
 		if (Refresh is not null)
 		{
 			writer.WriteFluentCall("Refresh", (w) => { Elastic.Clients.Elasticsearch.RefreshCodeFormatter.FormatCode(Refresh.Value, w); });
+		}
+
+		if (Description is not null)
+		{
+			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });
 		}
 
 		if (Enabled is not null)

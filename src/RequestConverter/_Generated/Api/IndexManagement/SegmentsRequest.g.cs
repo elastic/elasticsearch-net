@@ -72,6 +72,18 @@ public partial class SegmentsRequest : RequestConverter.IClientCallFormattable
 				writer.WriteValue(IgnoreUnavailable.Value);
 			}
 
+			if (IncludeAutoCalibration is not null)
+			{
+				initializer.Property("IncludeAutoCalibration");
+				writer.WriteValue(IncludeAutoCalibration.Value);
+			}
+
+			if (VectorFormats is not null)
+			{
+				initializer.Property("VectorFormats");
+				writer.WriteValue(VectorFormats.Value);
+			}
+
 			initializer.Dispose();
 		}
 	}
@@ -101,6 +113,16 @@ public partial class SegmentsRequest : RequestConverter.IClientCallFormattable
 		if (IgnoreUnavailable is not null)
 		{
 			writer.WriteFluentCall("IgnoreUnavailable", (w) => { w.WriteValue(IgnoreUnavailable.Value); });
+		}
+
+		if (IncludeAutoCalibration is not null)
+		{
+			writer.WriteFluentCall("IncludeAutoCalibration", (w) => { w.WriteValue(IncludeAutoCalibration.Value); });
+		}
+
+		if (VectorFormats is not null)
+		{
+			writer.WriteFluentCall("VectorFormats", (w) => { w.WriteValue(VectorFormats.Value); });
 		}
 	}
 }

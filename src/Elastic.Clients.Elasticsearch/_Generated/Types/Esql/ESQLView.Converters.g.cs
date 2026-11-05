@@ -28,6 +28,7 @@ public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReserved = System.Text.Json.JsonEncodedText.Encode("reserved"u8);
 
 	public override Elastic.Clients.Elasticsearch.Esql.ESQLView Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -35,6 +36,7 @@ public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<string> propName = default;
 		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<bool?> propReserved = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
@@ -48,6 +50,11 @@ public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propReserved.TryReadProperty(ref reader, options, PropReserved, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -66,7 +73,8 @@ public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.J
 		{
 			Description = propDescription.Value,
 			Name = propName.Value,
-			Query = propQuery.Value
+			Query = propQuery.Value,
+			Reserved = propReserved.Value
 		};
 	}
 
@@ -76,6 +84,7 @@ public sealed partial class ESQLViewConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropReserved, value.Reserved, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

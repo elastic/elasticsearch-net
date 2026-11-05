@@ -67,6 +67,9 @@ public sealed partial class GetResult<TDocument>
 	/// <include file="GetResult.g.xml" path="doc/member[@key='_global.get.GetResult#_seq_no']/*"/>
 	public long? SeqNo { get; set; }
 
+	/// <include file="GetResult.g.xml" path="doc/member[@key='_global.get.GetResult#_slice']/*"/>
+	public string? Slice { get; set; }
+
 	/// <include file="GetResult.g.xml" path="doc/member[@key='_global.get.GetResult#_source']/*"/>
 	public TDocument? Source { get; set; }
 

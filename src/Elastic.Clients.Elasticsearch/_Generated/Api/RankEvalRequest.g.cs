@@ -101,6 +101,9 @@ public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requ
 
 	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
+
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#templates']/*"/>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>? Templates { get; set; }
 }
 
 /// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
@@ -230,6 +233,33 @@ public readonly partial struct RankEvalRequestDescriptor
 		}
 
 		Instance.Requests = items;
+		return this;
+	}
+
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#templates']/*"/>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Templates(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>? value)
+	{
+		Instance.Templates = value;
+		return this;
+	}
+
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#templates']/*"/>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Templates(params Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate[] values)
+	{
+		Instance.Templates = [.. values];
+		return this;
+	}
+
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#templates']/*"/>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Templates(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplateDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplateDescriptor.Build(action));
+		}
+
+		Instance.Templates = items;
 		return this;
 	}
 
@@ -403,6 +433,33 @@ public readonly partial struct RankEvalRequestDescriptor<TDocument>
 		}
 
 		Instance.Requests = items;
+		return this;
+	}
+
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#templates']/*"/>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Templates(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>? value)
+	{
+		Instance.Templates = value;
+		return this;
+	}
+
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#templates']/*"/>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Templates(params Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate[] values)
+	{
+		Instance.Templates = [.. values];
+		return this;
+	}
+
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#templates']/*"/>
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Templates(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplateDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplateDescriptor.Build(action));
+		}
+
+		Instance.Templates = items;
 		return this;
 	}
 

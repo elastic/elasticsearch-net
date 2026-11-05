@@ -29,6 +29,10 @@ public static class ApiKeyGrantTypeCodeFormatter
 	{
 		switch (instance)
 		{
+			case Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.UserManagedServiceAccount:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType");
+				writer.Write(".UserManagedServiceAccount");
+				break;
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.AccessToken:
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType");
 				writer.Write(".AccessToken");

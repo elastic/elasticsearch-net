@@ -29,6 +29,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropAnalytics = System.Text.Json.JsonEncodedText.Encode("analytics"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropArchive = System.Text.Json.JsonEncodedText.Encode("archive"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCcr = System.Text.Json.JsonEncodedText.Encode("ccr"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDataTiers = System.Text.Json.JsonEncodedText.Encode("data_tiers"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEnrich = System.Text.Json.JsonEncodedText.Encode("enrich"u8);
@@ -39,6 +40,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogsdbColumnar = System.Text.Json.JsonEncodedText.Encode("logsdb_columnar"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLogstash = System.Text.Json.JsonEncodedText.Encode("logstash"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMonitoring = System.Text.Json.JsonEncodedText.Encode("monitoring"u8);
@@ -61,6 +63,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propAnalytics = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propArchive = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propCcr = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propDataStreams = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propDataTiers = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEnrich = default;
@@ -71,6 +74,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propGraph = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propIlm = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propLogsdb = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propLogsdbColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propLogstash = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propMl = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propMonitoring = default;
@@ -103,6 +107,11 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propCcr.TryReadProperty(ref reader, options, PropCcr, null))
+			{
+				continue;
+			}
+
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
 			{
 				continue;
 			}
@@ -153,6 +162,11 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propLogsdb.TryReadProperty(ref reader, options, PropLogsdb, null))
+			{
+				continue;
+			}
+
+			if (propLogsdbColumnar.TryReadProperty(ref reader, options, PropLogsdbColumnar, null))
 			{
 				continue;
 			}
@@ -243,6 +257,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 			Analytics = propAnalytics.Value,
 			Archive = propArchive.Value,
 			Ccr = propCcr.Value,
+			Columnar = propColumnar.Value,
 			DataStreams = propDataStreams.Value,
 			DataTiers = propDataTiers.Value,
 			Enrich = propEnrich.Value,
@@ -253,6 +268,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 			Graph = propGraph.Value,
 			Ilm = propIlm.Value,
 			Logsdb = propLogsdb.Value,
+			LogsdbColumnar = propLogsdbColumnar.Value,
 			Logstash = propLogstash.Value,
 			Ml = propMl.Value,
 			Monitoring = propMonitoring.Value,
@@ -277,6 +293,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropAnalytics, value.Analytics, null, null);
 		writer.WriteProperty(options, PropArchive, value.Archive, null, null);
 		writer.WriteProperty(options, PropCcr, value.Ccr, null, null);
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
 		writer.WriteProperty(options, PropDataStreams, value.DataStreams, null, null);
 		writer.WriteProperty(options, PropDataTiers, value.DataTiers, null, null);
 		writer.WriteProperty(options, PropEnrich, value.Enrich, null, null);
@@ -287,6 +304,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
 		writer.WriteProperty(options, PropLogsdb, value.Logsdb, null, null);
+		writer.WriteProperty(options, PropLogsdbColumnar, value.LogsdbColumnar, null, null);
 		writer.WriteProperty(options, PropLogstash, value.Logstash, null, null);
 		writer.WriteProperty(options, PropMl, value.Ml, null, null);
 		writer.WriteProperty(options, PropMonitoring, value.Monitoring, null, null);

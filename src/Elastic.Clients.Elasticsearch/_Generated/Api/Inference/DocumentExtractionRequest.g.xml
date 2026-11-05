@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.document_extraction.Request"><summary><para>
+Perform document extraction inference on the service.
+</para>
+<para>
+Extract the content of documents, such as PDFs or images of documents, into a textual format.
+</para></summary></member>
+  <member key="inference.document_extraction.Request#inference_id"><summary><para>
+The unique identifier for the inference endpoint.
+</para></summary></member>
+  <member key="inference.document_extraction.Request#input"><summary><para>
+The documents to extract the content from.
+Either a <c>content</c> object or an array of <c>content</c> objects.
+</para>
+<para>
+<c>content</c> object example:
+</para>
+<code>
+"input": {
+  "content": {
+    "type": "pdf",
+    "format": "base64",
+    "value": "data:application/pdf;base64,..."
+  }
+}
+</code>
+<para>
+<c>content</c> object array example:
+</para>
+<code>
+"input": [
+  {
+    "content": {
+      "type": "pdf",
+      "format": "base64",
+      "value": "data:application/pdf;base64,..."
+    }
+  },
+  {
+    "content": {
+      "type": "image",
+      "format": "url",
+      "value": "https://example.com/scanned-page.png"
+    }
+  }
+]
+</code></summary></member>
+  <member key="inference.document_extraction.Request#task_settings"><summary><para>
+Task settings for the individual inference request.
+These settings are specific to the task type you specified and override the task settings specified when initializing the service.
+</para></summary></member>
+  <member key="inference.document_extraction.Request#timeout"><summary><para>
+The amount of time to wait for the inference request to complete.
+</para></summary></member>
+</doc>

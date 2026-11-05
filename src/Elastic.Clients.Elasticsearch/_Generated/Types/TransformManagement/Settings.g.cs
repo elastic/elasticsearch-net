@@ -50,6 +50,9 @@ public sealed partial class Settings
 	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#docs_per_second']/*"/>
 	public float? DocsPerSecond { get; set; }
 
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#indexer_request_timeout']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? IndexerRequestTimeout { get; set; }
+
 	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#max_page_search_size']/*"/>
 	public int? MaxPageSearchSize { get; set; }
 
@@ -109,6 +112,13 @@ public readonly partial struct SettingsDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor DocsPerSecond(float? value)
 	{
 		Instance.DocsPerSecond = value;
+		return this;
+	}
+
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#indexer_request_timeout']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor IndexerRequestTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.IndexerRequestTimeout = value;
 		return this;
 	}
 

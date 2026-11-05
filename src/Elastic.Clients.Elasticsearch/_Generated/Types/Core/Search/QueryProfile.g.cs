@@ -48,6 +48,9 @@ public sealed partial class QueryProfile
 
 	public required Elastic.Clients.Elasticsearch.Core.Search.QueryBreakdown Breakdown { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>? Children { get; set; }
+
+	/// <include file="QueryProfile.g.xml" path="doc/member[@key='_global.search._types.QueryProfile#debug']/*"/>
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Debug { get; set; }
 	public required string Description { get; set; }
 	public required System.TimeSpan TimeInNanos { get; set; }
 	public required string Type { get; set; }

@@ -68,6 +68,7 @@ public sealed partial class Features
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Analytics { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Feature? Archive { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ccr { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? Columnar { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature DataStreams { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature DataTiers { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Enrich { get; set; }
@@ -78,6 +79,7 @@ public sealed partial class Features
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Graph { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ilm { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Logsdb { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? LogsdbColumnar { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Logstash { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ml { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Monitoring { get; set; }

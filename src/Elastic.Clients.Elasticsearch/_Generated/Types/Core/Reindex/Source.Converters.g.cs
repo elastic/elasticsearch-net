@@ -29,6 +29,7 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRemote = System.Text.Json.JsonEncodedText.Encode("remote"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouteSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice"u8);
@@ -42,6 +43,7 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource?> propRemote = default;
+		LocalJsonValue<string?> propRouteSlice = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
 		LocalJsonValue<int?> propSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
@@ -65,6 +67,11 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 			}
 
 			if (propRemote.TryReadProperty(ref reader, options, PropRemote, null))
+			{
+				continue;
+			}
+
+			if (propRouteSlice.TryReadProperty(ref reader, options, PropRouteSlice, null))
 			{
 				continue;
 			}
@@ -110,6 +117,7 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
 			Remote = propRemote.Value,
+			RouteSlice = propRouteSlice.Value,
 			RuntimeMappings = propRuntimeMappings.Value,
 			Size = propSize.Value,
 			Slice = propSlice.Value,
@@ -128,6 +136,7 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRemote, value.Remote, null, null);
+		writer.WriteProperty(options, PropRouteSlice, value.RouteSlice, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
 		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSlice, value.Slice, null, null);

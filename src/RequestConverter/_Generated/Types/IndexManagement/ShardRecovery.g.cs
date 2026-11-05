@@ -28,6 +28,18 @@ public partial class ShardRecovery : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.ShardRecovery", false);
+		if (BlockedForMillis is not null)
+		{
+			initializer.Property("BlockedForMillis");
+			writer.WriteValue(BlockedForMillis.Value);
+		}
+
+		if (Gate is not null)
+		{
+			initializer.Property("Gate");
+			writer.WriteString(Gate);
+		}
+
 		{
 			initializer.Property("Id");
 			writer.WriteValue(Id);

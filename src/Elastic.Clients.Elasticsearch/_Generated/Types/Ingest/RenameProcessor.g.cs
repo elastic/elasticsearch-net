@@ -62,6 +62,9 @@ public sealed partial class RenameProcessor
 	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#override']/*"/>
+	public bool? Override { get; set; }
+
 	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
@@ -169,6 +172,13 @@ public readonly partial struct RenameProcessorDescriptor<TDocument>
 		}
 
 		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#override']/*"/>
+	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> Override(bool? value = true)
+	{
+		Instance.Override = value;
 		return this;
 	}
 
@@ -315,6 +325,13 @@ public readonly partial struct RenameProcessorDescriptor
 		}
 
 		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#override']/*"/>
+	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor Override(bool? value = true)
+	{
+		Instance.Override = value;
 		return this;
 	}
 

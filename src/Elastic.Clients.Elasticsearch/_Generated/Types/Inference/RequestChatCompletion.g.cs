@@ -43,6 +43,9 @@ public sealed partial class RequestChatCompletion
 		_ = sentinel;
 	}
 
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#cache_control']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.CacheControl? CacheControl { get; set; }
+
 	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#max_completion_tokens']/*"/>
 	public long? MaxCompletionTokens { get; set; }
 
@@ -54,6 +57,9 @@ public sealed partial class RequestChatCompletion
 
 	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#reasoning']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.Reasoning? Reasoning { get; set; }
+
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#session_id']/*"/>
+	public string? SessionId { get; set; }
 
 	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#stop']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stop { get; set; }
@@ -90,6 +96,27 @@ public readonly partial struct RequestChatCompletionDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion instance) => new Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor descriptor) => descriptor.Instance;
+
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#cache_control']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor CacheControl(Elastic.Clients.Elasticsearch.Inference.CacheControl? value)
+	{
+		Instance.CacheControl = value;
+		return this;
+	}
+
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#cache_control']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor CacheControl()
+	{
+		Instance.CacheControl = Elastic.Clients.Elasticsearch.Inference.CacheControlDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#cache_control']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor CacheControl(System.Action<Elastic.Clients.Elasticsearch.Inference.CacheControlDescriptor>? action)
+	{
+		Instance.CacheControl = Elastic.Clients.Elasticsearch.Inference.CacheControlDescriptor.Build(action);
+		return this;
+	}
 
 	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#max_completion_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor MaxCompletionTokens(long? value)
@@ -150,6 +177,13 @@ public readonly partial struct RequestChatCompletionDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Reasoning(System.Action<Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor>? action)
 	{
 		Instance.Reasoning = Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#session_id']/*"/>
+	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor SessionId(string? value)
+	{
+		Instance.SessionId = value;
 		return this;
 	}
 

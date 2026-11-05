@@ -9,6 +9,9 @@ The metric_details give additional information about the calculated quality metr
   <member key="_global.rank_eval.RankEvalMetricDetail#metric_score"><summary><para>
 The metric_score in the details section shows the contribution of this query to the global quality metric score
 </para></summary></member>
+  <member key="_global.rank_eval.RankEvalMetricDetail#took"><summary><para>
+The time in milliseconds it took to execute the search request for this query
+</para></summary></member>
   <member key="_global.rank_eval.RankEvalMetricDetail#unrated_docs"><summary><para>
 The unrated_docs section contains an _index and _id entry for each document in the search result for this query that didn’t have a ratings value. This can be used to ask the user to supply ratings for these documents
 </para></summary></member>

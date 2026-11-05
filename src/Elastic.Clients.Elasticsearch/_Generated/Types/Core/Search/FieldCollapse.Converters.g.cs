@@ -25,7 +25,6 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class FieldCollapseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentGroupSearches = System.Text.Json.JsonEncodedText.Encode("max_concurrent_group_searches"u8);
@@ -33,17 +32,11 @@ public sealed partial class FieldCollapseConverter : System.Text.Json.Serializat
 	public override Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>?> propInnerHits = default;
 		LocalJsonValue<int?> propMaxConcurrentGroupSearches = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollapse.TryReadProperty(ref reader, options, PropCollapse, null))
-			{
-				continue;
-			}
-
 			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
@@ -71,7 +64,6 @@ public sealed partial class FieldCollapseConverter : System.Text.Json.Serializat
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Collapse = propCollapse.Value,
 			Field = propField.Value,
 			InnerHits = propInnerHits.Value,
 			MaxConcurrentGroupSearches = propMaxConcurrentGroupSearches.Value
@@ -81,7 +73,6 @@ public sealed partial class FieldCollapseConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>(o, v, null));
 		writer.WriteProperty(options, PropMaxConcurrentGroupSearches, value.MaxConcurrentGroupSearches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));

@@ -39,4 +39,7 @@ public sealed partial class PutAliasResponse : Elastic.Transport.Products.Elasti
 
 	/// <include file="PutAliasResponse.g.xml" path="doc/member[@key='indices.put_alias.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
+
+	/// <include file="PutAliasResponse.g.xml" path="doc/member[@key='indices.put_alias.Response#errors']/*"/>
+	public bool? Errors { get; set; }
 }

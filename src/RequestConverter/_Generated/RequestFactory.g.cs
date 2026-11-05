@@ -233,8 +233,33 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"data_recovery.get_recovery",
+			CreateDataRecoveryGetRecovery
+		}
+,
+		{
 			"data_recovery.get_recovery_points",
 			CreateDataRecoveryGetRecoveryPoints
+		}
+,
+		{
+			"data_recovery.get_recovery_sources",
+			CreateDataRecoveryGetRecoverySources
+		}
+,
+		{
+			"data_recovery.get_rpo_series",
+			CreateDataRecoveryGetRpoSeries
+		}
+,
+		{
+			"data_recovery.list_recoveries",
+			CreateDataRecoveryListRecoveries
+		}
+,
+		{
+			"data_recovery.start_recovery",
+			CreateDataRecoveryStartRecovery
 		}
 ,
 		{
@@ -888,6 +913,11 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"inference.decision",
+			CreateInferenceDecision
+		}
+,
+		{
 			"inference.delete",
 			CreateInferenceDelete
 		}
@@ -895,6 +925,11 @@ internal static partial class RequestFactory
 		{
 			"inference.delete_region_policy",
 			CreateInferenceDeleteRegionPolicy
+		}
+,
+		{
+			"inference.document_extraction",
+			CreateInferenceDocumentExtraction
 		}
 ,
 		{
@@ -1150,6 +1185,11 @@ internal static partial class RequestFactory
 		{
 			"ingest.simulate",
 			CreateIngestSimulate
+		}
+,
+		{
+			"knn_eval",
+			CreateKnnEval
 		}
 ,
 		{
@@ -2130,6 +2170,11 @@ internal static partial class RequestFactory
 		{
 			"security.query_role",
 			CreateSecurityQueryRole
+		}
+,
+		{
+			"security.query_service_accounts",
+			CreateSecurityQueryServiceAccounts
 		}
 ,
 		{

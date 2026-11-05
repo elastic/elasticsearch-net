@@ -27,6 +27,7 @@ public sealed partial class RerankInputFormatConverter : System.Text.Json.Serial
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberBase64 = System.Text.Json.JsonEncodedText.Encode("base64"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberText = System.Text.Json.JsonEncodedText.Encode("text"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUrl = System.Text.Json.JsonEncodedText.Encode("url"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.RerankInputFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -40,6 +41,11 @@ public sealed partial class RerankInputFormatConverter : System.Text.Json.Serial
 			return Elastic.Clients.Elasticsearch.Inference.RerankInputFormat.Text;
 		}
 
+		if (reader.ValueTextEquals(MemberUrl))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.RerankInputFormat.Url;
+		}
+
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberBase64.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
@@ -49,6 +55,11 @@ public sealed partial class RerankInputFormatConverter : System.Text.Json.Serial
 		if (string.Equals(value, MemberText.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.RerankInputFormat.Text;
+		}
+
+		if (string.Equals(value, MemberUrl.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.RerankInputFormat.Url;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.RerankInputFormat)}'.");
@@ -63,6 +74,9 @@ public sealed partial class RerankInputFormatConverter : System.Text.Json.Serial
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.RerankInputFormat.Text:
 				writer.WriteStringValue(MemberText);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.RerankInputFormat.Url:
+				writer.WriteStringValue(MemberUrl);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.RerankInputFormat)}'.");

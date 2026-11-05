@@ -48,7 +48,7 @@ public sealed partial class ReindexTaskResult
 	public long? Deleted { get; set; }
 
 	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#failures']/*"/>
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>? Failures { get; set; }
 
 	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#noops']/*"/>
 	public long? Noops { get; set; }

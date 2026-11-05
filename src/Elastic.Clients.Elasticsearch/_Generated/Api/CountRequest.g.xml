@@ -19,9 +19,8 @@ For each shard ID group, a replica is chosen and the search is run against it.
 This means that replicas increase the scalability of the count.
 </para></summary></member>
   <member key="_global.count.Request#_slice"><summary><para>
-The slice identifier used to route the operation to a specific slice.
-Use the special value <c>_all</c> to target all slices without restricting to a routing value.
-Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+The slice identifiers for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>): a single slice, a comma-separated list such as <c>tenant-a,tenant-b</c>, or <c>_all</c> to target all slices.
+When omitted, all slices are targeted. Indices that are not slice-enabled match no documents when a slice is specified.
 </para></summary></member>
   <member key="_global.count.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.

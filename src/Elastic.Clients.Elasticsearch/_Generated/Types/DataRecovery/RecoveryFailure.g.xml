@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery._types.RecoveryFailure#detail"><summary><para>
+Human-readable detail about the failure, which can be truncated.
+</para></summary></member>
+  <member key="data_recovery._types.RecoveryFailure#reason"><summary><para>
+A stable, machine-readable code for the reason that the source could not be recovered.
+</para></summary></member>
+  <member key="data_recovery._types.RecoveryFailure#source"><summary><para>
+The name of the source that could not be recovered.
+</para></summary></member>
+</doc>

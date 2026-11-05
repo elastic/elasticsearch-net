@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.grant_api_key.ApiKeyGrantType#_user_managed_service_account"><summary><para>
+In this type of grant, you must supply a service account token of a user-managed service account in the <c>service_account_token</c> parameter.
+The API key is owned by the service account and is limited by the roles assigned to it.
+The service account token is authenticated on every grant, so a disabled account or an invalidated token is rejected.
+Tokens that belong to built-in (<c>elastic/*</c>) service accounts are rejected.
+</para></summary></member>
+</doc>

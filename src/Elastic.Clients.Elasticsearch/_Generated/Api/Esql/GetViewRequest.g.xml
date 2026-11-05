@@ -4,7 +4,7 @@
 Get an ES|QL view.
 </para>
 <para>
-Returns a stored ES|QL view.
+Returns one or more stored views. A reserved view includes <c>reserved</c> set to <c>true</c>.
 </para></summary></member>
   <member key="esql.get_view.Request#name"><summary><para>
 The comma-separated view names to retrieve.

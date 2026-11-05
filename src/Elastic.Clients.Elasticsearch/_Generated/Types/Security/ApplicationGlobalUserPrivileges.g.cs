@@ -27,12 +27,6 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ApplicationGlobalUserPrivilegesConverter))]
 public sealed partial class ApplicationGlobalUserPrivileges
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ApplicationGlobalUserPrivileges(Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges manage)
-	{
-		Manage = manage;
-	}
-
 	public ApplicationGlobalUserPrivileges()
 	{
 	}
@@ -43,7 +37,8 @@ public sealed partial class ApplicationGlobalUserPrivileges
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges Manage { get; set; }
+	/// <include file="ApplicationGlobalUserPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationGlobalUserPrivileges#manage']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges? Manage { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ApplicationGlobalUserPrivileges']/*"/>
@@ -66,12 +61,14 @@ public readonly partial struct ApplicationGlobalUserPrivilegesDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges(Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor Manage(Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges value)
+	/// <include file="ApplicationGlobalUserPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationGlobalUserPrivileges#manage']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor Manage(Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges? value)
 	{
 		Instance.Manage = value;
 		return this;
 	}
 
+	/// <include file="ApplicationGlobalUserPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationGlobalUserPrivileges#manage']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor Manage(System.Action<Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor> action)
 	{
 		Instance.Manage = Elastic.Clients.Elasticsearch.Security.ManageUserPrivilegesDescriptor.Build(action);
@@ -79,8 +76,13 @@ public readonly partial struct ApplicationGlobalUserPrivilegesDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Build(System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Build(System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor(new Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

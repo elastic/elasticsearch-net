@@ -33,6 +33,7 @@ public sealed partial class GetResponseConverter<TDocument> : System.Text.Json.S
 	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version"u8);
 
@@ -47,6 +48,7 @@ public sealed partial class GetResponseConverter<TDocument> : System.Text.Json.S
 		LocalJsonValue<long?> propPrimaryTerm = default;
 		LocalJsonValue<string?> propRouting = default;
 		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<string?> propSlice = default;
 		LocalJsonValue<TDocument?> propSource = default;
 		LocalJsonValue<long?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -91,6 +93,11 @@ public sealed partial class GetResponseConverter<TDocument> : System.Text.Json.S
 				continue;
 			}
 
+			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
+			{
+				continue;
+			}
+
 			if (propSource.TryReadProperty(ref reader, options, PropSource, static TDocument? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>))))
 			{
 				continue;
@@ -121,6 +128,7 @@ public sealed partial class GetResponseConverter<TDocument> : System.Text.Json.S
 			PrimaryTerm = propPrimaryTerm.Value,
 			Routing = propRouting.Value,
 			SeqNo = propSeqNo.Value,
+			Slice = propSlice.Value,
 			Source = propSource.Value,
 			Version = propVersion.Value
 		};
@@ -137,6 +145,7 @@ public sealed partial class GetResponseConverter<TDocument> : System.Text.Json.S
 		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
 		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));
 		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();

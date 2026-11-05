@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_rpo_series.RpoBucket#end"><summary><para>
+The exclusive end of the bucket. The last bucket is clipped to the end of the range.
+</para></summary></member>
+  <member key="data_recovery.get_rpo_series.RpoBucket#max_recovery_point_age_millis"><summary><para>
+The greatest age, in milliseconds, that the newest recoverable state reached during the bucket.
+It is <c>null</c> if no retained recovery point covers the start of the bucket or the bucket starts in the future.
+</para></summary></member>
+  <member key="data_recovery.get_rpo_series.RpoBucket#start"><summary><para>
+The inclusive start of the bucket.
+</para></summary></member>
+</doc>

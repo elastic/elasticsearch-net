@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.start_recovery.RecoveryMode#rename"><summary><para>
+Recover each source under a new name, which is derived from its name by the <c>rename_strategy</c>.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.RecoveryMode#replace"><summary><para>
+Replace each source with its state at the recovery point, in the place where it currently is.
+</para></summary></member>
+</doc>

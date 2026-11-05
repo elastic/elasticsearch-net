@@ -54,6 +54,12 @@ public partial class CountRequest : RequestConverter.IClientCallFormattable
 				Indices.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteInlineList(RouteSlice, (w, item) => { w.WriteString(item); });
+			}
+
 			if (AllowNoIndices is not null)
 			{
 				initializer.Property("AllowNoIndices");
@@ -127,12 +133,6 @@ public partial class CountRequest : RequestConverter.IClientCallFormattable
 				writer.WriteString(QueryLuceneSyntax);
 			}
 
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
-			}
-
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
@@ -178,6 +178,11 @@ public partial class CountRequest : RequestConverter.IClientCallFormattable
 		if (Indices is not null)
 		{
 			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentParams("RouteSlice", RouteSlice, (w, item) => { w.WriteString(item); });
 		}
 
 		if (AllowNoIndices is not null)
@@ -238,11 +243,6 @@ public partial class CountRequest : RequestConverter.IClientCallFormattable
 		if (QueryLuceneSyntax is not null)
 		{
 			writer.WriteFluentCall("QueryLuceneSyntax", (w) => { w.WriteString(QueryLuceneSyntax); });
-		}
-
-		if (RouteSlice is not null)
-		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
 		}
 
 		if (Routing is not null)

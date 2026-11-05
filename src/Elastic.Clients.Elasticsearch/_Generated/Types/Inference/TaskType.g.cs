@@ -30,6 +30,10 @@ public enum TaskType
 	ChatCompletion,
 	[System.Runtime.Serialization.EnumMember(Value = "completion")]
 	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "decision")]
+	Decision,
+	[System.Runtime.Serialization.EnumMember(Value = "document_extraction")]
+	DocumentExtraction,
 	[System.Runtime.Serialization.EnumMember(Value = "embedding")]
 	Embedding,
 	[System.Runtime.Serialization.EnumMember(Value = "rerank")]

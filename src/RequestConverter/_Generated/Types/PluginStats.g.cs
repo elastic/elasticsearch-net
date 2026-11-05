@@ -69,6 +69,11 @@ public partial class PluginStats : RequestConverter.ICodeFormattable
 		}
 
 		{
+			initializer.Property("NativeControllerEnabledSettings");
+			writer.WriteInlineList(NativeControllerEnabledSettings, (w, item) => { w.WriteString(item); });
+		}
+
+		{
 			initializer.Property("Version");
 			writer.WriteString(Version);
 		}

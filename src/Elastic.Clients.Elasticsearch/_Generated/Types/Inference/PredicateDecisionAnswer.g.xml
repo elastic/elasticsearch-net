@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.PredicateDecisionAnswer"><summary><para>
+The answer to a <c>predicate</c> question.
+</para></summary></member>
+  <member key="inference._types.PredicateDecisionAnswer#probability"><summary><para>
+The probability that the statement in the question is true.
+</para></summary></member>
+</doc>

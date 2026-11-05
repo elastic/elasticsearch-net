@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.AuthenticatedUser>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAuthenticationProvider = System.Text.Json.JsonEncodedText.Encode("authentication_provider"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAuthenticationRealm = System.Text.Json.JsonEncodedText.Encode("authentication_realm"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropAuthenticationType = System.Text.Json.JsonEncodedText.Encode("authentication_type"u8);
@@ -35,11 +36,13 @@ public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProfileUid = System.Text.Json.JsonEncodedText.Encode("profile_uid"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.AuthenticatedUser Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey?> propApiKey = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.AuthenticationProvider?> propAuthenticationProvider = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.UserRealm> propAuthenticationRealm = default;
 		LocalJsonValue<string> propAuthenticationType = default;
@@ -50,9 +53,15 @@ public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serial
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propMetadata = default;
 		LocalJsonValue<string?> propProfileUid = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propRoles = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.AuthenticateToken?> propToken = default;
 		LocalJsonValue<string> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
+			{
+				continue;
+			}
+
 			if (propAuthenticationProvider.TryReadProperty(ref reader, options, PropAuthenticationProvider, null))
 			{
 				continue;
@@ -103,6 +112,11 @@ public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
+			{
+				continue;
+			}
+
 			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
 			{
 				continue;
@@ -120,6 +134,7 @@ public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Security.AuthenticatedUser(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			ApiKey = propApiKey.Value,
 			AuthenticationProvider = propAuthenticationProvider.Value,
 			AuthenticationRealm = propAuthenticationRealm.Value,
 			AuthenticationType = propAuthenticationType.Value,
@@ -130,6 +145,7 @@ public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serial
 			Metadata = propMetadata.Value,
 			ProfileUid = propProfileUid.Value,
 			Roles = propRoles.Value,
+			Token = propToken.Value,
 			Username = propUsername.Value
 		};
 	}
@@ -137,6 +153,7 @@ public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.AuthenticatedUser value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropAuthenticationProvider, value.AuthenticationProvider, null, null);
 		writer.WriteProperty(options, PropAuthenticationRealm, value.AuthenticationRealm, null, null);
 		writer.WriteProperty(options, PropAuthenticationType, value.AuthenticationType, null, null);
@@ -147,6 +164,7 @@ public sealed partial class AuthenticatedUserConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropProfileUid, value.ProfileUid, null, null);
 		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
 		writer.WriteProperty(options, PropUsername, value.Username, null, null);
 		writer.WriteEndObject();
 	}

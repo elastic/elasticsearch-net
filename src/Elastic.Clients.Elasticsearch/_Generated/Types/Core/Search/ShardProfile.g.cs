@@ -56,6 +56,9 @@ public sealed partial class ShardProfile
 	public required string Id { get; set; }
 	public required string Index { get; set; }
 	public required string NodeId { get; set; }
+
+	/// <include file="ShardProfile.g.xml" path="doc/member[@key='_global.search._types.ShardProfile#rescore']/*"/>
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.IRescoreProfile>? Rescore { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> Searches { get; set; }
 	public required int ShardId { get; set; }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.ShardProfile#rescore"><summary><para>
+One entry per rescorer, in the order they ran. Omitted when the request has no rescorer.
+</para></summary></member>
+</doc>

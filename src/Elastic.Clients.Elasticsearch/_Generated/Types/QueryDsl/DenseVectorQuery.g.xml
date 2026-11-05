@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.DenseVectorQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.query_dsl.DenseVectorQuery#field"><summary><para>
+The name of the <c>dense_vector</c> field to search against.
+The field can be indexed, or not indexed (<c>index: false</c>).
+</para></summary></member>
+  <member key="_types.query_dsl.DenseVectorQuery#quantized"><summary><para>
+If <c>false</c>, the documents are scored with the full-precision vectors, regardless of the index options of the field.
+If <c>true</c>, the documents are scored with the quantized vectors of a quantized field, which is faster but less accurate.
+For a field that is not quantized, <c>true</c> has no effect.
+</para></summary></member>
+  <member key="_types.query_dsl.DenseVectorQuery#query_vector"><summary><para>
+The query vector. It must have the same number of dimensions as the field.
+You must provide either <c>query_vector</c> or <c>query_vector_builder</c>, but not both.
+</para></summary></member>
+  <member key="_types.query_dsl.DenseVectorQuery#query_vector_builder"><summary><para>
+The configuration to build the query vector, for example by running a text embedding model.
+You must provide either <c>query_vector</c> or <c>query_vector_builder</c>, but not both.
+</para></summary></member>
+  <member key="_types.query_dsl.DenseVectorQuery#similarity_function"><summary><para>
+The similarity used for scoring, which overrides the similarity of the field for this query.
+It defaults to the similarity of the field, or to <c>cosine</c> for a field that is not indexed.
+For <c>bit</c> fields, only <c>l2_norm</c> is supported.
+It can't be combined with <c>quantized: true</c>.
+</para></summary></member>
+</doc>

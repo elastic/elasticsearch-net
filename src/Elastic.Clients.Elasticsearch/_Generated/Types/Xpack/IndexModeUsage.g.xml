@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.IndexModeUsage"><summary><para>
+Usage of the indices with a given <c>index.mode</c>.
+</para></summary></member>
+  <member key="xpack.usage.IndexModeUsage#data_streams_count"><summary><para>
+The number of data streams in this index mode.
+</para></summary></member>
+  <member key="xpack.usage.IndexModeUsage#data_streams_managed_by_dlm"><summary><para>
+The number of data streams in this index mode that are managed by data stream lifecycle.
+</para></summary></member>
+  <member key="xpack.usage.IndexModeUsage#data_streams_managed_by_ilm"><summary><para>
+The number of data streams in this index mode that are managed by index lifecycle management.
+</para></summary></member>
+  <member key="xpack.usage.IndexModeUsage#indices_count"><summary><para>
+The number of indices in this index mode.
+</para></summary></member>
+  <member key="xpack.usage.IndexModeUsage#indices_with_synthetic_source"><summary><para>
+The number of indices in this index mode that use synthetic <c>_source</c>.
+</para></summary></member>
+  <member key="xpack.usage.IndexModeUsage#num_docs"><summary><para>
+The number of documents in the indices in this index mode.
+</para></summary></member>
+  <member key="xpack.usage.IndexModeUsage#size_in_bytes"><summary><para>
+The size of the indices in this index mode, in bytes.
+</para></summary></member>
+</doc>

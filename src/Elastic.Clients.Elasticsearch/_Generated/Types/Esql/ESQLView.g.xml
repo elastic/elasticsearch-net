@@ -12,4 +12,12 @@ The name of the ES|QL view
   <member key="esql._types.ESQLView#query"><summary><para>
 The ES|QL query
 </para></summary></member>
+  <member key="esql._types.ESQLView#reserved"><summary><para>
+Whether this view is reserved.
+</para>
+<para>
+Elasticsearch creates reserved views. They can be queried and read like any other view.
+They cannot be created, updated, or deleted through the views API.
+The response includes this field only when the value is <c>true</c>.
+</para></summary></member>
 </doc>

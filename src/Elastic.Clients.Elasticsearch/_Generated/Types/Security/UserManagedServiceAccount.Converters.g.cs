@@ -25,17 +25,51 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class UserManagedServiceAccountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UserManagedServiceAccount>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedAt = System.Text.Json.JsonEncodedText.Encode("created_at"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedBy = System.Text.Json.JsonEncodedText.Encode("created_by"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedByProfileUid = System.Text.Json.JsonEncodedText.Encode("created_by_profile_uid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpdatedAt = System.Text.Json.JsonEncodedText.Encode("updated_at"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpdatedBy = System.Text.Json.JsonEncodedText.Encode("updated_by"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpdatedByProfileUid = System.Text.Json.JsonEncodedText.Encode("updated_by_profile_uid"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.UserManagedServiceAccount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset?> propCreatedAt = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ServiceAccountAuthor?> propCreatedBy = default;
+		LocalJsonValue<string?> propCreatedByProfileUid = default;
+		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<bool> propEnabled = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propRoles = default;
+		LocalJsonValue<System.DateTimeOffset?> propUpdatedAt = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ServiceAccountAuthor?> propUpdatedBy = default;
+		LocalJsonValue<string?> propUpdatedByProfileUid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propCreatedAt.TryReadProperty(ref reader, options, PropCreatedAt, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propCreatedBy.TryReadProperty(ref reader, options, PropCreatedBy, null))
+			{
+				continue;
+			}
+
+			if (propCreatedByProfileUid.TryReadProperty(ref reader, options, PropCreatedByProfileUid, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
 			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
 			{
 				continue;
@@ -52,6 +86,21 @@ public sealed partial class UserManagedServiceAccountConverter : System.Text.Jso
 				continue;
 			}
 
+			if (propUpdatedAt.TryReadProperty(ref reader, options, PropUpdatedAt, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propUpdatedBy.TryReadProperty(ref reader, options, PropUpdatedBy, null))
+			{
+				continue;
+			}
+
+			if (propUpdatedByProfileUid.TryReadProperty(ref reader, options, PropUpdatedByProfileUid, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -64,17 +113,31 @@ public sealed partial class UserManagedServiceAccountConverter : System.Text.Jso
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Security.UserManagedServiceAccount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			CreatedAt = propCreatedAt.Value,
+			CreatedBy = propCreatedBy.Value,
+			CreatedByProfileUid = propCreatedByProfileUid.Value,
+			Description = propDescription.Value,
 			Enabled = propEnabled.Value,
-			Roles = propRoles.Value
+			Roles = propRoles.Value,
+			UpdatedAt = propUpdatedAt.Value,
+			UpdatedBy = propUpdatedBy.Value,
+			UpdatedByProfileUid = propUpdatedByProfileUid.Value
 		};
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.UserManagedServiceAccount value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreatedAt, value.CreatedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreatedBy, value.CreatedBy, null, null);
+		writer.WriteProperty(options, PropCreatedByProfileUid, value.CreatedByProfileUid, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
 		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUpdatedAt, value.UpdatedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropUpdatedBy, value.UpdatedBy, null, null);
+		writer.WriteProperty(options, PropUpdatedByProfileUid, value.UpdatedByProfileUid, null, null);
 		writer.WriteEndObject();
 	}
 }

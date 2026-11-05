@@ -42,6 +42,7 @@ public sealed partial class HitConverter<TDocument> : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("_score"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("_shard"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version"u8);
@@ -66,6 +67,7 @@ public sealed partial class HitConverter<TDocument> : System.Text.Json.Serializa
 		LocalJsonValue<double?> propScore = default;
 		LocalJsonValue<long?> propSeqNo = default;
 		LocalJsonValue<string?> propShard = default;
+		LocalJsonValue<string?> propSlice = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSort = default;
 		LocalJsonValue<TDocument?> propSource = default;
 		LocalJsonValue<long?> propVersion = default;
@@ -156,6 +158,11 @@ public sealed partial class HitConverter<TDocument> : System.Text.Json.Serializa
 				continue;
 			}
 
+			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
+			{
+				continue;
+			}
+
 			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
 			{
 				continue;
@@ -200,6 +207,7 @@ public sealed partial class HitConverter<TDocument> : System.Text.Json.Serializa
 			Score = propScore.Value,
 			SeqNo = propSeqNo.Value,
 			Shard = propShard.Value,
+			Slice = propSlice.Value,
 			Sort = propSort.Value,
 			Source = propSource.Value,
 			Version = propVersion.Value
@@ -226,6 +234,7 @@ public sealed partial class HitConverter<TDocument> : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropScore, value.Score, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropShard, value.Shard, null, null);
+		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
 		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));
 		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));

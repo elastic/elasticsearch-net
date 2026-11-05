@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.Response#baseline"><summary><para>
+The settings of the baseline search.
+Not returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Response#baseline_took_ms"><summary><para>
+The time the baseline searches took, in milliseconds.
+Not returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Response#baseline_vector_ops"><summary><para>
+The number of vector operations of the baseline searches.
+Not returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Response#baseline_vector_ops_kind"><summary><para>
+What <c>baseline_vector_ops</c> counts.
+Not returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Response#failures"><summary><para>
+The queries that failed, by query identifier.
+Not returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Response#query_source"><summary><para>
+The source of the query vectors.
+Not returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Response#results"><summary><para>
+The results of each <c>knn_settings</c> entry, in the order of the request.
+Not returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Response#task"><summary><para>
+The identifier of the task that runs the evaluation.
+Only returned when <c>wait_for_completion</c> is <c>false</c>.
+</para></summary></member>
+</doc>

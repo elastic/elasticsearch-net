@@ -67,7 +67,7 @@ public partial class HotThreadsRequest : RequestConverter.IClientCallFormattable
 			if (Sort is not null)
 			{
 				initializer.Property("Sort");
-				Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, writer);
+				Elastic.Clients.Elasticsearch.ThreadSortOrderCodeFormatter.FormatCode(Sort.Value, writer);
 			}
 
 			if (Threads is not null)
@@ -122,7 +122,7 @@ public partial class HotThreadsRequest : RequestConverter.IClientCallFormattable
 
 		if (Sort is not null)
 		{
-			writer.WriteFluentCall("Sort", (w) => { Elastic.Clients.Elasticsearch.ThreadTypeCodeFormatter.FormatCode(Sort.Value, w); });
+			writer.WriteFluentCall("Sort", (w) => { Elastic.Clients.Elasticsearch.ThreadSortOrderCodeFormatter.FormatCode(Sort.Value, w); });
 		}
 
 		if (Threads is not null)

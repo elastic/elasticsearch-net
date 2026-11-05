@@ -36,9 +36,6 @@ public sealed partial class DeleteRequestParameters : Elastic.Transport.RequestP
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -62,6 +59,11 @@ public partial class DeleteRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteRequest(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Required("id", id))
 	{
 	}
 
@@ -89,6 +91,9 @@ public partial class DeleteRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
+	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
@@ -97,9 +102,6 @@ public partial class DeleteRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-
-	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -134,6 +136,11 @@ public readonly partial struct DeleteRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(index, id);
 	}
 
+	public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteRequestDescriptor()
 	{
@@ -157,6 +164,13 @@ public readonly partial struct DeleteRequestDescriptor
 		return this;
 	}
 
+	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#if_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor IfPrimaryTerm(long? value)
 	{
@@ -175,13 +189,6 @@ public readonly partial struct DeleteRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
-		return this;
-	}
-
-	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -313,6 +320,11 @@ public readonly partial struct DeleteRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(typeof(TDocument), id);
 	}
 
+	public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteRequestDescriptor()
 	{
@@ -336,6 +348,13 @@ public readonly partial struct DeleteRequestDescriptor<TDocument>
 		return this;
 	}
 
+	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#if_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> IfPrimaryTerm(long? value)
 	{
@@ -354,13 +373,6 @@ public readonly partial struct DeleteRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
-		return this;
-	}
-
-	/// <include file="DeleteRequest.g.xml" path="doc/member[@key='_global.delete.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.DeleteRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
