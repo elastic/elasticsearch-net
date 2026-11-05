@@ -3,4 +3,8 @@
   <member key="_types.aggregations.TopMetricsValue#field"><summary><para>
 A field to return as a metric.
 </para></summary></member>
+  <member key="_types.aggregations.TopMetricsValue#missing"><summary><para>
+The value to treat a document as having when it has no value for the field.
+By default, a document that is missing any of the metrics or the sort value is ignored.
+</para></summary></member>
 </doc>

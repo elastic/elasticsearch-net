@@ -28,6 +28,12 @@ public partial class AuthenticatedUser : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.AuthenticatedUser", false);
+		if (ApiKey is not null)
+		{
+			initializer.Property("ApiKey");
+			ApiKey.FormatCode(writer);
+		}
+
 		if (AuthenticationProvider is not null)
 		{
 			initializer.Property("AuthenticationProvider");
@@ -87,6 +93,12 @@ public partial class AuthenticatedUser : RequestConverter.ICodeFormattable
 		{
 			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Token is not null)
+		{
+			initializer.Property("Token");
+			Token.FormatCode(writer);
 		}
 
 		{

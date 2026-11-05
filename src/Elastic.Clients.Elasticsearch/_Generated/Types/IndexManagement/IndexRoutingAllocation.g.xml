@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexRoutingAllocation#require"><summary><para>
+Assign the index to a node whose attribute has all of the given values.
+Each key is a node attribute: one of the built-in attributes <c>_name</c>, <c>_host_ip</c>, <c>_publish_ip</c>, <c>_ip</c>, <c>_host</c>, <c>_id</c> and <c>_tier</c>, or a custom node attribute.
+Each value is a comma-separated string or an array of strings, and can use wildcards.
+</para></summary></member>
+</doc>

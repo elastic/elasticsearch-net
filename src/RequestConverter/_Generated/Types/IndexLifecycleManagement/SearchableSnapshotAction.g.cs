@@ -34,8 +34,18 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 				writer.WriteFluentCall("ForceMergeIndex", (w) => { w.WriteValue(ForceMergeIndex.Value); });
 			}
 
+			if (ReplicateFor is not null)
+			{
+				writer.WriteFluentCall("ReplicateFor", (w) => { ReplicateFor.FormatCode(w); });
+			}
+
 			{
 				writer.WriteFluentCall("SnapshotRepository", (w) => { w.WriteString(SnapshotRepository); });
+			}
+
+			if (TotalShardsPerNode is not null)
+			{
+				writer.WriteFluentCall("TotalShardsPerNode", (w) => { w.WriteValue(TotalShardsPerNode.Value); });
 			}
 		}
 		else
@@ -47,9 +57,21 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 				writer.WriteValue(ForceMergeIndex.Value);
 			}
 
+			if (ReplicateFor is not null)
+			{
+				initializer.Property("ReplicateFor");
+				ReplicateFor.FormatCode(writer);
+			}
+
 			{
 				initializer.Property("SnapshotRepository");
 				writer.WriteString(SnapshotRepository);
+			}
+
+			if (TotalShardsPerNode is not null)
+			{
+				initializer.Property("TotalShardsPerNode");
+				writer.WriteValue(TotalShardsPerNode.Value);
 			}
 
 			initializer.Dispose();

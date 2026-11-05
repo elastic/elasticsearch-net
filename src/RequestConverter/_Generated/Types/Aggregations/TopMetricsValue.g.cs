@@ -32,6 +32,11 @@ public partial class TopMetricsValue : RequestConverter.ICodeFormattable
 			{
 				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
+
+			if (Missing is not null)
+			{
+				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
+			}
 		}
 		else
 		{
@@ -39,6 +44,12 @@ public partial class TopMetricsValue : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Field");
 				Field.FormatCode(writer);
+			}
+
+			if (Missing is not null)
+			{
+				initializer.Property("Missing");
+				writer.WriteObjectValue(Missing);
 			}
 
 			initializer.Dispose();

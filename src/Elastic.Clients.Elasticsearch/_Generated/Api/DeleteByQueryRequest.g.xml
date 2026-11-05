@@ -222,6 +222,10 @@ The throttle for this request in sub-requests per second.
   <member key="_global.delete_by_query.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
 </para></summary></member>
+  <member key="_global.delete_by_query.Request#runtime_mappings"><summary><para>
+One or more runtime fields in the search request.
+These fields take precedence over mapped fields with the same name.
+</para></summary></member>
   <member key="_global.delete_by_query.Request#scroll"><summary><para>
 The period to retain the search context for scrolling.
 </para></summary></member>
