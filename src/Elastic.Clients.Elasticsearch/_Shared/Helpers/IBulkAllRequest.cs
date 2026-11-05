@@ -20,6 +20,7 @@ public interface IBulkAllRequest<T>
 	Action<ResponseItem, T>? DroppedDocumentCallback { get; }
 	IndexName Index { get; }
 	int? MaxDegreeOfParallelism { get; }
+	long? MaxRequestBytes { get; }
 	string? Pipeline { get; }
 	Indices? RefreshIndices { get; }
 	bool RefreshOnCompleted { get; }
