@@ -44,7 +44,7 @@ public sealed partial class UpdateByQueryResponse : Elastic.Transport.Products.E
 	public long? Deleted { get; set; }
 
 	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#failures']/*"/>
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>? Failures { get; set; }
 
 	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#noops']/*"/>
 	public long? Noops { get; set; }

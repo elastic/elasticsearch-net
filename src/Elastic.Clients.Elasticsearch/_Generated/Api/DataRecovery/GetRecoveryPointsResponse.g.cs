@@ -38,5 +38,5 @@ public sealed partial class GetRecoveryPointsResponse : Elastic.Transport.Produc
 	}
 
 	/// <include file="GetRecoveryPointsResponse.g.xml" path="doc/member[@key='data_recovery.get_recovery_points.Response#recovery_points']/*"/>
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryPoint> RecoveryPoints { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.Point> RecoveryPoints { get; set; }
 }

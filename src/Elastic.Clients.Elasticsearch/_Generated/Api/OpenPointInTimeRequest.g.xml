@@ -53,6 +53,10 @@ Ensure that your nodes have sufficient heap space if you have many open point-in
 Note that a point-in-time doesn't prevent its associated indices from being deleted.
 You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 </para></summary></member>
+  <member key="_global.open_point_in_time.Request#_slice"><summary><para>
+The slice identifier for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>), which scopes the point in time to that slice.
+When omitted, the point in time covers all slices.
+</para></summary></member>
   <member key="_global.open_point_in_time.Request#allow_partial_search_results"><summary><para>
 Indicates whether the point in time tolerates unavailable shards or shard failures when initially creating the PIT.
 If <c>false</c>, creating a point in time request when a shard is missing or unavailable will throw an exception.
@@ -96,5 +100,6 @@ Supported in serverless only.
 </para></summary></member>
   <member key="_global.open_point_in_time.Request#routing"><summary><para>
 A custom value that is used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
 </doc>

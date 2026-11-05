@@ -44,6 +44,11 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 				writer.WriteFluentCall("Container", (w) => { w.WriteString(Container); });
 			}
 
+			if (DataAccessTier is not null)
+			{
+				writer.WriteFluentCall("DataAccessTier", (w) => { w.WriteString(DataAccessTier); });
+			}
+
 			if (DeleteObjectsMaxSize is not null)
 			{
 				writer.WriteFluentCall("DeleteObjectsMaxSize", (w) => { w.WriteValue(DeleteObjectsMaxSize.Value); });
@@ -57,6 +62,11 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 			if (MaxConcurrentBatchDeletes is not null)
 			{
 				writer.WriteFluentCall("MaxConcurrentBatchDeletes", (w) => { w.WriteValue(MaxConcurrentBatchDeletes.Value); });
+			}
+
+			if (MetadataAccessTier is not null)
+			{
+				writer.WriteFluentCall("MetadataAccessTier", (w) => { w.WriteString(MetadataAccessTier); });
 			}
 
 			if (Readonly is not null)
@@ -85,6 +95,12 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 				writer.WriteString(Container);
 			}
 
+			if (DataAccessTier is not null)
+			{
+				initializer.Property("DataAccessTier");
+				writer.WriteString(DataAccessTier);
+			}
+
 			if (DeleteObjectsMaxSize is not null)
 			{
 				initializer.Property("DeleteObjectsMaxSize");
@@ -101,6 +117,12 @@ public partial class SourceOnlyRepositorySettingsForAzure : RequestConverter.ICo
 			{
 				initializer.Property("MaxConcurrentBatchDeletes");
 				writer.WriteValue(MaxConcurrentBatchDeletes.Value);
+			}
+
+			if (MetadataAccessTier is not null)
+			{
+				initializer.Property("MetadataAccessTier");
+				writer.WriteString(MetadataAccessTier);
 			}
 
 			if (Readonly is not null)

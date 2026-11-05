@@ -27,12 +27,6 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.StorageConverter))]
 public sealed partial class Storage
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Storage(Elastic.Clients.Elasticsearch.IndexManagement.StorageType type)
-	{
-		Type = type;
-	}
-
 	public Storage()
 	{
 	}
@@ -48,7 +42,7 @@ public sealed partial class Storage
 
 	/// <include file="Storage.g.xml" path="doc/member[@key='indices._types.Storage#stats_refresh_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? StatsRefreshInterval { get; set; }
-	public required Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.StorageType? Type { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.Storage']/*"/>
@@ -85,15 +79,20 @@ public readonly partial struct StorageDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor Type(Elastic.Clients.Elasticsearch.IndexManagement.StorageType value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor Type(Elastic.Clients.Elasticsearch.IndexManagement.StorageType? value)
 	{
 		Instance.Type = value;
 		return this;
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.IndexManagement.Storage Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.Storage Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.Storage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.Storage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

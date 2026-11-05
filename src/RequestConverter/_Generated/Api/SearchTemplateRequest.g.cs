@@ -54,6 +54,12 @@ public partial class SearchTemplateRequest : RequestConverter.IClientCallFormatt
 				Indices.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteInlineList(RouteSlice, (w, item) => { w.WriteString(item); });
+			}
+
 			if (AllowNoIndices is not null)
 			{
 				initializer.Property("AllowNoIndices");
@@ -177,6 +183,11 @@ public partial class SearchTemplateRequest : RequestConverter.IClientCallFormatt
 		if (Indices is not null)
 		{
 			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
+		}
+
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentParams("RouteSlice", RouteSlice, (w, item) => { w.WriteString(item); });
 		}
 
 		if (AllowNoIndices is not null)

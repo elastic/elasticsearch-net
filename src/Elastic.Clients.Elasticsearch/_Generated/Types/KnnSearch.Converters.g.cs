@@ -48,7 +48,7 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 		LocalJsonValue<int?> propK = default;
 		LocalJsonValue<int?> propNumCandidates = default;
 		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<float>?> propQueryVector = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>?> propQueryVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.RescoreVector?> propRescoreVector = default;
 		LocalJsonValue<float?> propSimilarity = default;
@@ -90,7 +90,7 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propQueryVector.TryReadProperty(ref reader, options, PropQueryVector, static System.Collections.Generic.ICollection<float>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<float>(o, null)))
+			if (propQueryVector.TryReadProperty(ref reader, options, PropQueryVector, static Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<System.Collections.Generic.ICollection<float>, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), static System.Collections.Generic.ICollection<float> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<float>(o, null)!, null)))
 			{
 				continue;
 			}
@@ -152,7 +152,7 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
+		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? v) => w.WriteUnionValue<System.Collections.Generic.ICollection<float>, string>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float> v) => w.WriteCollectionValue<float>(o, v, null), null));
 		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
 		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));

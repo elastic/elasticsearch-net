@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery._types.ResolvedRecoverySource#destination"><summary><para>
+The name of the index or data stream that the source is recovered to.
+</para></summary></member>
+  <member key="data_recovery._types.ResolvedRecoverySource#source"><summary><para>
+The name of the index or data stream in the recovery point.
+</para></summary></member>
+  <member key="data_recovery._types.ResolvedRecoverySource#type"><summary><para>
+The type of the source.
+</para></summary></member>
+</doc>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.DocumentExtractionResult"><summary><para>
+The document extraction result object representing the content extracted from a single document.
+</para></summary></member>
+  <member key="inference._types.DocumentExtractionResult#content"><summary><para>
+The content extracted from the document.
+</para></summary></member>
+  <member key="inference._types.DocumentExtractionResult#format"><summary><para>
+The format of the extracted content, for example <c>markdown</c>.
+</para></summary></member>
+  <member key="inference._types.DocumentExtractionResult#metadata"><summary><para>
+Additional information about the document, such as its title. The available fields depend on the service and model.
+</para></summary></member>
+</doc>

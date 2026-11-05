@@ -34,7 +34,7 @@ public sealed partial class GetViewRequestParameters : Elastic.Transport.Request
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.GetViewRequestConverter))]
 public sealed partial class GetViewRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>
 {
-	public GetViewRequest(Elastic.Clients.Elasticsearch.Id? name) : base(r => r.Optional("name", name))
+	public GetViewRequest(Elastic.Clients.Elasticsearch.Ids? name) : base(r => r.Optional("name", name))
 	{
 	}
 
@@ -57,7 +57,7 @@ public sealed partial class GetViewRequest : Elastic.Clients.Elasticsearch.Reque
 	internal override string OperationName => "esql.get_view";
 
 	/// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request#name']/*"/>
-	public Elastic.Clients.Elasticsearch.Id? Name { get => P<Elastic.Clients.Elasticsearch.Id?>("name"); set => PO("name", value); }
+	public Elastic.Clients.Elasticsearch.Ids? Name { get => P<Elastic.Clients.Elasticsearch.Ids?>("name"); set => PO("name", value); }
 }
 
 /// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
@@ -72,7 +72,7 @@ public readonly partial struct GetViewRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetViewRequestDescriptor(Elastic.Clients.Elasticsearch.Id? name)
+	public GetViewRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Esql.GetViewRequest(name);
 	}
@@ -86,7 +86,7 @@ public readonly partial struct GetViewRequestDescriptor
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.GetViewRequest(Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request#name']/*"/>
-	public Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Id? value)
+	public Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.Name = value;
 		return this;

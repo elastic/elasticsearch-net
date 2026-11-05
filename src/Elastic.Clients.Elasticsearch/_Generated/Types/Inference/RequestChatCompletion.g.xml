@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="inference._types.RequestChatCompletion#cache_control"><summary><para>
+The prompt caching configuration for the completion request.
+Example:
+</para>
+<code>
+{
+  "cache_control": {
+    "type": "ephemeral",
+    "ttl": "1h"
+  }
+}
+</code>
+<para>
+Unknown fields in the object and invalid <c>ttl</c> values return an error.
+Currently supported only for <c>elastic</c> provider.
+</para></summary></member>
   <member key="inference._types.RequestChatCompletion#max_completion_tokens"><summary><para>
 The upper bound limit for the number of tokens that can be generated for a completion request.
 </para></summary></member>
@@ -67,6 +83,10 @@ Example (enabled):
 }
 </code>
 <para>
+Currently supported only for <c>elastic</c> provider.
+</para></summary></member>
+  <member key="inference._types.RequestChatCompletion#session_id"><summary><para>
+An identifier that groups related completion requests into a session.
 Currently supported only for <c>elastic</c> provider.
 </para></summary></member>
   <member key="inference._types.RequestChatCompletion#stop"><summary><para>

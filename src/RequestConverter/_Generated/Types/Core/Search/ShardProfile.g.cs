@@ -65,6 +65,12 @@ public partial class ShardProfile : RequestConverter.ICodeFormattable
 			writer.WriteString(NodeId);
 		}
 
+		if (Rescore is not null)
+		{
+			initializer.Property("Rescore");
+			writer.WriteInlineList(Rescore, (w, item) => { item.FormatCode(w); });
+		}
+
 		{
 			initializer.Property("Searches");
 			writer.WriteInlineList(Searches, (w, item) => { item.FormatCode(w); });

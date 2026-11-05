@@ -64,6 +64,9 @@ public sealed partial class MultiTermVectorsOperation
 	/// <include file="MultiTermVectorsOperation.g.xml" path="doc/member[@key='_global.mtermvectors.Operation#positions']/*"/>
 	public bool? Positions { get; set; }
 
+	/// <include file="MultiTermVectorsOperation.g.xml" path="doc/member[@key='_global.mtermvectors.Operation#_slice']/*"/>
+	public string? RouteSlice { get; set; }
+
 	/// <include file="MultiTermVectorsOperation.g.xml" path="doc/member[@key='_global.mtermvectors.Operation#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
@@ -178,6 +181,13 @@ public readonly partial struct MultiTermVectorsOperationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> Positions(bool? value = true)
 	{
 		Instance.Positions = value;
+		return this;
+	}
+
+	/// <include file="MultiTermVectorsOperation.g.xml" path="doc/member[@key='_global.mtermvectors.Operation#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -324,6 +334,13 @@ public readonly partial struct MultiTermVectorsOperationDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor Positions(bool? value = true)
 	{
 		Instance.Positions = value;
+		return this;
+	}
+
+	/// <include file="MultiTermVectorsOperation.g.xml" path="doc/member[@key='_global.mtermvectors.Operation#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

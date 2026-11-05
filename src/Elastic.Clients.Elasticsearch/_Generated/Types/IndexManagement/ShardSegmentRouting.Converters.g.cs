@@ -27,6 +27,7 @@ public sealed partial class ShardSegmentRoutingConverter : System.Text.Json.Seri
 {
 	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingNode = System.Text.Json.JsonEncodedText.Encode("relocating_node"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -34,6 +35,7 @@ public sealed partial class ShardSegmentRoutingConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propNode = default;
 		LocalJsonValue<bool> propPrimary = default;
+		LocalJsonValue<string?> propRelocatingNode = default;
 		LocalJsonValue<string> propState = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -43,6 +45,11 @@ public sealed partial class ShardSegmentRoutingConverter : System.Text.Json.Seri
 			}
 
 			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, null))
+			{
+				continue;
+			}
+
+			if (propRelocatingNode.TryReadProperty(ref reader, options, PropRelocatingNode, null))
 			{
 				continue;
 			}
@@ -66,6 +73,7 @@ public sealed partial class ShardSegmentRoutingConverter : System.Text.Json.Seri
 		{
 			Node = propNode.Value,
 			Primary = propPrimary.Value,
+			RelocatingNode = propRelocatingNode.Value,
 			State = propState.Value
 		};
 	}
@@ -75,6 +83,7 @@ public sealed partial class ShardSegmentRoutingConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropNode, value.Node, null, null);
 		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
+		writer.WriteProperty(options, PropRelocatingNode, value.RelocatingNode, null, null);
 		writer.WriteProperty(options, PropState, value.State, null, null);
 		writer.WriteEndObject();
 	}

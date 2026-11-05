@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.document_extraction.DocumentExtractionTaskSettings"><summary><para>
+Task settings for the <c>document_extraction</c> task type of the <c>elastic</c> service.
+They can be set when creating the inference endpoint and overridden per request.
+Request values take precedence, and <c>parameters</c> are merged per key.
+</para></summary></member>
+  <member key="inference.document_extraction.DocumentExtractionTaskSettings#output_format"><summary><para>
+The output format of the extracted content. Only <c>markdown</c> is supported.
+</para></summary></member>
+  <member key="inference.document_extraction.DocumentExtractionTaskSettings#parameters"><summary><para>
+A free-form object of extraction options that is forwarded to the Elastic Inference Service as-is.
+The accepted parameters are defined by the Elastic Inference Service.
+</para></summary></member>
+</doc>

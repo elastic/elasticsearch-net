@@ -28,6 +28,7 @@ public sealed partial class RankEvalMetricDetailConverter : System.Text.Json.Ser
 	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMetricDetails = System.Text.Json.JsonEncodedText.Encode("metric_details"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMetricScore = System.Text.Json.JsonEncodedText.Encode("metric_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUnratedDocs = System.Text.Json.JsonEncodedText.Encode("unrated_docs"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,6 +37,7 @@ public sealed partial class RankEvalMetricDetailConverter : System.Text.Json.Ser
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem>> propHits = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>>> propMetricDetails = default;
 		LocalJsonValue<double> propMetricScore = default;
+		LocalJsonValue<long> propTook = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument>> propUnratedDocs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -50,6 +52,11 @@ public sealed partial class RankEvalMetricDetailConverter : System.Text.Json.Ser
 			}
 
 			if (propMetricScore.TryReadProperty(ref reader, options, PropMetricScore, null))
+			{
+				continue;
+			}
+
+			if (propTook.TryReadProperty(ref reader, options, PropTook, null))
 			{
 				continue;
 			}
@@ -74,6 +81,7 @@ public sealed partial class RankEvalMetricDetailConverter : System.Text.Json.Ser
 			Hits = propHits.Value,
 			MetricDetails = propMetricDetails.Value,
 			MetricScore = propMetricScore.Value,
+			Took = propTook.Value,
 			UnratedDocs = propUnratedDocs.Value
 		};
 	}
@@ -84,6 +92,7 @@ public sealed partial class RankEvalMetricDetailConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropHits, value.Hits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem>(o, v, null));
 		writer.WriteProperty(options, PropMetricDetails, value.MetricDetails, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, object>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)))));
 		writer.WriteProperty(options, PropMetricScore, value.MetricScore, null, null);
+		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteProperty(options, PropUnratedDocs, value.UnratedDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument>(o, v, null));
 		writer.WriteEndObject();
 	}

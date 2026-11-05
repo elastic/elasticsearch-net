@@ -93,7 +93,7 @@ public partial class SearchShardsRequest : RequestConverter.IClientCallFormattab
 			if (RouteSlice is not null)
 			{
 				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
+				writer.WriteInlineList(RouteSlice, (w, item) => { w.WriteString(item); });
 			}
 
 			if (Routing is not null)
@@ -150,7 +150,7 @@ public partial class SearchShardsRequest : RequestConverter.IClientCallFormattab
 
 		if (RouteSlice is not null)
 		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			writer.WriteFluentParams("RouteSlice", RouteSlice, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Routing is not null)

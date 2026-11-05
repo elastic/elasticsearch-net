@@ -33,6 +33,7 @@ public sealed partial class PluginStatsConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText PropJavaVersion = System.Text.Json.JsonEncodedText.Encode("java_version"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLicensed = System.Text.Json.JsonEncodedText.Encode("licensed"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNativeControllerEnabledSettings = System.Text.Json.JsonEncodedText.Encode("native_controller_enabled_settings"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.PluginStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -46,6 +47,7 @@ public sealed partial class PluginStatsConverter : System.Text.Json.Serializatio
 		LocalJsonValue<string> propJavaVersion = default;
 		LocalJsonValue<bool> propLicensed = default;
 		LocalJsonValue<string> propName = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propNativeControllerEnabledSettings = default;
 		LocalJsonValue<string> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -89,6 +91,11 @@ public sealed partial class PluginStatsConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
+			if (propNativeControllerEnabledSettings.TryReadProperty(ref reader, options, PropNativeControllerEnabledSettings, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
 			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
@@ -114,6 +121,7 @@ public sealed partial class PluginStatsConverter : System.Text.Json.Serializatio
 			JavaVersion = propJavaVersion.Value,
 			Licensed = propLicensed.Value,
 			Name = propName.Value,
+			NativeControllerEnabledSettings = propNativeControllerEnabledSettings.Value,
 			Version = propVersion.Value
 		};
 	}
@@ -129,6 +137,7 @@ public sealed partial class PluginStatsConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropJavaVersion, value.JavaVersion, null, null);
 		writer.WriteProperty(options, PropLicensed, value.Licensed, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropNativeControllerEnabledSettings, value.NativeControllerEnabledSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}

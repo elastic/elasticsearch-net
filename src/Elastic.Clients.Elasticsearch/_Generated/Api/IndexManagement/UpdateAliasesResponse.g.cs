@@ -39,4 +39,10 @@ public sealed partial class UpdateAliasesResponse : Elastic.Transport.Products.E
 
 	/// <include file="UpdateAliasesResponse.g.xml" path="doc/member[@key='indices.update_aliases.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
+
+	/// <include file="UpdateAliasesResponse.g.xml" path="doc/member[@key='indices.update_aliases.Response#action_results']/*"/>
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AliasActionResult>? ActionResults { get; set; }
+
+	/// <include file="UpdateAliasesResponse.g.xml" path="doc/member[@key='indices.update_aliases.Response#errors']/*"/>
+	public bool? Errors { get; set; }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.QueryRescoreProfile#breakdown"><summary><para>
+The <c>query</c> rescorer does not report any steps.
+</para></summary></member>
+  <member key="_global.search._types.QueryRescoreProfile#debug"><summary><para>
+Extra details about the rescorer.
+</para>
+<para>
+Every rescorer reports <c>window_size</c>, the number of top documents it was configured to rescore. <c>timed_out</c> is
+set to <c>true</c> if the search timed out while the rescorer was running. Rescorers can add their own keys.
+</para></summary></member>
+  <member key="_global.search._types.QueryRescoreProfile#description"><summary><para>
+What the rescorer runs.
+</para></summary></member>
+  <member key="_global.search._types.QueryRescoreProfile#time"><summary><para>
+The time spent in the rescorer, in human-readable units. Only returned when <c>human</c> is <c>true</c>.
+</para></summary></member>
+  <member key="_global.search._types.QueryRescoreProfile#time_in_nanos"><summary><para>
+The total time spent in the rescorer, including the time spent running its queries.
+</para></summary></member>
+</doc>

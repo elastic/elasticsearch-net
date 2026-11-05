@@ -48,6 +48,11 @@ public partial class Source : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("Remote", (w) => { Remote.FormatCode(w); }, (w) => { Remote.FormatCode(w); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (RuntimeMappings is not null)
 			{
 				writer.WriteFluentDescriptorCall("RuntimeMappings", (w) => { w.WriteFluentDictionaryAdds("Add", RuntimeMappings, (w, kvp) => { kvp.Key.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }, (w, kvp) => { kvp.Value.FormatCode(w); }); });
@@ -97,6 +102,12 @@ public partial class Source : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Remote");
 				Remote.FormatCode(writer);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (RuntimeMappings is not null)

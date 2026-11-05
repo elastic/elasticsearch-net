@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="indices.recovery.ShardRecovery#blocked_for_millis"><summary><para>
+The elapsed time in milliseconds recovery is blocked for.
+</para>
+<para>
+Only present with <c>gate</c>.
+</para></summary></member>
+  <member key="indices.recovery.ShardRecovery#gate"><summary><para>
+The name of the recovery gate that blocked recovery on the target node.
+</para>
+<para>
+Only present for queued recoveries in the <c>CREATED</c> stage that are blocked by a recovery gate.
+</para></summary></member>
   <member key="indices.recovery.ShardRecovery#local_retries"><summary><para>
 The number of times this recovery has failed in a way which is retried locally (i.e. on the data node).
 </para></summary></member>

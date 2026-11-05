@@ -34,9 +34,9 @@ public partial class DatasetFieldMapping : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Format", (w) => { w.WriteString(Format); });
 			}
 
-			if (Path is not null)
+			if (RenameFrom is not null)
 			{
-				writer.WriteFluentCall("Path", (w) => { w.WriteString(Path); });
+				writer.WriteFluentCall("RenameFrom", (w) => { w.WriteString(RenameFrom); });
 			}
 
 			{
@@ -52,10 +52,10 @@ public partial class DatasetFieldMapping : RequestConverter.ICodeFormattable
 				writer.WriteString(Format);
 			}
 
-			if (Path is not null)
+			if (RenameFrom is not null)
 			{
-				initializer.Property("Path");
-				writer.WriteString(Path);
+				initializer.Property("RenameFrom");
+				writer.WriteString(RenameFrom);
 			}
 
 			{

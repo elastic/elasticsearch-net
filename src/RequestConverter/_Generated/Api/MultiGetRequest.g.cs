@@ -54,6 +54,12 @@ public partial class MultiGetRequest : RequestConverter.IClientCallFormattable
 				Index.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (ForceSyntheticSource is not null)
 			{
 				initializer.Property("ForceSyntheticSource");
@@ -76,12 +82,6 @@ public partial class MultiGetRequest : RequestConverter.IClientCallFormattable
 			{
 				initializer.Property("Refresh");
 				writer.WriteValue(Refresh.Value);
-			}
-
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)
@@ -142,6 +142,11 @@ public partial class MultiGetRequest : RequestConverter.IClientCallFormattable
 			writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 		}
 
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+		}
+
 		if (ForceSyntheticSource is not null)
 		{
 			writer.WriteFluentCall("ForceSyntheticSource", (w) => { w.WriteValue(ForceSyntheticSource.Value); });
@@ -160,11 +165,6 @@ public partial class MultiGetRequest : RequestConverter.IClientCallFormattable
 		if (Refresh is not null)
 		{
 			writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
-		}
-
-		if (RouteSlice is not null)
-		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
 		}
 
 		if (Routing is not null)

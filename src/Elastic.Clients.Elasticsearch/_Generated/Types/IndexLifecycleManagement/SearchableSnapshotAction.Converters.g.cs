@@ -26,13 +26,17 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 public sealed partial class SearchableSnapshotActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropForceMergeIndex = System.Text.Json.JsonEncodedText.Encode("force_merge_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplicateFor = System.Text.Json.JsonEncodedText.Encode("replicate_for"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepository = System.Text.Json.JsonEncodedText.Encode("snapshot_repository"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalShardsPerNode = System.Text.Json.JsonEncodedText.Encode("total_shards_per_node"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propForceMergeIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propReplicateFor = default;
 		LocalJsonValue<string> propSnapshotRepository = default;
+		LocalJsonValue<int?> propTotalShardsPerNode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propForceMergeIndex.TryReadProperty(ref reader, options, PropForceMergeIndex, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
@@ -40,7 +44,17 @@ public sealed partial class SearchableSnapshotActionConverter : System.Text.Json
 				continue;
 			}
 
+			if (propReplicateFor.TryReadProperty(ref reader, options, PropReplicateFor, null))
+			{
+				continue;
+			}
+
 			if (propSnapshotRepository.TryReadProperty(ref reader, options, PropSnapshotRepository, null))
+			{
+				continue;
+			}
+
+			if (propTotalShardsPerNode.TryReadProperty(ref reader, options, PropTotalShardsPerNode, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -58,7 +72,9 @@ public sealed partial class SearchableSnapshotActionConverter : System.Text.Json
 		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ForceMergeIndex = propForceMergeIndex.Value,
-			SnapshotRepository = propSnapshotRepository.Value
+			ReplicateFor = propReplicateFor.Value,
+			SnapshotRepository = propSnapshotRepository.Value,
+			TotalShardsPerNode = propTotalShardsPerNode.Value
 		};
 	}
 
@@ -66,7 +82,9 @@ public sealed partial class SearchableSnapshotActionConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropForceMergeIndex, value.ForceMergeIndex, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropReplicateFor, value.ReplicateFor, null, null);
 		writer.WriteProperty(options, PropSnapshotRepository, value.SnapshotRepository, null, null);
+		writer.WriteProperty(options, PropTotalShardsPerNode, value.TotalShardsPerNode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

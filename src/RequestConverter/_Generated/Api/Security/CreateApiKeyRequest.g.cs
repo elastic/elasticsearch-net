@@ -73,7 +73,6 @@ public partial class CreateApiKeyRequest : RequestConverter.IClientCallFormattab
 				writer.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
 			}
 
-			if (Name is not null)
 			{
 				initializer.Property("Name");
 				Name.FormatCode(writer);
@@ -118,7 +117,6 @@ public partial class CreateApiKeyRequest : RequestConverter.IClientCallFormattab
 			writer.WriteFluentCall("Metadata", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("object"); w.Write(">()"); w.WriteBlockList(Metadata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); }); });
 		}
 
-		if (Name is not null)
 		{
 			writer.WriteFluentCall("Name", (w) => { Name.FormatCode(w); });
 		}

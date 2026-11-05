@@ -89,6 +89,12 @@ public partial class RankEvalRequest : RequestConverter.IClientCallFormattable
 				writer.WriteInlineList(Requests, (w, item) => { item.FormatCode(w); });
 			}
 
+			if (Templates is not null)
+			{
+				initializer.Property("Templates");
+				writer.WriteInlineList(Templates, (w, item) => { item.FormatCode(w); });
+			}
+
 			initializer.Dispose();
 		}
 	}
@@ -132,6 +138,11 @@ public partial class RankEvalRequest : RequestConverter.IClientCallFormattable
 
 		{
 			writer.WriteFluentDescriptorParams("Requests", Requests, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>"); w.Write("()"); });
+		}
+
+		if (Templates is not null)
+		{
+			writer.WriteFluentDescriptorParams("Templates", Templates, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>"); w.Write("()"); });
 		}
 	}
 }

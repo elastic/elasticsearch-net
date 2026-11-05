@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.decision.DecisionScoreLevelObject#description"><summary><para>
+A description of the level.
+</para></summary></member>
+  <member key="inference.decision.DecisionScoreLevelObject#label"><summary><para>
+The label of the level.
+</para></summary></member>
+</doc>

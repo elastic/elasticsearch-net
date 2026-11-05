@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.document_extraction.DocumentExtractionContentObjectItem"><summary><para>
+An object describing a single document to extract the content from.
+</para></summary></member>
+  <member key="inference.document_extraction.DocumentExtractionContentObjectItem#format"><summary><para>
+The format of the document. If not specified, this defaults to <c>base64</c> for <c>pdf</c> and <c>image</c>, and <c>url</c> for <c>html</c>.
+The <c>html</c> type supports <c>url</c> only.
+Not all services and models support all formats.
+</para></summary></member>
+  <member key="inference.document_extraction.DocumentExtractionContentObjectItem#type"><summary><para>
+The type of the document. Not all services and models support all types.
+</para></summary></member>
+  <member key="inference.document_extraction.DocumentExtractionContentObjectItem#value"><summary><para>
+The value of the document. For the <c>base64</c> format, this must be a base64-encoded data URI, that is, "data:content/type;base64,...".
+For the <c>url</c> format, this must be a URL that points to the document, that is, "https://example.com/document.pdf".
+</para></summary></member>
+</doc>

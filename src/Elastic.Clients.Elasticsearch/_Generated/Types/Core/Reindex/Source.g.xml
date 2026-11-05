@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="_global.reindex.Source#_slice"><summary><para>
+The slice of a slice-enabled source index (<c>index.slice.enabled</c> set to <c>true</c>) to read, or <c>_all</c> to read all slices.
+The reindexed documents keep the slice they are read from, unless <c>_slice</c> is set in <c>dest</c>.
+Not supported when reindexing from a remote cluster.
+</para></summary></member>
   <member key="_global.reindex.Source#_source"><summary><para>
 If <c>true</c>, reindex all source fields.
 Set it to a list to reindex select fields.

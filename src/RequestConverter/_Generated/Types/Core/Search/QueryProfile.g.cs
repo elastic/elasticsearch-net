@@ -39,6 +39,19 @@ public partial class QueryProfile : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(Children, (w, item) => { item.FormatCode(w); });
 		}
 
+		if (Debug is not null)
+		{
+			initializer.Property("Debug");
+			writer.Write("new ");
+			writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+			writer.Write("<");
+			writer.WriteTypeRef("string");
+			writer.Write(", ");
+			writer.WriteTypeRef("object");
+			writer.Write(">()");
+			writer.WriteBlockList(Debug, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteObjectValue(kvp.Value); w.Write(" }"); });
+		}
+
 		{
 			initializer.Property("Description");
 			writer.WriteString(Description);

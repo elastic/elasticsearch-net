@@ -75,6 +75,9 @@ public sealed partial class PutUserManagedServiceAccountRequest : Elastic.Client
 	/// <include file="PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+	/// <include file="PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request#description']/*"/>
+	public string? Description { get; set; }
+
 	/// <include file="PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
@@ -128,6 +131,13 @@ public readonly partial struct PutUserManagedServiceAccountRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <include file="PutUserManagedServiceAccountRequest.g.xml" path="doc/member[@key='security.put_user_managed_service_account.Request#description']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.PutUserManagedServiceAccountRequestDescriptor Description(string? value)
+	{
+		Instance.Description = value;
 		return this;
 	}
 

@@ -25,11 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberUserManagedServiceAccount = System.Text.Json.JsonEncodedText.Encode("_user_managed_service_account"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberUserManagedServiceAccount))
+		{
+			return Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.UserManagedServiceAccount;
+		}
+
 		if (reader.ValueTextEquals(MemberAccessToken))
 		{
 			return Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.AccessToken;
@@ -41,6 +47,11 @@ public sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serializ
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberUserManagedServiceAccount.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.UserManagedServiceAccount;
+		}
+
 		if (string.Equals(value, MemberAccessToken.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.AccessToken;
@@ -58,6 +69,9 @@ public sealed partial class ApiKeyGrantTypeConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.UserManagedServiceAccount:
+				writer.WriteStringValue(MemberUserManagedServiceAccount);
+				break;
 			case Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType.AccessToken:
 				writer.WriteStringValue(MemberAccessToken);
 				break;

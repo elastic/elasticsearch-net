@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ChoiceDecisionAnswer"><summary><para>
+The answer to a <c>choice</c> question.
+</para></summary></member>
+  <member key="inference._types.ChoiceDecisionAnswer#choice"><summary><para>
+The chosen option.
+</para></summary></member>
+  <member key="inference._types.ChoiceDecisionAnswer#confidence"><summary><para>
+The confidence in the chosen option.
+</para></summary></member>
+  <member key="inference._types.ChoiceDecisionAnswer#probabilities"><summary><para>
+The probability of each option.
+</para></summary></member>
+</doc>

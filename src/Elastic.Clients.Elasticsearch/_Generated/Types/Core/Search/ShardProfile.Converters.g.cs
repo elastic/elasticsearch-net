@@ -32,6 +32,7 @@ public sealed partial class ShardProfileConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearches = System.Text.Json.JsonEncodedText.Encode("searches"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShardId = System.Text.Json.JsonEncodedText.Encode("shard_id"u8);
 
@@ -45,6 +46,7 @@ public sealed partial class ShardProfileConverter : System.Text.Json.Serializati
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<string> propIndex = default;
 		LocalJsonValue<string> propNodeId = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.IRescoreProfile>?> propRescore = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile>> propSearches = default;
 		LocalJsonValue<int> propShardId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -84,6 +86,11 @@ public sealed partial class ShardProfileConverter : System.Text.Json.Serializati
 				continue;
 			}
 
+			if (propRescore.TryReadProperty(ref reader, options, PropRescore, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.IRescoreProfile>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.IRescoreProfile>(o, null)))
+			{
+				continue;
+			}
+
 			if (propSearches.TryReadProperty(ref reader, options, PropSearches, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile>(o, null)!))
 			{
 				continue;
@@ -113,6 +120,7 @@ public sealed partial class ShardProfileConverter : System.Text.Json.Serializati
 			Id = propId.Value,
 			Index = propIndex.Value,
 			NodeId = propNodeId.Value,
+			Rescore = propRescore.Value,
 			Searches = propSearches.Value,
 			ShardId = propShardId.Value
 		};
@@ -128,6 +136,7 @@ public sealed partial class ShardProfileConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropNodeId, value.NodeId, null, null);
+		writer.WriteProperty(options, PropRescore, value.Rescore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.IRescoreProfile>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.IRescoreProfile>(o, v, null));
 		writer.WriteProperty(options, PropSearches, value.Searches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile>(o, v, null));
 		writer.WriteProperty(options, PropShardId, value.ShardId, null, null);
 		writer.WriteEndObject();

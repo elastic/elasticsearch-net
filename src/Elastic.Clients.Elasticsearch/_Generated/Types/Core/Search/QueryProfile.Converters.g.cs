@@ -27,6 +27,7 @@ public sealed partial class QueryProfileConverter : System.Text.Json.Serializati
 {
 	private static readonly System.Text.Json.JsonEncodedText PropBreakdown = System.Text.Json.JsonEncodedText.Encode("breakdown"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDebug = System.Text.Json.JsonEncodedText.Encode("debug"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeInNanos = System.Text.Json.JsonEncodedText.Encode("time_in_nanos"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
@@ -36,6 +37,7 @@ public sealed partial class QueryProfileConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.QueryBreakdown> propBreakdown = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>?> propChildren = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propDebug = default;
 		LocalJsonValue<string> propDescription = default;
 		LocalJsonValue<System.TimeSpan> propTimeInNanos = default;
 		LocalJsonValue<string> propType = default;
@@ -47,6 +49,11 @@ public sealed partial class QueryProfileConverter : System.Text.Json.Serializati
 			}
 
 			if (propChildren.TryReadProperty(ref reader, options, PropChildren, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDebug.TryReadProperty(ref reader, options, PropDebug, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
 			{
 				continue;
 			}
@@ -80,6 +87,7 @@ public sealed partial class QueryProfileConverter : System.Text.Json.Serializati
 		{
 			Breakdown = propBreakdown.Value,
 			Children = propChildren.Value,
+			Debug = propDebug.Value,
 			Description = propDescription.Value,
 			TimeInNanos = propTimeInNanos.Value,
 			Type = propType.Value
@@ -91,6 +99,7 @@ public sealed partial class QueryProfileConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBreakdown, value.Breakdown, null, null);
 		writer.WriteProperty(options, PropChildren, value.Children, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>(o, v, null));
+		writer.WriteProperty(options, PropDebug, value.Debug, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropTimeInNanos, value.TimeInNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);

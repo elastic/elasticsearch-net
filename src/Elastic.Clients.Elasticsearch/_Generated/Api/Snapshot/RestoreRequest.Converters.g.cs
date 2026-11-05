@@ -35,6 +35,7 @@ public sealed partial class RestoreRequestConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRenamePattern = System.Text.Json.JsonEncodedText.Encode("rename_pattern"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRenameReplacement = System.Text.Json.JsonEncodedText.Encode("rename_replacement"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRestoreOverExisting = System.Text.Json.JsonEncodedText.Encode("restore_over_existing"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -49,6 +50,7 @@ public sealed partial class RestoreRequestConverter : System.Text.Json.Serializa
 		LocalJsonValue<bool?> propPartial = default;
 		LocalJsonValue<string?> propRenamePattern = default;
 		LocalJsonValue<string?> propRenameReplacement = default;
+		LocalJsonValue<bool?> propRestoreOverExisting = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFeatureStates.TryReadProperty(ref reader, options, PropFeatureStates, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
@@ -101,6 +103,11 @@ public sealed partial class RestoreRequestConverter : System.Text.Json.Serializa
 				continue;
 			}
 
+			if (propRestoreOverExisting.TryReadProperty(ref reader, options, PropRestoreOverExisting, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -122,7 +129,8 @@ public sealed partial class RestoreRequestConverter : System.Text.Json.Serializa
 			Indices = propIndices.Value,
 			Partial = propPartial.Value,
 			RenamePattern = propRenamePattern.Value,
-			RenameReplacement = propRenameReplacement.Value
+			RenameReplacement = propRenameReplacement.Value,
+			RestoreOverExisting = propRestoreOverExisting.Value
 		};
 	}
 
@@ -139,6 +147,7 @@ public sealed partial class RestoreRequestConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropPartial, value.Partial, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRenamePattern, value.RenamePattern, null, null);
 		writer.WriteProperty(options, PropRenameReplacement, value.RenameReplacement, null, null);
+		writer.WriteProperty(options, PropRestoreOverExisting, value.RestoreOverExisting, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

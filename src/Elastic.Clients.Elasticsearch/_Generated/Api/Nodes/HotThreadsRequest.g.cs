@@ -37,7 +37,7 @@ public sealed partial class HotThreadsRequestParameters : Elastic.Transport.Requ
 	public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
 	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#sort']/*"/>
-	public Elastic.Clients.Elasticsearch.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("sort"); set => Q("sort", value); }
+	public Elastic.Clients.Elasticsearch.ThreadSortOrder? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadSortOrder?>("sort"); set => Q("sort", value); }
 
 	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#threads']/*"/>
 	public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
@@ -89,7 +89,7 @@ public sealed partial class HotThreadsRequest : Elastic.Clients.Elasticsearch.Re
 	public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
 	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#sort']/*"/>
-	public Elastic.Clients.Elasticsearch.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("sort"); set => Q("sort", value); }
+	public Elastic.Clients.Elasticsearch.ThreadSortOrder? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadSortOrder?>("sort"); set => Q("sort", value); }
 
 	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#threads']/*"/>
 	public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
@@ -155,7 +155,7 @@ public readonly partial struct HotThreadsRequestDescriptor
 	}
 
 	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#sort']/*"/>
-	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.ThreadType? value)
+	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.ThreadSortOrder? value)
 	{
 		Instance.Sort = value;
 		return this;

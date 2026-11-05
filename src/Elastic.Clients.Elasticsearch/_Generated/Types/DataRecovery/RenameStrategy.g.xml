@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.start_recovery.RenameStrategy#prefix"><summary><para>
+Text to add at the start of the name of each recovered source.
+At least one of <c>prefix</c> and <c>suffix</c> must be set to a non-empty value, and both can be set together.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.RenameStrategy#suffix"><summary><para>
+Text to add at the end of the name of each recovered source.
+At least one of <c>prefix</c> and <c>suffix</c> must be set to a non-empty value, and both can be set together.
+</para></summary></member>
+</doc>

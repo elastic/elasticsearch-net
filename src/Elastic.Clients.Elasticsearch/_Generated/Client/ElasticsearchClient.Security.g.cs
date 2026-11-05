@@ -728,30 +728,10 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 
 	/// <include file="../Api/Security/CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey()
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
-	}
-
-	/// <include file="../Api/Security/CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
 		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
-	}
-
-	/// <include file="../Api/Security/CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey<TDocument>()
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
@@ -778,30 +758,10 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 
 	/// <include file="../Api/Security/CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <include file="../Api/Security/CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
 		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <include file="../Api/Security/CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.create_api_key.Request']/*"/>
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>();
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
@@ -3720,6 +3680,106 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse QueryServiceAccounts(Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse QueryServiceAccounts()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse QueryServiceAccounts(System.Action<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse QueryServiceAccounts<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse QueryServiceAccounts<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse> QueryServiceAccountsAsync(Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse> QueryServiceAccountsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse> QueryServiceAccountsAsync(System.Action<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse> QueryServiceAccountsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Security/QueryServiceAccountsRequest.g.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='security.query_service_accounts.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse> QueryServiceAccountsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequestParameters>(request, cancellationToken);
 	}
 
 	/// <include file="../Api/Security/QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request']/*"/>

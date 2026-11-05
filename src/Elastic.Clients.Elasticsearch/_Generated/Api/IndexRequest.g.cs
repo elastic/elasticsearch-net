@@ -51,9 +51,6 @@ public sealed partial class IndexRequestParameters : Elastic.Transport.RequestPa
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
-	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -75,6 +72,18 @@ public sealed partial class IndexRequestParameters : Elastic.Transport.RequestPa
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.IndexRequestConverterFactory))]
 public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Optional("id", id))
+	{
+		Document = document;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice) : base(r => r.Required("index", index).Optional("_slice", routeSlice))
+	{
+		Document = document;
+	}
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public IndexRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 	{
@@ -117,6 +126,9 @@ public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Req
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
@@ -140,9 +152,6 @@ public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Req
 
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
-
-	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -171,6 +180,16 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 	public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexRequest<TDocument> instance)
 	{
 		Instance = instance;
+	}
+
+	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id? id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(document, index, routeSlice, id);
+	}
+
+	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(document, index, routeSlice);
 	}
 
 	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id)
@@ -208,6 +227,13 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -264,13 +290,6 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
 	{
 		Instance.RequireDataStream = value;
-		return this;
-	}
-
-	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

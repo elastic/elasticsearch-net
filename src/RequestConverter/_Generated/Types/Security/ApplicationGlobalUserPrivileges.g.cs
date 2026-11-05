@@ -29,6 +29,7 @@ public partial class ApplicationGlobalUserPrivileges : RequestConverter.ICodeFor
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
+			if (Manage is not null)
 			{
 				writer.WriteFluentDescriptorCall("Manage", (w) => { Manage.FormatCode(w); }, (w) => { Manage.FormatCode(w); });
 			}
@@ -36,6 +37,7 @@ public partial class ApplicationGlobalUserPrivileges : RequestConverter.ICodeFor
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges", false);
+			if (Manage is not null)
 			{
 				initializer.Property("Manage");
 				Manage.FormatCode(writer);

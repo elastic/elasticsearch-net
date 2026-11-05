@@ -44,6 +44,18 @@ public sealed partial class UserManagedServiceAccount : Elastic.Clients.Elastics
 		_ = sentinel;
 	}
 
+	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#created_at']/*"/>
+	public System.DateTimeOffset? CreatedAt { get; set; }
+
+	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#created_by']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.ServiceAccountAuthor? CreatedBy { get; set; }
+
+	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#created_by_profile_uid']/*"/>
+	public string? CreatedByProfileUid { get; set; }
+
+	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#description']/*"/>
+	public string? Description { get; set; }
+
 	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#enabled']/*"/>
 	public required bool Enabled { get; set; }
 
@@ -52,4 +64,13 @@ public sealed partial class UserManagedServiceAccount : Elastic.Clients.Elastics
 
 	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#type']/*"/>
 	public string? Type => "user_managed";
+
+	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#updated_at']/*"/>
+	public System.DateTimeOffset? UpdatedAt { get; set; }
+
+	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#updated_by']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.ServiceAccountAuthor? UpdatedBy { get; set; }
+
+	/// <include file="UserManagedServiceAccount.g.xml" path="doc/member[@key='security.get_service_accounts.UserManagedServiceAccount#updated_by_profile_uid']/*"/>
+	public string? UpdatedByProfileUid { get; set; }
 }

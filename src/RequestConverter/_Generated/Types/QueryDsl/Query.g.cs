@@ -54,6 +54,11 @@ public partial class Query : RequestConverter.ICodeFormattable
 				writer.WriteFluentDescriptorCall("ConstantScore", (w) => { ConstantScore.FormatCode(w); }, (w) => { ConstantScore.FormatCode(w); });
 			}
 
+			if (DenseVector is not null)
+			{
+				writer.WriteFluentDescriptorCall("DenseVector", (w) => { DenseVector.FormatCode(w); }, (w) => { DenseVector.FormatCode(w); });
+			}
+
 			if (DisMax is not null)
 			{
 				writer.WriteFluentDescriptorCall("DisMax", (w) => { DisMax.FormatCode(w); }, (w) => { DisMax.FormatCode(w); });
@@ -372,6 +377,12 @@ public partial class Query : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("ConstantScore");
 				ConstantScore.FormatCode(writer);
+			}
+
+			if (DenseVector is not null)
+			{
+				initializer.Property("DenseVector");
+				DenseVector.FormatCode(writer);
 			}
 
 			if (DisMax is not null)

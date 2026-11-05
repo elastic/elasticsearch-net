@@ -30,10 +30,10 @@ public sealed partial class GetRecoveryPointsResponseConverter : System.Text.Jso
 	public override Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryPoint>> propRecoveryPoints = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.Point>> propRecoveryPoints = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRecoveryPoints.TryReadProperty(ref reader, options, PropRecoveryPoints, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryPoint> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryPoint>(o, null)!))
+			if (propRecoveryPoints.TryReadProperty(ref reader, options, PropRecoveryPoints, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.Point> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.DataRecovery.Point>(o, null)!))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ public sealed partial class GetRecoveryPointsResponseConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRecoveryPoints, value.RecoveryPoints, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryPoint> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryPoint>(o, v, null));
+		writer.WriteProperty(options, PropRecoveryPoints, value.RecoveryPoints, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DataRecovery.Point> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.DataRecovery.Point>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

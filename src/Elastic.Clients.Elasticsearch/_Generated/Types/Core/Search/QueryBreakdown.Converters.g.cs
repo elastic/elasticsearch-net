@@ -35,6 +35,8 @@ public sealed partial class QueryBreakdownConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropCountWeightCount = System.Text.Json.JsonEncodedText.Encode("count_weight_count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCreateWeight = System.Text.Json.JsonEncodedText.Encode("create_weight"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCreateWeightCount = System.Text.Json.JsonEncodedText.Encode("create_weight_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIntoBitSet = System.Text.Json.JsonEncodedText.Encode("into_bit_set"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIntoBitSetCount = System.Text.Json.JsonEncodedText.Encode("into_bit_set_count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMatchCount = System.Text.Json.JsonEncodedText.Encode("match_count"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNextDoc = System.Text.Json.JsonEncodedText.Encode("next_doc"u8);
@@ -59,6 +61,8 @@ public sealed partial class QueryBreakdownConverter : System.Text.Json.Serializa
 		LocalJsonValue<long> propCountWeightCount = default;
 		LocalJsonValue<long> propCreateWeight = default;
 		LocalJsonValue<long> propCreateWeightCount = default;
+		LocalJsonValue<long> propIntoBitSet = default;
+		LocalJsonValue<long> propIntoBitSetCount = default;
 		LocalJsonValue<long> propMatch = default;
 		LocalJsonValue<long> propMatchCount = default;
 		LocalJsonValue<long> propNextDoc = default;
@@ -117,6 +121,16 @@ public sealed partial class QueryBreakdownConverter : System.Text.Json.Serializa
 			}
 
 			if (propCreateWeightCount.TryReadProperty(ref reader, options, PropCreateWeightCount, null))
+			{
+				continue;
+			}
+
+			if (propIntoBitSet.TryReadProperty(ref reader, options, PropIntoBitSet, null))
+			{
+				continue;
+			}
+
+			if (propIntoBitSetCount.TryReadProperty(ref reader, options, PropIntoBitSetCount, null))
 			{
 				continue;
 			}
@@ -193,6 +207,8 @@ public sealed partial class QueryBreakdownConverter : System.Text.Json.Serializa
 			CountWeightCount = propCountWeightCount.Value,
 			CreateWeight = propCreateWeight.Value,
 			CreateWeightCount = propCreateWeightCount.Value,
+			IntoBitSet = propIntoBitSet.Value,
+			IntoBitSetCount = propIntoBitSetCount.Value,
 			Match = propMatch.Value,
 			MatchCount = propMatchCount.Value,
 			NextDoc = propNextDoc.Value,
@@ -219,6 +235,8 @@ public sealed partial class QueryBreakdownConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropCountWeightCount, value.CountWeightCount, null, null);
 		writer.WriteProperty(options, PropCreateWeight, value.CreateWeight, null, null);
 		writer.WriteProperty(options, PropCreateWeightCount, value.CreateWeightCount, null, null);
+		writer.WriteProperty(options, PropIntoBitSet, value.IntoBitSet, null, null);
+		writer.WriteProperty(options, PropIntoBitSetCount, value.IntoBitSetCount, null, null);
 		writer.WriteProperty(options, PropMatch, value.Match, null, null);
 		writer.WriteProperty(options, PropMatchCount, value.MatchCount, null, null);
 		writer.WriteProperty(options, PropNextDoc, value.NextDoc, null, null);

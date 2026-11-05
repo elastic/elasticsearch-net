@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class QueryBreakdown
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public QueryBreakdown(long advance, long advanceCount, long buildScorer, long buildScorerCount, long computeMaxScore, long computeMaxScoreCount, long countWeight, long countWeightCount, long createWeight, long createWeightCount, long match, long matchCount, long nextDoc, long nextDocCount, long score, long scoreCount, long setMinCompetitiveScore, long setMinCompetitiveScoreCount, long shallowAdvance, long shallowAdvanceCount)
+	public QueryBreakdown(long advance, long advanceCount, long buildScorer, long buildScorerCount, long computeMaxScore, long computeMaxScoreCount, long countWeight, long countWeightCount, long createWeight, long createWeightCount, long intoBitSet, long intoBitSetCount, long match, long matchCount, long nextDoc, long nextDocCount, long score, long scoreCount, long setMinCompetitiveScore, long setMinCompetitiveScoreCount, long shallowAdvance, long shallowAdvanceCount)
 	{
 		Advance = advance;
 		AdvanceCount = advanceCount;
@@ -40,6 +40,8 @@ public sealed partial class QueryBreakdown
 		CountWeightCount = countWeightCount;
 		CreateWeight = createWeight;
 		CreateWeightCount = createWeightCount;
+		IntoBitSet = intoBitSet;
+		IntoBitSetCount = intoBitSetCount;
 		Match = match;
 		MatchCount = matchCount;
 		NextDoc = nextDoc;
@@ -72,6 +74,8 @@ public sealed partial class QueryBreakdown
 	public required long CountWeightCount { get; set; }
 	public required long CreateWeight { get; set; }
 	public required long CreateWeightCount { get; set; }
+	public required long IntoBitSet { get; set; }
+	public required long IntoBitSetCount { get; set; }
 	public required long Match { get; set; }
 	public required long MatchCount { get; set; }
 	public required long NextDoc { get; set; }

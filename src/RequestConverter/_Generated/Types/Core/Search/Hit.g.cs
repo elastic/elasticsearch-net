@@ -176,6 +176,12 @@ public partial class Hit<TDocument> : RequestConverter.ICodeFormattable
 			writer.WriteString(Shard);
 		}
 
+		if (Slice is not null)
+		{
+			initializer.Property("Slice");
+			writer.WriteString(Slice);
+		}
+
 		if (Sort is not null)
 		{
 			initializer.Property("Sort");

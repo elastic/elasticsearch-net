@@ -103,6 +103,9 @@ public sealed partial class RestoreRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <include file="RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request#rename_replacement']/*"/>
 	public string? RenameReplacement { get; set; }
+
+	/// <include file="RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request#restore_over_existing']/*"/>
+	public bool? RestoreOverExisting { get; set; }
 }
 
 /// <include file="RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
@@ -261,6 +264,13 @@ public readonly partial struct RestoreRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor RenameReplacement(string? value)
 	{
 		Instance.RenameReplacement = value;
+		return this;
+	}
+
+	/// <include file="RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request#restore_over_existing']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor RestoreOverExisting(bool? value = true)
+	{
+		Instance.RestoreOverExisting = value;
 		return this;
 	}
 
@@ -469,6 +479,13 @@ public readonly partial struct RestoreRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> RenameReplacement(string? value)
 	{
 		Instance.RenameReplacement = value;
+		return this;
+	}
+
+	/// <include file="RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request#restore_over_existing']/*"/>
+	public Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument> RestoreOverExisting(bool? value = true)
+	{
+		Instance.RestoreOverExisting = value;
 		return this;
 	}
 

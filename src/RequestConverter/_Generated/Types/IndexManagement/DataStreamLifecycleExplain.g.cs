@@ -34,6 +34,12 @@ public partial class DataStreamLifecycleExplain : RequestConverter.ICodeFormatta
 			writer.WriteString(Error);
 		}
 
+		if (FrozenTransitionStatus is not null)
+		{
+			initializer.Property("FrozenTransitionStatus");
+			writer.WriteString(FrozenTransitionStatus);
+		}
+
 		if (GenerationTime is not null)
 		{
 			initializer.Property("GenerationTime");
@@ -78,6 +84,12 @@ public partial class DataStreamLifecycleExplain : RequestConverter.ICodeFormatta
 		{
 			initializer.Property("TimeSinceRollover");
 			TimeSinceRollover.FormatCode(writer);
+		}
+
+		if (UnmanagedReason is not null)
+		{
+			initializer.Property("UnmanagedReason");
+			writer.WriteString(UnmanagedReason);
 		}
 
 		initializer.Dispose();

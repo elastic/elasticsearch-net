@@ -27,12 +27,14 @@ public sealed partial class PointInTimeReferenceConverter : System.Text.Json.Ser
 {
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouteSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
+		LocalJsonValue<string?> propRouteSlice = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propId.TryReadProperty(ref reader, options, PropId, null))
@@ -41,6 +43,11 @@ public sealed partial class PointInTimeReferenceConverter : System.Text.Json.Ser
 			}
 
 			if (propKeepAlive.TryReadProperty(ref reader, options, PropKeepAlive, null))
+			{
+				continue;
+			}
+
+			if (propRouteSlice.TryReadProperty(ref reader, options, PropRouteSlice, null))
 			{
 				continue;
 			}
@@ -58,7 +65,8 @@ public sealed partial class PointInTimeReferenceConverter : System.Text.Json.Ser
 		return new Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Id = propId.Value,
-			KeepAlive = propKeepAlive.Value
+			KeepAlive = propKeepAlive.Value,
+			RouteSlice = propRouteSlice.Value
 		};
 	}
 
@@ -67,6 +75,7 @@ public sealed partial class PointInTimeReferenceConverter : System.Text.Json.Ser
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
+		writer.WriteProperty(options, PropRouteSlice, value.RouteSlice, null, null);
 		writer.WriteEndObject();
 	}
 }

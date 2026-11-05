@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm._types.SearchableSnapshotAction#replicate_for"><summary><para>
+The period for which the mounted index keeps one replica before the replica is removed.
+By default, the index is mounted without replicas.
+Must be positive.
+Only the first <c>searchable_snapshot</c> action in a policy may set this.
+It must fit before the next phase starts: for example, if this phase has a <c>min_age</c> of 5d and the next phase has 12d, it can be at most 7d.
+</para></summary></member>
+  <member key="ilm._types.SearchableSnapshotAction#total_shards_per_node"><summary><para>
+The maximum number of shards, including primaries and replicas, that can be allocated to any single node for the mounted index.
+Must be at least 1.
+</para></summary></member>
+</doc>

@@ -7,6 +7,6 @@ The format of the data. If null, the default data format for the given type is u
 The type of data that the value represents.
 </para></summary></member>
   <member key="_types.InferenceString#value"><summary><para>
-String which may be raw text, or the string representation of some other data such as an image in base64.
+String which may be raw text, the string representation of some other data such as an image in base64, or a URL that points to the data.
 </para></summary></member>
 </doc>

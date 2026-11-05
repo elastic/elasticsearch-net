@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.health_report.Indicators#dlm_frozen_transitions"><summary><para>
+Reports the health of data stream lifecycle transitions of backing indices to the frozen tier.
+</para></summary></member>
+</doc>

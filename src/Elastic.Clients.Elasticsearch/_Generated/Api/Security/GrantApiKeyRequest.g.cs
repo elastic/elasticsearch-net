@@ -70,6 +70,9 @@ public sealed partial class GrantApiKeyRequest : Elastic.Clients.Elasticsearch.R
 	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#api_key']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.GrantApiKey ApiKey { get; set; }
 
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#client_authentication']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthentication? ClientAuthentication { get; set; }
+
 	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#grant_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType GrantType { get; set; }
 
@@ -78,6 +81,9 @@ public sealed partial class GrantApiKeyRequest : Elastic.Clients.Elasticsearch.R
 
 	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? RunAs { get; set; }
+
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#service_account_token']/*"/>
+	public string? ServiceAccountToken { get; set; }
 
 	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
@@ -138,6 +144,20 @@ public readonly partial struct GrantApiKeyRequestDescriptor
 		return this;
 	}
 
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#client_authentication']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ClientAuthentication(Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthentication? value)
+	{
+		Instance.ClientAuthentication = value;
+		return this;
+	}
+
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#client_authentication']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ClientAuthentication(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthenticationDescriptor> action)
+	{
+		Instance.ClientAuthentication = Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthenticationDescriptor.Build(action);
+		return this;
+	}
+
 	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#grant_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType value)
 	{
@@ -156,6 +176,13 @@ public readonly partial struct GrantApiKeyRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor RunAs(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.RunAs = value;
+		return this;
+	}
+
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#service_account_token']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ServiceAccountToken(string? value)
+	{
+		Instance.ServiceAccountToken = value;
 		return this;
 	}
 
@@ -270,6 +297,20 @@ public readonly partial struct GrantApiKeyRequestDescriptor<TDocument>
 		return this;
 	}
 
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#client_authentication']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ClientAuthentication(Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthentication? value)
+	{
+		Instance.ClientAuthentication = value;
+		return this;
+	}
+
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#client_authentication']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ClientAuthentication(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthenticationDescriptor> action)
+	{
+		Instance.ClientAuthentication = Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthenticationDescriptor.Build(action);
+		return this;
+	}
+
 	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#grant_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType value)
 	{
@@ -288,6 +329,13 @@ public readonly partial struct GrantApiKeyRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> RunAs(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.RunAs = value;
+		return this;
+	}
+
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#service_account_token']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ServiceAccountToken(string? value)
+	{
+		Instance.ServiceAccountToken = value;
 		return this;
 	}
 

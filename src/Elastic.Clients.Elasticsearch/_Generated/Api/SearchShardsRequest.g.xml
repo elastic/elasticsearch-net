@@ -15,7 +15,7 @@ If the Elasticsearch security features are enabled, you must have the <c>view_in
 The slice identifier for routing the search to a specific slice.
 When provided, the request is limited to shards that match the given slice value.
 Use the special value <c>_all</c> to query all slices without restricting to a routing value.
-Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+When omitted, all slices are targeted.
 </para></summary></member>
   <member key="_global.search_shards.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.

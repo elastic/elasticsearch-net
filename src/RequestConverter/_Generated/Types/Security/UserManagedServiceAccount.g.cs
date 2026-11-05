@@ -28,6 +28,30 @@ public partial class UserManagedServiceAccount : RequestConverter.ICodeFormattab
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Security.UserManagedServiceAccount", true);
+		if (CreatedAt is not null)
+		{
+			initializer.Property("CreatedAt");
+			writer.WriteValue(CreatedAt.Value);
+		}
+
+		if (CreatedBy is not null)
+		{
+			initializer.Property("CreatedBy");
+			CreatedBy.FormatCode(writer);
+		}
+
+		if (CreatedByProfileUid is not null)
+		{
+			initializer.Property("CreatedByProfileUid");
+			writer.WriteString(CreatedByProfileUid);
+		}
+
+		if (Description is not null)
+		{
+			initializer.Property("Description");
+			writer.WriteString(Description);
+		}
+
 		{
 			initializer.Property("Enabled");
 			writer.WriteValue(Enabled);
@@ -36,6 +60,24 @@ public partial class UserManagedServiceAccount : RequestConverter.ICodeFormattab
 		{
 			initializer.Property("Roles");
 			writer.WriteInlineList(Roles, (w, item) => { w.WriteString(item); });
+		}
+
+		if (UpdatedAt is not null)
+		{
+			initializer.Property("UpdatedAt");
+			writer.WriteValue(UpdatedAt.Value);
+		}
+
+		if (UpdatedBy is not null)
+		{
+			initializer.Property("UpdatedBy");
+			UpdatedBy.FormatCode(writer);
+		}
+
+		if (UpdatedByProfileUid is not null)
+		{
+			initializer.Property("UpdatedByProfileUid");
+			writer.WriteString(UpdatedByProfileUid);
 		}
 
 		initializer.Dispose();

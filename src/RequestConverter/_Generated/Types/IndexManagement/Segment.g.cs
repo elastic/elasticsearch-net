@@ -28,6 +28,7 @@ public partial class Segment : RequestConverter.ICodeFormattable
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
 		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.IndexManagement.Segment", false);
+		if (Attributes is not null)
 		{
 			initializer.Property("Attributes");
 			writer.Write("new ");
@@ -40,14 +41,21 @@ public partial class Segment : RequestConverter.ICodeFormattable
 			writer.WriteBlockList(Attributes, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteString(kvp.Value); w.Write(" }"); });
 		}
 
+		if (AutoCalibration is not null)
+		{
+			initializer.Property("AutoCalibration");
+			AutoCalibration.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("Committed");
 			writer.WriteValue(Committed);
 		}
 
+		if (Compound is not null)
 		{
 			initializer.Property("Compound");
-			writer.WriteValue(Compound);
+			writer.WriteValue(Compound.Value);
 		}
 
 		{
@@ -61,6 +69,12 @@ public partial class Segment : RequestConverter.ICodeFormattable
 			writer.WriteValue(Generation);
 		}
 
+		if (MergeId is not null)
+		{
+			initializer.Property("MergeId");
+			writer.WriteString(MergeId);
+		}
+
 		{
 			initializer.Property("NumDocs");
 			writer.WriteValue(NumDocs);
@@ -72,12 +86,25 @@ public partial class Segment : RequestConverter.ICodeFormattable
 			writer.WriteValue(Search);
 		}
 
+		if (Size is not null)
+		{
+			initializer.Property("Size");
+			Size.FormatCode(writer);
+		}
+
 		{
 			initializer.Property("SizeInBytes");
 			writer.WriteValue(SizeInBytes);
 			writer.Write("d");
 		}
 
+		if (Sort is not null)
+		{
+			initializer.Property("Sort");
+			writer.WriteInlineList(Sort, (w, item) => { item.FormatCode(w); });
+		}
+
+		if (Version is not null)
 		{
 			initializer.Property("Version");
 			writer.WriteString(Version);

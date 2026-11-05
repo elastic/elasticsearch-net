@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.KnnEvalResult#excluded_queries"><summary><para>
+The number of queries excluded from the mean recall, because the search found a document scoring above the baseline's lowest top <c>k</c> score.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalResult#included_queries"><summary><para>
+The number of queries included in the mean recall.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalResult#knn_settings"><summary><para>
+The evaluated settings.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalResult#recall"><summary><para>
+The mean recall of the included queries, or <c>null</c> if no query is included.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalResult#took_ms"><summary><para>
+The time the searches took, in milliseconds.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalResult#vector_ops"><summary><para>
+The number of vector operations of the searches.
+</para></summary></member>
+</doc>

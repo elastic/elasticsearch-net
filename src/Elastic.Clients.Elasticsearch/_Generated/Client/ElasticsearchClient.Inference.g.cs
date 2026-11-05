@@ -152,6 +152,64 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.CompletionRequest, Elastic.Clients.Elasticsearch.Inference.CompletionResponse, Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Inference/DecisionRequest.g.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DecisionResponse Decision(Elastic.Clients.Elasticsearch.Inference.DecisionRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DecisionRequest, Elastic.Clients.Elasticsearch.Inference.DecisionResponse, Elastic.Clients.Elasticsearch.Inference.DecisionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DecisionRequest.g.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DecisionResponse Decision(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DecisionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DecisionRequest, Elastic.Clients.Elasticsearch.Inference.DecisionResponse, Elastic.Clients.Elasticsearch.Inference.DecisionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DecisionRequest.g.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DecisionResponse Decision(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DecisionRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DecisionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DecisionRequest, Elastic.Clients.Elasticsearch.Inference.DecisionResponse, Elastic.Clients.Elasticsearch.Inference.DecisionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DecisionRequest.g.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DecisionResponse> DecisionAsync(Elastic.Clients.Elasticsearch.Inference.DecisionRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DecisionRequest, Elastic.Clients.Elasticsearch.Inference.DecisionResponse, Elastic.Clients.Elasticsearch.Inference.DecisionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/DecisionRequest.g.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DecisionResponse> DecisionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DecisionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DecisionRequest, Elastic.Clients.Elasticsearch.Inference.DecisionResponse, Elastic.Clients.Elasticsearch.Inference.DecisionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/DecisionRequest.g.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.decision.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DecisionResponse> DecisionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DecisionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DecisionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DecisionRequest, Elastic.Clients.Elasticsearch.Inference.DecisionResponse, Elastic.Clients.Elasticsearch.Inference.DecisionRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/Inference/DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest request)
@@ -308,6 +366,64 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequest, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyResponse, Elastic.Clients.Elasticsearch.Inference.DeleteRegionPolicyRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/DocumentExtractionRequest.g.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse DocumentExtraction(Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DocumentExtractionRequest.g.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse DocumentExtraction(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DocumentExtractionRequest.g.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse DocumentExtraction(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestParameters>(request);
+	}
+
+	/// <include file="../Api/Inference/DocumentExtractionRequest.g.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse> DocumentExtractionAsync(Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/DocumentExtractionRequest.g.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse> DocumentExtractionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/Inference/DocumentExtractionRequest.g.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='inference.document_extraction.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse> DocumentExtractionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequest, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionResponse, Elastic.Clients.Elasticsearch.Inference.DocumentExtractionRequestParameters>(request, cancellationToken);
 	}
 
 	/// <include file="../Api/Inference/EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request']/*"/>

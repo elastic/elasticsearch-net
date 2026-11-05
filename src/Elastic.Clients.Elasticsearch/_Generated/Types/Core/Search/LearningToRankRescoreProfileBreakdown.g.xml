@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.LearningToRankRescoreProfileBreakdown#build_feature_extractors"><summary><para>
+The time spent turning the feature queries of the model into queries that can score documents.
+</para></summary></member>
+  <member key="_global.search._types.LearningToRankRescoreProfileBreakdown#feature_extraction"><summary><para>
+The time spent extracting the features of the top documents.
+</para></summary></member>
+  <member key="_global.search._types.LearningToRankRescoreProfileBreakdown#inference"><summary><para>
+The time spent running the model on the extracted features.
+</para></summary></member>
+</doc>

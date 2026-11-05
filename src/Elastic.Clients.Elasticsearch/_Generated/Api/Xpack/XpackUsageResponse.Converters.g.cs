@@ -29,6 +29,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropAnalytics = System.Text.Json.JsonEncodedText.Encode("analytics"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropArchive = System.Text.Json.JsonEncodedText.Encode("archive"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCcr = System.Text.Json.JsonEncodedText.Encode("ccr"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDataFrame = System.Text.Json.JsonEncodedText.Encode("data_frame"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDataLifecycle = System.Text.Json.JsonEncodedText.Encode("data_lifecycle"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDataScience = System.Text.Json.JsonEncodedText.Encode("data_science"u8);
@@ -42,6 +43,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropHealthApi = System.Text.Json.JsonEncodedText.Encode("health_api"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLogging = System.Text.Json.JsonEncodedText.Encode("logging"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogsdbColumnar = System.Text.Json.JsonEncodedText.Encode("logsdb_columnar"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLogstash = System.Text.Json.JsonEncodedText.Encode("logstash"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMonitoring = System.Text.Json.JsonEncodedText.Encode("monitoring"u8);
@@ -53,6 +55,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropSpatial = System.Text.Json.JsonEncodedText.Encode("spatial"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSql = System.Text.Json.JsonEncodedText.Encode("sql"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTransform = System.Text.Json.JsonEncodedText.Encode("transform"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVectordbColumnar = System.Text.Json.JsonEncodedText.Encode("vectordb_columnar"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVectordbDocument = System.Text.Json.JsonEncodedText.Encode("vectordb_document"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVectors = System.Text.Json.JsonEncodedText.Encode("vectors"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only"u8);
@@ -65,6 +68,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Analytics> propAnalytics = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Archive> propArchive = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ccr> propCcr = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.IndexModeUsage?> propColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base?> propDataFrame = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.DataStreamLifecycleUsage?> propDataLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base?> propDataScience = default;
@@ -78,6 +82,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.HealthStatistics?> propHealthApi = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ilm> propIlm = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Logging?> propLogging = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.IndexModeUsage?> propLogsdbColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propLogstash = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MachineLearning> propMl = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Monitoring> propMonitoring = default;
@@ -89,6 +94,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propSpatial = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Sql> propSql = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propTransform = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.VectorDbColumnar?> propVectordbColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.VectorDbDocument?> propVectordbDocument = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Vector?> propVectors = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propVotingOnly = default;
@@ -111,6 +117,11 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			}
 
 			if (propCcr.TryReadProperty(ref reader, options, PropCcr, null))
+			{
+				continue;
+			}
+
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
 			{
 				continue;
 			}
@@ -180,6 +191,11 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 				continue;
 			}
 
+			if (propLogsdbColumnar.TryReadProperty(ref reader, options, PropLogsdbColumnar, null))
+			{
+				continue;
+			}
+
 			if (propLogstash.TryReadProperty(ref reader, options, PropLogstash, null))
 			{
 				continue;
@@ -235,6 +251,11 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 				continue;
 			}
 
+			if (propVectordbColumnar.TryReadProperty(ref reader, options, PropVectordbColumnar, null))
+			{
+				continue;
+			}
+
 			if (propVectordbDocument.TryReadProperty(ref reader, options, PropVectordbDocument, null))
 			{
 				continue;
@@ -271,6 +292,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			Analytics = propAnalytics.Value,
 			Archive = propArchive.Value,
 			Ccr = propCcr.Value,
+			Columnar = propColumnar.Value,
 			DataFrame = propDataFrame.Value,
 			DataLifecycle = propDataLifecycle.Value,
 			DataScience = propDataScience.Value,
@@ -284,6 +306,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			HealthApi = propHealthApi.Value,
 			Ilm = propIlm.Value,
 			Logging = propLogging.Value,
+			LogsdbColumnar = propLogsdbColumnar.Value,
 			Logstash = propLogstash.Value,
 			Ml = propMl.Value,
 			Monitoring = propMonitoring.Value,
@@ -295,6 +318,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 			Spatial = propSpatial.Value,
 			Sql = propSql.Value,
 			Transform = propTransform.Value,
+			VectordbColumnar = propVectordbColumnar.Value,
 			VectordbDocument = propVectordbDocument.Value,
 			Vectors = propVectors.Value,
 			VotingOnly = propVotingOnly.Value,
@@ -309,6 +333,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropAnalytics, value.Analytics, null, null);
 		writer.WriteProperty(options, PropArchive, value.Archive, null, null);
 		writer.WriteProperty(options, PropCcr, value.Ccr, null, null);
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
 		writer.WriteProperty(options, PropDataFrame, value.DataFrame, null, null);
 		writer.WriteProperty(options, PropDataLifecycle, value.DataLifecycle, null, null);
 		writer.WriteProperty(options, PropDataScience, value.DataScience, null, null);
@@ -322,6 +347,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropHealthApi, value.HealthApi, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
 		writer.WriteProperty(options, PropLogging, value.Logging, null, null);
+		writer.WriteProperty(options, PropLogsdbColumnar, value.LogsdbColumnar, null, null);
 		writer.WriteProperty(options, PropLogstash, value.Logstash, null, null);
 		writer.WriteProperty(options, PropMl, value.Ml, null, null);
 		writer.WriteProperty(options, PropMonitoring, value.Monitoring, null, null);
@@ -333,6 +359,7 @@ public sealed partial class XpackUsageResponseConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropSpatial, value.Spatial, null, null);
 		writer.WriteProperty(options, PropSql, value.Sql, null, null);
 		writer.WriteProperty(options, PropTransform, value.Transform, null, null);
+		writer.WriteProperty(options, PropVectordbColumnar, value.VectordbColumnar, null, null);
 		writer.WriteProperty(options, PropVectordbDocument, value.VectordbDocument, null, null);
 		writer.WriteProperty(options, PropVectors, value.Vectors, null, null);
 		writer.WriteProperty(options, PropVotingOnly, value.VotingOnly, null, null);

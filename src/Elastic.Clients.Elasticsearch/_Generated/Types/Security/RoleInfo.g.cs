@@ -49,7 +49,7 @@ public sealed partial class RoleInfo
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> Applications { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
 	public string? Description { get; set; }
-	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>>>>? Global { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilege? Global { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesRead> Indices { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }

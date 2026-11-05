@@ -233,18 +233,43 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"data_recovery.get_recovery",
+			new ClientCallInfo("DataRecovery", "GetRecovery", 0, 0)
+		}
+,
+		{
 			"data_recovery.get_recovery_points",
 			new ClientCallInfo("DataRecovery", "GetRecoveryPoints", 0, 0)
 		}
 ,
 		{
+			"data_recovery.get_recovery_sources",
+			new ClientCallInfo("DataRecovery", "GetRecoverySources", 0, 0)
+		}
+,
+		{
+			"data_recovery.get_rpo_series",
+			new ClientCallInfo("DataRecovery", "GetRpoSeries", 0, 0)
+		}
+,
+		{
+			"data_recovery.list_recoveries",
+			new ClientCallInfo("DataRecovery", "ListRecoveries", 0, 0)
+		}
+,
+		{
+			"data_recovery.start_recovery",
+			new ClientCallInfo("DataRecovery", "StartRecovery", 0, 0)
+		}
+,
+		{
 			"delete",
-			new ClientCallInfo("", "Delete", 0, 0)
+			new ClientCallInfo("", "Delete", 0, -1)
 		}
 ,
 		{
 			"delete_by_query",
-			new ClientCallInfo("", "DeleteByQuery", 0, 0)
+			new ClientCallInfo("", "DeleteByQuery", 0, -1)
 		}
 ,
 		{
@@ -394,7 +419,7 @@ internal static class ClientMethods
 ,
 		{
 			"exists",
-			new ClientCallInfo("", "Exists", 0, 0)
+			new ClientCallInfo("", "Exists", 0, -1)
 		}
 ,
 		{
@@ -404,7 +429,7 @@ internal static class ClientMethods
 ,
 		{
 			"explain",
-			new ClientCallInfo("", "Explain", 1, 1)
+			new ClientCallInfo("", "Explain", 1, -1)
 		}
 ,
 		{
@@ -424,7 +449,7 @@ internal static class ClientMethods
 ,
 		{
 			"get",
-			new ClientCallInfo("", "Get", 1, 1)
+			new ClientCallInfo("", "Get", 1, -1)
 		}
 ,
 		{
@@ -888,6 +913,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"inference.decision",
+			new ClientCallInfo("Inference", "Decision", 0, 0)
+		}
+,
+		{
 			"inference.delete",
 			new ClientCallInfo("Inference", "Delete", 0, -1)
 		}
@@ -895,6 +925,11 @@ internal static class ClientMethods
 		{
 			"inference.delete_region_policy",
 			new ClientCallInfo("Inference", "DeleteRegionPolicy", 0, 0)
+		}
+,
+		{
+			"inference.document_extraction",
+			new ClientCallInfo("Inference", "DocumentExtraction", 0, 0)
 		}
 ,
 		{
@@ -1150,6 +1185,11 @@ internal static class ClientMethods
 		{
 			"ingest.simulate",
 			new ClientCallInfo("Ingest", "Simulate", 0, 0)
+		}
+,
+		{
+			"knn_eval",
+			new ClientCallInfo("", "KnnEval", 0, 0)
 		}
 ,
 		{
@@ -2133,6 +2173,11 @@ internal static class ClientMethods
 		}
 ,
 		{
+			"security.query_service_accounts",
+			new ClientCallInfo("Security", "QueryServiceAccounts", 0, 0)
+		}
+,
+		{
 			"security.query_user",
 			new ClientCallInfo("Security", "QueryUser", 0, 0)
 		}
@@ -2504,7 +2549,7 @@ internal static class ClientMethods
 ,
 		{
 			"update_by_query",
-			new ClientCallInfo("", "UpdateByQuery", 0, 0)
+			new ClientCallInfo("", "UpdateByQuery", 0, -1)
 		}
 ,
 		{

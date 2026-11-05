@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_recovery_sources.Response#has_more"><summary><para>
+Whether more matching sources are available than were returned.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_sources.Response#recovery_point"><summary><para>
+The selected recovery point.
+</para></summary></member>
+  <member key="data_recovery.get_recovery_sources.Response#sources"><summary><para>
+Matching logical recovery sources ordered by name.
+</para></summary></member>
+</doc>

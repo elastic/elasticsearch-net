@@ -88,10 +88,22 @@ public partial class FieldCapability : RequestConverter.ICodeFormattable
 			writer.WriteInlineList(NonInferenceIndices, (w, item) => { w.WriteString(item); });
 		}
 
+		if (NonPassthroughIndices is not null)
+		{
+			initializer.Property("NonPassthroughIndices");
+			writer.WriteInlineList(NonPassthroughIndices, (w, item) => { w.WriteString(item); });
+		}
+
 		if (NonSearchableIndices is not null)
 		{
 			initializer.Property("NonSearchableIndices");
 			writer.WriteInlineList(NonSearchableIndices, (w, item) => { w.WriteString(item); });
+		}
+
+		if (Passthrough is not null)
+		{
+			initializer.Property("Passthrough");
+			writer.WriteValue(Passthrough.Value);
 		}
 
 		{

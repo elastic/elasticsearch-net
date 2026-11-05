@@ -104,6 +104,10 @@ It is important to note that this setting greatly reduces the chances of the wri
 After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 </para></summary></member>
+  <member key="_global.create.Request#_slice"><summary><para>
+The slice identifier for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>), which scopes the operation to that slice.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.create.Request#id"><summary><para>
 A unique identifier for the document.
 To automatically generate a document ID, use the <c>POST /&lt;target>/_doc/</c> request format.
@@ -134,6 +138,7 @@ If <c>true</c>, the request's actions must target a data stream (existing or to 
 </para></summary></member>
   <member key="_global.create.Request#routing"><summary><para>
 A custom value that is used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.create.Request#timeout"><summary><para>
 The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.

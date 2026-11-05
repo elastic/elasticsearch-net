@@ -45,6 +45,9 @@ public sealed partial class PointInTimeReference
 
 	public required string Id { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
+
+	/// <include file="PointInTimeReference.g.xml" path="doc/member[@key='_global.search._types.PointInTimeReference#_slice']/*"/>
+	public string? RouteSlice { get; set; }
 }
 
 /// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PointInTimeReference']/*"/>
@@ -76,6 +79,13 @@ public readonly partial struct PointInTimeReferenceDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <include file="PointInTimeReference.g.xml" path="doc/member[@key='_global.search._types.PointInTimeReference#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

@@ -50,6 +50,12 @@ public partial class StartTransformRequest : RequestConverter.IClientCallFormatt
 				writer.WriteString(From);
 			}
 
+			if (InitialDelay is not null)
+			{
+				initializer.Property("InitialDelay");
+				InitialDelay.FormatCode(writer);
+			}
+
 			if (Timeout is not null)
 			{
 				initializer.Property("Timeout");
@@ -75,6 +81,11 @@ public partial class StartTransformRequest : RequestConverter.IClientCallFormatt
 		if (From is not null)
 		{
 			writer.WriteFluentCall("From", (w) => { w.WriteString(From); });
+		}
+
+		if (InitialDelay is not null)
+		{
+			writer.WriteFluentCall("InitialDelay", (w) => { InitialDelay.FormatCode(w); });
 		}
 
 		if (Timeout is not null)

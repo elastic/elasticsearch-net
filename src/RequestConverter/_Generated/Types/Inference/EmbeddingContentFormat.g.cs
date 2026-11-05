@@ -37,6 +37,10 @@ public static class EmbeddingContentFormatCodeFormatter
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat");
 				writer.Write(".Text");
 				break;
+			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat.Url:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat");
+				writer.Write(".Url");
+				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected EmbeddingContentFormat value.");
 		}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.ManageRolesGlobalUserPrivileges#manage"><summary><para>
+The index-scoped role management privileges.
+Absent when the <c>role</c> section is present but grants no privileges.
+</para></summary></member>
+</doc>

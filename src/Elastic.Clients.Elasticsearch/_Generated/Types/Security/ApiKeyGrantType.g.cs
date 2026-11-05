@@ -26,6 +26,9 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ApiKeyGrantTypeConverter))]
 public enum ApiKeyGrantType
 {
+	/// <include file="ApiKeyGrantType.g.xml" path="doc/member[@key='security.grant_api_key.ApiKeyGrantType#_user_managed_service_account']/*"/>
+	[System.Runtime.Serialization.EnumMember(Value = "_user_managed_service_account")]
+	UserManagedServiceAccount,
 	[System.Runtime.Serialization.EnumMember(Value = "access_token")]
 	AccessToken,
 	[System.Runtime.Serialization.EnumMember(Value = "password")]

@@ -39,9 +39,6 @@ public sealed partial class MultiGetRequestParameters : Elastic.Transport.Reques
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -67,6 +64,10 @@ public sealed partial class MultiGetRequest : Elastic.Clients.Elasticsearch.Requ
 	{
 	}
 
+	public MultiGetRequest(Elastic.Clients.Elasticsearch.IndexName? index, string? routeSlice) : base(r => r.Optional("index", index).Optional("_slice", routeSlice))
+	{
+	}
+
 	public MultiGetRequest()
 	{
 	}
@@ -88,6 +89,9 @@ public sealed partial class MultiGetRequest : Elastic.Clients.Elasticsearch.Requ
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#force_synthetic_source']/*"/>
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
@@ -99,9 +103,6 @@ public sealed partial class MultiGetRequest : Elastic.Clients.Elasticsearch.Requ
 
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
-	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -142,6 +143,11 @@ public readonly partial struct MultiGetRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(index);
 	}
 
+	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index, string? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(index, routeSlice);
+	}
+
 	public MultiGetRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -154,6 +160,13 @@ public readonly partial struct MultiGetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -182,13 +195,6 @@ public readonly partial struct MultiGetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
-		return this;
-	}
-
-	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -392,6 +398,11 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(typeof(TDocument));
 	}
 
+	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index, string? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MultiGetRequest(index, routeSlice);
+	}
+
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiGetRequest instance) => new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiGetRequest(Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
@@ -399,6 +410,13 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -427,13 +445,6 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
-		return this;
-	}
-
-	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

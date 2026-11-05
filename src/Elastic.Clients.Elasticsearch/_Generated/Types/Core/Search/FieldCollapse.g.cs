@@ -43,8 +43,6 @@ public sealed partial class FieldCollapse
 		_ = sentinel;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
-
 	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -74,18 +72,6 @@ public readonly partial struct FieldCollapseDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse instance) => new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> descriptor) => descriptor.Instance;
-
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
-	{
-		Instance.Collapse = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> action)
-	{
-		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>.Build(action);
-		return this;
-	}
 
 	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
@@ -163,24 +149,6 @@ public readonly partial struct FieldCollapseDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse instance) => new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor descriptor) => descriptor.Instance;
-
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
-	{
-		Instance.Collapse = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> action)
-	{
-		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor Collapse<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>> action)
-	{
-		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>.Build(action);
-		return this;
-	}
 
 	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor Field(Elastic.Clients.Elasticsearch.Field value)

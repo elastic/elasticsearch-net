@@ -34,7 +34,7 @@ public sealed partial class StorageConverter : System.Text.Json.Serialization.Js
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propAllowMmap = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propStatsRefreshInterval = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.StorageType> propType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.StorageType?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAllowMmap.TryReadProperty(ref reader, options, PropAllowMmap, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
@@ -47,7 +47,7 @@ public sealed partial class StorageConverter : System.Text.Json.Serialization.Js
 				continue;
 			}
 
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			if (propType.TryReadProperty(ref reader, options, PropType, static Elastic.Clients.Elasticsearch.IndexManagement.StorageType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.StorageType>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ public sealed partial class StorageConverter : System.Text.Json.Serialization.Js
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllowMmap, value.AllowMmap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropStatsRefreshInterval, value.StatsRefreshInterval, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.StorageType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.StorageType>(o, v));
 		writer.WriteEndObject();
 	}
 }

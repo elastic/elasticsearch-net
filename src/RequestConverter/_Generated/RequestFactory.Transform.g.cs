@@ -529,6 +529,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "initial_delay":
+						{
+							if (parameter.Value is string value)
+								request.InitialDelay = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
 					case "timeout":
 						{
 							if (parameter.Value is string value)

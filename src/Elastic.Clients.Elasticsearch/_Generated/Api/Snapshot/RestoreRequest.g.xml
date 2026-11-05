@@ -142,6 +142,14 @@ The rename replacement string that is used with the <c>rename_pattern</c>.
   <member key="snapshot.restore.Request#repository"><summary><para>
 The name of the repository to restore a snapshot from.
 </para></summary></member>
+  <member key="snapshot.restore.Request#restore_over_existing"><summary><para>
+If <c>true</c>, the request can restore over destination indices and data streams that already exist, without closing or deleting them first.
+An open destination index is closed and restored over in a single step.
+A destination data stream is deleted, together with its backing and failure store indices, and recreated from the snapshot.
+</para>
+<para>
+It can't be combined with <c>rename_pattern</c>, <c>rename_replacement</c>, <c>include_global_state</c>, or <c>partial</c>.
+</para></summary></member>
   <member key="snapshot.restore.Request#snapshot"><summary><para>
 The name of the snapshot to restore.
 </para></summary></member>

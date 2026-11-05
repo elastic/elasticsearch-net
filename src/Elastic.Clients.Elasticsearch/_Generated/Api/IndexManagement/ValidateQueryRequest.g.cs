@@ -64,7 +64,7 @@ public sealed partial class ValidateQueryRequestParameters : Elastic.Transport.R
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
 	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -137,7 +137,7 @@ public sealed partial class ValidateQueryRequest : Elastic.Clients.Elasticsearch
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
 	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -270,9 +270,16 @@ public readonly partial struct ValidateQueryRequestDescriptor
 	}
 
 	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor RouteSlice(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -489,9 +496,16 @@ public readonly partial struct ValidateQueryRequestDescriptor<TDocument>
 	}
 
 	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> RouteSlice(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 

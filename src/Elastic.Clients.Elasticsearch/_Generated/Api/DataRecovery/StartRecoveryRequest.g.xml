@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.start_recovery.Request"><summary><para>
+Start a recovery.
+</para>
+<para>
+Start recovering indices and data streams from a recovery point.
+This API is intended for internal operator use.
+Depending on the mode, the sources are either replaced with their state at the recovery point, over the data that currently exists,
+or recovered under new names.
+The recovery runs in the background, so the API returns with a <c>202 Accepted</c> status once it has started.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Request#metadata"><summary><para>
+Custom metadata for the recovery.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Request#mode"><summary><para>
+How to recover the sources: <c>replace</c> recovers them in place, over the data that currently exists, and <c>rename</c> recovers them under new names.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Request#recovery_point_end_time"><summary><para>
+The exact end time of the recovery point to recover from, as a date or epoch milliseconds.
+An <c>end_time</c> returned when listing recovery points can be passed back as it is.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Request#rename_strategy"><summary><para>
+How to derive the new name of each recovered source from its name.
+Required when <c>mode</c> is <c>rename</c>, and not allowed when <c>mode</c> is <c>replace</c>.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Request#sources"><summary><para>
+The sources to recover. Each value is an index or data stream expression. Wildcards and exclusions prefixed with <c>-</c> are supported.
+The list must not be empty and must not contain blank values.
+</para></summary></member>
+</doc>

@@ -4,7 +4,7 @@
 Delete an ES|QL view.
 </para>
 <para>
-Deletes a stored ES|QL view.
+Deletes a stored ES|QL view. Deleting a reserved view fails.
 </para></summary></member>
   <member key="esql.delete_view.Request#name"><summary><para>
 The view name to remove.
