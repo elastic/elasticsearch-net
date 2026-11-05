@@ -269,7 +269,7 @@ public sealed class ClientCallTests
 			+ "{\n"
 			+ "  \"name\": \"book\"\n"
 			+ "}\n"
-			+ "\"\"\"), index: \"books\", id: null);",
+			+ "\"\"\"), index: \"books\", routeSlice: null, id: null);",
 			result.Code);
 	}
 
@@ -293,7 +293,7 @@ public sealed class ClientCallTests
 		var result = Convert("update", """{"doc":{"name":"book"}}""", options,
 			new Dictionary<string, string> { ["index"] = "books", ["id"] = "1" });
 
-		Assert.StartsWith("var response = await client\n    .UpdateAsync<JsonElement, JsonElement>(index: \"books\", id: \"1\", ", result.Code, StringComparison.Ordinal);
+		Assert.StartsWith("var response = await client\n    .UpdateAsync<JsonElement, JsonElement>(index: \"books\", routeSlice: null, id: \"1\", ", result.Code, StringComparison.Ordinal);
 		Assert.Contains(" => ", result.Code, StringComparison.Ordinal);
 	}
 
