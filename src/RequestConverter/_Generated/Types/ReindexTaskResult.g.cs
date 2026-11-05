@@ -52,7 +52,7 @@ public partial class ReindexTaskResult : RequestConverter.ICodeFormattable
 		if (Failures is not null)
 		{
 			initializer.Property("Failures");
-			writer.WriteInlineList(Failures, (w, item) => { item.FormatCode(w); });
+			writer.WriteInlineList(Failures, (w, item) => { if (item.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { item.Value1.FormatCode(w); } else { item.Value2.FormatCode(w); } });
 		}
 
 		if (Noops is not null)

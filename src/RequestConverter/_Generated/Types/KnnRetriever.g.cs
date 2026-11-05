@@ -59,7 +59,7 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 
 			if (QueryVector is not null)
 			{
-				writer.WriteFluentParams("QueryVector", QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
+				writer.WriteFluentCall("QueryVector", (w) => { if (QueryVector.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.Write("new "); w.WriteTypeRef("float"); w.Write("[] "); w.WriteInlineList(QueryVector.Value1, (w, item) => { w.WriteValue(item); w.Write("f"); }, "{ ", " }", ", "); } else { w.WriteString(QueryVector.Value2); } });
 			}
 
 			if (QueryVectorBuilder is not null)
@@ -123,7 +123,17 @@ public partial class KnnRetriever : RequestConverter.ICodeFormattable
 			if (QueryVector is not null)
 			{
 				initializer.Property("QueryVector");
-				writer.WriteInlineList(QueryVector, (w, item) => { w.WriteValue(item); w.Write("f"); });
+				if (QueryVector.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1)
+				{
+					writer.Write("new ");
+					writer.WriteTypeRef("float");
+					writer.Write("[] ");
+					writer.WriteInlineList(QueryVector.Value1, (w, item) => { w.WriteValue(item); w.Write("f"); }, "{ ", " }", ", ");
+				}
+				else
+				{
+					writer.WriteString(QueryVector.Value2);
+				}
 			}
 
 			if (QueryVectorBuilder is not null)

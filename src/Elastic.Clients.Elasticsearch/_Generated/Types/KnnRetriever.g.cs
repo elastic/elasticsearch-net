@@ -63,7 +63,7 @@ public sealed partial class KnnRetriever
 	public int? NumCandidates { get; set; }
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
-	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? QueryVector { get; set; }
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
@@ -161,16 +161,9 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 	}
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(params float[] values)
-	{
-		Instance.QueryVector = [.. values];
 		return this;
 	}
 
@@ -321,16 +314,9 @@ public readonly partial struct KnnRetrieverDescriptor
 	}
 
 	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<float>, string>? value)
 	{
 		Instance.QueryVector = value;
-		return this;
-	}
-
-	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
-	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(params float[] values)
-	{
-		Instance.QueryVector = [.. values];
 		return this;
 	}
 

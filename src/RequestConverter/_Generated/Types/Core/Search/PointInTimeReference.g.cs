@@ -37,6 +37,11 @@ public partial class PointInTimeReference : RequestConverter.ICodeFormattable
 			{
 				writer.WriteFluentCall("KeepAlive", (w) => { KeepAlive.FormatCode(w); });
 			}
+
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
 		}
 		else
 		{
@@ -50,6 +55,12 @@ public partial class PointInTimeReference : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("KeepAlive");
 				KeepAlive.FormatCode(writer);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			initializer.Dispose();

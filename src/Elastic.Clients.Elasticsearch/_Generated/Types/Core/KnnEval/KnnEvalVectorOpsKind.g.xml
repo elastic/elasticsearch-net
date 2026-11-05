@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.KnnEvalVectorOpsKind#full_precision_scan"><summary><para>
+Full-precision comparisons across all the matching vectors.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalVectorOpsKind#quantized_visit_plus_rescore"><summary><para>
+Quantized visits plus full-precision rescoring.
+</para></summary></member>
+</doc>

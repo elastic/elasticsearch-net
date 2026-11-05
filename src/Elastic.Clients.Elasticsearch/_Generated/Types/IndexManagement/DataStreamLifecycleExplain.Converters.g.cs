@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenTransitionStatus = System.Text.Json.JsonEncodedText.Encode("frozen_transition_status"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGenerationTime = System.Text.Json.JsonEncodedText.Encode("generation_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexCreationDateMillis = System.Text.Json.JsonEncodedText.Encode("index_creation_date_millis"u8);
@@ -34,11 +35,13 @@ public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Js
 	private static readonly System.Text.Json.JsonEncodedText PropRolloverDateMillis = System.Text.Json.JsonEncodedText.Encode("rollover_date_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceIndexCreation = System.Text.Json.JsonEncodedText.Encode("time_since_index_creation"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceRollover = System.Text.Json.JsonEncodedText.Encode("time_since_rollover"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnmanagedReason = System.Text.Json.JsonEncodedText.Encode("unmanaged_reason"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propError = default;
+		LocalJsonValue<string?> propFrozenTransitionStatus = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propGenerationTime = default;
 		LocalJsonValue<string> propIndex = default;
 		LocalJsonValue<System.DateTimeOffset?> propIndexCreationDateMillis = default;
@@ -47,9 +50,15 @@ public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Js
 		LocalJsonValue<System.DateTimeOffset?> propRolloverDateMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeSinceIndexCreation = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeSinceRollover = default;
+		LocalJsonValue<string?> propUnmanagedReason = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propError.TryReadProperty(ref reader, options, PropError, null))
+			{
+				continue;
+			}
+
+			if (propFrozenTransitionStatus.TryReadProperty(ref reader, options, PropFrozenTransitionStatus, null))
 			{
 				continue;
 			}
@@ -94,6 +103,11 @@ public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Js
 				continue;
 			}
 
+			if (propUnmanagedReason.TryReadProperty(ref reader, options, PropUnmanagedReason, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -107,6 +121,7 @@ public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Js
 		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Error = propError.Value,
+			FrozenTransitionStatus = propFrozenTransitionStatus.Value,
 			GenerationTime = propGenerationTime.Value,
 			Index = propIndex.Value,
 			IndexCreationDateMillis = propIndexCreationDateMillis.Value,
@@ -114,7 +129,8 @@ public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Js
 			ManagedByLifecycle = propManagedByLifecycle.Value,
 			RolloverDateMillis = propRolloverDateMillis.Value,
 			TimeSinceIndexCreation = propTimeSinceIndexCreation.Value,
-			TimeSinceRollover = propTimeSinceRollover.Value
+			TimeSinceRollover = propTimeSinceRollover.Value,
+			UnmanagedReason = propUnmanagedReason.Value
 		};
 	}
 
@@ -122,6 +138,7 @@ public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropFrozenTransitionStatus, value.FrozenTransitionStatus, null, null);
 		writer.WriteProperty(options, PropGenerationTime, value.GenerationTime, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropIndexCreationDateMillis, value.IndexCreationDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
@@ -130,6 +147,7 @@ public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Js
 		writer.WriteProperty(options, PropRolloverDateMillis, value.RolloverDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropTimeSinceIndexCreation, value.TimeSinceIndexCreation, null, null);
 		writer.WriteProperty(options, PropTimeSinceRollover, value.TimeSinceRollover, null, null);
+		writer.WriteProperty(options, PropUnmanagedReason, value.UnmanagedReason, null, null);
 		writer.WriteEndObject();
 	}
 }

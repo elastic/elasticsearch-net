@@ -32,9 +32,6 @@ public sealed partial class TermVectorsRequestParameters : Elastic.Transport.Req
 
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
-	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 }
 
 /// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
@@ -49,6 +46,16 @@ public sealed partial class TermVectorsRequest<TDocument> : Elastic.Clients.Elas
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public TermVectorsRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermVectorsRequest(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Optional("id", id))
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TermVectorsRequest(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice) : base(r => r.Required("index", index).Optional("_slice", routeSlice))
 	{
 	}
 
@@ -76,14 +83,14 @@ public sealed partial class TermVectorsRequest<TDocument> : Elastic.Clients.Elas
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
-	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#doc']/*"/>
 	public TDocument? Doc { get; set; }
@@ -149,6 +156,16 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>(typeof(TDocument));
 	}
 
+	public TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id? id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>(index, routeSlice, id);
+	}
+
+	public TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>(index, routeSlice);
+	}
+
 	public static explicit operator Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument> instance) => new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>(Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
@@ -166,6 +183,13 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 		return this;
 	}
 
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
 	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Preference(string? value)
 	{
@@ -177,13 +201,6 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
-		return this;
-	}
-
-	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

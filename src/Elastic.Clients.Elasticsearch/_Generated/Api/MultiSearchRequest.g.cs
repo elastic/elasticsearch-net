@@ -62,7 +62,7 @@ public sealed partial class MultiSearchRequestParameters : Elastic.Transport.Req
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -152,7 +152,7 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -285,9 +285,16 @@ public readonly partial struct MultiSearchRequestDescriptor
 	}
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RouteSlice(string? value)
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -500,9 +507,16 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	}
 
 	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RouteSlice(string? value)
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 

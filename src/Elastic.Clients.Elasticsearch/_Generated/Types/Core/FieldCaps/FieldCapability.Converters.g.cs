@@ -34,7 +34,9 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropNonAggregatableIndices = System.Text.Json.JsonEncodedText.Encode("non_aggregatable_indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNonDimensionIndices = System.Text.Json.JsonEncodedText.Encode("non_dimension_indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNonInferenceIndices = System.Text.Json.JsonEncodedText.Encode("non_inference_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonPassthroughIndices = System.Text.Json.JsonEncodedText.Encode("non_passthrough_indices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNonSearchableIndices = System.Text.Json.JsonEncodedText.Encode("non_searchable_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPassthrough = System.Text.Json.JsonEncodedText.Encode("passthrough"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearchable = System.Text.Json.JsonEncodedText.Encode("searchable"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric"u8);
@@ -52,7 +54,9 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonAggregatableIndices = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propNonDimensionIndices = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonInferenceIndices = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonPassthroughIndices = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propNonSearchableIndices = default;
+		LocalJsonValue<bool?> propPassthrough = default;
 		LocalJsonValue<bool> propSearchable = default;
 		LocalJsonValue<bool?> propTimeSeriesDimension = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType?> propTimeSeriesMetric = default;
@@ -104,7 +108,17 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 				continue;
 			}
 
+			if (propNonPassthroughIndices.TryReadProperty(ref reader, options, PropNonPassthroughIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
 			if (propNonSearchableIndices.TryReadProperty(ref reader, options, PropNonSearchableIndices, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPassthrough.TryReadProperty(ref reader, options, PropPassthrough, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -150,7 +164,9 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 			NonAggregatableIndices = propNonAggregatableIndices.Value,
 			NonDimensionIndices = propNonDimensionIndices.Value,
 			NonInferenceIndices = propNonInferenceIndices.Value,
+			NonPassthroughIndices = propNonPassthroughIndices.Value,
 			NonSearchableIndices = propNonSearchableIndices.Value,
+			Passthrough = propPassthrough.Value,
 			Searchable = propSearchable.Value,
 			TimeSeriesDimension = propTimeSeriesDimension.Value,
 			TimeSeriesMetric = propTimeSeriesMetric.Value,
@@ -170,7 +186,9 @@ public sealed partial class FieldCapabilityConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropNonAggregatableIndices, value.NonAggregatableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropNonDimensionIndices, value.NonDimensionIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropNonInferenceIndices, value.NonInferenceIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNonPassthroughIndices, value.NonPassthroughIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropNonSearchableIndices, value.NonSearchableIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPassthrough, value.Passthrough, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSearchable, value.Searchable, null, null);
 		writer.WriteProperty(options, PropTimeSeriesDimension, value.TimeSeriesDimension, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType>(o, v));

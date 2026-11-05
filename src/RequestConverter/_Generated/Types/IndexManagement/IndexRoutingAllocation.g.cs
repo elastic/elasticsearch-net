@@ -48,6 +48,11 @@ public partial class IndexRoutingAllocation : RequestConverter.ICodeFormattable
 			{
 				writer.WriteFluentDescriptorCall("InitialRecovery", (w) => { InitialRecovery.FormatCode(w); });
 			}
+
+			if (Require is not null)
+			{
+				writer.WriteFluentCall("Require", (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("System.Collections.Generic.ICollection<string>"); w.Write(">()"); w.WriteBlockList(Require, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); }); });
+			}
 		}
 		else
 		{
@@ -74,6 +79,19 @@ public partial class IndexRoutingAllocation : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("InitialRecovery");
 				InitialRecovery.FormatCode(writer);
+			}
+
+			if (Require is not null)
+			{
+				initializer.Property("Require");
+				writer.Write("new ");
+				writer.WriteTypeRef("System.Collections.Generic.Dictionary");
+				writer.Write("<");
+				writer.WriteTypeRef("string");
+				writer.Write(", ");
+				writer.WriteTypeRef("System.Collections.Generic.ICollection<string>");
+				writer.Write(">()");
+				writer.WriteBlockList(Require, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteInlineList(kvp.Value, (w, item) => { w.WriteString(item); }); w.Write(" }"); });
 			}
 
 			initializer.Dispose();

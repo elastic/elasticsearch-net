@@ -137,7 +137,7 @@ internal static partial class RequestFactory
 					case "sort":
 						{
 							if (parameter.Value is string value)
-								request.Sort = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ThreadType>.Parse(value);
+								request.Sort = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ThreadSortOrder>.Parse(value);
 							continue;
 						}
 

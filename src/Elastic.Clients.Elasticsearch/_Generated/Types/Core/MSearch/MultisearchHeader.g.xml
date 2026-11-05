@@ -6,7 +6,7 @@ Contains parameters used to limit or change the subsequent search body request.
   <member key="_global.msearch.MultisearchHeader#_slice"><summary><para>
 The slice identifier for routing the search to a specific slice.
 Use the special value <c>_all</c> to query all slices without restricting to a routing value.
-Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+When omitted, all slices are targeted.
 </para></summary></member>
   <member key="_global.msearch.MultisearchHeader#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.

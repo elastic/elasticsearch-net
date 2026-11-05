@@ -6,6 +6,10 @@ The ID of the document.
   <member key="_global.mtermvectors.Operation#_index"><summary><para>
 The index of the document.
 </para></summary></member>
+  <member key="_global.mtermvectors.Operation#_slice"><summary><para>
+The slice the document belongs to, for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>).
+It overrides the <c>_slice</c> set in the request path.
+</para></summary></member>
   <member key="_global.mtermvectors.Operation#doc"><summary><para>
 An artificial document (a document not present in the index) for which you want to retrieve term vectors.
 </para></summary></member>
@@ -30,6 +34,7 @@ If <c>true</c>, the response includes term positions.
 </para></summary></member>
   <member key="_global.mtermvectors.Operation#routing"><summary><para>
 Custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.mtermvectors.Operation#term_statistics"><summary><para>
 If true, the response includes term frequency and document frequency.

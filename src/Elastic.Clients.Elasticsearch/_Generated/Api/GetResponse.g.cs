@@ -59,6 +59,9 @@ public sealed partial class GetResponse<TDocument> : Elastic.Transport.Products.
 	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_seq_no']/*"/>
 	public long? SeqNo { get; set; }
 
+	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_slice']/*"/>
+	public string? Slice { get; set; }
+
 	/// <include file="GetResponse.g.xml" path="doc/member[@key='_global.get.Response#_source']/*"/>
 	public TDocument? Source { get; set; }
 

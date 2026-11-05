@@ -375,6 +375,11 @@ internal static partial class RequestFactory
 
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateSecurityCreateApiKey(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
+		if (string.IsNullOrEmpty(body))
+		{
+			throw new System.InvalidOperationException("Body is required.");
+		}
+
 		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest>(serializer, body);
 		if (queryParameters is not null)
 		{
@@ -1252,6 +1257,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "with_profile_uid":
+						{
+							if (parameter.Value is string value)
+								request.WithProfileUid = bool.Parse(value);
+							continue;
+						}
+
 					default:
 						{
 							unsupportedParameters.Add(parameter.Key);
@@ -1852,6 +1864,34 @@ internal static partial class RequestFactory
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateSecurityQueryRole(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest>(serializer, body);
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateSecurityQueryServiceAccounts(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.QueryServiceAccountsRequest>(serializer, body);
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "with_profile_uid":
+						{
+							if (parameter.Value is string value)
+								request.WithProfileUid = bool.Parse(value);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
 		return request;
 	}
 

@@ -30,11 +30,13 @@ public sealed partial class AzureRepositorySettingsConverter : System.Text.Json.
 	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataAccessTier = System.Text.Json.JsonEncodedText.Encode("data_access_tier"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLocationMode = System.Text.Json.JsonEncodedText.Encode("location_mode"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentBatchDeletes = System.Text.Json.JsonEncodedText.Encode("max_concurrent_batch_deletes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadataAccessTier = System.Text.Json.JsonEncodedText.Encode("metadata_access_tier"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -45,11 +47,13 @@ public sealed partial class AzureRepositorySettingsConverter : System.Text.Json.
 		LocalJsonValue<string?> propClient = default;
 		LocalJsonValue<bool?> propCompress = default;
 		LocalJsonValue<string?> propContainer = default;
+		LocalJsonValue<string?> propDataAccessTier = default;
 		LocalJsonValue<int?> propDeleteObjectsMaxSize = default;
 		LocalJsonValue<string?> propLocationMode = default;
 		LocalJsonValue<int?> propMaxConcurrentBatchDeletes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxRestoreBytesPerSec = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxSnapshotBytesPerSec = default;
+		LocalJsonValue<string?> propMetadataAccessTier = default;
 		LocalJsonValue<bool?> propReadonly = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -74,6 +78,11 @@ public sealed partial class AzureRepositorySettingsConverter : System.Text.Json.
 			}
 
 			if (propContainer.TryReadProperty(ref reader, options, PropContainer, null))
+			{
+				continue;
+			}
+
+			if (propDataAccessTier.TryReadProperty(ref reader, options, PropDataAccessTier, null))
 			{
 				continue;
 			}
@@ -103,6 +112,11 @@ public sealed partial class AzureRepositorySettingsConverter : System.Text.Json.
 				continue;
 			}
 
+			if (propMetadataAccessTier.TryReadProperty(ref reader, options, PropMetadataAccessTier, null))
+			{
+				continue;
+			}
+
 			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
@@ -125,11 +139,13 @@ public sealed partial class AzureRepositorySettingsConverter : System.Text.Json.
 			Client = propClient.Value,
 			Compress = propCompress.Value,
 			Container = propContainer.Value,
+			DataAccessTier = propDataAccessTier.Value,
 			DeleteObjectsMaxSize = propDeleteObjectsMaxSize.Value,
 			LocationMode = propLocationMode.Value,
 			MaxConcurrentBatchDeletes = propMaxConcurrentBatchDeletes.Value,
 			MaxRestoreBytesPerSec = propMaxRestoreBytesPerSec.Value,
 			MaxSnapshotBytesPerSec = propMaxSnapshotBytesPerSec.Value,
+			MetadataAccessTier = propMetadataAccessTier.Value,
 			Readonly = propReadonly.Value
 		};
 	}
@@ -142,11 +158,13 @@ public sealed partial class AzureRepositorySettingsConverter : System.Text.Json.
 		writer.WriteProperty(options, PropClient, value.Client, null, null);
 		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropContainer, value.Container, null, null);
+		writer.WriteProperty(options, PropDataAccessTier, value.DataAccessTier, null, null);
 		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropLocationMode, value.LocationMode, null, null);
 		writer.WriteProperty(options, PropMaxConcurrentBatchDeletes, value.MaxConcurrentBatchDeletes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
+		writer.WriteProperty(options, PropMetadataAccessTier, value.MetadataAccessTier, null, null);
 		writer.WriteProperty(options, PropReadonly, value.Readonly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}

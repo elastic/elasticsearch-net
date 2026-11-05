@@ -29,6 +29,9 @@ public sealed partial class GetServiceAccountsRequestParameters : Elastic.Transp
 {
 	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#type']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>? Type { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>?>("type"); set => Q("type", value); }
+
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#with_profile_uid']/*"/>
+	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
 /// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
@@ -70,6 +73,9 @@ public sealed partial class GetServiceAccountsRequest : Elastic.Clients.Elastics
 
 	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#type']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>? Type { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ServiceAccountType>?>("type"); set => Q("type", value); }
+
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#with_profile_uid']/*"/>
+	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
 /// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
@@ -127,6 +133,13 @@ public readonly partial struct GetServiceAccountsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Type(params Elastic.Clients.Elasticsearch.Security.ServiceAccountType[] values)
 	{
 		Instance.Type = [.. values];
+		return this;
+	}
+
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#with_profile_uid']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor WithProfileUid(bool? value = true)
+	{
+		Instance.WithProfileUid = value;
 		return this;
 	}
 

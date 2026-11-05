@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.update_aliases.AliasActionResult#action"><summary><para>
+The action this result describes.
+</para></summary></member>
+  <member key="indices.update_aliases.AliasActionResult#error"><summary><para>
+Cause of the failure.
+Returned only when this action fails.
+</para></summary></member>
+  <member key="indices.update_aliases.AliasActionResult#status"><summary><para>
+HTTP status for this action.
+<c>200</c> when the action succeeds.
+</para></summary></member>
+</doc>

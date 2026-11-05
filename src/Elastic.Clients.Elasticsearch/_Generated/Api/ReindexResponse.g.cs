@@ -47,7 +47,7 @@ public sealed partial class ReindexResponse : Elastic.Transport.Products.Elastic
 	public long? Deleted { get; set; }
 
 	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#failures']/*"/>
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>? Failures { get; set; }
 
 	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#noops']/*"/>
 	public long? Noops { get; set; }

@@ -52,6 +52,12 @@ public partial class CreateRequest<TDocument> : RequestConverter.IClientCallForm
 				Index.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (IncludeSourceOnError is not null)
 			{
 				initializer.Property("IncludeSourceOnError");
@@ -135,6 +141,18 @@ public partial class CreateRequest<TDocument> : RequestConverter.IClientCallForm
 		{
 			using var _oi = writer.ForceObjectInitializer();
 			Index.FormatCode(writer);
+		}
+
+		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("routeSlice");
+		if (RouteSlice is not null)
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(RouteSlice);
+		}
+		else
+		{
+			writer.Write("null");
 		}
 
 		writer.Write(", ");

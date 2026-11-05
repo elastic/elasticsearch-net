@@ -54,6 +54,12 @@ public partial class SearchRequest : RequestConverter.IClientCallFormattable
 				Indices.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteInlineList(RouteSlice, (w, item) => { w.WriteString(item); });
+			}
+
 			if (AllowNoIndices is not null)
 			{
 				initializer.Property("AllowNoIndices");
@@ -174,12 +180,6 @@ public partial class SearchRequest : RequestConverter.IClientCallFormattable
 			{
 				initializer.Property("RestTotalHitsAsInt");
 				writer.WriteValue(RestTotalHitsAsInt.Value);
-			}
-
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)
@@ -505,6 +505,11 @@ public partial class SearchRequest : RequestConverter.IClientCallFormattable
 			writer.WriteFluentCall("Indices", (w) => { Indices.FormatCode(w); });
 		}
 
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentParams("RouteSlice", RouteSlice, (w, item) => { w.WriteString(item); });
+		}
+
 		if (AllowNoIndices is not null)
 		{
 			writer.WriteFluentCall("AllowNoIndices", (w) => { w.WriteValue(AllowNoIndices.Value); });
@@ -603,11 +608,6 @@ public partial class SearchRequest : RequestConverter.IClientCallFormattable
 		if (RestTotalHitsAsInt is not null)
 		{
 			writer.WriteFluentCall("RestTotalHitsAsInt", (w) => { w.WriteValue(RestTotalHitsAsInt.Value); });
-		}
-
-		if (RouteSlice is not null)
-		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
 		}
 
 		if (Routing is not null)

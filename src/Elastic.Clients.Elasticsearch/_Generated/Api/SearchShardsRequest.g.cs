@@ -46,7 +46,7 @@ public sealed partial class SearchShardsRequestParameters : Elastic.Transport.Re
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -101,7 +101,7 @@ public sealed partial class SearchShardsRequest : Elastic.Clients.Elasticsearch.
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -189,9 +189,16 @@ public readonly partial struct SearchShardsRequestDescriptor
 	}
 
 	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor RouteSlice(string? value)
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -345,9 +352,16 @@ public readonly partial struct SearchShardsRequestDescriptor<TDocument>
 	}
 
 	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> RouteSlice(string? value)
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 

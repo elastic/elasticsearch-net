@@ -36,6 +36,64 @@ public partial class DataRecoveryNamespacedClient : Elastic.Clients.Elasticsearc
 	{
 	}
 
+	/// <include file="../Api/DataRecovery/GetRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse GetRecovery(Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse GetRecovery(Elastic.Clients.Elasticsearch.Id recoveryId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestDescriptor(recoveryId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse GetRecovery(Elastic.Clients.Elasticsearch.Id recoveryId, System.Action<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestDescriptor(recoveryId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse> GetRecoveryAsync(Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse> GetRecoveryAsync(Elastic.Clients.Elasticsearch.Id recoveryId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestDescriptor(recoveryId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse> GetRecoveryAsync(Elastic.Clients.Elasticsearch.Id recoveryId, System.Action<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestDescriptor(recoveryId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequestParameters>(request, cancellationToken);
+	}
+
 	/// <include file="../Api/DataRecovery/GetRecoveryPointsRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery_points.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery_points.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsResponse GetRecoveryPoints(Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsRequest request)
@@ -92,5 +150,217 @@ public partial class DataRecoveryNamespacedClient : Elastic.Clients.Elasticsearc
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoverySourcesRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse GetRecoverySources(Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoverySourcesRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse GetRecoverySources()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoverySourcesRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse GetRecoverySources(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoverySourcesRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse> GetRecoverySourcesAsync(Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoverySourcesRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse> GetRecoverySourcesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRecoverySourcesRequest.g.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_recovery_sources.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse> GetRecoverySourcesAsync(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRpoSeriesRequest.g.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse GetRpoSeries(Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRpoSeriesRequest.g.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse GetRpoSeries()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRpoSeriesRequest.g.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse GetRpoSeries(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRpoSeriesRequest.g.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse> GetRpoSeriesAsync(Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRpoSeriesRequest.g.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse> GetRpoSeriesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/GetRpoSeriesRequest.g.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.get_rpo_series.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse> GetRpoSeriesAsync(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/ListRecoveriesRequest.g.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse ListRecoveries(Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/ListRecoveriesRequest.g.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse ListRecoveries()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/ListRecoveriesRequest.g.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse ListRecoveries(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/ListRecoveriesRequest.g.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse> ListRecoveriesAsync(Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/ListRecoveriesRequest.g.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse> ListRecoveriesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/ListRecoveriesRequest.g.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.list_recoveries.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse> ListRecoveriesAsync(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesResponse, Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/StartRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse StartRecovery(Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/StartRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	public virtual Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse StartRecovery(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestParameters>(request);
+	}
+
+	/// <include file="../Api/DataRecovery/StartRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse> StartRecoveryAsync(Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestParameters>(request, cancellationToken);
+	}
+
+	/// <include file="../Api/DataRecovery/StartRecoveryRequest.g.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='data_recovery.start_recovery.Request']/*"/>
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse> StartRecoveryAsync(System.Action<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequest, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryResponse, Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequestParameters>(request, cancellationToken);
 	}
 }

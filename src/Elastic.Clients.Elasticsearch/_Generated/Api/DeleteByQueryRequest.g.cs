@@ -72,9 +72,6 @@ public sealed partial class DeleteByQueryRequestParameters : Elastic.Transport.R
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
-	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -122,6 +119,11 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteByQueryRequest(Elastic.Clients.Elasticsearch.Indices indices, System.Collections.Generic.ICollection<string>? routeSlice) : base(r => r.Required("index", indices).Optional("_slice", routeSlice))
+	{
+	}
+
 	public DeleteByQueryRequest()
 	{
 	}
@@ -142,6 +144,9 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => P<System.Collections.Generic.ICollection<string>?>("_slice"); set => PO("_slice", value); }
 
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -188,9 +193,6 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
-	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -233,6 +235,9 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+
 	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
@@ -257,6 +262,11 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(indices);
 	}
 
+	public DeleteByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(indices, routeSlice);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public DeleteByQueryRequestDescriptor()
 	{
@@ -270,6 +280,20 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -382,13 +406,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
-		return this;
-	}
-
-	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -515,6 +532,76 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
+	{
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
 		return this;
 	}
 
@@ -657,6 +744,11 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(typeof(TDocument));
 	}
 
+	public DeleteByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(indices, routeSlice);
+	}
+
 	public static explicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.DeleteByQueryRequest instance) => new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRequest(Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
@@ -664,6 +756,20 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -776,13 +882,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
-		return this;
-	}
-
-	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -902,6 +1001,55 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
+	{
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#runtime_mappings']/*"/>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
 		return this;
 	}
 

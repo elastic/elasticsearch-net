@@ -27,6 +27,7 @@ public sealed partial class FieldSummaryConverter : System.Text.Json.Serializati
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAny = System.Text.Json.JsonEncodedText.Encode("any"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocValuesSkipper = System.Text.Json.JsonEncodedText.Encode("doc_values_skipper"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropInvertedIndex = System.Text.Json.JsonEncodedText.Encode("inverted_index"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropKnnVectors = System.Text.Json.JsonEncodedText.Encode("knn_vectors"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms"u8);
@@ -39,6 +40,7 @@ public sealed partial class FieldSummaryConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int> propAny = default;
 		LocalJsonValue<int> propDocValues = default;
+		LocalJsonValue<int> propDocValuesSkipper = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex> propInvertedIndex = default;
 		LocalJsonValue<int> propKnnVectors = default;
 		LocalJsonValue<int> propNorms = default;
@@ -53,6 +55,11 @@ public sealed partial class FieldSummaryConverter : System.Text.Json.Serializati
 			}
 
 			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			{
+				continue;
+			}
+
+			if (propDocValuesSkipper.TryReadProperty(ref reader, options, PropDocValuesSkipper, null))
 			{
 				continue;
 			}
@@ -101,6 +108,7 @@ public sealed partial class FieldSummaryConverter : System.Text.Json.Serializati
 		{
 			Any = propAny.Value,
 			DocValues = propDocValues.Value,
+			DocValuesSkipper = propDocValuesSkipper.Value,
 			InvertedIndex = propInvertedIndex.Value,
 			KnnVectors = propKnnVectors.Value,
 			Norms = propNorms.Value,
@@ -115,6 +123,7 @@ public sealed partial class FieldSummaryConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAny, value.Any, null, null);
 		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDocValuesSkipper, value.DocValuesSkipper, null, null);
 		writer.WriteProperty(options, PropInvertedIndex, value.InvertedIndex, null, null);
 		writer.WriteProperty(options, PropKnnVectors, value.KnnVectors, null, null);
 		writer.WriteProperty(options, PropNorms, value.Norms, null, null);

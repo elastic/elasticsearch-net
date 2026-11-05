@@ -37,6 +37,10 @@ public static class RerankInputFormatCodeFormatter
 				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.RerankInputFormat");
 				writer.Write(".Text");
 				break;
+			case Elastic.Clients.Elasticsearch.Inference.RerankInputFormat.Url:
+				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.RerankInputFormat");
+				writer.Write(".Url");
+				break;
 			default:
 				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected RerankInputFormat value.");
 		}

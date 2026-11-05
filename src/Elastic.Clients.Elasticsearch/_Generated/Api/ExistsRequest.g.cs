@@ -68,6 +68,11 @@ public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Reques
 	{
 	}
 
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExistsRequest(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Required("id", id))
+	{
+	}
+
 	public ExistsRequest()
 	{
 	}
@@ -91,6 +96,9 @@ public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Reques
 
 	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
 
 	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -140,6 +148,11 @@ public readonly partial struct ExistsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.ExistsRequest(index, id);
 	}
 
+	public ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.ExistsRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExistsRequestDescriptor()
 	{
@@ -160,6 +173,13 @@ public readonly partial struct ExistsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -361,6 +381,11 @@ public readonly partial struct ExistsRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.ExistsRequest(typeof(TDocument), id);
 	}
 
+	public ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.ExistsRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExistsRequestDescriptor()
 	{
@@ -381,6 +406,13 @@ public readonly partial struct ExistsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

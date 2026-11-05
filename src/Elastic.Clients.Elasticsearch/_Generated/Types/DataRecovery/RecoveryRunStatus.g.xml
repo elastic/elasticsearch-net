@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery._types.RecoveryRunStatus#completed"><summary><para>
+Every source was recovered.
+</para></summary></member>
+  <member key="data_recovery._types.RecoveryRunStatus#failed"><summary><para>
+The recovery stopped without recovering every source. The <c>failures</c> of the recovery describe why.
+</para></summary></member>
+  <member key="data_recovery._types.RecoveryRunStatus#running"><summary><para>
+The recovery has not finished.
+</para></summary></member>
+</doc>

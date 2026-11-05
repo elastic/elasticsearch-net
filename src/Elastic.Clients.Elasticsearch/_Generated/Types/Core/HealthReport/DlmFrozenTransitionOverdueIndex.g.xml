@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.health_report.DlmFrozenTransitionOverdueIndex#index_name"><summary><para>
+The name of the overdue index.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionOverdueIndex#transition_state"><summary><para>
+The transition state of the overdue index.
+</para></summary></member>
+</doc>

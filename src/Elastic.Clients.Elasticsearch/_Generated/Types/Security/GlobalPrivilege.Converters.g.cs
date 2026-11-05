@@ -27,12 +27,16 @@ public sealed partial class GlobalPrivilegeConverter : System.Text.Json.Serializ
 {
 	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDataSource = System.Text.Json.JsonEncodedText.Encode("data_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRole = System.Text.Json.JsonEncodedText.Encode("role"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges?> propApplication = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>?> propDataSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.WriteProfileGlobalUserPrivileges?> propProfile = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ManageRolesGlobalUserPrivileges?> propRole = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propApplication.TryReadProperty(ref reader, options, PropApplication, null))
@@ -41,6 +45,16 @@ public sealed partial class GlobalPrivilegeConverter : System.Text.Json.Serializ
 			}
 
 			if (propDataSource.TryReadProperty(ref reader, options, PropDataSource, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>(o, null)))
+			{
+				continue;
+			}
+
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			{
+				continue;
+			}
+
+			if (propRole.TryReadProperty(ref reader, options, PropRole, null))
 			{
 				continue;
 			}
@@ -58,7 +72,9 @@ public sealed partial class GlobalPrivilegeConverter : System.Text.Json.Serializ
 		return new Elastic.Clients.Elasticsearch.Security.GlobalPrivilege(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Application = propApplication.Value,
-			DataSource = propDataSource.Value
+			DataSource = propDataSource.Value,
+			Profile = propProfile.Value,
+			Role = propRole.Value
 		};
 	}
 
@@ -67,6 +83,8 @@ public sealed partial class GlobalPrivilegeConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApplication, value.Application, null, null);
 		writer.WriteProperty(options, PropDataSource, value.DataSource, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>(o, v, null));
+		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropRole, value.Role, null, null);
 		writer.WriteEndObject();
 	}
 }

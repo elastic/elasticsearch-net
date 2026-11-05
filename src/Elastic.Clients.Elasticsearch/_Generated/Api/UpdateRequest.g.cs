@@ -48,9 +48,6 @@ public sealed partial class UpdateRequestParameters : Elastic.Transport.RequestP
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#retry_on_conflict']/*"/>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
-	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -74,6 +71,11 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : Elastic
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateRequest(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Required("id", id))
 	{
 	}
 
@@ -101,6 +103,9 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : Elastic
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
@@ -121,9 +126,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : Elastic
 
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#retry_on_conflict']/*"/>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
-
-	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -179,6 +181,11 @@ public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocume
 		Instance = new Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>(index, id);
 	}
 
+	public UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public UpdateRequestDescriptor()
 	{
@@ -199,6 +206,13 @@ public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocume
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -248,13 +262,6 @@ public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocume
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> RetryOnConflict(int? value)
 	{
 		Instance.RetryOnConflict = value;
-		return this;
-	}
-
-	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

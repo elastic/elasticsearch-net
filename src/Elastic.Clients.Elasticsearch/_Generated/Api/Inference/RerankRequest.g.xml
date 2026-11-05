@@ -53,6 +53,18 @@ object array example:
     "value": "data:image/jpeg;base64,..."
   }
 ]
+</code>
+<para>
+object array example using the <c>url</c> format (available in Elasticsearch 9.6.0 and later):
+</para>
+<code>
+"input": [
+  {
+    "type": "image",
+    "format": "url",
+    "value": "https://example.com/image.jpg"
+  }
+]
 </code></summary></member>
   <member key="inference.rerank.Request#query"><summary><para>
 Query input.
@@ -77,6 +89,16 @@ object example:
   "type": "image",
   "format": "base64",
   "value": "data:image/jpeg;base64,..."
+}
+</code>
+<para>
+object example using the <c>url</c> format (available in Elasticsearch 9.6.0 and later):
+</para>
+<code>
+"query": {
+  "type": "image",
+  "format": "url",
+  "value": "https://example.com/image.jpg"
 }
 </code></summary></member>
   <member key="inference.rerank.Request#return_documents"><summary><para>

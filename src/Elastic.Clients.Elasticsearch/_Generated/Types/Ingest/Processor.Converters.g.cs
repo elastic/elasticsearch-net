@@ -54,7 +54,9 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 	private static readonly System.Text.Json.JsonEncodedText VariantKv = System.Text.Json.JsonEncodedText.Encode("kv");
 	private static readonly System.Text.Json.JsonEncodedText VariantLowercase = System.Text.Json.JsonEncodedText.Encode("lowercase");
 	private static readonly System.Text.Json.JsonEncodedText VariantNetworkDirection = System.Text.Json.JsonEncodedText.Encode("network_direction");
+	private static readonly System.Text.Json.JsonEncodedText VariantNormalizeForStream = System.Text.Json.JsonEncodedText.Encode("normalize_for_stream");
 	private static readonly System.Text.Json.JsonEncodedText VariantPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
+	private static readonly System.Text.Json.JsonEncodedText VariantRecoverFailureDocument = System.Text.Json.JsonEncodedText.Encode("recover_failure_document");
 	private static readonly System.Text.Json.JsonEncodedText VariantRedact = System.Text.Json.JsonEncodedText.Encode("redact");
 	private static readonly System.Text.Json.JsonEncodedText VariantRegisteredDomain = System.Text.Json.JsonEncodedText.Encode("registered_domain");
 	private static readonly System.Text.Json.JsonEncodedText VariantRemove = System.Text.Json.JsonEncodedText.Encode("remove");
@@ -311,11 +313,27 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
+			if (reader.ValueTextEquals(VariantNormalizeForStream))
+			{
+				variantType = VariantNormalizeForStream.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessor>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantPipeline))
 			{
 				variantType = VariantPipeline.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRecoverFailureDocument))
+			{
+				variantType = VariantRecoverFailureDocument.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessor>(options, null);
 				continue;
 			}
 
@@ -563,8 +581,14 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 			case "network_direction":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor)value.Variant, null, null);
 				break;
+			case "normalize_for_stream":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.NormalizeForStreamProcessor)value.Variant, null, null);
+				break;
 			case "pipeline":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor)value.Variant, null, null);
+				break;
+			case "recover_failure_document":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RecoverFailureDocumentProcessor)value.Variant, null, null);
 				break;
 			case "redact":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.RedactProcessor)value.Variant, null, null);

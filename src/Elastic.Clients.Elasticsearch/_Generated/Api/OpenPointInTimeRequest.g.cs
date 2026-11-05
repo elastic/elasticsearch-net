@@ -45,6 +45,9 @@ public sealed partial class OpenPointInTimeRequestParameters : Elastic.Transport
 	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
+	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#_slice']/*"/>
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
+
 	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 }
@@ -97,6 +100,9 @@ public sealed partial class OpenPointInTimeRequest : Elastic.Clients.Elasticsear
 
 	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#_slice']/*"/>
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => Q<System.Collections.Generic.ICollection<string>?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -187,6 +193,20 @@ public readonly partial struct OpenPointInTimeRequestDescriptor
 	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
+		return this;
+	}
+
+	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -359,6 +379,20 @@ public readonly partial struct OpenPointInTimeRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
+		return this;
+	}
+
+	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="OpenPointInTimeRequest.g.xml" path="doc/member[@key='_global.open_point_in_time.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 

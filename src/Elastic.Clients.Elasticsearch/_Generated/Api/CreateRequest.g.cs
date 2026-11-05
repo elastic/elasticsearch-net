@@ -64,6 +64,12 @@ public sealed partial class CreateRequestParameters : Elastic.Transport.RequestP
 public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CreateRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Required("id", id))
+	{
+		Document = document;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateRequest(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 		Document = document;
@@ -104,6 +110,9 @@ public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticse
 
 	/// <include file="CreateRequest.g.xml" path="doc/member[@key='_global.create.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <include file="CreateRequest.g.xml" path="doc/member[@key='_global.create.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
 
 	/// <include file="CreateRequest.g.xml" path="doc/member[@key='_global.create.Request#include_source_on_error']/*"/>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
@@ -149,6 +158,11 @@ public readonly partial struct CreateRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
+	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(document, index, routeSlice, id);
+	}
+
 	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(document, index, id);
@@ -184,6 +198,13 @@ public readonly partial struct CreateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="CreateRequest.g.xml" path="doc/member[@key='_global.create.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

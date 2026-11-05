@@ -35,6 +35,12 @@ public sealed partial class SegmentsRequestParameters : Elastic.Transport.Reques
 
 	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#include_auto_calibration']/*"/>
+	public bool? IncludeAutoCalibration { get => Q<bool?>("include_auto_calibration"); set => Q("include_auto_calibration", value); }
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#vector_formats']/*"/>
+	public bool? VectorFormats { get => Q<bool?>("vector_formats"); set => Q("vector_formats", value); }
 }
 
 /// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
@@ -75,6 +81,12 @@ public sealed partial class SegmentsRequest : Elastic.Clients.Elasticsearch.Requ
 
 	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#include_auto_calibration']/*"/>
+	public bool? IncludeAutoCalibration { get => Q<bool?>("include_auto_calibration"); set => Q("include_auto_calibration", value); }
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#vector_formats']/*"/>
+	public bool? VectorFormats { get => Q<bool?>("vector_formats"); set => Q("vector_formats", value); }
 }
 
 /// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
@@ -134,6 +146,20 @@ public readonly partial struct SegmentsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#include_auto_calibration']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor IncludeAutoCalibration(bool? value = true)
+	{
+		Instance.IncludeAutoCalibration = value;
+		return this;
+	}
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#vector_formats']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor VectorFormats(bool? value = true)
+	{
+		Instance.VectorFormats = value;
 		return this;
 	}
 
@@ -255,6 +281,20 @@ public readonly partial struct SegmentsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#include_auto_calibration']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> IncludeAutoCalibration(bool? value = true)
+	{
+		Instance.IncludeAutoCalibration = value;
+		return this;
+	}
+
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#vector_formats']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> VectorFormats(bool? value = true)
+	{
+		Instance.VectorFormats = value;
 		return this;
 	}
 

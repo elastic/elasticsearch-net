@@ -34,6 +34,7 @@ public sealed partial class MultiTermVectorsOperationConverter : System.Text.Jso
 	private static readonly System.Text.Json.JsonEncodedText PropOffsets = System.Text.Json.JsonEncodedText.Encode("offsets"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPayloads = System.Text.Json.JsonEncodedText.Encode("payloads"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPositions = System.Text.Json.JsonEncodedText.Encode("positions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouteSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTermStatistics = System.Text.Json.JsonEncodedText.Encode("term_statistics"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
@@ -51,6 +52,7 @@ public sealed partial class MultiTermVectorsOperationConverter : System.Text.Jso
 		LocalJsonValue<bool?> propOffsets = default;
 		LocalJsonValue<bool?> propPayloads = default;
 		LocalJsonValue<bool?> propPositions = default;
+		LocalJsonValue<string?> propRouteSlice = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
 		LocalJsonValue<bool?> propTermStatistics = default;
 		LocalJsonValue<long?> propVersion = default;
@@ -102,6 +104,11 @@ public sealed partial class MultiTermVectorsOperationConverter : System.Text.Jso
 				continue;
 			}
 
+			if (propRouteSlice.TryReadProperty(ref reader, options, PropRouteSlice, null))
+			{
+				continue;
+			}
+
 			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
@@ -143,6 +150,7 @@ public sealed partial class MultiTermVectorsOperationConverter : System.Text.Jso
 			Offsets = propOffsets.Value,
 			Payloads = propPayloads.Value,
 			Positions = propPositions.Value,
+			RouteSlice = propRouteSlice.Value,
 			Routing = propRouting.Value,
 			TermStatistics = propTermStatistics.Value,
 			Version = propVersion.Value,
@@ -162,6 +170,7 @@ public sealed partial class MultiTermVectorsOperationConverter : System.Text.Jso
 		writer.WriteProperty(options, PropOffsets, value.Offsets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPayloads, value.Payloads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPositions, value.Positions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropRouteSlice, value.RouteSlice, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropTermStatistics, value.TermStatistics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));

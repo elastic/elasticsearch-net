@@ -49,6 +49,8 @@ public sealed partial class AuthenticatedUser
 		_ = sentinel;
 	}
 
+	/// <include file="AuthenticatedUser.g.xml" path="doc/member[@key='security.get_token.AuthenticatedUser#api_key']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey? ApiKey { get; set; }
 	public Elastic.Clients.Elasticsearch.Security.AuthenticationProvider? AuthenticationProvider { get; set; }
 	public required Elastic.Clients.Elasticsearch.Security.UserRealm AuthenticationRealm { get; set; }
 	public required string AuthenticationType { get; set; }
@@ -59,5 +61,8 @@ public sealed partial class AuthenticatedUser
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 	public string? ProfileUid { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+
+	/// <include file="AuthenticatedUser.g.xml" path="doc/member[@key='security.get_token.AuthenticatedUser#token']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.AuthenticateToken? Token { get; set; }
 	public required string Username { get; set; }
 }

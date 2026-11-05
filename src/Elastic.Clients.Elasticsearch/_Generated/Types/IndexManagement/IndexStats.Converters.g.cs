@@ -27,6 +27,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 {
 	private static readonly System.Text.Json.JsonEncodedText PropBulk = System.Text.Json.JsonEncodedText.Encode("bulk"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropFlush = System.Text.Json.JsonEncodedText.Encode("flush"u8);
@@ -41,6 +42,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShardStats = System.Text.Json.JsonEncodedText.Encode("shard_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTranslog = System.Text.Json.JsonEncodedText.Encode("translog"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropWarmer = System.Text.Json.JsonEncodedText.Encode("warmer"u8);
@@ -50,6 +52,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.BulkStats?> propBulk = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.CompletionStats?> propCompletion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats?> propDenseVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.DocStats?> propDocs = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.FielddataStats?> propFielddata = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.FlushStats?> propFlush = default;
@@ -64,6 +67,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchStats?> propSearch = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SegmentsStats?> propSegments = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats?> propShardStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats?> propSparseVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.StoreStats?> propStore = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TranslogStats?> propTranslog = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.WarmerStats?> propWarmer = default;
@@ -75,6 +79,11 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 			}
 
 			if (propCompletion.TryReadProperty(ref reader, options, PropCompletion, null))
+			{
+				continue;
+			}
+
+			if (propDenseVector.TryReadProperty(ref reader, options, PropDenseVector, null))
 			{
 				continue;
 			}
@@ -149,6 +158,11 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 				continue;
 			}
 
+			if (propSparseVector.TryReadProperty(ref reader, options, PropSparseVector, null))
+			{
+				continue;
+			}
+
 			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
 			{
 				continue;
@@ -178,6 +192,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 		{
 			Bulk = propBulk.Value,
 			Completion = propCompletion.Value,
+			DenseVector = propDenseVector.Value,
 			Docs = propDocs.Value,
 			Fielddata = propFielddata.Value,
 			Flush = propFlush.Value,
@@ -192,6 +207,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 			Search = propSearch.Value,
 			Segments = propSegments.Value,
 			ShardStats = propShardStats.Value,
+			SparseVector = propSparseVector.Value,
 			Store = propStore.Value,
 			Translog = propTranslog.Value,
 			Warmer = propWarmer.Value
@@ -203,6 +219,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBulk, value.Bulk, null, null);
 		writer.WriteProperty(options, PropCompletion, value.Completion, null, null);
+		writer.WriteProperty(options, PropDenseVector, value.DenseVector, null, null);
 		writer.WriteProperty(options, PropDocs, value.Docs, null, null);
 		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, null);
 		writer.WriteProperty(options, PropFlush, value.Flush, null, null);
@@ -217,6 +234,7 @@ public sealed partial class IndexStatsConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropSearch, value.Search, null, null);
 		writer.WriteProperty(options, PropSegments, value.Segments, null, null);
 		writer.WriteProperty(options, PropShardStats, value.ShardStats, null, null);
+		writer.WriteProperty(options, PropSparseVector, value.SparseVector, null, null);
 		writer.WriteProperty(options, PropStore, value.Store, null, null);
 		writer.WriteProperty(options, PropTranslog, value.Translog, null, null);
 		writer.WriteProperty(options, PropWarmer, value.Warmer, null, null);

@@ -51,6 +51,9 @@ public sealed partial class ShardSegmentRouting
 	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#primary']/*"/>
 	public required bool Primary { get; set; }
 
+	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#relocating_node']/*"/>
+	public string? RelocatingNode { get; set; }
+
 	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#state']/*"/>
 	public required string State { get; set; }
 }

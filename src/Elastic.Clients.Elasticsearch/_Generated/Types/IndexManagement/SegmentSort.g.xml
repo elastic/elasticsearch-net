@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.segments.SegmentSort#field"><summary><para>
+The name of the sort field.
+</para></summary></member>
+  <member key="indices.segments.SegmentSort#missing"><summary><para>
+The value used for documents that are missing the field.
+</para></summary></member>
+  <member key="indices.segments.SegmentSort#mode"><summary><para>
+The selector used to pick a value from multi-valued fields, such as <c>min</c> or <c>max</c>. Only returned for numeric and keyword fields.
+</para></summary></member>
+  <member key="indices.segments.SegmentSort#reverse"><summary><para>
+If <c>true</c>, the sort order is descending.
+</para></summary></member>
+</doc>

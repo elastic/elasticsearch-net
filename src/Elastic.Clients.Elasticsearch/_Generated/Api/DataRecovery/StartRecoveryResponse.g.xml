@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.start_recovery.Response#recovery_id"><summary><para>
+The identifier of the recovery that was started.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Response#recovery_point"><summary><para>
+The recovery point that the sources are recovered from.
+</para></summary></member>
+  <member key="data_recovery.start_recovery.Response#resolved_sources"><summary><para>
+The sources that the requested source expressions resolved to, with the destinations that they are recovered to.
+</para></summary></member>
+</doc>

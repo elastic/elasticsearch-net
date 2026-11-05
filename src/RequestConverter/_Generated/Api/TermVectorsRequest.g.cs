@@ -53,6 +53,12 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.IClientCal
 				Index.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (Preference is not null)
 			{
 				initializer.Property("Preference");
@@ -63,12 +69,6 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.IClientCal
 			{
 				initializer.Property("Realtime");
 				writer.WriteValue(Realtime.Value);
-			}
-
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
 			}
 
 			if (Doc is not null)
@@ -164,6 +164,18 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.IClientCal
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("routeSlice");
+		if (RouteSlice is not null)
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(RouteSlice);
+		}
+		else
+		{
+			writer.Write("null");
+		}
+
+		writer.Write(", ");
 		writer.WriteInlineArgumentLabel("id");
 		if (Id is not null)
 		{
@@ -187,11 +199,6 @@ public partial class TermVectorsRequest<TDocument> : RequestConverter.IClientCal
 		if (Realtime is not null)
 		{
 			writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
-		}
-
-		if (RouteSlice is not null)
-		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
 		}
 
 		if (Doc is not null)

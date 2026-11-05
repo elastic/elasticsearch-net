@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.KnnEvalQuerySourceSummary#from"><summary><para>
+How the query vectors were chosen.
+</para></summary></member>
+</doc>

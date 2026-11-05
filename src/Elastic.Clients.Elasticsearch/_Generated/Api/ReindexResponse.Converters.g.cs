@@ -49,7 +49,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 		LocalJsonValue<long?> propBatches = default;
 		LocalJsonValue<long?> propCreated = default;
 		LocalJsonValue<long?> propDeleted = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>?> propFailures = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>?> propFailures = default;
 		LocalJsonValue<long?> propNoops = default;
 		LocalJsonValue<float?> propRequestsPerSecond = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retries?> propRetries = default;
@@ -80,7 +80,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>(o, null)))
+			if (propFailures.TryReadProperty(ref reader, options, PropFailures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>(o, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "cause"), null, null)!)))
 			{
 				continue;
 			}
@@ -188,7 +188,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropBatches, value.Batches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropCreated, value.Created, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDeleted, value.Deleted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>(o, v, null));
+		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure> v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure, Elastic.Clients.Elasticsearch.ShardFailure>(o, v, null, null)));
 		writer.WriteProperty(options, PropNoops, value.Noops, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropRetries, value.Retries, null, null);

@@ -494,7 +494,7 @@ internal static partial class RequestFactory
 					case "name":
 						{
 							if (parameter.Value is string value)
-								request.Name = Elastic.Clients.Elasticsearch.Id.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+								request.Name = Elastic.Clients.Elasticsearch.Ids.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 
@@ -658,6 +658,28 @@ internal static partial class RequestFactory
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'esql.put_view'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "validate":
+						{
+							if (parameter.Value is string value)
+								request.Validate = bool.Parse(value);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
 						}
 				}
 			}

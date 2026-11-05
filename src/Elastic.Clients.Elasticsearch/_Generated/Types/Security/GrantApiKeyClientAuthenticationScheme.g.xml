@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.grant_api_key.GrantApiKeyClientAuthenticationScheme#SharedSecret"><summary><para>
+The client authenticates with the shared secret configured for the JWT realm.
+</para></summary></member>
+</doc>

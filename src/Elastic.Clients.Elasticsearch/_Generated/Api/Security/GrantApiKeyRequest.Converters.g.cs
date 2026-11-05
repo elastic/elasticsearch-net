@@ -27,9 +27,11 @@ public sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Seria
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClientAuthentication = System.Text.Json.JsonEncodedText.Encode("client_authentication"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropServiceAccountToken = System.Text.Json.JsonEncodedText.Encode("service_account_token"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -37,9 +39,11 @@ public sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Seria
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propAccessToken = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GrantApiKey> propApiKey = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GrantApiKeyClientAuthentication?> propClientAuthentication = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType> propGrantType = default;
 		LocalJsonValue<string?> propPassword = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propRunAs = default;
+		LocalJsonValue<string?> propServiceAccountToken = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -49,6 +53,11 @@ public sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Seria
 			}
 
 			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
+			{
+				continue;
+			}
+
+			if (propClientAuthentication.TryReadProperty(ref reader, options, PropClientAuthentication, null))
 			{
 				continue;
 			}
@@ -64,6 +73,11 @@ public sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Seria
 			}
 
 			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, null))
+			{
+				continue;
+			}
+
+			if (propServiceAccountToken.TryReadProperty(ref reader, options, PropServiceAccountToken, null))
 			{
 				continue;
 			}
@@ -87,9 +101,11 @@ public sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Seria
 		{
 			AccessToken = propAccessToken.Value,
 			ApiKey = propApiKey.Value,
+			ClientAuthentication = propClientAuthentication.Value,
 			GrantType = propGrantType.Value,
 			Password = propPassword.Value,
 			RunAs = propRunAs.Value,
+			ServiceAccountToken = propServiceAccountToken.Value,
 			Username = propUsername.Value
 		};
 	}
@@ -99,9 +115,11 @@ public sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Seria
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
+		writer.WriteProperty(options, PropClientAuthentication, value.ClientAuthentication, null, null);
 		writer.WriteProperty(options, PropGrantType, value.GrantType, null, null);
 		writer.WriteProperty(options, PropPassword, value.Password, null, null);
 		writer.WriteProperty(options, PropRunAs, value.RunAs, null, null);
+		writer.WriteProperty(options, PropServiceAccountToken, value.ServiceAccountToken, null, null);
 		writer.WriteProperty(options, PropUsername, value.Username, null, null);
 		writer.WriteEndObject();
 	}

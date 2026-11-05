@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.get_rpo_series.Response#bucket_count"><summary><para>
+The number of buckets in the series.
+</para></summary></member>
+  <member key="data_recovery.get_rpo_series.Response#bucket_duration"><summary><para>
+The duration of each bucket.
+</para></summary></member>
+  <member key="data_recovery.get_rpo_series.Response#buckets"><summary><para>
+The buckets in ascending order by start time.
+</para></summary></member>
+  <member key="data_recovery.get_rpo_series.Response#end"><summary><para>
+The exclusive end of the range.
+</para></summary></member>
+  <member key="data_recovery.get_rpo_series.Response#start"><summary><para>
+The inclusive start of the range.
+</para></summary></member>
+</doc>

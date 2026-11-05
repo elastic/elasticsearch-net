@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.ApplicationGlobalUserPrivileges#manage"><summary><para>
+The applications for which application privileges can be managed.
+Absent when the <c>application</c> section is present but grants no privileges.
+</para></summary></member>
+</doc>

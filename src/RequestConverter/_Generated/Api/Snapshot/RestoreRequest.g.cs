@@ -130,6 +130,12 @@ public partial class RestoreRequest : RequestConverter.IClientCallFormattable
 				writer.WriteString(RenameReplacement);
 			}
 
+			if (RestoreOverExisting is not null)
+			{
+				initializer.Property("RestoreOverExisting");
+				writer.WriteValue(RestoreOverExisting.Value);
+			}
+
 			initializer.Dispose();
 		}
 	}
@@ -211,6 +217,11 @@ public partial class RestoreRequest : RequestConverter.IClientCallFormattable
 		if (RenameReplacement is not null)
 		{
 			writer.WriteFluentCall("RenameReplacement", (w) => { w.WriteString(RenameReplacement); });
+		}
+
+		if (RestoreOverExisting is not null)
+		{
+			writer.WriteFluentCall("RestoreOverExisting", (w) => { w.WriteValue(RestoreOverExisting.Value); });
 		}
 	}
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.Request"><summary><para>
+Evaluate kNN search settings.
+</para>
+<para>
+Estimate the recall and cost of approximate kNN search configurations on a <c>dense_vector</c> field against a more thorough baseline.
+The field must use the <c>bbq_disk</c> index type, and must not be inside a nested object.
+</para>
+<para>
+Each <c>knn_settings</c> entry reports the mean recall of the baseline's top <c>k</c>, not of relevance judgments, plus included and excluded query counts and cost totals.
+A query is excluded from the mean recall when the candidate finds a document scoring above the baseline's lowest top <c>k</c> score.
+A baseline returning fewer than <c>k</c> hits fails that query, because recall at <c>k</c> is undefined.
+All configurations run against one point in time.
+</para>
+<para>
+The default baseline uses a <c>visit_percentage</c> of 20 and a <c>rescore_vector.oversample</c> of 100.
+An exact full-precision baseline must be requested explicitly with <c>allow_exact_baseline</c>, and is limited to 100 million vector-by-query comparisons.
+</para>
+<para>
+The request is refused when the <c>search.knn_eval.enabled</c> cluster setting or the <c>index.knn_eval.enabled</c> index setting is <c>false</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#allow_exact_baseline"><summary><para>
+If <c>true</c>, the <c>baseline</c> can be <c>exact</c>.
+An exact baseline compares every vector at full precision, and can severely slow down other searches.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#baseline"><summary><para>
+The settings of the search that the <c>knn_settings</c> entries are compared with.
+If not specified, it uses a <c>visit_percentage</c> of 20 and a <c>rescore_vector.oversample</c> of 100.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#expand_wildcards"><summary><para>
+The type of index that wildcard patterns can match.
+It supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#field"><summary><para>
+The <c>dense_vector</c> field to evaluate.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a missing or closed index.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#index"><summary><para>
+A comma-separated list of index names to search.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#k"><summary><para>
+The number of nearest neighbors to compute the recall for, from 1 to 1000.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#knn_settings"><summary><para>
+The kNN search settings to evaluate, from 1 to 32 unique entries.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#query_source"><summary><para>
+The source of the query vectors.
+</para></summary></member>
+  <member key="_global.knn_eval.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request waits for the evaluation to complete.
+A large evaluation can run for minutes, and closing the connection, for example because of a client or proxy timeout, cancels it.
+If <c>false</c>, the request returns a task identifier, and stores the completed response for retrieval through the task management API.
+</para></summary></member>
+</doc>

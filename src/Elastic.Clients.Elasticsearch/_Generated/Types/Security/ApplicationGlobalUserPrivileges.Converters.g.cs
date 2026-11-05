@@ -30,7 +30,7 @@ public sealed partial class ApplicationGlobalUserPrivilegesConverter : System.Te
 	public override Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges> propManage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges?> propManage = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propManage.TryReadProperty(ref reader, options, PropManage, null))

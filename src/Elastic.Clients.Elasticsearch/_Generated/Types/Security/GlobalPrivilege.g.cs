@@ -41,6 +41,12 @@ public sealed partial class GlobalPrivilege
 
 	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#data_source']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.DataSourcePrivileges>? DataSource { get; set; }
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#profile']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.WriteProfileGlobalUserPrivileges? Profile { get; set; }
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#role']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.ManageRolesGlobalUserPrivileges? Role { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.GlobalPrivilege']/*"/>
@@ -69,7 +75,13 @@ public readonly partial struct GlobalPrivilegeDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application(System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application()
+	{
+		Instance.Application = Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Application(System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor>? action)
 	{
 		Instance.Application = Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivilegesDescriptor.Build(action);
 		return this;
@@ -99,6 +111,48 @@ public readonly partial struct GlobalPrivilegeDescriptor
 		}
 
 		Instance.DataSource = items;
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#profile']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Profile(Elastic.Clients.Elasticsearch.Security.WriteProfileGlobalUserPrivileges? value)
+	{
+		Instance.Profile = value;
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#profile']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Profile()
+	{
+		Instance.Profile = Elastic.Clients.Elasticsearch.Security.WriteProfileGlobalUserPrivilegesDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#profile']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Profile(System.Action<Elastic.Clients.Elasticsearch.Security.WriteProfileGlobalUserPrivilegesDescriptor>? action)
+	{
+		Instance.Profile = Elastic.Clients.Elasticsearch.Security.WriteProfileGlobalUserPrivilegesDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#role']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Role(Elastic.Clients.Elasticsearch.Security.ManageRolesGlobalUserPrivileges? value)
+	{
+		Instance.Role = value;
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#role']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Role()
+	{
+		Instance.Role = Elastic.Clients.Elasticsearch.Security.ManageRolesGlobalUserPrivilegesDescriptor.Build(null);
+		return this;
+	}
+
+	/// <include file="GlobalPrivilege.g.xml" path="doc/member[@key='security._types.GlobalPrivilege#role']/*"/>
+	public Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor Role(System.Action<Elastic.Clients.Elasticsearch.Security.ManageRolesGlobalUserPrivilegesDescriptor>? action)
+	{
+		Instance.Role = Elastic.Clients.Elasticsearch.Security.ManageRolesGlobalUserPrivilegesDescriptor.Build(action);
 		return this;
 	}
 

@@ -53,4 +53,7 @@ public sealed partial class ESQLView
 
 	/// <include file="ESQLView.g.xml" path="doc/member[@key='esql._types.ESQLView#query']/*"/>
 	public required string Query { get; set; }
+
+	/// <include file="ESQLView.g.xml" path="doc/member[@key='esql._types.ESQLView#reserved']/*"/>
+	public bool? Reserved { get; set; }
 }

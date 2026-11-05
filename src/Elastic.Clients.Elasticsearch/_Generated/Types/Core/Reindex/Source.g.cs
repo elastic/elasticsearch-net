@@ -54,6 +54,9 @@ public sealed partial class Source
 
 	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#remote']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? Remote { get; set; }
+
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_slice']/*"/>
+	public string? RouteSlice { get; set; }
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#size']/*"/>
@@ -129,6 +132,13 @@ public readonly partial struct SourceDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Remote(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor> action)
 	{
 		Instance.Remote = Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -318,6 +328,13 @@ public readonly partial struct SourceDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Remote(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor> action)
 	{
 		Instance.Remote = Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor.Build(action);
+		return this;
+	}
+
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
