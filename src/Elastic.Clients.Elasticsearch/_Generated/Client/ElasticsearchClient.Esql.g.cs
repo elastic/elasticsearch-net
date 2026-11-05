@@ -733,7 +733,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 
 	/// <include file="../Api/Esql/GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
-	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(Elastic.Clients.Elasticsearch.Id? name)
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(Elastic.Clients.Elasticsearch.Ids? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
 		var request = builder.Instance;
@@ -743,7 +743,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 
 	/// <include file="../Api/Esql/GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
-	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(Elastic.Clients.Elasticsearch.Id? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(Elastic.Clients.Elasticsearch.Ids? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
 		action.Invoke(builder);
@@ -783,7 +783,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 
 	/// <include file="../Api/Esql/GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(Elastic.Clients.Elasticsearch.Id? name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(Elastic.Clients.Elasticsearch.Ids? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
 		var request = builder.Instance;
@@ -793,7 +793,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 
 	/// <include file="../Api/Esql/GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
 	/// <include file="../SpecReferences.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(Elastic.Clients.Elasticsearch.Id? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(Elastic.Clients.Elasticsearch.Ids? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
 		action.Invoke(builder);

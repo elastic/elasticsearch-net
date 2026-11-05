@@ -53,6 +53,11 @@ public sealed partial class ShardRecovery
 		_ = sentinel;
 	}
 
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#blocked_for_millis']/*"/>
+	public System.TimeSpan? BlockedForMillis { get; set; }
+
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#gate']/*"/>
+	public string? Gate { get; set; }
 	public required long Id { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus Index { get; set; }
 

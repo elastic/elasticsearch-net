@@ -28,9 +28,8 @@ If different PIT IDs are used, slices can overlap and miss documents.
 This situation can occur because, by default, the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 </para></summary></member>
   <member key="_global.search.Request#_slice"><summary><para>
-The slice identifier used to route the operation to a specific slice.
-Use the special value <c>_all</c> to target all slices without restricting to a routing value.
-Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+The slice identifiers for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>): a single slice, a comma-separated list such as <c>tenant-a,tenant-b</c>, or <c>_all</c> to target all slices.
+When omitted, all slices are targeted. Indices that are not slice-enabled match no documents when a slice is specified.
 </para></summary></member>
   <member key="_global.search.Request#_source"><summary><para>
 The source fields that are returned for matching documents.

@@ -25,6 +25,32 @@ namespace RequestConverter;
 
 internal static partial class RequestFactory
 {
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDataRecoveryGetRecovery(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "recovery_id":
+						{
+							request.RecoveryId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'data_recovery.get_recovery'.");
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDataRecoveryGetRecoveryPoints(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoveryPointsRequest>(serializer, body);
@@ -52,6 +78,230 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Size = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDataRecoveryGetRecoverySources(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DataRecovery.GetRecoverySourcesRequest>(serializer, body);
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "expression":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.Expression = list.Select(x => x).ToList();
+							}
+
+							continue;
+						}
+
+					case "include_incomplete_sources":
+						{
+							if (parameter.Value is string value)
+								request.IncludeIncompleteSources = bool.Parse(value);
+							continue;
+						}
+
+					case "master_timeout":
+						{
+							if (parameter.Value is string value)
+								request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "recovery_point_end_time":
+						{
+							if (parameter.Value is string value)
+								request.RecoveryPointEndTime = System.DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "size":
+						{
+							if (parameter.Value is string value)
+								request.Size = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDataRecoveryGetRpoSeries(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DataRecovery.GetRpoSeriesRequest>(serializer, body);
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "bucket_duration":
+						{
+							if (parameter.Value is string value)
+								request.BucketDuration = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "end":
+						{
+							if (parameter.Value is string value)
+								request.End = System.DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "master_timeout":
+						{
+							if (parameter.Value is string value)
+								request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "start":
+						{
+							if (parameter.Value is string value)
+								request.Start = System.DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDataRecoveryListRecoveries(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DataRecovery.ListRecoveriesRequest>(serializer, body);
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "order":
+						{
+							if (parameter.Value is string value)
+								request.Order = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.SortOrder>.Parse(value);
+							continue;
+						}
+
+					case "search_after_recovery_id":
+						{
+							if (parameter.Value is string value)
+								request.SearchAfterRecoveryId = Elastic.Clients.Elasticsearch.Id.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "search_after_started_at":
+						{
+							if (parameter.Value is string value)
+								request.SearchAfterStartedAt = System.DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "size":
+						{
+							if (parameter.Value is string value)
+								request.Size = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "started_at_gte":
+						{
+							if (parameter.Value is string value)
+								request.StartedAtGte = System.DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "started_at_lt":
+						{
+							if (parameter.Value is string value)
+								request.StartedAtLt = System.DateTimeOffset.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "status":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.Status = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.DataRecovery.RecoveryRunStatus>.Parse(x)).ToList();
+							}
+
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateDataRecoveryStartRecovery(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		if (string.IsNullOrEmpty(body))
+		{
+			throw new System.InvalidOperationException("Body is required.");
+		}
+
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.DataRecovery.StartRecoveryRequest>(serializer, body);
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "master_timeout":
+						{
+							if (parameter.Value is string value)
+								request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 

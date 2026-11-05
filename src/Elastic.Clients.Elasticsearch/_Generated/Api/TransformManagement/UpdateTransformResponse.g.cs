@@ -39,7 +39,7 @@ public sealed partial class UpdateTransformResponse : Elastic.Transport.Products
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization? Authorization { get; set; }
 	public required long CreateTime { get; set; }
-	public required string Description { get; set; }
+	public string? Description { get; set; }
 	public required Elastic.Clients.Elasticsearch.TransformManagement.Destination Dest { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 	public required string Id { get; set; }

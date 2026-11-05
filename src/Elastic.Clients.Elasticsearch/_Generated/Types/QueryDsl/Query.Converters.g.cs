@@ -30,6 +30,7 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 	private static readonly System.Text.Json.JsonEncodedText VariantCombinedFields = System.Text.Json.JsonEncodedText.Encode("combined_fields");
 	private static readonly System.Text.Json.JsonEncodedText VariantCommon = System.Text.Json.JsonEncodedText.Encode("common");
 	private static readonly System.Text.Json.JsonEncodedText VariantConstantScore = System.Text.Json.JsonEncodedText.Encode("constant_score");
+	private static readonly System.Text.Json.JsonEncodedText VariantDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector");
 	private static readonly System.Text.Json.JsonEncodedText VariantDisMax = System.Text.Json.JsonEncodedText.Encode("dis_max");
 	private static readonly System.Text.Json.JsonEncodedText VariantDistanceFeature = System.Text.Json.JsonEncodedText.Encode("distance_feature");
 	private static readonly System.Text.Json.JsonEncodedText VariantExists = System.Text.Json.JsonEncodedText.Encode("exists");
@@ -132,6 +133,14 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 				variantType = VariantConstantScore.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantDenseVector))
+			{
+				variantType = VariantDenseVector.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQuery>(options, null);
 				continue;
 			}
 
@@ -634,6 +643,9 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 				break;
 			case "constant_score":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery)value.Variant, null, null);
+				break;
+			case "dense_vector":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQuery)value.Variant, null, null);
 				break;
 			case "dis_max":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery)value.Variant, null, null);

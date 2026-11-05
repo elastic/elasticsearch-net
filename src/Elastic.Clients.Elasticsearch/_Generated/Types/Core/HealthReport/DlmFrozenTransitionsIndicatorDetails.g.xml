@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails"><summary><para>
+An index is overdue when it has passed its <c>frozen_after</c> age by more than the configured threshold and has not yet completed its transition to the frozen tier.
+Indices with a running transition are making progress and are not counted as overdue.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails#default_repository_configured"><summary><para>
+Indicates whether a default snapshot repository is configured with the <c>repositories.default_repository</c> cluster setting.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails#generated_at_millis"><summary><para>
+The time, in milliseconds since the Unix epoch, when the master node generated the health snapshot.
+Only present when the indicator status is <c>unknown</c>, meaning the health snapshot is stale.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails#overdue_indices_count"><summary><para>
+The total number of overdue indices in the cluster.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails#overdue_indices_count_by_state"><summary><para>
+The number of overdue indices in the cluster for each transition state.
+Only present when there are overdue indices.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails#overdue_indices_sample"><summary><para>
+A sample of the overdue indices and their transition states, sorted by index name.
+The sample is limited to 100 indices for each transition state, so it can contain fewer indices than <c>overdue_indices_count</c>.
+Only present when there are overdue indices.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails#service_running"><summary><para>
+Indicates whether the frozen transition service is running on the current master node.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionsIndicatorDetails#transitions_enabled"><summary><para>
+Indicates whether frozen-tier transitions are enabled by the <c>dlm.frozen_transitions.enabled</c> cluster setting.
+</para></summary></member>
+</doc>

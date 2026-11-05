@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ChoiceDecisionProbability#probability"><summary><para>
+The probability of the option.
+</para></summary></member>
+  <member key="inference._types.ChoiceDecisionProbability#value"><summary><para>
+The option.
+</para></summary></member>
+</doc>

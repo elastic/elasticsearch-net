@@ -6,6 +6,9 @@ The node ID of the node that holds the shard.
   <member key="indices.segments.ShardSegmentRouting#primary"><summary><para>
 If <c>true</c>, the shard is a primary shard.
 </para></summary></member>
+  <member key="indices.segments.ShardSegmentRouting#relocating_node"><summary><para>
+The node ID of the node the shard is relocating to. Only returned while the shard is relocating.
+</para></summary></member>
   <member key="indices.segments.ShardSegmentRouting#state"><summary><para>
 The state of the shard, such as <c>STARTED</c> or <c>RELOCATING</c>.
 </para></summary></member>

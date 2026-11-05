@@ -26,14 +26,28 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 public sealed partial class UpdateAliasesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropActionResults = System.Text.Json.JsonEncodedText.Encode("action_results"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AliasActionResult>?> propActionResults = default;
+		LocalJsonValue<bool?> propErrors = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (propActionResults.TryReadProperty(ref reader, options, PropActionResults, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AliasActionResult>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.AliasActionResult>(o, null)))
+			{
+				continue;
+			}
+
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -50,7 +64,9 @@ public sealed partial class UpdateAliasesResponseConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Acknowledged = propAcknowledged.Value
+			Acknowledged = propAcknowledged.Value,
+			ActionResults = propActionResults.Value,
+			Errors = propErrors.Value
 		};
 	}
 
@@ -58,6 +74,8 @@ public sealed partial class UpdateAliasesResponseConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropActionResults, value.ActionResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.AliasActionResult>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.AliasActionResult>(o, v, null));
+		writer.WriteProperty(options, PropErrors, value.Errors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

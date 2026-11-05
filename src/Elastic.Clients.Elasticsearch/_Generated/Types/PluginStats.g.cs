@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class PluginStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PluginStats(string classname, string description, string elasticsearchVersion, System.Collections.Generic.IReadOnlyCollection<string> extendedPlugins, bool hasNativeController, string javaVersion, bool licensed, string name, string version)
+	public PluginStats(string classname, string description, string elasticsearchVersion, System.Collections.Generic.IReadOnlyCollection<string> extendedPlugins, bool hasNativeController, string javaVersion, bool licensed, string name, System.Collections.Generic.IReadOnlyCollection<string> nativeControllerEnabledSettings, string version)
 	{
 		Classname = classname;
 		Description = description;
@@ -38,6 +38,7 @@ public sealed partial class PluginStats
 		JavaVersion = javaVersion;
 		Licensed = licensed;
 		Name = name;
+		NativeControllerEnabledSettings = nativeControllerEnabledSettings;
 		Version = version;
 	}
 
@@ -59,5 +60,6 @@ public sealed partial class PluginStats
 	public required string JavaVersion { get; set; }
 	public required bool Licensed { get; set; }
 	public required string Name { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> NativeControllerEnabledSettings { get; set; }
 	public required string Version { get; set; }
 }

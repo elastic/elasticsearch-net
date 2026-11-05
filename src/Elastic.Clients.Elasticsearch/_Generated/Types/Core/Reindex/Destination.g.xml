@@ -2,8 +2,8 @@
 <doc>
   <member key="_global.reindex.Destination#_slice"><summary><para>
 The slice identifier used to route the reindexed documents to a specific slice of the destination index.
-Use the special value <c>_all</c> to target all slices without restricting to a routing value.
-Required when <c>index.slice.enabled</c> is <c>true</c> for the destination index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+Not allowed when <c>index.slice.enabled</c> is <c>false</c> for the destination index.
+When <c>index.slice.enabled</c> is <c>true</c>, it is required unless the source is read with <c>_slice</c>, in which case each document keeps its source slice, or a script sets <c>ctx._slice</c>.
 </para></summary></member>
   <member key="_global.reindex.Destination#index"><summary><para>
 The name of the data stream, index, or index alias you are copying to.

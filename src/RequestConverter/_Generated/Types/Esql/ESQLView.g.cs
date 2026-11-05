@@ -44,6 +44,12 @@ public partial class ESQLView : RequestConverter.ICodeFormattable
 			writer.WriteString(Query);
 		}
 
+		if (Reserved is not null)
+		{
+			initializer.Property("Reserved");
+			writer.WriteValue(Reserved.Value);
+		}
+
 		initializer.Dispose();
 	}
 }

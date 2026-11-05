@@ -69,6 +69,16 @@ public partial class DynamicProperty : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("Enabled", (w) => { w.WriteValue(Enabled.Value); });
 			}
 
+			if (Fielddata is not null)
+			{
+				writer.WriteFluentCall("Fielddata", (w) => { w.WriteValue(Fielddata.Value); });
+			}
+
+			if (FielddataFrequencyFilter is not null)
+			{
+				writer.WriteFluentDescriptorCall("FielddataFrequencyFilter", (w) => { FielddataFrequencyFilter.FormatCode(w); }, (w) => { FielddataFrequencyFilter.FormatCode(w); });
+			}
+
 			if (Fields is not null)
 			{
 				writer.WriteFluentDescriptorCall("Fields", (w) => { Fields.FormatCode(w); }, (w) => { Fields.FormatCode(w); });
@@ -164,9 +174,19 @@ public partial class DynamicProperty : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("SearchQuoteAnalyzer", (w) => { w.WriteString(SearchQuoteAnalyzer); });
 			}
 
+			if (Similarity is not null)
+			{
+				writer.WriteFluentCall("Similarity", (w) => { w.WriteString(Similarity); });
+			}
+
 			if (Store is not null)
 			{
 				writer.WriteFluentCall("Store", (w) => { w.WriteValue(Store.Value); });
+			}
+
+			if (Subobjects is not null)
+			{
+				writer.WriteFluentCall("Subobjects", (w) => { Elastic.Clients.Elasticsearch.Mapping.SubobjectsCodeFormatter.FormatCode(Subobjects.Value, w); });
 			}
 
 			if (SyntheticSourceKeep is not null)
@@ -177,6 +197,11 @@ public partial class DynamicProperty : RequestConverter.ICodeFormattable
 			if (TermVector is not null)
 			{
 				writer.WriteFluentCall("TermVector", (w) => { Elastic.Clients.Elasticsearch.Mapping.TermVectorOptionCodeFormatter.FormatCode(TermVector.Value, w); });
+			}
+
+			if (TimeSeriesDimension is not null)
+			{
+				writer.WriteFluentCall("TimeSeriesDimension", (w) => { w.WriteValue(TimeSeriesDimension.Value); });
 			}
 
 			if (TimeSeriesMetric is not null)
@@ -241,6 +266,18 @@ public partial class DynamicProperty : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Enabled");
 				writer.WriteValue(Enabled.Value);
+			}
+
+			if (Fielddata is not null)
+			{
+				initializer.Property("Fielddata");
+				writer.WriteValue(Fielddata.Value);
+			}
+
+			if (FielddataFrequencyFilter is not null)
+			{
+				initializer.Property("FielddataFrequencyFilter");
+				FielddataFrequencyFilter.FormatCode(writer);
 			}
 
 			if (Fields is not null)
@@ -364,10 +401,22 @@ public partial class DynamicProperty : RequestConverter.ICodeFormattable
 				writer.WriteString(SearchQuoteAnalyzer);
 			}
 
+			if (Similarity is not null)
+			{
+				initializer.Property("Similarity");
+				writer.WriteString(Similarity);
+			}
+
 			if (Store is not null)
 			{
 				initializer.Property("Store");
 				writer.WriteValue(Store.Value);
+			}
+
+			if (Subobjects is not null)
+			{
+				initializer.Property("Subobjects");
+				Elastic.Clients.Elasticsearch.Mapping.SubobjectsCodeFormatter.FormatCode(Subobjects.Value, writer);
 			}
 
 			if (SyntheticSourceKeep is not null)
@@ -380,6 +429,12 @@ public partial class DynamicProperty : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("TermVector");
 				Elastic.Clients.Elasticsearch.Mapping.TermVectorOptionCodeFormatter.FormatCode(TermVector.Value, writer);
+			}
+
+			if (TimeSeriesDimension is not null)
+			{
+				initializer.Property("TimeSeriesDimension");
+				writer.WriteValue(TimeSeriesDimension.Value);
 			}
 
 			if (TimeSeriesMetric is not null)

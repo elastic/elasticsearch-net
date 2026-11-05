@@ -28,17 +28,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class Segment
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Segment(System.Collections.Generic.IReadOnlyDictionary<string, string> attributes, bool committed, bool compound, long deletedDocs, int generation, long numDocs, bool search, double sizeInBytes, string version)
+	public Segment(bool committed, long deletedDocs, int generation, long numDocs, bool search, double sizeInBytes)
 	{
-		Attributes = attributes;
 		Committed = committed;
-		Compound = compound;
 		DeletedDocs = deletedDocs;
 		Generation = generation;
 		NumDocs = numDocs;
 		Search = search;
 		SizeInBytes = sizeInBytes;
-		Version = version;
 	}
 
 	public Segment()
@@ -52,13 +49,16 @@ public sealed partial class Segment
 	}
 
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#attributes']/*"/>
-	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Attributes { get; set; }
+
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#auto_calibration']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentAutoCalibrations? AutoCalibration { get; set; }
 
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#committed']/*"/>
 	public required bool Committed { get; set; }
 
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#compound']/*"/>
-	public required bool Compound { get; set; }
+	public bool? Compound { get; set; }
 
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#deleted_docs']/*"/>
 	public required long DeletedDocs { get; set; }
@@ -66,15 +66,24 @@ public sealed partial class Segment
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#generation']/*"/>
 	public required int Generation { get; set; }
 
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#merge_id']/*"/>
+	public string? MergeId { get; set; }
+
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#num_docs']/*"/>
 	public required long NumDocs { get; set; }
 
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#search']/*"/>
 	public required bool Search { get; set; }
 
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#size']/*"/>
+	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
+
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#size_in_bytes']/*"/>
 	public required double SizeInBytes { get; set; }
 
+	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#sort']/*"/>
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSort>? Sort { get; set; }
+
 	/// <include file="Segment.g.xml" path="doc/member[@key='indices.segments.Segment#version']/*"/>
-	public required string Version { get; set; }
+	public string? Version { get; set; }
 }

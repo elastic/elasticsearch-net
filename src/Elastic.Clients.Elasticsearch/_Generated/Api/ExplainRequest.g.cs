@@ -48,9 +48,6 @@ public sealed partial class ExplainRequestParameters : Elastic.Transport.Request
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -74,6 +71,11 @@ public sealed partial class ExplainRequest : Elastic.Clients.Elasticsearch.Reque
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ExplainRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ExplainRequest(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Optional("_slice", routeSlice).Required("id", id))
 	{
 	}
 
@@ -101,6 +103,9 @@ public sealed partial class ExplainRequest : Elastic.Clients.Elasticsearch.Reque
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
@@ -121,9 +126,6 @@ public sealed partial class ExplainRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-
-	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -161,6 +163,11 @@ public readonly partial struct ExplainRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.ExplainRequest(index, id);
 	}
 
+	public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.ExplainRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExplainRequestDescriptor()
 	{
@@ -181,6 +188,13 @@ public readonly partial struct ExplainRequestDescriptor
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -230,13 +244,6 @@ public readonly partial struct ExplainRequestDescriptor
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
-		return this;
-	}
-
-	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -424,6 +431,11 @@ public readonly partial struct ExplainRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.ExplainRequest(typeof(TDocument), id);
 	}
 
+	public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, string? routeSlice, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.ExplainRequest(index, routeSlice, id);
+	}
+
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public ExplainRequestDescriptor()
 	{
@@ -444,6 +456,13 @@ public readonly partial struct ExplainRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -493,13 +512,6 @@ public readonly partial struct ExplainRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
-		return this;
-	}
-
-	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

@@ -28,6 +28,7 @@ public sealed partial class UpdateByQueryRequestConverter : System.Text.Json.Ser
 	private static readonly System.Text.Json.JsonEncodedText PropConflicts = System.Text.Json.JsonEncodedText.Encode("conflicts"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice"u8);
 
@@ -37,6 +38,7 @@ public sealed partial class UpdateByQueryRequestConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Conflicts?> propConflicts = default;
 		LocalJsonValue<long?> propMaxDocs = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -52,6 +54,11 @@ public sealed partial class UpdateByQueryRequestConverter : System.Text.Json.Ser
 			}
 
 			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
 			{
 				continue;
 			}
@@ -81,6 +88,7 @@ public sealed partial class UpdateByQueryRequestConverter : System.Text.Json.Ser
 			Conflicts = propConflicts.Value,
 			MaxDocs = propMaxDocs.Value,
 			Query = propQuery.Value,
+			RuntimeMappings = propRuntimeMappings.Value,
 			Script = propScript.Value,
 			Slice = propSlice.Value
 		};
@@ -92,6 +100,7 @@ public sealed partial class UpdateByQueryRequestConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Conflicts? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o, v));
 		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
 		writer.WriteEndObject();

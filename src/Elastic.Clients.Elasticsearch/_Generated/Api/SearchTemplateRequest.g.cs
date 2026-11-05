@@ -71,6 +71,10 @@ public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Reque
 	{
 	}
 
+	public SearchTemplateRequest(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice) : base(r => r.Optional("index", indices).Optional("_slice", routeSlice))
+	{
+	}
+
 	public SearchTemplateRequest()
 	{
 	}
@@ -91,6 +95,9 @@ public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#_slice']/*"/>
+	public System.Collections.Generic.ICollection<string>? RouteSlice { get => P<System.Collections.Generic.ICollection<string>?>("_slice"); set => PO("_slice", value); }
 
 	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -162,6 +169,11 @@ public readonly partial struct SearchTemplateRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(indices);
 	}
 
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(indices, routeSlice);
+	}
+
 	public SearchTemplateRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -174,6 +186,20 @@ public readonly partial struct SearchTemplateRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 
@@ -403,6 +429,11 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(indices);
 	}
 
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<string>? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(indices, routeSlice);
+	}
+
 	public SearchTemplateRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -415,6 +446,20 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> RouteSlice(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.RouteSlice = value;
+		return this;
+	}
+
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> RouteSlice(params string[] values)
+	{
+		Instance.RouteSlice = [.. values];
 		return this;
 	}
 

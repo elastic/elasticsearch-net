@@ -41,6 +41,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'bulk'.");
@@ -94,13 +101,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.RequireDataStream = bool.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -318,6 +318,21 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'count'.");
@@ -429,13 +444,6 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
-							continue;
-						}
-
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -500,6 +508,13 @@ internal static partial class RequestFactory
 					case "index":
 						{
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 
@@ -620,6 +635,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'delete'.");
@@ -652,13 +674,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -721,6 +736,21 @@ internal static partial class RequestFactory
 					case "index":
 						{
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 
@@ -848,13 +878,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.RequestsPerSecond = float.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -1086,6 +1109,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'exists'.");
@@ -1313,6 +1343,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'explain'.");
@@ -1373,13 +1410,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.QueryLuceneSyntax = value;
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -1566,6 +1596,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'get'.");
@@ -1605,13 +1642,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Refresh = bool.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -2006,6 +2036,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'index'.");
@@ -2076,13 +2113,6 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
-							continue;
-						}
-
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -2136,6 +2166,88 @@ internal static partial class RequestFactory
 		return request;
 	}
 
+	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateKnnEval(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
+	{
+		if (string.IsNullOrEmpty(body))
+		{
+			throw new System.InvalidOperationException("Body is required.");
+		}
+
+		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.KnnEvalRequest>(serializer, body);
+		if (pathParameters is not null)
+		{
+			foreach (var parameter in pathParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "index":
+						{
+							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					default:
+						{
+							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'knn_eval'.");
+						}
+				}
+			}
+		}
+
+		if (queryParameters is not null)
+		{
+			foreach (var parameter in queryParameters)
+			{
+				switch (parameter.Key.ToLowerInvariant())
+				{
+					case "allow_no_indices":
+						{
+							if (parameter.Value is string value)
+								request.AllowNoIndices = bool.Parse(value);
+							continue;
+						}
+
+					case "expand_wildcards":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.ExpandWildcards = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ExpandWildcard>.Parse(x)).ToList();
+							}
+
+							continue;
+						}
+
+					case "ignore_unavailable":
+						{
+							if (parameter.Value is string value)
+								request.IgnoreUnavailable = bool.Parse(value);
+							continue;
+						}
+
+					case "wait_for_completion":
+						{
+							if (parameter.Value is string value)
+								request.WaitForCompletion = bool.Parse(value);
+							continue;
+						}
+
+					default:
+						{
+							unsupportedParameters.Add(parameter.Key);
+							continue;
+						}
+				}
+			}
+		}
+
+		return request;
+	}
+
 	private static Elastic.Clients.Elasticsearch.Requests.Request? CreateListReindex(Elastic.Transport.Serializer serializer, System.Collections.Generic.IReadOnlyDictionary<string, string>? pathParameters, System.Collections.Generic.IReadOnlyDictionary<string, string>? queryParameters, string body, System.Collections.Generic.ICollection<string> unsupportedParameters)
 	{
 		var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ListReindexRequest>(serializer, body);
@@ -2180,6 +2292,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'mget'.");
@@ -2219,13 +2338,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Refresh = bool.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -2404,7 +2516,15 @@ internal static partial class RequestFactory
 					case "_slice":
 						{
 							if (parameter.Value is string value)
-								request.RouteSlice = value;
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 
@@ -2546,6 +2666,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'mtermvectors'.");
@@ -2606,13 +2733,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Realtime = bool.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -2732,6 +2852,21 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Preference = value;
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 
@@ -3108,6 +3243,21 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'search'.");
@@ -3272,13 +3422,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.RestTotalHitsAsInt = bool.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -3504,7 +3647,15 @@ internal static partial class RequestFactory
 					case "_slice":
 						{
 							if (parameter.Value is string value)
-								request.RouteSlice = value;
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 
@@ -3540,6 +3691,21 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 
@@ -3712,6 +3878,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
+							continue;
+						}
+
 					default:
 						{
 							throw new System.InvalidOperationException("Unknown path parameter '" + parameter.Key + "' for endpoint 'termvectors'.");
@@ -3737,13 +3910,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.Realtime = bool.Parse(value);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 
@@ -3777,6 +3943,13 @@ internal static partial class RequestFactory
 					case "index":
 						{
 							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+								request.RouteSlice = value;
 							continue;
 						}
 
@@ -3843,13 +4016,6 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
-							continue;
-						}
-
 					case "routing":
 						{
 							if (parameter.Value is string value)
@@ -3909,6 +4075,21 @@ internal static partial class RequestFactory
 					case "index":
 						{
 							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+					case "_slice":
+						{
+							if (parameter.Value is string value)
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 
@@ -4036,13 +4217,6 @@ internal static partial class RequestFactory
 						{
 							if (parameter.Value is string value)
 								request.RequestsPerSecond = float.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-					case "_slice":
-						{
-							if (parameter.Value is string value)
-								request.RouteSlice = value;
 							continue;
 						}
 

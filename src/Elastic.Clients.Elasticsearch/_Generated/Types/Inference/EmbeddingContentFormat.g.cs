@@ -29,5 +29,7 @@ public enum EmbeddingContentFormat
 	[System.Runtime.Serialization.EnumMember(Value = "base64")]
 	Base64,
 	[System.Runtime.Serialization.EnumMember(Value = "text")]
-	Text
+	Text,
+	[System.Runtime.Serialization.EnumMember(Value = "url")]
+	Url
 }

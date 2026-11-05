@@ -38,6 +38,12 @@ public partial class ShardSegmentRouting : RequestConverter.ICodeFormattable
 			writer.WriteValue(Primary);
 		}
 
+		if (RelocatingNode is not null)
+		{
+			initializer.Property("RelocatingNode");
+			writer.WriteString(RelocatingNode);
+		}
+
 		{
 			initializer.Property("State");
 			writer.WriteString(State);

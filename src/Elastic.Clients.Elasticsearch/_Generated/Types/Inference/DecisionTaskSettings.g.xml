@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.decision.DecisionTaskSettings"><summary><para>
+The task settings of the <c>decision</c> task.
+</para></summary></member>
+  <member key="inference.decision.DecisionTaskSettings#questions"><summary><para>
+The questions to answer, keyed by question name. The answers in the response use the same names.
+The questions replace the ones of the inference endpoint as a whole. At least one question is required.
+</para></summary></member>
+</doc>

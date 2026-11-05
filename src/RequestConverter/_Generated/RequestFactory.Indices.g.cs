@@ -4313,6 +4313,20 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "include_auto_calibration":
+						{
+							if (parameter.Value is string value)
+								request.IncludeAutoCalibration = bool.Parse(value);
+							continue;
+						}
+
+					case "vector_formats":
+						{
+							if (parameter.Value is string value)
+								request.VectorFormats = bool.Parse(value);
+							continue;
+						}
+
 					default:
 						{
 							unsupportedParameters.Add(parameter.Key);
@@ -4982,7 +4996,15 @@ internal static partial class RequestFactory
 					case "_slice":
 						{
 							if (parameter.Value is string value)
-								request.RouteSlice = value;
+							{
+								if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(value, out var list))
+								{
+									continue;
+								}
+
+								request.RouteSlice = list.Select(x => x).ToList();
+							}
+
 							continue;
 						}
 

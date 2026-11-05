@@ -29,6 +29,11 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
+			if (CacheControl is not null)
+			{
+				writer.WriteFluentDescriptorCall("CacheControl", (w) => { CacheControl.FormatCode(w); });
+			}
+
 			if (MaxCompletionTokens is not null)
 			{
 				writer.WriteFluentCall("MaxCompletionTokens", (w) => { w.WriteValue(MaxCompletionTokens.Value); w.Write("L"); });
@@ -46,6 +51,11 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 			if (Reasoning is not null)
 			{
 				writer.WriteFluentDescriptorCall("Reasoning", (w) => { Reasoning.FormatCode(w); });
+			}
+
+			if (SessionId is not null)
+			{
+				writer.WriteFluentCall("SessionId", (w) => { w.WriteString(SessionId); });
 			}
 
 			if (Stop is not null)
@@ -76,6 +86,12 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion", false);
+			if (CacheControl is not null)
+			{
+				initializer.Property("CacheControl");
+				CacheControl.FormatCode(writer);
+			}
+
 			if (MaxCompletionTokens is not null)
 			{
 				initializer.Property("MaxCompletionTokens");
@@ -98,6 +114,12 @@ public partial class RequestChatCompletion : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("Reasoning");
 				Reasoning.FormatCode(writer);
+			}
+
+			if (SessionId is not null)
+			{
+				initializer.Property("SessionId");
+				writer.WriteString(SessionId);
 			}
 
 			if (Stop is not null)

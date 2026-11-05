@@ -25,7 +25,7 @@ When sending requests to this endpoint the <c>Content-Type</c> header should be 
 The slice identifier for routing the search to a specific slice.
 When provided at the top level, all sub-searches are routed to shards matching the given slice value.
 Use the special value <c>_all</c> to query all slices without restricting to a routing value.
-Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+When omitted, all slices are targeted.
 Individual sub-search headers can also specify <c>_slice</c> to override the top-level setting.
 </para></summary></member>
   <member key="_global.msearch.Request#allow_no_indices"><summary><para>

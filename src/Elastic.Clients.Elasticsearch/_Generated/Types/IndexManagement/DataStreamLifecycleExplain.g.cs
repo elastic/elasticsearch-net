@@ -45,6 +45,7 @@ public sealed partial class DataStreamLifecycleExplain
 	}
 
 	public string? Error { get; set; }
+	public string? FrozenTransitionStatus { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? GenerationTime { get; set; }
 	public required string Index { get; set; }
 	public System.DateTimeOffset? IndexCreationDateMillis { get; set; }
@@ -53,4 +54,5 @@ public sealed partial class DataStreamLifecycleExplain
 	public System.DateTimeOffset? RolloverDateMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceIndexCreation { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceRollover { get; set; }
+	public string? UnmanagedReason { get; set; }
 }

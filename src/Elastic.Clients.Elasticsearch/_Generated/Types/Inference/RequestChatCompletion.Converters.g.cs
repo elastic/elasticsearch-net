@@ -25,10 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class RequestChatCompletionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropCacheControl = System.Text.Json.JsonEncodedText.Encode("cache_control"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxCompletionTokens = System.Text.Json.JsonEncodedText.Encode("max_completion_tokens"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMessages = System.Text.Json.JsonEncodedText.Encode("messages"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropReasoning = System.Text.Json.JsonEncodedText.Encode("reasoning"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSessionId = System.Text.Json.JsonEncodedText.Encode("session_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropStop = System.Text.Json.JsonEncodedText.Encode("stop"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropToolChoice = System.Text.Json.JsonEncodedText.Encode("tool_choice"u8);
@@ -38,10 +40,12 @@ public sealed partial class RequestChatCompletionConverter : System.Text.Json.Se
 	public override Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CacheControl?> propCacheControl = default;
 		LocalJsonValue<long?> propMaxCompletionTokens = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.Message>> propMessages = default;
 		LocalJsonValue<string?> propModel = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.Reasoning?> propReasoning = default;
+		LocalJsonValue<string?> propSessionId = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStop = default;
 		LocalJsonValue<float?> propTemperature = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>?> propToolChoice = default;
@@ -49,6 +53,11 @@ public sealed partial class RequestChatCompletionConverter : System.Text.Json.Se
 		LocalJsonValue<float?> propTopP = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propCacheControl.TryReadProperty(ref reader, options, PropCacheControl, null))
+			{
+				continue;
+			}
+
 			if (propMaxCompletionTokens.TryReadProperty(ref reader, options, PropMaxCompletionTokens, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
@@ -65,6 +74,11 @@ public sealed partial class RequestChatCompletionConverter : System.Text.Json.Se
 			}
 
 			if (propReasoning.TryReadProperty(ref reader, options, PropReasoning, null))
+			{
+				continue;
+			}
+
+			if (propSessionId.TryReadProperty(ref reader, options, PropSessionId, null))
 			{
 				continue;
 			}
@@ -106,10 +120,12 @@ public sealed partial class RequestChatCompletionConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			CacheControl = propCacheControl.Value,
 			MaxCompletionTokens = propMaxCompletionTokens.Value,
 			Messages = propMessages.Value,
 			Model = propModel.Value,
 			Reasoning = propReasoning.Value,
+			SessionId = propSessionId.Value,
 			Stop = propStop.Value,
 			Temperature = propTemperature.Value,
 			ToolChoice = propToolChoice.Value,
@@ -121,10 +137,12 @@ public sealed partial class RequestChatCompletionConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCacheControl, value.CacheControl, null, null);
 		writer.WriteProperty(options, PropMaxCompletionTokens, value.MaxCompletionTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMessages, value.Messages, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.Message> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.Message>(o, v, null));
 		writer.WriteProperty(options, PropModel, value.Model, null, null);
 		writer.WriteProperty(options, PropReasoning, value.Reasoning, null, null);
+		writer.WriteProperty(options, PropSessionId, value.SessionId, null, null);
 		writer.WriteProperty(options, PropStop, value.Stop, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropTemperature, value.Temperature, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropToolChoice, value.ToolChoice, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>? v) => w.WriteUnionValue<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>(o, v, null, null));

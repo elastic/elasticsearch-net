@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_token.AuthenticatedUser#api_key"><summary><para>
+Present when the authenticated user is an API key.
+</para></summary></member>
+  <member key="security.get_token.AuthenticatedUser#token"><summary><para>
+Present when the authenticated user is a service account, or authenticated with a token.
+</para></summary></member>
+</doc>

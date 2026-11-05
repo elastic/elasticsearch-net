@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.QueryProfile#debug"><summary><para>
+Extra details about the query.
+</para>
+<para>
+Queries run by a rescorer include a <c>rescorer</c> key with the position of that rescorer in the shard's <c>rescore</c> array.
+</para></summary></member>
+</doc>

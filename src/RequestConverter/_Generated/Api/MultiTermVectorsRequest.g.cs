@@ -54,6 +54,12 @@ public partial class MultiTermVectorsRequest : RequestConverter.IClientCallForma
 				Index.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (Fields is not null)
 			{
 				initializer.Property("Fields");
@@ -94,12 +100,6 @@ public partial class MultiTermVectorsRequest : RequestConverter.IClientCallForma
 			{
 				initializer.Property("Realtime");
 				writer.WriteValue(Realtime.Value);
-			}
-
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)
@@ -155,6 +155,11 @@ public partial class MultiTermVectorsRequest : RequestConverter.IClientCallForma
 			writer.WriteFluentCall("Index", (w) => { Index.FormatCode(w); });
 		}
 
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+		}
+
 		if (Fields is not null)
 		{
 			writer.WriteFluentCall("Fields", (w) => { Fields.FormatCode(w); }, false);
@@ -188,11 +193,6 @@ public partial class MultiTermVectorsRequest : RequestConverter.IClientCallForma
 		if (Realtime is not null)
 		{
 			writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
-		}
-
-		if (RouteSlice is not null)
-		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
 		}
 
 		if (Routing is not null)

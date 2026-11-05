@@ -27,12 +27,14 @@ public sealed partial class RankEvalRequestConverter : System.Text.Json.Serializ
 {
 	private static readonly System.Text.Json.JsonEncodedText PropMetric = System.Text.Json.JsonEncodedText.Encode("metric"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRequests = System.Text.Json.JsonEncodedText.Encode("requests"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemplates = System.Text.Json.JsonEncodedText.Encode("templates"u8);
 
 	public override Elastic.Clients.Elasticsearch.RankEvalRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric?> propMetric = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>> propRequests = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>?> propTemplates = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propMetric.TryReadProperty(ref reader, options, PropMetric, null))
@@ -41,6 +43,11 @@ public sealed partial class RankEvalRequestConverter : System.Text.Json.Serializ
 			}
 
 			if (propRequests.TryReadProperty(ref reader, options, PropRequests, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propTemplates.TryReadProperty(ref reader, options, PropTemplates, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>(o, null)))
 			{
 				continue;
 			}
@@ -58,7 +65,8 @@ public sealed partial class RankEvalRequestConverter : System.Text.Json.Serializ
 		return new Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Metric = propMetric.Value,
-			Requests = propRequests.Value
+			Requests = propRequests.Value,
+			Templates = propTemplates.Value
 		};
 	}
 
@@ -67,6 +75,7 @@ public sealed partial class RankEvalRequestConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMetric, value.Metric, null, null);
 		writer.WriteProperty(options, PropRequests, value.Requests, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>(o, v, null));
+		writer.WriteProperty(options, PropTemplates, value.Templates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalTemplate>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

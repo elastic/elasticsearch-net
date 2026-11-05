@@ -30,6 +30,9 @@ public sealed partial class StartTransformRequestParameters : Elastic.Transport.
 	/// <include file="StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request#from']/*"/>
 	public string? From { get => Q<string?>("from"); set => Q("from", value); }
 
+	/// <include file="StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request#initial_delay']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? InitialDelay { get => Q<Elastic.Clients.Elasticsearch.Duration?>("initial_delay"); set => Q("initial_delay", value); }
+
 	/// <include file="StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
@@ -67,6 +70,9 @@ public sealed partial class StartTransformRequest : Elastic.Clients.Elasticsearc
 
 	/// <include file="StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request#from']/*"/>
 	public string? From { get => Q<string?>("from"); set => Q("from", value); }
+
+	/// <include file="StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request#initial_delay']/*"/>
+	public Elastic.Clients.Elasticsearch.Duration? InitialDelay { get => Q<Elastic.Clients.Elasticsearch.Duration?>("initial_delay"); set => Q("initial_delay", value); }
 
 	/// <include file="StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -109,6 +115,13 @@ public readonly partial struct StartTransformRequestDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor From(string? value)
 	{
 		Instance.From = value;
+		return this;
+	}
+
+	/// <include file="StartTransformRequest.g.xml" path="doc/member[@key='transform.start_transform.Request#initial_delay']/*"/>
+	public Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor InitialDelay(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.InitialDelay = value;
 		return this;
 	}
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.KnnEvalVectorsQuerySource"><summary><para>
+Uses the query vectors in the request.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalVectorsQuerySource#vectors"><summary><para>
+The query vectors, from 1 to 1000 entries with unique identifiers.
+</para></summary></member>
+</doc>

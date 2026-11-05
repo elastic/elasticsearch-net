@@ -26,14 +26,15 @@ namespace Elastic.Clients.Elasticsearch.Esql.Json;
 public sealed partial class DatasetFieldMappingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.DatasetFieldMapping>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRenameFrom = System.Text.Json.JsonEncodedText.Encode("rename_from"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRenameFrom1 = System.Text.Json.JsonEncodedText.Encode("path"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Esql.DatasetFieldMapping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propFormat = default;
-		LocalJsonValue<string?> propPath = default;
+		LocalJsonValue<string?> propRenameFrom = default;
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -42,7 +43,7 @@ public sealed partial class DatasetFieldMappingConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			if (propRenameFrom.TryReadProperty(ref reader, options, PropRenameFrom, null) || propRenameFrom.TryReadProperty(ref reader, options, PropRenameFrom1, null))
 			{
 				continue;
 			}
@@ -65,7 +66,7 @@ public sealed partial class DatasetFieldMappingConverter : System.Text.Json.Seri
 		return new Elastic.Clients.Elasticsearch.Esql.DatasetFieldMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Format = propFormat.Value,
-			Path = propPath.Value,
+			RenameFrom = propRenameFrom.Value,
 			Type = propType.Value
 		};
 	}
@@ -74,7 +75,7 @@ public sealed partial class DatasetFieldMappingConverter : System.Text.Json.Seri
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropRenameFrom, value.RenameFrom, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

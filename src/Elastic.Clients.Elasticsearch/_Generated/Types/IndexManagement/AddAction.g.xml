@@ -14,6 +14,7 @@ Query used to limit documents the alias can access.
   <member key="indices.update_aliases.AddAction#index"><summary><para>
 Data stream or index for the action.
 Supports wildcards (<c>*</c>).
+Wildcard patterns that match both data streams and indices return an error.
 </para></summary></member>
   <member key="indices.update_aliases.AddAction#index_routing"><summary><para>
 Value used to route indexing operations to a specific shard.
@@ -23,6 +24,7 @@ Data stream aliases don’t support this parameter.
   <member key="indices.update_aliases.AddAction#indices"><summary><para>
 Data streams or indices for the action.
 Supports wildcards (<c>*</c>).
+Wildcard patterns that match both data streams and indices return an error.
 </para></summary></member>
   <member key="indices.update_aliases.AddAction#is_hidden"><summary><para>
 If <c>true</c>, the alias is hidden.

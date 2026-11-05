@@ -3,4 +3,8 @@
   <member key="indices.put_alias.Response#acknowledged"><summary><para>
 For a successful response, this value is always true. On failure, an exception is returned instead.
 </para></summary></member>
+  <member key="indices.put_alias.Response#errors"><summary><para>
+If <c>true</c>, at least one alias action failed.
+The request still returns HTTP 200.
+</para></summary></member>
 </doc>

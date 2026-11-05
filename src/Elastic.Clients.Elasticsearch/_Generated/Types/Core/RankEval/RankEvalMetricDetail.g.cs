@@ -28,11 +28,12 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 public sealed partial class RankEvalMetricDetail
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RankEvalMetricDetail(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> hits, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> metricDetails, double metricScore, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> unratedDocs)
+	public RankEvalMetricDetail(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> hits, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> metricDetails, double metricScore, long took, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> unratedDocs)
 	{
 		Hits = hits;
 		MetricDetails = metricDetails;
 		MetricScore = metricScore;
+		Took = took;
 		UnratedDocs = unratedDocs;
 	}
 
@@ -54,6 +55,9 @@ public sealed partial class RankEvalMetricDetail
 
 	/// <include file="RankEvalMetricDetail.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail#metric_score']/*"/>
 	public required double MetricScore { get; set; }
+
+	/// <include file="RankEvalMetricDetail.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail#took']/*"/>
+	public required long Took { get; set; }
 
 	/// <include file="RankEvalMetricDetail.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail#unrated_docs']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; set; }

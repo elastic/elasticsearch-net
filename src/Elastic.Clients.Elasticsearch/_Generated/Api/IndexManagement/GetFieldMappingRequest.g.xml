@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="indices.get_field_mapping.Request"><summary><para>
-Get mapping definitions.
+Get field mapping definitions.
 </para>
 <para>
 Retrieves mapping definitions for one or more fields.

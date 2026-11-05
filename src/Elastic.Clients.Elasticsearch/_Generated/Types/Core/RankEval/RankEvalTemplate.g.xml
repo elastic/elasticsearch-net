@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.rank_eval.RankEvalTemplate#id"><summary><para>
+The ID of the template. A rated request refers to it by this ID in its <c>template_id</c>.
+</para></summary></member>
+  <member key="_global.rank_eval.RankEvalTemplate#template"><summary><para>
+The search template, either an inline <c>source</c> or the <c>id</c> of a stored search template.
+It must be a <c>mustache</c> template (the default <c>lang</c>), and it must render to a search request body.
+Any <c>params</c> set here are ignored: each rated request provides its own <c>params</c>, which are used to render the template.
+</para></summary></member>
+</doc>

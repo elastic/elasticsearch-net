@@ -18,9 +18,7 @@ You can also use <c>mtermvectors</c> to generate term vectors for artificial doc
 The mapping used is determined by the specified <c>_index</c>.
 </para></summary></member>
   <member key="_global.mtermvectors.Request#_slice"><summary><para>
-The slice identifier used to route the operation to a specific slice.
-Use the special value <c>_all</c> to target all slices without restricting to a routing value.
-Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+The default slice identifier for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>), applied to the items that do not specify their own <c>_slice</c>.
 </para></summary></member>
   <member key="_global.mtermvectors.Request#docs"><summary><para>
 An array of existing or artificial documents.

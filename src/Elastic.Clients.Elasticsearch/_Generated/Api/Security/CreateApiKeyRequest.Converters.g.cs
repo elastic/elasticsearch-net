@@ -35,7 +35,7 @@ public sealed partial class CreateApiKeyRequestConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExpiration = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name> propName = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>?> propRoleDescriptors = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

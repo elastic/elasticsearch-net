@@ -3,6 +3,9 @@
   <member key="indices.stats.IndexStats#completion"><summary><para>
 Contains statistics about completions across all shards assigned to the node.
 </para></summary></member>
+  <member key="indices.stats.IndexStats#dense_vector"><summary><para>
+Contains statistics about the dense vectors in the index.
+</para></summary></member>
   <member key="indices.stats.IndexStats#docs"><summary><para>
 Contains statistics about documents across all primary shards assigned to the node.
 </para></summary></member>
@@ -41,6 +44,9 @@ Contains statistics about search operations for the node.
 </para></summary></member>
   <member key="indices.stats.IndexStats#segments"><summary><para>
 Contains statistics about segments across all shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#sparse_vector"><summary><para>
+Contains statistics about the sparse vectors in the index.
 </para></summary></member>
   <member key="indices.stats.IndexStats#store"><summary><para>
 Contains statistics about the size of shards assigned to the node.

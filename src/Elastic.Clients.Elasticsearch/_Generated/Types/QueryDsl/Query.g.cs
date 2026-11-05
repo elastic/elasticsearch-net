@@ -45,6 +45,7 @@ public partial class Query
 	[System.Obsolete("Deprecated in '7.3.0'.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery? Common { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery>("common"); set => SetVariant("common", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery? ConstantScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery>("constant_score"); set => SetVariant("constant_score", value); }
+	public Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQuery? DenseVector { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQuery>("dense_vector"); set => SetVariant("dense_vector", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery? DisMax { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery>("dis_max"); set => SetVariant("dis_max", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery? DistanceFeature { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery>("distance_feature"); set => SetVariant("distance_feature", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? Exists { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>("exists"); set => SetVariant("exists", value); }
@@ -114,6 +115,7 @@ public partial class Query
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Common = value };
 #pragma warning restore CS0618
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { ConstantScore = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { DenseVector = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { DisMax = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { DistanceFeature = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { DistanceFeature = value };
@@ -314,6 +316,18 @@ public readonly partial struct QueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ConstantScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument>> action)
 	{
 		Instance.ConstantScore = Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQuery? value)
+	{
+		Instance.DenseVector = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DenseVector(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQueryDescriptor<TDocument>> action)
+	{
+		Instance.DenseVector = Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1170,6 +1184,24 @@ public readonly partial struct QueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ConstantScore<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<T>> action)
 	{
 		Instance.ConstantScore = Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DenseVector(Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQuery? value)
+	{
+		Instance.DenseVector = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DenseVector(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQueryDescriptor> action)
+	{
+		Instance.DenseVector = Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQueryDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DenseVector<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQueryDescriptor<T>> action)
+	{
+		Instance.DenseVector = Elastic.Clients.Elasticsearch.QueryDsl.DenseVectorQueryDescriptor<T>.Build(action);
 		return this;
 	}
 

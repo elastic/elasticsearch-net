@@ -89,6 +89,12 @@ public partial class OpenPointInTimeRequest : RequestConverter.IClientCallFormat
 				writer.WriteString(Preference);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteInlineList(RouteSlice, (w, item) => { w.WriteString(item); });
+			}
+
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
@@ -151,6 +157,11 @@ public partial class OpenPointInTimeRequest : RequestConverter.IClientCallFormat
 		if (Preference is not null)
 		{
 			writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
+		}
+
+		if (RouteSlice is not null)
+		{
+			writer.WriteFluentParams("RouteSlice", RouteSlice, (w, item) => { w.WriteString(item); });
 		}
 
 		if (Routing is not null)

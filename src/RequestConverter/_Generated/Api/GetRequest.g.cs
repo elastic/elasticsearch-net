@@ -23,206 +23,101 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public partial class GetRequest : RequestConverter.IClientCallFormattable
+public partial class GetRequest : RequestConverter.ICodeFormattable
 {
 	public void FormatCode(RequestConverter.CodeWriter writer)
 	{
-		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
+		using var _objectInitializer = writer.ForceObjectInitializer();
+		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetRequest", false);
 		{
-			if (writer.Options.UseStronglyTypedDocument)
-			{
-				writer.Write("new ");
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument>");
-			}
-			else
-			{
-				writer.Write("new ");
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.GetRequestDescriptor");
-			}
-
-			writer.Write("(");
-			FormatDescriptorHeadArguments(writer);
-			writer.Write(")");
-			FormatDescriptorChain(writer);
-		}
-		else
-		{
-			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.GetRequest", false);
-			{
-				initializer.Property("Id");
-				Id.FormatCode(writer);
-			}
-
-			{
-				initializer.Property("Index");
-				Index.FormatCode(writer);
-			}
-
-			if (ForceSyntheticSource is not null)
-			{
-				initializer.Property("ForceSyntheticSource");
-				writer.WriteValue(ForceSyntheticSource.Value);
-			}
-
-			if (Preference is not null)
-			{
-				initializer.Property("Preference");
-				writer.WriteString(Preference);
-			}
-
-			if (Realtime is not null)
-			{
-				initializer.Property("Realtime");
-				writer.WriteValue(Realtime.Value);
-			}
-
-			if (Refresh is not null)
-			{
-				initializer.Property("Refresh");
-				writer.WriteValue(Refresh.Value);
-			}
-
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
-			}
-
-			if (Routing is not null)
-			{
-				initializer.Property("Routing");
-				Routing.FormatCode(writer);
-			}
-
-			if (Source is not null)
-			{
-				initializer.Property("Source");
-				Source.FormatCode(writer);
-			}
-
-			if (SourceExcludes is not null)
-			{
-				initializer.Property("SourceExcludes");
-				SourceExcludes.FormatCode(writer);
-			}
-
-			if (SourceExcludeVectors is not null)
-			{
-				initializer.Property("SourceExcludeVectors");
-				writer.WriteValue(SourceExcludeVectors.Value);
-			}
-
-			if (SourceIncludes is not null)
-			{
-				initializer.Property("SourceIncludes");
-				SourceIncludes.FormatCode(writer);
-			}
-
-			if (StoredFields is not null)
-			{
-				initializer.Property("StoredFields");
-				StoredFields.FormatCode(writer);
-			}
-
-			if (Version is not null)
-			{
-				initializer.Property("Version");
-				writer.WriteValue(Version.Value);
-				writer.Write("L");
-			}
-
-			if (VersionType is not null)
-			{
-				initializer.Property("VersionType");
-				Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
-			}
-
-			initializer.Dispose();
-		}
-	}
-
-	public void FormatDescriptorHeadArguments(RequestConverter.CodeWriter writer)
-	{
-		writer.WriteInlineArgumentLabel("index");
-		{
-			using var _oi = writer.ForceObjectInitializer();
-			Index.FormatCode(writer);
-		}
-
-		writer.Write(", ");
-		writer.WriteInlineArgumentLabel("id");
-		{
-			using var _oi = writer.ForceObjectInitializer();
+			initializer.Property("Id");
 			Id.FormatCode(writer);
 		}
-	}
 
-	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
-	{
-		using var _chainIndent = writer.Indent();
-		if (ForceSyntheticSource is not null)
 		{
-			writer.WriteFluentCall("ForceSyntheticSource", (w) => { w.WriteValue(ForceSyntheticSource.Value); });
-		}
-
-		if (Preference is not null)
-		{
-			writer.WriteFluentCall("Preference", (w) => { w.WriteString(Preference); });
-		}
-
-		if (Realtime is not null)
-		{
-			writer.WriteFluentCall("Realtime", (w) => { w.WriteValue(Realtime.Value); });
-		}
-
-		if (Refresh is not null)
-		{
-			writer.WriteFluentCall("Refresh", (w) => { w.WriteValue(Refresh.Value); });
+			initializer.Property("Index");
+			Index.FormatCode(writer);
 		}
 
 		if (RouteSlice is not null)
 		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			initializer.Property("RouteSlice");
+			writer.WriteString(RouteSlice);
+		}
+
+		if (ForceSyntheticSource is not null)
+		{
+			initializer.Property("ForceSyntheticSource");
+			writer.WriteValue(ForceSyntheticSource.Value);
+		}
+
+		if (Preference is not null)
+		{
+			initializer.Property("Preference");
+			writer.WriteString(Preference);
+		}
+
+		if (Realtime is not null)
+		{
+			initializer.Property("Realtime");
+			writer.WriteValue(Realtime.Value);
+		}
+
+		if (Refresh is not null)
+		{
+			initializer.Property("Refresh");
+			writer.WriteValue(Refresh.Value);
 		}
 
 		if (Routing is not null)
 		{
-			writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
+			initializer.Property("Routing");
+			Routing.FormatCode(writer);
 		}
 
 		if (Source is not null)
 		{
-			writer.WriteFluentCall("Source", (w) => { Source.FormatCode(w); });
+			initializer.Property("Source");
+			Source.FormatCode(writer);
 		}
 
 		if (SourceExcludes is not null)
 		{
-			writer.WriteFluentCall("SourceExcludes", (w) => { SourceExcludes.FormatCode(w); }, false);
+			initializer.Property("SourceExcludes");
+			SourceExcludes.FormatCode(writer);
 		}
 
 		if (SourceExcludeVectors is not null)
 		{
-			writer.WriteFluentCall("SourceExcludeVectors", (w) => { w.WriteValue(SourceExcludeVectors.Value); });
+			initializer.Property("SourceExcludeVectors");
+			writer.WriteValue(SourceExcludeVectors.Value);
 		}
 
 		if (SourceIncludes is not null)
 		{
-			writer.WriteFluentCall("SourceIncludes", (w) => { SourceIncludes.FormatCode(w); }, false);
+			initializer.Property("SourceIncludes");
+			SourceIncludes.FormatCode(writer);
 		}
 
 		if (StoredFields is not null)
 		{
-			writer.WriteFluentCall("StoredFields", (w) => { StoredFields.FormatCode(w); }, false);
+			initializer.Property("StoredFields");
+			StoredFields.FormatCode(writer);
 		}
 
 		if (Version is not null)
 		{
-			writer.WriteFluentCall("Version", (w) => { w.WriteValue(Version.Value); w.Write("L"); });
+			initializer.Property("Version");
+			writer.WriteValue(Version.Value);
+			writer.Write("L");
 		}
 
 		if (VersionType is not null)
 		{
-			writer.WriteFluentCall("VersionType", (w) => { Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, w); });
+			initializer.Property("VersionType");
+			Elastic.Clients.Elasticsearch.VersionTypeCodeFormatter.FormatCode(VersionType.Value, writer);
 		}
+
+		initializer.Dispose();
 	}
 }

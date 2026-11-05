@@ -53,6 +53,12 @@ public partial class IndexRequest<TDocument> : RequestConverter.IClientCallForma
 				Index.FormatCode(writer);
 			}
 
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
+			}
+
 			if (IfPrimaryTerm is not null)
 			{
 				initializer.Property("IfPrimaryTerm");
@@ -101,12 +107,6 @@ public partial class IndexRequest<TDocument> : RequestConverter.IClientCallForma
 			{
 				initializer.Property("RequireDataStream");
 				writer.WriteValue(RequireDataStream.Value);
-			}
-
-			if (RouteSlice is not null)
-			{
-				initializer.Property("RouteSlice");
-				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)
@@ -165,6 +165,18 @@ public partial class IndexRequest<TDocument> : RequestConverter.IClientCallForma
 		}
 
 		writer.Write(", ");
+		writer.WriteInlineArgumentLabel("routeSlice");
+		if (RouteSlice is not null)
+		{
+			using var _oi = writer.ForceObjectInitializer();
+			writer.WriteString(RouteSlice);
+		}
+		else
+		{
+			writer.Write("null");
+		}
+
+		writer.Write(", ");
 		writer.WriteInlineArgumentLabel("id");
 		if (Id is not null)
 		{
@@ -218,11 +230,6 @@ public partial class IndexRequest<TDocument> : RequestConverter.IClientCallForma
 		if (RequireDataStream is not null)
 		{
 			writer.WriteFluentCall("RequireDataStream", (w) => { w.WriteValue(RequireDataStream.Value); });
-		}
-
-		if (RouteSlice is not null)
-		{
-			writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
 		}
 
 		if (Routing is not null)

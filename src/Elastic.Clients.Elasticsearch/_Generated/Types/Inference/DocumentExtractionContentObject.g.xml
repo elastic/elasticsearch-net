@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.document_extraction.DocumentExtractionContentObject"><summary><para>
+A wrapper object which contains a single document to extract the content from.
+</para></summary></member>
+  <member key="inference.document_extraction.DocumentExtractionContentObject#content"><summary><para>
+The document to extract the content from.
+</para></summary></member>
+</doc>

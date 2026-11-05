@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.VectorDbColumnar"><summary><para>
+Usage statistics for indices using the <c>vectordb_columnar</c> index mode.
+</para></summary></member>
+  <member key="xpack.usage.VectorDbColumnar#indices_count"><summary><para>
+The number of indices using the <c>vectordb_columnar</c> index mode.
+</para></summary></member>
+  <member key="xpack.usage.VectorDbColumnar#num_docs"><summary><para>
+The total number of documents held across all <c>vectordb_columnar</c> indices.
+</para></summary></member>
+</doc>

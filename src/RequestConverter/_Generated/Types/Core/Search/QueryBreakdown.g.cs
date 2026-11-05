@@ -89,6 +89,18 @@ public partial class QueryBreakdown : RequestConverter.ICodeFormattable
 		}
 
 		{
+			initializer.Property("IntoBitSet");
+			writer.WriteValue(IntoBitSet);
+			writer.Write("L");
+		}
+
+		{
+			initializer.Property("IntoBitSetCount");
+			writer.WriteValue(IntoBitSetCount);
+			writer.Write("L");
+		}
+
+		{
 			initializer.Property("Match");
 			writer.WriteValue(Match);
 			writer.Write("L");

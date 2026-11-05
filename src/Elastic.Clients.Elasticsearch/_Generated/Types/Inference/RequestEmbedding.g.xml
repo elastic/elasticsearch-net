@@ -53,6 +53,18 @@ string array example:
 ]
 </code>
 <para>
+<c>content</c> object using the <c>url</c> format example (available in Elasticsearch 9.6.0 and later):
+</para>
+<code>
+"input": {
+    "content": {
+      "type": "image",
+      "format": "url",
+      "value": "https://example.com/image.jpg"
+    }
+  }
+</code>
+<para>
 Multiple items in one <c>content</c> object example (available in Elasticsearch 9.5.0 and later):
 </para>
 <code>

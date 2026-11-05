@@ -49,6 +49,9 @@ public sealed partial class MultiGetOperation
 	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_slice']/*"/>
+	public string? RouteSlice { get; set; }
+
 	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
@@ -92,6 +95,13 @@ public readonly partial struct MultiGetOperationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -182,6 +192,13 @@ public readonly partial struct MultiGetOperationDescriptor
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 

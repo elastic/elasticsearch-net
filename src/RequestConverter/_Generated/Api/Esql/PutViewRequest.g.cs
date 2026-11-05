@@ -44,6 +44,12 @@ public partial class PutViewRequest : RequestConverter.IClientCallFormattable
 				Name.FormatCode(writer);
 			}
 
+			if (Validate is not null)
+			{
+				initializer.Property("Validate");
+				writer.WriteValue(Validate.Value);
+			}
+
 			if (Description is not null)
 			{
 				initializer.Property("Description");
@@ -71,6 +77,11 @@ public partial class PutViewRequest : RequestConverter.IClientCallFormattable
 	public void FormatDescriptorChain(RequestConverter.CodeWriter writer)
 	{
 		using var _chainIndent = writer.Indent();
+		if (Validate is not null)
+		{
+			writer.WriteFluentCall("Validate", (w) => { w.WriteValue(Validate.Value); });
+		}
+
 		if (Description is not null)
 		{
 			writer.WriteFluentCall("Description", (w) => { w.WriteString(Description); });

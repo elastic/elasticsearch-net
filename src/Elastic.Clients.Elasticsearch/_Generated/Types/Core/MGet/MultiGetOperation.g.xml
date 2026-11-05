@@ -6,11 +6,16 @@ The unique document ID.
   <member key="_global.mget.Operation#_index"><summary><para>
 The index that contains the document.
 </para></summary></member>
+  <member key="_global.mget.Operation#_slice"><summary><para>
+The slice the document belongs to, for a slice-enabled index (<c>index.slice.enabled</c> set to <c>true</c>).
+It overrides the <c>_slice</c> set in the request path.
+</para></summary></member>
   <member key="_global.mget.Operation#_source"><summary><para>
 If <c>false</c>, excludes all _source fields.
 </para></summary></member>
   <member key="_global.mget.Operation#routing"><summary><para>
 The key for the primary shard the document resides on. Required if routing is used during indexing.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.mget.Operation#stored_fields"><summary><para>
 The stored fields you want to retrieve.

@@ -25,6 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardRecoveryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardRecovery>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropBlockedForMillis = System.Text.Json.JsonEncodedText.Encode("blocked_for_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGate = System.Text.Json.JsonEncodedText.Encode("gate"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLocalRetries = System.Text.Json.JsonEncodedText.Encode("local_retries"u8);
@@ -47,6 +49,8 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardRecovery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.TimeSpan?> propBlockedForMillis = default;
+		LocalJsonValue<string?> propGate = default;
 		LocalJsonValue<long> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus> propIndex = default;
 		LocalJsonValue<int?> propLocalRetries = default;
@@ -67,6 +71,16 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex> propVerifyIndex = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propBlockedForMillis.TryReadProperty(ref reader, options, PropBlockedForMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propGate.TryReadProperty(ref reader, options, PropGate, null))
+			{
+				continue;
+			}
+
 			if (propId.TryReadProperty(ref reader, options, PropId, null))
 			{
 				continue;
@@ -169,6 +183,8 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.IndexManagement.ShardRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			BlockedForMillis = propBlockedForMillis.Value,
+			Gate = propGate.Value,
 			Id = propId.Value,
 			Index = propIndex.Value,
 			LocalRetries = propLocalRetries.Value,
@@ -193,6 +209,8 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardRecovery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBlockedForMillis, value.BlockedForMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropGate, value.Gate, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropLocalRetries, value.LocalRetries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));

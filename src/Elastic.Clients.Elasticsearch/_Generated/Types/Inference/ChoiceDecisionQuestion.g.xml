@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.decision.ChoiceDecisionQuestion"><summary><para>
+A question answered with one option out of a fixed set of choices.
+</para></summary></member>
+  <member key="inference.decision.ChoiceDecisionQuestion#choices"><summary><para>
+The options to choose from, each mapped to an optional description. At least two choices are required.
+</para></summary></member>
+  <member key="inference.decision.ChoiceDecisionQuestion#instructions"><summary><para>
+A description of what to decide. It must not be empty.
+</para></summary></member>
+</doc>

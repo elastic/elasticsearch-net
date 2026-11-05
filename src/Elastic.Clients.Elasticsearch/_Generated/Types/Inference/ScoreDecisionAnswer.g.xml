@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ScoreDecisionAnswer"><summary><para>
+The answer to a <c>score</c> question.
+</para></summary></member>
+  <member key="inference._types.ScoreDecisionAnswer#confidence"><summary><para>
+The confidence in the score.
+</para></summary></member>
+  <member key="inference._types.ScoreDecisionAnswer#probabilities"><summary><para>
+The probability of each level, ordered from the lowest to the highest level.
+</para></summary></member>
+  <member key="inference._types.ScoreDecisionAnswer#score"><summary><para>
+The probability-weighted position on the scale, from <c>0</c> for the lowest level.
+</para></summary></member>
+</doc>

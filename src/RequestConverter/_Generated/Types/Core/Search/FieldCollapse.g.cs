@@ -29,11 +29,6 @@ public partial class FieldCollapse : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			if (Collapse is not null)
-			{
-				writer.WriteFluentDescriptorCall("Collapse", (w) => { Collapse.FormatCode(w); }, (w) => { Collapse.FormatCode(w); });
-			}
-
 			{
 				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
 			}
@@ -51,12 +46,6 @@ public partial class FieldCollapse : RequestConverter.ICodeFormattable
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse", false);
-			if (Collapse is not null)
-			{
-				initializer.Property("Collapse");
-				Collapse.FormatCode(writer);
-			}
-
 			{
 				initializer.Property("Field");
 				Field.FormatCode(writer);

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.grant_api_key.GrantApiKeyClientAuthentication#scheme"><summary><para>
+The client authentication scheme.
+</para></summary></member>
+  <member key="security.grant_api_key.GrantApiKeyClientAuthentication#value"><summary><para>
+The client authentication value, which is what normally follows the scheme in the <c>ES-Client-Authentication</c> request header.
+</para></summary></member>
+</doc>

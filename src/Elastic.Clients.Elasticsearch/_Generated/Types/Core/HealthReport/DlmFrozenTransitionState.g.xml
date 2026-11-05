@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.health_report.DlmFrozenTransitionState#marked"><summary><para>
+The index is marked for conversion but has not been submitted to the transition executor.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionState#queued"><summary><para>
+The index has been submitted to the transition executor and is waiting in its queue for a thread.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionState#running"><summary><para>
+The transition of the index is in progress.
+</para></summary></member>
+  <member key="_global.health_report.DlmFrozenTransitionState#unmarked"><summary><para>
+The index is eligible for a frozen-tier transition but the data stream lifecycle has not marked it for conversion.
+</para></summary></member>
+</doc>

@@ -2,6 +2,10 @@
 <doc>
   <member key="esql.put_view.Request"><summary><para>
 Create or update an ES|QL view.
+</para>
+<para>
+Stores an ES|QL query that runs whenever the view is referenced.
+A query that cannot be parsed is rejected. Replacing a reserved view fails.
 </para></summary></member>
   <member key="esql.put_view.Request#description"><summary><para>
 A free-text description of the view.
@@ -10,6 +14,14 @@ A free-text description of the view.
 The view name to create or update.
 </para></summary></member>
   <member key="esql.put_view.Request#query"><summary><para>
-The ES|QL query string from which to create a view.
+The ES|QL query string that defines the view. A query that cannot be parsed is rejected.
+</para></summary></member>
+  <member key="esql.put_view.Request#validate"><summary><para>
+Whether to analyze the view query and return a warning when validation fails.
+</para>
+<para>
+Validation reports an unknown index or column, including an index the caller cannot read.
+The view is saved even when validation reports a problem.
+Failures unrelated to the query, such as an overloaded cluster, produce no warning.
 </para></summary></member>
 </doc>

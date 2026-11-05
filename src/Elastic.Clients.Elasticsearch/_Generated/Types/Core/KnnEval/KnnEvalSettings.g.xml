@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.knn_eval.KnnEvalSettings#exact"><summary><para>
+If <c>true</c>, compares every vector at full precision.
+Only applies to the <c>baseline</c>, requires <c>allow_exact_baseline</c>, and can't be combined with other settings.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalSettings#num_candidates"><summary><para>
+The number of nearest neighbor candidates to consider per shard.
+It can't be less than <c>k</c>, or more than 10000 (9999 with sampling).
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalSettings#rescore_vector"><summary><para>
+The rescoring of the candidates. Only applies to quantized fields.
+</para></summary></member>
+  <member key="_global.knn_eval.KnnEvalSettings#visit_percentage"><summary><para>
+The percentage of postings to visit, from 0 to 100.
+<c>0</c> selects the automatic visit calculation.
+</para></summary></member>
+</doc>

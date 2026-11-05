@@ -28,10 +28,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class FieldSummary
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FieldSummary(int any, int docValues, Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex invertedIndex, int knnVectors, int norms, int points, int storedFields, int termVectors)
+	public FieldSummary(int any, int docValues, int docValuesSkipper, Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex invertedIndex, int knnVectors, int norms, int points, int storedFields, int termVectors)
 	{
 		Any = any;
 		DocValues = docValues;
+		DocValuesSkipper = docValuesSkipper;
 		InvertedIndex = invertedIndex;
 		KnnVectors = knnVectors;
 		Norms = norms;
@@ -52,6 +53,7 @@ public sealed partial class FieldSummary
 
 	public required int Any { get; set; }
 	public required int DocValues { get; set; }
+	public required int DocValuesSkipper { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex InvertedIndex { get; set; }
 	public required int KnnVectors { get; set; }
 	public required int Norms { get; set; }

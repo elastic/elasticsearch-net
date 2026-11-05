@@ -45,9 +45,6 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
-	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
-
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
@@ -75,6 +72,10 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 	{
 	}
 
+	public BulkRequest(Elastic.Clients.Elasticsearch.IndexName? index, string? routeSlice) : base(r => r.Optional("index", index).Optional("_slice", routeSlice))
+	{
+	}
+
 	public BulkRequest()
 	{
 	}
@@ -96,6 +97,9 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
+	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
+	public string? RouteSlice { get => P<string?>("_slice"); set => PO("_slice", value); }
+
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#include_source_on_error']/*"/>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
@@ -113,9 +117,6 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
-
-	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
-	public string? RouteSlice { get => Q<string?>("_slice"); set => Q("_slice", value); }
 
 	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -153,6 +154,11 @@ public readonly partial struct BulkRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(index);
 	}
 
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index, string? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(index, routeSlice);
+	}
+
 	public BulkRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -165,6 +171,13 @@ public readonly partial struct BulkRequestDescriptor
 	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -207,13 +220,6 @@ public readonly partial struct BulkRequestDescriptor
 	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RequireDataStream(bool? value = true)
 	{
 		Instance.RequireDataStream = value;
-		return this;
-	}
-
-	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -370,6 +376,11 @@ public readonly partial struct BulkRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(typeof(TDocument));
 	}
 
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index, string? routeSlice)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.BulkRequest(index, routeSlice);
+	}
+
 	public static explicit operator Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.BulkRequest instance) => new Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
@@ -377,6 +388,13 @@ public readonly partial struct BulkRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
+	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RouteSlice(string? value)
+	{
+		Instance.RouteSlice = value;
 		return this;
 	}
 
@@ -419,13 +437,6 @@ public readonly partial struct BulkRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
 	{
 		Instance.RequireDataStream = value;
-		return this;
-	}
-
-	/// <include file="BulkRequest.g.xml" path="doc/member[@key='_global.bulk.Request#_slice']/*"/>
-	public Elastic.Clients.Elasticsearch.BulkRequestDescriptor<TDocument> RouteSlice(string? value)
-	{
-		Instance.RouteSlice = value;
 		return this;
 	}
 

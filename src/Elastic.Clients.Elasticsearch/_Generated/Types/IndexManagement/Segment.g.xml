@@ -3,6 +3,10 @@
   <member key="indices.segments.Segment#attributes"><summary><para>
 Contains information about whether high compression was enabled and per-field vector formats.
 </para></summary></member>
+  <member key="indices.segments.Segment#auto_calibration"><summary><para>
+The auto-calibration information of the segment, per <c>dense_vector</c> field that supports auto-calibration.
+Only returned when <c>include_auto_calibration</c> is <c>true</c>.
+</para></summary></member>
   <member key="indices.segments.Segment#committed"><summary><para>
 If <c>true</c>, the segment is synced to disk. Segments that are synced can survive a hard reboot.
 If <c>false</c>, the data from uncommitted segments is also stored in the transaction log so that Elasticsearch is able to replay changes on the next start.
@@ -19,6 +23,9 @@ Also, Elasticsearch creates extra deleted documents to internally track the rece
   <member key="indices.segments.Segment#generation"><summary><para>
 Generation number, such as <c>0</c>. Elasticsearch increments this generation number for each segment written then uses this number to derive the segment name.
 </para></summary></member>
+  <member key="indices.segments.Segment#merge_id"><summary><para>
+The ID of the merge the segment is part of. Only returned while the segment is being merged.
+</para></summary></member>
   <member key="indices.segments.Segment#num_docs"><summary><para>
 The number of documents as reported by Lucene.
 This excludes deleted documents and counts any nested documents separately from their parents.
@@ -28,8 +35,14 @@ It also excludes documents which were indexed recently and do not yet belong to 
 If <c>true</c>, the segment is searchable.
 If <c>false</c>, the segment has most likely been written to disk but needs a refresh to be searchable.
 </para></summary></member>
+  <member key="indices.segments.Segment#size"><summary><para>
+Disk space used by the segment.
+</para></summary></member>
   <member key="indices.segments.Segment#size_in_bytes"><summary><para>
 Disk space used by the segment, in bytes.
+</para></summary></member>
+  <member key="indices.segments.Segment#sort"><summary><para>
+The index sort of the segment. Only returned when the index is sorted.
 </para></summary></member>
   <member key="indices.segments.Segment#version"><summary><para>
 Version of Lucene used to write the segment.

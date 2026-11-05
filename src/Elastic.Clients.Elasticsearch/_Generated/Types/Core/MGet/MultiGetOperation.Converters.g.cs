@@ -27,6 +27,7 @@ public sealed partial class MultiGetOperationConverter : System.Text.Json.Serial
 {
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouteSlice = System.Text.Json.JsonEncodedText.Encode("_slice"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields"u8);
@@ -38,6 +39,7 @@ public sealed partial class MultiGetOperationConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<string?> propRouteSlice = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propStoredFields = default;
@@ -51,6 +53,11 @@ public sealed partial class MultiGetOperationConverter : System.Text.Json.Serial
 			}
 
 			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propRouteSlice.TryReadProperty(ref reader, options, PropRouteSlice, null))
 			{
 				continue;
 			}
@@ -94,6 +101,7 @@ public sealed partial class MultiGetOperationConverter : System.Text.Json.Serial
 		{
 			Id = propId.Value,
 			Index = propIndex.Value,
+			RouteSlice = propRouteSlice.Value,
 			Routing = propRouting.Value,
 			Source = propSource.Value,
 			StoredFields = propStoredFields.Value,
@@ -107,6 +115,7 @@ public sealed partial class MultiGetOperationConverter : System.Text.Json.Serial
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropRouteSlice, value.RouteSlice, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));

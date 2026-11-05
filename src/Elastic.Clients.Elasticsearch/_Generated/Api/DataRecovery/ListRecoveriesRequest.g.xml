@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="data_recovery.list_recoveries.Request"><summary><para>
+List recoveries.
+</para>
+<para>
+List the recoveries that were started with the start recovery API, including those that have finished.
+This API is intended for internal operator use.
+Recoveries are ordered by start time, and the most recent are returned first by default.
+To retrieve further pages, pass the start time and identifier of the last recovery of a page as <c>search_after_started_at</c> and <c>search_after_recovery_id</c>.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Request#order"><summary><para>
+The order of the recoveries by start time.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Request#search_after_recovery_id"><summary><para>
+Return only recoveries after this identifier in the sort order for recoveries with the same start time, to retrieve the next page.
+It must be provided together with <c>search_after_started_at</c>.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Request#search_after_started_at"><summary><para>
+Return only recoveries after this start time in the sort order, to retrieve the next page.
+It must be provided together with <c>search_after_recovery_id</c>.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Request#size"><summary><para>
+The maximum number of recoveries to return. The value must be between 1 and 1000.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Request#started_at_gte"><summary><para>
+Return only recoveries that started at or after this time, as an ISO-8601 timestamp.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Request#started_at_lt"><summary><para>
+Return only recoveries that started before this time, as an ISO-8601 timestamp. It must not be earlier than <c>started_at_gte</c>.
+</para></summary></member>
+  <member key="data_recovery.list_recoveries.Request#status"><summary><para>
+A comma-separated list of statuses. Return only recoveries with one of these statuses. By default, recoveries with any status are returned.
+</para></summary></member>
+</doc>

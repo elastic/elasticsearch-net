@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.PointInTimeReference#_slice"><summary><para>
+The slice identifiers to search within the point in time: a single slice, a comma-separated list such as <c>tenant-a,tenant-b</c>, or <c>_all</c> to search all slices.
+</para></summary></member>
+</doc>

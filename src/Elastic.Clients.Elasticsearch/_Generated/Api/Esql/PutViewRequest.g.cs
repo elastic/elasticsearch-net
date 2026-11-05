@@ -27,6 +27,8 @@ namespace Elastic.Clients.Elasticsearch.Esql;
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
 public sealed partial class PutViewRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#validate']/*"/>
+	public bool? Validate { get => Q<bool?>("validate"); set => Q("validate", value); }
 }
 
 /// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
@@ -67,6 +69,9 @@ public sealed partial class PutViewRequest : Elastic.Clients.Elasticsearch.Reque
 	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Name { get => P<Elastic.Clients.Elasticsearch.Id>("name"); set => PR("name", value); }
 
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#validate']/*"/>
+	public bool? Validate { get => Q<bool?>("validate"); set => Q("validate", value); }
+
 	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#description']/*"/>
 	public string? Description { get; set; }
 
@@ -106,6 +111,13 @@ public readonly partial struct PutViewRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#validate']/*"/>
+	public Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor Validate(bool? value = true)
+	{
+		Instance.Validate = value;
 		return this;
 	}
 

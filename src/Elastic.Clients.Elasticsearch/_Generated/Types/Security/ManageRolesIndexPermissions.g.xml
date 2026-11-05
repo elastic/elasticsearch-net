@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.ManageRolesIndexPermissions#names"><summary><para>
+A list of indices (or index name patterns) that the owners of the role can manage roles for.
+</para></summary></member>
+  <member key="security._types.ManageRolesIndexPermissions#privileges"><summary><para>
+The index privileges that the managed roles are allowed to grant on the specified indices.
+</para></summary></member>
+</doc>

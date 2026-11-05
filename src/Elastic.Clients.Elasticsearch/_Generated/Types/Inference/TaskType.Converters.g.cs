@@ -27,6 +27,8 @@ public sealed partial class TaskTypeConverter : System.Text.Json.Serialization.J
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDecision = System.Text.Json.JsonEncodedText.Encode("decision"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDocumentExtraction = System.Text.Json.JsonEncodedText.Encode("document_extraction"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding"u8);
@@ -42,6 +44,16 @@ public sealed partial class TaskTypeConverter : System.Text.Json.Serialization.J
 		if (reader.ValueTextEquals(MemberCompletion))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberDecision))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.Decision;
+		}
+
+		if (reader.ValueTextEquals(MemberDocumentExtraction))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.DocumentExtraction;
 		}
 
 		if (reader.ValueTextEquals(MemberEmbedding))
@@ -73,6 +85,16 @@ public sealed partial class TaskTypeConverter : System.Text.Json.Serialization.J
 		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberDecision.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.Decision;
+		}
+
+		if (string.Equals(value, MemberDocumentExtraction.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.DocumentExtraction;
 		}
 
 		if (string.Equals(value, MemberEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -107,6 +129,12 @@ public sealed partial class TaskTypeConverter : System.Text.Json.Serialization.J
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Completion:
 				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.Decision:
+				writer.WriteStringValue(MemberDecision);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.DocumentExtraction:
+				writer.WriteStringValue(MemberDocumentExtraction);
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskType.Embedding:
 				writer.WriteStringValue(MemberEmbedding);

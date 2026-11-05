@@ -26,30 +26,43 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 public sealed partial class SegmentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Segment>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAutoCalibration = System.Text.Json.JsonEncodedText.Encode("auto_calibration"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCommitted = System.Text.Json.JsonEncodedText.Encode("committed"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCompound = System.Text.Json.JsonEncodedText.Encode("compound"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDeletedDocs = System.Text.Json.JsonEncodedText.Encode("deleted_docs"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMergeId = System.Text.Json.JsonEncodedText.Encode("merge_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNumDocs = System.Text.Json.JsonEncodedText.Encode("num_docs"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.Segment Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propAttributes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propAttributes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentAutoCalibrations?> propAutoCalibration = default;
 		LocalJsonValue<bool> propCommitted = default;
-		LocalJsonValue<bool> propCompound = default;
+		LocalJsonValue<bool?> propCompound = default;
 		LocalJsonValue<long> propDeletedDocs = default;
 		LocalJsonValue<int> propGeneration = default;
+		LocalJsonValue<string?> propMergeId = default;
 		LocalJsonValue<long> propNumDocs = default;
 		LocalJsonValue<bool> propSearch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propSize = default;
 		LocalJsonValue<double> propSizeInBytes = default;
-		LocalJsonValue<string> propVersion = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSort>?> propSort = default;
+		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAttributes.TryReadProperty(ref reader, options, PropAttributes, static System.Collections.Generic.IReadOnlyDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
+			if (propAttributes.TryReadProperty(ref reader, options, PropAttributes, static System.Collections.Generic.IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propAutoCalibration.TryReadProperty(ref reader, options, PropAutoCalibration, null))
 			{
 				continue;
 			}
@@ -59,7 +72,7 @@ public sealed partial class SegmentConverter : System.Text.Json.Serialization.Js
 				continue;
 			}
 
-			if (propCompound.TryReadProperty(ref reader, options, PropCompound, null))
+			if (propCompound.TryReadProperty(ref reader, options, PropCompound, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -74,6 +87,11 @@ public sealed partial class SegmentConverter : System.Text.Json.Serialization.Js
 				continue;
 			}
 
+			if (propMergeId.TryReadProperty(ref reader, options, PropMergeId, null))
+			{
+				continue;
+			}
+
 			if (propNumDocs.TryReadProperty(ref reader, options, PropNumDocs, null))
 			{
 				continue;
@@ -84,7 +102,17 @@ public sealed partial class SegmentConverter : System.Text.Json.Serialization.Js
 				continue;
 			}
 
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
 			if (propSizeInBytes.TryReadProperty(ref reader, options, PropSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSort>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSort>(o, null)))
 			{
 				continue;
 			}
@@ -107,13 +135,17 @@ public sealed partial class SegmentConverter : System.Text.Json.Serialization.Js
 		return new Elastic.Clients.Elasticsearch.IndexManagement.Segment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Attributes = propAttributes.Value,
+			AutoCalibration = propAutoCalibration.Value,
 			Committed = propCommitted.Value,
 			Compound = propCompound.Value,
 			DeletedDocs = propDeletedDocs.Value,
 			Generation = propGeneration.Value,
+			MergeId = propMergeId.Value,
 			NumDocs = propNumDocs.Value,
 			Search = propSearch.Value,
+			Size = propSize.Value,
 			SizeInBytes = propSizeInBytes.Value,
+			Sort = propSort.Value,
 			Version = propVersion.Value
 		};
 	}
@@ -121,14 +153,18 @@ public sealed partial class SegmentConverter : System.Text.Json.Serialization.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Segment value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropAutoCalibration, value.AutoCalibration, null, null);
 		writer.WriteProperty(options, PropCommitted, value.Committed, null, null);
-		writer.WriteProperty(options, PropCompound, value.Compound, null, null);
+		writer.WriteProperty(options, PropCompound, value.Compound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDeletedDocs, value.DeletedDocs, null, null);
 		writer.WriteProperty(options, PropGeneration, value.Generation, null, null);
+		writer.WriteProperty(options, PropMergeId, value.MergeId, null, null);
 		writer.WriteProperty(options, PropNumDocs, value.NumDocs, null, null);
 		writer.WriteProperty(options, PropSearch, value.Search, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
 		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSort>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSort>(o, v, null));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}

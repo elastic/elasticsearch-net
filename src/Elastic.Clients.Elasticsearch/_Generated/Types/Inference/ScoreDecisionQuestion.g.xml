@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.decision.ScoreDecisionQuestion"><summary><para>
+A question answered with the probability-weighted position on an ordered scale of levels.
+</para></summary></member>
+  <member key="inference.decision.ScoreDecisionQuestion#instructions"><summary><para>
+A description of what to decide. It must not be empty.
+</para></summary></member>
+  <member key="inference.decision.ScoreDecisionQuestion#levels"><summary><para>
+The levels of the scale, ordered from lowest to highest. At least two levels are required.
+</para></summary></member>
+</doc>

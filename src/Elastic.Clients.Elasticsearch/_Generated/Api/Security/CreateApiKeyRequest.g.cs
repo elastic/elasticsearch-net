@@ -36,6 +36,12 @@ public sealed partial class CreateApiKeyRequestParameters : Elastic.Transport.Re
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.CreateApiKeyRequestConverter))]
 public sealed partial class CreateApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Name name)
+	{
+		Name = name;
+	}
+
 	public CreateApiKeyRequest()
 	{
 	}
@@ -64,7 +70,7 @@ public sealed partial class CreateApiKeyRequest : Elastic.Clients.Elasticsearch.
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
 	/// <include file="CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request#name']/*"/>
-	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
 	/// <include file="CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request#role_descriptors']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? RoleDescriptors { get; set; }
@@ -133,7 +139,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	}
 
 	/// <include file="CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request#name']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
@@ -216,13 +222,8 @@ public readonly partial struct CreateApiKeyRequestDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;
@@ -339,7 +340,7 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	}
 
 	/// <include file="CreateApiKeyRequest.g.xml" path="doc/member[@key='security.create_api_key.Request#name']/*"/>
-	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? value)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
@@ -408,13 +409,8 @@ public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>>? action)
+	internal static Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

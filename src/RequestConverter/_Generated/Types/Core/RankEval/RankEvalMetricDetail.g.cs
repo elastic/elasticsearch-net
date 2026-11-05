@@ -52,6 +52,12 @@ public partial class RankEvalMetricDetail : RequestConverter.ICodeFormattable
 		}
 
 		{
+			initializer.Property("Took");
+			writer.WriteValue(Took);
+			writer.Write("L");
+		}
+
+		{
 			initializer.Property("UnratedDocs");
 			writer.WriteInlineList(UnratedDocs, (w, item) => { item.FormatCode(w); });
 		}

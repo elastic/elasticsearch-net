@@ -74,6 +74,11 @@ public partial class MultiTermVectorsOperation : RequestConverter.ICodeFormattab
 				writer.WriteFluentCall("Positions", (w) => { w.WriteValue(Positions.Value); });
 			}
 
+			if (RouteSlice is not null)
+			{
+				writer.WriteFluentCall("RouteSlice", (w) => { w.WriteString(RouteSlice); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -149,6 +154,12 @@ public partial class MultiTermVectorsOperation : RequestConverter.ICodeFormattab
 			{
 				initializer.Property("Positions");
 				writer.WriteValue(Positions.Value);
+			}
+
+			if (RouteSlice is not null)
+			{
+				initializer.Property("RouteSlice");
+				writer.WriteString(RouteSlice);
 			}
 
 			if (Routing is not null)

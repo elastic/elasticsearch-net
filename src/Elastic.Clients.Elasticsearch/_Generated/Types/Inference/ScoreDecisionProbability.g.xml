@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ScoreDecisionProbability#label"><summary><para>
+The label of the level.
+</para></summary></member>
+  <member key="inference._types.ScoreDecisionProbability#probability"><summary><para>
+The probability of the level.
+</para></summary></member>
+  <member key="inference._types.ScoreDecisionProbability#value"><summary><para>
+The zero-based position of the level, which is also its position in the array.
+</para></summary></member>
+</doc>
