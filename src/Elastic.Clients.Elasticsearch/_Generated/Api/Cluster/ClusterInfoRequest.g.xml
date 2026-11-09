@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="cluster.info.Request"><summary><para>
-Get cluster info.
+Get cluster subsystem info.
+</para>
+<para>
 Returns basic information about the cluster.
 </para></summary></member>
   <member key="cluster.info.Request#target"><summary><para>

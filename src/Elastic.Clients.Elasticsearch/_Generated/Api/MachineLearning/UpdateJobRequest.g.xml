@@ -45,7 +45,7 @@ before version 7.8.0, the default value matches
 A description of the job.
 </para></summary></member>
   <member key="ml.update_job.Request#detectors"><summary><para>
-An array of detector update objects.
+A detector update object or an array of detector update objects.
 </para></summary></member>
   <member key="ml.update_job.Request#groups"><summary><para>
 A list of job groups. A job can belong to no groups or many.

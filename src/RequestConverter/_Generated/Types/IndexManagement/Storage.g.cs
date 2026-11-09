@@ -39,8 +39,9 @@ public partial class Storage : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("StatsRefreshInterval", (w) => { StatsRefreshInterval.FormatCode(w); });
 			}
 
+			if (Type is not null)
 			{
-				writer.WriteFluentCall("Type", (w) => { Type.FormatCode(w); });
+				writer.WriteFluentCall("Type", (w) => { Type.Value.FormatCode(w); });
 			}
 		}
 		else
@@ -58,9 +59,10 @@ public partial class Storage : RequestConverter.ICodeFormattable
 				StatsRefreshInterval.FormatCode(writer);
 			}
 
+			if (Type is not null)
 			{
 				initializer.Property("Type");
-				Type.FormatCode(writer);
+				Type.Value.FormatCode(writer);
 			}
 
 			initializer.Dispose();

@@ -29,6 +29,7 @@ public sealed partial class IndexRoutingAllocationConverter : System.Text.Json.S
 	private static readonly System.Text.Json.JsonEncodedText PropEnable = System.Text.Json.JsonEncodedText.Encode("enable"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropInitialRecovery = System.Text.Json.JsonEncodedText.Encode("initial_recovery"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequire = System.Text.Json.JsonEncodedText.Encode("require"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -37,6 +38,7 @@ public sealed partial class IndexRoutingAllocationConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions?> propEnable = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude?> propInclude = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery?> propInitialRecovery = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>?> propRequire = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDisk.TryReadProperty(ref reader, options, PropDisk, null))
@@ -59,6 +61,11 @@ public sealed partial class IndexRoutingAllocationConverter : System.Text.Json.S
 				continue;
 			}
 
+			if (propRequire.TryReadProperty(ref reader, options, PropRequire, static System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -74,7 +81,8 @@ public sealed partial class IndexRoutingAllocationConverter : System.Text.Json.S
 			Disk = propDisk.Value,
 			Enable = propEnable.Value,
 			Include = propInclude.Value,
-			InitialRecovery = propInitialRecovery.Value
+			InitialRecovery = propInitialRecovery.Value,
+			Require = propRequire.Value
 		};
 	}
 
@@ -85,6 +93,7 @@ public sealed partial class IndexRoutingAllocationConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropEnable, value.Enable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions>(o, v));
 		writer.WriteProperty(options, PropInclude, value.Include, null, null);
 		writer.WriteProperty(options, PropInitialRecovery, value.InitialRecovery, null, null);
+		writer.WriteProperty(options, PropRequire, value.Require, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null)));
 		writer.WriteEndObject();
 	}
 }

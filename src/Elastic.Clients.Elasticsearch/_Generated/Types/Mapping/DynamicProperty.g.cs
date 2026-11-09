@@ -45,6 +45,8 @@ public sealed partial class DynamicProperty : Elastic.Clients.Elasticsearch.Mapp
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public bool? EagerGlobalOrdinals { get; set; }
 	public bool? Enabled { get; set; }
+	public bool? Fielddata { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public string? Format { get; set; }
 	public int? IgnoreAbove { get; set; }
@@ -66,9 +68,12 @@ public sealed partial class DynamicProperty : Elastic.Clients.Elasticsearch.Mapp
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public string? SearchAnalyzer { get; set; }
 	public string? SearchQuoteAnalyzer { get; set; }
+	public string? Similarity { get; set; }
 	public bool? Store { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.Subobjects? Subobjects { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
+	public bool? TimeSeriesDimension { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	public string Type => "{dynamic_type}";
@@ -145,6 +150,24 @@ public readonly partial struct DynamicPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Fielddata(bool? value = true)
+	{
+		Instance.Fielddata = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? value)
+	{
+		Instance.FielddataFrequencyFilter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> FielddataFrequencyFilter(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor> action)
+	{
+		Instance.FielddataFrequencyFilter = Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor.Build(action);
 		return this;
 	}
 
@@ -320,9 +343,21 @@ public readonly partial struct DynamicPropertyDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Similarity(string? value)
+	{
+		Instance.Similarity = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Store(bool? value = true)
 	{
 		Instance.Store = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? value)
+	{
+		Instance.Subobjects = value;
 		return this;
 	}
 
@@ -335,6 +370,12 @@ public readonly partial struct DynamicPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? value)
 	{
 		Instance.TermVector = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> TimeSeriesDimension(bool? value = true)
+	{
+		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
@@ -429,6 +470,24 @@ public readonly partial struct DynamicPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Fielddata(bool? value = true)
+	{
+		Instance.Fielddata = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? value)
+	{
+		Instance.FielddataFrequencyFilter = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor FielddataFrequencyFilter(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor> action)
+	{
+		Instance.FielddataFrequencyFilter = Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor.Build(action);
 		return this;
 	}
 
@@ -616,9 +675,21 @@ public readonly partial struct DynamicPropertyDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Similarity(string? value)
+	{
+		Instance.Similarity = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Store(bool? value = true)
 	{
 		Instance.Store = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? value)
+	{
+		Instance.Subobjects = value;
 		return this;
 	}
 
@@ -631,6 +702,12 @@ public readonly partial struct DynamicPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? value)
 	{
 		Instance.TermVector = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor TimeSeriesDimension(bool? value = true)
+	{
+		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
