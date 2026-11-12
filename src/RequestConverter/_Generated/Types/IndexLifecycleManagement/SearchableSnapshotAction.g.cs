@@ -34,6 +34,11 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 				writer.WriteFluentCall("ForceMergeIndex", (w) => { w.WriteValue(ForceMergeIndex.Value); });
 			}
 
+			if (ForceMergeOnClone is not null)
+			{
+				writer.WriteFluentCall("ForceMergeOnClone", (w) => { w.WriteValue(ForceMergeOnClone.Value); });
+			}
+
 			if (ReplicateFor is not null)
 			{
 				writer.WriteFluentCall("ReplicateFor", (w) => { ReplicateFor.FormatCode(w); });
@@ -55,6 +60,12 @@ public partial class SearchableSnapshotAction : RequestConverter.ICodeFormattabl
 			{
 				initializer.Property("ForceMergeIndex");
 				writer.WriteValue(ForceMergeIndex.Value);
+			}
+
+			if (ForceMergeOnClone is not null)
+			{
+				initializer.Property("ForceMergeOnClone");
+				writer.WriteValue(ForceMergeOnClone.Value);
 			}
 
 			if (ReplicateFor is not null)

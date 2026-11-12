@@ -23,68 +23,50 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
-public sealed partial class ContentObjectConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ContentObject>
+public sealed partial class IContentObjectConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.IContentObject>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropImageUrl = System.Text.Json.JsonEncodedText.Encode("image_url"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
 
-	public override Elastic.Clients.Elasticsearch.Inference.ContentObject Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Inference.IContentObject Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.FileContent> propFile = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ImageUrl> propImageUrl = default;
-		LocalJsonValue<string> propText = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ContentType> propType = default;
+		var readerSnapshot = reader;
+		string? discriminator = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFile.TryReadProperty(ref reader, options, PropFile, null))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
-				continue;
+				break;
 			}
 
-			if (propImageUrl.TryReadProperty(ref reader, options, PropImageUrl, null))
-			{
-				continue;
-			}
-
-			if (propText.TryReadProperty(ref reader, options, PropText, null))
-			{
-				continue;
-			}
-
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.SafeSkip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+			reader.SafeSkip();
 		}
 
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.ContentObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			File = propFile.Value,
-			ImageUrl = propImageUrl.Value,
-			Text = propText.Value,
-			Type = propType.Value
+			"file" => reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.FileContentPart>(options, null),
+			"image_url" => reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.ImageUrlContent>(options, null),
+			"text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.TextContent>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Inference.IContentObject)}'.")
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ContentObject value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.IContentObject value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFile, value.File, null, null);
-		writer.WriteProperty(options, PropImageUrl, value.ImageUrl, null, null);
-		writer.WriteProperty(options, PropText, value.Text, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteEndObject();
+		switch (value.Type)
+		{
+			case "file":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Inference.FileContentPart)value, null);
+				break;
+			case "image_url":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Inference.ImageUrlContent)value, null);
+				break;
+			case "text":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Inference.TextContent)value, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Inference.IContentObject)}'.");
+		}
 	}
 }

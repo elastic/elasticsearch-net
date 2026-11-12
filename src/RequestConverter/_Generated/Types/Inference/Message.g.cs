@@ -31,7 +31,7 @@ public partial class Message : RequestConverter.ICodeFormattable
 		{
 			if (Content is not null)
 			{
-				writer.WriteFluentCall("Content", (w) => { if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Content.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject"); w.Write("[] "); w.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
+				writer.WriteFluentCall("Content", (w) => { if (Content.Tag == Elastic.Clients.Elasticsearch.UnionTag.T1) { w.WriteString(Content.Value1); } else { w.Write("new "); w.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.IContentObject"); w.Write("[] "); w.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", "); } });
 			}
 
 			if (Reasoning is not null)
@@ -71,7 +71,7 @@ public partial class Message : RequestConverter.ICodeFormattable
 				else
 				{
 					writer.Write("new ");
-					writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentObject");
+					writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.IContentObject");
 					writer.Write("[] ");
 					writer.WriteInlineList(Content.Value2, (w, item) => { item.FormatCode(w); }, "{ ", " }", ", ");
 				}

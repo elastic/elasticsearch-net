@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
+  <member key="ilm._types.SearchableSnapshotAction#force_merge_on_clone"><summary><para>
+If <c>true</c>, and the index has replicas, ILM first clones the index with zero replicas and force merges the clone, so that replicas are not merged redundantly.
+If <c>false</c>, the managed index is force merged directly.
+Not allowed when <c>force_merge_index</c> is <c>false</c>.
+</para></summary></member>
   <member key="ilm._types.SearchableSnapshotAction#replicate_for"><summary><para>
 The period for which the mounted index keeps one replica before the replica is removed.
 By default, the index is mounted without replicas.

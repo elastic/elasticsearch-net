@@ -45,7 +45,7 @@ public sealed partial class Message
 	}
 
 	/// <include file="Message.g.xml" path="doc/member[@key='inference._types.Message#content']/*"/>
-	public Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>? Content { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.IContentObject>>? Content { get; set; }
 
 	/// <include file="Message.g.xml" path="doc/member[@key='inference._types.Message#reasoning']/*"/>
 	public string? Reasoning { get; set; }
@@ -85,7 +85,7 @@ public readonly partial struct MessageDescriptor
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.Message(Elastic.Clients.Elasticsearch.Inference.MessageDescriptor descriptor) => descriptor.Instance;
 
 	/// <include file="Message.g.xml" path="doc/member[@key='inference._types.Message#content']/*"/>
-	public Elastic.Clients.Elasticsearch.Inference.MessageDescriptor Content(Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.ContentObject>>? value)
+	public Elastic.Clients.Elasticsearch.Inference.MessageDescriptor Content(Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.IContentObject>>? value)
 	{
 		Instance.Content = value;
 		return this;

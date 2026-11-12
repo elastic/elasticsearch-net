@@ -21,28 +21,18 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public static class ContentTypeCodeFormatter
+public partial interface IDenseVectorAutoCalibration : RequestConverter.ICodeFormattable
 {
-	public static void FormatCode(Elastic.Clients.Elasticsearch.Inference.ContentType instance, RequestConverter.CodeWriter writer)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		switch (instance)
+		if (this is Elastic.Clients.Elasticsearch.Cluster.OsqDenseVectorAutoCalibration c1)
 		{
-			case Elastic.Clients.Elasticsearch.Inference.ContentType.File:
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentType");
-				writer.Write(".File");
-				break;
-			case Elastic.Clients.Elasticsearch.Inference.ContentType.ImageUrl:
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentType");
-				writer.Write(".ImageUrl");
-				break;
-			case Elastic.Clients.Elasticsearch.Inference.ContentType.Text:
-				writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Inference.ContentType");
-				writer.Write(".Text");
-				break;
-			default:
-				throw new System.ArgumentOutOfRangeException(nameof(instance), instance, "Unexpected ContentType value.");
+			c1.FormatCode(writer);
+			return;
 		}
+
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }

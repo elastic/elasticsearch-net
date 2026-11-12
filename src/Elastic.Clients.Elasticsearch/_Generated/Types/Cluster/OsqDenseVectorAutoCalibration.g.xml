@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.OsqDenseVectorAutoCalibration#calibrated"><summary><para>
+If <c>true</c>, the segment has been calibrated, and <c>parameters</c> is present.
+</para></summary></member>
+  <member key="cluster.stats.OsqDenseVectorAutoCalibration#number_of_segments"><summary><para>
+The number of segments that share these parameters.
+</para></summary></member>
+  <member key="cluster.stats.OsqDenseVectorAutoCalibration#number_of_vectors"><summary><para>
+The number of vectors of the field in the segment.
+</para></summary></member>
+  <member key="cluster.stats.OsqDenseVectorAutoCalibration#parameters"><summary><para>
+The calibration parameters.
+</para></summary></member>
+  <member key="cluster.stats.OsqDenseVectorAutoCalibration#size_in_bytes"><summary><para>
+The size of the vectors of the field in the segment, in bytes.
+</para></summary></member>
+</doc>

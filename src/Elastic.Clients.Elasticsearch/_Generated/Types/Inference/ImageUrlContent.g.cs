@@ -23,13 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ContentTypeConverter))]
-public enum ContentType
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ImageUrlContent']/*"/>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ImageUrlContentConverter))]
+public sealed partial class ImageUrlContent : Elastic.Clients.Elasticsearch.Inference.IContentObject
 {
-	[System.Runtime.Serialization.EnumMember(Value = "file")]
-	File,
-	[System.Runtime.Serialization.EnumMember(Value = "image_url")]
-	ImageUrl,
-	[System.Runtime.Serialization.EnumMember(Value = "text")]
-	Text
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ImageUrlContent(Elastic.Clients.Elasticsearch.Inference.ImageUrl imageUrl)
+	{
+		ImageUrl = imageUrl;
+	}
+
+	public ImageUrlContent()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ImageUrlContent(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <include file="ImageUrlContent.g.xml" path="doc/member[@key='inference._types.ImageUrlContent#image_url']/*"/>
+	public required Elastic.Clients.Elasticsearch.Inference.ImageUrl ImageUrl { get; set; }
+
+	public string Type => "image_url";
 }

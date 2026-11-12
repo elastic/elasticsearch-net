@@ -86,6 +86,7 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.Queries? Queries { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryString { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? RefreshInterval { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.Requests? Requests { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing { get; set; }
 	public int? RoutingPartitionSize { get; set; }
 	public System.Collections.Generic.ICollection<string>? RoutingPath { get; set; }
@@ -537,6 +538,24 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> RefreshInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.RefreshInterval = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Requests(Elastic.Clients.Elasticsearch.IndexManagement.Requests? value)
+	{
+		Instance.Requests = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Requests()
+	{
+		Instance.Requests = Elastic.Clients.Elasticsearch.IndexManagement.RequestsDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Requests(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RequestsDescriptor>? action)
+	{
+		Instance.Requests = Elastic.Clients.Elasticsearch.IndexManagement.RequestsDescriptor.Build(action);
 		return this;
 	}
 
@@ -1222,6 +1241,24 @@ public readonly partial struct IndexSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor RefreshInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.RefreshInterval = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Requests(Elastic.Clients.Elasticsearch.IndexManagement.Requests? value)
+	{
+		Instance.Requests = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Requests()
+	{
+		Instance.Requests = Elastic.Clients.Elasticsearch.IndexManagement.RequestsDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Requests(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RequestsDescriptor>? action)
+	{
+		Instance.Requests = Elastic.Clients.Elasticsearch.IndexManagement.RequestsDescriptor.Build(action);
 		return this;
 	}
 
