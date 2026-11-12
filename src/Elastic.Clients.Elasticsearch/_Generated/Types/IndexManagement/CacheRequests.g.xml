@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.CacheRequests#enable"><summary><para>
+Whether the shard request cache is enabled for the index.
+This setting is dynamic and can be updated on an existing index.
+</para></summary></member>
+</doc>

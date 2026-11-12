@@ -41,7 +41,7 @@ public sealed partial class Alias
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#index_routing']/*"/>
-	public string? IndexRouting { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#is_hidden']/*"/>
 	public bool? IsHidden { get; set; }
@@ -50,10 +50,10 @@ public sealed partial class Alias
 	public bool? IsWriteIndex { get; set; }
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#routing']/*"/>
-	public string? Routing { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#search_routing']/*"/>
-	public string? SearchRouting { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.Alias']/*"/>
@@ -91,7 +91,7 @@ public readonly partial struct AliasDescriptor<TDocument>
 	}
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#index_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> IndexRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -112,14 +112,14 @@ public readonly partial struct AliasDescriptor<TDocument>
 	}
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> Routing(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#search_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> SearchRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.SearchRouting = value;
 		return this;
@@ -181,7 +181,7 @@ public readonly partial struct AliasDescriptor
 	}
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#index_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor IndexRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -202,14 +202,14 @@ public readonly partial struct AliasDescriptor
 	}
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor Routing(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
 	/// <include file="Alias.g.xml" path="doc/member[@key='indices._types.Alias#search_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor SearchRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.SearchRouting = value;
 		return this;

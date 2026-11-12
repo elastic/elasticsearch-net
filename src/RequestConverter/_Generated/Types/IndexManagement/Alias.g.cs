@@ -36,7 +36,7 @@ public partial class Alias : RequestConverter.ICodeFormattable
 
 			if (IndexRouting is not null)
 			{
-				writer.WriteFluentCall("IndexRouting", (w) => { w.WriteString(IndexRouting); });
+				writer.WriteFluentCall("IndexRouting", (w) => { IndexRouting.FormatCode(w); });
 			}
 
 			if (IsHidden is not null)
@@ -51,12 +51,12 @@ public partial class Alias : RequestConverter.ICodeFormattable
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (SearchRouting is not null)
 			{
-				writer.WriteFluentCall("SearchRouting", (w) => { w.WriteString(SearchRouting); });
+				writer.WriteFluentCall("SearchRouting", (w) => { SearchRouting.FormatCode(w); });
 			}
 		}
 		else
@@ -71,7 +71,7 @@ public partial class Alias : RequestConverter.ICodeFormattable
 			if (IndexRouting is not null)
 			{
 				initializer.Property("IndexRouting");
-				writer.WriteString(IndexRouting);
+				IndexRouting.FormatCode(writer);
 			}
 
 			if (IsHidden is not null)
@@ -89,13 +89,13 @@ public partial class Alias : RequestConverter.ICodeFormattable
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
-				writer.WriteString(Routing);
+				Routing.FormatCode(writer);
 			}
 
 			if (SearchRouting is not null)
 			{
 				initializer.Property("SearchRouting");
-				writer.WriteString(SearchRouting);
+				SearchRouting.FormatCode(writer);
 			}
 
 			initializer.Dispose();

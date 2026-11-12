@@ -29,24 +29,9 @@ public partial class TopMetricsAggregation : RequestConverter.ICodeFormattable
 	{
 		if (writer.EffectiveSyntaxMode == RequestConverter.SyntaxMode.Descriptor)
 		{
-			if (Field is not null)
-			{
-				writer.WriteFluentCall("Field", (w) => { Field.FormatCode(w); }, false);
-			}
-
 			if (Metrics is not null)
 			{
 				writer.WriteFluentDescriptorParams("Metrics", Metrics, (w, item) => { item.FormatCode(w); }, (w, item) => { item.FormatCode(w); }, (w) => { w.Write("new "); w.WriteTypeRef("System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>"); w.Write("()"); });
-			}
-
-			if (Missing is not null)
-			{
-				writer.WriteFluentCall("Missing", (w) => { w.WriteObjectValue(Missing); });
-			}
-
-			if (Script is not null)
-			{
-				writer.WriteFluentDescriptorCall("Script", (w) => { Script.FormatCode(w); });
 			}
 
 			if (Size is not null)
@@ -62,28 +47,10 @@ public partial class TopMetricsAggregation : RequestConverter.ICodeFormattable
 		else
 		{
 			var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation", false);
-			if (Field is not null)
-			{
-				initializer.Property("Field");
-				Field.FormatCode(writer);
-			}
-
 			if (Metrics is not null)
 			{
 				initializer.Property("Metrics");
 				writer.WriteInlineList(Metrics, (w, item) => { item.FormatCode(w); });
-			}
-
-			if (Missing is not null)
-			{
-				initializer.Property("Missing");
-				writer.WriteObjectValue(Missing);
-			}
-
-			if (Script is not null)
-			{
-				initializer.Property("Script");
-				Script.FormatCode(writer);
 			}
 
 			if (Size is not null)

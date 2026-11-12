@@ -53,7 +53,7 @@ public sealed partial class FieldLookup
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 
 	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#routing']/*"/>
-	public string? Routing { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldLookup']/*"/>
@@ -105,7 +105,7 @@ public readonly partial struct FieldLookupDescriptor<TDocument>
 	}
 
 	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Routing(string? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -169,7 +169,7 @@ public readonly partial struct FieldLookupDescriptor
 	}
 
 	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Routing(string? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;

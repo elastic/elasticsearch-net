@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.DenseVectorFieldOffHeapStats"><summary><para>
+The off-heap stats of a <c>dense_vector</c> field.
+</para></summary></member>
+  <member key="cluster.stats.DenseVectorFieldOffHeapStats#auto_calibration"><summary><para>
+The auto-calibration information of the field, aggregated by distinct set of parameters.
+Only returned when <c>include_auto_calibration</c> is <c>true</c>.
+</para></summary></member>
+</doc>

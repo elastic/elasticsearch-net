@@ -23,31 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class ContentObject : RequestConverter.ICodeFormattable
+public partial interface IContentObject : RequestConverter.ICodeFormattable
 {
-	public void FormatCode(RequestConverter.CodeWriter writer)
+	void RequestConverter.ICodeFormattable.FormatCode(RequestConverter.CodeWriter writer)
 	{
-		var initializer = writer.BeginObjectInitializer("Elastic.Clients.Elasticsearch.Inference.ContentObject", false);
+		if (this is Elastic.Clients.Elasticsearch.Inference.FileContentPart c1)
 		{
-			initializer.Property("File");
-			File.FormatCode(writer);
+			c1.FormatCode(writer);
+			return;
 		}
 
+		if (this is Elastic.Clients.Elasticsearch.Inference.ImageUrlContent c2)
 		{
-			initializer.Property("ImageUrl");
-			ImageUrl.FormatCode(writer);
+			c2.FormatCode(writer);
+			return;
 		}
 
+		if (this is Elastic.Clients.Elasticsearch.Inference.TextContent c3)
 		{
-			initializer.Property("Text");
-			writer.WriteString(Text);
+			c3.FormatCode(writer);
+			return;
 		}
 
-		{
-			initializer.Property("Type");
-			Elastic.Clients.Elasticsearch.Inference.ContentTypeCodeFormatter.FormatCode(Type, writer);
-		}
-
-		initializer.Dispose();
+		throw new System.InvalidOperationException("Unhandled variant type '" + (this?.GetType().FullName ?? "null") + "'.");
 	}
 }
