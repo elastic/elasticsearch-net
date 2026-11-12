@@ -66,6 +66,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRefreshInterval = System.Text.Json.JsonEncodedText.Encode("refresh_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequests = System.Text.Json.JsonEncodedText.Encode("requests"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRoutingPartitionSize = System.Text.Json.JsonEncodedText.Encode("routing_partition_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRoutingPath = System.Text.Json.JsonEncodedText.Encode("routing_path"u8);
@@ -128,6 +129,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Queries?> propQueries = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString?> propQueryString = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRefreshInterval = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.Requests?> propRequests = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting?> propRouting = default;
 		LocalJsonValue<int?> propRoutingPartitionSize = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRoutingPath = default;
@@ -351,6 +353,11 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 				continue;
 			}
 
+			if (propRequests.TryReadProperty(ref reader, options, PropRequests, null))
+			{
+				continue;
+			}
+
 			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
 			{
 				continue;
@@ -481,6 +488,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 			Queries = propQueries.Value,
 			QueryString = propQueryString.Value,
 			RefreshInterval = propRefreshInterval.Value,
+			Requests = propRequests.Value,
 			Routing = propRouting.Value,
 			RoutingPartitionSize = propRoutingPartitionSize.Value,
 			RoutingPath = propRoutingPath.Value,
@@ -544,6 +552,7 @@ public sealed partial class IndexSettingsConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropQueries, value.Queries, null, null);
 		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
 		writer.WriteProperty(options, PropRefreshInterval, value.RefreshInterval, null, null);
+		writer.WriteProperty(options, PropRequests, value.Requests, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropRoutingPartitionSize, value.RoutingPartitionSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRoutingPath, value.RoutingPath, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));

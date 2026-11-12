@@ -105,7 +105,7 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 
 			if (StopWords is not null)
@@ -225,7 +225,7 @@ public partial class MoreLikeThisQuery : RequestConverter.ICodeFormattable
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
-				writer.WriteString(Routing);
+				Routing.FormatCode(writer);
 			}
 
 			if (StopWords is not null)

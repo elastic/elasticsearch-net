@@ -45,7 +45,7 @@ public partial class FieldLookup : RequestConverter.ICodeFormattable
 
 			if (Routing is not null)
 			{
-				writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
+				writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 			}
 		}
 		else
@@ -71,7 +71,7 @@ public partial class FieldLookup : RequestConverter.ICodeFormattable
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
-				writer.WriteString(Routing);
+				Routing.FormatCode(writer);
 			}
 
 			initializer.Dispose();

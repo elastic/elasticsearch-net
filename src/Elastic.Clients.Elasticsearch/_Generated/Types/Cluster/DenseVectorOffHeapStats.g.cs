@@ -49,7 +49,7 @@ public sealed partial class DenseVectorOffHeapStats
 		_ = sentinel;
 	}
 
-	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? Fielddata { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.DenseVectorFieldOffHeapStats>? Fielddata { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalCenivfSize { get; set; }
 	public required long TotalCenivfSizeBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalClivfSize { get; set; }

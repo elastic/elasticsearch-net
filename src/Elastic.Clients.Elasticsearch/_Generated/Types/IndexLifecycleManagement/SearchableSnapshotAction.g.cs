@@ -45,6 +45,9 @@ public sealed partial class SearchableSnapshotAction
 
 	public bool? ForceMergeIndex { get; set; }
 
+	/// <include file="SearchableSnapshotAction.g.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction#force_merge_on_clone']/*"/>
+	public bool? ForceMergeOnClone { get; set; }
+
 	/// <include file="SearchableSnapshotAction.g.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction#replicate_for']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ReplicateFor { get; set; }
 	public required string SnapshotRepository { get; set; }
@@ -76,6 +79,13 @@ public readonly partial struct SearchableSnapshotActionDescriptor
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor ForceMergeIndex(bool? value = true)
 	{
 		Instance.ForceMergeIndex = value;
+		return this;
+	}
+
+	/// <include file="SearchableSnapshotAction.g.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction#force_merge_on_clone']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor ForceMergeOnClone(bool? value = true)
+	{
+		Instance.ForceMergeOnClone = value;
 		return this;
 	}
 

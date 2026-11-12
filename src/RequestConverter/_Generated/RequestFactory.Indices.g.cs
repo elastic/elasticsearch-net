@@ -4803,6 +4803,13 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+					case "include_auto_calibration":
+						{
+							if (parameter.Value is string value)
+								request.IncludeAutoCalibration = bool.Parse(value);
+							continue;
+						}
+
 					case "include_segment_file_sizes":
 						{
 							if (parameter.Value is string value)

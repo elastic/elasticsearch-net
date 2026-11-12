@@ -78,16 +78,16 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index_routing']/*"/>
-	public string? IndexRouting { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#is_write_index']/*"/>
 	public bool? IsWriteIndex { get; set; }
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#routing']/*"/>
-	public string? Routing { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#search_routing']/*"/>
-	public string? SearchRouting { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
 
 /// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
@@ -166,7 +166,7 @@ public readonly partial struct PutAliasRequestDescriptor
 	}
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IndexRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -180,14 +180,14 @@ public readonly partial struct PutAliasRequestDescriptor
 	}
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Routing(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#search_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor SearchRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.SearchRouting = value;
 		return this;
@@ -318,7 +318,7 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 	}
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IndexRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -332,14 +332,14 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 	}
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Routing(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
 	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#search_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> SearchRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.SearchRouting = value;
 		return this;

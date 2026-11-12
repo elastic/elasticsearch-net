@@ -47,7 +47,7 @@ public sealed partial class InlineGet<TDocument>
 	public required bool Found { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
 	public long? PrimaryTerm { get; set; }
-	public System.Collections.Generic.ICollection<string>? Routing { get; set; }
+	public string? Routing { get; set; }
 	public long? SeqNo { get; set; }
 	public TDocument? Source { get; set; }
 }

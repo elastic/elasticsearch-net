@@ -69,7 +69,7 @@ public partial class InlineGet<TDocument> : RequestConverter.ICodeFormattable
 		if (Routing is not null)
 		{
 			initializer.Property("Routing");
-			writer.WriteInlineList(Routing, (w, item) => { w.WriteString(item); });
+			writer.WriteString(Routing);
 		}
 
 		if (SeqNo is not null)

@@ -44,7 +44,7 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 	public override Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>?> propFielddata = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.DenseVectorFieldOffHeapStats>?> propFielddata = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalCenivfSize = default;
 		LocalJsonValue<long> propTotalCenivfSizeBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalClivfSize = default;
@@ -61,7 +61,7 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 		LocalJsonValue<long> propTotalVexSizeBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFielddata.TryReadProperty(ref reader, options, PropFielddata, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>(o, null, static System.Collections.Generic.IReadOnlyDictionary<string, long> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)!)))
+			if (propFielddata.TryReadProperty(ref reader, options, PropFielddata, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.DenseVectorFieldOffHeapStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.DenseVectorFieldOffHeapStats>(o, null, null)))
 			{
 				continue;
 			}
@@ -169,7 +169,7 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null)));
+		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.DenseVectorFieldOffHeapStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.DenseVectorFieldOffHeapStats>(o, v, null, null));
 		writer.WriteProperty(options, PropTotalCenivfSize, value.TotalCenivfSize, null, null);
 		writer.WriteProperty(options, PropTotalCenivfSizeBytes, value.TotalCenivfSizeBytes, null, null);
 		writer.WriteProperty(options, PropTotalClivfSize, value.TotalClivfSize, null, null);
