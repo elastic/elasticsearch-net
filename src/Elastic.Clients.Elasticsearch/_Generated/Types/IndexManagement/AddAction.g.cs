@@ -50,7 +50,7 @@ public sealed partial class AddAction
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index_routing']/*"/>
-	public string? IndexRouting { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
@@ -65,10 +65,10 @@ public sealed partial class AddAction
 	public bool? MustExist { get; set; }
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#routing']/*"/>
-	public string? Routing { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#search_routing']/*"/>
-	public string? SearchRouting { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
 
 /// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.AddAction']/*"/>
@@ -134,7 +134,7 @@ public readonly partial struct AddActionDescriptor<TDocument>
 	}
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IndexRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -169,14 +169,14 @@ public readonly partial struct AddActionDescriptor<TDocument>
 	}
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Routing(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#search_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> SearchRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.SearchRouting = value;
 		return this;
@@ -266,7 +266,7 @@ public readonly partial struct AddActionDescriptor
 	}
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IndexRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -301,14 +301,14 @@ public readonly partial struct AddActionDescriptor
 	}
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Routing(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
 	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#search_routing']/*"/>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor SearchRouting(string? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.SearchRouting = value;
 		return this;

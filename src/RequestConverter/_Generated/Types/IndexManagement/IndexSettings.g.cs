@@ -239,6 +239,11 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 				writer.WriteFluentCall("RefreshInterval", (w) => { RefreshInterval.FormatCode(w); });
 			}
 
+			if (Requests is not null)
+			{
+				writer.WriteFluentDescriptorCall("Requests", (w) => { Requests.FormatCode(w); });
+			}
+
 			if (Routing is not null)
 			{
 				writer.WriteFluentDescriptorCall("Routing", (w) => { Routing.FormatCode(w); });
@@ -614,6 +619,12 @@ public partial class IndexSettings : RequestConverter.ICodeFormattable
 			{
 				initializer.Property("RefreshInterval");
 				RefreshInterval.FormatCode(writer);
+			}
+
+			if (Requests is not null)
+			{
+				initializer.Property("Requests");
+				Requests.FormatCode(writer);
 			}
 
 			if (Routing is not null)

@@ -69,7 +69,7 @@ public sealed partial class PercolateQuery
 	public string? QueryName { get; set; }
 
 	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#routing']/*"/>
-	public string? Routing { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#version']/*"/>
 	public long? Version { get; set; }
@@ -172,7 +172,7 @@ public readonly partial struct PercolateQueryDescriptor<TDocument>
 	}
 
 	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Routing(string? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -291,7 +291,7 @@ public readonly partial struct PercolateQueryDescriptor
 	}
 
 	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#routing']/*"/>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Routing(string? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;

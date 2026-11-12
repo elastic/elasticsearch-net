@@ -96,6 +96,12 @@ public partial class IndicesStatsRequest : RequestConverter.IClientCallFormattab
 				writer.WriteInlineList(Groups, (w, item) => { w.WriteString(item); });
 			}
 
+			if (IncludeAutoCalibration is not null)
+			{
+				initializer.Property("IncludeAutoCalibration");
+				writer.WriteValue(IncludeAutoCalibration.Value);
+			}
+
 			if (IncludeSegmentFileSizes is not null)
 			{
 				initializer.Property("IncludeSegmentFileSizes");
@@ -163,6 +169,11 @@ public partial class IndicesStatsRequest : RequestConverter.IClientCallFormattab
 		if (Groups is not null)
 		{
 			writer.WriteFluentParams("Groups", Groups, (w, item) => { w.WriteString(item); });
+		}
+
+		if (IncludeAutoCalibration is not null)
+		{
+			writer.WriteFluentCall("IncludeAutoCalibration", (w) => { w.WriteValue(IncludeAutoCalibration.Value); });
 		}
 
 		if (IncludeSegmentFileSizes is not null)

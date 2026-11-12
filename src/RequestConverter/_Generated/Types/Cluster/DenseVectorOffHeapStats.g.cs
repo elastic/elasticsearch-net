@@ -36,9 +36,9 @@ public partial class DenseVectorOffHeapStats : RequestConverter.ICodeFormattable
 			writer.Write("<");
 			writer.WriteTypeRef("string");
 			writer.Write(", ");
-			writer.WriteTypeRef("System.Collections.Generic.IReadOnlyDictionary<string,long>");
+			writer.WriteTypeRef("Elastic.Clients.Elasticsearch.Cluster.DenseVectorFieldOffHeapStats");
 			writer.Write(">()");
-			writer.WriteBlockList(Fielddata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.Write("new "); w.WriteTypeRef("System.Collections.Generic.Dictionary"); w.Write("<"); w.WriteTypeRef("string"); w.Write(", "); w.WriteTypeRef("long"); w.Write(">()"); w.WriteBlockList(kvp.Value, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); w.WriteValue(kvp.Value); w.Write("L"); w.Write(" }"); }); w.Write(" }"); });
+			writer.WriteBlockList(Fielddata, (w, kvp) => { w.Write("{ "); w.WriteString(kvp.Key); w.Write(", "); kvp.Value.FormatCode(w); w.Write(" }"); });
 		}
 
 		if (TotalCenivfSize is not null)

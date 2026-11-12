@@ -85,7 +85,7 @@ public sealed partial class MoreLikeThisQuery
 	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_word_length']/*"/>
 	public int? MinWordLength { get; set; }
 	public string? QueryName { get; set; }
-	public string? Routing { get; set; }
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#stop_words']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? StopWords { get; set; }
@@ -247,7 +247,7 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Routing(string? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -472,7 +472,7 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Routing(string? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;

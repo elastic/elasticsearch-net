@@ -37,15 +37,8 @@ public sealed partial class TopMetricsAggregation
 		_ = sentinel;
 	}
 
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
-	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
-
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#missing']/*"/>
-	public object? Missing { get; set; }
-	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#size']/*"/>
 	public int? Size { get; set; }
@@ -74,20 +67,6 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
-	{
-		Instance.Field = value;
-		return this;
-	}
-
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
-	{
-		Instance.Field = value;
-		return this;
-	}
-
 	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? value)
 	{
@@ -112,31 +91,6 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 		}
 
 		Instance.Metrics = items;
-		return this;
-	}
-
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#missing']/*"/>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Missing(object? value)
-	{
-		Instance.Missing = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
-	{
-		Instance.Script = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Script()
-	{
-		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -208,20 +162,6 @@ public readonly partial struct TopMetricsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
-	{
-		Instance.Field = value;
-		return this;
-	}
-
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
-	{
-		Instance.Field = value;
-		return this;
-	}
-
 	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? value)
 	{
@@ -259,31 +199,6 @@ public readonly partial struct TopMetricsAggregationDescriptor
 		}
 
 		Instance.Metrics = items;
-		return this;
-	}
-
-	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#missing']/*"/>
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Missing(object? value)
-	{
-		Instance.Missing = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
-	{
-		Instance.Script = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Script()
-	{
-		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 

@@ -45,6 +45,9 @@ public sealed partial class IndicesStatsRequestParameters : Elastic.Transport.Re
 	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public System.Collections.Generic.ICollection<string>? Groups { get => Q<System.Collections.Generic.ICollection<string>?>("groups"); set => Q("groups", value); }
 
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_auto_calibration']/*"/>
+	public bool? IncludeAutoCalibration { get => Q<bool?>("include_auto_calibration"); set => Q("include_auto_calibration", value); }
+
 	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_segment_file_sizes']/*"/>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
@@ -113,6 +116,9 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 
 	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public System.Collections.Generic.ICollection<string>? Groups { get => Q<System.Collections.Generic.ICollection<string>?>("groups"); set => Q("groups", value); }
+
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_auto_calibration']/*"/>
+	public bool? IncludeAutoCalibration { get => Q<bool?>("include_auto_calibration"); set => Q("include_auto_calibration", value); }
 
 	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_segment_file_sizes']/*"/>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
@@ -254,6 +260,13 @@ public readonly partial struct IndicesStatsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups(params string[] values)
 	{
 		Instance.Groups = [.. values];
+		return this;
+	}
+
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_auto_calibration']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor IncludeAutoCalibration(bool? value = true)
+	{
+		Instance.IncludeAutoCalibration = value;
 		return this;
 	}
 
@@ -469,6 +482,13 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups(params string[] values)
 	{
 		Instance.Groups = [.. values];
+		return this;
+	}
+
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_auto_calibration']/*"/>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> IncludeAutoCalibration(bool? value = true)
+	{
+		Instance.IncludeAutoCalibration = value;
 		return this;
 	}
 

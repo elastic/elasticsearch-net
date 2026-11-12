@@ -79,7 +79,7 @@ public partial class PutAliasRequest : RequestConverter.IClientCallFormattable
 			if (IndexRouting is not null)
 			{
 				initializer.Property("IndexRouting");
-				writer.WriteString(IndexRouting);
+				IndexRouting.FormatCode(writer);
 			}
 
 			if (IsWriteIndex is not null)
@@ -91,13 +91,13 @@ public partial class PutAliasRequest : RequestConverter.IClientCallFormattable
 			if (Routing is not null)
 			{
 				initializer.Property("Routing");
-				writer.WriteString(Routing);
+				Routing.FormatCode(writer);
 			}
 
 			if (SearchRouting is not null)
 			{
 				initializer.Property("SearchRouting");
-				writer.WriteString(SearchRouting);
+				SearchRouting.FormatCode(writer);
 			}
 
 			initializer.Dispose();
@@ -140,7 +140,7 @@ public partial class PutAliasRequest : RequestConverter.IClientCallFormattable
 
 		if (IndexRouting is not null)
 		{
-			writer.WriteFluentCall("IndexRouting", (w) => { w.WriteString(IndexRouting); });
+			writer.WriteFluentCall("IndexRouting", (w) => { IndexRouting.FormatCode(w); });
 		}
 
 		if (IsWriteIndex is not null)
@@ -150,12 +150,12 @@ public partial class PutAliasRequest : RequestConverter.IClientCallFormattable
 
 		if (Routing is not null)
 		{
-			writer.WriteFluentCall("Routing", (w) => { w.WriteString(Routing); });
+			writer.WriteFluentCall("Routing", (w) => { Routing.FormatCode(w); });
 		}
 
 		if (SearchRouting is not null)
 		{
-			writer.WriteFluentCall("SearchRouting", (w) => { w.WriteString(SearchRouting); });
+			writer.WriteFluentCall("SearchRouting", (w) => { SearchRouting.FormatCode(w); });
 		}
 	}
 }
