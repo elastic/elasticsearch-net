@@ -40,6 +40,23 @@ public partial class BulkRequest : IStreamSerializable
 
 	public BulkOperationsCollection? Operations { get; set; }
 
+	internal BulkRequest WithOperations(IEnumerable<IBulkOperation> operations)
+	{
+		var request = new BulkRequest
+		{
+			RequestConfiguration = RequestConfiguration,
+			Operations = new BulkOperationsCollection(operations)
+		};
+
+		foreach (var route in RouteValues)
+			request.RouteValues.Optional(route.Key, route.Value);
+
+		foreach (var parameter in RequestParameters.QueryString)
+			request.RequestParameters.SetQueryString(parameter.Key, parameter.Value);
+
+		return request;
+	}
+
 	public void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
 	{
 		if (Operations is null)
