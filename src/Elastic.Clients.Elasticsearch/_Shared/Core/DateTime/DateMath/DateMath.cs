@@ -90,12 +90,20 @@ public abstract partial class DateMath
 			return math;
 		}
 
-		if (EnumValue<DateMathTimeUnit>.TryParse(match.Groups["rounding"].Value[1..], out var rounding))
+		// Date math units are case-sensitive: "m" is minutes and "M" is months.
+		var rounding = match.Groups["rounding"].Value[1..] switch
 		{
-			return math.RoundTo(rounding);
-		}
+			"y" => DateMathTimeUnit.Year,
+			"M" => DateMathTimeUnit.Month,
+			"w" => DateMathTimeUnit.Week,
+			"d" => DateMathTimeUnit.Day,
+			"h" => DateMathTimeUnit.Hour,
+			"m" => DateMathTimeUnit.Minute,
+			"s" => DateMathTimeUnit.Second,
+			_ => (DateMathTimeUnit?)null
+		};
 
-		return math;
+		return rounding.HasValue ? math.RoundTo(rounding.Value) : math;
 	}
 
 	internal static bool IsValidDateMathString(string dateMath) => dateMath != null && DateMathRegex.IsMatch(dateMath);
