@@ -57,9 +57,11 @@ public sealed partial class Indices :
 	{
 		var enumerated = indices.NotEmpty(nameof(indices));
 
+		var hasExclusion = enumerated.Any(index => IsExclusion(index.Name));
+
 		foreach (var index in enumerated)
 		{
-			if (index.Equals(AllValue) || index.Equals(WildcardValue))
+			if (!hasExclusion && (index.Equals(AllValue) || index.Equals(WildcardValue)))
 			{
 				_isAllIndices = true;
 				_indices = AllIndexList;
@@ -74,9 +76,11 @@ public sealed partial class Indices :
 	{
 		var enumerated = indices.NotEmpty(nameof(indices));
 
+		var hasExclusion = enumerated.Any(IsExclusion);
+
 		foreach (var index in enumerated)
 		{
-			if (index.Equals(AllValue) || index.Equals(WildcardValue))
+			if (!hasExclusion && (index.Equals(AllValue) || index.Equals(WildcardValue)))
 			{
 				_isAllIndices = true;
 				_indices = AllIndexList;
@@ -126,6 +130,8 @@ public sealed partial class Indices :
 		return string.Join(",", indices);
 	}
 
+	private static bool IsExclusion(string index) => index is not null && index.StartsWith("-", StringComparison.Ordinal);
+
 	public static IndexName Index(string index) => index;
 
 	public static IndexName Index(IndexName index) => index;
@@ -137,7 +143,10 @@ public sealed partial class Indices :
 		if (indicesString.IsNullOrEmptyCommaSeparatedList(out var indices))
 			return null;
 
-		return indices.Contains(AllValue) || indices.Contains(WildcardValue) ? All : new Indices(indices);
+		// A wildcard combined with exclusions (e.g. "*,-index") must be kept as-is, collapsing it to _all would drop the exclusions.
+		var hasExclusion = indices.Any(IsExclusion);
+
+		return !hasExclusion && (indices.Contains(AllValue) || indices.Contains(WildcardValue)) ? All : new Indices(indices);
 	}
 
 	public static implicit operator Indices(string indicesString) => Parse(indicesString);
