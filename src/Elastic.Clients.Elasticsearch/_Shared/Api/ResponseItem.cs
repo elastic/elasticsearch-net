@@ -34,4 +34,19 @@ public abstract partial class ResponseItem
 			return false;
 		}
 	}
+
+	public override string ToString()
+	{
+		var id = Id is not null ? $" Id: {Id}," : string.Empty;
+		var baseInfo = $"Index: {Index}, Operation: {Operation},{id} Status: {Status}";
+
+		if (Error is not null)
+		{
+			return $"{baseInfo}, Error: {Error.Type}, Reason: {Error.Reason}";
+		}
+
+		return Result is not null
+			? $"{baseInfo} ({Result})"
+			: baseInfo;
+	}
 }

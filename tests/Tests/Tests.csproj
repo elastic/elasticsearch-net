@@ -37,6 +37,7 @@
   <ItemGroup>
     <!-- TODO ADD THESE BACK -->
     <Compile Remove="**" />
+    <Compile Include="Bulk\CreateResponseItemTests.cs" />
     <Compile Include="ClientConcepts\OpenTelemetry\OpenTelemetryTests.cs" />
     <Compile Include="XunitBootstrap.cs" />
   </ItemGroup>
